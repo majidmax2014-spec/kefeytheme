@@ -142,7 +142,7 @@
         render 'header-drawer'
       endif
 
-      if section.settings.logo_position == 'top-center' or section.settings.menu == blank
+      if (section.settings.logo_position == 'top-center' or section.settings.menu == blank) and section.settings.show_search
         render 'header-search', input_id: 'Search-In-Modal-1'
       endif
     -%}
@@ -247,7 +247,7 @@
           </localization-form>
         {%- endif -%}
       </div>
-      {% render 'header-search', input_id: 'Search-In-Modal' %}
+      {% if section.settings.show_search %}{% render 'header-search', input_id: 'Search-In-Modal' %}{% endif %}
 
       {%- if section.settings.cta_label != blank -%}
         <div class="header__cta-wrapper small-hide">
@@ -260,7 +260,7 @@
         </div>
       {%- endif -%}
 
-      {%- if shop.customer_accounts_enabled -%}
+      {%- if shop.customer_accounts_enabled and section.settings.show_account_icon -%}
         <a
           href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}"
           class="header__icon header__icon--account link focus-inset{% if section.settings.menu != blank %} small-hide{% endif %}"
@@ -620,6 +620,18 @@
       "default": true,
       "label": "t:sections.header.settings.enable_customer_avatar.label",
       "info": "t:sections.header.settings.enable_customer_avatar.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_search",
+      "default": false,
+      "label": "Show search in header"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_account_icon",
+      "default": false,
+      "label": "Show account icon"
     },
     {
       "type": "header",

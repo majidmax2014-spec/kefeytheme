@@ -2593,6 +2593,22 @@ input[type='checkbox'] {
   margin-right: -1.2rem;
 }
 
+/* Kefey header tweaks */
+@media screen and (min-width: 990px) {
+  .header {
+    grid-template-columns: auto 1fr auto;
+  }
+  .header--middle-left .header__inline-menu {
+    justify-self: center;
+  }
+}
+.header__heading-logo {
+  max-height: 34px;
+}
+.header__inline-menu .list-menu--inline > li > a {
+  font-weight: 700;
+}
+
 .header__icon--menu[aria-expanded='true']::before {
   content: '';
   top: 100%;
