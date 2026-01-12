@@ -8,7 +8,7 @@
   --focused-base-box-shadow: 0 0 0 0.3rem rgb(var(--color-background)), 0 0 0.5rem 0.4rem rgba(var(--color-foreground), 0.3);
 }
 
-.product-card-wrapper .card,
+.product-card-wrapper .card, 
 .contains-card--product {
   --border-radius: var(--product-card-corner-radius);
   --border-width: var(--product-card-border-width);
