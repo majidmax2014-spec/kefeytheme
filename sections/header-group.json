@@ -1,1 +1,91 @@
-{"name":"t:sections.header.name","type":"header","sections":{"announcement-bar":{"type":"announcement-bar","blocks":{"announcement-bar-0":{"type":"announcement","settings":{"text":"PRE- BLACK FRIDAY SALE – OVER 50% OFF – LIVE NOW!","link":""}}},"block_order":["announcement-bar-0"],"settings":{"auto_rotate":false,"change_slides_speed":5,"color_scheme":"scheme-4","show_line_separator":true,"show_social":false,"enable_country_selector":false,"enable_language_selector":false}},"header":{"type":"header","settings":{"logo_position":"middle-left","mobile_logo_position":"center","menu":"main-menu","menu_type_desktop":"dropdown","sticky_header_type":"on-scroll-up","show_line_separator":true,"color_scheme":"scheme-1","menu_color_scheme":"scheme-1","enable_country_selector":true,"enable_language_selector":true,"enable_customer_avatar":true,"margin_bottom":0,"padding_top":20,"padding_bottom":20,"cta_label":"Shop Now","cta_link":"","cta_subtext":"Free Shipping"}}},"order":["announcement-bar","header"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.header.name",
+  "type": "header",
+  "sections": {
+    "announcement_bar_wyP6Wk": {
+      "type": "announcement-bar",
+      "name": "t:sections.announcement-bar.presets.name",
+      "settings": {
+        "enable_countdown": true,
+        "countdown_message": "FREE SHIPPING 🚀 JOY TRACKED TO YOUR DOOR!",
+        "countdown_end": "2026-01-31 23:59:59",
+        "countdown_accent_color": "#FFC72C",
+        "countdown_link_label": "",
+        "countdown_link_url": "",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-bar-0": {
+          "type": "announcement",
+          "settings": {
+            "text": "PRE- BLACK FRIDAY SALE – OVER 50% OFF – LIVE NOW!",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "announcement-bar-0"
+      ],
+      "settings": {
+        "enable_countdown": false,
+        "countdown_message": "FREE SHIPPING 🚀 JOY TRACKED TO YOUR DOOR!",
+        "countdown_end": "2025-12-31 23:59:59",
+        "countdown_accent_color": "#ffc72c",
+        "countdown_link_label": "LAST CHANCE",
+        "countdown_link_url": "",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "color_scheme": "scheme-4",
+        "show_line_separator": true,
+        "show_social": false,
+        "enable_country_selector": false,
+        "enable_language_selector": false
+      }
+    },
+    "header": {
+      "type": "header",
+      "settings": {
+        "logo_position": "middle-left",
+        "mobile_logo_position": "center",
+        "menu": "main-menu",
+        "menu_type_desktop": "dropdown",
+        "sticky_header_type": "on-scroll-up",
+        "show_line_separator": true,
+        "color_scheme": "scheme-1",
+        "menu_color_scheme": "scheme-1",
+        "enable_country_selector": true,
+        "enable_language_selector": true,
+        "enable_customer_avatar": true,
+        "cta_label": "Shop Now",
+        "cta_link": "",
+        "cta_subtext": "Free Shipping",
+        "margin_bottom": 0,
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    }
+  },
+  "order": [
+    "announcement_bar_wyP6Wk",
+    "announcement-bar",
+    "header"
+  ]
+}
