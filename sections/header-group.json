@@ -30,36 +30,6 @@
         "enable_language_selector": false
       }
     },
-    "announcement-bar": {
-      "type": "announcement-bar",
-      "blocks": {
-        "announcement-bar-0": {
-          "type": "announcement",
-          "settings": {
-            "text": "PRE- BLACK FRIDAY SALE – OVER 50% OFF – LIVE NOW!",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "announcement-bar-0"
-      ],
-      "settings": {
-        "enable_countdown": false,
-        "countdown_message": "FREE SHIPPING 🚀 JOY TRACKED TO YOUR DOOR!",
-        "countdown_end": "2025-12-31 23:59:59",
-        "countdown_accent_color": "#ffc72c",
-        "countdown_link_label": "LAST CHANCE",
-        "countdown_link_url": "",
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "color_scheme": "scheme-4",
-        "show_line_separator": true,
-        "show_social": false,
-        "enable_country_selector": false,
-        "enable_language_selector": false
-      }
-    },
     "header": {
       "type": "header",
       "settings": {
@@ -85,7 +55,6 @@
   },
   "order": [
     "announcement_bar_wyP6Wk",
-    "announcement-bar",
     "header"
   ]
 }
