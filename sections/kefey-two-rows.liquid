@@ -1,0 +1,218 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .kefey-two-rows__row1 {
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+  }
+  @media screen and (min-width: 990px) {
+    .kefey-two-rows__row1 {
+      grid-template-columns: 1.1fr 0.9fr;
+      min-height: 36rem;
+      padding: 3rem 4rem;
+      border-radius: 1.2rem;
+    }
+  }
+  .kefey-two-rows__content .title {
+    margin: 0 0 1.2rem 0;
+  }
+  .kefey-two-rows__content .rte {
+    margin: 0 0 2rem 0;
+  }
+  .kefey-two-rows__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5rem;
+    padding: 1.2rem 2.6rem;
+    text-decoration: none;
+    border-radius: 0;
+  }
+  .kefey-two-rows__image {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 0.8rem;
+  }
+  .kefey-two-rows__row2 {
+    margin-top: 2.4rem;
+    display: grid;
+    gap: 2rem;
+  }
+  @media screen and (min-width: 990px) {
+    .kefey-two-rows__row2 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .kefey-two-rows__tile {
+    padding: 2.4rem;
+    border-radius: 1.2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    gap: 1.6rem;
+  }
+  .kefey-two-rows__tile img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    border-radius: 0.8rem;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign row1 = null
+  for block in section.blocks
+    if block.type == 'row1' and row1 == null
+      assign row1 = block
+    endif
+  endfor
+-%}
+
+<div class="color-{{ section.settings.color_scheme }} isolate gradient section-{{ section.id }}-padding">
+  <div class="page-width">
+    {%- if row1 != null -%}
+      <div class="kefey-two-rows__row1" style="background: {{ row1.settings.bg }};">
+        {%- if row1.settings.image_position == 'left' -%}
+          <div>
+            {%- if row1.settings.image != blank -%}
+              {{ row1.settings.image | image_url: width: 1600 | image_tag: class: 'kefey-two-rows__image', loading: 'lazy' }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <div class="kefey-two-rows__content color-{{ section.settings.color_scheme }}">
+          {%- if row1.settings.title != blank -%}
+            <h2 class="title inline-richtext {{ row1.settings.heading_size }}">{{ row1.settings.title }}</h2>
+          {%- endif -%}
+          {%- if row1.settings.text != blank -%}
+            <div class="rte">{{ row1.settings.text }}</div>
+          {%- endif -%}
+          {%- if row1.settings.button_label != blank -%}
+            <a
+              {% if row1.settings.button_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ row1.settings.button_link }}"{% endif %}
+              class="button kefey-two-rows__cta{% if row1.settings.button_secondary %} button--secondary{% endif %}"
+            >{{ row1.settings.button_label }}</a>
+          {%- endif -%}
+        </div>
+        {%- if row1.settings.image_position == 'right' -%}
+          <div>
+            {%- if row1.settings.image != blank -%}
+              {{ row1.settings.image | image_url: width: 1600 | image_tag: class: 'kefey-two-rows__image', loading: 'lazy' }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="kefey-two-rows__row2">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'row2' -%}
+          <div class="kefey-two-rows__tile" style="background: {{ block.settings.bg }};">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1200 | image_tag: loading: 'lazy' }}
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="title inline-richtext {{ block.settings.heading_size }}">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+            {%- if block.settings.button_label != blank -%}
+              <a
+                {% if block.settings.button_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.button_link }}"{% endif %}
+                class="button kefey-two-rows__cta{% if block.settings.button_secondary %} button--secondary{% endif %}"
+              >{{ block.settings.button_label }}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Kefey two rows",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 36 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 36 }
+  ],
+  "blocks": [
+    {
+      "type": "row1",
+      "name": "Row 1 (full width)",
+      "limit": 1,
+      "settings": [
+        { "type": "inline_richtext", "id": "title", "label": "Title", "default": "At the core of it all, we lead with purpose." },
+        { "type": "richtext", "id": "text", "label": "Text" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "LEARN MORE" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        { "type": "checkbox", "id": "button_secondary", "label": "Secondary button style", "default": false },
+        { "type": "image_picker", "id": "image", "label": "Side image" },
+        {
+          "type": "select",
+          "id": "image_position",
+          "label": "Image position",
+          "default": "right",
+          "options": [
+            { "value": "left", "label": "Left" },
+            { "value": "right", "label": "Right" }
+          ]
+        },
+        { "type": "color", "id": "bg", "label": "Background color", "default": "#C92B31" }
+      ]
+    },
+    {
+      "type": "row2",
+      "name": "Row 2 item (half)",
+      "limit": 2,
+      "settings": [
+        { "type": "inline_richtext", "id": "title", "label": "Title" },
+        { "type": "richtext", "id": "text", "label": "Text" },
+        { "type": "image_picker", "id": "image", "label": "Image/Logo" },
+        { "type": "text", "id": "button_label", "label": "Button label" },
+        { "type": "url", "id": "button_link", "label": "Button link" },
+        { "type": "checkbox", "id": "button_secondary", "label": "Secondary button style", "default": false },
+        { "type": "color", "id": "bg", "label": "Background color", "default": "#0C6A73" },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "options": [
+            { "value": "h3", "label": "H3" },
+            { "value": "h2", "label": "H2" },
+            { "value": "h1", "label": "H1" }
+          ],
+          "default": "h3",
+          "label": "Heading size"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kefey two rows",
+      "blocks": [
+        { "type": "row1" },
+        { "type": "row2" },
+        { "type": "row2" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+

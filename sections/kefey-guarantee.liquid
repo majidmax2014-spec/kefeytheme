@@ -1,0 +1,111 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  .kefey-guarantee {
+    display: grid;
+    gap: 2.4rem;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+  }
+  .kefey-guarantee__badge {
+    width: 120px;
+    height: 120px;
+  }
+  @media screen and (min-width: 990px) {
+    .kefey-guarantee__badge {
+      width: 140px;
+      height: 140px;
+    }
+  }
+  .kefey-guarantee__title {
+    margin: 0 0 1.2rem 0;
+  }
+  .kefey-guarantee__text {
+    margin: 0 0 2rem 0;
+    max-width: 80ch;
+  }
+  .kefey-guarantee__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 5rem;
+    padding: 1.4rem 3.2rem;
+    text-decoration: none;
+    background: transparent;
+    border: 0.2rem solid currentColor;
+    border-radius: 0;
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="section-{{ section.id }}-padding page-width">
+    <div class="kefey-guarantee">
+      <div>
+        {%- if section.settings.badge != blank -%}
+          {{ section.settings.badge | image_url: width: 280 | image_tag: class: 'kefey-guarantee__badge', loading: 'lazy' }}
+        {%- elsif section.settings.badge_svg != blank -%}
+          <div class="kefey-guarantee__badge">{{ section.settings.badge_svg }}</div>
+        {%- endif -%}
+      </div>
+      <div>
+        {%- if section.settings.title != blank -%}
+          <h2 class="kefey-guarantee__title title inline-richtext {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="kefey-guarantee__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a
+            {% if section.settings.button_link == blank %}role="link" aria-disabled="true"{% else %}href="{{ section.settings.button_link }}"{% endif %}
+            class="kefey-guarantee__cta"
+          >
+            {{ section.settings.button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Kefey guarantee",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "title", "label": "Title", "default": "TRY IT, RISK-FREE!" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>If you’re not satisfied with our product, simply contact us and we’ll give you a full, 100% hassle-free refund.</p>" },
+    { "type": "image_picker", "id": "badge", "label": "Badge image (optional)" },
+    { "type": "html", "id": "badge_svg", "label": "Badge SVG (optional)" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "SHOP NOW" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 40 },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h1", "label": "H1" },
+        { "value": "h0", "label": "Hero" }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    }
+  ],
+  "presets": [
+    { "name": "Kefey guarantee" }
+  ]
+}
+{% endschema %}
+
+

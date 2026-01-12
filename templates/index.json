@@ -1,0 +1,167 @@
+{
+  "sections": {
+    "kefey_hero": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Taste your goals",
+            "heading_size": "h0"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "Shop now",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": false,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": false
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "button"
+      ],
+      "settings": {
+        "image_overlay_opacity": 0,
+        "image_height": "large",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "image_behavior": "none",
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "kefey_product_carousel": {
+      "type": "slideshow",
+      "blocks": {
+        "slide-1": { "type": "slide", "settings": { "heading": "Discover", "heading_size": "h2", "button_label": "Shop now" } },
+        "slide-2": { "type": "slide", "settings": { "heading": "", "button_label": "" } }
+      },
+      "block_order": ["slide-1","slide-2"],
+      "settings": {
+        "layout": "grid",
+        "slide_height": "medium",
+        "slider_visual": "dots",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "image_behavior": "none",
+        "show_text_below": true,
+        "accessibility_info": "Homepage slideshow"
+      }
+    },
+    "featured_collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Featured products",
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "full_width": false,
+        "show_view_all": true,
+        "view_all_style": "solid",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": false,
+        "image_ratio": "adapt",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "padding_top": 44,
+        "padding_bottom": 36
+      }
+    },
+    "kefey_reviews": {
+      "type": "kefey-reviews",
+      "settings": {
+        "title": "Over 1,000,000+ Reviews from Happy Customers.",
+        "heading_size": "h0",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "kefey_guarantee": {
+      "type": "kefey-guarantee",
+      "settings": {
+        "title": "TRY IT, RISK-FREE!",
+        "text": "<p>If you\u2019re not satisfied with our product, simply contact us and we\u2019ll give you a full, 100% hassle-free refund.</p>",
+        "button_label": "SHOP NOW",
+        "button_link": "shopify://collections/all",
+        "color_scheme": "scheme-4",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "heading_size": "h1"
+      }
+    },
+    "kefey_feature_carousel": {
+      "type": "kefey-feature-carousel",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "kefey_video": {
+      "type": "video",
+      "settings": {
+        "heading": "",
+        "heading_size": "h1",
+        "enable_video_looping": false,
+        "video": null,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "cover_image": null,
+        "description": "Taste your goals",
+        "full_width": false,
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "kefey_logo_marquee": {
+      "type": "kefey-logo-marquee",
+      "settings": {
+        "title": "AS FEATURED IN",
+        "color_scheme": "scheme-4",
+        "logo_height": 36,
+        "speed": 30,
+        "invert": true,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "kefey_two_rows": {
+      "type": "kefey-two-rows",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "kefey_hero",
+    "kefey_product_carousel",
+    "featured_collection",
+    "kefey_reviews",
+    "kefey_guarantee",
+    "kefey_feature_carousel",
+    "kefey_video",
+    "kefey_logo_marquee",
+    "kefey_two_rows"
+  ]
+}

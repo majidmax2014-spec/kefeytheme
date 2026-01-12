@@ -1,0 +1,198 @@
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .kefey-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    min-height: 42rem;
+    background: #f3f3f3;
+  }
+  .kefey-card__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .kefey-card__cta {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+  .kefey-card__button {
+    background: #000;
+    color: #fff;
+    border-radius: 0;
+    padding: 1.2rem 2.6rem;
+    text-decoration: none;
+  }
+  .kefey-card__button:after {
+    box-shadow: none;
+  }
+  .kefey-card__title {
+    position: absolute;
+    top: 1.6rem;
+    left: 1.6rem;
+    right: 1.6rem;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,.35);
+    font-family: var(--font-heading-family);
+    font-weight: 800;
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign columns_desktop_int = section.settings.columns_desktop | plus: 0
+  assign columns_mobile_int = section.settings.columns_mobile | plus: 0
+
+  assign show_mobile_slider = false
+  if section.settings.swipe_on_mobile and section.blocks.size > columns_mobile_int
+    assign show_mobile_slider = true
+  endif
+
+  assign show_desktop_slider = false
+  if section.settings.enable_desktop_slider and section.blocks.size > columns_desktop_int
+    assign show_desktop_slider = true
+  endif
+-%}
+
+<div class="color-{{ section.settings.color_scheme }} isolate gradient">
+  <div class="section-{{ section.id }}-padding {% if section.settings.full_width %}page-width{% endif %}">
+    {%- if section.settings.title != blank -%}
+      <div class="title-wrapper title-wrapper--no-top-margin page-width">
+        <h2 class="title inline-richtext {{ section.settings.heading_size }}">{{ section.settings.title }}</h2>
+      </div>
+    {%- endif -%}
+
+    <slider-component class="slider-mobile-gutter{% if section.settings.full_width %} slider-component-full-width{% endif %}{% if show_mobile_slider == false %} page-width{% endif %}{% if show_desktop_slider == false and section.settings.full_width == false %} page-width-desktop{% endif %}{% if show_desktop_slider %} slider-component-desktop{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <ul
+        id="Slider-{{ section.id }}"
+        class="grid contains-card grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down{% if show_mobile_slider or show_desktop_slider %} slider{% if show_desktop_slider %} slider--desktop{% endif %}{% if show_mobile_slider %} slider--tablet grid--peek{% endif %}{% endif %}"
+        role="list"
+        aria-label="{{ 'general.slider.name' | t }}"
+      >
+        {%- for block in section.blocks -%}
+          <li class="grid__item{% if show_mobile_slider or show_desktop_slider %} slider__slide{% endif %}" {{ block.shopify_attributes }}>
+            <div class="kefey-card">
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 1500 | image_tag: class: 'kefey-card__img', loading: 'lazy', sizes: '50vw', widths: '375, 550, 750, 1100, 1500' }}
+              {%- else -%}
+                {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <div class="kefey-card__title">{{ block.settings.title }}</div>
+              {%- endif -%}
+              <div class="kefey-card__cta">
+                {%- if block.settings.button_label != blank -%}
+                  <a
+                    {% if block.settings.link == blank %}role="link" aria-disabled="true"{% else %}href="{{ block.settings.link }}"{% endif %}
+                    class="button kefey-card__button"
+                  >{{ block.settings.button_label }}</a>
+                {%- endif -%}
+              </div>
+            </div>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- if show_mobile_slider or show_desktop_slider -%}
+        <div class="slider-buttons">
+          <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'general.slider.previous_slide' | t }}" aria-controls="Slider-{{ section.id }}">
+            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+          </button>
+          <div class="slider-counter caption">
+            <span class="slider-counter--current">1</span>
+            <span aria-hidden="true"> / </span>
+            <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+            <span class="slider-counter--total">{{ section.blocks.size }}</span>
+          </div>
+          <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'general.slider.next_slide' | t }}" aria-controls="Slider-{{ section.id }}">
+            <span class="svg-wrapper">{{- 'icon-caret.svg' | inline_asset_content -}}</span>
+          </button>
+        </div>
+      {%- endif -%}
+    </slider-component>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Kefey product carousel",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "title", "label": "Title", "default": "Discover" },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "H2" },
+        { "value": "h1", "label": "H1" },
+        { "value": "h0", "label": "Hero" }
+      ],
+      "default": "h2",
+      "label": "Heading size"
+    },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": false },
+    { "type": "checkbox", "id": "enable_desktop_slider", "label": "Enable slider on desktop", "default": true },
+    { "type": "checkbox", "id": "swipe_on_mobile", "label": "Swipe on mobile", "default": true },
+    { "type": "select", "id": "columns_desktop", "label": "Columns (desktop)", "default": "6", "options": [
+      { "value": "3", "label": "3" },
+      { "value": "4", "label": "4" },
+      { "value": "5", "label": "5" },
+      { "value": "6", "label": "6" }
+    ]},
+    { "type": "select", "id": "columns_mobile", "label": "Columns (mobile)", "default": "2", "options": [
+      { "value": "1", "label": "1" },
+      { "value": "2", "label": "2" }
+    ]},
+    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 36 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 36 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Carousel item",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "inline_richtext", "id": "title", "label": "Title" },
+        { "type": "text", "id": "button_label", "label": "Button label", "default": "DISCOVER" },
+        { "type": "url", "id": "link", "label": "Link" }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Kefey product carousel",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
