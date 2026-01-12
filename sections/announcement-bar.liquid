@@ -24,15 +24,16 @@
   <div class="page-width utility-bar__grid{% if announcement_bar and language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--3-col{% elsif language_country_selector or section.settings.show_social and social_icons %} utility-bar__grid--2-col{% endif %}">
     {%- if section.settings.enable_countdown -%}
       <div class="announcement-bar announcement-countdown" role="region" aria-label="sale countdown">
-        <div class="announcement-bar__announcement" style="gap:1.6rem; align-items:center;">
-          {%- if section.settings.countdown_heading != blank -%}
-            <p class="announcement-bar__message h5" style="margin:0;">
-              <span>{{ section.settings.countdown_heading }}</span>
+        <div class="announcement-countdown__container">
+          {%- if section.settings.countdown_message != blank -%}
+            <p class="announcement-bar__message h5 announcement-countdown__message">
+              <span>{{ section.settings.countdown_message }}</span>
             </p>
           {%- endif -%}
           <div class="announcement-countdown__timer"
                id="AnnouncementTimer-{{ section.id }}"
-               data-end="{{ section.settings.countdown_end | escape }}">
+               data-end="{{ section.settings.countdown_end | escape }}"
+               style="--countdown-accent: {{ section.settings.countdown_accent_color }};">
             <span class="announcement-countdown__group">
               <span class="announcement-countdown__num" data-unit="days">00</span>
               <span class="announcement-countdown__label">D</span>
@@ -63,11 +64,13 @@
         </div>
       </div>
       <style>
-        .announcement-countdown__timer{display:flex;align-items:center;gap:.6rem;}
+        .announcement-countdown__container{display:flex;align-items:center;justify-content:space-between;gap:1.6rem;width:100%;}
+        .announcement-countdown__message{text-transform:uppercase;margin:0;}
+        .announcement-countdown__timer{display:flex;align-items:center;gap:.6rem;color:var(--countdown-accent,#FFC72C);}
         .announcement-countdown__group{display:flex;align-items:baseline;gap:.2rem;}
-        .announcement-countdown__num{min-width:2ch;display:inline-block;text-align:center;font-weight:700;}
-        .announcement-countdown__label{opacity:.85;font-size:.9em;}
-        .announcement-countdown__sep{opacity:.75}
+        .announcement-countdown__num{min-width:2ch;display:inline-block;text-align:center;font-weight:700;color:var(--countdown-accent,#FFC72C);}
+        .announcement-countdown__label{opacity:.95;font-size:.9em;color:var(--countdown-accent,#FFC72C);}
+        .announcement-countdown__sep{opacity:.9;color:var(--countdown-accent,#FFC72C);}
       </style>
     {%- endif -%}
     {%- if section.settings.show_social and social_icons -%}
@@ -230,10 +233,10 @@
       "default": false
     },
     {
-      "type": "text",
-      "id": "countdown_heading",
-      "label": "Heading",
-      "default": "END OF SEASON SOON"
+      "type": "inline_richtext",
+      "id": "countdown_message",
+      "label": "Left message",
+      "default": "FREE SHIPPING 🚀 JOY TRACKED TO YOUR DOOR!"
     },
     {
       "type": "text",
@@ -241,6 +244,12 @@
       "label": "End date/time",
       "default": "2025-12-31 23:59:59",
       "info": "Use format YYYY-MM-DD HH:MM or full ISO (store local time)."
+    },
+    {
+      "type": "color",
+      "id": "countdown_accent_color",
+      "label": "Timer accent color",
+      "default": "#FFC72C"
     },
     {
       "type": "text",
