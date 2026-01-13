@@ -36,7 +36,7 @@
         "autoplay_speed": 5000,
         "show_dots": true,
         "show_arrows": false,
-        "content_max_width": 1000,
+        "content_max_width": 900,
         "content_position": "left",
         "padding_top": 0,
         "padding_bottom": 0
