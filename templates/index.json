@@ -133,7 +133,7 @@
             "customer_name": "Patricia Kate",
             "review_text": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>",
             "rating": 5,
-            "badge_quote_color": "#2BB4A7"
+            "badge_quote_color": "#2bb4a7"
           }
         },
         "review_KnLXci": {
@@ -142,7 +142,7 @@
             "customer_name": "Patricia Kate",
             "review_text": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>",
             "rating": 5,
-            "badge_quote_color": "#2BB4A7"
+            "badge_quote_color": "#2bb4a7"
           }
         },
         "review_3EVnhH": {
@@ -151,7 +151,7 @@
             "customer_name": "Patricia Kate",
             "review_text": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>",
             "rating": 5,
-            "badge_quote_color": "#2BB4A7"
+            "badge_quote_color": "#2bb4a7"
           }
         }
       },
@@ -165,11 +165,11 @@
         "heading_line_1": "Over 1,000,000+ Reviews",
         "heading_line_2": "from Happy Customers.",
         "highlight_enabled": true,
-        "highlight_color": "#10B6A6",
+        "highlight_color": "#10b6a6",
         "highlight_width": 56,
         "highlight_height": 14,
         "show_decorations": true,
-        "bubble_color": "#FFC72C",
+        "bubble_color": "#ffc72c",
         "bubble_max_width": 1320,
         "bubble_padding_desktop": 48,
         "bubble_padding_mobile": 24,
@@ -181,11 +181,153 @@
         "show_arrows": false,
         "show_dots": false
       }
+    },
+    "risk_free_banner_NymyxM": {
+      "type": "risk-free-banner",
+      "blocks": {
+        "decor_qEzDqH": {
+          "type": "decor",
+          "settings": {
+            "width": 80,
+            "top": 20,
+            "right": 20,
+            "alt": ""
+          }
+        },
+        "decor_7U3WKK": {
+          "type": "decor",
+          "settings": {
+            "width": 80,
+            "top": 20,
+            "right": 20,
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "decor_qEzDqH",
+        "decor_7U3WKK"
+      ],
+      "name": "Risk-Free Banner",
+      "settings": {
+        "background_color": "#3FB6B4",
+        "section_height_desktop": 220,
+        "section_height_mobile": 180,
+        "padding_left_right": 40,
+        "heading": "TRY IT, RISK FREE!",
+        "text": "If you’re not satisfied with our product, simply contact us, and we’ll give you a full, 100% hassle-free refund.",
+        "button_label": "SHOP NOW",
+        "button_link": "",
+        "button_style": "outline",
+        "heading_color": "#FFC94D",
+        "text_color": "#FFFFFF",
+        "button_text_color": "#FFFFFF",
+        "button_border_color": "#FFFFFF",
+        "button_bg_color": "#FFFFFF",
+        "badge_type": "text",
+        "badge_size": 160,
+        "badge_text_center": "kefey",
+        "badge_text_ring": "MONEYBACK GUARANTEE",
+        "left_decor_enabled": true,
+        "right_decor_enabled": true
+      }
+    },
+    "text_marquee_bar_aVHYqT": {
+      "type": "text-marquee-bar",
+      "blocks": {
+        "item_9aDBHn": {
+          "type": "item",
+          "settings": {
+            "text": "FRIENDLY"
+          }
+        },
+        "item_GGMBVD": {
+          "type": "item",
+          "settings": {
+            "text": "ECO FRIENDLY"
+          }
+        },
+        "item_fU48wf": {
+          "type": "item",
+          "settings": {
+            "text": "SUGAR FREE"
+          }
+        },
+        "item_wbbREb": {
+          "type": "item",
+          "settings": {
+            "text": "GELATIN FREE"
+          }
+        },
+        "item_FGPrik": {
+          "type": "item",
+          "settings": {
+            "text": "GLUTEN FREE"
+          }
+        },
+        "item_ij63mf": {
+          "type": "item",
+          "settings": {
+            "text": "NON–GMO"
+          }
+        },
+        "item_zUHLW8": {
+          "type": "item",
+          "settings": {
+            "text": "GMP CERTIFIED"
+          }
+        },
+        "item_JfBfg3": {
+          "type": "item",
+          "settings": {
+            "text": "KOSHER"
+          }
+        },
+        "item_6kzxpm": {
+          "type": "item",
+          "settings": {
+            "text": "HALAL"
+          }
+        }
+      },
+      "block_order": [
+        "item_9aDBHn",
+        "item_GGMBVD",
+        "item_fU48wf",
+        "item_wbbREb",
+        "item_FGPrik",
+        "item_ij63mf",
+        "item_zUHLW8",
+        "item_JfBfg3",
+        "item_6kzxpm"
+      ],
+      "name": "Text Marquee Bar",
+      "settings": {
+        "enabled": true,
+        "background_color": "#E95439",
+        "text_color": "#FFFFFF",
+        "bar_height_desktop": 80,
+        "bar_height_mobile": 60,
+        "font_size_desktop": 20,
+        "font_size_mobile": 16,
+        "font_weight": "700",
+        "letter_spacing": 1,
+        "gap": 28,
+        "separator_text": "|",
+        "speed": 18,
+        "direction": "left",
+        "enable_rtl": false,
+        "pause_on_hover": true,
+        "pause_on_focus": true,
+        "aria_label": "Scrolling product benefits"
+      }
     }
   },
   "order": [
     "hero_slider_8iGqUR",
     "angled_image_carousel_rRtqYE",
-    "happy_customers_VFDqzg"
+    "happy_customers_VFDqzg",
+    "risk_free_banner_NymyxM",
+    "text_marquee_bar_aVHYqT"
   ]
 }

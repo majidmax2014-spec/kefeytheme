@@ -1,1 +1,40 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"kefey-footer","settings":{"color_scheme":"scheme-4","newsletter_heading":"Keep well with Goli","newsletter_subtext":"<p>Subscribe to our newsletter for exclusive offers!</p>","show_social":true,"padding_top":36,"padding_bottom":36}}},"order":["footer"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "kefey-footer",
+      "settings": {
+        "color_scheme": "scheme-4",
+        "newsletter_heading": "Keep well with Kefey",
+        "newsletter_subtext": "<p>Subscribe to our newsletter for exclusive offers!</p>",
+        "show_social": true,
+        "menu": "",
+        "link_1_label": "Terms & Conditions",
+        "link_1_url": "",
+        "link_2_label": "Privacy Policy",
+        "link_2_url": "",
+        "link_3_label": "Goli Rewards Gift Cards",
+        "link_3_url": "",
+        "link_4_label": "Digital Accessibility Statement",
+        "link_4_url": "",
+        "disclaimer": "",
+        "footnotes": "",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
