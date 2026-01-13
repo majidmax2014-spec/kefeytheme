@@ -7,8 +7,8 @@
 }
 .angled-carousel__inner {
   position: relative;
-  margin-inline: auto;
-  max-width: var(--max-w, 1400px);
+  width: 100vw;
+  margin: 0;
 }
 
 /* Side angled panels */
@@ -57,15 +57,19 @@
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
   scroll-padding-inline: 10%;
-  padding-inline: 6vw;
+  padding-inline: var(--side-padding, 64px);
+  width: 100vw;
+  touch-action: pan-y;
+  cursor: grab;
 }
 .angled-carousel__viewport::-webkit-scrollbar { display: none; }
 .angled-carousel__viewport { scrollbar-width: none; }
+.angled-carousel__viewport.is-dragging { cursor: grabbing; }
 
 .angled-carousel__track {
   display: flex;
   align-items: center;
-  gap: var(--gap, 40px);
+  gap: var(--gap-desktop, 48px);
   padding: 16px 0;
 }
 
@@ -83,6 +87,7 @@
   scroll-snap-align: center;
   position: relative;
 }
+.angled-carousel__card a { -webkit-tap-highlight-color: transparent; }
 .angled-carousel__link { display: block; height: 100%; }
 .angled-carousel__media,
 .angled-carousel__media picture,
@@ -102,17 +107,17 @@
   box-shadow: 0 12px 30px rgba(0,0,0,.18);
 }
 .angled-carousel__card.is-prev {
-  transform: perspective(1000px) rotateY(var(--tilt-deg, 10deg)) scale(.985);
+  transform: perspective(1000px) rotateY(var(--tilt, 10deg)) scale(.985);
 }
 .angled-carousel__card.is-next {
-  transform: perspective(1000px) rotateY(calc(var(--tilt-deg, 10deg) * -1)) scale(.985);
+  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * -1)) scale(.985);
 }
 .angled-carousel__card.is-far-prev {
-  transform: perspective(1000px) rotateY(calc(var(--tilt-deg, 10deg) * 1.4)) scale(.97);
+  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * 1.25)) scale(.96);
   opacity: .9;
 }
 .angled-carousel__card.is-far-next {
-  transform: perspective(1000px) rotateY(calc(var(--tilt-deg, 10deg) * -1.4)) scale(.97);
+  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * -1.25)) scale(.96);
   opacity: .9;
 }
 
@@ -159,17 +164,18 @@
 
 /* Responsive */
 @media screen and (max-width: 989px) {
-  .angled-carousel__viewport {
-    padding-inline: 5vw;
-    scroll-padding-inline: 12%;
-  }
-  .angled-carousel__track { gap: calc(var(--gap, 40px) * .7); }
+  .angled-carousel { --tilt: var(--tilt-deg-mobile, 8deg); }
+  .angled-carousel__viewport { scroll-padding-inline: 12%; }
+  .angled-carousel__track { gap: var(--gap-mobile, 28px); }
   .angled-carousel__card {
     width: var(--card-w-mobile, 240px);
     height: var(--card-h-mobile, 320px);
   }
   .angled-carousel__panel--left { width: calc(var(--panel-left-width, 220px) * .7); }
   .angled-carousel__panel--right { width: calc(var(--panel-right-width, 220px) * .7); }
+}
+@media screen and (min-width: 990px) {
+  .angled-carousel { --tilt: var(--tilt-deg-desktop, 10deg); }
 }
 
 @media (prefers-reduced-motion: reduce) {
