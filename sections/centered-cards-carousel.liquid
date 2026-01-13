@@ -1,0 +1,129 @@
+{{ 'centered-cards-carousel.css' | asset_url | stylesheet_tag }}
+<section
+  id="CCC-{{ section.id }}"
+  class="ccc{% if section.settings.full_width %} ccc--full{% endif %}"
+  style="
+    --pt: {{ section.settings.padding_top | default: 40 }}px;
+    --pb: {{ section.settings.padding_bottom | default: 40 }}px;
+    --max: {{ section.settings.max_width | default: 1400 }}px;
+    --card-bg: {{ section.settings.card_bg_color | default: '#FFC400' }};
+    --strip: {{ section.settings.strip_color | default: '#E8593B' }};
+    --strip-h: {{ section.settings.strip_height | default: 72 }}px;
+    --radius: {{ section.settings.border_radius | default: 28 }}px;
+    --w-d: {{ section.settings.card_width_desktop | default: 480 }}px;
+    --h-d: {{ section.settings.card_height_desktop | default: 360 }}px;
+    --w-m: {{ section.settings.card_width_mobile | default: 320 }}px;
+    --h-m: {{ section.settings.card_height_mobile | default: 300 }}px;
+    --gap-d: {{ section.settings.gap_desktop | default: 40 }}px;
+    --gap-m: {{ section.settings.gap_mobile | default: 16 }}px;
+    --scale-center: {{ section.settings.center_scale_desktop | default: 1.1 }};
+    --scale-side: {{ section.settings.side_scale_desktop | default: 0.92 }};
+  "
+  data-show-dots="{{ section.settings.show_dots }}"
+  data-show-arrows="{{ section.settings.show_arrows }}"
+  data-infinite="{{ section.settings.infinite_loop }}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
+>
+  <div class="ccc__inner">
+    <div class="ccc__viewport" aria-roledescription="carousel">
+      <ul class="ccc__track" role="list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'card' -%}
+            <li class="ccc__slide" {{ block.shopify_attributes }}>
+              <article class="ccc__card" style="{% if block.settings.text_color != blank %}--txt: {{ block.settings.text_color }};{% endif %}{% if block.settings.heading_color != blank %}--heading: {{ block.settings.heading_color }};{% endif %}">
+                <div class="ccc__icon">
+                  {%- if block.settings.icon != blank -%}
+                    <img src="{{ block.settings.icon | image_url: width: 140 }}" alt="{{ block.settings.heading | escape }}" loading="lazy">
+                  {%- endif -%}
+                </div>
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="ccc__heading">{{ block.settings.heading }}</h3>
+                {%- endif -%}
+                {%- if block.settings.subheading != blank -%}
+                  <div class="ccc__sub">{{ block.settings.subheading }}</div>
+                {%- endif -%}
+                {%- if block.settings.body_text != blank -%}
+                  <div class="ccc__body rte">{{ block.settings.body_text }}</div>
+                {%- endif -%}
+                <div class="ccc__strip" aria-hidden="true"></div>
+                {%- if block.settings.link != blank -%}
+                  <a class="ccc__link" href="{{ block.settings.link }}" aria-label="{{ block.settings.heading | default: 'Learn more' | escape }}"></a>
+                {%- endif -%}
+              </article>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+      {%- if section.settings.show_arrows -%}
+        <button class="ccc__arrow ccc__arrow--prev" type="button" aria-label="Previous slide">
+          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+        </button>
+        <button class="ccc__arrow ccc__arrow--next" type="button" aria-label="Next slide">
+          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+        </button>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.show_dots -%}
+      <div class="ccc__dots" role="tablist" aria-label="Carousel pagination"></div>
+    {%- endif -%}
+  </div>
+</section>
+{{ 'centered-cards-carousel.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Centered Cards Carousel",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "default": 36 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "default": 36 },
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": true },
+    { "type": "number", "id": "max_width", "label": "Max width (px)", "default": 1400 },
+    { "type": "color", "id": "card_bg_color", "label": "Card background", "default": "#FFC400" },
+    { "type": "color", "id": "strip_color", "label": "Bottom strip color", "default": "#E8593B" },
+    { "type": "number", "id": "strip_height", "label": "Bottom strip height (px)", "default": 72 },
+    { "type": "number", "id": "border_radius", "label": "Card radius (px)", "default": 28 },
+    { "type": "number", "id": "card_width_desktop", "label": "Card width desktop (px)", "default": 480 },
+    { "type": "number", "id": "card_height_desktop", "label": "Card height desktop (px)", "default": 360 },
+    { "type": "number", "id": "card_width_mobile", "label": "Card width mobile (px)", "default": 320 },
+    { "type": "number", "id": "card_height_mobile", "label": "Card height mobile (px)", "default": 300 },
+    { "type": "number", "id": "gap_desktop", "label": "Gap desktop (px)", "default": 40 },
+    { "type": "number", "id": "gap_mobile", "label": "Gap mobile (px)", "default": 16 },
+    { "type": "range", "id": "center_scale_desktop", "label": "Center scale (desktop)", "min": 1.0, "max": 1.2, "step": 0.01, "default": 1.1 },
+    { "type": "range", "id": "side_scale_desktop", "label": "Side scale (desktop)", "min": 0.8, "max": 1.0, "step": 0.01, "default": 0.92 },
+    { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": false },
+    { "type": "checkbox", "id": "infinite_loop", "label": "Infinite loop", "default": false },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
+    { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 5000 }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "WORLDWIDE DELIVERY" },
+        { "type": "text", "id": "subheading", "label": "Subheading", "default": "From Us to You 🌍" },
+        { "type": "richtext", "id": "body_text", "label": "Body", "default": "<p>Joyful tubes flying to doors everywhere</p>" },
+        { "type": "url", "id": "link", "label": "Optional link" },
+        { "type": "color", "id": "heading_color", "label": "Heading color" },
+        { "type": "color", "id": "text_color", "label": "Text color" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Centered Cards Carousel",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+

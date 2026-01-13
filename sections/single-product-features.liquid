@@ -1,0 +1,217 @@
+{{ 'single-product-features.css' | asset_url | stylesheet_tag }}
+<section
+  id="SingleProductFeatures-{{ section.id }}"
+  class="spf{% if section.settings.section_full_width %} spf--full{% endif %}"
+  style="
+    --spf-bg: {{ section.settings.background_color | default: '#ffffff' }};
+    --spf-max-w: {{ section.settings.max_width | default: 1400 }}px;
+    --spf-pt: {{ section.settings.padding_top | default: 36 }}px;
+    --spf-pb: {{ section.settings.padding_bottom | default: 36 }}px;
+    --spf-flower-fill: {{ section.settings.flower_bg_color | default: '#45b6b0' }};
+    --spf-flower-stroke: {{ section.settings.flower_outline_color | default: '#FFC72C' }};
+    --spf-flower-stroke-w: {{ section.settings.flower_outline_width | default: 6 }}px;
+    --spf-flower-size-d: {{ section.settings.flower_size_desktop | default: 560 }}px;
+    --spf-flower-size-m: {{ section.settings.flower_size_mobile | default: 360 }}px;
+    --spf-product-w-d: {{ section.settings.product_image_max_width_desktop | default: 360 }}px;
+    --spf-product-w-m: {{ section.settings.product_image_max_width_mobile | default: 260 }}px;
+    --spf-feature-fs: {{ section.settings.feature_text_font_size | default: 20 }}px;
+    --spf-feature-color: {{ section.settings.feature_text_color | default: '#1a1a1a' }};
+    --spf-icon-size: {{ section.settings.icon_size | default: 40 }}px;
+    --spf-dots-color: {{ section.settings.dotted_divider_color | default: '#999' }};
+  "
+>
+  {%- comment -%} Decorations (absolute) {%- endcomment -%}
+  {%- for i in (1..4) -%}
+    {%- assign show = section.settings["decor_" | append: i | append: "_show"] -%}
+    {%- if show and section.settings["decor_" | append: i | append: "_image"] != blank -%}
+      <img
+        class="spf__decor spf__decor--{{ i }}"
+        src="{{ section.settings["decor_" | append: i | append: "_image"] | image_url: width: 600 }}"
+        alt=""
+        style="left: {{ section.settings["decor_" | append: i | append: "_x"] | default: 8 }}%; top: {{ section.settings["decor_" | append: i | append: "_y"] | default: 8 }}%; width: {{ section.settings["decor_" | append: i | append: "_size"] | default: 64 }}px;"
+        loading="lazy"
+      >
+    {%- endif -%}
+  {%- endfor -%}
+
+  <div class="spf__inner">
+    <div class="spf__grid">
+      <!-- Left text blocks -->
+      <div class="spf__left">
+        <div class="spf__stats">
+          <div class="spf__num">{{ section.settings.left_number | default: '60' }}</div>
+          <div class="spf__small">{{ section.settings.left_line_1 | default: 'Gummies' }}</div>
+          <div class="spf__small">{{ section.settings.left_line_2 | default: 'Dietary supplement' }}</div>
+        </div>
+        <div class="spf__title">
+          <div class="spf__title-text">{{ section.settings.left_title | default: 'Mood Gummies' }}</div>
+          <div class="spf__title-icons">
+            {%- if section.settings.left_title_icon_1 != blank -%}
+              <img src="{{ section.settings.left_title_icon_1 | image_url: width: 80 }}" alt="" loading="lazy">
+            {%- endif -%}
+            {%- if section.settings.left_title_icon_2 != blank -%}
+              <img src="{{ section.settings.left_title_icon_2 | image_url: width: 80 }}" alt="" loading="lazy">
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- Center product with flower -->
+      <div class="spf__center">
+        <div class="spf__flower-wrap">
+          {%- liquid
+            assign shape = section.settings.flower_shape_type | default: 'flower'
+            assign d_path = 'M100,15 C130,15 145,35 155,45 C165,55 185,70 185,100 C185,130 165,145 155,155 C145,165 130,185 100,185 C70,185 55,165 45,155 C35,145 15,130 15,100 C15,70 35,55 45,45 C55,35 70,15 100,15 Z'
+            if shape == 'cloud'
+              assign d_path = 'M45,120 C25,120 15,105 15,90 C15,75 25,60 45,60 C50,40 70,30 90,38 C100,25 120,25 130,38 C150,30 170,40 175,60 C190,60 205,75 205,92 C205,110 190,125 172,125 Z'
+            elsif shape == 'scallop'
+              assign d_path = 'M100,20 c10,0 15,10 20,15 c5,5 15,10 25,10 c10,0 15,-5 25,-10 c10,-5 25,-10 35,0 c10,10 5,25 0,35 c-5,10 -10,15 -10,25 c0,10 5,15 10,25 c5,10 10,25 0,35 c-10,10 -25,5 -35,0 c-10,-5 -15,-10 -25,-10 c-10,0 -15,5 -25,10 c-10,5 -25,10 -35,0 c-10,-10 -5,-25 0,-35 c5,-10 10,-15 10,-25 c0,-10 -5,-15 -10,-25 c-5,-10 -10,-25 0,-35 c10,-10 25,-5 35,0 Z'
+            endif
+          -%}
+          <svg class="spf__flower" viewBox="0 0 220 220" aria-hidden="true" focusable="false">
+            <path d="{{ d_path }}" fill="var(--spf-flower-fill)" stroke="var(--spf-flower-stroke)" stroke-width="var(--spf-flower-stroke-w)"></path>
+          </svg>
+          {%- if section.settings.product_image != blank -%}
+            <img
+              class="spf__product"
+              srcset="
+                {{ section.settings.product_image | image_url: width: 400 }} 400w,
+                {{ section.settings.product_image | image_url: width: 600 }} 600w,
+                {{ section.settings.product_image | image_url: width: 900 }} 900w
+              "
+              sizes="(max-width: 749px) var(--spf-product-w-m), var(--spf-product-w-d)"
+              src="{{ section.settings.product_image | image_url: width: 600 }}"
+              alt="{{ section.settings.left_title | default: 'Product' | escape }}"
+              loading="lazy"
+            >
+          {%- endif -%}
+        </div>
+      </div>
+
+      <!-- Right features list -->
+      <div class="spf__right">
+        <ul class="spf__features" role="list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'feature' -%}
+              <li class="spf__feature" {{ block.shopify_attributes }}>
+                <div class="spf__feature-icon">
+                  {%- if block.settings.icon != blank -%}
+                    <img src="{{ block.settings.icon | image_url: width: 120 }}" width="{{ section.settings.icon_size | default: 40 }}" height="{{ section.settings.icon_size | default: 40 }}" alt="{{ block.settings.title | strip_html | escape }}" loading="lazy">
+                  {%- endif -%}
+                </div>
+                <div class="spf__feature-text">
+                  {%- if block.settings.link != blank -%}
+                    <a href="{{ block.settings.link }}" class="spf__feature-link">{{ block.settings.title }}</a>
+                  {%- else -%}
+                    <div class="rte">{{ block.settings.title }}</div>
+                  {%- endif -%}
+                  {%- if section.settings.dotted_divider_enabled and forloop.last == false -%}
+                    <div class="spf__dots" aria-hidden="true">
+                      <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                  {%- endif -%}
+                </div>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Single Product Features",
+  "settings": [
+    { "type": "checkbox", "id": "section_full_width", "label": "Full width", "default": true },
+    { "type": "number", "id": "max_width", "label": "Max width (px)", "default": 1400 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "default": 48 },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#ffffff" },
+
+    { "type": "image_picker", "id": "product_image", "label": "Product image" },
+    { "type": "number", "id": "product_image_max_width_desktop", "label": "Product width desktop (px)", "default": 360 },
+    { "type": "number", "id": "product_image_max_width_mobile", "label": "Product width mobile (px)", "default": 260 },
+    { "type": "color", "id": "flower_bg_color", "label": "Flower fill color", "default": "#45b6b0" },
+    { "type": "color", "id": "flower_outline_color", "label": "Flower outline color", "default": "#FFC72C" },
+    { "type": "number", "id": "flower_outline_width", "label": "Flower outline width (px)", "default": 6 },
+    { "type": "number", "id": "flower_size_desktop", "label": "Flower size desktop (px)", "default": 560 },
+    { "type": "number", "id": "flower_size_mobile", "label": "Flower size mobile (px)", "default": 360 },
+    {
+      "type": "select",
+      "id": "flower_shape_type",
+      "label": "Flower shape",
+      "default": "flower",
+      "options": [
+        { "value": "flower", "label": "Flower" },
+        { "value": "cloud", "label": "Cloud" },
+        { "value": "scallop", "label": "Scallop" }
+      ]
+    },
+
+    { "type": "text", "id": "left_number", "label": "Left number", "default": "60" },
+    { "type": "text", "id": "left_line_1", "label": "Left line 1", "default": "Gummies" },
+    { "type": "text", "id": "left_line_2", "label": "Left line 2", "default": "Dietary supplement" },
+
+    { "type": "text", "id": "left_title", "label": "Left bottom title", "default": "Mood Gummies" },
+    { "type": "image_picker", "id": "left_title_icon_1", "label": "Left title icon 1 (small star)" },
+    { "type": "image_picker", "id": "left_title_icon_2", "label": "Left title icon 2 (small star)" },
+
+    { "type": "number", "id": "feature_text_font_size", "label": "Feature text size (px)", "default": 20 },
+    { "type": "color", "id": "feature_text_color", "label": "Feature text color", "default": "#1a1a1a" },
+    { "type": "number", "id": "icon_size", "label": "Icon size (px)", "default": 40 },
+    { "type": "checkbox", "id": "dotted_divider_enabled", "label": "Show dotted divider", "default": true },
+    { "type": "color", "id": "dotted_divider_color", "label": "Dotted divider color", "default": "#9aa" },
+
+    { "type": "image_picker", "id": "decor_1_image", "label": "Decor 1 image" },
+    { "type": "checkbox", "id": "decor_1_show", "label": "Show decor 1", "default": true },
+    { "type": "number", "id": "decor_1_x", "label": "Decor 1 left (%)", "default": 4 },
+    { "type": "number", "id": "decor_1_y", "label": "Decor 1 top (%)", "default": 8 },
+    { "type": "number", "id": "decor_1_size", "label": "Decor 1 size (px)", "default": 120 },
+
+    { "type": "image_picker", "id": "decor_2_image", "label": "Decor 2 image" },
+    { "type": "checkbox", "id": "decor_2_show", "label": "Show decor 2", "default": true },
+    { "type": "number", "id": "decor_2_x", "label": "Decor 2 left (%)", "default": 2 },
+    { "type": "number", "id": "decor_2_y", "label": "Decor 2 top (%)", "default": 28 },
+    { "type": "number", "id": "decor_2_size", "label": "Decor 2 size (px)", "default": 20 },
+
+    { "type": "image_picker", "id": "decor_3_image", "label": "Decor 3 image" },
+    { "type": "checkbox", "id": "decor_3_show", "label": "Show decor 3", "default": true },
+    { "type": "number", "id": "decor_3_x", "label": "Decor 3 left (%)", "default": 92 },
+    { "type": "number", "id": "decor_3_y", "label": "Decor 3 top (%)", "default": 76 },
+    { "type": "number", "id": "decor_3_size", "label": "Decor 3 size (px)", "default": 120 },
+
+    { "type": "image_picker", "id": "decor_4_image", "label": "Decor 4 image" },
+    { "type": "checkbox", "id": "decor_4_show", "label": "Show decor 4", "default": true },
+    { "type": "number", "id": "decor_4_x", "label": "Decor 4 left (%)", "default": 88 },
+    { "type": "number", "id": "decor_4_y", "label": "Decor 4 top (%)", "default": 84 },
+    { "type": "number", "id": "decor_4_size", "label": "Decor 4 size (px)", "default": 18 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature row",
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon" },
+        { "type": "richtext", "id": "title", "label": "Text (allow line breaks)", "default": "<p>Non-GMO</p>" },
+        { "type": "url", "id": "link", "label": "Optional link" }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Single Product Features",
+      "blocks": [
+        { "type": "feature", "settings": { "title": "<p>Sugar Free<br/>Gluten Free<br/>Gelatin Free</p>" } },
+        { "type": "feature", "settings": { "title": "<p>Eco-Friendly<br/>Vegan-Friendly</p>" } },
+        { "type": "feature", "settings": { "title": "<p>Non-GMO</p>" } },
+        { "type": "feature", "settings": { "title": "<p>Strawberry Flavor</p>" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+

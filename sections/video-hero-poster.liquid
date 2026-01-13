@@ -1,0 +1,163 @@
+{{ 'video-hero-poster.css' | asset_url | stylesheet_tag }}
+<section
+  id="VideoHero-{{ section.id }}"
+  class="vhp{% if section.settings.full_width %} vhp--full{% endif %}"
+  style="
+    --vhp-pt: {{ section.settings.padding_top | default: 48 }}px;
+    --vhp-pb: {{ section.settings.padding_bottom | default: 48 }}px;
+    --vhp-max: {{ section.settings.max_width | default: 1400 }}px;
+    --vhp-radius: {{ section.settings.border_radius | default: 28 }}px;
+    --vhp-h-desktop: {{ section.settings.poster_height_desktop | default: 520 }}px;
+    --vhp-h-mobile: {{ section.settings.poster_height_mobile | default: 320 }}px;
+    --vhp-play-size-d: {{ section.settings.play_button_size_desktop | default: 140 }}px;
+    --vhp-play-size-m: {{ section.settings.play_button_size_mobile | default: 100 }}px;
+    --vhp-play-color: {{ section.settings.play_button_color | default: '#E65A3D' }};
+    --vhp-play-icon: {{ section.settings.play_icon_color | default: '#FFFFFF' }};
+    --vhp-heading: {{ section.settings.heading_color | default: '#FFFFFF' }};
+    --vhp-sub: {{ section.settings.subheading_color | default: '#FFFFFF' }};
+  "
+  data-video-type="{{ section.settings.video_type }}"
+  data-external-url="{{ section.settings.external_video_url }}"
+  data-shopify-sources='{{ section.settings.shopify_video.sources | json }}'
+>
+  {%- comment -%} Background decorations {%- endcomment -%}
+  {%- for i in (1..5) -%}
+    {%- assign show = section.settings["decor_" | append: i | append: "_show"] -%}
+    {%- if show and section.settings["decor_" | append: i | append: "_image"] != blank -%}
+      <img
+        class="vhp__decor vhp__decor--{{ i }}"
+        src="{{ section.settings["decor_" | append: i | append: "_image"] | image_url: width: 800 }}"
+        alt=""
+        style="left: {{ section.settings["decor_" | append: i | append: "_x"] | default: 6 }}%; top: {{ section.settings["decor_" | append: i | append: "_y"] | default: 86 }}%; width: {{ section.settings["decor_" | append: i | append: "_size"] | default: 120 }}px; transform: rotate({{ section.settings["decor_" | append: i | append: "_rotation"] | default: 0 }}deg);"
+        loading="lazy"
+      >
+    {%- endif -%}
+  {%- endfor -%}
+
+  <div class="vhp__inner">
+    <button class="vhp__poster" type="button" aria-label="Play video">
+      <div class="vhp__poster-bg" style="{% if section.settings.poster_image != blank %}background-image:url('{{ section.settings.poster_image | image_url: width: 2000 }}');{% endif %}"></div>
+      <div class="vhp__overlay">
+        <div class="vhp__text">
+          <h2 class="vhp__heading">{{ section.settings.heading | default: 'Escape with flavor.' }}</h2>
+          <p class="vhp__sub">{{ section.settings.subheading | default: 'Dark chocolate & orange' }}</p>
+          <div class="vhp__brand">
+            {%- if section.settings.logo_type == 'image' and section.settings.logo_image != blank -%}
+              <img src="{{ section.settings.logo_image | image_url: width: 240 }}" alt="{{ section.settings.logo_text | default: 'kefey' | escape }}" loading="lazy">
+            {%- else -%}
+              <span style="color: {{ section.settings.logo_color | default: '#ffffff' }};">{{ section.settings.logo_text | default: 'kefey' }}</span>
+            {%- endif -%}
+          </div>
+        </div>
+        {%- if section.settings.show_audio_icon -%}
+          <div class="vhp__audio" style="left: {{ section.settings.audio_icon_x | default: 16 }}px; bottom: {{ section.settings.audio_icon_y | default: 16 }}px;">
+            {%- if section.settings.audio_icon_image != blank -%}
+              <img src="{{ section.settings.audio_icon_image | image_url: width: 64 }}" alt="" loading="lazy">
+            {%- else -%}
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 10h3l4-4v12l-4-4H5V10Z" fill="#fff"/><path d="M16 7a5 5 0 010 10" stroke="#fff" stroke-width="2" fill="none"/></svg>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <span class="vhp__play" aria-hidden="true">
+          <svg class="vhp__play-icon" viewBox="0 0 64 64" focusable="false" aria-hidden="true"><polygon points="24,18 48,32 24,46" fill="var(--vhp-play-icon)"/></svg>
+        </span>
+      </div>
+    </button>
+  </div>
+
+  <div class="vhp__modal" role="dialog" aria-modal="true" aria-label="{{ section.settings.heading | default: 'Video' }}" hidden>
+    <div class="vhp__backdrop"></div>
+    <div class="vhp__dialog">
+      <button class="vhp__close" type="button" aria-label="Close video">✕</button>
+      <div class="vhp__video"></div>
+    </div>
+  </div>
+</section>
+{{ 'video-hero-poster.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Video Hero Poster",
+  "settings": [
+    { "type": "checkbox", "id": "full_width", "label": "Full width", "default": true },
+    { "type": "number", "id": "max_width", "label": "Max width (px)", "default": 1400 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "default": 48 },
+
+    { "type": "select", "id": "video_type", "label": "Video source", "default": "youtube_vimeo", "options": [
+      { "value": "shopify", "label": "Shopify hosted" },
+      { "value": "youtube_vimeo", "label": "YouTube/Vimeo URL" }
+    ]},
+    { "type": "video", "id": "shopify_video", "label": "Shopify video" },
+    { "type": "url", "id": "external_video_url", "label": "YouTube or Vimeo URL" },
+    { "type": "image_picker", "id": "poster_image", "label": "Poster image" },
+    { "type": "number", "id": "poster_height_desktop", "label": "Poster height desktop (px)", "default": 520 },
+    { "type": "number", "id": "poster_height_mobile", "label": "Poster height mobile (px)", "default": 320 },
+    { "type": "number", "id": "border_radius", "label": "Poster border radius (px)", "default": 28 },
+
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Escape with flavor." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Dark chocolate & orange" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#FFFFFF" },
+    { "type": "color", "id": "subheading_color", "label": "Subheading color", "default": "#FFFFFF" },
+    { "type": "number", "id": "text_max_width", "label": "Text max width (px)", "default": 620 },
+    { "type": "select", "id": "text_position", "label": "Text position", "default": "left", "options": [{ "value": "left", "label": "Left" }]},
+
+    { "type": "select", "id": "logo_type", "label": "Brand logo type", "default": "text", "options": [
+      { "value": "text", "label": "Text" }, { "value": "image", "label": "Image" }
+    ]},
+    { "type": "text", "id": "logo_text", "label": "Logo text", "default": "kefey" },
+    { "type": "image_picker", "id": "logo_image", "label": "Logo image" },
+    { "type": "color", "id": "logo_color", "label": "Logo color", "default": "#FFFFFF" },
+
+    { "type": "color", "id": "play_button_color", "label": "Play button color", "default": "#E65A3D" },
+    { "type": "color", "id": "play_icon_color", "label": "Play icon color", "default": "#FFFFFF" },
+    { "type": "number", "id": "play_button_size_desktop", "label": "Play button size desktop (px)", "default": 140 },
+    { "type": "number", "id": "play_button_size_mobile", "label": "Play button size mobile (px)", "default": 100 },
+
+    { "type": "checkbox", "id": "show_audio_icon", "label": "Show audio icon (bottom-left)", "default": true },
+    { "type": "image_picker", "id": "audio_icon_image", "label": "Audio icon image (optional)" },
+    { "type": "number", "id": "audio_icon_x", "label": "Audio icon left (px)", "default": 16 },
+    { "type": "number", "id": "audio_icon_y", "label": "Audio icon bottom (px)", "default": 16 },
+
+    { "type": "checkbox", "id": "decor_1_show", "label": "Show decor 1", "default": true },
+    { "type": "image_picker", "id": "decor_1_image", "label": "Decor 1 image" },
+    { "type": "number", "id": "decor_1_x", "label": "Decor 1 left (%)", "default": 8 },
+    { "type": "number", "id": "decor_1_y", "label": "Decor 1 top (%)", "default": 86 },
+    { "type": "number", "id": "decor_1_size", "label": "Decor 1 size (px)", "default": 160 },
+    { "type": "number", "id": "decor_1_rotation", "label": "Decor 1 rotation (deg)", "default": -12 },
+
+    { "type": "checkbox", "id": "decor_2_show", "label": "Show decor 2", "default": true },
+    { "type": "image_picker", "id": "decor_2_image", "label": "Decor 2 image" },
+    { "type": "number", "id": "decor_2_x", "label": "Decor 2 left (%)", "default": 86 },
+    { "type": "number", "id": "decor_2_y", "label": "Decor 2 top (%)", "default": 4 },
+    { "type": "number", "id": "decor_2_size", "label": "Decor 2 size (px)", "default": 220 },
+    { "type": "number", "id": "decor_2_rotation", "label": "Decor 2 rotation (deg)", "default": 0 },
+
+    { "type": "checkbox", "id": "decor_3_show", "label": "Show decor 3", "default": true },
+    { "type": "image_picker", "id": "decor_3_image", "label": "Decor 3 image" },
+    { "type": "number", "id": "decor_3_x", "label": "Decor 3 left (%)", "default": 88 },
+    { "type": "number", "id": "decor_3_y", "label": "Decor 3 top (%)", "default": 78 },
+    { "type": "number", "id": "decor_3_size", "label": "Decor 3 size (px)", "default": 28 },
+    { "type": "number", "id": "decor_3_rotation", "label": "Decor 3 rotation (deg)", "default": 0 },
+
+    { "type": "checkbox", "id": "decor_4_show", "label": "Show decor 4", "default": false },
+    { "type": "image_picker", "id": "decor_4_image", "label": "Decor 4 image" },
+    { "type": "number", "id": "decor_4_x", "label": "Decor 4 left (%)", "default": 12 },
+    { "type": "number", "id": "decor_4_y", "label": "Decor 4 top (%)", "default": 10 },
+    { "type": "number", "id": "decor_4_size", "label": "Decor 4 size (px)", "default": 60 },
+    { "type": "number", "id": "decor_4_rotation", "label": "Decor 4 rotation (deg)", "default": 0 },
+
+    { "type": "checkbox", "id": "decor_5_show", "label": "Show decor 5", "default": false },
+    { "type": "image_picker", "id": "decor_5_image", "label": "Decor 5 image" },
+    { "type": "number", "id": "decor_5_x", "label": "Decor 5 left (%)", "default": 90 },
+    { "type": "number", "id": "decor_5_y", "label": "Decor 5 top (%)", "default": 20 },
+    { "type": "number", "id": "decor_5_size", "label": "Decor 5 size (px)", "default": 42 },
+    { "type": "number", "id": "decor_5_rotation", "label": "Decor 5 rotation (deg)", "default": 0 }
+  ],
+  "presets": [
+    { "name": "Video Hero Poster" }
+  ]
+}
+{% endschema %}
+
+

@@ -1,0 +1,200 @@
+{{ 'footer-kefey.css' | asset_url | stylesheet_tag }}
+<footer id="FooterKefey-{{ section.id }}" class="fk" style="--fk-max: {{ section.settings.content_max_width | default: 1320 }}px; --fk-pt: {{ section.settings.padding_top | default: 40 }}px; --fk-pb: {{ section.settings.padding_bottom | default: 28 }}px; --fk-gap: {{ section.settings.column_gap | default: 40 }}px;">
+  {%- if section.settings.show_top_band -%}
+    <div class="fk__top" style="--fk-top-bg: {{ section.settings.top_band_bg | default: '#C93C3C' }}; --fk-top-h: {{ section.settings.top_band_height_desktop | default: 420 }}px; --fk-top-hm: {{ section.settings.top_band_height_mobile | default: 360 }}px;">
+      <div class="fk__top-inner">
+        <div class="fk__top-col fk__top-col--text">
+          {%- if section.settings.top_logo != blank -%}
+            <div class="fk__top-logo">
+              <img src="{{ section.settings.top_logo | image_url: width: 360 }}" alt="" loading="lazy">
+            </div>
+          {%- endif -%}
+          {%- if section.settings.top_text != blank -%}
+            <div class="fk__top-text rte">{{ section.settings.top_text }}</div>
+          {%- endif -%}
+          {%- if section.settings.top_button_label != blank -%}
+            <a class="fk__btn" href="{{ section.settings.top_button_link | default: '#' }}">{{ section.settings.top_button_label }}</a>
+          {%- endif -%}
+        </div>
+        <div class="fk__top-col fk__top-col--image">
+          {%- if section.settings.top_right_image != blank -%}
+            <img class="fk__top-hero" src="{{ section.settings.top_right_image | image_url: width: 1200 }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_partner_strip -%}
+    <div class="fk__partners" style="--fk-left-bg: {{ section.settings.partner_left_bg | default: '#77ACDA' }}; --fk-right-bg: {{ section.settings.partner_right_bg | default: '#203120' }}; --fk-partner-h: {{ section.settings.partner_strip_height | default: 140 }}px;">
+      <div class="fk__partners-inner">
+        <div class="fk__partner fk__partner--left">
+          {%- if section.settings.partner_left_logo != blank -%}
+            <img src="{{ section.settings.partner_left_logo | image_url: width: 420 }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+        <div class="fk__partner fk__partner--right">
+          {%- if section.settings.partner_right_logo != blank -%}
+            <img src="{{ section.settings.partner_right_logo | image_url: width: 420 }}" alt="" loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="fk__main" style="--fk-bg: {{ section.settings.footer_bg | default: '#000000' }}">
+    <div class="fk__main-inner">
+      <div class="fk__grid">
+        <div class="fk__col fk__col--newsletter">
+          {%- if section.settings.show_newsletter -%}
+            {%- if section.settings.newsletter_heading != blank -%}
+              <h3 class="fk__h">{{ section.settings.newsletter_heading }}</h3>
+            {%- endif -%}
+            {%- if section.settings.newsletter_text != blank -%}
+              <div class="fk__p">{{ section.settings.newsletter_text }}</div>
+            {%- endif -%}
+            <div class="fk__form">
+              {%- form 'customer', id: 'FooterSubscribe-'.concat(section.id) -%}
+                {%- if form.posted_successfully? -%}
+                  <p class="fk__note fk__note--success">{{ 'general.newsletter_form.confirmation' | t }}</p>
+                {%- endif -%}
+                {%- if form.errors -%}
+                  <p class="fk__note fk__note--error">{{ form.errors.translated_fields['email'] | default: 'email' | capitalize }} {{ form.errors.messages['email'] }}</p>
+                {%- endif -%}
+                <input type="hidden" name="contact[tags]" value="newsletter">
+                <div class="fk__input">
+                  <input
+                    id="FooterEmail-{{ section.id }}"
+                    type="email"
+                    name="contact[email]"
+                    value=""
+                    autocorrect="off"
+                    autocapitalize="off"
+                    autocomplete="email"
+                    placeholder="{{ section.settings.newsletter_placeholder | default: 'Subscribe to our newsletter' }}"
+                    required
+                  >
+                  <button class="fk__submit" type="submit" aria-label="Subscribe">
+                    <span aria-hidden="true">→</span>
+                  </button>
+                </div>
+              {%- endform -%}
+            </div>
+            {%- if section.settings.show_social -%}
+              <div class="fk__social">
+                <div class="fk__social-label">{{ 'Follow us & share the joy :' }}</div>
+                <div class="fk__social-icons fk__social-icons--{{ section.settings.social_icon_style | default: 'outline' }}">
+                  {%- if section.settings.social_tiktok_url != blank -%}
+                    <a class="fk__si" href="{{ section.settings.social_tiktok_url }}" target="_blank" rel="noopener" aria-label="TikTok">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M20.7 8.5a7 7 0 0 1-4.4-2v8.1a5.4 5.4 0 1 1-5.4-5.3c.2 0 .4 0 .6.1v2.2c-.2 0-.4-.1-.6-.1a3.2 3.2 0 1 0 3.2 3.2V3h2.3c.6 2 2.1 3.7 4.3 4.2v2.3z"/></svg>
+                    </a>
+                  {%- endif -%}
+                  {%- if section.settings.social_snapchat_url != blank -%}
+                    <a class="fk__si" href="{{ section.settings.social_snapchat_url }}" target="_blank" rel="noopener" aria-label="Snapchat">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M12 3c2.7 0 4.7 1.9 5 4.6.1.9.5 1.5 1.2 2 .7.5 1 1.2.9 2-.1.6-.5 1.1-1.1 1.3-.5.1-1 .2-1.5.3.4.6.9 1 1.5 1.3.3.2.4.5.3.8-.2.6-.9.7-1.4.8-.9.1-1.5.6-1.9 1.4-.5.9-1.2 1.5-2.2 1.8-1.3.4-2.6.4-3.9 0-1-.3-1.7-1-2.2-1.8-.4-.8-1-1.3-1.9-1.4-.5-.1-1.2-.2-1.4-.8-.1-.3 0-.6.3-.8.6-.3 1.1-.7 1.5-1.3-.5-.1-1-.2-1.5-.3-.6-.2-1-.7-1.1-1.3-.1-.8.2-1.5.9-2 .7-.5 1.1-1.1 1.2-2C7.3 4.9 9.3 3 12 3z"/></svg>
+                    </a>
+                  {%- endif -%}
+                  {%- if section.settings.social_instagram_url != blank -%}
+                    <a class="fk__si" href="{{ section.settings.social_instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram">
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3.8A4.2 4.2 0 1 1 7.8 12 4.2 4.2 0 0 1 12 7.8zm0 2A2.2 2.2 0 1 0 14.2 12 2.2 2.2 0 0 0 12 9.8zm5.6-2.5a1 1 0 1 1-1 1 1 1 0 0 1 1-1z"/></svg>
+                    </a>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+        <div class="fk__col fk__col--menu">
+          {%- if section.settings.menu_primary != blank -%}
+            <ul class="fk__menu" role="list">
+              {%- for link in section.settings.menu_primary.links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+        <div class="fk__col fk__col--brand">
+          {%- if section.settings.brand_logo != blank -%}
+            <div class="fk__brand">
+              <img src="{{ section.settings.brand_logo | image_url: width: 400 }}" alt="" loading="lazy">
+            </div>
+          {%- endif -%}
+          {%- if section.settings.certification_logo != blank -%}
+            <div class="fk__cert">
+              <img src="{{ section.settings.certification_logo | image_url: width: 160 }}" alt="" loading="lazy">
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+
+      {%- if section.settings.menu_legal != blank -%}
+        <div class="fk__legal">
+          <ul class="fk__legal-list" role="list">
+            {%- for link in section.settings.menu_legal.links -%}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.show_disclaimer and section.settings.disclaimer_text != blank -%}
+        <div class="fk__disclaimer">
+          <div class="fk__disclaimer-inner rte">
+            {{ section.settings.disclaimer_text }}
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer (Kefey)",
+  "settings": [
+    { "type": "number", "id": "content_max_width", "label": "Content max width (px)", "default": 1320 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 160, "step": 4, "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 160, "step": 4, "default": 28 },
+
+    { "type": "checkbox", "id": "show_top_band", "label": "Show top give-back band", "default": true },
+    { "type": "color", "id": "top_band_bg", "label": "Top band background", "default": "#C93C3C" },
+    { "type": "image_picker", "id": "top_logo", "label": "Top logo (e.g., WWF)" },
+    { "type": "richtext", "id": "top_text", "label": "Top band text", "default": "<p>At the heart of Kefey, we give back. With every smile you unwrap, we help grow brighter futures around the world.</p>" },
+    { "type": "text", "id": "top_button_label", "label": "Top button label", "default": "LEARN MORE" },
+    { "type": "url", "id": "top_button_link", "label": "Top button link" },
+    { "type": "image_picker", "id": "top_right_image", "label": "Right image (child)" },
+    { "type": "number", "id": "top_band_height_desktop", "label": "Top band height desktop (px)", "default": 420 },
+    { "type": "number", "id": "top_band_height_mobile", "label": "Top band height mobile (px)", "default": 360 },
+
+    { "type": "checkbox", "id": "show_partner_strip", "label": "Show partner strip", "default": true },
+    { "type": "color", "id": "partner_left_bg", "label": "Partner left background", "default": "#77ACDA" },
+    { "type": "image_picker", "id": "partner_left_logo", "label": "Partner left logo" },
+    { "type": "color", "id": "partner_right_bg", "label": "Partner right background", "default": "#203120" },
+    { "type": "image_picker", "id": "partner_right_logo", "label": "Partner right logo" },
+    { "type": "number", "id": "partner_strip_height", "label": "Partner strip height (px)", "default": 140 },
+
+    { "type": "color", "id": "footer_bg", "label": "Footer background", "default": "#000000" },
+    { "type": "number", "id": "column_gap", "label": "Columns gap (px)", "default": 40 },
+    { "type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "KEEP IT JOYFUL WITH KEFEY®" },
+    { "type": "textarea", "id": "newsletter_text", "label": "Newsletter text", "default": "Be the first to know about Kefey goodies, joyful updates, fun deals & little surprises!" },
+    { "type": "text", "id": "newsletter_placeholder", "label": "Newsletter placeholder", "default": "Subscribe to our newsletter" },
+    { "type": "checkbox", "id": "show_newsletter", "label": "Show newsletter column", "default": true },
+    { "type": "checkbox", "id": "show_social", "label": "Show social icons", "default": true },
+    { "type": "url", "id": "social_tiktok_url", "label": "TikTok URL" },
+    { "type": "url", "id": "social_snapchat_url", "label": "Snapchat URL" },
+    { "type": "url", "id": "social_instagram_url", "label": "Instagram URL" },
+    { "type": "select", "id": "social_icon_style", "label": "Social icon style", "default": "outline", "options": [ { "value": "outline", "label": "Outline" }, { "value": "filled", "label": "Filled" } ] },
+    { "type": "link_list", "id": "menu_primary", "label": "Primary menu (column 2)" },
+    { "type": "link_list", "id": "menu_legal", "label": "Legal links menu (bottom row)" },
+    { "type": "image_picker", "id": "brand_logo", "label": "Brand logo (Kefey)" },
+    { "type": "image_picker", "id": "certification_logo", "label": "Certification logo (e.g., B Corp)" },
+    { "type": "checkbox", "id": "show_disclaimer", "label": "Show disclaimer box", "default": true },
+    { "type": "richtext", "id": "disclaimer_text", "label": "Disclaimer text", "default": "<p>† These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. The views and nutritional advice expressed by Kefey® are not intended for the purpose of providing medical advice. Please always consult your health care provider if you are taking any medications or have any medical conditions. Individual results may vary.</p>" }
+  ],
+  "presets": [
+    { "name": "Footer (Kefey)" }
+  ]
+}
+{% endschema %}
+
+

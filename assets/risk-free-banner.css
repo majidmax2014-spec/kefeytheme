@@ -1,0 +1,77 @@
+.rf-banner {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background: var(--rf-bg, #3FB6B4);
+  min-height: var(--rf-height-desktop, 220px);
+  display: grid;
+  align-items: center;
+}
+@media (max-width: 749px) {
+  .rf-banner { min-height: var(--rf-height-mobile, 180px); }
+}
+.rf-banner__inner {
+  display: grid;
+  grid-template-columns: minmax(40px, 1fr) auto minmax(420px, 820px) minmax(40px, 1fr);
+  align-items: center;
+  gap: 28px;
+  padding-inline: var(--rf-pad-x, 40px);
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  position: relative;
+}
+@media (max-width: 989px) {
+  .rf-banner__inner {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    text-align: center;
+    padding-block: 18px;
+  }
+}
+.rf-banner__left,
+.rf-banner__right { position: relative; height: 100%; }
+.rf-banner__decor { position: absolute; height: auto; pointer-events: none; }
+.rf-banner__decor--left { left: 0; bottom: -10%; width: min(38vw, 520px); transform: translateX(-12%); opacity: .95; }
+.rf-banner__decor--right { width: var(--w, 80px); }
+
+.rf-banner__badge { display: grid; place-items: center; }
+.rf-badge { width: var(--rf-badge-size, 160px); height: var(--rf-badge-size, 160px); }
+.rf-badge__img { width: var(--rf-badge-size, 160px); height: auto; }
+.rf-badge__ring { font-family: var(--font-body-family); text-transform: uppercase; }
+.rf-badge__center { font-family: var(--font-heading-family); text-transform: lowercase; }
+
+.rf-banner__content { color: var(--rf-text, #fff); }
+.rf-banner__heading {
+  margin: 0 0 6px 0;
+  color: var(--rf-heading, #FFC94D);
+  font-family: var(--font-heading-family);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: clamp(1.8rem, 2.2vw, 2.8rem);
+}
+.rf-banner__text { opacity: .98; max-width: 58ch; }
+@media (max-width: 989px) {
+  .rf-banner__text { margin: 0 auto; }
+}
+.rf-banner__btn {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 12px 22px;
+  border: 2px solid var(--rf-btn-border, #fff);
+  color: var(--rf-btn-text, #fff);
+  background: transparent;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.rf-banner__btn--solid {
+  background: var(--rf-btn-bg, #fff);
+  color: var(--rf-btn-text, #0a0a0a);
+}
+
+
