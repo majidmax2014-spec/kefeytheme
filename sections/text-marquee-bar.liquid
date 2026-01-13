@@ -1,0 +1,115 @@
+{{ 'text-marquee-bar.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.enabled -%}
+<section
+  id="MarqueeBar-{{ section.id }}"
+  class="marquee-bar"
+  {% if section.settings.enable_rtl %}dir="rtl"{% endif %}
+  style="
+    --bg: {{ section.settings.background_color | default: '#E95439' }};
+    --color: {{ section.settings.text_color | default: '#FFFFFF' }};
+    --h-desktop: {{ section.settings.bar_height_desktop | default: 80 }}px;
+    --h-mobile: {{ section.settings.bar_height_mobile | default: 60 }}px;
+    --fs-desktop: {{ section.settings.font_size_desktop | default: 20 }}px;
+    --fs-mobile: {{ section.settings.font_size_mobile | default: 16 }}px;
+    --weight: {{ section.settings.font_weight | default: '700' }};
+    --letter: {{ section.settings.letter_spacing | default: 0 }}px;
+    --gap: {{ section.settings.gap | default: 28 }}px;
+    --duration: {{ section.settings.speed | default: 18 }}s;
+    --sep: '{{ section.settings.separator_text | default: '|' }}';
+  "
+  data-direction="{{ section.settings.direction }}"
+  data-pause-hover="{{ section.settings.pause_on_hover }}"
+  data-pause-focus="{{ section.settings.pause_on_focus }}"
+  role="region"
+  aria-label="{{ section.settings.aria_label | default: 'Scrolling information' }}"
+>
+  <div class="marquee-bar__viewport">
+    <div class="marquee-bar__track">
+      {%- capture items_markup -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'item' -%}
+            <span class="marquee-bar__item" data-sep="{{ section.settings.separator_text | default: '|' }}" {{ block.shopify_attributes }}>
+              {{- block.settings.text | strip -}}
+            </span>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+      <div class="marquee-bar__group">{{ items_markup }}</div>
+      <div class="marquee-bar__group" aria-hidden="true">{{ items_markup }}</div>
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Text Marquee Bar",
+  "settings": [
+    { "type": "checkbox", "id": "enabled", "label": "Enabled", "default": true },
+    { "type": "color", "id": "background_color", "label": "Background", "default": "#E95439" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+    { "type": "number", "id": "bar_height_desktop", "label": "Height desktop (px)", "default": 80 },
+    { "type": "number", "id": "bar_height_mobile", "label": "Height mobile (px)", "default": 60 },
+    { "type": "number", "id": "font_size_desktop", "label": "Font size desktop (px)", "default": 20 },
+    { "type": "number", "id": "font_size_mobile", "label": "Font size mobile (px)", "default": 16 },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    { "type": "number", "id": "letter_spacing", "label": "Letter spacing (px)", "default": 1 },
+    { "type": "number", "id": "gap", "label": "Gap between items (px)", "default": 28 },
+    { "type": "text", "id": "separator_text", "label": "Separator text", "default": "|" },
+    { "type": "range", "id": "speed", "label": "Speed (seconds per loop)", "min": 5, "max": 40, "step": 1, "default": 18 },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Scroll direction",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left to right" },
+        { "value": "right", "label": "Right to left" }
+      ]
+    },
+    { "type": "checkbox", "id": "enable_rtl", "label": "Enable RTL text direction", "default": false },
+    { "type": "checkbox", "id": "pause_on_hover", "label": "Pause on hover", "default": true },
+    { "type": "checkbox", "id": "pause_on_focus", "label": "Pause when focused", "default": true },
+    { "type": "text", "id": "aria_label", "label": "ARIA label", "default": "Scrolling product benefits" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Text", "default": "ECO FRIENDLY" }
+      ]
+    }
+  ],
+  "max_blocks": 30,
+  "presets": [
+    {
+      "name": "Text Marquee Bar",
+      "blocks": [
+        { "type": "item", "settings": { "text": "FRIENDLY" } },
+        { "type": "item", "settings": { "text": "ECO FRIENDLY" } },
+        { "type": "item", "settings": { "text": "SUGAR FREE" } },
+        { "type": "item", "settings": { "text": "GELATIN FREE" } },
+        { "type": "item", "settings": { "text": "GLUTEN FREE" } },
+        { "type": "item", "settings": { "text": "NON–GMO" } },
+        { "type": "item", "settings": { "text": "GMP CERTIFIED" } },
+        { "type": "item", "settings": { "text": "KOSHER" } },
+        { "type": "item", "settings": { "text": "HALAL" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
