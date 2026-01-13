@@ -1,1 +1,1 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"kefey-footer","settings":{"color_scheme":"scheme-4","newsletter_heading":"Keep well with Goli","newsletter_subtext":"<p>Subscribe to our newsletter for exclusive offers!</p>","show_social":true,"padding_top":36,"padding_bottom":36}}},"order":["footer"]}
+{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer-kefey","settings":{}}},"order":["footer"]}
