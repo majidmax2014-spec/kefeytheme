@@ -1,0 +1,144 @@
+{{ 'angled-image-carousel.css' | asset_url | stylesheet_tag }}
+<section
+  id="AngledCarousel-{{ section.id }}"
+  class="angled-carousel"
+  style="
+    --pt: {{ section.settings.section_padding_top | default: 0 }}px;
+    --pb: {{ section.settings.section_padding_bottom | default: 0 }}px;
+    --max-w: {{ section.settings.max_width | default: 1400 }}px;
+    --gap: {{ section.settings.gap | default: 40 }}px;
+    --radius: {{ section.settings.border_radius | default: 28 }}px;
+    --card-w-desktop: {{ section.settings.card_width_desktop | default: 260 }}px;
+    --card-h-desktop: {{ section.settings.card_height_desktop | default: 360 }}px;
+    --card-w-mobile: {{ section.settings.card_width_mobile | default: 240 }}px;
+    --card-h-mobile: {{ section.settings.card_height_mobile | default: 320 }}px;
+    --panel-left-width: {{ section.settings.left_panel_width | default: 220 }}px;
+    --panel-right-width: {{ section.settings.right_panel_width | default: 220 }}px;
+    --panel-angle: {{ section.settings.panel_angle | default: 12 }}deg;
+    --panel-left-color: {{ section.settings.left_panel_color | default: '#7B61FF' }};
+    --panel-right-color: {{ section.settings.right_panel_color | default: '#7B61FF' }};
+    --tilt-deg: {{ section.settings.tilt_strength | default: 10 }}deg;
+  "
+  data-show-arrows="{{ section.settings.show_arrows }}"
+  data-show-dots="{{ section.settings.show_dots }}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
+>
+  <div class="angled-carousel__inner">
+    {%- if section.settings.side_panels_enabled -%}
+      <div class="angled-carousel__panel angled-carousel__panel--left" aria-hidden="true">
+        <div class="angled-carousel__panel-inner"></div>
+      </div>
+      <div class="angled-carousel__panel angled-carousel__panel--right" aria-hidden="true">
+        <div class="angled-carousel__panel-inner"></div>
+      </div>
+    {%- endif -%}
+
+    <div class="angled-carousel__viewport" aria-roledescription="carousel">
+      <ul class="angled-carousel__track" role="list">
+        {%- for block in section.blocks -%}
+          {%- assign d = block.settings.image -%}
+          {%- assign m = block.settings.image_mobile -%}
+          <li class="angled-carousel__card" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}<a class="angled-carousel__link" href="{{ block.settings.link }}">{%- endif -%}
+              <div class="angled-carousel__media" style="{% if block.settings.background_color != blank %}background-color: {{ block.settings.background_color }};{% endif %}">
+                <picture>
+                  {%- if m != blank -%}
+                    <source media="(max-width: 749px)"
+                            srcset="
+                              {{ m | image_url: width: 600 }} 600w,
+                              {{ m | image_url: width: 900 }} 900w
+                            ">
+                  {%- endif -%}
+                  <img
+                    srcset="
+                      {{ d | image_url: width: 600 }} 600w,
+                      {{ d | image_url: width: 900 }} 900w,
+                      {{ d | image_url: width: 1200 }} 1200w
+                    "
+                    sizes="(max-width: 749px) calc(100vw - 48px), 25vw"
+                    src="{{ d | image_url: width: 900 }}"
+                    width="{{ d.width }}"
+                    height="{{ d.height }}"
+                    alt="{{ block.settings.alt | default: d.alt | escape }}"
+                    {% if forloop.first == false %}loading="lazy"{% endif %}
+                  >
+                </picture>
+              </div>
+            {%- if block.settings.link != blank -%}</a>{%- endif -%}
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    {%- if section.settings.show_arrows -%}
+      <button class="angled-carousel__arrow angled-carousel__arrow--prev" type="button" aria-label="Previous">
+        <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+      </button>
+      <button class="angled-carousel__arrow angled-carousel__arrow--next" type="button" aria-label="Next">
+        <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+      </button>
+    {%- endif -%}
+
+    {%- if section.settings.show_dots -%}
+      <div class="angled-carousel__dots" role="tablist" aria-label="Carousel pagination"></div>
+    {%- endif -%}
+  </div>
+</section>
+{{ 'angled-image-carousel.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Angled Image Carousel",
+  "settings": [
+    { "type": "range", "id": "section_padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 40 },
+    { "type": "range", "id": "section_padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 40 },
+    { "type": "number", "id": "max_width", "label": "Max width (px)", "default": 1400 },
+    { "type": "number", "id": "card_width_desktop", "label": "Card width desktop (px)", "default": 260 },
+    { "type": "number", "id": "card_height_desktop", "label": "Card height desktop (px)", "default": 360 },
+    { "type": "number", "id": "card_width_mobile", "label": "Card width mobile (px)", "default": 240 },
+    { "type": "number", "id": "card_height_mobile", "label": "Card height mobile (px)", "default": 320 },
+    { "type": "number", "id": "gap", "label": "Gap (px)", "default": 40 },
+    { "type": "number", "id": "border_radius", "label": "Card border radius (px)", "default": 28 },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
+    { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
+    { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 5000 },
+    { "type": "checkbox", "id": "side_panels_enabled", "label": "Show side angled panels", "default": true },
+    { "type": "color", "id": "left_panel_color", "label": "Left panel color", "default": "#7B61FF" },
+    { "type": "color", "id": "right_panel_color", "label": "Right panel color", "default": "#7B61FF" },
+    { "type": "number", "id": "left_panel_width", "label": "Left panel width (px)", "default": 220 },
+    { "type": "number", "id": "right_panel_width", "label": "Right panel width (px)", "default": 220 },
+    { "type": "range", "id": "panel_angle", "min": 6, "max": 20, "step": 1, "unit": "deg", "label": "Panel angle", "default": 12 },
+    { "type": "range", "id": "tilt_strength", "min": 0, "max": 20, "step": 1, "unit": "deg", "label": "Card tilt strength", "default": 10 }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image (desktop)" },
+        { "type": "image_picker", "id": "image_mobile", "label": "Image (mobile optional)" },
+        { "type": "url", "id": "link", "label": "Link (optional)" },
+        { "type": "text", "id": "alt", "label": "Alt text (optional)" },
+        { "type": "color", "id": "background_color", "label": "Background color (optional)" }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Angled Image Carousel",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
