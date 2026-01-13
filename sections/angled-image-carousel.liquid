@@ -5,8 +5,9 @@
   style="
     --pt: {{ section.settings.section_padding_top | default: 0 }}px;
     --pb: {{ section.settings.section_padding_bottom | default: 0 }}px;
-    --max-w: {{ section.settings.max_width | default: 1400 }}px;
-    --gap: {{ section.settings.gap | default: 40 }}px;
+    --side-padding: {{ section.settings.side_padding | default: 64 }}px;
+    --gap-desktop: {{ section.settings.gap_desktop | default: 48 }}px;
+    --gap-mobile: {{ section.settings.gap_mobile | default: 28 }}px;
     --radius: {{ section.settings.border_radius | default: 28 }}px;
     --card-w-desktop: {{ section.settings.card_width_desktop | default: 260 }}px;
     --card-h-desktop: {{ section.settings.card_height_desktop | default: 360 }}px;
@@ -17,7 +18,8 @@
     --panel-angle: {{ section.settings.panel_angle | default: 12 }}deg;
     --panel-left-color: {{ section.settings.left_panel_color | default: '#7B61FF' }};
     --panel-right-color: {{ section.settings.right_panel_color | default: '#7B61FF' }};
-    --tilt-deg: {{ section.settings.tilt_strength | default: 10 }}deg;
+    --tilt-deg-desktop: {{ section.settings.tilt_strength_desktop | default: 10 }}deg;
+    --tilt-deg-mobile: {{ section.settings.tilt_strength_mobile | default: 8 }}deg;
   "
   data-show-arrows="{{ section.settings.show_arrows }}"
   data-show-dots="{{ section.settings.show_dots }}"
@@ -93,12 +95,13 @@
   "settings": [
     { "type": "range", "id": "section_padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 40 },
     { "type": "range", "id": "section_padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 40 },
-    { "type": "number", "id": "max_width", "label": "Max width (px)", "default": 1400 },
+    { "type": "number", "id": "side_padding", "label": "Side padding (px)", "default": 64 },
     { "type": "number", "id": "card_width_desktop", "label": "Card width desktop (px)", "default": 260 },
     { "type": "number", "id": "card_height_desktop", "label": "Card height desktop (px)", "default": 360 },
     { "type": "number", "id": "card_width_mobile", "label": "Card width mobile (px)", "default": 240 },
     { "type": "number", "id": "card_height_mobile", "label": "Card height mobile (px)", "default": 320 },
-    { "type": "number", "id": "gap", "label": "Gap (px)", "default": 40 },
+    { "type": "number", "id": "gap_desktop", "label": "Gap desktop (px)", "default": 48 },
+    { "type": "number", "id": "gap_mobile", "label": "Gap mobile (px)", "default": 28 },
     { "type": "number", "id": "border_radius", "label": "Card border radius (px)", "default": 28 },
     { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
     { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true },
@@ -110,7 +113,8 @@
     { "type": "number", "id": "left_panel_width", "label": "Left panel width (px)", "default": 220 },
     { "type": "number", "id": "right_panel_width", "label": "Right panel width (px)", "default": 220 },
     { "type": "range", "id": "panel_angle", "min": 6, "max": 20, "step": 1, "unit": "deg", "label": "Panel angle", "default": 12 },
-    { "type": "range", "id": "tilt_strength", "min": 0, "max": 20, "step": 1, "unit": "deg", "label": "Card tilt strength", "default": 10 }
+    { "type": "range", "id": "tilt_strength_desktop", "min": 0, "max": 20, "step": 1, "unit": "deg", "label": "Tilt desktop", "default": 10 },
+    { "type": "range", "id": "tilt_strength_mobile", "min": 0, "max": 20, "step": 1, "unit": "deg", "label": "Tilt mobile", "default": 8 }
   ],
   "blocks": [
     {
