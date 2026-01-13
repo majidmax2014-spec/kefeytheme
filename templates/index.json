@@ -29,7 +29,7 @@
       ],
       "name": "Hero Slider",
       "settings": {
-        "height_desktop": 560,
+        "height_desktop": 600,
         "height_mobile": 480,
         "overlay_opacity": 20,
         "autoplay": true,
@@ -40,59 +40,6 @@
         "content_position": "left",
         "padding_top": 0,
         "padding_bottom": 0
-      }
-    },
-    "kefey_product_carousel": {
-      "type": "slideshow",
-      "blocks": {
-        "slide-1": {
-          "type": "slide",
-          "settings": {
-            "image_overlay_opacity": 0,
-            "heading": "Discover",
-            "heading_size": "h2",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "Shop now",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          }
-        },
-        "slide-2": {
-          "type": "slide",
-          "settings": {
-            "image_overlay_opacity": 0,
-            "heading": "",
-            "heading_size": "h1",
-            "subheading": "Tell your brand's story through images",
-            "button_label": "",
-            "link": "",
-            "button_style_secondary": false,
-            "show_text_box": true,
-            "box_align": "middle-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": ""
-          }
-        }
-      },
-      "block_order": [
-        "slide-1",
-        "slide-2"
-      ],
-      "settings": {
-        "layout": "grid",
-        "slide_height": "medium",
-        "slider_visual": "dots",
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": true,
-        "accessibility_info": "Homepage slideshow"
       }
     },
     "featured_collection": {
@@ -193,7 +140,6 @@
   },
   "order": [
     "hero_slider_8iGqUR",
-    "kefey_product_carousel",
     "featured_collection",
     "kefey_reviews",
     "kefey_guarantee",
