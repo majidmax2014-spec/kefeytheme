@@ -1,0 +1,173 @@
+{{ 'happy-customers.css' | asset_url | stylesheet_tag }}
+<section
+  id="HappyCustomers-{{ section.id }}"
+  class="happy-reviews"
+  style="
+    --bubble-color: {{ section.settings.bubble_color | default: '#FFC72C' }};
+    --bubble-max: {{ section.settings.bubble_max_width | default: 1320 }}px;
+    --bubble-r: {{ section.settings.bubble_radius | default: 120 }}px;
+    --tail-size: {{ section.settings.bubble_tail_size | default: 80 }}px;
+    --pad-d: {{ section.settings.bubble_padding_desktop | default: 48 }}px;
+    --pad-m: {{ section.settings.bubble_padding_mobile | default: 24 }}px;
+    --card-r: {{ section.settings.card_radius | default: 32 }}px;
+    --hl-color: {{ section.settings.highlight_color | default: '#14B8A6' }};
+    --hl-w: {{ section.settings.highlight_width | default: 48 }}%;
+    --hl-h: {{ section.settings.highlight_height | default: 14 }}px;
+  "
+  data-show-arrows="{{ section.settings.show_arrows }}"
+  data-show-dots="{{ section.settings.show_dots }}"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
+  data-show-decor="{{ section.settings.show_decorations }}"
+  data-highlight="{{ section.settings.highlight_enabled }}"
+>
+  <div class="happy-reviews__header">
+    <div class="happy-reviews__decor" aria-hidden="true"></div>
+    <h2 class="happy-reviews__title">
+      <span class="happy-reviews__line1">
+        <span class="happy-reviews__marker">{% if section.settings.highlight_enabled %}</span>{% endif %}
+        {{ section.settings.heading_line_1 | default: 'Over 1,000,000+ Reviews' }}
+        {% if section.settings.highlight_enabled %}<span class="happy-reviews__marker-end"></span>{% endif %}
+      </span>
+      <span class="happy-reviews__line2">{{ section.settings.heading_line_2 | default: 'from Happy Customers.' }}</span>
+    </h2>
+  </div>
+
+  <div class="happy-reviews__bubble">
+    <div class="happy-reviews__viewport" aria-roledescription="carousel">
+      <ul class="happy-reviews__track" role="list">
+        {%- for block in section.blocks -%}
+          <li class="happy-reviews__slide" {{ block.shopify_attributes }}>
+            <article class="happy-reviews__card">
+              <div class="happy-reviews__card-main">
+                <div class="happy-reviews__quote">“</div>
+                <div class="happy-reviews__avatar">
+                  {%- if block.settings.customer_image != blank -%}
+                    <img
+                      src="{{ block.settings.customer_image | image_url: width: 200 }}"
+                      alt="{{ block.settings.customer_name | escape }}"
+                      width="100" height="100" loading="lazy">
+                  {%- else -%}
+                    <span class="happy-reviews__avatar-fallback" aria-hidden="true"></span>
+                  {%- endif -%}
+                </div>
+                <div class="happy-reviews__text rte">
+                  {{ block.settings.review_text | default: 'I’m so impressed with this online store. Great selection, fair prices, and fast delivery!' }}
+                </div>
+                <div class="happy-reviews__meta">
+                  <strong class="happy-reviews__name">{{ block.settings.customer_name | default: 'Patricia Kate' }}</strong>
+                  <span class="happy-reviews__stars" aria-label="{{ block.settings.rating | default: 5 }} out of 5 stars">
+                    {%- assign r = block.settings.rating | default: 5 -%}
+                    {%- for i in (1..5) -%}
+                      <span class="happy-reviews__star{% if i <= r %} is-on{% endif %}" aria-hidden="true">★</span>
+                    {%- endfor -%}
+                  </span>
+                </div>
+              </div>
+              <div class="happy-reviews__product">
+                {%- if block.settings.product_image != blank -%}
+                  <img
+                    srcset="
+                      {{ block.settings.product_image | image_url: width: 300 }} 300w,
+                      {{ block.settings.product_image | image_url: width: 600 }} 600w
+                    "
+                    sizes="(max-width: 749px) 35vw, 280px"
+                    src="{{ block.settings.product_image | image_url: width: 480 }}"
+                    alt="{{ block.settings.customer_name | escape }} product"
+                    loading="lazy">
+                {%- endif -%}
+              </div>
+              <div class="happy-reviews__side happy-reviews__side--left">
+                <div class="happy-reviews__side-quote" style="{% if block.settings.badge_quote_color != blank %}color: {{ block.settings.badge_quote_color }};{% endif %}">“</div>
+                <div class="happy-reviews__side-avatar">
+                  {%- if block.settings.customer_image != blank -%}
+                    <img src="{{ block.settings.customer_image | image_url: width: 120 }}" alt="{{ block.settings.customer_name | escape }}" loading="lazy">
+                  {%- endif -%}
+                </div>
+                <div class="happy-reviews__side-name">{{ block.settings.customer_name | default: 'Henry' }}</div>
+                <div class="happy-reviews__side-arrow" aria-hidden="true">←</div>
+              </div>
+              <div class="happy-reviews__side happy-reviews__side--right">
+                <div class="happy-reviews__side-quote" style="{% if block.settings.badge_quote_color != blank %}color: {{ block.settings.badge_quote_color }};{% endif %}">“</div>
+                <div class="happy-reviews__side-avatar">
+                  {%- if block.settings.customer_image != blank -%}
+                    <img src="{{ block.settings.customer_image | image_url: width: 120 }}" alt="{{ block.settings.customer_name | escape }}" loading="lazy">
+                  {%- endif -%}
+                </div>
+                <div class="happy-reviews__side-name">{{ block.settings.customer_name | default: 'Henry' }}</div>
+                <div class="happy-reviews__side-arrow" aria-hidden="true">→</div>
+              </div>
+            </article>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if section.settings.show_arrows -%}
+        <button class="happy-reviews__arrow happy-reviews__arrow--prev" type="button" aria-label="Previous review">
+          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+        </button>
+        <button class="happy-reviews__arrow happy-reviews__arrow--next" type="button" aria-label="Next review">
+          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+        </button>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.show_dots -%}
+      <div class="happy-reviews__dots" role="tablist" aria-label="Reviews pagination"></div>
+    {%- endif -%}
+  </div>
+</section>
+{{ 'happy-customers.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Happy Customers Reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Over 1,000,000+ Reviews" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "from Happy Customers." },
+    { "type": "checkbox", "id": "highlight_enabled", "label": "Enable highlight marker", "default": true },
+    { "type": "color", "id": "highlight_color", "label": "Highlight color", "default": "#10B6A6" },
+    { "type": "range", "id": "highlight_width", "label": "Highlight width (%)", "min": 20, "max": 100, "step": 2, "unit": "%", "default": 56 },
+    { "type": "range", "id": "highlight_height", "label": "Highlight height (px)", "min": 6, "max": 24, "step": 1, "unit": "px", "default": 14 },
+    { "type": "checkbox", "id": "show_decorations", "label": "Show decorative shapes", "default": true },
+    { "type": "color", "id": "bubble_color", "label": "Bubble color", "default": "#FFC72C" },
+    { "type": "number", "id": "bubble_max_width", "label": "Bubble max width (px)", "default": 1320 },
+    { "type": "range", "id": "bubble_padding_desktop", "label": "Bubble padding desktop (px)", "min": 20, "max": 120, "step": 2, "unit": "px", "default": 48 },
+    { "type": "range", "id": "bubble_padding_mobile", "label": "Bubble padding mobile (px)", "min": 12, "max": 80, "step": 2, "unit": "px", "default": 24 },
+    { "type": "range", "id": "bubble_radius", "label": "Bubble radius (px)", "min": 40, "max": 160, "step": 4, "unit": "px", "default": 120 },
+    { "type": "range", "id": "bubble_tail_size", "label": "Bubble tail size (px)", "min": 40, "max": 140, "step": 4, "unit": "px", "default": 80 },
+    { "type": "range", "id": "card_radius", "label": "Card radius (px)", "min": 16, "max": 48, "step": 2, "unit": "px", "default": 32 },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 5000 },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
+    { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        { "type": "text", "id": "customer_name", "label": "Customer name", "default": "Patricia Kate" },
+        { "type": "richtext", "id": "review_text", "label": "Review text", "default": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>" },
+        { "type": "image_picker", "id": "customer_image", "label": "Customer avatar" },
+        { "type": "image_picker", "id": "product_image", "label": "Product image (optional)" },
+        { "type": "range", "id": "rating", "label": "Rating", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "color", "id": "badge_quote_color", "label": "Side panel quote color", "default": "#2BB4A7" }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Happy Customers Reviews",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
