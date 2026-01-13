@@ -102,9 +102,9 @@
       "settings": {
         "section_padding_top": 40,
         "section_padding_bottom": 40,
-        "max_width": 1400,
-        "card_width_desktop": 260,
-        "card_height_desktop": 360,
+        "max_width": 1920,
+        "card_width_desktop": 280,
+        "card_height_desktop": 380,
         "card_width_mobile": 240,
         "card_height_mobile": 320,
         "gap": 40,
