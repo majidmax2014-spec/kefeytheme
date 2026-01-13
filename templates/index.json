@@ -29,14 +29,14 @@
       ],
       "name": "Hero Slider",
       "settings": {
-        "height_desktop": 520,
+        "height_desktop": 560,
         "height_mobile": 480,
         "overlay_opacity": 20,
         "autoplay": true,
         "autoplay_speed": 5000,
         "show_dots": true,
         "show_arrows": false,
-        "content_max_width": 1200,
+        "content_max_width": 1000,
         "content_position": "left",
         "padding_top": 0,
         "padding_bottom": 0
