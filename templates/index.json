@@ -42,6 +42,86 @@
         "padding_bottom": 0
       }
     },
+    "angled_image_carousel_rRtqYE": {
+      "type": "angled-image-carousel",
+      "blocks": {
+        "item_XMtTWK": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/customer1.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        },
+        "item_wJfNym": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/customer2.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        },
+        "item_nBmzrE": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/customer3.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        },
+        "item_eWRJP9": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/customer4.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        },
+        "item_9nfxiL": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/customer5.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "item_XMtTWK",
+        "item_wJfNym",
+        "item_nBmzrE",
+        "item_eWRJP9",
+        "item_9nfxiL"
+      ],
+      "name": "Angled Image Carousel",
+      "settings": {
+        "section_padding_top": 40,
+        "section_padding_bottom": 40,
+        "max_width": 1400,
+        "card_width_desktop": 260,
+        "card_height_desktop": 360,
+        "card_width_mobile": 240,
+        "card_height_mobile": 320,
+        "gap": 40,
+        "border_radius": 28,
+        "show_arrows": true,
+        "show_dots": true,
+        "autoplay": false,
+        "autoplay_speed": 5000,
+        "side_panels_enabled": true,
+        "left_panel_color": "#7B61FF",
+        "right_panel_color": "#7B61FF",
+        "left_panel_width": 220,
+        "right_panel_width": 220,
+        "panel_angle": 20,
+        "tilt_strength": 20
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -140,6 +220,7 @@
   },
   "order": [
     "hero_slider_8iGqUR",
+    "angled_image_carousel_rRtqYE",
     "featured_collection",
     "kefey_reviews",
     "kefey_guarantee",
