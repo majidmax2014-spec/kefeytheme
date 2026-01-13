@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * ------------------------------------------------------------
  * IMPORTANT: The contents of this file are auto-generated.
@@ -38,3 +39,6 @@
     "footer"
   ]
 }
+=======
+{"name":"t:sections.footer.name","type":"footer","sections":{"footer":{"type":"footer-kefey","settings":{}}},"order":["footer"]}
+>>>>>>> majid
