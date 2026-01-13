@@ -1,51 +1,89 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "kefey_hero": {
-      "type": "image-banner",
+    "hero_slider_8iGqUR": {
+      "type": "hero-slider",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "slide_f63LM7": {
+          "type": "slide",
           "settings": {
-            "heading": "Taste your goals",
-            "heading_size": "h0"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop now",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": false,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "desktop_bg_image": "shopify://shop_images/Gemini_Generated_Image_ktl0u1ktl0u1ktl0.png",
+            "heading": "JOY IN EVERY CHEW",
+            "body_text": "<p>Playful Gummies | Joyful Wellness | Eco‑Friendly Packaging</p>",
+            "button_label": "SHOP NOW",
+            "button_link": "shopify://collections/all",
+            "text_alignment": "left"
           }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "slide_f63LM7"
       ],
+      "name": "Hero Slider",
       "settings": {
-        "image_overlay_opacity": 0,
-        "image_height": "large",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "image_behavior": "none",
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-1",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
+        "height_desktop": 520,
+        "height_mobile": 480,
+        "overlay_opacity": 20,
+        "autoplay": true,
+        "autoplay_speed": 5000,
+        "show_dots": true,
+        "show_arrows": false,
+        "content_max_width": 1200,
+        "content_position": "left",
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "kefey_product_carousel": {
       "type": "slideshow",
       "blocks": {
-        "slide-1": { "type": "slide", "settings": { "heading": "Discover", "heading_size": "h2", "button_label": "Shop now" } },
-        "slide-2": { "type": "slide", "settings": { "heading": "", "button_label": "" } }
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "image_overlay_opacity": 0,
+            "heading": "Discover",
+            "heading_size": "h2",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "Shop now",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "image_overlay_opacity": 0,
+            "heading": "",
+            "heading_size": "h1",
+            "subheading": "Tell your brand's story through images",
+            "button_label": "",
+            "link": "",
+            "button_style_secondary": false,
+            "show_text_box": true,
+            "box_align": "middle-center",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "color_scheme": ""
+          }
+        }
       },
-      "block_order": ["slide-1","slide-2"],
+      "block_order": [
+        "slide-1",
+        "slide-2"
+      ],
       "settings": {
         "layout": "grid",
         "slide_height": "medium",
@@ -60,20 +98,19 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
+        "collection": "all",
+        "products_to_show": 8,
         "title": "Featured products",
         "heading_size": "h2",
         "description": "",
         "show_description": false,
         "description_style": "body",
-        "collection": "all",
-        "products_to_show": 8,
         "columns_desktop": 4,
-        "color_scheme": "scheme-1",
+        "enable_desktop_slider": false,
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "color_scheme": "scheme-1",
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
@@ -81,6 +118,7 @@
         "show_rating": false,
         "quick_add": "none",
         "columns_mobile": "2",
+        "swipe_on_mobile": false,
         "padding_top": 44,
         "padding_bottom": 36
       }
@@ -89,6 +127,7 @@
       "type": "kefey-reviews",
       "settings": {
         "title": "Over 1,000,000+ Reviews from Happy Customers.",
+        "subtitle": "",
         "heading_size": "h0",
         "color_scheme": "scheme-1",
         "padding_top": 36,
@@ -99,7 +138,8 @@
       "type": "kefey-guarantee",
       "settings": {
         "title": "TRY IT, RISK-FREE!",
-        "text": "<p>If you\u2019re not satisfied with our product, simply contact us and we\u2019ll give you a full, 100% hassle-free refund.</p>",
+        "text": "<p>If you’re not satisfied with our product, simply contact us and we’ll give you a full, 100% hassle-free refund.</p>",
+        "badge_svg": "",
         "button_label": "SHOP NOW",
         "button_link": "shopify://collections/all",
         "color_scheme": "scheme-4",
@@ -122,9 +162,7 @@
         "heading": "",
         "heading_size": "h1",
         "enable_video_looping": false,
-        "video": null,
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "cover_image": null,
         "description": "Taste your goals",
         "full_width": false,
         "color_scheme": "scheme-1",
@@ -154,7 +192,7 @@
     }
   },
   "order": [
-    "kefey_hero",
+    "hero_slider_8iGqUR",
     "kefey_product_carousel",
     "featured_collection",
     "kefey_reviews",
