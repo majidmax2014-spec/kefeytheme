@@ -102,24 +102,26 @@
       "settings": {
         "section_padding_top": 40,
         "section_padding_bottom": 40,
-        "max_width": 1920,
+        "side_padding": 64,
         "card_width_desktop": 380,
         "card_height_desktop": 480,
         "card_width_mobile": 240,
         "card_height_mobile": 320,
-        "gap": 40,
+        "gap_desktop": 48,
+        "gap_mobile": 28,
         "border_radius": 28,
         "show_arrows": true,
         "show_dots": true,
         "autoplay": false,
         "autoplay_speed": 5000,
         "side_panels_enabled": true,
-        "left_panel_color": "#7B61FF",
-        "right_panel_color": "#7B61FF",
+        "left_panel_color": "#7b61ff",
+        "right_panel_color": "#7b61ff",
         "left_panel_width": 220,
         "right_panel_width": 220,
         "panel_angle": 20,
-        "tilt_strength": 20
+        "tilt_strength_desktop": 10,
+        "tilt_strength_mobile": 8
       }
     },
     "featured_collection": {
@@ -216,11 +218,70 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "happy_customers_VFDqzg": {
+      "type": "happy-customers",
+      "blocks": {
+        "review_wJfzLT": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Patricia Kate",
+            "review_text": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>",
+            "rating": 5,
+            "badge_quote_color": "#2BB4A7"
+          }
+        },
+        "review_KnLXci": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Patricia Kate",
+            "review_text": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>",
+            "rating": 5,
+            "badge_quote_color": "#2BB4A7"
+          }
+        },
+        "review_3EVnhH": {
+          "type": "review",
+          "settings": {
+            "customer_name": "Patricia Kate",
+            "review_text": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>",
+            "rating": 5,
+            "badge_quote_color": "#2BB4A7"
+          }
+        }
+      },
+      "block_order": [
+        "review_wJfzLT",
+        "review_KnLXci",
+        "review_3EVnhH"
+      ],
+      "name": "Happy Customers Reviews",
+      "settings": {
+        "heading_line_1": "Over 1,000,000+ Reviews",
+        "heading_line_2": "from Happy Customers.",
+        "highlight_enabled": true,
+        "highlight_color": "#10B6A6",
+        "highlight_width": 56,
+        "highlight_height": 14,
+        "show_decorations": true,
+        "bubble_color": "#FFC72C",
+        "bubble_max_width": 1320,
+        "bubble_padding_desktop": 48,
+        "bubble_padding_mobile": 24,
+        "bubble_radius": 120,
+        "bubble_tail_size": 80,
+        "card_radius": 32,
+        "autoplay": true,
+        "autoplay_speed": 5000,
+        "show_arrows": true,
+        "show_dots": true
+      }
     }
   },
   "order": [
     "hero_slider_8iGqUR",
     "angled_image_carousel_rRtqYE",
+    "happy_customers_VFDqzg",
     "featured_collection",
     "kefey_reviews",
     "kefey_guarantee",
