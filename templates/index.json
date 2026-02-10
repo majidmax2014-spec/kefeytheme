@@ -127,6 +127,30 @@
     "kefey_testimonials_grid_pJ6xQe": {
       "type": "kefey-testimonials-grid",
       "blocks": {
+        "testimonial_Dq9KfY": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
+            "customer_name": "Maya"
+          }
+        },
+        "testimonial_ALF7pK": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
+            "customer_name": "Maya"
+          }
+        },
+        "testimonial_tKqeW9": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
+            "customer_name": "Maya"
+          }
+        },
         "t1": {
           "type": "testimonial",
           "settings": {
@@ -152,11 +176,28 @@
           }
         }
       },
-      "block_order": ["t1", "t2", "t3"],
+      "block_order": [
+        "testimonial_Dq9KfY",
+        "testimonial_ALF7pK",
+        "testimonial_tKqeW9",
+        "t1",
+        "t2",
+        "t3"
+      ],
       "name": "Testimonials",
       "settings": {
         "heading": "Joyful Routines. That’s Why They Stay!",
-        "columns_desktop": 3
+        "heading_size": 36,
+        "highlight_color": "#ffc94d",
+        "card_bg_color": "#ffe082",
+        "card_radius": 24,
+        "star_color": "#e15241",
+        "quote_color": "#2bb4a7",
+        "show_decorations": true,
+        "columns_desktop": 3,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
       }
     },
     "risk_free_banner_NymyxM": {
@@ -187,7 +228,7 @@
       ],
       "name": "Risk-Free Banner",
       "settings": {
-        "background_color": "#3FB6B4",
+        "background_color": "#3fb6b4",
         "section_height_desktop": 220,
         "section_height_mobile": 180,
         "padding_left_right": 40,
@@ -196,11 +237,11 @@
         "button_label": "SHOP NOW",
         "button_link": "",
         "button_style": "outline",
-        "heading_color": "#FFC94D",
-        "text_color": "#FFFFFF",
-        "button_text_color": "#FFFFFF",
-        "button_border_color": "#FFFFFF",
-        "button_bg_color": "#FFFFFF",
+        "heading_color": "#ffc94d",
+        "text_color": "#ffffff",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "button_bg_color": "#ffffff",
         "badge_type": "text",
         "badge_size": 160,
         "badge_text_center": "kefey",
@@ -281,8 +322,8 @@
       "name": "Text Marquee Bar",
       "settings": {
         "enabled": true,
-        "background_color": "#E95439",
-        "text_color": "#FFFFFF",
+        "background_color": "#e95439",
+        "text_color": "#ffffff",
         "bar_height_desktop": 80,
         "bar_height_mobile": 60,
         "font_size_desktop": 20,
