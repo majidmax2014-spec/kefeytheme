@@ -156,9 +156,10 @@
   }
 }
 
+/* Restore quote icon without changing layout */
 .kefey-testimonials-grid__quotes { margin-bottom: 0.8rem; }
 .kefey-testimonials-grid__quotes::before {
-  content: '""';
+  content: "\201C";
   display: inline-block;
   font-size: 4.2rem;
   line-height: 1;
