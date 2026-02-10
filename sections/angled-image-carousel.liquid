@@ -20,6 +20,7 @@
     --panel-right-color: {{ section.settings.right_panel_color | default: '#7B61FF' }};
     --tilt-deg-desktop: {{ section.settings.tilt_strength_desktop | default: 10 }}deg;
     --tilt-deg-mobile: {{ section.settings.tilt_strength_mobile | default: 8 }}deg;
+    --heading-size: {{ section.settings.heading_size | default: 42 }}px;
   "
   data-show-arrows="{{ section.settings.show_arrows }}"
   data-show-dots="{{ section.settings.show_dots }}"
@@ -27,6 +28,17 @@
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
 >
   <div class="angled-carousel__inner">
+    {%- if section.settings.heading != blank -%}
+      <div class="angled-carousel__header">
+        <h2 class="angled-carousel__title">
+          <span class="angled-carousel__title-text">{{ section.settings.heading }}</span>
+          {%- if section.settings.show_highlight -%}
+            <span class="angled-carousel__highlight" style="background-color: {{ section.settings.highlight_color }};"></span>
+          {%- endif -%}
+        </h2>
+      </div>
+    {%- endif -%}
+
     {%- if section.settings.side_panels_enabled -%}
       <div class="angled-carousel__panel angled-carousel__panel--left" aria-hidden="true">
         <div class="angled-carousel__panel-inner"></div>
@@ -93,6 +105,10 @@
 {
   "name": "Angled Image Carousel",
   "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "" },
+    { "type": "range", "id": "heading_size", "min": 24, "max": 72, "step": 2, "unit": "px", "label": "Heading size", "default": 42 },
+    { "type": "checkbox", "id": "show_highlight", "label": "Show heading highlight", "default": true },
+    { "type": "color", "id": "highlight_color", "label": "Highlight color", "default": "#FFC94D" },
     { "type": "range", "id": "section_padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 40 },
     { "type": "range", "id": "section_padding_bottom", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding bottom", "default": 40 },
     { "type": "number", "id": "side_padding", "label": "Side padding (px)", "default": 64 },

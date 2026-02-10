@@ -11,6 +11,37 @@
   margin: 0;
 }
 
+/* Heading */
+.angled-carousel__header {
+  text-align: center;
+  margin-bottom: 3.2rem;
+  padding: 0 var(--side-padding, 64px);
+  position: relative;
+  z-index: 2;
+}
+.angled-carousel__title {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-heading-family);
+  font-weight: 800;
+  font-size: var(--heading-size, 42px);
+  line-height: 1.1;
+  margin: 0;
+  text-transform: uppercase;
+}
+.angled-carousel__title-text {
+  position: relative;
+  z-index: 1;
+}
+.angled-carousel__highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 12px;
+  bottom: -6px;
+  z-index: 0;
+}
+
 /* Side angled panels */
 .angled-carousel__panel {
   position: absolute;
@@ -165,6 +196,13 @@
 /* Responsive */
 @media screen and (max-width: 989px) {
   .angled-carousel { --tilt: var(--tilt-deg-mobile, 8deg); }
+  .angled-carousel__header {
+    margin-bottom: 2.4rem;
+    padding: 0 var(--side-padding, 64px);
+  }
+  .angled-carousel__title {
+    font-size: calc(var(--heading-size, 42px) * 0.75);
+  }
   .angled-carousel__viewport { scroll-padding-inline: 12%; }
   .angled-carousel__track { gap: var(--gap-mobile, 28px); }
   .angled-carousel__card {

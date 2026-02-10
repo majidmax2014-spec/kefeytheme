@@ -1,10 +1,18 @@
 {% comment %}
-  Kefey Testimonials Grid
-  - Static grid of testimonial cards with heading highlight
+  Kefey Testimonials Carousel
+  - Carousel of testimonial cards with heading highlight
   - Accessible stars, customizable colors, and spacing
 {% endcomment %}
 
-<section class="kefey-testimonials-grid color-{{ section.settings.color_scheme }}" style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }};">
+{{ 'kefey-testimonials-grid.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="TestimonialsCarousel-{{ section.id }}"
+  class="kefey-testimonials-grid color-{{ section.settings.color_scheme }}"
+  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-slides-desktop: {{ section.settings.slides_desktop }}; --ktg-slides-mobile: {{ section.settings.slides_mobile }};"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
+>
   <div class="kefey-testimonials-grid__inner page-width">
     {% if section.settings.heading != blank %}
       <div class="kefey-testimonials-grid__header">
@@ -15,31 +23,50 @@
       </div>
     {% endif %}
 
-    <div class="kefey-testimonials-grid__grid kefey-testimonials-grid__grid--cols-{{ section.settings.columns_desktop }}">
-      {% for block in section.blocks %}
-        {% assign rating = block.settings.rating | at_least: 0 | at_most: 5 %}
-        <article class="kefey-testimonials-grid__card" {{ block.shopify_attributes }}>
-          <div class="kefey-testimonials-grid__quotes" aria-hidden="true">“”</div>
-          <div class="kefey-testimonials-grid__stars" role="img" aria-label="{{ rating }} out of 5 stars">
-            {% for i in (1..rating) %}
-              <svg class="kefey-testimonials-grid__star" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-              </svg>
-            {% endfor %}
-            {% for i in (rating..4) %}
-              {% if forloop.first == false %}
-                <svg class="kefey-testimonials-grid__star kefey-testimonials-grid__star--empty" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
-                  <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                </svg>
-              {% endif %}
-            {% endfor %}
-          </div>
-          <div class="kefey-testimonials-grid__content rte">{{ block.settings.review_text }}</div>
-          {% if block.settings.customer_name != blank %}
-            <div class="kefey-testimonials-grid__name">{{ block.settings.customer_name }}</div>
-          {% endif %}
-        </article>
-      {% endfor %}
+    <div class="kefey-testimonials-grid__carousel-wrapper">
+      <div class="kefey-testimonials-grid__viewport" aria-roledescription="carousel">
+        <ul class="kefey-testimonials-grid__track" role="list">
+          {% for block in section.blocks %}
+            {% assign rating = block.settings.rating | at_least: 0 | at_most: 5 %}
+            <li class="kefey-testimonials-grid__slide" {{ block.shopify_attributes }}>
+              <article class="kefey-testimonials-grid__card">
+                <div class="kefey-testimonials-grid__quotes" aria-hidden="true">""</div>
+                <div class="kefey-testimonials-grid__stars" role="img" aria-label="{{ rating }} out of 5 stars">
+                  {% for i in (1..rating) %}
+                    <svg class="kefey-testimonials-grid__star" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                  {% endfor %}
+                  {% for i in (rating..4) %}
+                    {% if forloop.first == false %}
+                      <svg class="kefey-testimonials-grid__star kefey-testimonials-grid__star--empty" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+                        <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                      </svg>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+                <div class="kefey-testimonials-grid__content rte">{{ block.settings.review_text }}</div>
+                {% if block.settings.customer_name != blank %}
+                  <div class="kefey-testimonials-grid__name">{{ block.settings.customer_name }}</div>
+                {% endif %}
+              </article>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% if section.settings.show_arrows %}
+        <button class="kefey-testimonials-grid__arrow kefey-testimonials-grid__arrow--prev" type="button" aria-label="Previous testimonials">
+          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+        </button>
+        <button class="kefey-testimonials-grid__arrow kefey-testimonials-grid__arrow--next" type="button" aria-label="Next testimonials">
+          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+        </button>
+      {% endif %}
+
+      {% if section.settings.show_dots %}
+        <div class="kefey-testimonials-grid__dots" role="tablist" aria-label="Testimonials pagination"></div>
+      {% endif %}
     </div>
   </div>
 
@@ -48,6 +75,8 @@
     <div class="kefey-testimonials-grid__decor kefey-testimonials-grid__decor--right" aria-hidden="true"></div>
   {% endif %}
 </section>
+
+{{ 'kefey-testimonials-grid.js' | asset_url | script_tag }}
 
 {% style %}
 .kefey-testimonials-grid {
@@ -80,70 +109,11 @@
   bottom: -6px;
   z-index: 0;
 }
-.kefey-testimonials-grid__grid {
-  display: grid;
-  gap: 2.4rem;
-}
-.kefey-testimonials-grid__grid--cols-3 {
-  grid-template-columns: 1fr;
-}
-@media screen and (min-width: 750px) {
-  .kefey-testimonials-grid__grid--cols-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-.kefey-testimonials-grid__card {
-  background: var(--ktg-card-bg, #FFE082);
-  border-radius: var(--ktg-card-radius, 24px);
-  padding: 2.4rem;
-  text-align: center;
-  min-height: 28rem;
-  box-shadow: 0 2px 0 rgba(0,0,0,0.05);
-}
-.kefey-testimonials-grid__quotes {
-  font-size: 4.2rem;
-  line-height: 1;
-  color: var(--ktg-quote-color, #2bb4a7);
-  font-weight: 800;
-  margin-bottom: 0.8rem;
-}
-.kefey-testimonials-grid__stars {
-  color: var(--ktg-star-color, #e15241);
-  display: inline-flex;
-  gap: 0.3rem;
-  margin-bottom: 1.2rem;
-}
-.kefey-testimonials-grid__star--empty {
-  opacity: 0.25;
-}
-.kefey-testimonials-grid__content {
-  color: rgba(var(--color-foreground), 0.9);
-  font-size: 1.4rem;
-}
-.kefey-testimonials-grid__name {
-  margin-top: 1.6rem;
-  font-weight: 700;
-}
-.kefey-testimonials-grid__decor {
-  position: absolute;
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 199, 44, 0.35), transparent 60%);
-  pointer-events: none;
-}
-.kefey-testimonials-grid__decor--left {
-  top: 10%;
-  left: 2%;
-}
-.kefey-testimonials-grid__decor--right {
-  bottom: 12%;
-  right: 4%;
-}
 {% endstyle %}
 
 {% schema %}
 {
-  "name": "Kefey Testimonials Grid",
+  "name": "Kefey Testimonials Carousel",
   "tag": "section",
   "class": "section",
   "settings": [
@@ -155,7 +125,12 @@
     { "type": "color", "id": "star_color", "label": "Star color", "default": "#E15241" },
     { "type": "color", "id": "quote_color", "label": "Quote color", "default": "#2BB4A7" },
     { "type": "checkbox", "id": "show_decorations", "label": "Show decorative shapes", "default": true },
-    { "type": "range", "id": "columns_desktop", "label": "Columns (desktop)", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "range", "id": "slides_desktop", "label": "Slides visible (desktop)", "min": 1, "max": 4, "step": 1, "default": 3 },
+    { "type": "range", "id": "slides_mobile", "label": "Slides visible (mobile)", "min": 1, "max": 2, "step": 1, "default": 1 },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 5000 },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
+    { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true },
     { "type": "select", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1", "options": [
       { "value": "scheme-1", "label": "Scheme 1" },
       { "value": "scheme-2", "label": "Scheme 2" },
@@ -176,10 +151,10 @@
       ]
     }
   ],
-  "max_blocks": 8,
+  "max_blocks": 20,
   "presets": [
     {
-      "name": "Kefey Testimonials Grid",
+      "name": "Kefey Testimonials Carousel",
       "category": "Testimonials",
       "blocks": [
         { "type": "testimonial" },
