@@ -9,7 +9,7 @@
 <section
   id="TestimonialsCarousel-{{ section.id }}"
   class="kefey-testimonials-grid color-{{ section.settings.color_scheme }}"
-  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }};"
+  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-gap: 2.4rem;"
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
 >
@@ -30,7 +30,7 @@
             {% assign rating = block.settings.rating | at_least: 0 | at_most: 5 %}
             <li class="kefey-testimonials-grid__slide" {{ block.shopify_attributes }}>
               <article class="kefey-testimonials-grid__card">
-                <div class="kefey-testimonials-grid__quotes" aria-hidden="true">""</div>
+                <div class="kefey-testimonials-grid__quotes" aria-hidden="true"></div>
                 <div class="kefey-testimonials-grid__stars" role="img" aria-label="{{ rating }} out of 5 stars">
                   {% for i in (1..rating) %}
                     <svg class="kefey-testimonials-grid__star" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
