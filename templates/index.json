@@ -124,62 +124,39 @@
         "tilt_strength_mobile": 8
       }
     },
-    "happy_customers_VFDqzg": {
-      "type": "happy-customers",
+    "kefey_testimonials_grid_pJ6xQe": {
+      "type": "kefey-testimonials-grid",
       "blocks": {
-        "review_wJfzLT": {
-          "type": "review",
+        "t1": {
+          "type": "testimonial",
           "settings": {
-            "customer_name": "Patricia Kate",
-            "review_text": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>",
             "rating": 5,
-            "badge_quote_color": "#2bb4a7"
+            "review_text": "<p>If you’re not satisfied with our product, simply contact us; and we'll give you a full, 100% hassle-free refund.</p>",
+            "customer_name": "Sophie"
           }
         },
-        "review_KnLXci": {
-          "type": "review",
+        "t2": {
+          "type": "testimonial",
           "settings": {
-            "customer_name": "Patricia Kate",
-            "review_text": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>",
             "rating": 5,
-            "badge_quote_color": "#2bb4a7"
+            "review_text": "<p>I like that it replaces multiple supplements. My routine feels lighter and more organized.</p>",
+            "customer_name": "Michael S."
           }
         },
-        "review_3EVnhH": {
-          "type": "review",
+        "t3": {
+          "type": "testimonial",
           "settings": {
-            "customer_name": "Patricia Kate",
-            "review_text": "<p>I’m so impressed with this online store. The selection is extensive and the prices are great. Delivery was prompt and items arrived in perfect condition. Customer service was incredibly helpful.</p>",
             "rating": 5,
-            "badge_quote_color": "#2bb4a7"
+            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
+            "customer_name": "Maya"
           }
         }
       },
-      "block_order": [
-        "review_wJfzLT",
-        "review_KnLXci",
-        "review_3EVnhH"
-      ],
-      "name": "Happy Customers Reviews",
+      "block_order": ["t1", "t2", "t3"],
+      "name": "Testimonials",
       "settings": {
-        "heading_line_1": "Over 1,000,000+ Reviews",
-        "heading_line_2": "from Happy Customers.",
-        "highlight_enabled": true,
-        "highlight_color": "#10b6a6",
-        "highlight_width": 56,
-        "highlight_height": 14,
-        "show_decorations": true,
-        "bubble_color": "#ffc72c",
-        "bubble_max_width": 1320,
-        "bubble_padding_desktop": 48,
-        "bubble_padding_mobile": 24,
-        "bubble_radius": 120,
-        "bubble_tail_size": 80,
-        "card_radius": 32,
-        "autoplay": true,
-        "autoplay_speed": 5000,
-        "show_arrows": false,
-        "show_dots": false
+        "heading": "Joyful Routines. That’s Why They Stay!",
+        "columns_desktop": 3
       }
     },
     "risk_free_banner_NymyxM": {
@@ -326,7 +303,7 @@
   "order": [
     "hero_slider_8iGqUR",
     "angled_image_carousel_rRtqYE",
-    "happy_customers_VFDqzg",
+    "kefey_testimonials_grid_pJ6xQe",
     "risk_free_banner_NymyxM",
     "text_marquee_bar_aVHYqT"
   ]
