@@ -27,9 +27,10 @@ class KefeyTestimonialsCarousel {
   }
   
   getSlidesPerView() {
-    const desktop = parseInt(getComputedStyle(this.section).getPropertyValue('--ktg-slides-desktop')) || 3;
-    const mobile = parseInt(getComputedStyle(this.section).getPropertyValue('--ktg-slides-mobile')) || 1;
-    return window.innerWidth < 750 ? mobile : desktop;
+    const width = window.innerWidth;
+    if (width >= 1024) return 3; // Desktop: 3 items
+    if (width >= 768) return 2;  // Tablet: 2 items
+    return 1; // Mobile: 1 item
   }
   
   init() {
@@ -88,6 +89,19 @@ class KefeyTestimonialsCarousel {
       this.nextBtn.addEventListener('click', () => this.next());
     }
     
+    // Keyboard navigation
+    if (this.track) {
+      this.track.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          this.prev();
+        } else if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          this.next();
+        }
+      });
+    }
+    
     // Touch/drag support
     if (this.viewport) {
       this.viewport.addEventListener('pointerdown', this.handlePointerDown.bind(this));
@@ -140,16 +154,12 @@ class KefeyTestimonialsCarousel {
   prev() {
     if (this.currentIndex > 0) {
       this.goTo(this.currentIndex - 1);
-    } else {
-      this.goTo(this.maxIndex);
     }
   }
   
   next() {
     if (this.currentIndex < this.maxIndex) {
       this.goTo(this.currentIndex + 1);
-    } else {
-      this.goTo(0);
     }
   }
   
@@ -170,12 +180,14 @@ class KefeyTestimonialsCarousel {
     const translateX = -(this.currentIndex * slideWidth);
     this.track.style.transform = `translateX(${translateX}%)`;
     
-    // Update arrows
+    // Update arrows - disable at ends (non-looping)
     if (this.prevBtn) {
-      this.prevBtn.disabled = this.currentIndex === 0 && this.slides.length <= this.slidesPerView;
+      this.prevBtn.disabled = this.currentIndex === 0;
+      this.prevBtn.setAttribute('aria-disabled', this.currentIndex === 0 ? 'true' : 'false');
     }
     if (this.nextBtn) {
-      this.nextBtn.disabled = this.currentIndex >= this.maxIndex && this.slides.length <= this.slidesPerView;
+      this.nextBtn.disabled = this.currentIndex >= this.maxIndex;
+      this.nextBtn.setAttribute('aria-disabled', this.currentIndex >= this.maxIndex ? 'true' : 'false');
     }
     
     // Update dots

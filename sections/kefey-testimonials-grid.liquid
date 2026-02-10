@@ -9,7 +9,7 @@
 <section
   id="TestimonialsCarousel-{{ section.id }}"
   class="kefey-testimonials-grid color-{{ section.settings.color_scheme }}"
-  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-slides-desktop: {{ section.settings.slides_desktop }}; --ktg-slides-mobile: {{ section.settings.slides_mobile }};"
+  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }};"
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
 >
@@ -25,7 +25,7 @@
 
     <div class="kefey-testimonials-grid__carousel-wrapper">
       <div class="kefey-testimonials-grid__viewport" aria-roledescription="carousel">
-        <ul class="kefey-testimonials-grid__track" role="list">
+        <ul class="kefey-testimonials-grid__track" role="list" tabindex="0" aria-label="Testimonials carousel">
           {% for block in section.blocks %}
             {% assign rating = block.settings.rating | at_least: 0 | at_most: 5 %}
             <li class="kefey-testimonials-grid__slide" {{ block.shopify_attributes }}>
@@ -55,18 +55,14 @@
         </ul>
       </div>
 
-      {% if section.settings.show_arrows %}
-        <button class="kefey-testimonials-grid__arrow kefey-testimonials-grid__arrow--prev" type="button" aria-label="Previous testimonials">
-          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
-        </button>
-        <button class="kefey-testimonials-grid__arrow kefey-testimonials-grid__arrow--next" type="button" aria-label="Next testimonials">
-          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
-        </button>
-      {% endif %}
+      <button class="kefey-testimonials-grid__arrow kefey-testimonials-grid__arrow--prev" type="button" aria-label="Previous testimonials" tabindex="0">
+        <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+      </button>
+      <button class="kefey-testimonials-grid__arrow kefey-testimonials-grid__arrow--next" type="button" aria-label="Next testimonials" tabindex="0">
+        <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+      </button>
 
-      {% if section.settings.show_dots %}
-        <div class="kefey-testimonials-grid__dots" role="tablist" aria-label="Testimonials pagination"></div>
-      {% endif %}
+      <div class="kefey-testimonials-grid__dots" role="tablist" aria-label="Testimonials pagination"></div>
     </div>
   </div>
 
@@ -125,12 +121,8 @@
     { "type": "color", "id": "star_color", "label": "Star color", "default": "#E15241" },
     { "type": "color", "id": "quote_color", "label": "Quote color", "default": "#2BB4A7" },
     { "type": "checkbox", "id": "show_decorations", "label": "Show decorative shapes", "default": true },
-    { "type": "range", "id": "slides_desktop", "label": "Slides visible (desktop)", "min": 1, "max": 4, "step": 1, "default": 3 },
-    { "type": "range", "id": "slides_mobile", "label": "Slides visible (mobile)", "min": 1, "max": 2, "step": 1, "default": 1 },
-    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
     { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 5000 },
-    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": true },
-    { "type": "checkbox", "id": "show_dots", "label": "Show dots", "default": true },
     { "type": "select", "id": "color_scheme", "label": "Color scheme", "default": "scheme-1", "options": [
       { "value": "scheme-1", "label": "Scheme 1" },
       { "value": "scheme-2", "label": "Scheme 2" },

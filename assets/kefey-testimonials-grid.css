@@ -13,7 +13,7 @@
   will-change: transform;
 }
 .kefey-testimonials-grid__slide {
-  flex: 0 0 calc((100% - (var(--ktg-slides-desktop, 3) - 1) * 2.4rem) / var(--ktg-slides-desktop, 3)));
+  flex: 0 0 calc((100% - 4.8rem) / 3); /* 3 items: (100% - 2 gaps) / 3 */
   min-width: 0;
 }
 .kefey-testimonials-grid__card {
@@ -131,9 +131,17 @@
 }
 
 /* Responsive */
-@media screen and (max-width: 749px) {
+/* Tablet: 2 items visible (>= 768px and < 1024px) */
+@media screen and (min-width: 768px) and (max-width: 1023px) {
   .kefey-testimonials-grid__slide {
-    flex: 0 0 calc((100% - (var(--ktg-slides-mobile, 1) - 1) * 2.4rem) / var(--ktg-slides-mobile, 1));
+    flex: 0 0 calc((100% - 2.4rem) / 2); /* 2 items: (100% - 1 gap) / 2 */
+  }
+}
+
+/* Mobile: 1 item visible (< 768px) */
+@media screen and (max-width: 767px) {
+  .kefey-testimonials-grid__slide {
+    flex: 0 0 100%; /* 1 item: full width */
   }
   .kefey-testimonials-grid__arrow--prev {
     left: 8px;
