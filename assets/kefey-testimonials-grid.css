@@ -1,6 +1,7 @@
 /* Kefey Testimonials Carousel */
 .kefey-testimonials-grid__carousel-wrapper {
   position: relative;
+  overflow: visible;
 }
 .kefey-testimonials-grid__viewport {
   overflow: hidden;
@@ -10,10 +11,14 @@
   display: flex;
   gap: var(--ktg-gap, 2.4rem);
   transition: transform 400ms ease;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 .kefey-testimonials-grid__slide {
   flex: 0 0 calc((100% - (var(--ktg-gap, 2.4rem) * 2)) / 3);
   min-width: 0;
+  list-style: none;
 }
 .kefey-testimonials-grid__card {
   background: var(--ktg-card-bg, #FFE082);
@@ -159,7 +164,7 @@
 /* Restore quote icon without changing layout */
 .kefey-testimonials-grid__quotes { margin-bottom: 0.8rem; }
 .kefey-testimonials-grid__quotes::before {
-  content: "\201C";
+  content: "\201C\201D";
   display: inline-block;
   font-size: 4.2rem;
   line-height: 1;
