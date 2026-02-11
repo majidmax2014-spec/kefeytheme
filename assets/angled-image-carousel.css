@@ -14,8 +14,7 @@
 /* Heading */
 .angled-carousel__header {
   text-align: center;
-  margin-bottom: 3.2rem;
-  padding: 0 var(--side-padding, 64px);
+  margin-bottom: 2.8rem;
   position: relative;
   z-index: 2;
 }
@@ -27,7 +26,6 @@
   font-size: var(--heading-size, 42px);
   line-height: 1.1;
   margin: 0;
-  text-transform: uppercase;
 }
 .angled-carousel__title-text {
   position: relative;
