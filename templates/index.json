@@ -16,7 +16,7 @@
           "type": "slide",
           "settings": {
             "desktop_bg_image": "shopify://shop_images/slide1.png",
-            "heading": "Wellness That <br>Makes You Smile",
+            "heading": "Wellness That Makes You Smile",
             "body_text": "<p>A Daily Ritual • Plant-Based • Sugar-Free • Planet-Kind</p>",
             "button_label": "SHOP NOW",
             "button_link": "shopify://collections/all",
@@ -36,7 +36,12 @@
         "autoplay_speed": 5000,
         "show_dots": true,
         "show_arrows": false,
-        "content_max_width": 900,
+        "content_max_width": 600,
+        "hero_heading_size": 56,
+        "hero_subheading_size": 17,
+        "hero_button_text_size": 16,
+        "hero_button_padding_y": 15,
+        "hero_button_padding_x": 28,
         "content_position": "left",
         "padding_top": 0,
         "padding_bottom": 0
