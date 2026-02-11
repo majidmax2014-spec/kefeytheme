@@ -6,6 +6,7 @@
 .kefey-testimonials-grid__viewport {
   overflow: hidden;
   position: relative;
+  padding-top: 50px;
 }
 .kefey-testimonials-grid__track {
   display: flex;
