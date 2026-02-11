@@ -45,9 +45,9 @@
   transform: translate(var(--decor-x, 0px), calc(-50% + var(--decor-y, 0px)));
 }
 .rf-banner__decor--right {
-  right: 0;
-  top: 50%;
-  transform: translate(calc(var(--decor-x, 0px) * 1), calc(-50% + var(--decor-y, 0px)));
+  width: var(--w, 80px);
+  right: var(--right, 20px);
+  top: var(--top, 20px);
 }
 .rf-banner__center {
   position: relative;
