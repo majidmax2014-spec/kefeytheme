@@ -4,8 +4,7 @@
   id="KefeyReels-{{ section.id }}"
   class="kefey-reels-carousel"
   data-autoplay="{{ section.settings.autoplay }}"
-  data-speed="{{ section.settings.autoplay_speed | default: 40 }}"
-  data-pause-hover="{{ section.settings.pause_on_hover }}"
+  data-speed="{{ section.settings.autoplay_speed | default: 4000 }}"
   style="
     --krc-pt: {{ section.settings.padding_top | default: 40 }}px;
     --krc-pb: {{ section.settings.padding_bottom | default: 32 }}px;
@@ -124,9 +123,8 @@
     { "type": "range", "id": "caption_font_size", "label": "Caption font size (px)", "min": 10, "max": 28, "step": 1, "default": 14 },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "default": 40 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "default": 32 },
-    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": true },
-    { "type": "range", "id": "autoplay_speed", "label": "Autoplay speed", "min": 10, "max": 120, "step": 1, "default": 40 },
-    { "type": "checkbox", "id": "pause_on_hover", "label": "Pause on hover", "default": true },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
+    { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 4000 },
     { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": false },
     { "type": "checkbox", "id": "show_play_icon", "label": "Show play icon overlay", "default": true },
     { "type": "range", "id": "card_radius", "label": "Card radius (px)", "min": 8, "max": 40, "step": 1, "default": 14 },
