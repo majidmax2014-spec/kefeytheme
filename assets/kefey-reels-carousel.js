@@ -9,111 +9,60 @@
     this.root = root;
     this.viewport = root.querySelector(".kefey-reels-carousel__viewport");
     this.track = root.querySelector(".kefey-reels-carousel__track");
-    this.slides = Array.prototype.slice.call(root.querySelectorAll(".kefey-reels-carousel__slide"));
     this.dots = root.querySelector(".kefey-reels-carousel__dots");
     this.prev = root.querySelector(".kefey-reels-carousel__arrow--prev");
     this.next = root.querySelector(".kefey-reels-carousel__arrow--next");
+    this.originalSlides = [];
     this.page = 0;
-    this.pages = 1;
-    this.snapPoints = [0];
+    this.totalPages = 1;
+    this.loopWidth = 0;
+    this.offset = 0;
+    this.lastTick = 0;
+    this.rafId = null;
     this.isDown = false;
+    this.isDragging = false;
     this.startX = 0;
     this.startY = 0;
-    this.startScroll = 0;
-    this.isDragging = false;
+    this.dragStartOffset = 0;
+    this.pointerId = null;
     this.blockClick = false;
     this.clickBlockTimer = null;
     this.activeCard = null;
-    this.autoplayEnabled = root.getAttribute("data-autoplay") === "true";
-    this.autoplaySpeed = parseInt(root.getAttribute("data-speed"), 10) || 4000;
-    this.autoplayTimer = null;
     this.isHovered = false;
     this.isFocused = false;
+    this.resumeAt = 0;
+    this.dotTween = null;
 
-    if (!this.viewport || !this.track || this.slides.length === 0) return;
+    this.autoplayEnabled = root.getAttribute("data-autoplay") === "true";
+    this.autoplaySpeed = parseFloat(root.getAttribute("data-speed")) || 40;
+    this.pauseOnHover = root.getAttribute("data-pause-hover") !== "false";
+
+    if (!this.viewport || !this.track) return;
 
     this.onPointerDown = this.onPointerDown.bind(this);
     this.onPointerMove = this.onPointerMove.bind(this);
     this.onPointerUp = this.onPointerUp.bind(this);
-    this.onScroll = this.onScroll.bind(this);
-    this.onResize = this.debounce(this.onResize.bind(this), 120);
     this.onTrackClick = this.onTrackClick.bind(this);
+    this.onResize = this.debounce(this.onResize.bind(this), 120);
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
     this.onFocusIn = this.onFocusIn.bind(this);
     this.onFocusOut = this.onFocusOut.bind(this);
     this.onVisibilityChange = this.onVisibilityChange.bind(this);
+    this.tick = this.tick.bind(this);
 
     this.setup();
   }
 
-  KefeyReelsCarousel.prototype.setup = function () {
-    this.buildPages();
-    this.renderDots();
-    this.updateUI();
-
-    this.viewport.addEventListener("pointerdown", this.onPointerDown);
-    this.viewport.addEventListener("pointermove", this.onPointerMove);
-    this.viewport.addEventListener("pointerup", this.onPointerUp);
-    this.viewport.addEventListener("pointercancel", this.onPointerUp);
-    this.viewport.addEventListener("scroll", this.onScroll, { passive: true });
-    this.track.addEventListener("click", this.onTrackClick);
-    this.root.addEventListener("mouseenter", this.onMouseEnter);
-    this.root.addEventListener("mouseleave", this.onMouseLeave);
-    this.root.addEventListener("focusin", this.onFocusIn);
-    this.root.addEventListener("focusout", this.onFocusOut);
-    document.addEventListener("visibilitychange", this.onVisibilityChange);
-
-    this.track.addEventListener(
-      "click",
-      function (event) {
-        if (this.blockClick) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      }.bind(this),
-      true
-    );
-
-    if (this.prev) {
-      this.prev.addEventListener(
-        "click",
-        function () {
-          this.goToPage(this.page - 1);
-        }.bind(this)
-      );
-    }
-
-    if (this.next) {
-      this.next.addEventListener(
-        "click",
-        function () {
-          this.goToPage(this.page + 1);
-        }.bind(this)
-      );
-    }
-
-    window.addEventListener("resize", this.onResize);
-    this.updateAutoplay();
-  };
-
-  KefeyReelsCarousel.prototype.destroy = function () {
-    if (!this.viewport) return;
-    this.viewport.removeEventListener("pointerdown", this.onPointerDown);
-    this.viewport.removeEventListener("pointermove", this.onPointerMove);
-    this.viewport.removeEventListener("pointerup", this.onPointerUp);
-    this.viewport.removeEventListener("pointercancel", this.onPointerUp);
-    this.viewport.removeEventListener("scroll", this.onScroll);
-    this.track.removeEventListener("click", this.onTrackClick);
-    this.root.removeEventListener("mouseenter", this.onMouseEnter);
-    this.root.removeEventListener("mouseleave", this.onMouseLeave);
-    this.root.removeEventListener("focusin", this.onFocusIn);
-    this.root.removeEventListener("focusout", this.onFocusOut);
-    document.removeEventListener("visibilitychange", this.onVisibilityChange);
-    window.removeEventListener("resize", this.onResize);
-    if (this.clickBlockTimer) window.clearTimeout(this.clickBlockTimer);
-    this.clearAutoplay();
-    this.stopActivePlayer();
+  KefeyReelsCarousel.prototype.debounce = function (fn, delay) {
+    var timer = null;
+    return function () {
+      var args = arguments;
+      if (timer) window.clearTimeout(timer);
+      timer = window.setTimeout(function () {
+        fn.apply(null, args);
+      }, delay);
+    };
   };
 
   KefeyReelsCarousel.prototype.extractYouTubeId = function (value) {
@@ -135,97 +84,127 @@
     return "";
   };
 
-  KefeyReelsCarousel.prototype.clearAutoplay = function () {
-    if (this.autoplayTimer) {
-      window.clearInterval(this.autoplayTimer);
-      this.autoplayTimer = null;
+  KefeyReelsCarousel.prototype.setup = function () {
+    this.prepareLoop();
+    this.buildPages();
+    this.renderDots();
+    this.setOffset(0);
+
+    this.viewport.addEventListener("pointerdown", this.onPointerDown);
+    this.viewport.addEventListener("pointermove", this.onPointerMove);
+    this.viewport.addEventListener("pointerup", this.onPointerUp);
+    this.viewport.addEventListener("pointercancel", this.onPointerUp);
+    this.track.addEventListener("click", this.onTrackClick);
+    this.track.addEventListener(
+      "click",
+      function (event) {
+        if (this.blockClick) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }.bind(this),
+      true
+    );
+
+    if (this.pauseOnHover) {
+      this.root.addEventListener("mouseenter", this.onMouseEnter);
+      this.root.addEventListener("mouseleave", this.onMouseLeave);
+    }
+    this.root.addEventListener("focusin", this.onFocusIn);
+    this.root.addEventListener("focusout", this.onFocusOut);
+    document.addEventListener("visibilitychange", this.onVisibilityChange);
+    window.addEventListener("resize", this.onResize);
+
+    if (this.prev) {
+      this.prev.addEventListener(
+        "click",
+        function () {
+          this.goToPage(this.page - 1);
+        }.bind(this)
+      );
+    }
+    if (this.next) {
+      this.next.addEventListener(
+        "click",
+        function () {
+          this.goToPage(this.page + 1);
+        }.bind(this)
+      );
+    }
+
+    this.startLoop();
+  };
+
+  KefeyReelsCarousel.prototype.destroy = function () {
+    if (!this.viewport || !this.track) return;
+    this.viewport.removeEventListener("pointerdown", this.onPointerDown);
+    this.viewport.removeEventListener("pointermove", this.onPointerMove);
+    this.viewport.removeEventListener("pointerup", this.onPointerUp);
+    this.viewport.removeEventListener("pointercancel", this.onPointerUp);
+    this.track.removeEventListener("click", this.onTrackClick);
+    if (this.pauseOnHover) {
+      this.root.removeEventListener("mouseenter", this.onMouseEnter);
+      this.root.removeEventListener("mouseleave", this.onMouseLeave);
+    }
+    this.root.removeEventListener("focusin", this.onFocusIn);
+    this.root.removeEventListener("focusout", this.onFocusOut);
+    document.removeEventListener("visibilitychange", this.onVisibilityChange);
+    window.removeEventListener("resize", this.onResize);
+    if (this.clickBlockTimer) window.clearTimeout(this.clickBlockTimer);
+    this.stopActivePlayer();
+    this.stopLoop();
+    this.cleanupClones();
+    this.track.style.transform = "";
+  };
+
+  KefeyReelsCarousel.prototype.cleanupClones = function () {
+    var clones = this.track.querySelectorAll('[data-krc-clone="true"]');
+    for (var i = 0; i < clones.length; i++) clones[i].remove();
+  };
+
+  KefeyReelsCarousel.prototype.prepareLoop = function () {
+    this.cleanupClones();
+    this.originalSlides = Array.prototype.slice.call(this.track.querySelectorAll(".kefey-reels-carousel__slide"));
+    if (this.originalSlides.length === 0) return;
+
+    for (var i = 0; i < this.originalSlides.length; i++) {
+      var clone = this.originalSlides[i].cloneNode(true);
+      clone.setAttribute("data-krc-clone", "true");
+      clone.setAttribute("aria-hidden", "true");
+      this.track.appendChild(clone);
     }
   };
 
-  KefeyReelsCarousel.prototype.shouldAutoplay = function () {
-    if (!this.autoplayEnabled) return false;
-    if (this.pages <= 1) return false;
-    if (this.isHovered || this.isFocused) return false;
-    if (this.isDown || this.activeCard) return false;
-    if (document.hidden) return false;
-    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-    return true;
-  };
-
-  KefeyReelsCarousel.prototype.updateAutoplay = function () {
-    if (!this.shouldAutoplay()) {
-      this.clearAutoplay();
+  KefeyReelsCarousel.prototype.measureLoopWidth = function () {
+    if (this.originalSlides.length === 0) {
+      this.loopWidth = 0;
       return;
     }
-    if (this.autoplayTimer) return;
-
-    this.autoplayTimer = window.setInterval(
-      function () {
-        if (!this.shouldAutoplay()) return;
-        this.goToPage((this.page + 1) % this.pages);
-      }.bind(this),
-      this.autoplaySpeed
-    );
-  };
-
-  KefeyReelsCarousel.prototype.debounce = function (fn, delay) {
-    var timer = null;
-    return function () {
-      var args = arguments;
-      if (timer) window.clearTimeout(timer);
-      timer = window.setTimeout(function () {
-        fn.apply(null, args);
-      }, delay);
-    };
-  };
-
-  KefeyReelsCarousel.prototype.getMetrics = function () {
-    var firstSlide = this.slides[0];
-    if (!firstSlide) return null;
-    var styles = window.getComputedStyle(this.track);
-    var gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
-    var slideWidth = firstSlide.getBoundingClientRect().width;
-    var perView = Math.max(1, Math.floor((this.viewport.clientWidth + gap) / (slideWidth + gap)));
-    return { gap: gap, slideWidth: slideWidth, perView: perView };
+    var firstClone = this.track.querySelector('.kefey-reels-carousel__slide[data-krc-clone="true"]');
+    if (firstClone) {
+      this.loopWidth = firstClone.offsetLeft;
+    }
+    if (!this.loopWidth) {
+      this.loopWidth = this.track.scrollWidth / 2;
+    }
   };
 
   KefeyReelsCarousel.prototype.buildPages = function () {
-    var metrics = this.getMetrics();
-    if (!metrics) return;
-
-    var perView = metrics.perView;
-    var total = this.slides.length;
-    var maxStart = Math.max(0, total - perView);
-    var starts = [];
-    var i;
-
-    for (i = 0; i <= maxStart; i += perView) {
-      starts.push(i);
-    }
-    if (starts[starts.length - 1] !== maxStart) {
-      starts.push(maxStart);
-    }
-
-    this.snapPoints = starts.map(
-      function (slideIndex) {
-        return this.slides[slideIndex].offsetLeft;
-      }.bind(this)
-    );
-    this.pages = Math.max(1, this.snapPoints.length);
-    this.page = clamp(this.page, 0, this.pages - 1);
+    this.measureLoopWidth();
+    var viewportWidth = Math.max(1, this.viewport.clientWidth);
+    this.totalPages = Math.max(1, Math.ceil(this.loopWidth / viewportWidth));
+    this.page = this.getPageFromOffset(this.offset);
   };
 
   KefeyReelsCarousel.prototype.renderDots = function () {
     if (!this.dots) return;
     this.dots.innerHTML = "";
-
-    if (this.pages <= 1) {
+    if (this.totalPages <= 1) {
       this.dots.hidden = true;
       return;
     }
-
     this.dots.hidden = false;
-    for (var i = 0; i < this.pages; i++) {
+    for (var i = 0; i < this.totalPages; i++) {
       var dot = document.createElement("button");
       dot.type = "button";
       dot.className = "kefey-reels-carousel__dot";
@@ -241,30 +220,24 @@
     }
   };
 
-  KefeyReelsCarousel.prototype.getNearestPageFromScroll = function () {
-    var left = this.viewport.scrollLeft;
-    var nearest = 0;
-    var smallest = Infinity;
-
-    for (var i = 0; i < this.snapPoints.length; i++) {
-      var dist = Math.abs(left - this.snapPoints[i]);
-      if (dist < smallest) {
-        smallest = dist;
-        nearest = i;
-      }
-    }
-    return nearest;
+  KefeyReelsCarousel.prototype.normalizeOffset = function (value) {
+    if (!this.loopWidth) return 0;
+    var normalized = value % this.loopWidth;
+    if (normalized < 0) normalized += this.loopWidth;
+    return normalized;
   };
 
-  KefeyReelsCarousel.prototype.goToPage = function (index) {
-    this.page = clamp(index, 0, this.pages - 1);
-    var target = this.snapPoints[this.page] || 0;
-    this.viewport.scrollTo({ left: target, behavior: "smooth" });
+  KefeyReelsCarousel.prototype.getPageFromOffset = function (offset) {
+    if (this.totalPages <= 1) return 0;
+    var viewportWidth = Math.max(1, this.viewport.clientWidth);
+    return Math.round(offset / viewportWidth) % this.totalPages;
+  };
+
+  KefeyReelsCarousel.prototype.setOffset = function (value) {
+    this.offset = this.normalizeOffset(value);
+    this.track.style.transform = "translate3d(" + -this.offset + "px, 0, 0)";
+    this.page = this.getPageFromOffset(this.offset);
     this.updateUI();
-  };
-
-  KefeyReelsCarousel.prototype.snapToNearest = function () {
-    this.goToPage(this.getNearestPageFromScroll());
   };
 
   KefeyReelsCarousel.prototype.updateUI = function () {
@@ -272,8 +245,76 @@
     for (var i = 0; i < dots.length; i++) {
       dots[i].setAttribute("aria-current", i === this.page ? "true" : "false");
     }
-    if (this.prev) this.prev.disabled = this.page <= 0;
-    if (this.next) this.next.disabled = this.page >= this.pages - 1;
+    if (this.prev) this.prev.disabled = this.totalPages <= 1;
+    if (this.next) this.next.disabled = this.totalPages <= 1;
+  };
+
+  KefeyReelsCarousel.prototype.goToPage = function (index) {
+    if (this.totalPages <= 1) return;
+    var targetIndex = ((index % this.totalPages) + this.totalPages) % this.totalPages;
+    var target = targetIndex * this.viewport.clientWidth;
+    var start = this.offset;
+    var diff = target - start;
+
+    if (this.loopWidth) {
+      if (diff > this.loopWidth / 2) diff -= this.loopWidth;
+      if (diff < -this.loopWidth / 2) diff += this.loopWidth;
+    }
+
+    this.dotTween = {
+      start: start,
+      diff: diff,
+      startTime: performance.now(),
+      duration: 420
+    };
+    this.resumeAt = performance.now() + 700;
+  };
+
+  KefeyReelsCarousel.prototype.shouldAutoplay = function () {
+    if (!this.autoplayEnabled) return false;
+    if (this.totalPages <= 1 || !this.loopWidth) return false;
+    if (document.hidden) return false;
+    if (this.pauseOnHover && this.isHovered) return false;
+    if (this.isFocused || this.isDragging || this.isDown) return false;
+    if (this.activeCard) return false;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+    if (performance.now() < this.resumeAt) return false;
+    return true;
+  };
+
+  KefeyReelsCarousel.prototype.startLoop = function () {
+    if (this.rafId) return;
+    this.lastTick = 0;
+    this.rafId = window.requestAnimationFrame(this.tick);
+  };
+
+  KefeyReelsCarousel.prototype.stopLoop = function () {
+    if (!this.rafId) return;
+    window.cancelAnimationFrame(this.rafId);
+    this.rafId = null;
+  };
+
+  KefeyReelsCarousel.prototype.tick = function (ts) {
+    if (!this.lastTick) this.lastTick = ts;
+    var dt = (ts - this.lastTick) / 1000;
+    this.lastTick = ts;
+
+    if (this.dotTween) {
+      var progress = (ts - this.dotTween.startTime) / this.dotTween.duration;
+      if (progress >= 1) {
+        this.setOffset(this.dotTween.start + this.dotTween.diff);
+        this.dotTween = null;
+      } else {
+        var eased = 1 - Math.pow(1 - progress, 3);
+        this.setOffset(this.dotTween.start + this.dotTween.diff * eased);
+      }
+    } else if (this.shouldAutoplay()) {
+      this.setOffset(this.offset + this.autoplaySpeed * dt);
+    } else {
+      this.updateUI();
+    }
+
+    this.rafId = window.requestAnimationFrame(this.tick);
   };
 
   KefeyReelsCarousel.prototype.getCardNodes = function (card) {
@@ -290,13 +331,11 @@
 
     var video = nodes.player.querySelector("video");
     if (video && !video.paused) video.pause();
-
     nodes.player.innerHTML = "";
     nodes.player.hidden = true;
     if (nodes.close) nodes.close.hidden = true;
     card.classList.remove("is-playing");
     if (this.activeCard === card) this.activeCard = null;
-    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.stopActivePlayer = function () {
@@ -329,10 +368,7 @@
       }
     } else if (sourceType === "youtube") {
       var youtubeId = card.getAttribute("data-youtube-id") || "";
-      if (!youtubeId) {
-        var youtubeUrl = card.getAttribute("data-youtube-url") || "";
-        youtubeId = this.extractYouTubeId(youtubeUrl);
-      }
+      if (!youtubeId) youtubeId = this.extractYouTubeId(card.getAttribute("data-youtube-url") || "");
       if (youtubeId) {
         nodes.player.innerHTML =
           '<iframe src="https://www.youtube-nocookie.com/embed/' +
@@ -355,7 +391,6 @@
     if (nodes.close) nodes.close.hidden = false;
     card.classList.add("is-playing");
     this.activeCard = card;
-    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.onTrackClick = function (event) {
@@ -368,16 +403,15 @@
     var closeButton = event.target.closest(".kefey-reels-carousel__close");
     if (closeButton) {
       event.preventDefault();
-      var closeCard = closeButton.closest(".kefey-reels-carousel__card");
-      this.stopCard(closeCard);
+      this.stopCard(closeButton.closest(".kefey-reels-carousel__card"));
       return;
     }
 
     var playButton = event.target.closest(".kefey-reels-carousel__play");
     if (playButton) {
       event.preventDefault();
-      var card = playButton.closest(".kefey-reels-carousel__card");
-      this.playCard(card);
+      event.stopPropagation();
+      this.playCard(playButton.closest(".kefey-reels-carousel__card"));
     }
   };
 
@@ -386,19 +420,18 @@
     if (
       event.target &&
       event.target.closest(
-        'button, a, input, textarea, select, label, [role="button"], .krc-play, .kefey-reels-carousel__play'
+        'button, a, input, textarea, select, label, [role="button"], .play-button, .krc-play, .kefey-reels-carousel__play'
       )
     ) {
       return;
     }
+
     this.isDown = true;
     this.isDragging = false;
     this.startX = event.clientX;
     this.startY = event.clientY;
-    this.startScroll = this.viewport.scrollLeft;
-    this.viewport.classList.add("is-dragging");
-    if (this.viewport.setPointerCapture) this.viewport.setPointerCapture(event.pointerId);
-    this.updateAutoplay();
+    this.dragStartOffset = this.offset;
+    this.pointerId = event.pointerId;
   };
 
   KefeyReelsCarousel.prototype.onPointerMove = function (event) {
@@ -410,22 +443,20 @@
     if (!this.isDragging) {
       if (dx > 8 && dx > dy) {
         this.isDragging = true;
+        this.viewport.classList.add("is-dragging");
+        if (this.viewport.setPointerCapture && this.pointerId != null) this.viewport.setPointerCapture(this.pointerId);
       } else {
         return;
       }
     }
 
-    this.viewport.scrollLeft = this.startScroll - deltaX;
+    this.setOffset(this.dragStartOffset - deltaX);
     event.preventDefault();
   };
 
   KefeyReelsCarousel.prototype.onPointerUp = function () {
     if (!this.isDown) return;
     this.isDown = false;
-    this.viewport.classList.remove("is-dragging");
-    this.page = this.getNearestPageFromScroll();
-    this.updateUI();
-    this.snapToNearest();
 
     if (this.isDragging) {
       this.blockClick = true;
@@ -436,52 +467,44 @@
         }.bind(this),
         180
       );
+      this.resumeAt = performance.now() + 300;
     }
-    this.isDragging = false;
-    this.updateAutoplay();
-  };
 
-  KefeyReelsCarousel.prototype.onScroll = function () {
-    this.page = this.getNearestPageFromScroll();
-    this.updateUI();
+    this.isDragging = false;
+    this.viewport.classList.remove("is-dragging");
+    this.pointerId = null;
   };
 
   KefeyReelsCarousel.prototype.onResize = function () {
     this.buildPages();
     this.renderDots();
-    this.goToPage(this.page);
-    this.updateAutoplay();
+    this.setOffset(this.offset);
   };
 
   KefeyReelsCarousel.prototype.onMouseEnter = function () {
     this.isHovered = true;
-    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.onMouseLeave = function () {
     this.isHovered = false;
-    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.onFocusIn = function () {
     this.isFocused = true;
-    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.onFocusOut = function () {
     var active = document.activeElement;
     this.isFocused = !!(active && this.root.contains(active));
-    this.updateAutoplay();
   };
 
-  KefeyReelsCarousel.prototype.onVisibilityChange = function () {
-    this.updateAutoplay();
-  };
+  KefeyReelsCarousel.prototype.onVisibilityChange = function () {};
 
   function initWithin(container) {
     if (!container) return;
     if (container === document) container = document.documentElement;
     if (!(container instanceof Element)) return;
+
     var sections = container.matches(".kefey-reels-carousel")
       ? [container]
       : container.querySelectorAll(".kefey-reels-carousel");
@@ -496,6 +519,9 @@
 
   function destroyWithin(container) {
     if (!container) return;
+    if (container === document) container = document.documentElement;
+    if (!(container instanceof Element)) return;
+
     var sections = container.matches(".kefey-reels-carousel")
       ? [container]
       : container.querySelectorAll(".kefey-reels-carousel");
