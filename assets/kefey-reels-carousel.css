@@ -1,5 +1,9 @@
 .kefey-reels-carousel {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   padding-top: var(--krc-pt, 40px);
   padding-bottom: var(--krc-pb, 32px);
   background: var(--krc-bg, #ffffff);
@@ -225,11 +229,11 @@
 }
 
 .kefey-reels-carousel__arrow--prev {
-  left: -18px;
+  left: 20px;
 }
 
 .kefey-reels-carousel__arrow--next {
-  right: -18px;
+  right: 10px;
 }
 
 .kefey-reels-carousel__arrow--prev .svg-wrapper {
