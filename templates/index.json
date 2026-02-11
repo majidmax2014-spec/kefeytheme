@@ -333,6 +333,8 @@
         "font_weight": "700",
         "letter_spacing": 1,
         "gap": 28,
+        "margin_top": 72,
+        "margin_bottom": 72,
         "separator_text": "|",
         "speed": 18,
         "direction": "left",
