@@ -193,8 +193,10 @@
         "card_radius": 24,
         "star_color": "#e15241",
         "quote_color": "#2bb4a7",
+        "quote_icon": "shopify://shop_images/quote.svg",
         "show_decorations": true,
-        "columns_desktop": 3,
+        "autoplay": false,
+        "autoplay_speed": 5000,
         "color_scheme": "scheme-1",
         "padding_top": 40,
         "padding_bottom": 40
