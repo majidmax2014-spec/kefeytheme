@@ -2,7 +2,7 @@
   position: relative;
   padding-top: var(--krc-pt, 40px);
   padding-bottom: var(--krc-pb, 32px);
-  background: #efefef;
+  background: var(--krc-bg, #ffffff);
 }
 
 .kefey-reels-carousel__header {
@@ -85,6 +85,11 @@
   aspect-ratio: 9 / 16;
 }
 
+.kefey-reels-carousel__poster {
+  width: 100%;
+  height: 100%;
+}
+
 .kefey-reels-carousel__media img,
 .kefey-reels-carousel__placeholder {
   width: 100%;
@@ -110,6 +115,9 @@
   transform: translateX(-50%);
   background: #f4d1f5;
   border: 4px solid #c644c7;
+  padding: 0;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .kefey-reels-carousel__play::before {
@@ -133,13 +141,58 @@
   padding: 1.2rem 1.2rem 1rem;
   color: #fff;
   font-family: var(--font-heading-family);
-  font-size: clamp(2rem, 2.4vw, 3.2rem);
+  font-size: var(--krc-caption-fs, 14px);
   font-weight: 700;
   line-height: 1.05;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  z-index: 2;
+}
+
+.kefey-reels-carousel__player {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: #000;
+}
+
+.kefey-reels-carousel__player iframe,
+.kefey-reels-carousel__player video,
+.kefey-reels-carousel__player .instagram-media,
+.kefey-reels-carousel__player blockquote {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.kefey-reels-carousel__close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.kefey-reels-carousel__card.is-playing .kefey-reels-carousel__play,
+.kefey-reels-carousel__card.is-playing .kefey-reels-carousel__caption,
+.kefey-reels-carousel__card.is-playing .kefey-reels-carousel__poster {
+  visibility: hidden;
+}
+
+.kefey-reels-carousel__link-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
 }
 
 .kefey-reels-carousel__arrow {

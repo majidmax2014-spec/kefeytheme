@@ -22,6 +22,7 @@
     this.didDrag = false;
     this.blockClick = false;
     this.clickBlockTimer = null;
+    this.activeCard = null;
 
     if (!this.viewport || !this.track || this.slides.length === 0) return;
 
@@ -30,6 +31,7 @@
     this.onPointerUp = this.onPointerUp.bind(this);
     this.onScroll = this.onScroll.bind(this);
     this.onResize = this.debounce(this.onResize.bind(this), 120);
+    this.onTrackClick = this.onTrackClick.bind(this);
 
     this.setup();
   }
@@ -44,6 +46,7 @@
     this.viewport.addEventListener("pointerup", this.onPointerUp);
     this.viewport.addEventListener("pointercancel", this.onPointerUp);
     this.viewport.addEventListener("scroll", this.onScroll, { passive: true });
+    this.track.addEventListener("click", this.onTrackClick);
 
     this.track.addEventListener(
       "click",
@@ -84,8 +87,22 @@
     this.viewport.removeEventListener("pointerup", this.onPointerUp);
     this.viewport.removeEventListener("pointercancel", this.onPointerUp);
     this.viewport.removeEventListener("scroll", this.onScroll);
+    this.track.removeEventListener("click", this.onTrackClick);
     window.removeEventListener("resize", this.onResize);
     if (this.clickBlockTimer) window.clearTimeout(this.clickBlockTimer);
+    this.stopActivePlayer();
+  };
+
+  KefeyReelsCarousel.prototype.extractYouTubeId = function (value) {
+    if (!value) return "";
+    var url = String(value).trim();
+    var match = url.match(/[?&]v=([^&#]+)/);
+    if (match && match[1]) return match[1];
+    match = url.match(/youtu\.be\/([^?&#/]+)/);
+    if (match && match[1]) return match[1];
+    match = url.match(/youtube\.com\/embed\/([^?&#/]+)/);
+    if (match && match[1]) return match[1];
+    return "";
   };
 
   KefeyReelsCarousel.prototype.debounce = function (fn, delay) {
@@ -194,6 +211,106 @@
     }
     if (this.prev) this.prev.disabled = this.page <= 0;
     if (this.next) this.next.disabled = this.page >= this.pages - 1;
+  };
+
+  KefeyReelsCarousel.prototype.getCardNodes = function (card) {
+    return {
+      player: card.querySelector(".kefey-reels-carousel__player"),
+      close: card.querySelector(".kefey-reels-carousel__close")
+    };
+  };
+
+  KefeyReelsCarousel.prototype.stopCard = function (card) {
+    if (!card) return;
+    var nodes = this.getCardNodes(card);
+    if (!nodes.player) return;
+
+    var video = nodes.player.querySelector("video");
+    if (video && !video.paused) video.pause();
+
+    nodes.player.innerHTML = "";
+    nodes.player.hidden = true;
+    if (nodes.close) nodes.close.hidden = true;
+    card.classList.remove("is-playing");
+    if (this.activeCard === card) this.activeCard = null;
+  };
+
+  KefeyReelsCarousel.prototype.stopActivePlayer = function () {
+    if (this.activeCard) this.stopCard(this.activeCard);
+  };
+
+  KefeyReelsCarousel.prototype.playCard = function (card) {
+    if (!card) return;
+    var sourceType = card.getAttribute("data-source-type") || "none";
+    if (sourceType === "none") return;
+
+    var nodes = this.getCardNodes(card);
+    if (!nodes.player) return;
+
+    this.stopActivePlayer();
+    nodes.player.innerHTML = "";
+
+    if (sourceType === "shopify") {
+      var template = card.querySelector(".kefey-reels-carousel__shopify-video-template");
+      if (template && template.innerHTML.trim() !== "") {
+        nodes.player.innerHTML = template.innerHTML;
+        var shopifyVideo = nodes.player.querySelector("video");
+        if (shopifyVideo) {
+          shopifyVideo.setAttribute("playsinline", "");
+          shopifyVideo.setAttribute("autoplay", "");
+          shopifyVideo.controls = true;
+          var playPromise = shopifyVideo.play();
+          if (playPromise && typeof playPromise.catch === "function") playPromise.catch(function () {});
+        }
+      }
+    } else if (sourceType === "youtube") {
+      var youtubeUrl = card.getAttribute("data-youtube-url") || "";
+      var youtubeId = this.extractYouTubeId(youtubeUrl);
+      if (youtubeId) {
+        nodes.player.innerHTML =
+          '<iframe src="https://www.youtube-nocookie.com/embed/' +
+          youtubeId +
+          '?autoplay=1&playsinline=1&rel=0" title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+      }
+    } else if (sourceType === "embed") {
+      var embedSource = card.querySelector(".kefey-reels-carousel__embed-source");
+      if (embedSource && embedSource.innerHTML.trim() !== "") {
+        nodes.player.innerHTML = embedSource.innerHTML;
+        if (window.instgrm && window.instgrm.Embeds && typeof window.instgrm.Embeds.process === "function") {
+          window.instgrm.Embeds.process();
+        }
+      }
+    }
+
+    if (nodes.player.innerHTML.trim() === "") return;
+
+    nodes.player.hidden = false;
+    if (nodes.close) nodes.close.hidden = false;
+    card.classList.add("is-playing");
+    this.activeCard = card;
+  };
+
+  KefeyReelsCarousel.prototype.onTrackClick = function (event) {
+    if (this.blockClick) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+
+    var closeButton = event.target.closest(".kefey-reels-carousel__close");
+    if (closeButton) {
+      event.preventDefault();
+      var closeCard = closeButton.closest(".kefey-reels-carousel__card");
+      this.stopCard(closeCard);
+      return;
+    }
+
+    var playButton = event.target.closest(".kefey-reels-carousel__play");
+    if (playButton) {
+      event.preventDefault();
+      var card = playButton.closest(".kefey-reels-carousel__card");
+      this.playCard(card);
+    }
   };
 
   KefeyReelsCarousel.prototype.onPointerDown = function (event) {

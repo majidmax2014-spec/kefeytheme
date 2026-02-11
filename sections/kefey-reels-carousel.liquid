@@ -10,6 +10,8 @@
     --krc-highlight: {{ section.settings.highlight_color | default: '#F5C524' }};
     --krc-gap: {{ section.settings.card_gap | default: 20 }}px;
     --krc-radius: {{ section.settings.card_radius | default: 14 }}px;
+    --krc-bg: {{ section.settings.background_color | default: '#ffffff' }};
+    --krc-caption-fs: {{ section.settings.caption_font_size | default: 14 }}px;
   "
 >
   <div class="kefey-reels-carousel__inner page-width">
@@ -27,17 +29,15 @@
         <ul class="kefey-reels-carousel__track" role="list" aria-label="Kefey reels carousel">
           {% for block in section.blocks %}
             {% assign poster = block.settings.thumbnail %}
-            {% assign target_url = block.settings.link %}
-            {% if target_url == blank and block.settings.video_url != blank %}
-              {% assign target_url = block.settings.video_url %}
-            {% endif %}
+            {% assign source_type = block.settings.source_type | default: 'none' %}
             <li class="kefey-reels-carousel__slide" {{ block.shopify_attributes }}>
-              {% if target_url != blank %}
-                <a class="kefey-reels-carousel__card" href="{{ target_url }}" {% if block.settings.video_url != blank %}target="_blank" rel="noopener noreferrer"{% endif %} aria-label="{{ block.settings.title | default: 'Open reel' | escape }}">
-              {% else %}
-                <div class="kefey-reels-carousel__card" aria-label="{{ block.settings.title | default: 'Reel poster' | escape }}">
-              {% endif %}
-                  <div class="kefey-reels-carousel__media">
+              <div
+                class="kefey-reels-carousel__card"
+                data-source-type="{{ source_type }}"
+                {% if block.settings.youtube_url != blank %}data-youtube-url="{{ block.settings.youtube_url | escape }}"{% endif %}
+              >
+                <div class="kefey-reels-carousel__media">
+                  <div class="kefey-reels-carousel__poster">
                     {% if poster != blank %}
                       <img
                         srcset="
@@ -56,17 +56,33 @@
                       {{ 'image' | placeholder_svg_tag: 'kefey-reels-carousel__placeholder' }}
                     {% endif %}
                   </div>
-                  {% if section.settings.show_play_icon %}
-                    <span class="kefey-reels-carousel__play" aria-hidden="true"></span>
+
+                  {% if source_type == 'shopify' and block.settings.shopify_video != blank %}
+                    <template class="kefey-reels-carousel__shopify-video-template">
+                      {{ block.settings.shopify_video | video_tag: controls: true, playsinline: true, preload: 'metadata' }}
+                    </template>
                   {% endif %}
-                  {% if block.settings.title != blank %}
-                    <span class="kefey-reels-carousel__caption">{{ block.settings.title }}</span>
+
+                  {% if source_type == 'embed' and block.settings.embed_html != blank %}
+                    <div class="kefey-reels-carousel__embed-source" hidden>
+                      {{ block.settings.embed_html }}
+                    </div>
                   {% endif %}
-              {% if target_url != blank %}
-                </a>
-              {% else %}
+
+                  <div class="kefey-reels-carousel__player" hidden></div>
+                  <button class="kefey-reels-carousel__close" type="button" hidden aria-label="Close video">&times;</button>
                 </div>
-              {% endif %}
+
+                {% if section.settings.show_play_icon and source_type != 'none' %}
+                  <button class="kefey-reels-carousel__play" type="button" aria-label="Play video"></button>
+                {% endif %}
+                {% if block.settings.title != blank %}
+                  <span class="kefey-reels-carousel__caption">{{ block.settings.title }}</span>
+                {% endif %}
+                {% if source_type == 'none' and block.settings.link != blank %}
+                  <a class="kefey-reels-carousel__link-overlay" href="{{ block.settings.link }}" aria-label="{{ block.settings.title | default: 'Open reel' | escape }}"></a>
+                {% endif %}
+              </div>
             </li>
           {% endfor %}
         </ul>
@@ -95,6 +111,8 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "Kefey in Real Life" },
     { "type": "range", "id": "heading_size", "label": "Heading size (px)", "min": 24, "max": 72, "step": 2, "default": 48 },
     { "type": "color", "id": "highlight_color", "label": "Highlight color", "default": "#F5C524" },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "range", "id": "caption_font_size", "label": "Caption font size (px)", "min": 10, "max": 28, "step": 1, "default": 14 },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "default": 40 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "default": 32 },
     { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": false },
@@ -109,8 +127,22 @@
       "settings": [
         { "type": "image_picker", "id": "thumbnail", "label": "Thumbnail image" },
         { "type": "text", "id": "title", "label": "Title", "default": "Reel" },
-        { "type": "url", "id": "link", "label": "Link URL" },
-        { "type": "url", "id": "video_url", "label": "Video URL" }
+        { "type": "url", "id": "link", "label": "Link URL (image-only mode)" },
+        {
+          "type": "select",
+          "id": "source_type",
+          "label": "Video source",
+          "default": "none",
+          "options": [
+            { "value": "none", "label": "None (image only)" },
+            { "value": "shopify", "label": "Uploaded video (Shopify)" },
+            { "value": "youtube", "label": "YouTube" },
+            { "value": "embed", "label": "Embed code (Instagram/TikTok/etc)" }
+          ]
+        },
+        { "type": "video", "id": "shopify_video", "label": "Upload video (Shopify)" },
+        { "type": "video_url", "id": "youtube_url", "label": "YouTube link", "accept": ["youtube"] },
+        { "type": "html", "id": "embed_html", "label": "Embed code (Instagram/TikTok/etc)" }
       ]
     }
   ],
