@@ -30,11 +30,9 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  overflow: visible;
 }
-.kefey-testimonials-grid__quotes { 
+.kefey-testimonials-grid__quotes {
   margin-bottom: 0.8rem;
-  margin-top: var(--ktg-quote-icon-offset, 0px);
   text-align: center;
   display: flex;
   justify-content: center;
@@ -52,7 +50,7 @@
   display: none;
 }
 .kefey-testimonials-grid__quote-icon {
-  width: var(--ktg-quote-icon-size, 72px);
+  max-width: 90px;
   height: auto;
   display: block;
 }
@@ -172,7 +170,7 @@
     min-height: 24rem;
   }
   .kefey-testimonials-grid__quote-icon {
-    width: var(--ktg-quote-icon-size-mobile, 56px);
+    max-width: 70px;
   }
 }
 
