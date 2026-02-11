@@ -364,6 +364,8 @@
 
   function initWithin(container) {
     if (!container) return;
+    if (container === document) container = document.documentElement;
+    if (!(container instanceof Element)) return;
     var sections = container.matches(".kefey-reels-carousel")
       ? [container]
       : container.querySelectorAll(".kefey-reels-carousel");
