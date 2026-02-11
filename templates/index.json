@@ -347,53 +347,118 @@
     "kefey_reels_carousel_4rLkP2": {
       "type": "kefey-reels-carousel",
       "blocks": {
-        "reel_fst1": {
+        "reel_KCNFUa": {
           "type": "reel",
           "settings": {
-            "title": "This/That",
+            "title": "Reel",
             "link": "",
-            "video_url": "https://www.youtube.com/shorts/uBmhNMAQqBA?feature=share"
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
           }
         },
-        "reel_fst2": {
+        "reel_XR4DrR": {
           "type": "reel",
           "settings": {
-            "title": "Best Sellers",
+            "title": "Reel",
             "link": "",
-            "video_url": ""
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
           }
         },
-        "reel_fst3": {
+        "reel_iwAXqT": {
           "type": "reel",
           "settings": {
-            "title": "OLLY Body",
+            "title": "Reel",
             "link": "",
-            "video_url": ""
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
           }
         },
-        "reel_fst4": {
+        "reel_L3zxkD": {
           "type": "reel",
           "settings": {
-            "title": "Women's 40+",
+            "title": "Reel",
             "link": "",
-            "video_url": ""
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
           }
         },
-        "reel_fst5": {
+        "reel_8HMf6b": {
           "type": "reel",
           "settings": {
-            "title": "Now",
+            "title": "Reel",
             "link": "",
-            "video_url": ""
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
+          }
+        },
+        "reel_G9cHG9": {
+          "type": "reel",
+          "settings": {
+            "title": "Reel",
+            "link": "",
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
+          }
+        },
+        "reel_XhUC6T": {
+          "type": "reel",
+          "settings": {
+            "title": "Reel",
+            "link": "",
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
+          }
+        },
+        "reel_ffjHwQ": {
+          "type": "reel",
+          "settings": {
+            "title": "Reel",
+            "link": "",
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
+          }
+        },
+        "reel_jPxkGh": {
+          "type": "reel",
+          "settings": {
+            "title": "Reel",
+            "link": "",
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
+          }
+        },
+        "reel_UMeane": {
+          "type": "reel",
+          "settings": {
+            "title": "Reel",
+            "link": "",
+            "source_type": "none",
+            "youtube_url": "",
+            "embed_html": ""
           }
         }
       },
       "block_order": [
-        "reel_fst1",
-        "reel_fst2",
-        "reel_fst3",
-        "reel_fst4",
-        "reel_fst5"
+        "reel_KCNFUa",
+        "reel_XR4DrR",
+        "reel_iwAXqT",
+        "reel_L3zxkD",
+        "reel_8HMf6b",
+        "reel_G9cHG9",
+        "reel_XhUC6T",
+        "reel_ffjHwQ",
+        "reel_jPxkGh",
+        "reel_UMeane"
       ],
       "name": "Kefey Reels",
       "settings": {
