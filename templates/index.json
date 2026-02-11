@@ -469,6 +469,8 @@
         "caption_font_size": 14,
         "padding_top": 40,
         "padding_bottom": 32,
+        "autoplay": true,
+        "autoplay_speed": 30,
         "show_arrows": true,
         "show_play_icon": true,
         "card_radius": 14,
