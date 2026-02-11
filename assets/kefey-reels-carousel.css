@@ -47,11 +47,9 @@
 }
 
 .kefey-reels-carousel__viewport {
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  scroll-snap-type: x mandatory;
   touch-action: pan-y;
   cursor: grab;
 }
@@ -73,9 +71,8 @@
 }
 
 .kefey-reels-carousel__slide {
-  flex: 0 0 calc((100% - (var(--krc-gap, 20px) * 4)) / 5);
+  flex: 0 0 calc((1200px - (var(--krc-gap, 20px) * 4)) / 5);
   min-width: 0;
-  scroll-snap-align: start;
 }
 
 .kefey-reels-carousel__card {
