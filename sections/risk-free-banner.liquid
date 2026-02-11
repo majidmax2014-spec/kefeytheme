@@ -13,6 +13,9 @@
     --rf-btn-border: {{ section.settings.button_border_color | default: '#FFFFFF' }};
     --rf-btn-bg: {{ section.settings.button_bg_color | default: 'transparent' }};
     --rf-badge-size: {{ section.settings.badge_size | default: 160 }}px;
+    --rf-heading-fs: {{ section.settings.heading_font_size }}px;
+    --rf-text-fs: {{ section.settings.text_font_size }}px;
+    --rf-btn-fs: {{ section.settings.button_font_size }}px;
   "
 >
   {%- for block in section.blocks -%}
@@ -104,6 +107,9 @@
     { "type": "text", "id": "heading", "label": "Heading", "default": "TRY IT WITH CONFIDENCE!" },
     { "type": "textarea", "id": "text", "label": "Supporting text", "default": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund." },
     { "type": "text", "id": "button_label", "label": "Button label", "default": "CHECKOUT NOW" },
+    { "type": "range", "id": "heading_font_size", "label": "Heading font size (px)", "min": 16, "max": 80, "step": 1, "default": 40 },
+    { "type": "range", "id": "text_font_size", "label": "Text font size (px)", "min": 12, "max": 40, "step": 1, "default": 16 },
+    { "type": "range", "id": "button_font_size", "label": "Button font size (px)", "min": 12, "max": 32, "step": 1, "default": 14 },
     { "type": "url", "id": "button_link", "label": "Button link" },
     {
       "type": "select",
