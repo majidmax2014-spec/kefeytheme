@@ -100,6 +100,10 @@
       ],
       "name": "Angled Image Carousel",
       "settings": {
+        "heading": "Every mood has a face",
+        "heading_size": 42,
+        "show_highlight": true,
+        "highlight_color": "#ffc94d",
         "section_padding_top": 40,
         "section_padding_bottom": 40,
         "side_padding": 64,
