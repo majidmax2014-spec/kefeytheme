@@ -216,8 +216,8 @@
           "type": "decor",
           "settings": {
             "decor_image": "shopify://shop_images/right-decor.png",
-            "width": 180,
-            "top": 20,
+            "width": 220,
+            "top": 40,
             "right": 0,
             "alt": ""
           }
@@ -229,7 +229,7 @@
       "name": "Risk-Free Banner",
       "settings": {
         "background_color": "#3fb6b4",
-        "section_height_desktop": 220,
+        "section_height_desktop": 300,
         "section_height_mobile": 180,
         "padding_left_right": 40,
         "heading": "TRY IT, RISK FREE!",
