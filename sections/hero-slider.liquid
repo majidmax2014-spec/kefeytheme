@@ -2,7 +2,7 @@
 <section
   id="HeroSlider-{{ section.id }}"
   class="hero-slider"
-  style="--hero-height-desktop: {{ section.settings.height_desktop | default: 600 }}px; --hero-height-mobile: {{ section.settings.height_mobile | default: 480 }}px; --hero-overlay-opacity: {{ section.settings.overlay_opacity | at_most: 60 | divided_by: 100.0 }};"
+  style="--hero-height-desktop: {{ section.settings.height_desktop | default: 600 }}px; --hero-height-mobile: {{ section.settings.height_mobile | default: 480 }}px; --hero-overlay-opacity: {{ section.settings.overlay_opacity | at_most: 60 | divided_by: 100.0 }}; --hero-heading-size: {{ section.settings.hero_heading_size | default: 72 }}px; --hero-subheading-size: {{ section.settings.hero_subheading_size | default: 18 }}px; --hero-btn-text-size: {{ section.settings.hero_button_text_size | default: 14 }}px; --hero-btn-py: {{ section.settings.hero_button_padding_y | default: 12 }}px; --hero-btn-px: {{ section.settings.hero_button_padding_x | default: 28 }}px;"
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
   data-show-dots="{{ section.settings.show_dots }}"
@@ -137,6 +137,11 @@
       "label": "Content max width (px)",
       "default": 900
     },
+    { "type":"range", "id":"hero_heading_size", "label":"Heading size (px)", "min": 24, "max": 120, "step": 2, "default": 72 },
+    { "type":"range", "id":"hero_subheading_size", "label":"Subheading size (px)", "min": 12, "max": 40, "step": 1, "default": 18 },
+    { "type":"range", "id":"hero_button_text_size", "label":"Button text size (px)", "min": 10, "max": 28, "step": 1, "default": 14 },
+    { "type":"range", "id":"hero_button_padding_y", "label":"Button padding top/bottom (px)", "min": 6, "max": 30, "step": 1, "default": 12 },
+    { "type":"range", "id":"hero_button_padding_x", "label":"Button padding left/right (px)", "min": 10, "max": 60, "step": 1, "default": 28 },
     {
       "type": "select",
       "id": "content_position",
