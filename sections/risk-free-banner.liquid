@@ -14,12 +14,33 @@
     --rf-btn-bg: {{ section.settings.button_bg_color | default: 'transparent' }};
     --rf-badge-size: {{ section.settings.badge_size | default: 160 }}px;
   "
-  data-right-decor-enabled="{{ section.settings.right_decor_enabled }}"
-  data-left-decor-enabled="{{ section.settings.left_decor_enabled }}"
 >
-  {%- if section.settings.left_decor_enabled and section.settings.left_decor_image != blank -%}
-    <img class="rf-banner__decor rf-banner__decor--left" src="{{ section.settings.left_decor_image | image_url: width: 800 }}" alt="" loading="lazy">
-  {%- endif -%}
+  {%- for block in section.blocks -%}
+    {%- case block.type -%}
+      {%- when 'left_decor' -%}
+        {%- if block.settings.decor_image != blank -%}
+          <img
+            class="rf-banner__decor rf-banner__decor--left"
+            src="{{ block.settings.decor_image | image_url: width: 800 }}"
+            alt="{{ block.settings.alt | default: '' }}"
+            style="--decor-w: {{ block.settings.decor_width | default: 220 }}px; --decor-x: {{ block.settings.decor_offset_x | default: 0 }}px; --decor-y: {{ block.settings.decor_offset_y | default: 0 }}px; --decor-z: {{ block.settings.decor_z | default: 0 }}; --decor-opacity: {{ block.settings.decor_opacity | default: 100 | times: 0.01 }};"
+            loading="lazy"
+            {{ block.shopify_attributes }}
+          >
+        {%- endif -%}
+      {%- when 'right_decor' -%}
+        {%- if block.settings.decor_image != blank -%}
+          <img
+            class="rf-banner__decor rf-banner__decor--right"
+            src="{{ block.settings.decor_image | image_url: width: 600 }}"
+            alt="{{ block.settings.alt | default: '' }}"
+            style="--decor-w: {{ block.settings.decor_width | default: 220 }}px; --decor-x: {{ block.settings.decor_offset_x | default: 0 }}px; --decor-y: {{ block.settings.decor_offset_y | default: 0 }}px; --decor-z: {{ block.settings.decor_z | default: 0 }}; --decor-opacity: {{ block.settings.decor_opacity | default: 100 | times: 0.01 }};"
+            loading="lazy"
+            {{ block.shopify_attributes }}
+          >
+        {%- endif -%}
+    {%- endcase -%}
+  {%- endfor -%}
 
   <div class="rf-banner__inner">
     <div class="rf-banner__center">
@@ -62,24 +83,6 @@
       </div>
     </div>
   </div>
-
-  {%- if section.settings.right_decor_enabled -%}
-    {%- for block in section.blocks -%}
-      {%- case block.type -%}
-        {%- when 'decor' -%}
-          {%- if block.settings.decor_image != blank -%}
-            <img
-              class="rf-banner__decor rf-banner__decor--right"
-              src="{{ block.settings.decor_image | image_url: width: 600 }}"
-              alt="{{ block.settings.alt | default: '' }}"
-              style="--w: {{ block.settings.width | default: 80 }}px; top: {{ block.settings.top | default: 20 }}px; right: {{ block.settings.right | default: 20 }}px;"
-              loading="lazy"
-              {{ block.shopify_attributes }}
-            >
-          {%- endif -%}
-      {%- endcase -%}
-    {%- endfor -%}
-  {%- endif -%}
 </section>
 
 {% schema %}
@@ -124,32 +127,43 @@
     { "type": "image_picker", "id": "badge_image", "label": "Badge image" },
     { "type": "number", "id": "badge_size", "label": "Badge size (px)", "default": 160 },
     { "type": "text", "id": "badge_text_center", "label": "Badge center text", "default": "kefey" },
-    { "type": "text", "id": "badge_text_ring", "label": "Badge ring text", "default": "MONEYBACK GUARANTEED" },
-
-    { "type": "checkbox", "id": "left_decor_enabled", "label": "Show left decor image", "default": true },
-    { "type": "image_picker", "id": "left_decor_image", "label": "Left decor image" },
-
-    { "type": "checkbox", "id": "right_decor_enabled", "label": "Show right decor images (via blocks)", "default": true }
+    { "type": "text", "id": "badge_text_ring", "label": "Badge ring text", "default": "MONEYBACK GUARANTEED" }
   ],
   "blocks": [
     {
-      "type": "decor",
-      "name": "Right decor image",
+      "type": "left_decor",
+      "name": "Left decor",
       "settings": [
-        { "type": "image_picker", "id": "decor_image", "label": "Image" },
-        { "type": "number", "id": "width", "label": "Width (px)", "default": 80 },
-        { "type": "number", "id": "top", "label": "Top offset (px)", "default": 20 },
-        { "type": "number", "id": "right", "label": "Right offset (px)", "default": 20 },
+        { "type": "image_picker", "id": "decor_image", "label": "Decor image" },
+        { "type": "range", "id": "decor_width", "label": "Width (px)", "min": 40, "max": 600, "step": 5, "default": 220 },
+        { "type": "range", "id": "decor_offset_x", "label": "Offset X (px)", "min": -300, "max": 300, "step": 5, "default": 0 },
+        { "type": "range", "id": "decor_offset_y", "label": "Offset Y (px)", "min": -200, "max": 200, "step": 5, "default": 0 },
+        { "type": "range", "id": "decor_z", "label": "Z-index", "min": 0, "max": 5, "step": 1, "default": 0 },
+        { "type": "range", "id": "decor_opacity", "label": "Opacity", "min": 0, "max": 100, "step": 5, "default": 95 },
+        { "type": "text", "id": "alt", "label": "Alt (leave blank if decorative)" }
+      ]
+    },
+    {
+      "type": "right_decor",
+      "name": "Right decor",
+      "settings": [
+        { "type": "image_picker", "id": "decor_image", "label": "Decor image" },
+        { "type": "range", "id": "decor_width", "label": "Width (px)", "min": 40, "max": 600, "step": 5, "default": 220 },
+        { "type": "range", "id": "decor_offset_x", "label": "Offset X (px)", "min": -300, "max": 300, "step": 5, "default": 0 },
+        { "type": "range", "id": "decor_offset_y", "label": "Offset Y (px)", "min": -200, "max": 200, "step": 5, "default": 0 },
+        { "type": "range", "id": "decor_z", "label": "Z-index", "min": 0, "max": 5, "step": 1, "default": 0 },
+        { "type": "range", "id": "decor_opacity", "label": "Opacity", "min": 0, "max": 100, "step": 5, "default": 100 },
         { "type": "text", "id": "alt", "label": "Alt (leave blank if decorative)" }
       ]
     }
   ],
+  "max_blocks": 4,
   "presets": [
     {
       "name": "Risk-Free Banner",
       "blocks": [
-        { "type": "decor" },
-        { "type": "decor" }
+        { "type": "left_decor" },
+        { "type": "right_decor" }
       ]
     }
   ]
