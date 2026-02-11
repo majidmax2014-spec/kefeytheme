@@ -350,16 +350,14 @@
         "reel_fst1": {
           "type": "reel",
           "settings": {
-            "thumbnail": "",
             "title": "This/That",
             "link": "",
-            "video_url": ""
+            "video_url": "https://www.youtube.com/shorts/uBmhNMAQqBA?feature=share"
           }
         },
         "reel_fst2": {
           "type": "reel",
           "settings": {
-            "thumbnail": "",
             "title": "Best Sellers",
             "link": "",
             "video_url": ""
@@ -368,7 +366,6 @@
         "reel_fst3": {
           "type": "reel",
           "settings": {
-            "thumbnail": "",
             "title": "OLLY Body",
             "link": "",
             "video_url": ""
@@ -377,7 +374,6 @@
         "reel_fst4": {
           "type": "reel",
           "settings": {
-            "thumbnail": "",
             "title": "Women's 40+",
             "link": "",
             "video_url": ""
@@ -386,7 +382,6 @@
         "reel_fst5": {
           "type": "reel",
           "settings": {
-            "thumbnail": "",
             "title": "Now",
             "link": "",
             "video_url": ""
@@ -403,7 +398,7 @@
       "name": "Kefey Reels",
       "settings": {
         "heading": "Kefey in Real Life",
-        "heading_size": 48,
+        "heading_size": 36,
         "highlight_color": "#f5c524",
         "padding_top": 40,
         "padding_bottom": 32,
