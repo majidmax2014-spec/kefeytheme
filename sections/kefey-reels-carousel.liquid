@@ -3,6 +3,8 @@
 <section
   id="KefeyReels-{{ section.id }}"
   class="kefey-reels-carousel"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-speed="{{ section.settings.autoplay_speed | default: 4000 }}"
   style="
     --krc-pt: {{ section.settings.padding_top | default: 40 }}px;
     --krc-pb: {{ section.settings.padding_bottom | default: 32 }}px;
@@ -30,11 +32,17 @@
           {% for block in section.blocks %}
             {% assign poster = block.settings.thumbnail %}
             {% assign source_type = block.settings.source_type | default: 'none' %}
+            {% assign youtube_id = block.settings.youtube_url.id | default: '' %}
+            {% assign youtube_url = block.settings.youtube_url.url | default: '' %}
+            {% if youtube_url == blank and block.settings.youtube_url != blank %}
+              {% assign youtube_url = block.settings.youtube_url %}
+            {% endif %}
             <li class="kefey-reels-carousel__slide" {{ block.shopify_attributes }}>
               <div
                 class="kefey-reels-carousel__card"
                 data-source-type="{{ source_type }}"
-                {% if block.settings.youtube_url != blank %}data-youtube-url="{{ block.settings.youtube_url | escape }}"{% endif %}
+                {% if youtube_id != blank %}data-youtube-id="{{ youtube_id | escape }}"{% endif %}
+                {% if youtube_url != blank %}data-youtube-url="{{ youtube_url | escape }}"{% endif %}
               >
                 <div class="kefey-reels-carousel__media">
                   <div class="kefey-reels-carousel__poster">
@@ -115,6 +123,8 @@
     { "type": "range", "id": "caption_font_size", "label": "Caption font size (px)", "min": 10, "max": 28, "step": 1, "default": 14 },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "default": 40 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "default": 32 },
+    { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
+    { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 4000 },
     { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": false },
     { "type": "checkbox", "id": "show_play_icon", "label": "Show play icon overlay", "default": true },
     { "type": "range", "id": "card_radius", "label": "Card radius (px)", "min": 8, "max": 40, "step": 1, "default": 14 },

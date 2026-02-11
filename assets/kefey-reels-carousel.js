@@ -23,6 +23,11 @@
     this.blockClick = false;
     this.clickBlockTimer = null;
     this.activeCard = null;
+    this.autoplayEnabled = root.getAttribute("data-autoplay") === "true";
+    this.autoplaySpeed = parseInt(root.getAttribute("data-speed"), 10) || 4000;
+    this.autoplayTimer = null;
+    this.isHovered = false;
+    this.isFocused = false;
 
     if (!this.viewport || !this.track || this.slides.length === 0) return;
 
@@ -32,6 +37,11 @@
     this.onScroll = this.onScroll.bind(this);
     this.onResize = this.debounce(this.onResize.bind(this), 120);
     this.onTrackClick = this.onTrackClick.bind(this);
+    this.onMouseEnter = this.onMouseEnter.bind(this);
+    this.onMouseLeave = this.onMouseLeave.bind(this);
+    this.onFocusIn = this.onFocusIn.bind(this);
+    this.onFocusOut = this.onFocusOut.bind(this);
+    this.onVisibilityChange = this.onVisibilityChange.bind(this);
 
     this.setup();
   }
@@ -47,6 +57,11 @@
     this.viewport.addEventListener("pointercancel", this.onPointerUp);
     this.viewport.addEventListener("scroll", this.onScroll, { passive: true });
     this.track.addEventListener("click", this.onTrackClick);
+    this.root.addEventListener("mouseenter", this.onMouseEnter);
+    this.root.addEventListener("mouseleave", this.onMouseLeave);
+    this.root.addEventListener("focusin", this.onFocusIn);
+    this.root.addEventListener("focusout", this.onFocusOut);
+    document.addEventListener("visibilitychange", this.onVisibilityChange);
 
     this.track.addEventListener(
       "click",
@@ -78,6 +93,7 @@
     }
 
     window.addEventListener("resize", this.onResize);
+    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.destroy = function () {
@@ -88,21 +104,67 @@
     this.viewport.removeEventListener("pointercancel", this.onPointerUp);
     this.viewport.removeEventListener("scroll", this.onScroll);
     this.track.removeEventListener("click", this.onTrackClick);
+    this.root.removeEventListener("mouseenter", this.onMouseEnter);
+    this.root.removeEventListener("mouseleave", this.onMouseLeave);
+    this.root.removeEventListener("focusin", this.onFocusIn);
+    this.root.removeEventListener("focusout", this.onFocusOut);
+    document.removeEventListener("visibilitychange", this.onVisibilityChange);
     window.removeEventListener("resize", this.onResize);
     if (this.clickBlockTimer) window.clearTimeout(this.clickBlockTimer);
+    this.clearAutoplay();
     this.stopActivePlayer();
   };
 
   KefeyReelsCarousel.prototype.extractYouTubeId = function (value) {
     if (!value) return "";
+    if (typeof value === "object") {
+      if (value.id) return String(value.id);
+      if (value.url) value = value.url;
+    }
     var url = String(value).trim();
+    if (/^[A-Za-z0-9_-]{11}$/.test(url)) return url;
     var match = url.match(/[?&]v=([^&#]+)/);
     if (match && match[1]) return match[1];
     match = url.match(/youtu\.be\/([^?&#/]+)/);
     if (match && match[1]) return match[1];
     match = url.match(/youtube\.com\/embed\/([^?&#/]+)/);
     if (match && match[1]) return match[1];
+    match = url.match(/youtube\.com\/shorts\/([^?&#/]+)/);
+    if (match && match[1]) return match[1];
     return "";
+  };
+
+  KefeyReelsCarousel.prototype.clearAutoplay = function () {
+    if (this.autoplayTimer) {
+      window.clearInterval(this.autoplayTimer);
+      this.autoplayTimer = null;
+    }
+  };
+
+  KefeyReelsCarousel.prototype.shouldAutoplay = function () {
+    if (!this.autoplayEnabled) return false;
+    if (this.pages <= 1) return false;
+    if (this.isHovered || this.isFocused) return false;
+    if (this.isDown || this.activeCard) return false;
+    if (document.hidden) return false;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
+    return true;
+  };
+
+  KefeyReelsCarousel.prototype.updateAutoplay = function () {
+    if (!this.shouldAutoplay()) {
+      this.clearAutoplay();
+      return;
+    }
+    if (this.autoplayTimer) return;
+
+    this.autoplayTimer = window.setInterval(
+      function () {
+        if (!this.shouldAutoplay()) return;
+        this.goToPage((this.page + 1) % this.pages);
+      }.bind(this),
+      this.autoplaySpeed
+    );
   };
 
   KefeyReelsCarousel.prototype.debounce = function (fn, delay) {
@@ -233,6 +295,7 @@
     if (nodes.close) nodes.close.hidden = true;
     card.classList.remove("is-playing");
     if (this.activeCard === card) this.activeCard = null;
+    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.stopActivePlayer = function () {
@@ -264,13 +327,16 @@
         }
       }
     } else if (sourceType === "youtube") {
-      var youtubeUrl = card.getAttribute("data-youtube-url") || "";
-      var youtubeId = this.extractYouTubeId(youtubeUrl);
+      var youtubeId = card.getAttribute("data-youtube-id") || "";
+      if (!youtubeId) {
+        var youtubeUrl = card.getAttribute("data-youtube-url") || "";
+        youtubeId = this.extractYouTubeId(youtubeUrl);
+      }
       if (youtubeId) {
         nodes.player.innerHTML =
           '<iframe src="https://www.youtube-nocookie.com/embed/' +
           youtubeId +
-          '?autoplay=1&playsinline=1&rel=0" title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+          '?autoplay=1&mute=0&playsinline=1&rel=0" title="YouTube video player" loading="lazy" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
       }
     } else if (sourceType === "embed") {
       var embedSource = card.querySelector(".kefey-reels-carousel__embed-source");
@@ -288,6 +354,7 @@
     if (nodes.close) nodes.close.hidden = false;
     card.classList.add("is-playing");
     this.activeCard = card;
+    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.onTrackClick = function (event) {
@@ -321,6 +388,7 @@
     this.startScroll = this.viewport.scrollLeft;
     this.viewport.classList.add("is-dragging");
     if (this.viewport.setPointerCapture) this.viewport.setPointerCapture(event.pointerId);
+    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.onPointerMove = function (event) {
@@ -349,6 +417,7 @@
         180
       );
     }
+    this.updateAutoplay();
   };
 
   KefeyReelsCarousel.prototype.onScroll = function () {
@@ -360,6 +429,32 @@
     this.buildPages();
     this.renderDots();
     this.goToPage(this.page);
+    this.updateAutoplay();
+  };
+
+  KefeyReelsCarousel.prototype.onMouseEnter = function () {
+    this.isHovered = true;
+    this.updateAutoplay();
+  };
+
+  KefeyReelsCarousel.prototype.onMouseLeave = function () {
+    this.isHovered = false;
+    this.updateAutoplay();
+  };
+
+  KefeyReelsCarousel.prototype.onFocusIn = function () {
+    this.isFocused = true;
+    this.updateAutoplay();
+  };
+
+  KefeyReelsCarousel.prototype.onFocusOut = function () {
+    var active = document.activeElement;
+    this.isFocused = !!(active && this.root.contains(active));
+    this.updateAutoplay();
+  };
+
+  KefeyReelsCarousel.prototype.onVisibilityChange = function () {
+    this.updateAutoplay();
   };
 
   function initWithin(container) {

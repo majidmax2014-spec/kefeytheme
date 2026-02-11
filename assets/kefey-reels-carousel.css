@@ -158,6 +158,10 @@
   background: #000;
 }
 
+.kefey-reels-carousel__player[hidden] {
+  display: none;
+}
+
 .kefey-reels-carousel__player iframe,
 .kefey-reels-carousel__player video,
 .kefey-reels-carousel__player .instagram-media,
@@ -187,6 +191,10 @@
 .kefey-reels-carousel__card.is-playing .kefey-reels-carousel__caption,
 .kefey-reels-carousel__card.is-playing .kefey-reels-carousel__poster {
   visibility: hidden;
+}
+
+.kefey-reels-carousel__card.is-playing .kefey-reels-carousel__player {
+  display: block;
 }
 
 .kefey-reels-carousel__link-overlay {
