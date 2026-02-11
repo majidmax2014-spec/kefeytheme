@@ -1,0 +1,132 @@
+{{ 'kefey-reels-carousel.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="KefeyReels-{{ section.id }}"
+  class="kefey-reels-carousel"
+  style="
+    --krc-pt: {{ section.settings.padding_top | default: 40 }}px;
+    --krc-pb: {{ section.settings.padding_bottom | default: 32 }}px;
+    --krc-heading-size: {{ section.settings.heading_size | default: 48 }}px;
+    --krc-highlight: {{ section.settings.highlight_color | default: '#F5C524' }};
+    --krc-gap: {{ section.settings.card_gap | default: 20 }}px;
+    --krc-radius: {{ section.settings.card_radius | default: 14 }}px;
+  "
+>
+  <div class="kefey-reels-carousel__inner page-width">
+    {% if section.settings.heading != blank %}
+      <div class="kefey-reels-carousel__header">
+        <h2 class="kefey-reels-carousel__title">
+          <span class="kefey-reels-carousel__title-text">{{ section.settings.heading }}</span>
+          <span class="kefey-reels-carousel__highlight" style="background-color: {{ section.settings.highlight_color }};"></span>
+        </h2>
+      </div>
+    {% endif %}
+
+    <div class="kefey-reels-carousel__carousel-wrapper">
+      <div class="kefey-reels-carousel__viewport" aria-roledescription="carousel">
+        <ul class="kefey-reels-carousel__track" role="list" aria-label="Kefey reels carousel">
+          {% for block in section.blocks %}
+            {% assign poster = block.settings.thumbnail %}
+            {% assign target_url = block.settings.link %}
+            {% if target_url == blank and block.settings.video_url != blank %}
+              {% assign target_url = block.settings.video_url %}
+            {% endif %}
+            <li class="kefey-reels-carousel__slide" {{ block.shopify_attributes }}>
+              {% if target_url != blank %}
+                <a class="kefey-reels-carousel__card" href="{{ target_url }}" {% if block.settings.video_url != blank %}target="_blank" rel="noopener noreferrer"{% endif %} aria-label="{{ block.settings.title | default: 'Open reel' | escape }}">
+              {% else %}
+                <div class="kefey-reels-carousel__card" aria-label="{{ block.settings.title | default: 'Reel poster' | escape }}">
+              {% endif %}
+                  <div class="kefey-reels-carousel__media">
+                    {% if poster != blank %}
+                      <img
+                        srcset="
+                          {{ poster | image_url: width: 360 }} 360w,
+                          {{ poster | image_url: width: 540 }} 540w,
+                          {{ poster | image_url: width: 720 }} 720w
+                        "
+                        sizes="(max-width: 749px) 44vw, (max-width: 1023px) 30vw, 22vw"
+                        src="{{ poster | image_url: width: 540 }}"
+                        width="{{ poster.width }}"
+                        height="{{ poster.height }}"
+                        alt="{{ block.settings.title | default: poster.alt | escape }}"
+                        loading="lazy"
+                      >
+                    {% else %}
+                      {{ 'image' | placeholder_svg_tag: 'kefey-reels-carousel__placeholder' }}
+                    {% endif %}
+                  </div>
+                  {% if section.settings.show_play_icon %}
+                    <span class="kefey-reels-carousel__play" aria-hidden="true"></span>
+                  {% endif %}
+                  {% if block.settings.title != blank %}
+                    <span class="kefey-reels-carousel__caption">{{ block.settings.title }}</span>
+                  {% endif %}
+              {% if target_url != blank %}
+                </a>
+              {% else %}
+                </div>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      {% if section.settings.show_arrows %}
+        <button class="kefey-reels-carousel__arrow kefey-reels-carousel__arrow--prev" type="button" aria-label="Previous reels">
+          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+        </button>
+        <button class="kefey-reels-carousel__arrow kefey-reels-carousel__arrow--next" type="button" aria-label="Next reels">
+          <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
+        </button>
+      {% endif %}
+    </div>
+
+    <div class="kefey-reels-carousel__dots" role="tablist" aria-label="Reels pagination"></div>
+  </div>
+</section>
+
+{{ 'kefey-reels-carousel.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Kefey Reels Carousel",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Kefey in Real Life" },
+    { "type": "range", "id": "heading_size", "label": "Heading size (px)", "min": 24, "max": 72, "step": 2, "default": 48 },
+    { "type": "color", "id": "highlight_color", "label": "Highlight color", "default": "#F5C524" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 200, "step": 4, "default": 32 },
+    { "type": "checkbox", "id": "show_arrows", "label": "Show arrows", "default": false },
+    { "type": "checkbox", "id": "show_play_icon", "label": "Show play icon overlay", "default": true },
+    { "type": "range", "id": "card_radius", "label": "Card radius (px)", "min": 8, "max": 40, "step": 1, "default": 14 },
+    { "type": "range", "id": "card_gap", "label": "Card gap (px)", "min": 8, "max": 40, "step": 2, "default": 20 }
+  ],
+  "blocks": [
+    {
+      "type": "reel",
+      "name": "Reel item",
+      "settings": [
+        { "type": "image_picker", "id": "thumbnail", "label": "Thumbnail image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Reel" },
+        { "type": "url", "id": "link", "label": "Link URL" },
+        { "type": "url", "id": "video_url", "label": "Video URL" }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Kefey Reels Carousel",
+      "blocks": [
+        { "type": "reel", "settings": { "title": "This/That" } },
+        { "type": "reel", "settings": { "title": "Best Sellers" } },
+        { "type": "reel", "settings": { "title": "OLLY Body" } },
+        { "type": "reel", "settings": { "title": "Women's 40+" } },
+        { "type": "reel", "settings": { "title": "Now" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
