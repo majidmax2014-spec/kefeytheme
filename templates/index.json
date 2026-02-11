@@ -352,8 +352,8 @@
           "settings": {
             "title": "Reel",
             "link": "",
-            "source_type": "none",
-            "youtube_url": "",
+            "source_type": "youtube",
+            "youtube_url": "https://www.youtube.com/watch?v=rOmpeY6gPHo",
             "embed_html": ""
           }
         },
