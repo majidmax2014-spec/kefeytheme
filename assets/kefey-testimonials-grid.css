@@ -33,6 +33,10 @@
 }
 .kefey-testimonials-grid__quotes {
   margin-bottom: 0.8rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .kefey-testimonials-grid__quotes::before {
   content: "\201C\201D";
@@ -41,6 +45,14 @@
   line-height: 1;
   color: var(--ktg-quote-color, #2bb4a7);
   font-weight: 800;
+}
+.kefey-testimonials-grid__quotes--has-icon::before {
+  display: none;
+}
+.kefey-testimonials-grid__quote-icon {
+  max-width: 90px;
+  height: auto;
+  display: block;
 }
 .kefey-testimonials-grid__stars {
   color: var(--ktg-star-color, #e15241);
@@ -156,6 +168,9 @@
   }
   .kefey-testimonials-grid__card {
     min-height: 24rem;
+  }
+  .kefey-testimonials-grid__quote-icon {
+    max-width: 70px;
   }
 }
 
