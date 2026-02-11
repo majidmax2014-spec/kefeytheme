@@ -15,9 +15,9 @@
         "slide_f63LM7": {
           "type": "slide",
           "settings": {
-            "desktop_bg_image": "shopify://shop_images/Gemini_Generated_Image_ktl0u1ktl0u1ktl0.png",
-            "heading": "JOY IN EVERY CHEW",
-            "body_text": "<p>Playful Gummies | Joyful Wellness | Eco‑Friendly Packaging</p>",
+            "desktop_bg_image": "shopify://shop_images/slide1.png",
+            "heading": "Wellness That <br>Makes You Smile",
+            "body_text": "<p>A Daily Ritual • Plant-Based • Sugar-Free • Planet-Kind</p>",
             "button_label": "SHOP NOW",
             "button_link": "shopify://collections/all",
             "text_alignment": "left"
