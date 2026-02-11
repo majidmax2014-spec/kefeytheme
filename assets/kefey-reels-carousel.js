@@ -18,8 +18,9 @@
     this.snapPoints = [0];
     this.isDown = false;
     this.startX = 0;
+    this.startY = 0;
     this.startScroll = 0;
-    this.didDrag = false;
+    this.isDragging = false;
     this.blockClick = false;
     this.clickBlockTimer = null;
     this.activeCard = null;
@@ -382,9 +383,18 @@
 
   KefeyReelsCarousel.prototype.onPointerDown = function (event) {
     if (event.pointerType === "mouse" && event.button !== 0) return;
+    if (
+      event.target &&
+      event.target.closest(
+        'button, a, input, textarea, select, label, [role="button"], .krc-play, .kefey-reels-carousel__play'
+      )
+    ) {
+      return;
+    }
     this.isDown = true;
-    this.didDrag = false;
+    this.isDragging = false;
     this.startX = event.clientX;
+    this.startY = event.clientY;
     this.startScroll = this.viewport.scrollLeft;
     this.viewport.classList.add("is-dragging");
     if (this.viewport.setPointerCapture) this.viewport.setPointerCapture(event.pointerId);
@@ -393,9 +403,19 @@
 
   KefeyReelsCarousel.prototype.onPointerMove = function (event) {
     if (!this.isDown) return;
-    var dx = event.clientX - this.startX;
-    if (Math.abs(dx) > 6) this.didDrag = true;
-    this.viewport.scrollLeft = this.startScroll - dx;
+    var deltaX = event.clientX - this.startX;
+    var dx = Math.abs(deltaX);
+    var dy = Math.abs(event.clientY - this.startY);
+
+    if (!this.isDragging) {
+      if (dx > 8 && dx > dy) {
+        this.isDragging = true;
+      } else {
+        return;
+      }
+    }
+
+    this.viewport.scrollLeft = this.startScroll - deltaX;
     event.preventDefault();
   };
 
@@ -407,7 +427,7 @@
     this.updateUI();
     this.snapToNearest();
 
-    if (this.didDrag) {
+    if (this.isDragging) {
       this.blockClick = true;
       if (this.clickBlockTimer) window.clearTimeout(this.clickBlockTimer);
       this.clickBlockTimer = window.setTimeout(
@@ -417,6 +437,7 @@
         180
       );
     }
+    this.isDragging = false;
     this.updateAutoplay();
   };
 
