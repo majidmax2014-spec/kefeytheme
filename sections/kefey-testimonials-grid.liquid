@@ -9,7 +9,11 @@
 <section
   id="TestimonialsCarousel-{{ section.id }}"
   class="kefey-testimonials-grid color-{{ section.settings.color_scheme }}"
+<<<<<<< HEAD
   style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-gap: 2.4rem;"
+=======
+  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-gap: 2.4rem; --ktg-quote-icon-size: {{ section.settings.quote_icon_size }}px; --ktg-quote-icon-mt: {{ section.settings.quote_icon_margin_top }}px; --ktg-quote-icon-mb: {{ section.settings.quote_icon_margin_bottom }}px;"
+>>>>>>> ea6ae96 (Add quote icon size and offset settings)
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
 >
@@ -125,6 +129,12 @@
     { "type": "color", "id": "star_color", "label": "Star color", "default": "#E15241" },
     { "type": "color", "id": "quote_color", "label": "Quote color", "default": "#2BB4A7" },
     { "type": "image_picker", "id": "quote_icon", "label": "Quote icon (SVG/PNG)" },
+<<<<<<< HEAD
+=======
+    { "type": "range", "id": "quote_icon_size", "label": "Quote icon size (px)", "min": 16, "max": 140, "step": 2, "default": 72 },
+    { "type": "range", "id": "quote_icon_margin_top", "label": "Quote icon margin top (px)", "min": -80, "max": 60, "step": 2, "default": -24 },
+    { "type": "range", "id": "quote_icon_margin_bottom", "label": "Quote icon margin bottom (px)", "min": -40, "max": 80, "step": 2, "default": 12 },
+>>>>>>> ea6ae96 (Add quote icon size and offset settings)
     { "type": "checkbox", "id": "show_decorations", "label": "Show decorative shapes", "default": true },
     { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
     { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 5000 },
