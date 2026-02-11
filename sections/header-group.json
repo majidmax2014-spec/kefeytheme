@@ -17,7 +17,7 @@
       "settings": {
         "enable_countdown": true,
         "countdown_message": "FREE SHIPPING 🚀 JOY TRACKED TO YOUR DOOR!",
-        "countdown_end": "2026-01-31 23:59:59",
+        "countdown_end": "2026-06-31 23:59:59",
         "countdown_accent_color": "#ffc72c",
         "countdown_link_label": "",
         "countdown_link_url": "",
