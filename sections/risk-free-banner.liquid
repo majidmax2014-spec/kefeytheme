@@ -18,69 +18,67 @@
   data-left-decor-enabled="{{ section.settings.left_decor_enabled }}"
 >
   <div class="rf-banner__inner">
-    <div class="rf-banner__left">
-      {%- if section.settings.left_decor_enabled and section.settings.left_decor_image != blank -%}
-        <img class="rf-banner__decor rf-banner__decor--left" src="{{ section.settings.left_decor_image | image_url: width: 800 }}" alt="" loading="lazy">
-      {%- endif -%}
+    {%- if section.settings.left_decor_enabled and section.settings.left_decor_image != blank -%}
+      <img class="rf-banner__decor rf-banner__decor--left" src="{{ section.settings.left_decor_image | image_url: width: 800 }}" alt="" loading="lazy">
+    {%- endif -%}
+
+    <div class="rf-banner__center">
+      <div class="rf-banner__badge">
+        {%- if section.settings.badge_type == 'image' and section.settings.badge_image != blank -%}
+          <img class="rf-badge__img" src="{{ section.settings.badge_image | image_url: width: 360 }}" alt="{{ 'Moneyback guarantee badge' | t }}" loading="lazy">
+        {%- else -%}
+          {%- liquid
+            assign badge_center = section.settings.badge_text_center | default: 'kefey'
+            assign badge_ring = section.settings.badge_text_ring | default: 'MONEYBACK GUARANTEED'
+          -%}
+          <svg class="rf-badge" viewBox="0 0 200 200" width="200" height="200" aria-hidden="true" focusable="false">
+            <defs>
+              <path id="rf-badge-path-{{ section.id }}" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0" />
+            </defs>
+            <circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="2" opacity=".6"></circle>
+            <circle cx="100" cy="100" r="2" fill="#fff"></circle>
+            <text class="rf-badge__ring" fill="#fff" font-size="14" letter-spacing="2">
+              <textPath startOffset="0" textLength="452" href="#rf-badge-path-{{ section.id }}">{{ badge_ring }}</textPath>
+            </text>
+            <text class="rf-badge__center" x="100" y="108" text-anchor="middle" fill="#2BB4A7" font-weight="700" font-size="26">{{ badge_center }}</text>
+          </svg>
+        {%- endif -%}
+      </div>
+
+      <div class="rf-banner__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="rf-banner__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="rf-banner__text rte">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+             class="rf-banner__btn{% if section.settings.button_style == 'solid' %} rf-banner__btn--solid{% endif %}"
+             aria-label="{{ section.settings.button_label | escape }}">
+            {{ section.settings.button_label | upcase }}
+          </a>
+        {%- endif -%}
+      </div>
     </div>
 
-    <div class="rf-banner__badge">
-      {%- if section.settings.badge_type == 'image' and section.settings.badge_image != blank -%}
-        <img class="rf-badge__img" src="{{ section.settings.badge_image | image_url: width: 360 }}" alt="{{ 'Moneyback guarantee badge' | t }}" loading="lazy">
-      {%- else -%}
-        {%- liquid
-          assign badge_center = section.settings.badge_text_center | default: 'kefey'
-          assign badge_ring = section.settings.badge_text_ring | default: 'MONEYBACK GUARANTEE'
-        -%}
-        <svg class="rf-badge" viewBox="0 0 200 200" width="200" height="200" aria-hidden="true" focusable="false">
-          <defs>
-            <path id="rf-badge-path-{{ section.id }}" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0" />
-          </defs>
-          <circle cx="100" cy="100" r="78" fill="none" stroke="#fff" stroke-width="2" opacity=".6"></circle>
-          <circle cx="100" cy="100" r="2" fill="#fff"></circle>
-          <text class="rf-badge__ring" fill="#fff" font-size="14" letter-spacing="2">
-            <textPath startOffset="0" textLength="452" href="#rf-badge-path-{{ section.id }}">{{ badge_ring }}</textPath>
-          </text>
-          <text class="rf-badge__center" x="100" y="108" text-anchor="middle" fill="#fff" font-weight="700" font-size="26">{{ badge_center }}</text>
-        </svg>
-      {%- endif -%}
-    </div>
-
-    <div class="rf-banner__content">
-      {%- if section.settings.heading != blank -%}
-        <h2 class="rf-banner__heading">{{ section.settings.heading }}</h2>
-      {%- endif -%}
-      {%- if section.settings.text != blank -%}
-        <div class="rf-banner__text rte">{{ section.settings.text }}</div>
-      {%- endif -%}
-      {%- if section.settings.button_label != blank -%}
-        <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
-           class="rf-banner__btn{% if section.settings.button_style == 'solid' %} rf-banner__btn--solid{% endif %}"
-           aria-label="{{ section.settings.button_label | escape }}">
-          {{ section.settings.button_label | upcase }}
-        </a>
-      {%- endif -%}
-    </div>
-
-    <div class="rf-banner__right">
-      {%- if section.settings.right_decor_enabled -%}
-        {%- for block in section.blocks -%}
-          {%- case block.type -%}
-            {%- when 'decor' -%}
-              {%- if block.settings.decor_image != blank -%}
-                <img
-                  class="rf-banner__decor rf-banner__decor--right"
-                  src="{{ block.settings.decor_image | image_url: width: 600 }}"
-                  alt="{{ block.settings.alt | default: '' }}"
-                  style="--w: {{ block.settings.width | default: 80 }}px; top: {{ block.settings.top | default: 20 }}px; right: {{ block.settings.right | default: 20 }}px;"
-                  loading="lazy"
-                  {{ block.shopify_attributes }}
-                >
-              {%- endif -%}
-          {%- endcase -%}
-        {%- endfor -%}
-      {%- endif -%}
-    </div>
+    {%- if section.settings.right_decor_enabled -%}
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'decor' -%}
+            {%- if block.settings.decor_image != blank -%}
+              <img
+                class="rf-banner__decor rf-banner__decor--right"
+                src="{{ block.settings.decor_image | image_url: width: 600 }}"
+                alt="{{ block.settings.alt | default: '' }}"
+                style="--w: {{ block.settings.width | default: 80 }}px; top: {{ block.settings.top | default: 20 }}px; right: {{ block.settings.right | default: 20 }}px;"
+                loading="lazy"
+                {{ block.shopify_attributes }}
+              >
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    {%- endif -%}
   </div>
 </section>
 
@@ -88,14 +86,14 @@
 {
   "name": "Risk-Free Banner",
   "settings": [
-    { "type": "color", "id": "background_color", "label": "Background color", "default": "#3FB6B4" },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#2BB4A7" },
     { "type": "number", "id": "section_height_desktop", "label": "Height desktop (px)", "default": 220 },
     { "type": "number", "id": "section_height_mobile", "label": "Height mobile (px)", "default": 180 },
     { "type": "number", "id": "padding_left_right", "label": "Side padding (px)", "default": 40 },
 
-    { "type": "text", "id": "heading", "label": "Heading", "default": "TRY IT, RISK FREE!" },
-    { "type": "textarea", "id": "text", "label": "Supporting text", "default": "If you’re not satisfied with our product, simply contact us, and we’ll give you a full, 100% hassle-free refund." },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "SHOP NOW" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "TRY IT WITH CONFIDENCE!" },
+    { "type": "textarea", "id": "text", "label": "Supporting text", "default": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund." },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "CHECKOUT NOW" },
     { "type": "url", "id": "button_link", "label": "Button link" },
     {
       "type": "select",
@@ -126,7 +124,7 @@
     { "type": "image_picker", "id": "badge_image", "label": "Badge image" },
     { "type": "number", "id": "badge_size", "label": "Badge size (px)", "default": 160 },
     { "type": "text", "id": "badge_text_center", "label": "Badge center text", "default": "kefey" },
-    { "type": "text", "id": "badge_text_ring", "label": "Badge ring text", "default": "MONEYBACK GUARANTEE" },
+    { "type": "text", "id": "badge_text_ring", "label": "Badge ring text", "default": "MONEYBACK GUARANTEED" },
 
     { "type": "checkbox", "id": "left_decor_enabled", "label": "Show left decor image", "default": true },
     { "type": "image_picker", "id": "left_decor_image", "label": "Left decor image" },
