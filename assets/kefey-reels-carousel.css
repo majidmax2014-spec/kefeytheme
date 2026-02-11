@@ -1,9 +1,5 @@
 .kefey-reels-carousel {
   position: relative;
-  width: 98%;
-  max-width: 98%;
-  margin-left: auto;
-  margin-right: auto;
   padding-top: var(--krc-pt, 40px);
   padding-bottom: var(--krc-pb, 32px);
   background: var(--krc-bg, #ffffff);
@@ -40,16 +36,14 @@
 
 .kefey-reels-carousel__carousel-wrapper {
   position: relative;
-  width: 100%;
-  max-width: 100%;
-  margin-left: 0;
-  margin-right: 0;
 }
 
 .kefey-reels-carousel__viewport {
-  overflow: hidden !important;
+  overflow-x: auto;
+  overflow-y: hidden;
   -ms-overflow-style: none;
   scrollbar-width: none;
+  scroll-snap-type: x mandatory;
   touch-action: pan-y;
   cursor: grab;
 }
@@ -71,8 +65,9 @@
 }
 
 .kefey-reels-carousel__slide {
-  flex: 0 0 calc((1200px - (var(--krc-gap, 20px) * 4)) / 5);
+  flex: 0 0 calc((100% - (var(--krc-gap, 20px) * 4)) / 5);
   min-width: 0;
+  scroll-snap-align: start;
 }
 
 .kefey-reels-carousel__card {
@@ -230,11 +225,11 @@
 }
 
 .kefey-reels-carousel__arrow--prev {
-  left: 20px;
+  left: -18px;
 }
 
 .kefey-reels-carousel__arrow--next {
-  right: 10px;
+  right: -18px;
 }
 
 .kefey-reels-carousel__arrow--prev .svg-wrapper {
