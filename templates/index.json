@@ -465,9 +465,11 @@
         "heading": "Kefey in Real Life",
         "heading_size": 36,
         "highlight_color": "#f5c524",
+        "background_color": "#ffffff",
+        "caption_font_size": 14,
         "padding_top": 40,
         "padding_bottom": 32,
-        "show_arrows": false,
+        "show_arrows": true,
         "show_play_icon": true,
         "card_radius": 14,
         "card_gap": 20
