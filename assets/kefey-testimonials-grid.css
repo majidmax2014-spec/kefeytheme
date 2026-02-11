@@ -32,7 +32,7 @@
   flex-direction: column;
   overflow: visible;
 }
-.kefey-testimonials-grid__quotes {
+.kefey-testimonials-grid__quotes { 
   margin-bottom: 0.8rem;
   margin-top: var(--ktg-quote-icon-offset, 0px);
   text-align: center;
