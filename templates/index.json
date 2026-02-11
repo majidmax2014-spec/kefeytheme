@@ -215,25 +215,16 @@
         "decor_qEzDqH": {
           "type": "decor",
           "settings": {
-            "width": 80,
+            "decor_image": "shopify://shop_images/right-decor.png",
+            "width": 180,
             "top": 20,
-            "right": 20,
-            "alt": ""
-          }
-        },
-        "decor_7U3WKK": {
-          "type": "decor",
-          "settings": {
-            "width": 80,
-            "top": 20,
-            "right": 20,
+            "right": 0,
             "alt": ""
           }
         }
       },
       "block_order": [
-        "decor_qEzDqH",
-        "decor_7U3WKK"
+        "decor_qEzDqH"
       ],
       "name": "Risk-Free Banner",
       "settings": {
@@ -242,8 +233,8 @@
         "section_height_mobile": 180,
         "padding_left_right": 40,
         "heading": "TRY IT, RISK FREE!",
-        "text": "If you’re not satisfied with our product, simply contact us, and we’ll give you a full, 100% hassle-free refund.",
-        "button_label": "SHOP NOW",
+        "text": "If it’s not for you, we’ll make it right. \nWith a full, 100% hassle-free refund.",
+        "button_label": "CHECKOUT NOW",
         "button_link": "",
         "button_style": "outline",
         "heading_color": "#ffc94d",
@@ -251,11 +242,13 @@
         "button_text_color": "#ffffff",
         "button_border_color": "#ffffff",
         "button_bg_color": "#ffffff",
-        "badge_type": "text",
-        "badge_size": 160,
+        "badge_type": "image",
+        "badge_image": "shopify://shop_images/money-back.png",
+        "badge_size": 130,
         "badge_text_center": "kefey",
         "badge_text_ring": "MONEYBACK GUARANTEE",
         "left_decor_enabled": true,
+        "left_decor_image": "shopify://shop_images/left-decor.png",
         "right_decor_enabled": true
       }
     },
