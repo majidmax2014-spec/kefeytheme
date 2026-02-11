@@ -11,6 +11,8 @@
   display: grid;
   align-items: center;
   overflow: hidden;
+  margin-top: var(--tmb-mt, 0px);
+  margin-bottom: var(--tmb-mb, 0px);
 }
 @media (max-width: 749px) {
   .marquee-bar { min-height: var(--h-mobile, 60px); }
