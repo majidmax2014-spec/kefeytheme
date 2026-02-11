@@ -17,11 +17,11 @@
   data-right-decor-enabled="{{ section.settings.right_decor_enabled }}"
   data-left-decor-enabled="{{ section.settings.left_decor_enabled }}"
 >
-  <div class="rf-banner__inner">
-    {%- if section.settings.left_decor_enabled and section.settings.left_decor_image != blank -%}
-      <img class="rf-banner__decor rf-banner__decor--left" src="{{ section.settings.left_decor_image | image_url: width: 800 }}" alt="" loading="lazy">
-    {%- endif -%}
+  {%- if section.settings.left_decor_enabled and section.settings.left_decor_image != blank -%}
+    <img class="rf-banner__decor rf-banner__decor--left" src="{{ section.settings.left_decor_image | image_url: width: 800 }}" alt="" loading="lazy">
+  {%- endif -%}
 
+  <div class="rf-banner__inner">
     <div class="rf-banner__center">
       <div class="rf-banner__badge">
         {%- if section.settings.badge_type == 'image' and section.settings.badge_image != blank -%}
@@ -61,25 +61,25 @@
         {%- endif -%}
       </div>
     </div>
-
-    {%- if section.settings.right_decor_enabled -%}
-      {%- for block in section.blocks -%}
-        {%- case block.type -%}
-          {%- when 'decor' -%}
-            {%- if block.settings.decor_image != blank -%}
-              <img
-                class="rf-banner__decor rf-banner__decor--right"
-                src="{{ block.settings.decor_image | image_url: width: 600 }}"
-                alt="{{ block.settings.alt | default: '' }}"
-                style="--w: {{ block.settings.width | default: 80 }}px; top: {{ block.settings.top | default: 20 }}px; right: {{ block.settings.right | default: 20 }}px;"
-                loading="lazy"
-                {{ block.shopify_attributes }}
-              >
-            {%- endif -%}
-        {%- endcase -%}
-      {%- endfor -%}
-    {%- endif -%}
   </div>
+
+  {%- if section.settings.right_decor_enabled -%}
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'decor' -%}
+          {%- if block.settings.decor_image != blank -%}
+            <img
+              class="rf-banner__decor rf-banner__decor--right"
+              src="{{ block.settings.decor_image | image_url: width: 600 }}"
+              alt="{{ block.settings.alt | default: '' }}"
+              style="--w: {{ block.settings.width | default: 80 }}px; top: {{ block.settings.top | default: 20 }}px; right: {{ block.settings.right | default: 20 }}px;"
+              loading="lazy"
+              {{ block.shopify_attributes }}
+            >
+          {%- endif -%}
+      {%- endcase -%}
+    {%- endfor -%}
+  {%- endif -%}
 </section>
 
 {% schema %}

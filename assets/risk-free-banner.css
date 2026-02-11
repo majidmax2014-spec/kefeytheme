@@ -9,6 +9,7 @@
   min-height: var(--rf-height-desktop, 220px);
   display: grid;
   align-items: center;
+  overflow: hidden;
 }
 @media (max-width: 749px) {
   .rf-banner { min-height: var(--rf-height-mobile, 180px); }
@@ -38,9 +39,9 @@
 }
 .rf-banner__decor--left {
   left: 0;
-  bottom: -10%;
+  bottom: 0;
   width: min(38vw, 520px);
-  transform: translateX(-12%);
+  transform: translateX(-12%) translateY(10%);
   opacity: .95;
 }
 .rf-banner__decor--right {
@@ -50,7 +51,7 @@
 }
 .rf-banner__center {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: 40px;
