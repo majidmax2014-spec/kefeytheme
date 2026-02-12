@@ -386,8 +386,8 @@
         "section_height_desktop": 300,
         "section_height_mobile": 180,
         "padding_left_right": 40,
-        "heading": "TRY IT, RISK FREE!",
-        "text": "If it’s not for you, we’ll make it right. \nWith a full, 100% hassle-free refund.",
+        "heading": "TRY IT WITH CONFIDENCE!",
+        "text": "If it’s not for you, we’ll make it right.\nWith a full, 100% hassle-free refund.",
         "button_label": "CHECKOUT NOW",
         "button_link": "",
         "button_style": "outline",
@@ -409,34 +409,22 @@
     "text_marquee_bar_aVHYqT": {
       "type": "text-marquee-bar",
       "blocks": {
-        "item_9aDBHn": {
-          "type": "item",
-          "settings": {
-            "text": "FRIENDLY"
-          }
-        },
-        "item_GGMBVD": {
-          "type": "item",
-          "settings": {
-            "text": "ECO FRIENDLY"
-          }
-        },
-        "item_fU48wf": {
-          "type": "item",
-          "settings": {
-            "text": "SUGAR FREE"
-          }
-        },
         "item_wbbREb": {
           "type": "item",
           "settings": {
-            "text": "GELATIN FREE"
+            "text": "MADE IN USA"
           }
         },
         "item_FGPrik": {
           "type": "item",
           "settings": {
-            "text": "GLUTEN FREE"
+            "text": "GMP CERTIFIED"
+          }
+        },
+        "item_GGMBVD": {
+          "type": "item",
+          "settings": {
+            "text": "ECO FRIENDLY PACKAGING"
           }
         },
         "item_ij63mf": {
@@ -448,13 +436,13 @@
         "item_zUHLW8": {
           "type": "item",
           "settings": {
-            "text": "GMP CERTIFIED"
+            "text": "SUGAR FREE"
           }
         },
         "item_JfBfg3": {
           "type": "item",
           "settings": {
-            "text": "KOSHER"
+            "text": "VEGAN"
           }
         },
         "item_6kzxpm": {
@@ -465,11 +453,9 @@
         }
       },
       "block_order": [
-        "item_9aDBHn",
-        "item_GGMBVD",
-        "item_fU48wf",
         "item_wbbREb",
         "item_FGPrik",
+        "item_GGMBVD",
         "item_ij63mf",
         "item_zUHLW8",
         "item_JfBfg3",
