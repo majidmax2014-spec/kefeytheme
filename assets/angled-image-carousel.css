@@ -132,21 +132,21 @@
 
 /* Tilt states */
 .angled-carousel__card.is-active {
-  transform: perspective(1000px) rotateY(0deg) scale(1);
+  transform: perspective(1000px) rotateY(0deg) scale(.86);
   box-shadow: 0 12px 30px rgba(0,0,0,.18);
 }
 .angled-carousel__card.is-prev {
-  transform: perspective(1000px) rotateY(var(--tilt, 10deg)) scale(.985);
+  transform: perspective(1000px) rotateY(var(--tilt, 10deg)) scale(.899);
 }
 .angled-carousel__card.is-next {
-  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * -1)) scale(.985);
+  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * -1)) scale(.899);
 }
 .angled-carousel__card.is-far-prev {
-  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * 1.25)) scale(.96);
+  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * 1.25)) scale(1);
   opacity: .9;
 }
 .angled-carousel__card.is-far-next {
-  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * -1.25)) scale(.96);
+  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * -1.25)) scale(1);
   opacity: .9;
 }
 
