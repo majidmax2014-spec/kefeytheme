@@ -3641,12 +3641,6 @@ details-disclosure > details {
   }
 }
 
-/* Kefey typography overrides */
-:root {
-  --font-heading-family: "Akira", "Gotham", sans-serif;
-  --font-body-family: "Gotham", sans-serif;
-}
-
 /* Kefey announcement bar styling */
 .announcement-bar__message {
   font-family: var(--font-heading-family);

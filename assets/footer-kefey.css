@@ -35,10 +35,10 @@
 
 .fk__top-heading {
   margin: 0;
-  font-family: "Akira", "Gotham", sans-serif;
+  font-family: var(--ff-top-heading-ff, var(--font-heading-family));
   font-size: var(--ff-top-heading-fs, 28px);
   line-height: 1.06;
-  font-weight: 700;
+  font-weight: var(--ff-top-heading-fw, 700);
   letter-spacing: 0;
   color: #ffffff;
 }
@@ -46,9 +46,10 @@
 .fk__top-subheading {
   margin: 10px auto 0;
   max-width: 320px;
-  font-family: "Gotham", sans-serif;
+  font-family: var(--ff-top-subheading-ff, var(--font-body-family));
   font-size: var(--ff-top-subheading-fs, 16px);
   line-height: 1.2;
+  font-weight: var(--ff-top-subheading-fw, inherit);
   color: #ffffff;
 }
 
@@ -62,7 +63,6 @@
   padding: var(--ff-top-btn-py, 12px) var(--ff-top-btn-px, 28px);
   background: var(--ff-top-btn-bg, #111111);
   color: var(--ff-top-btn-text, #ffffff);
-  font-family: "Gotham", sans-serif;
   font-size: var(--ff-top-btn-fs, 14px);
   line-height: 1;
   font-family: var(--ff-top-btn-font-family, inherit);
@@ -128,10 +128,10 @@
   margin-top: 14px;
   max-width: 360px;
   color: #ffffff;
-  font-family: "Gotham", sans-serif;
+  font-family: var(--ff-mid-text-ff, var(--font-body-family));
   font-size: var(--ff-mid-text-fs, 16px);
   line-height: 1.26;
-  font-weight: 500;
+  font-weight: var(--ff-mid-text-fw, 500);
 }
 
 .fk__row--main {
@@ -153,9 +153,10 @@
 .fk__newsletter-heading {
   margin: 0;
   color: #ffffff;
-  font-family: "Akira", "Gotham", sans-serif;
+  font-family: var(--ff-newsletter-heading-ff, var(--font-heading-family));
   font-size: var(--ff-newsletter-heading-fs, 16px);
   line-height: 1.2;
+  font-weight: var(--ff-newsletter-heading-fw, inherit);
   letter-spacing: 0;
 }
 
@@ -163,9 +164,10 @@
   margin: 10px 0 0;
   max-width: 510px;
   color: #ffffff;
-  font-family: "Gotham", sans-serif;
+  font-family: var(--ff-newsletter-text-ff, var(--font-body-family));
   font-size: var(--ff-newsletter-text-fs, 13px);
   line-height: 1.35;
+  font-weight: var(--ff-newsletter-text-fw, inherit);
 }
 
 .fk__newsletter-form {
@@ -185,7 +187,7 @@
   outline: 0;
   background: transparent;
   color: #ffffff;
-  font-family: "Gotham", sans-serif;
+  font-family: inherit;
   font-size: var(--ff-input-fs, 13px);
   padding: 0 13px;
 }
@@ -199,7 +201,7 @@
   border-left: 1px solid #ffffff;
   background: transparent;
   color: #ffffff;
-  font-family: "Gotham", sans-serif;
+  font-family: inherit;
   font-size: var(--ff-input-fs, 13px);
   white-space: nowrap;
   padding: 0 14px;
@@ -213,7 +215,7 @@
   display: block;
   margin-top: 8px;
   font-size: 13px;
-  font-family: "Gotham", sans-serif;
+  font-family: inherit;
 }
 
 .fk__newsletter-note--error {
@@ -230,7 +232,7 @@
 
 .fk__social-label {
   color: #ffffff;
-  font-family: "Gotham", sans-serif;
+  font-family: inherit;
   font-size: 28px;
   line-height: 1.2;
 }
@@ -261,7 +263,7 @@
 
 .fk__social-item span {
   color: #ffffff;
-  font-family: "Gotham", sans-serif;
+  font-family: inherit;
   font-size: 20px;
   line-height: 1;
 }
@@ -279,9 +281,10 @@
 .fk__menu a {
   color: #ffffff;
   text-decoration: none;
-  font-family: "Gotham", sans-serif;
+  font-family: var(--ff-menu-links-ff, var(--font-body-family));
   font-size: var(--ff-menu-links-fs, 13px);
   line-height: 1.37;
+  font-weight: var(--ff-menu-links-fw, inherit);
 }
 
 .fk__col--brand {
@@ -315,9 +318,10 @@
 .fk__policy-menu a {
   color: #ffffff;
   text-decoration: none;
-  font-family: "Gotham", sans-serif;
+  font-family: var(--ff-policy-links-ff, var(--font-body-family));
   font-size: var(--ff-policy-links-fs, 12px);
   line-height: 1.24;
+  font-weight: var(--ff-policy-links-fw, inherit);
 }
 
 .fk__disclaimer-box {
@@ -325,9 +329,10 @@
   border: 1px solid #ffffff;
   padding: 14px 18px;
   color: #ffffff;
-  font-family: "Gotham", sans-serif;
+  font-family: var(--ff-disclaimer-ff, var(--font-body-family));
   font-size: var(--ff-disclaimer-fs, 11px);
   line-height: 1.32;
+  font-weight: var(--ff-disclaimer-fw, inherit);
 }
 
 @media (max-width: 1199px) {

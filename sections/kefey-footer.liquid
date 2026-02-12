@@ -7,11 +7,67 @@
     assign ff_font_family_value = 'var(--font-body-family)'
   endif
 
+  assign ff_top_heading_ff_value = 'inherit'
+  if section.settings.ff_top_heading_ff == 'heading'
+    assign ff_top_heading_ff_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_top_heading_ff == 'body'
+    assign ff_top_heading_ff_value = 'var(--font-body-family)'
+  endif
+
+  assign ff_top_subheading_ff_value = 'inherit'
+  if section.settings.ff_top_subheading_ff == 'heading'
+    assign ff_top_subheading_ff_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_top_subheading_ff == 'body'
+    assign ff_top_subheading_ff_value = 'var(--font-body-family)'
+  endif
+
   assign ff_top_btn_font_family_value = 'inherit'
   if section.settings.ff_top_btn_font_family == 'heading'
     assign ff_top_btn_font_family_value = 'var(--font-heading-family)'
   elsif section.settings.ff_top_btn_font_family == 'body'
     assign ff_top_btn_font_family_value = 'var(--font-body-family)'
+  endif
+
+  assign ff_mid_text_ff_value = 'inherit'
+  if section.settings.ff_mid_text_ff == 'heading'
+    assign ff_mid_text_ff_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_mid_text_ff == 'body'
+    assign ff_mid_text_ff_value = 'var(--font-body-family)'
+  endif
+
+  assign ff_newsletter_heading_ff_value = 'inherit'
+  if section.settings.ff_newsletter_heading_ff == 'heading'
+    assign ff_newsletter_heading_ff_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_newsletter_heading_ff == 'body'
+    assign ff_newsletter_heading_ff_value = 'var(--font-body-family)'
+  endif
+
+  assign ff_newsletter_text_ff_value = 'inherit'
+  if section.settings.ff_newsletter_text_ff == 'heading'
+    assign ff_newsletter_text_ff_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_newsletter_text_ff == 'body'
+    assign ff_newsletter_text_ff_value = 'var(--font-body-family)'
+  endif
+
+  assign ff_menu_links_ff_value = 'inherit'
+  if section.settings.ff_menu_links_ff == 'heading'
+    assign ff_menu_links_ff_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_menu_links_ff == 'body'
+    assign ff_menu_links_ff_value = 'var(--font-body-family)'
+  endif
+
+  assign ff_policy_links_ff_value = 'inherit'
+  if section.settings.ff_policy_links_ff == 'heading'
+    assign ff_policy_links_ff_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_policy_links_ff == 'body'
+    assign ff_policy_links_ff_value = 'var(--font-body-family)'
+  endif
+
+  assign ff_disclaimer_ff_value = 'inherit'
+  if section.settings.ff_disclaimer_ff == 'heading'
+    assign ff_disclaimer_ff_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_disclaimer_ff == 'body'
+    assign ff_disclaimer_ff_value = 'var(--font-body-family)'
   endif
 -%}
 
@@ -52,6 +108,22 @@
     --ff-top-btn-font-weight: {{ section.settings.ff_top_btn_font_weight }};
     --ff-top-btn-bg: {{ section.settings.ff_top_btn_bg }};
     --ff-top-btn-text: {{ section.settings.ff_top_btn_text }};
+    --ff-top-heading-ff: {{ ff_top_heading_ff_value }};
+    --ff-top-heading-fw: {{ section.settings.ff_top_heading_fw }};
+    --ff-top-subheading-ff: {{ ff_top_subheading_ff_value }};
+    --ff-top-subheading-fw: {{ section.settings.ff_top_subheading_fw }};
+    --ff-mid-text-ff: {{ ff_mid_text_ff_value }};
+    --ff-mid-text-fw: {{ section.settings.ff_mid_text_fw }};
+    --ff-newsletter-heading-ff: {{ ff_newsletter_heading_ff_value }};
+    --ff-newsletter-heading-fw: {{ section.settings.ff_newsletter_heading_fw }};
+    --ff-newsletter-text-ff: {{ ff_newsletter_text_ff_value }};
+    --ff-newsletter-text-fw: {{ section.settings.ff_newsletter_text_fw }};
+    --ff-menu-links-ff: {{ ff_menu_links_ff_value }};
+    --ff-menu-links-fw: {{ section.settings.ff_menu_links_fw }};
+    --ff-policy-links-ff: {{ ff_policy_links_ff_value }};
+    --ff-policy-links-fw: {{ section.settings.ff_policy_links_fw }};
+    --ff-disclaimer-ff: {{ ff_disclaimer_ff_value }};
+    --ff-disclaimer-fw: {{ section.settings.ff_disclaimer_fw }};
   "
 >
   <div class="fk__row fk__row--top">
@@ -269,7 +341,57 @@
     { "type": "range", "id": "kids_offset_x", "label": "Kids image offset X", "min": -200, "max": 200, "step": 4, "default": 0 },
     { "type": "range", "id": "kids_offset_y", "label": "Kids image offset Y", "min": -120, "max": 120, "step": 4, "default": -8 },
     { "type":"range", "id":"ff_top_heading_fs", "label":"Top heading font size (px)", "min": 14, "max": 72, "step": 1, "default": 28 },
+    {
+      "type":"select",
+      "id":"ff_top_heading_ff",
+      "label":"Top heading font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_top_heading_fw",
+      "label":"Top heading font weight",
+      "default":"700",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"ff_top_subheading_fs", "label":"Top subheading font size (px)", "min": 10, "max": 28, "step": 1, "default": 16 },
+    {
+      "type":"select",
+      "id":"ff_top_subheading_ff",
+      "label":"Top subheading font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_top_subheading_fw",
+      "label":"Top subheading font weight",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"ff_top_btn_fs", "label":"Top button font size (px)", "min": 10, "max": 24, "step": 1, "default": 14 },
     { "type":"range", "id":"ff_top_btn_py", "label":"Top button padding Y (px)", "min": 6, "max": 30, "step": 1, "default": 12 },
     { "type":"range", "id":"ff_top_btn_px", "label":"Top button padding X (px)", "min": 10, "max": 60, "step": 1, "default": 28 },
@@ -312,6 +434,31 @@
     { "type": "textarea", "id": "row2_right_text", "label": "Right text", "default": "Proudly Supporting Global Reforestation Efforts." },
     { "type": "range", "id": "row2_height_desktop", "label": "Row height desktop (px)", "min": 120, "max": 280, "step": 4, "default": 200 },
     { "type":"range", "id":"ff_mid_text_fs", "label":"Middle row text font size (px)", "min": 10, "max": 28, "step": 1, "default": 16 },
+    {
+      "type":"select",
+      "id":"ff_mid_text_ff",
+      "label":"Middle text font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_mid_text_fw",
+      "label":"Middle text font weight",
+      "default":"500",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
 
     { "type": "header", "content": "Main black footer row" },
     { "type": "color", "id": "row3_bg", "label": "Background", "default": "#000000" },
@@ -333,11 +480,136 @@
     { "type": "image_picker", "id": "cert_logo", "label": "Certification logo" },
     { "type": "range", "id": "cert_logo_width", "label": "Certification logo width", "min": 80, "max": 240, "step": 4, "default": 88 },
     { "type":"range", "id":"ff_newsletter_heading_fs", "label":"Newsletter heading font size (px)", "min": 12, "max": 36, "step": 1, "default": 16 },
+    {
+      "type":"select",
+      "id":"ff_newsletter_heading_ff",
+      "label":"Newsletter heading font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_newsletter_heading_fw",
+      "label":"Newsletter heading font weight",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"ff_newsletter_text_fs", "label":"Newsletter text font size (px)", "min": 10, "max": 24, "step": 1, "default": 13 },
+    {
+      "type":"select",
+      "id":"ff_newsletter_text_ff",
+      "label":"Newsletter text font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_newsletter_text_fw",
+      "label":"Newsletter text font weight",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"ff_input_fs", "label":"Input font size (px)", "min": 10, "max": 22, "step": 1, "default": 13 },
     { "type":"range", "id":"ff_menu_links_fs", "label":"Menu links font size (px)", "min": 10, "max": 24, "step": 1, "default": 13 },
+    {
+      "type":"select",
+      "id":"ff_menu_links_ff",
+      "label":"Menu links font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_menu_links_fw",
+      "label":"Menu links font weight",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"ff_policy_links_fs", "label":"Policy links font size (px)", "min": 10, "max": 22, "step": 1, "default": 12 },
+    {
+      "type":"select",
+      "id":"ff_policy_links_ff",
+      "label":"Policy links font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_policy_links_fw",
+      "label":"Policy links font weight",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"ff_disclaimer_fs", "label":"Disclaimer font size (px)", "min": 9, "max": 18, "step": 1, "default": 11 },
+    {
+      "type":"select",
+      "id":"ff_disclaimer_ff",
+      "label":"Disclaimer font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_disclaimer_fw",
+      "label":"Disclaimer font weight",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     {
       "type": "textarea",
       "id": "disclaimer_text",
