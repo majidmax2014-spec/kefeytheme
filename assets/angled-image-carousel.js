@@ -152,6 +152,7 @@
         updateActiveFromPhysical(idx);
         updateDots();
       }
+      updateEdgeClasses();
     }
 
     function nearestPhysicalIndex() {
@@ -170,7 +171,9 @@
     function updateActiveFromPhysical(physIdx) {
       const logical = Number(items[physIdx].dataset.logicalIndex);
       activeLogicalIndex = logical;
-      items.forEach((c) => c.classList.remove('is-active', 'is-prev', 'is-next', 'is-far-prev', 'is-far-next'));
+      items.forEach((c) =>
+        c.classList.remove('is-active', 'is-prev', 'is-next', 'is-far-prev', 'is-far-next', 'is-edge-left', 'is-edge-right')
+      );
       // Apply relative classes using physical positions
       [0,1,2].forEach((offset) => {
         const left = items[physIdx - offset];
@@ -185,6 +188,7 @@
           if (right) right.classList.add('is-far-next');
         }
       });
+      updateEdgeClasses();
     }
 
     function updateDots() {
@@ -247,6 +251,26 @@
       currentPhysicalIndex = idx;
       normalizeIfNeeded();
       scrollToPhysical(currentPhysicalIndex);
+      updateEdgeClasses();
+    }
+
+    function updateEdgeClasses() {
+      const viewportRect = viewport.getBoundingClientRect();
+      let firstVisible = null;
+      let lastVisible = null;
+
+      items.forEach((el) => {
+        el.classList.remove('is-edge-left', 'is-edge-right');
+        const rect = el.getBoundingClientRect();
+        const overlap = Math.min(rect.right, viewportRect.right) - Math.max(rect.left, viewportRect.left);
+        if (overlap > 0) {
+          if (!firstVisible) firstVisible = el;
+          lastVisible = el;
+        }
+      });
+
+      if (firstVisible) firstVisible.classList.add('is-edge-left');
+      if (lastVisible && lastVisible !== firstVisible) lastVisible.classList.add('is-edge-right');
     }
 
     function start() {
