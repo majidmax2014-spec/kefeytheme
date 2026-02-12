@@ -7,8 +7,8 @@
 }
 .angled-carousel__inner {
   position: relative;
-  width: 100%;
-  margin: 0 auto;
+  width: 100vw;
+  margin: 0;
 }
 
 /* Heading */
@@ -43,8 +43,8 @@
 /* Side angled panels */
 .angled-carousel__panel {
   position: absolute;
-  top: clamp(86px, 10vw, 126px);
-  bottom: clamp(12px, 3vw, 36px);
+  top: 0;
+  bottom: 0;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
@@ -84,9 +84,10 @@
   overflow-x: auto;
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x proximity;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 10%;
   padding-inline: var(--side-padding, 64px);
-  width: 100%;
+  width: 100vw;
   touch-action: pan-y;
   cursor: grab;
 }
@@ -99,11 +100,6 @@
   align-items: center;
   gap: var(--gap-desktop, 48px);
   padding: 16px 0;
-  list-style: none;
-  margin: 0;
-  padding-left: 0;
-  padding-right: 0;
-  will-change: transform;
 }
 
 /* Cards */
@@ -119,7 +115,6 @@
   transition: transform 400ms ease, opacity 400ms ease, box-shadow 400ms ease;
   scroll-snap-align: center;
   position: relative;
-  will-change: transform;
 }
 .angled-carousel__card a { -webkit-tap-highlight-color: transparent; }
 .angled-carousel__link { display: block; height: 100%; }
@@ -141,30 +136,18 @@
   box-shadow: 0 12px 30px rgba(0,0,0,.18);
 }
 .angled-carousel__card.is-prev {
-  transform: perspective(1000px) rotateY(0deg) scale(1);
+  transform: perspective(1000px) rotateY(var(--tilt, 10deg)) scale(.985);
 }
 .angled-carousel__card.is-next {
-  transform: perspective(1000px) rotateY(0deg) scale(1);
+  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * -1)) scale(.985);
 }
 .angled-carousel__card.is-far-prev {
-  transform: perspective(1000px) rotateY(0deg) scale(1);
-  opacity: 1;
+  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * 1.25)) scale(.96);
+  opacity: .9;
 }
 .angled-carousel__card.is-far-next {
-  transform: perspective(1000px) rotateY(0deg) scale(1);
-  opacity: 1;
-}
-
-.angled-carousel__card.is-edge-left {
-  transform: perspective(1000px) rotateY(var(--tilt, 10deg)) scale(0.985);
-  transform-origin: left center;
-  clip-path: polygon(0 0, 100% 4.5%, 100% 95.5%, 0 100%);
-}
-
-.angled-carousel__card.is-edge-right {
-  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * -1)) scale(0.985);
-  transform-origin: right center;
-  clip-path: polygon(0 4.5%, 100% 0, 100% 100%, 0 95.5%);
+  transform: perspective(1000px) rotateY(calc(var(--tilt, 10deg) * -1.25)) scale(.96);
+  opacity: .9;
 }
 
 /* Arrows */
