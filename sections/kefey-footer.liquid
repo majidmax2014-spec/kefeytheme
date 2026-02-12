@@ -69,6 +69,13 @@
   elsif section.settings.ff_disclaimer_ff == 'body'
     assign ff_disclaimer_ff_value = 'var(--font-body-family)'
   endif
+
+  assign ff_social_label_ff_value = 'inherit'
+  if section.settings.ff_social_label_ff == 'heading'
+    assign ff_social_label_ff_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_social_label_ff == 'body'
+    assign ff_social_label_ff_value = 'var(--font-body-family)'
+  endif
 -%}
 
 <footer
@@ -124,6 +131,9 @@
     --ff-policy-links-fw: {{ section.settings.ff_policy_links_fw }};
     --ff-disclaimer-ff: {{ ff_disclaimer_ff_value }};
     --ff-disclaimer-fw: {{ section.settings.ff_disclaimer_fw }};
+    --ff-social-label-fs: {{ section.settings.ff_social_label_fs }}px;
+    --ff-social-label-ff: {{ ff_social_label_ff_value }};
+    --ff-social-label-fw: {{ section.settings.ff_social_label_fw }};
   "
 >
   <div class="fk__row fk__row--top">
@@ -532,6 +542,32 @@
       ]
     },
     { "type":"range", "id":"ff_input_fs", "label":"Input font size (px)", "min": 10, "max": 22, "step": 1, "default": 13 },
+    { "type":"range", "id":"ff_social_label_fs", "label":"Social label font size (px)", "min": 10, "max": 24, "step": 1, "default": 12 },
+    {
+      "type":"select",
+      "id":"ff_social_label_ff",
+      "label":"Social label font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_social_label_fw",
+      "label":"Social label font weight",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"ff_menu_links_fs", "label":"Menu links font size (px)", "min": 10, "max": 24, "step": 1, "default": 13 },
     {
       "type":"select",

@@ -232,9 +232,10 @@
 
 .fk__social-label {
   color: #ffffff;
-  font-family: inherit;
-  font-size: 28px;
+  font-family: var(--ff-social-label-ff, inherit);
+  font-size: var(--ff-social-label-fs, 12px);
   line-height: 1.2;
+  font-weight: var(--ff-social-label-fw, inherit);
 }
 
 .fk__social-list {
