@@ -1,4 +1,19 @@
 {{ 'footer-kefey.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign ff_font_family_value = 'inherit'
+  if section.settings.ff_font_family == 'heading'
+    assign ff_font_family_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_font_family == 'body'
+    assign ff_font_family_value = 'var(--font-body-family)'
+  endif
+
+  assign ff_top_btn_font_family_value = 'inherit'
+  if section.settings.ff_top_btn_font_family == 'heading'
+    assign ff_top_btn_font_family_value = 'var(--font-heading-family)'
+  elsif section.settings.ff_top_btn_font_family == 'body'
+    assign ff_top_btn_font_family_value = 'var(--font-body-family)'
+  endif
+-%}
 
 <footer
   id="FooterKefey-{{ section.id }}"
@@ -29,6 +44,14 @@
     --ff-menu-links-fs: {{ section.settings.ff_menu_links_fs }}px;
     --ff-policy-links-fs: {{ section.settings.ff_policy_links_fs }}px;
     --ff-disclaimer-fs: {{ section.settings.ff_disclaimer_fs }}px;
+    --ff-font-family: {{ ff_font_family_value }};
+    --ff-font-weight: {{ section.settings.ff_font_weight }};
+    --ff-top-btn-py: {{ section.settings.ff_top_btn_py }}px;
+    --ff-top-btn-px: {{ section.settings.ff_top_btn_px }}px;
+    --ff-top-btn-font-family: {{ ff_top_btn_font_family_value }};
+    --ff-top-btn-font-weight: {{ section.settings.ff_top_btn_font_weight }};
+    --ff-top-btn-bg: {{ section.settings.ff_top_btn_bg }};
+    --ff-top-btn-text: {{ section.settings.ff_top_btn_text }};
   "
 >
   <div class="fk__row fk__row--top">
@@ -207,6 +230,31 @@
   "settings": [
     { "type": "header", "content": "General layout" },
     { "type": "range", "id": "content_max_width", "label": "Content max width (px)", "min": 1120, "max": 1600, "step": 8, "default": 1200 },
+    {
+      "type": "select",
+      "id": "ff_font_family",
+      "label": "Footer font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "ff_font_weight",
+      "label": "Footer font weight",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "400", "label": "Regular (400)" },
+        { "value": "500", "label": "Medium (500)" },
+        { "value": "600", "label": "Semi-bold (600)" },
+        { "value": "700", "label": "Bold (700)" },
+        { "value": "800", "label": "Extra bold (800)" }
+      ]
+    },
 
     { "type": "header", "content": "Top orange row" },
     { "type": "color", "id": "row1_bg", "label": "Background", "default": "#E9573C" },
@@ -223,6 +271,35 @@
     { "type":"range", "id":"ff_top_heading_fs", "label":"Top heading font size (px)", "min": 14, "max": 72, "step": 1, "default": 28 },
     { "type":"range", "id":"ff_top_subheading_fs", "label":"Top subheading font size (px)", "min": 10, "max": 28, "step": 1, "default": 16 },
     { "type":"range", "id":"ff_top_btn_fs", "label":"Top button font size (px)", "min": 10, "max": 24, "step": 1, "default": 14 },
+    { "type":"range", "id":"ff_top_btn_py", "label":"Top button padding Y (px)", "min": 6, "max": 30, "step": 1, "default": 12 },
+    { "type":"range", "id":"ff_top_btn_px", "label":"Top button padding X (px)", "min": 10, "max": 60, "step": 1, "default": 28 },
+    {
+      "type":"select",
+      "id":"ff_top_btn_font_family",
+      "label":"Top button font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"ff_top_btn_font_weight",
+      "label":"Top button font weight",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
+    { "type":"color", "id":"ff_top_btn_bg", "label":"Top button background", "default":"#111111" },
+    { "type":"color", "id":"ff_top_btn_text", "label":"Top button text color", "default":"#FFFFFF" },
 
     { "type": "header", "content": "Middle split row" },
     { "type": "color", "id": "row2_left_bg", "label": "Left background", "default": "#4DB1B7" },
