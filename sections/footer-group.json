@@ -57,12 +57,12 @@
         "brand_logo_width": 180,
         "cert_logo": "shopify://shop_images/certificate.png",
         "cert_logo_width": 180,
-        "ff_newsletter_heading_fs": 16,
+        "ff_newsletter_heading_fs": 24,
         "ff_newsletter_text_fs": 13,
         "ff_input_fs": 13,
         "ff_menu_links_fs": 13,
-        "ff_policy_links_fs": 12,
-        "ff_disclaimer_fs": 11,
+        "ff_policy_links_fs": 13,
+        "ff_disclaimer_fs": 12,
         "disclaimer_text": "† These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. The views and nutritional advice expressed by Kefey® are not intended for the purpose of providing medical advice. Please always consult your health care provider if you are taking any medications or have any medical conditions. Individual results may vary."
       }
     }
