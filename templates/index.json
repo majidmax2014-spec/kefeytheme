@@ -409,6 +409,12 @@
     "text_marquee_bar_aVHYqT": {
       "type": "text-marquee-bar",
       "blocks": {
+        "item_MVMNH9": {
+          "type": "item",
+          "settings": {
+            "text": ""
+          }
+        },
         "item_wbbREb": {
           "type": "item",
           "settings": {
@@ -453,6 +459,7 @@
         }
       },
       "block_order": [
+        "item_MVMNH9",
         "item_wbbREb",
         "item_FGPrik",
         "item_GGMBVD",
