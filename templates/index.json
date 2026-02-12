@@ -130,7 +130,7 @@
         "card_height_desktop": 480,
         "card_width_mobile": 240,
         "card_height_mobile": 320,
-        "gap_desktop": 48,
+        "gap_desktop": 0,
         "gap_mobile": 28,
         "border_radius": 28,
         "show_arrows": true,
@@ -143,7 +143,7 @@
         "left_panel_width": 220,
         "right_panel_width": 220,
         "panel_angle": 20,
-        "tilt_strength_desktop": 10,
+        "tilt_strength_desktop": 12,
         "tilt_strength_mobile": 8
       }
     },
