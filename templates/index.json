@@ -119,7 +119,7 @@
       ],
       "name": "Angled Image Carousel",
       "settings": {
-        "heading": "Every mood has a face",
+        "heading": "Every Mood Has a Face",
         "heading_size": 36,
         "show_highlight": true,
         "highlight_color": "#ffc94d",
@@ -209,7 +209,7 @@
       ],
       "name": "Testimonials",
       "settings": {
-        "heading": "Joyful Routines. That’s Why They Stay!",
+        "heading": "Joyful Routines, Shared By Real People.",
         "heading_size": 36,
         "highlight_color": "#ffc94d",
         "card_bg_color": "#ffe082",
@@ -260,7 +260,7 @@
         "section_height_desktop": 300,
         "section_height_mobile": 180,
         "padding_left_right": 40,
-        "heading": "TRY IT, RISK FREE!",
+        "heading": "TRY IT WITH CONFIDENCE!",
         "text": "If it’s not for you, we’ll make it right. \nWith a full, 100% hassle-free refund.",
         "button_label": "CHECKOUT NOW",
         "button_link": "",
@@ -286,7 +286,7 @@
         "item_9aDBHn": {
           "type": "item",
           "settings": {
-            "text": "FRIENDLY"
+            "text": ""
           }
         },
         "item_GGMBVD": {
