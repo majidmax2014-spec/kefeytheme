@@ -1,174 +1,191 @@
-{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
-{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
+{{ 'footer-kefey.css' | asset_url | stylesheet_tag }}
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-
-  .kefey-footer__top {
-    display: grid;
-    gap: 3rem;
-    align-items: start;
-  }
-  @media screen and (min-width: 990px) {
-    .kefey-footer__top {
-      grid-template-columns: 1.4fr 1.2fr 0.8fr;
-      gap: 4rem;
-    }
-  }
-  .kefey-footer__heading {
-    font-weight: 800;
-    font-size: 2.2rem;
-    margin: 0 0 1rem 0;
-  }
-  .kefey-footer__newsletter .field__button {
-    background: transparent;
-    border: .2rem solid currentColor;
-    border-radius: 0;
-  }
-  .kefey-footer__links a {
-    display: block;
-    padding: .5rem 0;
-    text-decoration: none;
-  }
-  .kefey-footer__brand-logos img {
-    max-width: 160px;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-bottom: 1.6rem;
-  }
-  .kefey-footer__legal {
-    border-top: 1px solid rgba(var(--color-foreground), .25);
-    margin-top: 3rem;
-    padding-top: 1.6rem;
-  }
-  .kefey-footer__legal-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.6rem;
-    justify-content: center;
-  }
-  .kefey-footer__fine {
-    opacity: .85;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-top: 1.6rem;
-  }
-  .kefey-footer__copy {
-    text-align: center;
-    margin-top: 1.6rem;
-    opacity: .85;
-  }
-{%- endstyle -%}
-
-{%- liquid
-  assign has_social_icons = true
-  if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
-    assign has_social_icons = false
-  endif
--%}
-
-<footer class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  <div class="page-width">
-    <div class="kefey-footer__top">
-      <div>
-        <h2 class="kefey-footer__heading">{{ section.settings.newsletter_heading }}</h2>
-        <p class="rte">{{ section.settings.newsletter_subtext }}</p>
-        {%- form 'customer', id: 'KefeyFooterNewsletter', class: 'newsletter-form kefey-footer__newsletter' -%}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="newsletter-form__field-wrapper">
-            <div class="field">
-              <input
-                id="NewsletterEmail--{{ section.id }}"
-                type="email"
-                name="contact[email]"
-                class="field__input"
-                value="{{ form.email }}"
-                aria-required="true"
-                autocorrect="off"
-                autocapitalize="off"
-                autocomplete="email"
-                placeholder="Email"
-                required
-              >
-              <label class="field__label" for="NewsletterEmail--{{ section.id }}">Email</label>
-              <button type="submit" class="newsletter-form__button field__button" aria-label="Subscribe">
-                <span class="svg-wrapper">{{- 'icon-arrow.svg' | inline_asset_content -}}</span>
-              </button>
-            </div>
-          </div>
-          {%- if form.errors -%}
-            <small class="newsletter-form__message form__message">
-              <span class="svg-wrapper">{{- 'icon-error.svg' | inline_asset_content -}}</span>
-              {{ form.errors.messages.email }}
-            </small>
-          {%- endif -%}
-          {%- if form.posted_successfully? -%}
-            <h3 class="newsletter-form__message newsletter-form__message--success form__message" tabindex="-1" autofocus>
-              <span class="svg-wrapper">{{- 'icon-success.svg' | inline_asset_content -}}</span>
-              Thanks for subscribing
-            </h3>
-          {%- endif -%}
-        {%- endform -%}
-
-        {%- if section.settings.show_social and has_social_icons -%}
-          <div style="margin-top: 1.2rem;">
-            <div class="caption">FOLLOW US:</div>
-            {%- render 'social-icons', class: '' -%}
-          </div>
+<footer
+  id="FooterKefey-{{ section.id }}"
+  class="fk"
+  style="
+    --fk-max: {{ section.settings.content_max_width }}px;
+    --fk-row1-bg: {{ section.settings.row1_bg }};
+    --fk-row2-left-bg: {{ section.settings.row2_left_bg }};
+    --fk-row2-right-bg: {{ section.settings.row2_right_bg }};
+    --fk-row3-bg: {{ section.settings.row3_bg }};
+    --fk-row1-h: {{ section.settings.row1_height_desktop }}px;
+    --fk-row1-hm: {{ section.settings.row1_height_mobile }}px;
+    --fk-row2-h: {{ section.settings.row2_height_desktop }}px;
+    --fk-kids-size: {{ section.settings.kids_image_width }}px;
+    --fk-kids-x: {{ section.settings.kids_offset_x }}px;
+    --fk-kids-y: {{ section.settings.kids_offset_y }}px;
+    --fk-row2-left-logo-w: {{ section.settings.row2_left_logo_width }}px;
+    --fk-row2-right-logo-w: {{ section.settings.row2_right_logo_width }}px;
+    --fk-brand-logo-w: {{ section.settings.brand_logo_width }}px;
+    --fk-cert-logo-w: {{ section.settings.cert_logo_width }}px;
+  "
+>
+  <div class="fk__row fk__row--top">
+    <div class="fk__top-inner">
+      <div class="fk__top-text-wrap">
+        <h2 class="fk__top-heading">{{ section.settings.row1_heading }}</h2>
+        <p class="fk__top-subheading">{{ section.settings.row1_subheading }}</p>
+        {%- if section.settings.row1_button_label != blank -%}
+          <a class="fk__top-btn" href="{{ section.settings.row1_button_link | default: '#' }}">
+            {{ section.settings.row1_button_label }}
+          </a>
         {%- endif -%}
       </div>
-
-      <div class="kefey-footer__links">
-        {%- if section.settings.menu != blank -%}
-          {%- for link in section.settings.menu.links -%}
-            <a href="{{ link.url }}" class="link link--text">{{ link.title | escape }}</a>
-          {%- endfor -%}
-        {%- endif -%}
-      </div>
-
-      <div class="kefey-footer__brand-logos">
-        {%- if section.settings.brand_logo != blank -%}
-          {{ section.settings.brand_logo | image_url: width: 300 | image_tag: loading: 'lazy' }}
-        {%- endif -%}
-        {%- if section.settings.cert_logo != blank -%}
-          {{ section.settings.cert_logo | image_url: width: 120 | image_tag: loading: 'lazy' }}
+      <div class="fk__top-image-wrap">
+        {%- if section.settings.kids_image != blank -%}
+          {{
+            section.settings.kids_image
+            | image_url: width: 1600
+            | image_tag:
+              class: 'fk__kids-image',
+              loading: 'lazy',
+              widths: '320, 480, 640, 800, 1000, 1200, 1600',
+              alt: section.settings.kids_image.alt
+          }}
         {%- endif -%}
       </div>
     </div>
+  </div>
 
-    <div class="kefey-footer__legal">
-      <div class="kefey-footer__legal-links">
-        {%- if section.settings.link_1_label != blank and section.settings.link_1_url != blank -%}
-          <a class="link link--text" href="{{ section.settings.link_1_url }}">{{ section.settings.link_1_label }}</a>
-        {%- endif -%}
-        {%- if section.settings.link_2_label != blank and section.settings.link_2_url != blank -%}
-          <a class="link link--text" href="{{ section.settings.link_2_url }}">{{ section.settings.link_2_label }}</a>
-        {%- endif -%}
-        {%- if section.settings.link_3_label != blank and section.settings.link_3_url != blank -%}
-          <a class="link link--text" href="{{ section.settings.link_3_url }}">{{ section.settings.link_3_label }}</a>
-        {%- endif -%}
-        {%- if section.settings.link_4_label != blank and section.settings.link_4_url != blank -%}
-          <a class="link link--text" href="{{ section.settings.link_4_url }}">{{ section.settings.link_4_label }}</a>
-        {%- endif -%}
+  <div class="fk__row fk__row--impact">
+    <div class="fk__impact-col fk__impact-col--left">
+      {%- if section.settings.row2_left_logo != blank -%}
+        {{
+          section.settings.row2_left_logo
+          | image_url: width: 700
+          | image_tag: class: 'fk__impact-logo fk__impact-logo--left', loading: 'lazy', alt: section.settings.row2_left_logo.alt
+        }}
+      {%- endif -%}
+      <div class="fk__impact-text">{{ section.settings.row2_left_text }}</div>
+    </div>
+    <div class="fk__impact-col fk__impact-col--right">
+      {%- if section.settings.row2_right_logo != blank -%}
+        {{
+          section.settings.row2_right_logo
+          | image_url: width: 700
+          | image_tag:
+            class: 'fk__impact-logo fk__impact-logo--right',
+            loading: 'lazy',
+            alt: section.settings.row2_right_logo.alt
+        }}
+      {%- endif -%}
+      <div class="fk__impact-text">{{ section.settings.row2_right_text }}</div>
+    </div>
+  </div>
+
+  <div class="fk__row fk__row--main">
+    <div class="fk__main-inner">
+      <div class="fk__main-grid">
+        <div class="fk__col fk__col--newsletter">
+          <h3 class="fk__newsletter-heading">{{ section.settings.newsletter_heading }}</h3>
+          <p class="fk__newsletter-text">{{ section.settings.newsletter_text }}</p>
+          {%- form 'customer', id: 'FooterNewsletter-'.append(section.id), class: 'fk__newsletter-form' -%}
+            <input type="hidden" name="contact[tags]" value="newsletter">
+            <label class="visually-hidden" for="FooterEmail-{{ section.id }}">Email</label>
+            <div class="fk__newsletter-field">
+              <input
+                id="FooterEmail-{{ section.id }}"
+                type="email"
+                name="contact[email]"
+                value="{{ form.email }}"
+                autocorrect="off"
+                autocapitalize="off"
+                autocomplete="email"
+                placeholder="{{ section.settings.newsletter_placeholder }}"
+                required
+              >
+              <button type="submit" aria-label="{{ section.settings.newsletter_button_label }}">
+                {{ section.settings.newsletter_button_label }}
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+            </div>
+            {%- if form.errors -%}
+              <small class="fk__newsletter-note fk__newsletter-note--error">{{ form.errors.messages.email }}</small>
+            {%- endif -%}
+            {%- if form.posted_successfully? -%}
+              <small class="fk__newsletter-note fk__newsletter-note--success">{{ 'newsletter.success' | t }}</small>
+            {%- endif -%}
+          {%- endform -%}
+
+          <div class="fk__social-wrap">
+            <div class="fk__social-label">{{ section.settings.social_label }}</div>
+            <div class="fk__social-list">
+              {%- if section.settings.tiktok_url != blank -%}
+                <a href="{{ section.settings.tiktok_url }}" class="fk__social-item" target="_blank" rel="noopener" aria-label="TikTok">
+                  {%- if section.settings.tiktok_icon != blank -%}
+                    {{ section.settings.tiktok_icon | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}
+                  {%- else -%}
+                    <span>T</span>
+                  {%- endif -%}
+                </a>
+              {%- endif -%}
+              {%- if section.settings.snapchat_url != blank -%}
+                <a href="{{ section.settings.snapchat_url }}" class="fk__social-item" target="_blank" rel="noopener" aria-label="Snapchat">
+                  {%- if section.settings.snapchat_icon != blank -%}
+                    {{ section.settings.snapchat_icon | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}
+                  {%- else -%}
+                    <span>S</span>
+                  {%- endif -%}
+                </a>
+              {%- endif -%}
+              {%- if section.settings.instagram_url != blank -%}
+                <a
+                  href="{{ section.settings.instagram_url }}"
+                  class="fk__social-item"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Instagram"
+                >
+                  {%- if section.settings.instagram_icon != blank -%}
+                    {{ section.settings.instagram_icon | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}
+                  {%- else -%}
+                    <span>I</span>
+                  {%- endif -%}
+                </a>
+              {%- endif -%}
+            </div>
+          </div>
+        </div>
+
+        <div class="fk__col fk__col--links">
+          {%- if section.settings.menu_primary != blank -%}
+            <ul class="fk__menu" role="list">
+              {%- for link in section.settings.menu_primary.links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </div>
+
+        <div class="fk__col fk__col--brand">
+          {%- if section.settings.brand_logo != blank -%}
+            {{
+              section.settings.brand_logo
+              | image_url: width: 800
+              | image_tag: class: 'fk__brand-logo', loading: 'lazy', alt: section.settings.brand_logo.alt
+            }}
+          {%- endif -%}
+          {%- if section.settings.cert_logo != blank -%}
+            {{
+              section.settings.cert_logo
+              | image_url: width: 400
+              | image_tag: class: 'fk__cert-logo', loading: 'lazy', alt: section.settings.cert_logo.alt
+            }}
+          {%- endif -%}
+        </div>
       </div>
-      {%- if section.settings.disclaimer != blank -%}
-        <div class="kefey-footer__fine rte">{{ section.settings.disclaimer }}</div>
+
+      {%- if section.settings.menu_policies != blank -%}
+        <ul class="fk__policy-menu" role="list">
+          {%- for link in section.settings.menu_policies.links -%}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        </ul>
       {%- endif -%}
-      {%- if section.settings.footnotes != blank -%}
-        <div class="kefey-footer__fine rte">{{ section.settings.footnotes }}</div>
-      {%- endif -%}
-      <div class="kefey-footer__copy">
-        &copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All Rights Reserved.
+
+      <div class="fk__disclaimer-box">
+        {{ section.settings.disclaimer_text }}
       </div>
     </div>
   </div>
@@ -178,25 +195,58 @@
 {
   "name": "Kefey footer",
   "settings": [
-    { "type": "color_scheme", "id": "color_scheme", "label": "Color scheme", "default": "scheme-4" },
-    { "type": "inline_richtext", "id": "newsletter_heading", "label": "Newsletter heading", "default": "Keep well with Goli" },
-    { "type": "richtext", "id": "newsletter_subtext", "label": "Newsletter subtext", "default": "<p>Subscribe to our newsletter for exclusive offers!</p>" },
-    { "type": "checkbox", "id": "show_social", "label": "Show social icons", "default": true },
-    { "type": "link_list", "id": "menu", "label": "Links menu" },
-    { "type": "image_picker", "id": "brand_logo", "label": "Brand logo (right column)" },
+    { "type": "header", "content": "General layout" },
+    { "type": "range", "id": "content_max_width", "label": "Content max width (px)", "min": 1120, "max": 1600, "step": 8, "default": 1200 },
+
+    { "type": "header", "content": "Top orange row" },
+    { "type": "color", "id": "row1_bg", "label": "Background", "default": "#E9573C" },
+    { "type": "text", "id": "row1_heading", "label": "Heading", "default": "Kefey FOR GOOD" },
+    { "type": "text", "id": "row1_subheading", "label": "Subheading", "default": "At the Heart of Kefey, Joy Creates Impact." },
+    { "type": "text", "id": "row1_button_label", "label": "Button label", "default": "Learn More" },
+    { "type": "url", "id": "row1_button_link", "label": "Button link" },
+    { "type": "image_picker", "id": "kids_image", "label": "Kids image" },
+    { "type": "range", "id": "row1_height_desktop", "label": "Row height desktop (px)", "min": 220, "max": 480, "step": 4, "default": 304 },
+    { "type": "range", "id": "row1_height_mobile", "label": "Row height mobile (px)", "min": 220, "max": 460, "step": 4, "default": 280 },
+    { "type": "range", "id": "kids_image_width", "label": "Kids image width (px)", "min": 200, "max": 780, "step": 4, "default": 500 },
+    { "type": "range", "id": "kids_offset_x", "label": "Kids image offset X", "min": -200, "max": 200, "step": 4, "default": 0 },
+    { "type": "range", "id": "kids_offset_y", "label": "Kids image offset Y", "min": -120, "max": 120, "step": 4, "default": -8 },
+
+    { "type": "header", "content": "Middle split row" },
+    { "type": "color", "id": "row2_left_bg", "label": "Left background", "default": "#4DB1B7" },
+    { "type": "image_picker", "id": "row2_left_logo", "label": "Left logo" },
+    { "type": "range", "id": "row2_left_logo_width", "label": "Left logo width", "min": 80, "max": 360, "step": 4, "default": 220 },
+    { "type": "textarea", "id": "row2_left_text", "label": "Left text", "default": "Kefey’s Impact: 20,000 Women & Children Reached." },
+    { "type": "color", "id": "row2_right_bg", "label": "Right background", "default": "#88C44F" },
+    { "type": "image_picker", "id": "row2_right_logo", "label": "Right logo" },
+    { "type": "range", "id": "row2_right_logo_width", "label": "Right logo width", "min": 80, "max": 360, "step": 4, "default": 220 },
+    { "type": "textarea", "id": "row2_right_text", "label": "Right text", "default": "Proudly Supporting Global Reforestation Efforts." },
+    { "type": "range", "id": "row2_height_desktop", "label": "Row height desktop (px)", "min": 120, "max": 280, "step": 4, "default": 200 },
+
+    { "type": "header", "content": "Main black footer row" },
+    { "type": "color", "id": "row3_bg", "label": "Background", "default": "#000000" },
+    { "type": "text", "id": "newsletter_heading", "label": "Newsletter heading", "default": "KEEP IT JOYFUL WITH KEFEY®" },
+    { "type": "textarea", "id": "newsletter_text", "label": "Newsletter text", "default": "Be the first to know about Kefey goodies, joyful updates, fun deals & little surprises!" },
+    { "type": "text", "id": "newsletter_placeholder", "label": "Newsletter placeholder", "default": "Subscribe to our newsletter" },
+    { "type": "text", "id": "newsletter_button_label", "label": "Newsletter button label", "default": "Subscribe to our newsletter" },
+    { "type": "text", "id": "social_label", "label": "Social row label", "default": "Follow us & share the joy :" },
+    { "type": "image_picker", "id": "tiktok_icon", "label": "TikTok icon" },
+    { "type": "url", "id": "tiktok_url", "label": "TikTok link" },
+    { "type": "image_picker", "id": "snapchat_icon", "label": "Snapchat icon" },
+    { "type": "url", "id": "snapchat_url", "label": "Snapchat link" },
+    { "type": "image_picker", "id": "instagram_icon", "label": "Instagram icon" },
+    { "type": "url", "id": "instagram_url", "label": "Instagram link" },
+    { "type": "link_list", "id": "menu_primary", "label": "Main links menu" },
+    { "type": "link_list", "id": "menu_policies", "label": "Policy links menu" },
+    { "type": "image_picker", "id": "brand_logo", "label": "Brand logo" },
+    { "type": "range", "id": "brand_logo_width", "label": "Brand logo width", "min": 120, "max": 420, "step": 4, "default": 220 },
     { "type": "image_picker", "id": "cert_logo", "label": "Certification logo" },
-    { "type": "text", "id": "link_1_label", "label": "Legal link 1 label", "default": "Terms & Conditions" },
-    { "type": "url", "id": "link_1_url", "label": "Legal link 1 URL" },
-    { "type": "text", "id": "link_2_label", "label": "Legal link 2 label", "default": "Privacy Policy" },
-    { "type": "url", "id": "link_2_url", "label": "Legal link 2 URL" },
-    { "type": "text", "id": "link_3_label", "label": "Legal link 3 label", "default": "Goli Rewards Gift Cards" },
-    { "type": "url", "id": "link_3_url", "label": "Legal link 3 URL" },
-    { "type": "text", "id": "link_4_label", "label": "Legal link 4 label", "default": "Digital Accessibility Statement" },
-    { "type": "url", "id": "link_4_url", "label": "Legal link 4 URL" },
-    { "type": "richtext", "id": "disclaimer", "label": "Disclaimer text" },
-    { "type": "richtext", "id": "footnotes", "label": "Footnotes text" },
-    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding top", "default": 36 },
-    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding bottom", "default": 36 }
+    { "type": "range", "id": "cert_logo_width", "label": "Certification logo width", "min": 80, "max": 240, "step": 4, "default": 88 },
+    {
+      "type": "textarea",
+      "id": "disclaimer_text",
+      "label": "Disclaimer text",
+      "default": "† These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. The views and nutritional advice expressed by Kefey® are not intended for the purpose of providing medical advice. Please always consult your health care provider if you are taking any medications or have any medical conditions. Individual results may vary."
+    }
   ]
 }
 {% endschema %}
