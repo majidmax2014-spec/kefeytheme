@@ -19,6 +19,16 @@
     --fk-row2-right-logo-w: {{ section.settings.row2_right_logo_width }}px;
     --fk-brand-logo-w: {{ section.settings.brand_logo_width }}px;
     --fk-cert-logo-w: {{ section.settings.cert_logo_width }}px;
+    --ff-top-heading-fs: {{ section.settings.ff_top_heading_fs }}px;
+    --ff-top-subheading-fs: {{ section.settings.ff_top_subheading_fs }}px;
+    --ff-top-btn-fs: {{ section.settings.ff_top_btn_fs }}px;
+    --ff-mid-text-fs: {{ section.settings.ff_mid_text_fs }}px;
+    --ff-newsletter-heading-fs: {{ section.settings.ff_newsletter_heading_fs }}px;
+    --ff-newsletter-text-fs: {{ section.settings.ff_newsletter_text_fs }}px;
+    --ff-input-fs: {{ section.settings.ff_input_fs }}px;
+    --ff-menu-links-fs: {{ section.settings.ff_menu_links_fs }}px;
+    --ff-policy-links-fs: {{ section.settings.ff_policy_links_fs }}px;
+    --ff-disclaimer-fs: {{ section.settings.ff_disclaimer_fs }}px;
   "
 >
   <div class="fk__row fk__row--top">
@@ -210,6 +220,9 @@
     { "type": "range", "id": "kids_image_width", "label": "Kids image width (px)", "min": 200, "max": 780, "step": 10, "default": 500 },
     { "type": "range", "id": "kids_offset_x", "label": "Kids image offset X", "min": -200, "max": 200, "step": 4, "default": 0 },
     { "type": "range", "id": "kids_offset_y", "label": "Kids image offset Y", "min": -120, "max": 120, "step": 4, "default": -8 },
+    { "type":"range", "id":"ff_top_heading_fs", "label":"Top heading font size (px)", "min": 14, "max": 72, "step": 1, "default": 28 },
+    { "type":"range", "id":"ff_top_subheading_fs", "label":"Top subheading font size (px)", "min": 10, "max": 28, "step": 1, "default": 16 },
+    { "type":"range", "id":"ff_top_btn_fs", "label":"Top button font size (px)", "min": 10, "max": 24, "step": 1, "default": 14 },
 
     { "type": "header", "content": "Middle split row" },
     { "type": "color", "id": "row2_left_bg", "label": "Left background", "default": "#4DB1B7" },
@@ -221,6 +234,7 @@
     { "type": "range", "id": "row2_right_logo_width", "label": "Right logo width", "min": 80, "max": 360, "step": 4, "default": 220 },
     { "type": "textarea", "id": "row2_right_text", "label": "Right text", "default": "Proudly Supporting Global Reforestation Efforts." },
     { "type": "range", "id": "row2_height_desktop", "label": "Row height desktop (px)", "min": 120, "max": 280, "step": 4, "default": 200 },
+    { "type":"range", "id":"ff_mid_text_fs", "label":"Middle row text font size (px)", "min": 10, "max": 28, "step": 1, "default": 16 },
 
     { "type": "header", "content": "Main black footer row" },
     { "type": "color", "id": "row3_bg", "label": "Background", "default": "#000000" },
@@ -241,6 +255,12 @@
     { "type": "range", "id": "brand_logo_width", "label": "Brand logo width", "min": 120, "max": 420, "step": 4, "default": 220 },
     { "type": "image_picker", "id": "cert_logo", "label": "Certification logo" },
     { "type": "range", "id": "cert_logo_width", "label": "Certification logo width", "min": 80, "max": 240, "step": 4, "default": 88 },
+    { "type":"range", "id":"ff_newsletter_heading_fs", "label":"Newsletter heading font size (px)", "min": 12, "max": 36, "step": 1, "default": 16 },
+    { "type":"range", "id":"ff_newsletter_text_fs", "label":"Newsletter text font size (px)", "min": 10, "max": 24, "step": 1, "default": 13 },
+    { "type":"range", "id":"ff_input_fs", "label":"Input font size (px)", "min": 10, "max": 22, "step": 1, "default": 13 },
+    { "type":"range", "id":"ff_menu_links_fs", "label":"Menu links font size (px)", "min": 10, "max": 24, "step": 1, "default": 13 },
+    { "type":"range", "id":"ff_policy_links_fs", "label":"Policy links font size (px)", "min": 10, "max": 22, "step": 1, "default": 12 },
+    { "type":"range", "id":"ff_disclaimer_fs", "label":"Disclaimer font size (px)", "min": 9, "max": 18, "step": 1, "default": 11 },
     {
       "type": "textarea",
       "id": "disclaimer_text",

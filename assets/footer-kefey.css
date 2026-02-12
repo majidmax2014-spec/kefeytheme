@@ -34,7 +34,7 @@
 .fk__top-heading {
   margin: 0;
   font-family: "Akira", "Gotham", sans-serif;
-  font-size: 41px;
+  font-size: calc(var(--ff-top-heading-fs, 28px) + 13px);
   line-height: 1.06;
   font-weight: 700;
   letter-spacing: 0;
@@ -45,7 +45,7 @@
   margin: 10px auto 0;
   max-width: 320px;
   font-family: "Gotham", sans-serif;
-  font-size: 35px;
+  font-size: calc(var(--ff-top-subheading-fs, 16px) + 19px);
   line-height: 1.2;
   color: #ffffff;
 }
@@ -61,7 +61,7 @@
   background: #2f3134;
   color: #ffffff;
   font-family: "Gotham", sans-serif;
-  font-size: 36px;
+  font-size: calc(var(--ff-top-btn-fs, 14px) + 22px);
   line-height: 1;
   font-weight: 500;
   text-decoration: none;
@@ -126,7 +126,7 @@
   max-width: 360px;
   color: #ffffff;
   font-family: "Gotham", sans-serif;
-  font-size: 34px;
+  font-size: calc(var(--ff-mid-text-fs, 16px) + 18px);
   line-height: 1.26;
   font-weight: 500;
 }
@@ -151,7 +151,7 @@
   margin: 0;
   color: #ffffff;
   font-family: "Akira", "Gotham", sans-serif;
-  font-size: 31px;
+  font-size: calc(var(--ff-newsletter-heading-fs, 16px) + 15px);
   line-height: 1.2;
   letter-spacing: 0;
 }
@@ -161,7 +161,7 @@
   max-width: 510px;
   color: #ffffff;
   font-family: "Gotham", sans-serif;
-  font-size: 31px;
+  font-size: calc(var(--ff-newsletter-text-fs, 13px) + 18px);
   line-height: 1.35;
 }
 
@@ -183,7 +183,7 @@
   background: transparent;
   color: #ffffff;
   font-family: "Gotham", sans-serif;
-  font-size: 30px;
+  font-size: calc(var(--ff-input-fs, 13px) + 17px);
   padding: 0 13px;
 }
 
@@ -197,7 +197,7 @@
   background: transparent;
   color: #ffffff;
   font-family: "Gotham", sans-serif;
-  font-size: 30px;
+  font-size: calc(var(--ff-input-fs, 13px) + 17px);
   white-space: nowrap;
   padding: 0 14px;
   display: inline-flex;
@@ -277,7 +277,7 @@
   color: #ffffff;
   text-decoration: none;
   font-family: "Gotham", sans-serif;
-  font-size: 33px;
+  font-size: calc(var(--ff-menu-links-fs, 13px) + 20px);
   line-height: 1.37;
 }
 
@@ -313,7 +313,7 @@
   color: #ffffff;
   text-decoration: none;
   font-family: "Gotham", sans-serif;
-  font-size: 29px;
+  font-size: calc(var(--ff-policy-links-fs, 12px) + 17px);
   line-height: 1.24;
 }
 
@@ -323,36 +323,66 @@
   padding: 14px 18px;
   color: #ffffff;
   font-family: "Gotham", sans-serif;
-  font-size: 26px;
+  font-size: calc(var(--ff-disclaimer-fs, 11px) + 15px);
   line-height: 1.32;
 }
 
 @media (max-width: 1199px) {
   .fk__top-heading {
-    font-size: clamp(28px, 3.5vw, 41px);
+    font-size: clamp(var(--ff-top-heading-fs, 28px), 3.5vw, calc(var(--ff-top-heading-fs, 28px) + 13px));
   }
 
   .fk__top-subheading {
-    font-size: clamp(20px, 2.9vw, 35px);
+    font-size: clamp(
+      calc(var(--ff-top-subheading-fs, 16px) + 4px),
+      2.9vw,
+      calc(var(--ff-top-subheading-fs, 16px) + 19px)
+    );
   }
 
   .fk__top-btn {
-    font-size: clamp(20px, 3vw, 36px);
+    font-size: clamp(calc(var(--ff-top-btn-fs, 14px) + 6px), 3vw, calc(var(--ff-top-btn-fs, 14px) + 22px));
   }
 
-  .fk__impact-text,
-  .fk__newsletter-text,
-  .fk__menu a,
-  .fk__policy-menu a,
-  .fk__newsletter-field input,
-  .fk__newsletter-field button,
-  .fk__social-label,
-  .fk__disclaimer-box {
-    font-size: clamp(14px, 2.1vw, 31px);
+  .fk__impact-text {
+    font-size: clamp(calc(var(--ff-mid-text-fs, 16px) - 2px), 2.1vw, calc(var(--ff-mid-text-fs, 16px) + 15px));
   }
 
   .fk__newsletter-heading {
-    font-size: clamp(18px, 2.3vw, 31px);
+    font-size: clamp(
+      calc(var(--ff-newsletter-heading-fs, 16px) + 2px),
+      2.3vw,
+      calc(var(--ff-newsletter-heading-fs, 16px) + 15px)
+    );
+  }
+
+  .fk__newsletter-text {
+    font-size: clamp(
+      calc(var(--ff-newsletter-text-fs, 13px) + 1px),
+      2.1vw,
+      calc(var(--ff-newsletter-text-fs, 13px) + 18px)
+    );
+  }
+
+  .fk__newsletter-field input,
+  .fk__newsletter-field button {
+    font-size: clamp(calc(var(--ff-input-fs, 13px) + 1px), 2.1vw, calc(var(--ff-input-fs, 13px) + 18px));
+  }
+
+  .fk__menu a {
+    font-size: clamp(calc(var(--ff-menu-links-fs, 13px) + 1px), 2.1vw, calc(var(--ff-menu-links-fs, 13px) + 18px));
+  }
+
+  .fk__policy-menu a {
+    font-size: clamp(
+      calc(var(--ff-policy-links-fs, 12px) + 2px),
+      2.1vw,
+      calc(var(--ff-policy-links-fs, 12px) + 19px)
+    );
+  }
+
+  .fk__disclaimer-box {
+    font-size: clamp(calc(var(--ff-disclaimer-fs, 11px) + 3px), 2.1vw, calc(var(--ff-disclaimer-fs, 11px) + 20px));
   }
 }
 
