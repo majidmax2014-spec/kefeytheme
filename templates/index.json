@@ -135,7 +135,7 @@
         "border_radius": 28,
         "show_arrows": true,
         "show_dots": true,
-        "autoplay": false,
+        "autoplay": true,
         "autoplay_speed": 5000,
         "side_panels_enabled": true,
         "left_panel_color": "#7b61ff",
