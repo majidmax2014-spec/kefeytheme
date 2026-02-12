@@ -2,6 +2,7 @@
 .kefey-testimonials-grid__carousel-wrapper {
   position: relative;
   overflow: visible;
+  z-index: 1;
 }
 .kefey-testimonials-grid__viewport {
   overflow: hidden;
@@ -12,6 +13,7 @@
   display: flex;
   gap: var(--ktg-gap, 2.4rem);
   transition: transform 400ms ease;
+  will-change: transform;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -150,6 +152,36 @@
 .kefey-testimonials-grid__decor--right {
   bottom: 12%;
   right: 4%;
+}
+
+.kefey-testimonials-grid {
+  overflow: hidden;
+}
+.kefey-testimonials-grid__inner {
+  position: relative;
+  z-index: 1;
+}
+.kefey-testimonials-grid__decor-img {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+.kefey-testimonials-grid__decor-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.kefey-testimonials-grid__decor-img--left {
+  left: 0;
+  top: 50%;
+  width: var(--ktg-decor-left-w, 160px);
+  transform: translate(var(--ktg-decor-left-x, 0px), calc(-50% + var(--ktg-decor-left-y, 0px)));
+}
+.kefey-testimonials-grid__decor-img--right {
+  right: 0;
+  top: 50%;
+  width: var(--ktg-decor-right-w, 160px);
+  transform: translate(var(--ktg-decor-right-x, 0px), calc(-50% + var(--ktg-decor-right-y, 0px)));
 }
 
 /* Responsive */

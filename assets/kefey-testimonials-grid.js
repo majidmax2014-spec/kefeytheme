@@ -175,10 +175,19 @@ class KefeyTestimonialsCarousel {
   
   updateCarousel() {
     if (!this.track) return;
-    
-    const slideWidth = 100 / this.slidesPerView;
-    const translateX = -(this.currentIndex * slideWidth);
-    this.track.style.transform = `translateX(${translateX}%)`;
+
+    const firstSlide = this.slides[0];
+    if (!firstSlide || !this.viewport) return;
+
+    const gap = parseFloat(getComputedStyle(this.track).columnGap || getComputedStyle(this.track).gap || '0') || 0;
+    const slideWidth = firstSlide.getBoundingClientRect().width;
+    const step = slideWidth + gap;
+    const viewportWidth = this.viewport.clientWidth;
+    const trackWidth = this.track.scrollWidth;
+    const maxTranslate = Math.max(0, trackWidth - viewportWidth);
+    const target = this.currentIndex * step;
+    const clamped = Math.max(0, Math.min(target, maxTranslate));
+    this.track.style.transform = `translateX(-${clamped}px)`;
     
     // Update arrows - disable at ends (non-looping)
     if (this.prevBtn) {

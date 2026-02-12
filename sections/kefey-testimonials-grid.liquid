@@ -9,7 +9,7 @@
 <section
   id="TestimonialsCarousel-{{ section.id }}"
   class="kefey-testimonials-grid color-{{ section.settings.color_scheme }}"
-  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-gap: 2.4rem; --ktg-quote-icon-size: {{ section.settings.quote_icon_size | default: 72 }}px; --ktg-quote-icon-mt: {{ section.settings.quote_icon_margin_top | default: 0 }}px; --ktg-quote-icon-mb: {{ section.settings.quote_icon_margin_bottom | default: 12 }}px;"
+  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-gap: 2.4rem; --ktg-quote-icon-size: {{ section.settings.quote_icon_size | default: 72 }}px; --ktg-quote-icon-mt: {{ section.settings.quote_icon_margin_top | default: 0 }}px; --ktg-quote-icon-mb: {{ section.settings.quote_icon_margin_bottom | default: 12 }}px; --ktg-decor-left-w: {{ section.settings.left_decor_width | default: 160 }}px; --ktg-decor-left-x: {{ section.settings.left_decor_offset_x | default: 0 }}px; --ktg-decor-left-y: {{ section.settings.left_decor_offset_y | default: 0 }}px; --ktg-decor-right-w: {{ section.settings.right_decor_width | default: 160 }}px; --ktg-decor-right-x: {{ section.settings.right_decor_offset_x | default: 0 }}px; --ktg-decor-right-y: {{ section.settings.right_decor_offset_y | default: 0 }}px;"
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
 >
@@ -70,6 +70,19 @@
     </div>
   </div>
 
+  {% if section.settings.show_decor_images %}
+    {% if section.settings.left_decor_image != blank %}
+      <div class="kefey-testimonials-grid__decor-img kefey-testimonials-grid__decor-img--left" aria-hidden="true">
+        {{ section.settings.left_decor_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}
+      </div>
+    {% endif %}
+    {% if section.settings.right_decor_image != blank %}
+      <div class="kefey-testimonials-grid__decor-img kefey-testimonials-grid__decor-img--right" aria-hidden="true">
+        {{ section.settings.right_decor_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}
+      </div>
+    {% endif %}
+  {% endif %}
+
   {% if section.settings.show_decorations %}
     <div class="kefey-testimonials-grid__decor kefey-testimonials-grid__decor--left" aria-hidden="true"></div>
     <div class="kefey-testimonials-grid__decor kefey-testimonials-grid__decor--right" aria-hidden="true"></div>
@@ -128,6 +141,15 @@
     { "type": "range", "id": "quote_icon_size", "label": "Quote icon size (px)", "min": 16, "max": 140, "step": 2, "default": 72 },
     { "type": "range", "id": "quote_icon_margin_top", "label": "Quote icon margin top (px)", "min": -80, "max": 60, "step": 2, "default": 0 },
     { "type": "range", "id": "quote_icon_margin_bottom", "label": "Quote icon margin bottom (px)", "min": -40, "max": 80, "step": 2, "default": 12 },
+    { "type": "checkbox", "id": "show_decor_images", "label": "Show decor images", "default": true },
+    { "type": "image_picker", "id": "left_decor_image", "label": "Left decor image" },
+    { "type": "range", "id": "left_decor_width", "label": "Left decor width (px)", "min": 40, "max": 600, "step": 7, "default": 160 },
+    { "type": "range", "id": "left_decor_offset_x", "label": "Left decor offset X (px)", "min": -300, "max": 300, "step": 6, "default": 0 },
+    { "type": "range", "id": "left_decor_offset_y", "label": "Left decor offset Y (px)", "min": -200, "max": 200, "step": 4, "default": 0 },
+    { "type": "image_picker", "id": "right_decor_image", "label": "Right decor image" },
+    { "type": "range", "id": "right_decor_width", "label": "Right decor width (px)", "min": 40, "max": 600, "step": 7, "default": 160 },
+    { "type": "range", "id": "right_decor_offset_x", "label": "Right decor offset X (px)", "min": -300, "max": 300, "step": 6, "default": 0 },
+    { "type": "range", "id": "right_decor_offset_y", "label": "Right decor offset Y (px)", "min": -200, "max": 200, "step": 4, "default": 0 },
     { "type": "checkbox", "id": "show_decorations", "label": "Show decorative shapes", "default": true },
     { "type": "checkbox", "id": "autoplay", "label": "Autoplay", "default": false },
     { "type": "number", "id": "autoplay_speed", "label": "Autoplay speed (ms)", "default": 5000 },
