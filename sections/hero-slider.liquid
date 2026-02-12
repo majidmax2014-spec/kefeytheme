@@ -1,8 +1,30 @@
 {{ 'hero-slider.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign hs_heading_ff = 'inherit'
+  if section.settings.hero_heading_font_family == 'heading'
+    assign hs_heading_ff = 'var(--font-heading-family)'
+  elsif section.settings.hero_heading_font_family == 'body'
+    assign hs_heading_ff = 'var(--font-body-family)'
+  endif
+
+  assign hs_subheading_ff = 'inherit'
+  if section.settings.hero_subheading_font_family == 'heading'
+    assign hs_subheading_ff = 'var(--font-heading-family)'
+  elsif section.settings.hero_subheading_font_family == 'body'
+    assign hs_subheading_ff = 'var(--font-body-family)'
+  endif
+
+  assign hs_btn_ff = 'inherit'
+  if section.settings.hero_button_font_family == 'heading'
+    assign hs_btn_ff = 'var(--font-heading-family)'
+  elsif section.settings.hero_button_font_family == 'body'
+    assign hs_btn_ff = 'var(--font-body-family)'
+  endif
+-%}
 <section
   id="HeroSlider-{{ section.id }}"
   class="hero-slider"
-  style="--hero-height-desktop: {{ section.settings.height_desktop | default: 600 }}px; --hero-height-mobile: {{ section.settings.height_mobile | default: 480 }}px; --hero-overlay-opacity: {{ section.settings.overlay_opacity | at_most: 60 | divided_by: 100.0 }}; --hero-heading-size: {{ section.settings.hero_heading_size | default: 72 }}px; --hero-subheading-size: {{ section.settings.hero_subheading_size | default: 18 }}px; --hero-btn-text-size: {{ section.settings.hero_button_text_size | default: 14 }}px; --hero-btn-py: {{ section.settings.hero_button_padding_y | default: 12 }}px; --hero-btn-px: {{ section.settings.hero_button_padding_x | default: 28 }}px; --hero-content-xmargin: {{ section.settings.hero_content_side_margin | default: 0 }}px; --hero-btn-bw: {{ section.settings.hero_btn_border_width | default: 1 }}px; --hero-btn-bs: {{ section.settings.hero_btn_border_style | default: 'solid' }}; --hero-btn-bc: {{ section.settings.hero_btn_border_color | default: '#FFFFFF' }}; --hero-btn-radius: {{ section.settings.hero_btn_radius | default: 0 }}px; --hero-btn-bg: {{ section.settings.hero_btn_bg | default: '#FFFFFF' }}; --hero-btn-tc: {{ section.settings.hero_btn_text_color | default: '#111111' }};"
+  style="--hero-height-desktop: {{ section.settings.height_desktop | default: 600 }}px; --hero-height-mobile: {{ section.settings.height_mobile | default: 480 }}px; --hero-overlay-opacity: {{ section.settings.overlay_opacity | at_most: 60 | divided_by: 100.0 }}; --hero-heading-size: {{ section.settings.hero_heading_size | default: 72 }}px; --hero-subheading-size: {{ section.settings.hero_subheading_size | default: 18 }}px; --hero-btn-text-size: {{ section.settings.hero_button_text_size | default: 14 }}px; --hero-btn-py: {{ section.settings.hero_button_padding_y | default: 12 }}px; --hero-btn-px: {{ section.settings.hero_button_padding_x | default: 28 }}px; --hero-content-xmargin: {{ section.settings.hero_content_side_margin | default: 0 }}px; --hero-btn-bw: {{ section.settings.hero_btn_border_width | default: 1 }}px; --hero-btn-bs: {{ section.settings.hero_btn_border_style | default: 'solid' }}; --hero-btn-bc: {{ section.settings.hero_btn_border_color | default: '#FFFFFF' }}; --hero-btn-radius: {{ section.settings.hero_btn_radius | default: 0 }}px; --hero-btn-bg: {{ section.settings.hero_btn_bg | default: '#FFFFFF' }}; --hero-btn-tc: {{ section.settings.hero_btn_text_color | default: '#111111' }}; --hs-heading-ff: {{ hs_heading_ff }}; --hs-heading-fw: {{ section.settings.hero_heading_font_weight | default: '800' }}; --hs-subheading-ff: {{ hs_subheading_ff }}; --hs-subheading-fw: {{ section.settings.hero_subheading_font_weight | default: '600' }}; --hs-btn-ff: {{ hs_btn_ff }}; --hs-btn-fw: {{ section.settings.hero_button_font_weight | default: '700' }};"
   data-btn-border="{{ section.settings.hero_btn_show_border }}"
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
@@ -139,8 +161,83 @@
       "default": 900
     },
     { "type":"range", "id":"hero_heading_size", "label":"Heading size (px)", "min": 24, "max": 120, "step": 2, "default": 72 },
+    {
+      "type":"select",
+      "id":"hero_heading_font_family",
+      "label":"Heading font family",
+      "default":"heading",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"hero_heading_font_weight",
+      "label":"Heading font weight",
+      "default":"800",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"hero_subheading_size", "label":"Subheading size (px)", "min": 12, "max": 40, "step": 1, "default": 18 },
+    {
+      "type":"select",
+      "id":"hero_subheading_font_family",
+      "label":"Subheading font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"hero_subheading_font_weight",
+      "label":"Subheading font weight",
+      "default":"600",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"hero_button_text_size", "label":"Button text size (px)", "min": 10, "max": 28, "step": 1, "default": 14 },
+    {
+      "type":"select",
+      "id":"hero_button_font_family",
+      "label":"Button font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"hero_button_font_weight",
+      "label":"Button font weight",
+      "default":"700",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
     { "type":"range", "id":"hero_button_padding_y", "label":"Button padding top/bottom (px)", "min": 6, "max": 30, "step": 1, "default": 12 },
     { "type":"range", "id":"hero_button_padding_x", "label":"Button padding left/right (px)", "min": 10, "max": 60, "step": 1, "default": 28 },
     { "type":"range", "id":"hero_content_side_margin", "label":"Content left/right margin (px)", "min": -120, "max": 120, "step": 4, "default": 0 },
