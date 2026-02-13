@@ -1,31 +1,43 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "header_banner": {
-      "type": "header-banner",
-      "settings": {
-        "background_image": "",
-        "heading": "We reimagine wellness as joy",
-        "subheading": "Little rituals that care for you and the world around you",
-        "banner_height_desktop": 460,
-        "banner_height_mobile": 340,
-        "content_max_width": 760,
-        "content_alignment": "left",
-        "content_padding_x": 64,
-        "overlay_enable": true,
-        "overlay_color": "#000000",
-        "overlay_opacity": 24
-      }
-    },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "our_story_intro_aTDRXc": {
+      "type": "our-story-intro",
+      "name": "Our Story Intro",
+      "settings": {
+        "heading": "Our Story",
+        "highlight_color": "#2BB4A7",
+        "heading_size": 36,
+        "body_text": "<p>Kefey® is a daily wellness ritual in the form of star-shaped gummies designed to make feeling good feel lighter.</p>",
+        "accent_text": "Kefey® began with a simple question:",
+        "accent_color": "#E15241",
+        "body_font_size": 18,
+        "accent_font_size": 22,
+        "padding_top": 52,
+        "padding_bottom": 56,
+        "max_width": 880,
+        "text_alignment": "center"
+      }
     }
   },
   "order": [
-    "header_banner",
-    "main"
+    "main",
+    "our_story_intro_aTDRXc"
   ]
 }
