@@ -1,0 +1,138 @@
+{{ 'header-banner.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign overlay_alpha = section.settings.overlay_opacity | divided_by: 100.0
+-%}
+
+<section
+  id="HeaderBanner-{{ section.id }}"
+  class="header-banner header-banner--{{ section.settings.content_alignment }}"
+  style="
+    --hb-height-d: {{ section.settings.banner_height_desktop }}px;
+    --hb-height-m: {{ section.settings.banner_height_mobile }}px;
+    --hb-content-max: {{ section.settings.content_max_width }}px;
+    --hb-content-pad-x: {{ section.settings.content_padding_x }}px;
+    --hb-overlay-color: {{ section.settings.overlay_color | color_modify: 'alpha', overlay_alpha }};
+  "
+>
+  <div
+    class="header-banner__media"
+    {% if section.settings.background_image != blank %}
+      style="background-image: url('{{ section.settings.background_image | image_url: width: 2600 }}');"
+    {% endif %}
+  ></div>
+
+  {% if section.settings.overlay_enable %}
+    <div class="header-banner__overlay" aria-hidden="true"></div>
+  {% endif %}
+
+  <div class="header-banner__content-wrap">
+    <div class="header-banner__content">
+      {% if section.settings.heading != blank %}
+        <h1 class="header-banner__heading">{{ section.settings.heading }}</h1>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <div class="header-banner__subheading">{{ section.settings.subheading | newline_to_br }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Header Banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We reimagine wellness as joy"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading text",
+      "default": "Little rituals that care for you and the world around you"
+    },
+    {
+      "type": "range",
+      "id": "banner_height_desktop",
+      "label": "Banner height desktop (px)",
+      "min": 300,
+      "max": 700,
+      "step": 10,
+      "default": 460
+    },
+    {
+      "type": "range",
+      "id": "banner_height_mobile",
+      "label": "Banner height mobile (px)",
+      "min": 240,
+      "max": 520,
+      "step": 10,
+      "default": 340
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width (px)",
+      "min": 400,
+      "max": 1400,
+      "step": 10,
+      "default": 760
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "content_padding_x",
+      "label": "Content side padding (px)",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "default": 64
+    },
+    {
+      "type": "checkbox",
+      "id": "overlay_enable",
+      "label": "Enable overlay",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity (%)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header Banner"
+    }
+  ]
+}
+{% endschema %}
