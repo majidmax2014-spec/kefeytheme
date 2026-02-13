@@ -22,11 +22,11 @@
       "name": "Our Story Intro",
       "settings": {
         "heading": "Our Story",
-        "highlight_color": "#2BB4A7",
+        "highlight_color": "#2bb4a7",
         "heading_size": 36,
         "body_text": "<p>Kefey® is a daily wellness ritual in the form of star-shaped gummies designed to make feeling good feel lighter.</p>",
         "accent_text": "Kefey® began with a simple question:",
-        "accent_color": "#E15241",
+        "accent_color": "#e15241",
         "body_font_size": 18,
         "accent_font_size": 22,
         "padding_top": 52,
@@ -34,10 +34,41 @@
         "max_width": 880,
         "text_alignment": "center"
       }
+    },
+    "what_if_wellness_j9mjDb": {
+      "type": "what-if-wellness",
+      "name": "What If Wellness",
+      "settings": {
+        "heading": "What if wellness felt lighter?",
+        "intro": "<p><strong>What if it didn't require more products, or endless routines, but instead focused on what truly mattered?</strong></p>",
+        "bullets": "<ul><li><strong>Kefey® was created from a clear belief:</strong> Self-care should be effective, intentional, and genuinely enjoyable.</li><li>That principle shaped our every decision - from choosing <strong>concentrated, premium extracts</strong> for faster, more meaningful results, to designing <strong>one focused ritual</strong> instead of many diluted ones.</li><li>Because when wellness is thoughtful and well-crafted, <strong>less can truly be more.</strong></li></ul>",
+        "right_image": "shopify://shop_images/about-product-img.png",
+        "bg_color": "#36B2B2",
+        "title_bar_color": "#F8CB34",
+        "heading_color": "#FFFFFF",
+        "text_color": "#FFFFFF",
+        "content_max_width": 1200,
+        "left_col_width": 70,
+        "padding_top": 48,
+        "padding_bottom": 0,
+        "show_left_decor": true,
+        "left_decor_image": "shopify://shop_images/left-decor.png",
+        "left_decor_width": 220,
+        "left_decor_x": -120,
+        "left_decor_y": 0,
+        "show_right_decor": true,
+        "right_decor_width_1": 120,
+        "right_decor_x_1": -180,
+        "right_decor_y_1": -120,
+        "right_decor_width_2": 80,
+        "right_decor_x_2": -120,
+        "right_decor_y_2": 90
+      }
     }
   },
   "order": [
     "main",
-    "our_story_intro_aTDRXc"
+    "our_story_intro_aTDRXc",
+    "what_if_wellness_j9mjDb"
   ]
 }
