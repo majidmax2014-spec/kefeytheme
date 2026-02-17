@@ -9,6 +9,23 @@
  */
 {
   "sections": {
+    "header_banner_4bbFmp": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/about-banner.png",
+        "heading": "We reimagine wellness as joy",
+        "subheading": "Little rituals that care for you and the world around you",
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 360,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": false,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -43,10 +60,10 @@
         "intro": "<p><strong>What if it didn't require more products, or endless routines, but instead focused on what truly mattered?</strong></p>",
         "bullets": "<ul><li><strong>Kefey® was created from a clear belief:</strong> Self-care should be effective, intentional, and genuinely enjoyable.</li><li>That principle shaped our every decision - from choosing <strong>concentrated, premium extracts</strong> for faster, more meaningful results, to designing <strong>one focused ritual</strong> instead of many diluted ones.</li><li>Because when wellness is thoughtful and well-crafted, <strong>less can truly be more.</strong></li></ul>",
         "right_image": "shopify://shop_images/about-product-img.png",
-        "bg_color": "#36B2B2",
-        "title_bar_color": "#F8CB34",
-        "heading_color": "#FFFFFF",
-        "text_color": "#FFFFFF",
+        "bg_color": "#36b2b2",
+        "title_bar_color": "#f8cb34",
+        "heading_color": "#ffffff",
+        "text_color": "#ffffff",
         "content_max_width": 1200,
         "left_col_width": 70,
         "padding_top": 48,
@@ -67,6 +84,7 @@
     }
   },
   "order": [
+    "header_banner_4bbFmp",
     "main",
     "our_story_intro_aTDRXc",
     "what_if_wellness_j9mjDb"
