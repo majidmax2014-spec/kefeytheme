@@ -51,28 +51,10 @@
         "padding_top": 20,
         "padding_bottom": 20
       }
-    },
-    "header_banner_fwDmpq": {
-      "type": "header-banner",
-      "name": "Header Banner",
-      "settings": {
-        "background_image": "shopify://shop_images/about-banner.png",
-        "heading": "We reimagine wellness as joy",
-        "subheading": "Little rituals that care for you and the world around you",
-        "banner_height_desktop": 460,
-        "banner_height_mobile": 360,
-        "content_max_width": 760,
-        "content_alignment": "left",
-        "content_padding_x": 64,
-        "overlay_enable": true,
-        "overlay_color": "#000000",
-        "overlay_opacity": 24
-      }
     }
   },
   "order": [
     "announcement_bar_wyP6Wk",
-    "header",
-    "header_banner_fwDmpq"
+    "header"
   ]
 }
