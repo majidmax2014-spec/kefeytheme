@@ -10,12 +10,11 @@
   width: 100%;
   margin: 0;
   position: relative;
-  padding-top: 76px;
 }
 
 .we-refuse-section__titlebar {
   position: absolute;
-  top: 0;
+  top: 20px;
   left: 0;
   z-index: 4;
   width: min(100%, calc(var(--wrs-left, 42%) + 16%));
@@ -40,7 +39,7 @@
 
 .we-refuse-section__left {
   background: #ffffff;
-  padding: 22px clamp(20px, 6vw, 88px) 16px;
+  padding: 120px clamp(20px, 6vw, 88px) 16px;
 }
 
 .we-refuse-section__text {
