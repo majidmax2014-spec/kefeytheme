@@ -6,18 +6,30 @@
   style="
     --pbg-max: {{ section.settings.content_max_width }}px;
     --pbg-left: {{ section.settings.left_col_width }}%;
-    --pbg-panel: {{ section.settings.panel_color }};
-    --pbg-title-bg: {{ section.settings.title_bg_color }};
-    --pbg-title-color: {{ section.settings.title_color }};
+    --pbg-section-bg: {{ section.settings.section_bg_color }};
+    --pbg-panel: {{ section.settings.left_panel_color }};
+    --pbg-title-bg: {{ section.settings.title_bar_color }};
+    --pbg-title-color: {{ section.settings.title_text_color }};
     --pbg-body-color: {{ section.settings.body_color }};
     --pbg-pt: {{ section.settings.padding_top }}px;
     --pbg-pb: {{ section.settings.padding_bottom }}px;
     --pbg-min-h: {{ section.settings.min_height }}px;
+    --pbg-content-pl: {{ section.settings.content_padding_left }}px;
+    --pbg-content-pr: {{ section.settings.content_padding_right }}px;
+    --pbg-title-y: {{ section.settings.title_bar_offset_y }}px;
+    --pbg-title-w: {{ section.settings.title_bar_width }}%;
   "
 >
-  <div class="purpose-beyond-gummy__inner page-width">
+  <div class="purpose-beyond-gummy__inner">
+    {% if section.settings.heading != blank %}
+      <div class="purpose-beyond-gummy__titlebar">
+        <h2 class="purpose-beyond-gummy__heading">{{ section.settings.heading }}</h2>
+      </div>
+    {% endif %}
+
     <div class="purpose-beyond-gummy__layout">
       <div class="purpose-beyond-gummy__media">
+        <div class="purpose-beyond-gummy__panel-fill" aria-hidden="true"></div>
         {% if section.settings.image != blank %}
           {{
             section.settings.image
@@ -33,12 +45,6 @@
       </div>
 
       <div class="purpose-beyond-gummy__text-panel">
-        {% if section.settings.heading != blank %}
-          <div class="purpose-beyond-gummy__titlebar">
-            <h2 class="purpose-beyond-gummy__heading">{{ section.settings.heading }}</h2>
-          </div>
-        {% endif %}
-
         {% if section.settings.body != blank %}
           <div class="purpose-beyond-gummy__body rte">{{ section.settings.body }}</div>
         {% endif %}
@@ -100,6 +106,34 @@
       "default": "#ffffff"
     },
     {
+      "type": "header",
+      "content": "Layout and color overrides"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "left_panel_color",
+      "label": "Left yellow panel color",
+      "default": "#f2c718"
+    },
+    {
+      "type": "color",
+      "id": "title_bar_color",
+      "label": "Teal title bar color",
+      "default": "#36b2b2"
+    },
+    {
+      "type": "color",
+      "id": "title_text_color",
+      "label": "Title text color",
+      "default": "#ffffff"
+    },
+    {
       "type": "color",
       "id": "body_color",
       "label": "Body text color",
@@ -131,6 +165,42 @@
       "max": 640,
       "step": 10,
       "default": 290
+    },
+    {
+      "type": "range",
+      "id": "content_padding_left",
+      "label": "Content padding left",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "content_padding_right",
+      "label": "Content padding right",
+      "min": 0,
+      "max": 180,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "title_bar_offset_y",
+      "label": "Title bar vertical offset",
+      "min": -40,
+      "max": 140,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "title_bar_width",
+      "label": "Title bar width (%)",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "default": 78
     },
     {
       "type": "range",
