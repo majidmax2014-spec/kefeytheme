@@ -82,6 +82,20 @@
         "right_decor_y_2": 90
       }
     },
+    "marquee_strip_A9xK2m": {
+      "type": "marquee-strip",
+      "name": "Marquee Strip",
+      "settings": {
+        "text": "We believed wellness could feel more like a gift than a task.",
+        "background_color": "#E95A3A",
+        "text_color": "#FFFFFF",
+        "font_size": 16,
+        "font_weight": "500",
+        "duration": 12,
+        "padding_y": 8,
+        "pause_on_hover": true
+      }
+    },
     "designed_to_shine_6E8hee": {
       "type": "designed-to-shine",
       "name": "Designed To Shine",
@@ -161,6 +175,7 @@
     "main",
     "our_story_intro_aTDRXc",
     "what_if_wellness_j9mjDb",
+    "marquee_strip_A9xK2m",
     "designed_to_shine_6E8hee",
     "built_planet_mind_J4mCcb",
     "we_refuse_section_76XaT4",

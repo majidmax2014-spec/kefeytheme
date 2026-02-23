@@ -1,0 +1,107 @@
+{{ 'marquee-strip.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="MarqueeStrip-{{ section.id }}"
+  class="marquee-strip{% if section.settings.pause_on_hover %} marquee-strip--pause-hover{% endif %}"
+  style="
+    --bg: {{ section.settings.background_color }};
+    --tc: {{ section.settings.text_color }};
+    --fs: {{ section.settings.font_size }}px;
+    --fw: {{ section.settings.font_weight }};
+    --dur: {{ section.settings.duration }}s;
+    --py: {{ section.settings.padding_y }}px;
+  "
+>
+  <div class="marquee-strip__inner" aria-label="Marquee">
+    <div class="marquee-strip__track">
+      <div class="marquee-strip__group" aria-hidden="false">
+        {% for i in (1..6) %}
+          <span class="marquee-strip__item">{{ section.settings.text }}</span>
+        {% endfor %}
+      </div>
+      <div class="marquee-strip__group" aria-hidden="true">
+        {% for i in (1..6) %}
+          <span class="marquee-strip__item">{{ section.settings.text }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Marquee Strip",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "We believed wellness could feel more like a gift than a task."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#E95A3A"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "default": "500",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "duration",
+      "label": "Scroll speed (seconds)",
+      "min": 6,
+      "max": 30,
+      "step": 1,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marquee Strip"
+    }
+  ]
+}
+{% endschema %}
