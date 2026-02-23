@@ -82,108 +82,6 @@
         "right_decor_y_2": 90
       }
     },
-    "text_marquee_about_8Yt2Lq": {
-      "type": "text-marquee-bar",
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "text": "We believed wellness could feel more like a gift than a task."
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "text": "We believed wellness could feel more like a gift than a task."
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "text": "We believed wellness could feel more like a gift than a task."
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3"
-      ],
-      "name": "Text Marquee Bar",
-      "settings": {
-        "enabled": true,
-        "background_color": "#e95439",
-        "text_color": "#ffffff",
-        "bar_height_desktop": 42,
-        "bar_height_mobile": 36,
-        "font_size_desktop": 14,
-        "font_size_mobile": 12,
-        "font_weight": "700",
-        "letter_spacing": 0,
-        "gap": 32,
-        "margin_top": 0,
-        "margin_bottom": 18,
-        "separator_text": "",
-        "speed": 24,
-        "direction": "left",
-        "enable_rtl": false,
-        "pause_on_hover": true,
-        "pause_on_focus": true,
-        "aria_label": "Scrolling statement"
-      }
-    },
-    "designed_to_shine_s4WcD1": {
-      "type": "designed-to-shine",
-      "name": "Designed To Shine",
-      "settings": {
-        "heading": "Designed to Shine",
-        "subtitle": "<p>And just like that - Kefey was born.</p><p>Not a capsule. | A colorful, star-shaped spark. | Not a chore.</p>",
-        "text": "<ul><li>The star is not a decoration. It's a statement.</li><li>A symbol of focus, light, and confidence - and the belief that caring for yourself should help you shine from the inside out.</li><li>Each star-shaped gummy is crafted to deliver strength without heaviness, joy without compromise, and wellness that fits naturally into real life.</li><li><strong>Not a capsule.</strong></li><li><strong>Not a chore.</strong></li><li>But a small, joyful moment worth looking forward to - one star at a time.</li></ul>",
-        "section_bg": "#efefef",
-        "panel_bg": "#f6cb1f",
-        "title_bg": "#36b2b2",
-        "title_color": "#ffffff",
-        "subtitle_color": "#ffffff",
-        "text_color": "#ffffff",
-        "content_max_width": 1220,
-        "left_col_width": 44,
-        "padding_top": 10,
-        "padding_bottom": 54
-      }
-    },
-    "built_planet_mind_v9QkP0": {
-      "type": "built-planet-mind",
-      "name": "Built Planet Mind",
-      "settings": {
-        "heading": "Built with You & the <strong>Planet in Mind</strong>",
-        "accent_text": "From the very beginning, Kefey® was designed with responsibility in mind.",
-        "body": "<p>The wellness industry produces millions of plastic containers every day that are used briefly, then discarded.</p>",
-        "bg_color": "#efefef",
-        "heading_color": "#0d1f30",
-        "accent_color": "#db5a45",
-        "body_color": "#2e2e2e",
-        "content_max_width": 820,
-        "padding_top": 20,
-        "padding_bottom": 24
-      }
-    },
-    "we_refuse_section_r6NcA3": {
-      "type": "we-refuse-section",
-      "name": "We Refuse Section",
-      "settings": {
-        "heading": "We refuse to be part of that.",
-        "text": "<ul><li>Kefey® signature tube is crafted from premium, non-plastic materials, designed to stay - not to be used once and forgotten.</li><li>On your desk, on your shelf, as part of your daily space.</li><li>By focusing on highly concentrated formulas, fewer products are needed.</li><li>By choosing non-plastic, reusable packaging, waste is reduced by design.</li><li>Because caring for yourself should not have to come at the planet's expense.</li></ul>",
-        "section_bg": "#efefef",
-        "title_bg": "#e95439",
-        "title_color": "#ffffff",
-        "right_bg": "#69c6de",
-        "text_color": "#1e1e1e",
-        "content_max_width": 1220,
-        "left_col_width": 42,
-        "padding_top": 6,
-        "padding_bottom": 42
-      }
-    },
     "purpose_beyond_gummy_F8mZx2": {
       "type": "purpose-beyond-gummy",
       "name": "Purpose Beyond Gummy",
@@ -200,6 +98,58 @@
         "padding_top": 44,
         "padding_bottom": 52
       }
+    },
+    "designed_to_shine_6E8hee": {
+      "type": "designed-to-shine",
+      "name": "Designed To Shine",
+      "settings": {
+        "heading": "Designed to Shine",
+        "subtitle": "<p>And just like that - Kefey was born.</p><p>Not a capsule. | A colorful, star-shaped spark. | Not a chore.</p>",
+        "text": "<ul><li>The star is not a decoration. It is a statement.</li><li>A symbol of focus, light, and confidence - and the belief that caring for yourself should help you shine from the inside out.</li><li>Each star-shaped gummy is crafted to deliver strength without heaviness, joy without compromise, and wellness that fits naturally into real life.</li><li><strong>Not a capsule.</strong></li><li><strong>Not a chore.</strong></li><li>But a small, joyful moment worth looking forward to - one star at a time.</li></ul>",
+        "section_bg": "#efefef",
+        "panel_bg": "#f6cb1f",
+        "title_bg": "#36b2b2",
+        "title_color": "#ffffff",
+        "subtitle_color": "#ffffff",
+        "text_color": "#ffffff",
+        "content_max_width": 1220,
+        "left_col_width": 44,
+        "padding_top": 24,
+        "padding_bottom": 56
+      }
+    },
+    "built_planet_mind_J4mCcb": {
+      "type": "built-planet-mind",
+      "name": "Built Planet Mind",
+      "settings": {
+        "heading": "Built with You & the <strong>Planet in Mind</strong>",
+        "accent_text": "From the very beginning, Kefey® was designed with responsibility in mind.",
+        "body": "<p>The wellness industry produces millions of plastic containers every day that are used briefly, then discarded.</p>",
+        "bg_color": "#efefef",
+        "heading_color": "#0d1f30",
+        "accent_color": "#db5a45",
+        "body_color": "#2e2e2e",
+        "content_max_width": 820,
+        "padding_top": 44,
+        "padding_bottom": 40
+      }
+    },
+    "we_refuse_section_76XaT4": {
+      "type": "we-refuse-section",
+      "name": "We Refuse Section",
+      "settings": {
+        "heading": "We refuse to be part of that.",
+        "text": "<ul><li>Kefey® signature tube is crafted from premium, non-plastic materials, designed to stay - not to be used once and forgotten.</li><li>On your desk, on your shelf, as part of your daily space.</li><li>By focusing on highly concentrated formulas, fewer products are needed.</li><li>By choosing non-plastic, reusable packaging, waste is reduced by design.</li><li>Because caring for yourself should not have to come at the planet's expense.</li></ul>",
+        "section_bg": "#efefef",
+        "title_bg": "#e95439",
+        "title_color": "#ffffff",
+        "right_bg": "#69c6de",
+        "text_color": "#1e1e1e",
+        "content_max_width": 1220,
+        "left_col_width": 42,
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
@@ -207,10 +157,9 @@
     "main",
     "our_story_intro_aTDRXc",
     "what_if_wellness_j9mjDb",
-    "text_marquee_about_8Yt2Lq",
-    "designed_to_shine_s4WcD1",
-    "built_planet_mind_v9QkP0",
-    "we_refuse_section_r6NcA3",
+    "designed_to_shine_6E8hee",
+    "built_planet_mind_J4mCcb",
+    "we_refuse_section_76XaT4",
     "purpose_beyond_gummy_F8mZx2"
   ]
 }
