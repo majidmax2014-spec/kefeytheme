@@ -1,0 +1,160 @@
+{{ 'purpose-beyond-gummy.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="PurposeBeyondGummy-{{ section.id }}"
+  class="purpose-beyond-gummy"
+  style="
+    --pbg-max: {{ section.settings.content_max_width }}px;
+    --pbg-left: {{ section.settings.left_col_width }}%;
+    --pbg-panel: {{ section.settings.panel_color }};
+    --pbg-title-bg: {{ section.settings.title_bg_color }};
+    --pbg-title-color: {{ section.settings.title_color }};
+    --pbg-body-color: {{ section.settings.body_color }};
+    --pbg-pt: {{ section.settings.padding_top }}px;
+    --pbg-pb: {{ section.settings.padding_bottom }}px;
+    --pbg-min-h: {{ section.settings.min_height }}px;
+  "
+>
+  <div class="purpose-beyond-gummy__inner page-width">
+    <div class="purpose-beyond-gummy__layout">
+      <div class="purpose-beyond-gummy__media">
+        {% if section.settings.image != blank %}
+          {{
+            section.settings.image
+            | image_url: width: 1400
+            | image_tag:
+              class: 'purpose-beyond-gummy__image',
+              loading: 'lazy',
+              widths: '320, 540, 760, 980, 1200, 1400',
+              sizes: '(max-width: 989px) 100vw, 42vw',
+              alt: section.settings.image.alt
+          }}
+        {% endif %}
+      </div>
+
+      <div class="purpose-beyond-gummy__text-panel">
+        {% if section.settings.heading != blank %}
+          <div class="purpose-beyond-gummy__titlebar">
+            <h2 class="purpose-beyond-gummy__heading">{{ section.settings.heading }}</h2>
+          </div>
+        {% endif %}
+
+        {% if section.settings.body != blank %}
+          <div class="purpose-beyond-gummy__body rte">{{ section.settings.body }}</div>
+        {% endif %}
+
+        {% if section.settings.decor_image != blank %}
+          <div class="purpose-beyond-gummy__decor" aria-hidden="true">
+            {{ section.settings.decor_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: '' }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Purpose Beyond Gummy",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Purpose Beyond the <strong>Gummy</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>At Kefey, we believe that wellness should not stop with the individual - it should ripple outward. That is why we proudly support initiatives that uplift communities, empower women, nourish children, and protect the planet.</p><p>We call it <strong>Kefey for Kindness</strong>: because giving is part of what makes us glow.</p><p>This is not just a supplement. It is simple, it sparks, and it is our commitment to feel good - and do good. Ready to shine? Discover your Kefey star today.</p><p>Live full. Live Kefey.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Left image"
+    },
+    {
+      "type": "image_picker",
+      "id": "decor_image",
+      "label": "Right decor image"
+    },
+    {
+      "type": "color",
+      "id": "panel_color",
+      "label": "Left panel background",
+      "default": "#f2c718"
+    },
+    {
+      "type": "color",
+      "id": "title_bg_color",
+      "label": "Title bar background",
+      "default": "#36b2b2"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "body_color",
+      "label": "Body text color",
+      "default": "#1c1c1c"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "label": "Content max width",
+      "min": 900,
+      "max": 1600,
+      "step": 10,
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "left_col_width",
+      "label": "Left column width (%)",
+      "min": 25,
+      "max": 60,
+      "step": 1,
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height",
+      "min": 260,
+      "max": 640,
+      "step": 10,
+      "default": 290
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "default": 52
+    }
+  ],
+  "presets": [
+    {
+      "name": "Purpose Beyond Gummy"
+    }
+  ]
+}
+{% endschema %}

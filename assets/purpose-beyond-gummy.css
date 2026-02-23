@@ -1,0 +1,119 @@
+.purpose-beyond-gummy {
+  background: #efefef;
+  padding-top: var(--pbg-pt, 44px);
+  padding-bottom: var(--pbg-pb, 52px);
+}
+
+.purpose-beyond-gummy__inner {
+  max-width: var(--pbg-max, 1200px);
+}
+
+.purpose-beyond-gummy__layout {
+  display: grid;
+  grid-template-columns: minmax(0, var(--pbg-left, 38%)) minmax(0, calc(100% - var(--pbg-left, 38%)));
+  min-height: var(--pbg-min-h, 290px);
+}
+
+.purpose-beyond-gummy__media {
+  background: var(--pbg-panel, #f2c718);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.purpose-beyond-gummy__image {
+  width: min(100%, 560px);
+  height: auto;
+  display: block;
+}
+
+.purpose-beyond-gummy__text-panel {
+  position: relative;
+  background: #ffffff;
+  padding: 56px 36px 30px;
+}
+
+.purpose-beyond-gummy__titlebar {
+  position: absolute;
+  left: -40px;
+  right: 0;
+  top: -1px;
+  background: var(--pbg-title-bg, #36b2b2);
+  padding: 14px 26px 14px 36px;
+}
+
+.purpose-beyond-gummy__heading {
+  margin: 0;
+  color: var(--pbg-title-color, #ffffff);
+  font-family: var(--font-heading-family);
+  font-size: clamp(2.8rem, 2.8vw, 4.4rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.purpose-beyond-gummy__heading strong {
+  font-weight: 800;
+}
+
+.purpose-beyond-gummy__body {
+  color: var(--pbg-body-color, #1c1c1c);
+  font-size: clamp(1.45rem, 1.25vw, 1.8rem);
+  line-height: 1.55;
+}
+
+.purpose-beyond-gummy__body p {
+  margin: 0 0 1rem;
+}
+
+.purpose-beyond-gummy__body p:last-child {
+  margin-bottom: 0;
+}
+
+.purpose-beyond-gummy__decor {
+  position: absolute;
+  right: -78px;
+  bottom: 8px;
+  width: 120px;
+  pointer-events: none;
+}
+
+.purpose-beyond-gummy__decor img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media screen and (max-width: 989px) {
+  .purpose-beyond-gummy {
+    padding-top: calc(var(--pbg-pt, 44px) * 0.7);
+    padding-bottom: calc(var(--pbg-pb, 52px) * 0.7);
+  }
+
+  .purpose-beyond-gummy__layout {
+    grid-template-columns: 1fr;
+  }
+
+  .purpose-beyond-gummy__media {
+    min-height: 220px;
+  }
+
+  .purpose-beyond-gummy__image {
+    width: min(100%, 420px);
+  }
+
+  .purpose-beyond-gummy__text-panel {
+    padding: 62px 18px 24px;
+  }
+
+  .purpose-beyond-gummy__titlebar {
+    left: 0;
+    padding: 12px 16px;
+  }
+
+  .purpose-beyond-gummy__decor {
+    width: 84px;
+    right: -18px;
+    bottom: -14px;
+  }
+}
