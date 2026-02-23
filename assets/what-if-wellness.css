@@ -9,7 +9,6 @@
 .what-if-wellness__inner {
   position: relative;
   z-index: 2;
-  width: min(100%, calc(var(--wiw-max, 1220px) + 210px));
   margin: 0 auto;
   overflow: visible;
 }
@@ -17,10 +16,9 @@
 .what-if-wellness__panel {
   position: relative;
   background: var(--wiw-bg, #36b2b2);
-  margin-left: clamp(56px, 6.2vw, 124px);
-  margin-right: clamp(10px, 2vw, 34px);
+  margin-left: clamp(56px, 19.2vw, 279px);
   min-height: 474px;
-  padding: 42px 34px 30px 44px;
+  padding: 42px 0 12px 0;
   overflow: visible;
 }
 
@@ -46,6 +44,7 @@
   grid-template-columns: minmax(0, min(var(--wiw-left-col, 60%), 60%)) minmax(0, 1fr);
   align-items: center;
   gap: 18px;
+  padding-left: 40px;
 }
 
 .what-if-wellness__left {
