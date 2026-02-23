@@ -15,7 +15,19 @@
 >
   <div class="built-planet-mind__inner">
     {% if section.settings.heading != blank %}
-      <h2 class="built-planet-mind__heading">{{ section.settings.heading }}</h2>
+      {% assign heading_raw = section.settings.heading %}
+      {% if heading_raw contains '<strong>' and heading_raw contains '</strong>' %}
+        {% assign heading_parts = heading_raw | split: '<strong>' %}
+        {% assign heading_top = heading_parts[0] | strip %}
+        {% assign heading_bottom_parts = heading_parts[1] | split: '</strong>' %}
+        {% assign heading_bottom = heading_bottom_parts[0] | strip %}
+        <h2 class="built-planet-mind__heading">
+          <span class="built-planet-mind__heading-line built-planet-mind__heading-line--top">{{ heading_top }}</span>
+          <span class="built-planet-mind__heading-line built-planet-mind__heading-line--bottom">{{ heading_bottom }}</span>
+        </h2>
+      {% else %}
+        <h2 class="built-planet-mind__heading">{{ heading_raw }}</h2>
+      {% endif %}
     {% endif %}
     {% if section.settings.accent_text != blank %}
       <p class="built-planet-mind__accent">{{ section.settings.accent_text }}</p>
