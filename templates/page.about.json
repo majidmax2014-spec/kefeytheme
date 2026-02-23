@@ -124,6 +124,7 @@
       "settings": {
         "heading": "We refuse to be part of that.",
         "text": "<ul><li>Kefey® signature tube is crafted from premium, non-plastic materials, designed to stay - not to be used once and forgotten.</li><li>On your desk, on your shelf, as part of your daily space.</li><li>By focusing on highly concentrated formulas, fewer products are needed.</li><li>By choosing non-plastic, reusable packaging, waste is reduced by design.</li><li>Because caring for yourself should not have to come at the planet's expense.</li></ul>",
+        "right_image": "shopify://shop_images/Whisk_ba727d54a16d9d1abfe436817fa0ef63dr_1.png",
         "section_bg": "#efefef",
         "title_bg": "#e95439",
         "title_color": "#ffffff",
@@ -141,12 +142,14 @@
       "settings": {
         "heading": "Purpose Beyond the <strong>Gummy</strong>",
         "body": "<p>At Kefey, we believe that wellness should not stop with the individual - it should ripple outward. That is why we proudly support initiatives that uplift communities, empower women, nourish children, and protect the planet.</p><p>We call it <strong>Kefey for Kindness</strong>: because giving is part of what makes us glow.</p><p>This is not just a supplement. It is simple, it sparks, and it is our commitment to feel good - and do good. Ready to shine? Discover your Kefey star today.</p><p>Live full. Live Kefey.</p>",
+        "image": "shopify://shop_images/Group_1597884077.png",
+        "decor_image": "shopify://shop_images/a-4right-decor.png",
         "panel_color": "#f2c718",
         "title_bg_color": "#36b2b2",
         "title_color": "#ffffff",
         "body_color": "#1c1c1c",
-        "content_max_width": 1200,
-        "left_col_width": 38,
+        "content_max_width": 1600,
+        "left_col_width": 45,
         "min_height": 290,
         "padding_top": 44,
         "padding_bottom": 52
