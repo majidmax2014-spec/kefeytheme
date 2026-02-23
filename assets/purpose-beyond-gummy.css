@@ -65,10 +65,10 @@
 .purpose-beyond-gummy__heading {
   margin: 0;
   color: var(--pbg-title-color, #ffffff);
-  font-family: var(--font-heading-family);
-  font-size: clamp(3.2rem, 3vw, 5rem);
+  font-family: var(--pbg-h-ff, inherit);
+  font-size: var(--pbg-h-fs, 48px);
   line-height: 1.1;
-  font-weight: 600;
+  font-weight: var(--pbg-h-fw, inherit);
 }
 
 .purpose-beyond-gummy__heading strong {
@@ -77,9 +77,11 @@
 
 .purpose-beyond-gummy__body {
   color: var(--pbg-body-color, #1c1c1c);
-  font-size: clamp(1.55rem, 1.16vw, 2rem);
+  font-family: var(--pbg-t-ff, inherit);
+  font-size: var(--pbg-t-fs, 20px);
   line-height: 1.42;
   max-width: min(100%, 880px);
+  font-weight: var(--pbg-t-fw, inherit);
 }
 
 .purpose-beyond-gummy__body p {
@@ -149,7 +151,7 @@
   }
 
   .purpose-beyond-gummy__heading {
-    font-size: clamp(3rem, 7.2vw, 4rem);
+    font-size: var(--pbg-h-fs, 48px);
   }
 
   .purpose-beyond-gummy__text-panel {

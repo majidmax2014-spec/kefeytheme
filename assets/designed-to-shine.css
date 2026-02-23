@@ -24,9 +24,10 @@
   margin: 0;
   display: inline-block;
   color: var(--dts-title-color, #fff);
-  font-size: clamp(3rem, 2.8vw, 4.2rem);
+  font-family: var(--dts-h-ff, inherit);
+  font-size: var(--dts-h-fs, 42px);
   line-height: 1.08;
-  font-weight: 800;
+  font-weight: var(--dts-h-fw, inherit);
   position: relative;
   z-index: 1;
   padding-bottom: 8px;
@@ -86,8 +87,10 @@
 
 .designed-to-shine__text {
   color: var(--dts-text-color, #fff);
-  font-size: clamp(1.45rem, 1.25vw, 1.8rem);
+  font-family: var(--dts-t-ff, inherit);
+  font-size: var(--dts-t-fs, 18px);
   line-height: 1.5;
+  font-weight: var(--dts-t-fw, inherit);
 }
 
 .designed-to-shine__text ul {

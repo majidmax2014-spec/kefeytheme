@@ -1,5 +1,21 @@
 {{ 'what-if-wellness.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign wiw_h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign wiw_h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign wiw_h_ff = 'var(--font-body-family)'
+  endif
+
+  assign wiw_t_ff = 'inherit'
+  if section.settings.text_font_family == 'heading'
+    assign wiw_t_ff = 'var(--font-heading-family)'
+  elsif section.settings.text_font_family == 'body'
+    assign wiw_t_ff = 'var(--font-body-family)'
+  endif
+-%}
+
 <section
   id="WhatIfWellness-{{ section.id }}"
   class="what-if-wellness"
@@ -21,6 +37,12 @@
     --wiw-r2-w: {{ section.settings.right_decor_width_2 }}px;
     --wiw-r2-x: {{ section.settings.right_decor_x_2 }}px;
     --wiw-r2-y: {{ section.settings.right_decor_y_2 }}px;
+    --wiw-h-ff: {{ wiw_h_ff }};
+    --wiw-h-fw: {{ section.settings.heading_font_weight }};
+    --wiw-h-fs: {{ section.settings.heading_font_size }}px;
+    --wiw-t-ff: {{ wiw_t_ff }};
+    --wiw-t-fw: {{ section.settings.text_font_weight }};
+    --wiw-t-fs: {{ section.settings.text_font_size }}px;
   "
 >
   <div class="what-if-wellness__inner">
@@ -105,6 +127,58 @@
     { "type": "color", "id": "title_bar_color", "label": "Title bar color", "default": "#F8CB34" },
     { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#FFFFFF" },
     { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    { "type": "range", "id": "heading_font_size", "label": "Heading font size", "min": 16, "max": 96, "step": 2, "default": 48 },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Body font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_weight",
+      "label": "Body font weight",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    { "type": "range", "id": "text_font_size", "label": "Body font size", "min": 10, "max": 32, "step": 1, "default": 18 },
     { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 900, "max": 1600, "step": 10, "default": 1220 },
     { "type": "range", "id": "left_col_width", "label": "Left column width (%)", "min": 45, "max": 70, "step": 1, "default": 60 },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 200, "step": 4, "default": 12 },

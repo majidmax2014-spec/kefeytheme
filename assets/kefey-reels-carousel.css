@@ -17,9 +17,9 @@
 .kefey-reels-carousel__title {
   position: relative;
   display: inline-block;
-  font-family: var(--font-heading-family);
-  font-weight: 800;
-  font-size: var(--krc-heading-size, 48px);
+  font-family: var(--krc-h-ff, inherit);
+  font-weight: var(--krc-h-fw, inherit);
+  font-size: var(--krc-h-fs, 48px);
   line-height: 1.1;
   margin: 0;
 }
@@ -141,9 +141,9 @@
   bottom: 0;
   padding: 1.2rem 1.2rem 1rem;
   color: #fff;
-  font-family: var(--font-heading-family);
-  font-size: var(--krc-caption-fs, 14px);
-  font-weight: 700;
+  font-family: var(--krc-t-ff, inherit);
+  font-size: var(--krc-t-fs, 14px);
+  font-weight: var(--krc-t-fw, inherit);
   line-height: 1.05;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
   white-space: nowrap;

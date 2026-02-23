@@ -32,10 +32,10 @@
 .what-if-wellness__heading {
   margin: 0;
   color: var(--wiw-heading-color, #ffffff);
-  font-family: var(--font-heading-family);
-  font-size: clamp(3.1rem, 3.2vw, 5.2rem);
+  font-family: var(--wiw-h-ff, inherit);
+  font-size: var(--wiw-h-fs, 48px);
   line-height: 1.05;
-  font-weight: 800;
+  font-weight: var(--wiw-h-fw, inherit);
   text-align: left;
 }
 
@@ -54,9 +54,10 @@
 }
 
 .what-if-wellness__intro {
-  font-size: clamp(1.8rem, 1.55vw, 2.8rem);
+  font-family: var(--wiw-t-ff, inherit);
+  font-size: var(--wiw-t-fs, 18px);
   line-height: 1.24;
-  font-weight: 700;
+  font-weight: var(--wiw-t-fw, inherit);
 }
 
 .what-if-wellness__intro p {
@@ -65,8 +66,10 @@
 
 .what-if-wellness__bullets {
   margin-top: 16px;
-  font-size: clamp(1.6rem, 1.25vw, 2.2rem);
+  font-family: var(--wiw-t-ff, inherit);
+  font-size: var(--wiw-t-fs, 18px);
   line-height: 1.42;
+  font-weight: var(--wiw-t-fw, inherit);
 }
 
 .what-if-wellness__bullets ul {

@@ -14,9 +14,10 @@
 .built-planet-mind__heading {
   margin: 0;
   color: var(--bpm-title-color, #0d1f30);
-  font-size: clamp(3.2rem, 3.1vw, 4.8rem);
+  font-family: var(--bpm-h-ff, inherit);
+  font-size: var(--bpm-h-fs, 48px);
   line-height: 1.08;
-  font-weight: 700;
+  font-weight: var(--bpm-h-fw, inherit);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +30,7 @@
 
 .built-planet-mind__heading-line--top {
   position: relative;
-  font-weight: 500;
+  font-weight: var(--bpm-h-fw, inherit);
   padding-bottom: 7px;
 }
 
@@ -63,8 +64,10 @@
 .built-planet-mind__body {
   margin-top: 10px;
   color: var(--bpm-body-color, #2e2e2e);
-  font-size: clamp(1.5rem, 1.18vw, 1.75rem);
+  font-family: var(--bpm-t-ff, inherit);
+  font-size: var(--bpm-t-fs, 18px);
   line-height: 1.45;
+  font-weight: var(--bpm-t-fw, inherit);
 }
 
 .built-planet-mind__body p {

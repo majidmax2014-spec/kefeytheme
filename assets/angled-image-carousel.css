@@ -21,9 +21,9 @@
 .angled-carousel__title {
   position: relative;
   display: inline-block;
-  font-family: var(--font-heading-family);
-  font-weight: 800;
-  font-size: var(--heading-size, 42px);
+  font-family: var(--aic-h-ff, inherit);
+  font-weight: var(--aic-h-fw, inherit);
+  font-size: var(--aic-h-fs, 42px);
   line-height: 1.1;
   margin: 0;
 }

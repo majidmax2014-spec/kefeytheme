@@ -25,9 +25,10 @@
 .we-refuse-section__heading {
   margin: 0;
   color: var(--wrs-title-color, #fff);
-  font-size: clamp(3rem, 2.5vw, 4.1rem);
+  font-family: var(--wrs-h-ff, inherit);
+  font-size: var(--wrs-h-fs, 42px);
   line-height: 1.1;
-  font-weight: 800;
+  font-weight: var(--wrs-h-fw, inherit);
 }
 
 .we-refuse-section__grid {
@@ -44,9 +45,11 @@
 
 .we-refuse-section__text {
   color: var(--wrs-text-color, #1e1e1e);
-  font-size: clamp(1.45rem, 1.14vw, 1.75rem);
+  font-family: var(--wrs-t-ff, inherit);
+  font-size: var(--wrs-t-fs, 18px);
   line-height: 1.52;
   max-width: min(100%, var(--wrs-max, 1220px));
+  font-weight: var(--wrs-t-fw, inherit);
 }
 
 .we-refuse-section__text ul {

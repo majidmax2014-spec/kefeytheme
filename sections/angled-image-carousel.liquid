@@ -1,4 +1,12 @@
 {{ 'angled-image-carousel.css' | asset_url | stylesheet_tag }}
+{%- liquid
+  assign aic_h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign aic_h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign aic_h_ff = 'var(--font-body-family)'
+  endif
+-%}
 <section
   id="AngledCarousel-{{ section.id }}"
   class="angled-carousel"
@@ -21,6 +29,9 @@
     --tilt-deg-desktop: {{ section.settings.tilt_strength_desktop | default: 10 }}deg;
     --tilt-deg-mobile: {{ section.settings.tilt_strength_mobile | default: 8 }}deg;
     --heading-size: {{ section.settings.heading_size | default: 42 }}px;
+    --aic-h-ff: {{ aic_h_ff }};
+    --aic-h-fw: {{ section.settings.heading_font_weight }};
+    --aic-h-fs: {{ section.settings.heading_size | default: 42 }}px;
   "
   data-show-arrows="{{ section.settings.show_arrows }}"
   data-show-dots="{{ section.settings.show_dots }}"
@@ -107,6 +118,31 @@
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Angled Carousel" },
     { "type": "range", "id": "heading_size", "min": 24, "max": 72, "step": 2, "unit": "px", "label": "Heading size", "default": 42 },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
     { "type": "checkbox", "id": "show_highlight", "label": "Show heading highlight", "default": true },
     { "type": "color", "id": "highlight_color", "label": "Highlight color", "default": "#FFC94D" },
     { "type": "range", "id": "section_padding_top", "min": 0, "max": 120, "step": 4, "unit": "px", "label": "Padding top", "default": 40 },

@@ -25,9 +25,9 @@
   position: relative;
   display: inline-block;
   margin: 0;
-  font-family: var(--font-heading-family);
-  font-weight: 800;
-  font-size: var(--osi-heading-size, 56px);
+  font-family: var(--osi-h-ff, inherit);
+  font-weight: var(--osi-h-fw, inherit);
+  font-size: var(--osi-h-fs, 56px);
   line-height: 1.1;
 }
 
@@ -47,7 +47,9 @@
 }
 
 .our-story-intro__body {
-  font-size: var(--osi-body-size, 18px);
+  font-family: var(--osi-t-ff, inherit);
+  font-weight: var(--osi-t-fw, inherit);
+  font-size: var(--osi-t-fs, 18px);
   line-height: 1.35;
 }
 

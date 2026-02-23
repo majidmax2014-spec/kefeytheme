@@ -6,10 +6,26 @@
 
 {{ 'kefey-testimonials-grid.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign ktg_h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign ktg_h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign ktg_h_ff = 'var(--font-body-family)'
+  endif
+
+  assign ktg_t_ff = 'inherit'
+  if section.settings.text_font_family == 'heading'
+    assign ktg_t_ff = 'var(--font-heading-family)'
+  elsif section.settings.text_font_family == 'body'
+    assign ktg_t_ff = 'var(--font-body-family)'
+  endif
+-%}
+
 <section
   id="TestimonialsCarousel-{{ section.id }}"
   class="kefey-testimonials-grid color-{{ section.settings.color_scheme }}"
-  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-gap: 2.4rem; --ktg-quote-icon-size: {{ section.settings.quote_icon_size | default: 72 }}px; --ktg-quote-icon-mt: {{ section.settings.quote_icon_margin_top | default: 0 }}px; --ktg-quote-icon-mb: {{ section.settings.quote_icon_margin_bottom | default: 12 }}px; --ktg-decor-left-w: {{ section.settings.left_decor_width | default: 160 }}px; --ktg-decor-left-x: {{ section.settings.left_decor_offset_x | default: 0 }}px; --ktg-decor-left-y: {{ section.settings.left_decor_offset_y | default: 0 }}px; --ktg-decor-right-w: {{ section.settings.right_decor_width | default: 160 }}px; --ktg-decor-right-x: {{ section.settings.right_decor_offset_x | default: 0 }}px; --ktg-decor-right-y: {{ section.settings.right_decor_offset_y | default: 0 }}px;"
+  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-gap: 2.4rem; --ktg-quote-icon-size: {{ section.settings.quote_icon_size | default: 72 }}px; --ktg-quote-icon-mt: {{ section.settings.quote_icon_margin_top | default: 0 }}px; --ktg-quote-icon-mb: {{ section.settings.quote_icon_margin_bottom | default: 12 }}px; --ktg-decor-left-w: {{ section.settings.left_decor_width | default: 160 }}px; --ktg-decor-left-x: {{ section.settings.left_decor_offset_x | default: 0 }}px; --ktg-decor-left-y: {{ section.settings.left_decor_offset_y | default: 0 }}px; --ktg-decor-right-w: {{ section.settings.right_decor_width | default: 160 }}px; --ktg-decor-right-x: {{ section.settings.right_decor_offset_x | default: 0 }}px; --ktg-decor-right-y: {{ section.settings.right_decor_offset_y | default: 0 }}px; --ktg-h-ff: {{ ktg_h_ff }}; --ktg-h-fw: {{ section.settings.heading_font_weight }}; --ktg-h-fs: {{ section.settings.heading_size }}px; --ktg-t-ff: {{ ktg_t_ff }}; --ktg-t-fw: {{ section.settings.text_font_weight }}; --ktg-t-fs: {{ section.settings.text_font_size }}px;"
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
 >
@@ -104,9 +120,9 @@
 .kefey-testimonials-grid__title {
   position: relative;
   display: inline-block;
-  font-family: var(--font-heading-family);
-  font-weight: 800;
-  font-size: {{ section.settings.heading_size }}px;
+  font-family: var(--ktg-h-ff, inherit);
+  font-weight: var(--ktg-h-fw, inherit);
+  font-size: var(--ktg-h-fs, 36px);
   line-height: 1.1;
   margin: 0;
 }
@@ -132,6 +148,57 @@
   "settings": [
     { "type": "text", "id": "heading", "label": "Heading", "default": "Joyful Routines. That’s Why They Stay!" },
     { "type": "range", "id": "heading_size", "label": "Heading size", "min": 20, "max": 64, "step": 1, "default": 36 },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Body font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_weight",
+      "label": "Body font weight",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    { "type": "range", "id": "text_font_size", "label": "Body font size", "min": 10, "max": 32, "step": 1, "default": 14 },
     { "type": "color", "id": "highlight_color", "label": "Highlight color", "default": "#FFC94D" },
     { "type": "color", "id": "card_bg_color", "label": "Card background", "default": "#FFE082" },
     { "type": "range", "id": "card_radius", "label": "Card corner radius", "min": 0, "max": 48, "step": 1, "default": 24 },

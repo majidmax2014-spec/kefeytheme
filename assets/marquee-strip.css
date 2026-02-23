@@ -29,6 +29,7 @@
 .marquee-strip__item {
   display: inline-block;
   white-space: nowrap;
+  font-family: var(--ms-t-ff, inherit);
   font-size: var(--fs, 16px);
   font-weight: var(--fw, 500);
   line-height: 1.2;

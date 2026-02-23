@@ -1,5 +1,21 @@
 {{ 'our-story-intro.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign osi_h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign osi_h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign osi_h_ff = 'var(--font-body-family)'
+  endif
+
+  assign osi_t_ff = 'inherit'
+  if section.settings.text_font_family == 'heading'
+    assign osi_t_ff = 'var(--font-heading-family)'
+  elsif section.settings.text_font_family == 'body'
+    assign osi_t_ff = 'var(--font-body-family)'
+  endif
+-%}
+
 <section
   id="OurStoryIntro-{{ section.id }}"
   class="our-story-intro our-story-intro--{{ section.settings.text_alignment }}"
@@ -12,6 +28,12 @@
     --osi-pt: {{ section.settings.padding_top }}px;
     --osi-pb: {{ section.settings.padding_bottom }}px;
     --osi-max: {{ section.settings.max_width }}px;
+    --osi-h-ff: {{ osi_h_ff }};
+    --osi-h-fw: {{ section.settings.heading_font_weight }};
+    --osi-h-fs: {{ section.settings.heading_size }}px;
+    --osi-t-ff: {{ osi_t_ff }};
+    --osi-t-fw: {{ section.settings.text_font_weight }};
+    --osi-t-fs: {{ section.settings.body_font_size }}px;
   "
 >
   <div class="our-story-intro__inner page-width">
@@ -66,6 +88,31 @@
       "default": 56
     },
     {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
       "type": "richtext",
       "id": "body_text",
       "label": "Body text",
@@ -91,6 +138,31 @@
       "max": 40,
       "step": 1,
       "default": 18
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Body font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_weight",
+      "label": "Body font weight",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
     },
     {
       "type": "range",

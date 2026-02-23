@@ -70,7 +70,9 @@
 }
 .kefey-testimonials-grid__content {
   color: rgba(var(--color-foreground), 0.9);
-  font-size: 1.4rem;
+  font-family: var(--ktg-t-ff, inherit);
+  font-size: var(--ktg-t-fs, 14px);
+  font-weight: var(--ktg-t-fw, inherit);
   flex: 1;
 }
 .kefey-testimonials-grid__name {

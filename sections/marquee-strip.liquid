@@ -1,13 +1,28 @@
 {{ 'marquee-strip.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign ms_t_ff = 'inherit'
+  if section.settings.text_font_family == 'heading'
+    assign ms_t_ff = 'var(--font-heading-family)'
+  elsif section.settings.text_font_family == 'body'
+    assign ms_t_ff = 'var(--font-body-family)'
+  endif
+
+  assign ms_t_fw = section.settings.font_weight
+  if section.settings.text_font_weight != 'inherit'
+    assign ms_t_fw = section.settings.text_font_weight
+  endif
+-%}
+
 <section
   id="MarqueeStrip-{{ section.id }}"
   class="marquee-strip{% if section.settings.pause_on_hover %} marquee-strip--pause-hover{% endif %}"
   style="
     --bg: {{ section.settings.background_color }};
     --tc: {{ section.settings.text_color }};
-    --fs: {{ section.settings.font_size }}px;
-    --fw: {{ section.settings.font_weight }};
+    --fs: {{ section.settings.text_font_size }}px;
+    --fw: {{ ms_t_fw }};
+    --ms-t-ff: {{ ms_t_ff }};
     --dur: {{ section.settings.duration }}s;
     --py: {{ section.settings.padding_y }}px;
   "
@@ -67,11 +82,47 @@
       "label": "Font weight",
       "default": "500",
       "options": [
+        { "value": "inherit", "label": "inherit" },
         { "value": "400", "label": "400" },
         { "value": "500", "label": "500" },
         { "value": "600", "label": "600" },
-        { "value": "700", "label": "700" }
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
       ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Text font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_weight",
+      "label": "Text font weight",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Text font size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "default": 16
     },
     {
       "type": "range",
