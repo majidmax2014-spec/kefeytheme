@@ -90,14 +90,14 @@
         "subtitle": "<p>And just like that - Kefey was born.</p><p>Not a capsule. | A colorful, star-shaped spark. | Not a chore.</p>",
         "text": "<ul><li>The star is not a decoration. It is a statement.</li><li>A symbol of focus, light, and confidence - and the belief that caring for yourself should help you shine from the inside out.</li><li>Each star-shaped gummy is crafted to deliver strength without heaviness, joy without compromise, and wellness that fits naturally into real life.</li><li><strong>Not a capsule.</strong></li><li><strong>Not a chore.</strong></li><li>But a small, joyful moment worth looking forward to - one star at a time.</li></ul>",
         "left_image": "shopify://shop_images/storryy_1.png",
-        "section_bg": "#efefef",
+        "section_bg": "#ffffff",
         "panel_bg": "#f6cb1f",
         "title_bg": "#36b2b2",
         "title_color": "#ffffff",
         "subtitle_color": "#ffffff",
         "text_color": "#ffffff",
         "content_max_width": 1600,
-        "left_col_width": 44,
+        "left_col_width": 50,
         "padding_top": 24,
         "padding_bottom": 56
       }
