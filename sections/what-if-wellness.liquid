@@ -23,56 +23,62 @@
     --wiw-r2-y: {{ section.settings.right_decor_y_2 }}px;
   "
 >
-  <div class="what-if-wellness__inner page-width">
-    <div class="what-if-wellness__titlebar">
-      <h2 class="what-if-wellness__heading">{{ section.settings.heading }}</h2>
-    </div>
-
-    <div class="what-if-wellness__grid">
-      <div class="what-if-wellness__left">
-        {% if section.settings.intro != blank %}
-          <div class="what-if-wellness__intro rte">{{ section.settings.intro }}</div>
-        {% endif %}
-        {% if section.settings.bullets != blank %}
-          <div class="what-if-wellness__bullets rte">{{ section.settings.bullets }}</div>
-        {% endif %}
+  <div class="what-if-wellness__inner">
+    <div class="what-if-wellness__panel">
+      <div class="what-if-wellness__titlebar">
+        <h2 class="what-if-wellness__heading">{{ section.settings.heading }}</h2>
       </div>
 
-      <div class="what-if-wellness__right">
-        {% if section.settings.right_image != blank %}
-          {{
-            section.settings.right_image
-            | image_url: width: 1400
-            | image_tag:
-              class: 'what-if-wellness__product-image',
-              loading: 'lazy',
-              widths: '300, 500, 700, 900, 1100, 1400',
-              sizes: '(max-width: 989px) 76vw, 38vw',
-              alt: section.settings.right_image.alt
-          }}
-        {% endif %}
+      <div class="what-if-wellness__grid">
+        <div class="what-if-wellness__left">
+          {% if section.settings.intro != blank %}
+            <div class="what-if-wellness__intro rte">{{ section.settings.intro }}</div>
+          {% endif %}
+          {% if section.settings.bullets != blank %}
+            <div class="what-if-wellness__bullets rte">{{ section.settings.bullets }}</div>
+          {% endif %}
+        </div>
+
+        <div class="what-if-wellness__right">
+          {% if section.settings.right_image != blank %}
+            {{
+              section.settings.right_image
+              | image_url: width: 1400
+              | image_tag:
+                class: 'what-if-wellness__product-image',
+                loading: 'lazy',
+                widths: '300, 500, 700, 900, 1100, 1400',
+                sizes: '(max-width: 989px) 70vw, 36vw',
+                alt: section.settings.right_image.alt
+            }}
+          {% endif %}
+        </div>
       </div>
+
+      {% if section.settings.show_left_decor and section.settings.left_decor_image != blank %}
+        <div class="what-if-wellness__decor what-if-wellness__decor--left" aria-hidden="true">
+          {{ section.settings.left_decor_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.show_right_decor %}
+        {% if section.settings.right_decor_image_1 != blank %}
+          <div class="what-if-wellness__decor what-if-wellness__decor--right-1" aria-hidden="true">
+            {{ section.settings.right_decor_image_1 | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}
+          </div>
+        {% else %}
+          <div class="what-if-wellness__decor what-if-wellness__decor--right-1 what-if-wellness__decor--fallback-zigzag" aria-hidden="true"></div>
+        {% endif %}
+        {% if section.settings.right_decor_image_2 != blank %}
+          <div class="what-if-wellness__decor what-if-wellness__decor--right-2" aria-hidden="true">
+            {{ section.settings.right_decor_image_2 | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}
+          </div>
+        {% else %}
+          <div class="what-if-wellness__decor what-if-wellness__decor--right-2 what-if-wellness__decor--fallback-star" aria-hidden="true"></div>
+        {% endif %}
+      {% endif %}
     </div>
   </div>
-
-  {% if section.settings.show_left_decor and section.settings.left_decor_image != blank %}
-    <div class="what-if-wellness__decor what-if-wellness__decor--left" aria-hidden="true">
-      {{ section.settings.left_decor_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}
-    </div>
-  {% endif %}
-
-  {% if section.settings.show_right_decor %}
-    {% if section.settings.right_decor_image_1 != blank %}
-      <div class="what-if-wellness__decor what-if-wellness__decor--right-1" aria-hidden="true">
-        {{ section.settings.right_decor_image_1 | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}
-      </div>
-    {% endif %}
-    {% if section.settings.right_decor_image_2 != blank %}
-      <div class="what-if-wellness__decor what-if-wellness__decor--right-2" aria-hidden="true">
-        {{ section.settings.right_decor_image_2 | image_url: width: 800 | image_tag: loading: 'lazy', alt: '' }}
-      </div>
-    {% endif %}
-  {% endif %}
 </section>
 
 {% schema %}
