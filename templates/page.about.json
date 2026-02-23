@@ -111,7 +111,7 @@
         "text_font_weight": "inherit",
         "text_font_size": 24,
         "duration": 30,
-        "padding_y": 16,
+        "padding_y": 20,
         "pause_on_hover": true
       }
     },
