@@ -64,7 +64,7 @@
         "title_bar_color": "#f8cb34",
         "heading_color": "#ffffff",
         "text_color": "#ffffff",
-        "content_max_width": 1600,
+        "content_max_width": 1200,
         "left_col_width": 70,
         "padding_top": 48,
         "padding_bottom": 0,
