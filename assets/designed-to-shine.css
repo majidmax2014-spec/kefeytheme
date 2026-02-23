@@ -20,25 +20,27 @@
   z-index: 2;
 }
 
-.designed-to-shine__title-card::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 16px;
-  width: min(86%, 380px);
-  height: 9px;
-  background: #f6cb1f;
-}
-
 .designed-to-shine__heading {
   margin: 0;
+  display: inline-block;
   color: var(--dts-title-color, #fff);
   font-size: clamp(3rem, 2.8vw, 4.2rem);
   line-height: 1.08;
   font-weight: 800;
   position: relative;
   z-index: 1;
+  padding-bottom: 8px;
+}
+
+.designed-to-shine__heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 9px;
+  background: #f6cb1f;
+  z-index: -1;
 }
 
 .designed-to-shine__subtitle {
@@ -65,7 +67,7 @@
 .designed-to-shine__media {
   display: flex;
   align-items: flex-end;
-  justify-content: center;
+  justify-content: left;
   overflow: hidden;
 }
 
