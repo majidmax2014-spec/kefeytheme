@@ -1,0 +1,48 @@
+{{ 'built-planet-mind.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="BuiltPlanetMind-{{ section.id }}"
+  class="built-planet-mind"
+  style="
+    --bpm-bg: {{ section.settings.bg_color }};
+    --bpm-title-color: {{ section.settings.heading_color }};
+    --bpm-accent-color: {{ section.settings.accent_color }};
+    --bpm-body-color: {{ section.settings.body_color }};
+    --bpm-max: {{ section.settings.content_max_width }}px;
+    --bpm-pt: {{ section.settings.padding_top }}px;
+    --bpm-pb: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="built-planet-mind__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="built-planet-mind__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.accent_text != blank %}
+      <p class="built-planet-mind__accent">{{ section.settings.accent_text }}</p>
+    {% endif %}
+    {% if section.settings.body != blank %}
+      <div class="built-planet-mind__body rte">{{ section.settings.body }}</div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Built Planet Mind",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Built with You & the <strong>Planet in Mind</strong>" },
+    { "type": "text", "id": "accent_text", "label": "Accent text", "default": "From the very beginning, Kefey\u00ae was designed with responsibility in mind." },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>The wellness industry produces millions of plastic containers every day that are used briefly, then discarded.</p>" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#efefef" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#0d1f30" },
+    { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#db5a45" },
+    { "type": "color", "id": "body_color", "label": "Body color", "default": "#2e2e2e" },
+    { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 520, "max": 1300, "step": 10, "default": 820 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 220, "step": 4, "default": 44 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 220, "step": 4, "default": 42 }
+  ],
+  "presets": [{ "name": "Built Planet Mind" }]
+}
+{% endschema %}

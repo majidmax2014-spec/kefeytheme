@@ -1,0 +1,122 @@
+.designed-to-shine {
+  background: var(--dts-bg, #efefef);
+  width: 100%;
+  padding-top: var(--dts-pt, 26px);
+  padding-bottom: var(--dts-pb, 58px);
+}
+
+.designed-to-shine__wrap {
+  width: min(100% - 32px, var(--dts-max, 1220px));
+  margin: 0 auto;
+}
+
+.designed-to-shine__title-card {
+  width: min(100%, 620px);
+  margin: 0 auto -6px;
+  padding: 12px 24px 14px;
+  text-align: center;
+  background: var(--dts-title-bg, #36b2b2);
+  position: relative;
+  z-index: 2;
+}
+
+.designed-to-shine__title-card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 16px;
+  width: min(86%, 380px);
+  height: 9px;
+  background: #f6cb1f;
+}
+
+.designed-to-shine__heading {
+  margin: 0;
+  color: var(--dts-title-color, #fff);
+  font-size: clamp(3rem, 2.8vw, 4.2rem);
+  line-height: 1.08;
+  font-weight: 800;
+  position: relative;
+  z-index: 1;
+}
+
+.designed-to-shine__subtitle {
+  margin-top: 10px;
+  color: var(--dts-sub-color, #fff);
+  font-size: clamp(1.4rem, 1.15vw, 1.8rem);
+  line-height: 1.32;
+  position: relative;
+  z-index: 1;
+}
+
+.designed-to-shine__subtitle p {
+  margin: 0.35rem 0;
+}
+
+.designed-to-shine__panel {
+  display: grid;
+  grid-template-columns: minmax(0, var(--dts-left, 44%)) minmax(0, calc(100% - var(--dts-left, 44%)));
+  align-items: stretch;
+  background: var(--dts-panel-bg, #f6cb1f);
+  min-height: 318px;
+}
+
+.designed-to-shine__media {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.designed-to-shine__image {
+  width: min(100%, 640px);
+  height: auto;
+  display: block;
+  margin-left: -16px;
+}
+
+.designed-to-shine__content {
+  display: flex;
+  align-items: center;
+  padding: 26px 26px 18px 20px;
+}
+
+.designed-to-shine__text {
+  color: var(--dts-text-color, #fff);
+  font-size: clamp(1.45rem, 1.25vw, 1.8rem);
+  line-height: 1.5;
+}
+
+.designed-to-shine__text ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.designed-to-shine__text li + li {
+  margin-top: 4px;
+}
+
+@media screen and (max-width: 989px) {
+  .designed-to-shine {
+    padding-top: calc(var(--dts-pt, 26px) * 0.85);
+    padding-bottom: calc(var(--dts-pb, 58px) * 0.75);
+  }
+
+  .designed-to-shine__wrap {
+    width: calc(100% - 20px);
+  }
+
+  .designed-to-shine__panel {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .designed-to-shine__content {
+    padding: 18px 16px 20px;
+  }
+
+  .designed-to-shine__title-card {
+    margin-bottom: 0;
+  }
+}
