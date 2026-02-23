@@ -1,47 +1,51 @@
 .what-if-wellness {
   position: relative;
-  overflow: hidden;
-  background: var(--wiw-bg, #36b2b2);
-  padding-top: var(--wiw-pt, 48px);
-  padding-bottom: var(--wiw-pb, 48px);
+  overflow: visible;
+  padding-top: calc(var(--wiw-pt, 48px) * 0.25);
+  padding-bottom: calc(var(--wiw-pb, 48px) * 0.25);
 }
 
 .what-if-wellness__inner {
   position: relative;
   z-index: 2;
   max-width: var(--wiw-max, 1220px);
+  background: var(--wiw-bg, #36b2b2);
+  min-height: 470px;
+  padding: 42px 34px 28px 44px;
+  overflow: visible;
 }
 
 .what-if-wellness__titlebar {
-  width: min(92%, 980px);
+  width: min(84%, 980px);
   background: var(--wiw-bar-bg, #f8cb34);
-  margin: 0 0 28px 0;
-  padding: 16px 28px;
+  margin: 0 0 26px -48px;
+  padding: 16px 28px 16px 72px;
 }
 
 .what-if-wellness__heading {
   margin: 0;
   color: var(--wiw-heading-color, #ffffff);
   font-family: var(--font-heading-family);
-  font-size: clamp(3.2rem, 3.8vw, 5.2rem);
+  font-size: clamp(3.8rem, 3.7vw, 5rem);
   line-height: 1.1;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .what-if-wellness__grid {
   display: grid;
   grid-template-columns: minmax(0, var(--wiw-left-col, 60%)) minmax(0, calc(100% - var(--wiw-left-col, 60%)));
-  align-items: center;
-  gap: 24px;
+  align-items: start;
+  gap: 8px;
 }
 
 .what-if-wellness__left {
   color: var(--wiw-text-color, #ffffff);
   max-width: 100%;
+  padding-right: 12px;
 }
 
 .what-if-wellness__intro {
-  font-size: clamp(2.2rem, 2.2vw, 4.2rem);
+  font-size: clamp(1.8rem, 1.85vw, 2.2rem);
   line-height: 1.26;
   font-weight: 700;
 }
@@ -51,30 +55,39 @@
 }
 
 .what-if-wellness__bullets {
-  margin-top: 16px;
-  font-size: clamp(2rem, 1.8vw, 3.8rem);
-  line-height: 1.34;
+  margin-top: 18px;
+  font-size: clamp(1.7rem, 1.45vw, 2rem);
+  line-height: 1.4;
 }
 
 .what-if-wellness__bullets ul {
   margin: 0;
-  padding-left: 1.15em;
+  padding-left: 1.2em;
+}
+
+.what-if-wellness__bullets li:first-child strong:first-child {
+  display: block;
 }
 
 .what-if-wellness__bullets li + li {
-  margin-top: 8px;
+  margin-top: 7px;
 }
 
 .what-if-wellness__right {
   display: flex;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
+  height: 100%;
+  position: relative;
 }
 
 .what-if-wellness__product-image {
   display: block;
-  width: min(100%, 500px);
+  width: min(100%, 430px);
   height: auto;
+  margin-right: -34px;
+  margin-top: -74px;
+  margin-bottom: -32px;
 }
 
 .what-if-wellness__decor {
@@ -93,7 +106,7 @@
   left: 0;
   top: 50%;
   width: var(--wiw-left-w, 220px);
-  transform: translate(var(--wiw-left-x, -120px), calc(-50% + var(--wiw-left-y, 0px)));
+  transform: translate(var(--wiw-left-x, -118px), calc(-50% + var(--wiw-left-y, -4px)));
 }
 
 .what-if-wellness__decor--right-1 {
@@ -112,19 +125,29 @@
 
 @media screen and (max-width: 989px) {
   .what-if-wellness {
-    padding-top: calc(var(--wiw-pt, 48px) * 0.8);
-    padding-bottom: calc(var(--wiw-pb, 48px) * 0.8);
+    padding-top: max(20px, calc(var(--wiw-pt, 48px) * 0.35));
+    padding-bottom: max(20px, calc(var(--wiw-pb, 48px) * 0.35));
+  }
+
+  .what-if-wellness__inner {
+    min-height: unset;
+    padding: 28px 18px 22px;
   }
 
   .what-if-wellness__titlebar {
-    width: 100%;
+    width: calc(100% + 12px);
     margin-bottom: 20px;
-    padding: 12px 18px;
+    margin-left: -12px;
+    padding: 12px 16px 12px 24px;
   }
 
   .what-if-wellness__grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
+  }
+
+  .what-if-wellness__left {
+    padding-right: 0;
   }
 
   .what-if-wellness__right {
@@ -132,7 +155,8 @@
   }
 
   .what-if-wellness__product-image {
-    width: min(92vw, 420px);
+    width: min(92vw, 360px);
+    margin: 0;
   }
 
   .what-if-wellness__decor--left {
