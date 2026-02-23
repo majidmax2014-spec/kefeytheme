@@ -18,7 +18,7 @@
   background: var(--wiw-bg, #36b2b2);
   margin-left: clamp(56px, 19.2vw, 279px);
   min-height: 0;
-  padding: 42px 0 12px 0;
+  padding: 42px 0 0 0;
   overflow: visible;
 }
 
@@ -95,9 +95,9 @@
 
 .what-if-wellness__product-image {
   display: block;
-  width: min(100%, 410px);
+  width: min(100%, 310px);
   height: auto;
-  margin-right: -16px;
+  margin-right: 200px;
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -122,8 +122,8 @@
 }
 
 .what-if-wellness__decor--right-1 {
-  right: 44px;
-  top: 22%;
+  right: 184px;
+  top: 30%;
   width: var(--wiw-r1-w, 120px);
   transform: translate(var(--wiw-r1-x, -10px), var(--wiw-r1-y, -100px));
 }
