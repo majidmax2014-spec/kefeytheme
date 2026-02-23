@@ -64,7 +64,7 @@
         "title_bar_color": "#f8cb34",
         "heading_color": "#ffffff",
         "text_color": "#ffffff",
-        "content_max_width": 1200,
+        "content_max_width": 1600,
         "left_col_width": 70,
         "padding_top": 48,
         "padding_bottom": 0,
@@ -80,23 +80,6 @@
         "right_decor_width_2": 80,
         "right_decor_x_2": -120,
         "right_decor_y_2": 90
-      }
-    },
-    "purpose_beyond_gummy_F8mZx2": {
-      "type": "purpose-beyond-gummy",
-      "name": "Purpose Beyond Gummy",
-      "settings": {
-        "heading": "Purpose Beyond the <strong>Gummy</strong>",
-        "body": "<p>At Kefey, we believe that wellness should not stop with the individual - it should ripple outward. That is why we proudly support initiatives that uplift communities, empower women, nourish children, and protect the planet.</p><p>We call it <strong>Kefey for Kindness</strong>: because giving is part of what makes us glow.</p><p>This is not just a supplement. It is simple, it sparks, and it is our commitment to feel good - and do good. Ready to shine? Discover your Kefey star today.</p><p>Live full. Live Kefey.</p>",
-        "panel_color": "#f2c718",
-        "title_bg_color": "#36b2b2",
-        "title_color": "#ffffff",
-        "body_color": "#1c1c1c",
-        "content_max_width": 1200,
-        "left_col_width": 38,
-        "min_height": 290,
-        "padding_top": 44,
-        "padding_bottom": 52
       }
     },
     "designed_to_shine_6E8hee": {
@@ -149,6 +132,23 @@
         "left_col_width": 42,
         "padding_top": 20,
         "padding_bottom": 40
+      }
+    },
+    "purpose_beyond_gummy_F8mZx2": {
+      "type": "purpose-beyond-gummy",
+      "name": "Purpose Beyond Gummy",
+      "settings": {
+        "heading": "Purpose Beyond the <strong>Gummy</strong>",
+        "body": "<p>At Kefey, we believe that wellness should not stop with the individual - it should ripple outward. That is why we proudly support initiatives that uplift communities, empower women, nourish children, and protect the planet.</p><p>We call it <strong>Kefey for Kindness</strong>: because giving is part of what makes us glow.</p><p>This is not just a supplement. It is simple, it sparks, and it is our commitment to feel good - and do good. Ready to shine? Discover your Kefey star today.</p><p>Live full. Live Kefey.</p>",
+        "panel_color": "#f2c718",
+        "title_bg_color": "#36b2b2",
+        "title_color": "#ffffff",
+        "body_color": "#1c1c1c",
+        "content_max_width": 1200,
+        "left_col_width": 38,
+        "min_height": 290,
+        "padding_top": 44,
+        "padding_bottom": 52
       }
     }
   },
