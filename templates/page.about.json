@@ -117,7 +117,7 @@
         "subtitle_color": "#ffffff",
         "text_color": "#ffffff",
         "content_max_width": 1600,
-        "left_col_width": 50,
+        "left_col_width": 45,
         "padding_top": 24,
         "padding_bottom": 56
       }
