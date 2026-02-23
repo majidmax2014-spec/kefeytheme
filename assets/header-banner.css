@@ -60,19 +60,19 @@
 .header-banner__heading {
   margin: 0;
   color: #ffffff;
-  font-family: var(--font-heading-family);
-  font-weight: 700;
+  font-family: var(--hb-heading-ff, inherit);
+  font-weight: var(--hb-heading-fw, inherit);
   line-height: 1.1;
-  font-size: clamp(3.6rem, 5vw, 6.2rem);
+  font-size: var(--hb-heading-fs, 56px);
 }
 
 .header-banner__subheading {
   margin-top: 1.2rem;
   color: #ffffff;
-  font-family: var(--font-body-family);
-  font-weight: 500;
+  font-family: var(--hb-desc-ff, inherit);
+  font-weight: var(--hb-desc-fw, inherit);
   line-height: 1.25;
-  font-size: clamp(1.8rem, 2.4vw, 4.2rem);
+  font-size: var(--hb-desc-fs, 24px);
 }
 
 @media screen and (max-width: 749px) {
@@ -85,10 +85,10 @@
   }
 
   .header-banner__heading {
-    font-size: clamp(2.8rem, 7vw, 4.2rem);
+    font-size: var(--hb-heading-fs-m, 42px);
   }
 
   .header-banner__subheading {
-    font-size: clamp(1.6rem, 4.6vw, 2.4rem);
+    font-size: var(--hb-desc-fs-m, 19px);
   }
 }

@@ -10,6 +10,20 @@
   if bg_mobile == blank
     assign bg_mobile = bg_desktop
   endif
+
+  assign hb_heading_ff = 'inherit'
+  if section.settings.hb_heading_ff == 'heading'
+    assign hb_heading_ff = 'var(--font-heading-family)'
+  elsif section.settings.hb_heading_ff == 'body'
+    assign hb_heading_ff = 'var(--font-body-family)'
+  endif
+
+  assign hb_desc_ff = 'inherit'
+  if section.settings.hb_desc_ff == 'heading'
+    assign hb_desc_ff = 'var(--font-heading-family)'
+  elsif section.settings.hb_desc_ff == 'body'
+    assign hb_desc_ff = 'var(--font-body-family)'
+  endif
 -%}
 
 <section
@@ -21,6 +35,14 @@
     --hb-content-max: {{ section.settings.content_max_width }}px;
     --hb-content-pad-x: {{ section.settings.content_padding_x }}px;
     --hb-overlay-color: {{ section.settings.overlay_color | color_modify: 'alpha', overlay_alpha }};
+    --hb-heading-ff: {{ hb_heading_ff }};
+    --hb-heading-fw: {{ section.settings.hb_heading_fw }};
+    --hb-heading-fs: {{ section.settings.hb_heading_fs }}px;
+    --hb-heading-fs-m: {{ section.settings.hb_heading_fs | times: 0.75 | round: 0 }}px;
+    --hb-desc-ff: {{ hb_desc_ff }};
+    --hb-desc-fw: {{ section.settings.hb_desc_fw }};
+    --hb-desc-fs: {{ section.settings.hb_desc_fs }}px;
+    --hb-desc-fs-m: {{ section.settings.hb_desc_fs | times: 0.8 | round: 0 }}px;
   "
 >
   <div class="header-banner__media">
@@ -104,6 +126,82 @@
       "id": "subheading",
       "label": "Subheading text",
       "default": "Little rituals that care for you and the world around you"
+    },
+    {
+      "type": "header",
+      "content": "Typography - Heading"
+    },
+    {
+      "type": "select",
+      "id": "hb_heading_ff",
+      "label": "Heading font family",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "hb_heading_fw",
+      "label": "Heading font weight",
+      "default": "700",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "hb_heading_fs",
+      "label": "Heading font size (px)",
+      "min": 20,
+      "max": 120,
+      "step": 2,
+      "default": 56
+    },
+    {
+      "type": "header",
+      "content": "Typography - Description"
+    },
+    {
+      "type": "select",
+      "id": "hb_desc_ff",
+      "label": "Description font family",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "hb_desc_fw",
+      "label": "Description font weight",
+      "default": "500",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "hb_desc_fs",
+      "label": "Description font size (px)",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "default": 24
     },
     {
       "type": "range",
