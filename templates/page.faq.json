@@ -21,8 +21,8 @@
         "hb_heading_fs": 46,
         "hb_desc_ff": "body",
         "hb_desc_fw": "500",
-        "hb_desc_fs": 26,
-        "banner_height_desktop": 460,
+        "hb_desc_fs": 24,
+        "banner_height_desktop": 520,
         "banner_height_mobile": 360,
         "content_max_width": 760,
         "content_alignment": "left",
@@ -254,6 +254,12 @@
         "help_text": "<p>Reach our Joyful Support Team anytime at:</p>",
         "help_email": "hello@kefey.co",
         "help_hours": "Sunday - Saturday | 8 AM - 8 PM (UAE / GMT+4)",
+        "help_font_family": "inherit",
+        "help_font_size": 16,
+        "help_font_weight": "500",
+        "help_line_height": 1.5,
+        "show_help_icons": true,
+        "help_icon_size": 16,
         "padding_top": 56,
         "padding_bottom": 56
       }
