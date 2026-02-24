@@ -21,8 +21,8 @@
         "faq_what_is": {
           "type": "faq",
           "settings": {
-            "question": "What are Kefey\u00ae Mood Gummies?",
-            "answer": "<p>Kefey\u00ae Mood Gummies are daily star-shaped wellness gummies designed to support a lighter, more joyful routine.</p>"
+            "question": "What are Kefey® Mood Gummies?",
+            "answer": "<p>Kefey® Mood Gummies are daily star-shaped wellness gummies designed to support a lighter, more joyful routine.</p>"
           }
         },
         "faq_how_many": {
@@ -42,14 +42,14 @@
         "faq_vegan": {
           "type": "faq",
           "settings": {
-            "question": "Are Kefey\u00ae Mood Gummies vegan or vegetarian?",
+            "question": "Are Kefey® Mood Gummies vegan or vegetarian?",
             "answer": "<p>Please refer to the current product pack details for dietary suitability.</p>"
           }
         },
         "faq_gluten_free": {
           "type": "faq",
           "settings": {
-            "question": "Are Kefey\u00ae Mood Gummies gluten-free?",
+            "question": "Are Kefey® Mood Gummies gluten-free?",
             "answer": "<p>Check the latest product information on your selected variant page for allergen and dietary claims.</p>"
           }
         },
@@ -62,28 +62,28 @@
         "faq_key_ingredients": {
           "type": "faq",
           "settings": {
-            "question": "What are the key ingredients in Kefey\u00ae Mood Gummies?",
+            "question": "What are the key ingredients in Kefey® Mood Gummies?",
             "answer": "<p>Each formula is built around thoughtfully selected ingredients. See the product page for complete ingredient lists.</p>"
           }
         },
         "faq_what_makes_different": {
           "type": "faq",
           "settings": {
-            "question": "What makes Kefey\u00ae different from other gummies?",
+            "question": "What makes Kefey® different from other gummies?",
             "answer": "<p>Kefey focuses on concentrated formulas and intentional rituals designed to make everyday wellness feel lighter.</p>"
           }
         },
         "faq_artificial_colors": {
           "type": "faq",
           "settings": {
-            "question": "Do Kefey\u00ae Gummies contain artificial colors or flavors?",
+            "question": "Do Kefey® Gummies contain artificial colors or flavors?",
             "answer": "<p>Ingredient specifics can vary by product. Please check the label and current product listing for exact details.</p>"
           }
         },
         "faq_eco_friendly": {
           "type": "faq",
           "settings": {
-            "question": "Are Kefey\u00ae Mood Gummies eco-friendly?",
+            "question": "Are Kefey® Mood Gummies eco-friendly?",
             "answer": "<p>We continue to improve responsible choices across packaging and partnerships. Visit product pages for current updates.</p>"
           }
         },
@@ -96,7 +96,7 @@
         "faq_where_buy": {
           "type": "faq",
           "settings": {
-            "question": "Where can I buy Kefey\u00ae Mood Gummies?",
+            "question": "Where can I buy Kefey® Mood Gummies?",
             "answer": "<p>You can order directly from our online store and selected partners where available.</p>"
           }
         },
@@ -158,34 +158,34 @@
         "category_more_about": {
           "type": "category",
           "settings": {
-            "title": "More About KEFEY\u00ae"
+            "title": "More About KEFEY®"
           }
         },
         "faq_charity": {
           "type": "faq",
           "settings": {
-            "question": "Is Kefey\u00ae involved in any sustainability or charity programs?",
+            "question": "Is Kefey® involved in any sustainability or charity programs?",
             "answer": "<p>Yes. We support ongoing purpose initiatives and partnerships. Visit our impact pages for details.</p>"
           }
         },
         "faq_other_supplements": {
           "type": "faq",
           "settings": {
-            "question": "Can I take Kefey\u00ae Gummies with other supplements?",
+            "question": "Can I take Kefey® Gummies with other supplements?",
             "answer": "<p>If you use other supplements or medications, consult your healthcare professional first.</p>"
           }
         },
         "faq_who_can_take": {
           "type": "faq",
           "settings": {
-            "question": "Who can take Kefey\u00ae Mood Gummies?",
+            "question": "Who can take Kefey® Mood Gummies?",
             "answer": "<p>Usage guidance can vary by formula and age group. Follow product labeling instructions.</p>"
           }
         },
         "faq_athletes": {
           "type": "faq",
           "settings": {
-            "question": "Are Kefey\u00ae Gummies suitable for athletes?",
+            "question": "Are Kefey® Gummies suitable for athletes?",
             "answer": "<p>Suitability can depend on your routine and requirements. Review product details before use.</p>"
           }
         }
@@ -234,9 +234,32 @@
         "padding_top": 40,
         "padding_bottom": 56
       }
+    },
+    "header_banner_prFdFC": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "heading": "We reimagine wellness as joy",
+        "subheading": "Little rituals that care for you and the world around you",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 56,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 24,
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 360,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24
+      }
     }
   },
   "order": [
+    "header_banner_prFdFC",
     "main_faqs_qx8Kp2"
   ]
 }
