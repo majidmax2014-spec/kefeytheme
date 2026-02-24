@@ -1,0 +1,233 @@
+{
+  "sections": {
+    "main_faqs_qx8Kp2": {
+      "type": "main-faqs",
+      "blocks": {
+        "category_about_product": {
+          "type": "category",
+          "settings": {
+            "title": "About the product"
+          }
+        },
+        "faq_what_is": {
+          "type": "faq",
+          "settings": {
+            "question": "What are Kefey\u00ae Mood Gummies?",
+            "answer": "<p>Kefey\u00ae Mood Gummies are daily star-shaped wellness gummies designed to support a lighter, more joyful routine.</p>"
+          }
+        },
+        "faq_how_many": {
+          "type": "faq",
+          "settings": {
+            "question": "How many gummies should I take per day?",
+            "answer": "<p>Follow the serving size shown on the product label, or consult your healthcare professional if needed.</p>"
+          }
+        },
+        "faq_with_food": {
+          "type": "faq",
+          "settings": {
+            "question": "Do I need to take them with food?",
+            "answer": "<p>You can take them with or without food unless your label states otherwise.</p>"
+          }
+        },
+        "faq_vegan": {
+          "type": "faq",
+          "settings": {
+            "question": "Are Kefey\u00ae Mood Gummies vegan or vegetarian?",
+            "answer": "<p>Please refer to the current product pack details for dietary suitability.</p>"
+          }
+        },
+        "faq_gluten_free": {
+          "type": "faq",
+          "settings": {
+            "question": "Are Kefey\u00ae Mood Gummies gluten-free?",
+            "answer": "<p>Check the latest product information on your selected variant page for allergen and dietary claims.</p>"
+          }
+        },
+        "category_ingredients": {
+          "type": "category",
+          "settings": {
+            "title": "Ingredients and Quality"
+          }
+        },
+        "faq_key_ingredients": {
+          "type": "faq",
+          "settings": {
+            "question": "What are the key ingredients in Kefey\u00ae Mood Gummies?",
+            "answer": "<p>Each formula is built around thoughtfully selected ingredients. See the product page for complete ingredient lists.</p>"
+          }
+        },
+        "faq_what_makes_different": {
+          "type": "faq",
+          "settings": {
+            "question": "What makes Kefey\u00ae different from other gummies?",
+            "answer": "<p>Kefey focuses on concentrated formulas and intentional rituals designed to make everyday wellness feel lighter.</p>"
+          }
+        },
+        "faq_artificial_colors": {
+          "type": "faq",
+          "settings": {
+            "question": "Do Kefey\u00ae Gummies contain artificial colors or flavors?",
+            "answer": "<p>Ingredient specifics can vary by product. Please check the label and current product listing for exact details.</p>"
+          }
+        },
+        "faq_eco_friendly": {
+          "type": "faq",
+          "settings": {
+            "question": "Are Kefey\u00ae Mood Gummies eco-friendly?",
+            "answer": "<p>We continue to improve responsible choices across packaging and partnerships. Visit product pages for current updates.</p>"
+          }
+        },
+        "category_orders": {
+          "type": "category",
+          "settings": {
+            "title": "Orders, Shipping and Returns"
+          }
+        },
+        "faq_where_buy": {
+          "type": "faq",
+          "settings": {
+            "question": "Where can I buy Kefey\u00ae Mood Gummies?",
+            "answer": "<p>You can order directly from our online store and selected partners where available.</p>"
+          }
+        },
+        "faq_international_shipping": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "<p>Shipping availability depends on your region. Enter your address at checkout to confirm options.</p>"
+          }
+        },
+        "faq_track_order": {
+          "type": "faq",
+          "settings": {
+            "question": "How can I track my order?",
+            "answer": "<p>Once your order ships, you will receive a tracking link by email.</p>"
+          }
+        },
+        "faq_return_policy": {
+          "type": "faq",
+          "settings": {
+            "question": "What is your return policy?",
+            "answer": "<p>Please review our current returns policy page for complete terms and eligibility.</p>"
+          }
+        },
+        "category_programs": {
+          "type": "category",
+          "settings": {
+            "title": "Programs and Support"
+          }
+        },
+        "faq_subscription": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you offer a subscription service?",
+            "answer": "<p>Yes, subscriptions may be available on eligible products. Check product pages for options.</p>"
+          }
+        },
+        "faq_wholesale": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you have a wholesale or distributor program?",
+            "answer": "<p>Contact our team with your business details and we will guide you through availability.</p>"
+          }
+        },
+        "faq_payment_secure": {
+          "type": "faq",
+          "settings": {
+            "question": "Is my payment information secure?",
+            "answer": "<p>Yes, checkout is encrypted and processed securely using trusted payment providers.</p>"
+          }
+        },
+        "faq_cancel_modify": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I cancel or modify my order?",
+            "answer": "<p>Contact support as soon as possible after purchase and we will do our best to help.</p>"
+          }
+        },
+        "category_more_about": {
+          "type": "category",
+          "settings": {
+            "title": "More About KEFEY\u00ae"
+          }
+        },
+        "faq_charity": {
+          "type": "faq",
+          "settings": {
+            "question": "Is Kefey\u00ae involved in any sustainability or charity programs?",
+            "answer": "<p>Yes. We support ongoing purpose initiatives and partnerships. Visit our impact pages for details.</p>"
+          }
+        },
+        "faq_other_supplements": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I take Kefey\u00ae Gummies with other supplements?",
+            "answer": "<p>If you use other supplements or medications, consult your healthcare professional first.</p>"
+          }
+        },
+        "faq_who_can_take": {
+          "type": "faq",
+          "settings": {
+            "question": "Who can take Kefey\u00ae Mood Gummies?",
+            "answer": "<p>Usage guidance can vary by formula and age group. Follow product labeling instructions.</p>"
+          }
+        },
+        "faq_athletes": {
+          "type": "faq",
+          "settings": {
+            "question": "Are Kefey\u00ae Gummies suitable for athletes?",
+            "answer": "<p>Suitability can depend on your routine and requirements. Review product details before use.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_about_product",
+        "faq_what_is",
+        "faq_how_many",
+        "faq_with_food",
+        "faq_vegan",
+        "faq_gluten_free",
+        "category_ingredients",
+        "faq_key_ingredients",
+        "faq_what_makes_different",
+        "faq_artificial_colors",
+        "faq_eco_friendly",
+        "category_orders",
+        "faq_where_buy",
+        "faq_international_shipping",
+        "faq_track_order",
+        "faq_return_policy",
+        "category_programs",
+        "faq_subscription",
+        "faq_wholesale",
+        "faq_payment_secure",
+        "faq_cancel_modify",
+        "category_more_about",
+        "faq_charity",
+        "faq_other_supplements",
+        "faq_who_can_take",
+        "faq_athletes"
+      ],
+      "settings": {
+        "max_width": 1160,
+        "category_title_color": "#29b6b3",
+        "category_title_size": 44,
+        "column_gap": 40,
+        "row_border_color": "#d8d8d8",
+        "row_padding_y": 16,
+        "question_size": 20,
+        "answer_size": 16,
+        "help_title": "Need more help?",
+        "help_text": "<p>Reach our Joyful Support Team anytime at:</p>",
+        "help_email": "hello@kefey.co",
+        "help_hours": "Sunday - Saturday | 8 AM - 8 PM (UAE / GMT+4)",
+        "padding_top": 40,
+        "padding_bottom": 56
+      }
+    }
+  },
+  "order": [
+    "main_faqs_qx8Kp2"
+  ]
+}

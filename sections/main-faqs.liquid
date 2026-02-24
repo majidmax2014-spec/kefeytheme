@@ -1,0 +1,429 @@
+<section id="MainFaqs-{{ section.id }}" class="main-faqs">
+  <div class="main-faqs__container page-width">
+    {%- liquid
+      assign has_open_category = false
+      assign has_rendered_any_group = false
+      assign pending_faq_before_category = false
+    -%}
+
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'category' -%}
+        {%- if has_open_category -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- assign has_open_category = true -%}
+        {%- assign has_rendered_any_group = true -%}
+        <div class="main-faqs__group" {{ block.shopify_attributes }}>
+          <h2 class="main-faqs__category-title">{{ block.settings.title }}</h2>
+          <div class="main-faqs__grid">
+            <div class="main-faqs__col">
+      {%- elsif block.type == 'faq' -%}
+        {%- unless has_open_category -%}
+          {%- assign has_open_category = true -%}
+          {%- assign has_rendered_any_group = true -%}
+          {%- assign pending_faq_before_category = true -%}
+          <div class="main-faqs__group">
+            <h2 class="main-faqs__category-title main-faqs__category-title--hidden">FAQs</h2>
+            <div class="main-faqs__grid">
+              <div class="main-faqs__col">
+        {%- endunless -%}
+
+        {%- assign mod = forloop.index0 | modulo: 2 -%}
+        {%- if mod == 0 and pending_faq_before_category == false -%}
+              </div>
+              <div class="main-faqs__col">
+        {%- endif -%}
+
+        <details class="main-faqs__item" {{ block.shopify_attributes }}>
+          <summary class="main-faqs__question">
+            <span class="main-faqs__question-text">{{ block.settings.question }}</span>
+            <span class="main-faqs__icon" aria-hidden="true"></span>
+          </summary>
+          <div class="main-faqs__answer rte">
+            {{ block.settings.answer }}
+          </div>
+        </details>
+      {%- endif -%}
+
+      {%- if pending_faq_before_category and block.type == 'faq' -%}
+        {%- assign pending_faq_before_category = false -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if has_open_category -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if has_rendered_any_group == false -%}
+      <div class="main-faqs__group">
+        <h2 class="main-faqs__category-title">About the product</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="main-faqs__help">
+      <h3 class="main-faqs__help-title">{{ section.settings.help_title }}</h3>
+      {%- if section.settings.help_text != blank -%}
+        <div class="main-faqs__help-text rte">{{ section.settings.help_text }}</div>
+      {%- endif -%}
+      {%- if section.settings.help_email != blank -%}
+        <p class="main-faqs__help-line">{{ section.settings.help_email }}</p>
+      {%- endif -%}
+      {%- if section.settings.help_hours != blank -%}
+        <p class="main-faqs__help-line">{{ section.settings.help_hours }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <style>
+    #MainFaqs-{{ section.id }} {
+      background: #fff;
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__container {
+      max-width: {{ section.settings.max_width }}px;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__group + .main-faqs__group {
+      margin-top: 4.2rem;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__category-title {
+      margin: 0 0 1.8rem;
+      color: {{ section.settings.category_title_color }};
+      font-size: {{ section.settings.category_title_size }}px;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__category-title--hidden {
+      display: none;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: {{ section.settings.column_gap }}px;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__col {
+      min-width: 0;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__item {
+      border-bottom: 1px solid {{ section.settings.row_border_color }};
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__question {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.6rem;
+      padding: {{ section.settings.row_padding_y }}px 0;
+      font-size: {{ section.settings.question_size }}px;
+      line-height: 1.35;
+      font-weight: 500;
+      color: #1f1f1f;
+    }
+
+    #MainFaqs-{{ section.id }} summary::-webkit-details-marker {
+      display: none;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__icon {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border-radius: 50%;
+      border: 1.5px solid #4b4b4b;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__icon::before,
+    #MainFaqs-{{ section.id }} .main-faqs__icon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: #4b4b4b;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s ease;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__icon::before {
+      width: 9px;
+      height: 1.5px;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__icon::after {
+      width: 1.5px;
+      height: 9px;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__item[open] .main-faqs__icon::after {
+      opacity: 0;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__answer {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.26s ease;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__answer > * {
+      overflow: hidden;
+      margin: 0 0 1.4rem;
+      color: #333;
+      font-size: {{ section.settings.answer_size }}px;
+      line-height: 1.55;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__item[open] .main-faqs__answer {
+      grid-template-rows: 1fr;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__help {
+      margin-top: 5rem;
+      max-width: 640px;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__help-title {
+      margin: 0 0 1.2rem;
+      font-size: 44px;
+      line-height: 1.05;
+      font-weight: 600;
+      color: #101010;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__help-text {
+      margin-bottom: 0.8rem;
+      font-size: 22px;
+      line-height: 1.45;
+      color: #1f1f1f;
+    }
+
+    #MainFaqs-{{ section.id }} .main-faqs__help-line {
+      margin: 0.35rem 0 0;
+      font-size: 22px;
+      line-height: 1.45;
+      color: #1f1f1f;
+    }
+
+    @media screen and (max-width: 989px) {
+      #MainFaqs-{{ section.id }} {
+        padding-top: calc({{ section.settings.padding_top }}px * 0.72);
+        padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.72);
+      }
+
+      #MainFaqs-{{ section.id }} .main-faqs__grid {
+        grid-template-columns: 1fr;
+        row-gap: 0;
+      }
+
+      #MainFaqs-{{ section.id }} .main-faqs__category-title {
+        margin-bottom: 1.2rem;
+      }
+
+      #MainFaqs-{{ section.id }} .main-faqs__help {
+        margin-top: 3.6rem;
+      }
+
+      #MainFaqs-{{ section.id }} .main-faqs__help-title {
+        font-size: 34px;
+      }
+
+      #MainFaqs-{{ section.id }} .main-faqs__help-text,
+      #MainFaqs-{{ section.id }} .main-faqs__help-line {
+        font-size: 18px;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Main FAQs",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Content max width",
+      "min": 960,
+      "max": 1400,
+      "step": 10,
+      "default": 1160
+    },
+    {
+      "type": "color",
+      "id": "category_title_color",
+      "label": "Category title color",
+      "default": "#29B6B3"
+    },
+    {
+      "type": "range",
+      "id": "category_title_size",
+      "label": "Category title size",
+      "min": 20,
+      "max": 64,
+      "step": 1,
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "label": "Column gap",
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "row_border_color",
+      "label": "Row border color",
+      "default": "#D8D8D8"
+    },
+    {
+      "type": "range",
+      "id": "row_padding_y",
+      "label": "Question row vertical padding",
+      "min": 10,
+      "max": 28,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "question_size",
+      "label": "Question font size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "answer_size",
+      "label": "Answer font size",
+      "min": 10,
+      "max": 26,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Need more help block"
+    },
+    {
+      "type": "text",
+      "id": "help_title",
+      "label": "Help title",
+      "default": "Need more help?"
+    },
+    {
+      "type": "richtext",
+      "id": "help_text",
+      "label": "Help text",
+      "default": "<p>Reach our Joyful Support Team anytime at:</p>"
+    },
+    {
+      "type": "text",
+      "id": "help_email",
+      "label": "Help email line",
+      "default": "hello@kefey.co"
+    },
+    {
+      "type": "text",
+      "id": "help_hours",
+      "label": "Help hours line",
+      "default": "Sunday - Saturday | 8 AM - 8 PM (UAE / GMT+4)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "default": 56
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Category title",
+          "default": "About the product"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What are Kefey Mood Gummies?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Add your answer here.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Main FAQs",
+      "blocks": [
+        {
+          "type": "category",
+          "settings": {
+            "title": "About the product"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What are Kefey Mood Gummies?"
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How many gummies should I take per day?"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
