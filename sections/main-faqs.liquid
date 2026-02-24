@@ -70,7 +70,8 @@
               {%- assign pre_faq_count = pre_faq_count | plus: 1 -%}
             {%- endif -%}
           {%- endfor -%}
-          {%- if pre_faq_count > 0 and pre_faq_count | modulo: 2 == 1 -%}
+          {%- assign pre_faq_mod = pre_faq_count | modulo: 2 -%}
+          {%- if pre_faq_count > 0 and pre_faq_mod == 1 -%}
                   <div class="main-faqs__col main-faqs__col--empty" aria-hidden="true"></div>
                 </div>
           {%- endif -%}
@@ -127,7 +128,8 @@
                 {%- assign category_faq_count = category_faq_count | plus: 1 -%}
               {%- endif -%}
             {%- endfor -%}
-            {%- if category_faq_count > 0 and category_faq_count | modulo: 2 == 1 -%}
+            {%- assign category_faq_mod = category_faq_count | modulo: 2 -%}
+            {%- if category_faq_count > 0 and category_faq_mod == 1 -%}
                     <div class="main-faqs__col main-faqs__col--empty" aria-hidden="true"></div>
                   </div>
             {%- endif -%}
