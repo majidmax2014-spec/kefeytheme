@@ -1,100 +1,189 @@
-<section id="MainFaqs-{{ section.id }}" class="main-faqs">
+{%- liquid
+  assign help_ff = ''
+  if section.settings.help_font_family == 'system'
+    assign help_ff = "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+  elsif section.settings.help_font_family == 'heading'
+    assign help_ff = 'var(--font-heading-family)'
+  elsif section.settings.help_font_family == 'body'
+    assign help_ff = 'var(--font-body-family)'
+  endif
+
+  assign blocks_count = section.blocks.size
+  assign first_category_index = blank
+  for block in section.blocks
+    if block.type == 'category'
+      assign first_category_index = forloop.index0
+      break
+    endif
+  endfor
+-%}
+
+<section
+  id="MainFaqs-{{ section.id }}"
+  class="main-faqs"
+  style="
+    --mf-help-fs: {{ section.settings.help_font_size }}px;
+    --mf-help-fw: {{ section.settings.help_font_weight }};
+    --mf-help-lh: {{ section.settings.help_line_height }};
+    --mf-help-icon-size: {{ section.settings.help_icon_size }}px;
+    {% if help_ff != blank %}
+      --mf-help-ff: {{ help_ff }};
+    {% endif %}
+  "
+>
   <div class="main-faqs__container page-width">
-    {%- liquid
-      assign has_open_category = false
-      assign has_rendered_any_group = false
-      assign pending_faq_before_category = false
-    -%}
-
-    {%- for block in section.blocks -%}
-      {%- if block.type == 'category' -%}
-        {%- if has_open_category -%}
-              </div>
-            </div>
-          </div>
-        {%- endif -%}
-
-        {%- assign has_open_category = true -%}
-        {%- assign has_rendered_any_group = true -%}
-        <div class="main-faqs__group" {{ block.shopify_attributes }}>
-          <h2 class="main-faqs__category-title">{{ block.settings.title }}</h2>
-          <div class="main-faqs__grid">
-            <div class="main-faqs__col">
-      {%- elsif block.type == 'faq' -%}
-        {%- unless has_open_category -%}
-          {%- assign has_open_category = true -%}
-          {%- assign has_rendered_any_group = true -%}
-          {%- assign pending_faq_before_category = true -%}
-          <div class="main-faqs__group">
-            <h2 class="main-faqs__category-title main-faqs__category-title--hidden">FAQs</h2>
-            <div class="main-faqs__grid">
-              <div class="main-faqs__col">
-        {%- endunless -%}
-
-        {%- assign mod = forloop.index0 | modulo: 2 -%}
-        {%- if mod == 0 and pending_faq_before_category == false -%}
-              </div>
-              <div class="main-faqs__col">
-        {%- endif -%}
-
-        <details class="main-faqs__item" {{ block.shopify_attributes }}>
-          <summary class="main-faqs__question">
-            <span class="main-faqs__question-text">{{ block.settings.question }}</span>
-            <span class="main-faqs__icon" aria-hidden="true"></span>
-          </summary>
-          <div class="main-faqs__answer rte">
-            {{ block.settings.answer }}
-          </div>
-        </details>
-      {%- endif -%}
-
-      {%- if pending_faq_before_category and block.type == 'faq' -%}
-        {%- assign pending_faq_before_category = false -%}
-      {%- endif -%}
-    {%- endfor -%}
-
-    {%- if has_open_category -%}
-          </div>
+    {%- if first_category_index != blank and first_category_index > 0 -%}
+      {%- assign pre_faq_count = 0 -%}
+      <div class="main-faqs__group">
+        <h2 class="main-faqs__category-title main-faqs__category-title--hidden">FAQs</h2>
+        <div class="main-faqs__rows">
+          {%- for block in section.blocks -%}
+            {%- if forloop.index0 < first_category_index and block.type == 'faq' -%}
+              {%- assign pre_mod = pre_faq_count | modulo: 2 -%}
+              {%- if pre_mod == 0 -%}
+                <div class="main-faqs__row">
+                  <div class="main-faqs__col">
+                    <details class="main-faqs__item" {{ block.shopify_attributes }}>
+                      <summary class="main-faqs__question">
+                        <span class="main-faqs__question-text">{{ block.settings.question }}</span>
+                        <span class="main-faqs__icon" aria-hidden="true"></span>
+                      </summary>
+                      <div class="main-faqs__answer">
+                        <div class="main-faqs__answer-inner rte">{{ block.settings.answer }}</div>
+                      </div>
+                    </details>
+                  </div>
+              {%- else -%}
+                  <div class="main-faqs__col">
+                    <details class="main-faqs__item" {{ block.shopify_attributes }}>
+                      <summary class="main-faqs__question">
+                        <span class="main-faqs__question-text">{{ block.settings.question }}</span>
+                        <span class="main-faqs__icon" aria-hidden="true"></span>
+                      </summary>
+                      <div class="main-faqs__answer">
+                        <div class="main-faqs__answer-inner rte">{{ block.settings.answer }}</div>
+                      </div>
+                    </details>
+                  </div>
+                </div>
+              {%- endif -%}
+              {%- assign pre_faq_count = pre_faq_count | plus: 1 -%}
+            {%- endif -%}
+          {%- endfor -%}
+          {%- if pre_faq_count > 0 and pre_faq_count | modulo: 2 == 1 -%}
+                  <div class="main-faqs__col main-faqs__col--empty" aria-hidden="true"></div>
+                </div>
+          {%- endif -%}
         </div>
       </div>
     {%- endif -%}
 
-    {%- if has_rendered_any_group == false -%}
-      <div class="main-faqs__group">
-        <h2 class="main-faqs__category-title">About the product</h2>
-      </div>
-    {%- endif -%}
+    {%- for block in section.blocks -%}
+      {%- if block.type == 'category' -%}
+        {%- assign category_index = forloop.index0 -%}
+        {%- assign next_category_index = blocks_count -%}
+        {%- for next_block in section.blocks -%}
+          {%- if forloop.index0 > category_index and next_block.type == 'category' -%}
+            {%- assign next_category_index = forloop.index0 -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
 
-    <div class="main-faqs__help">
+        {%- assign category_faq_count = 0 -%}
+        <div class="main-faqs__group" {{ block.shopify_attributes }}>
+          <h2 class="main-faqs__category-title">{{ block.settings.title }}</h2>
+          <div class="main-faqs__rows">
+            {%- for faq_block in section.blocks -%}
+              {%- assign idx = forloop.index0 -%}
+              {%- if idx > category_index and idx < next_category_index and faq_block.type == 'faq' -%}
+                {%- assign mod = category_faq_count | modulo: 2 -%}
+                {%- if mod == 0 -%}
+                  <div class="main-faqs__row">
+                    <div class="main-faqs__col">
+                      <details class="main-faqs__item" {{ faq_block.shopify_attributes }}>
+                        <summary class="main-faqs__question">
+                          <span class="main-faqs__question-text">{{ faq_block.settings.question }}</span>
+                          <span class="main-faqs__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="main-faqs__answer">
+                          <div class="main-faqs__answer-inner rte">{{ faq_block.settings.answer }}</div>
+                        </div>
+                      </details>
+                    </div>
+                {%- else -%}
+                    <div class="main-faqs__col">
+                      <details class="main-faqs__item" {{ faq_block.shopify_attributes }}>
+                        <summary class="main-faqs__question">
+                          <span class="main-faqs__question-text">{{ faq_block.settings.question }}</span>
+                          <span class="main-faqs__icon" aria-hidden="true"></span>
+                        </summary>
+                        <div class="main-faqs__answer">
+                          <div class="main-faqs__answer-inner rte">{{ faq_block.settings.answer }}</div>
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                {%- endif -%}
+                {%- assign category_faq_count = category_faq_count | plus: 1 -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- if category_faq_count > 0 and category_faq_count | modulo: 2 == 1 -%}
+                    <div class="main-faqs__col main-faqs__col--empty" aria-hidden="true"></div>
+                  </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+    {%- endfor -%}
+
+    <div class="main-faqs__help{% if help_ff != blank %} main-faqs__help--has-ff{% endif %}">
       <h3 class="main-faqs__help-title">{{ section.settings.help_title }}</h3>
       {%- if section.settings.help_text != blank -%}
         <div class="main-faqs__help-text rte">{{ section.settings.help_text }}</div>
       {%- endif -%}
       {%- if section.settings.help_email != blank -%}
-        <p class="main-faqs__help-line">{{ section.settings.help_email }}</p>
+        <p class="main-faqs__help-line main-faqs__help-line--email">
+          {%- if section.settings.show_help_icons -%}
+            <span class="main-faqs__help-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M3 6.75A1.75 1.75 0 0 1 4.75 5h14.5A1.75 1.75 0 0 1 21 6.75v10.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75zm1.5.29v.21l7.5 5.02 7.5-5.02v-.21a.25.25 0 0 0-.25-.25H4.75a.25.25 0 0 0-.25.25zm15 1.99-5.9 3.95a2.75 2.75 0 0 1-3.2 0L4.5 9.03v8.22c0 .14.11.25.25.25h14.5a.25.25 0 0 0 .25-.25V9.03z"/>
+              </svg>
+            </span>
+          {%- endif -%}
+          <span>{{ section.settings.help_email }}</span>
+        </p>
       {%- endif -%}
       {%- if section.settings.help_hours != blank -%}
-        <p class="main-faqs__help-line">{{ section.settings.help_hours }}</p>
+        <p class="main-faqs__help-line main-faqs__help-line--hours">
+          {%- if section.settings.show_help_icons -%}
+            <span class="main-faqs__help-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <path d="M12 2.5A9.5 9.5 0 1 1 2.5 12 9.51 9.51 0 0 1 12 2.5zm0 1.5A8 8 0 1 0 20 12a8.01 8.01 0 0 0-8-8zm.75 3.5v4.02l3.19 1.91-.77 1.29-3.55-2.13A.75.75 0 0 1 11.25 12V7.5h1.5z"/>
+              </svg>
+            </span>
+          {%- endif -%}
+          <span>{{ section.settings.help_hours }}</span>
+        </p>
       {%- endif -%}
     </div>
   </div>
 
   <style>
-    #MainFaqs-{{ section.id }} {
+    #shopify-section-{{ section.id }} .main-faqs {
       background: #fff;
       padding-top: {{ section.settings.padding_top }}px;
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__container {
+    #shopify-section-{{ section.id }} .main-faqs__container {
       max-width: {{ section.settings.max_width }}px;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__group + .main-faqs__group {
+    #shopify-section-{{ section.id }} .main-faqs__group + .main-faqs__group {
       margin-top: 4.2rem;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__category-title {
+    #shopify-section-{{ section.id }} .main-faqs__category-title {
       margin: 0 0 1.8rem;
       color: {{ section.settings.category_title_color }};
       font-size: {{ section.settings.category_title_size }}px;
@@ -102,25 +191,37 @@
       font-weight: 600;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__category-title--hidden {
+    #shopify-section-{{ section.id }} .main-faqs__category-title--hidden {
       display: none;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__grid {
+    #shopify-section-{{ section.id }} .main-faqs__rows {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #shopify-section-{{ section.id }} .main-faqs__row {
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       column-gap: {{ section.settings.column_gap }}px;
+      align-items: stretch;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__col {
+    #shopify-section-{{ section.id }} .main-faqs__col {
       min-width: 0;
+      display: flex;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__item {
+    #shopify-section-{{ section.id }} .main-faqs__col--empty {
       border-bottom: 1px solid {{ section.settings.row_border_color }};
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__question {
+    #shopify-section-{{ section.id }} .main-faqs__item {
+      width: 100%;
+      border-bottom: 1px solid {{ section.settings.row_border_color }};
+    }
+
+    #shopify-section-{{ section.id }} .main-faqs__question {
       list-style: none;
       cursor: pointer;
       display: flex;
@@ -134,11 +235,11 @@
       color: #1f1f1f;
     }
 
-    #MainFaqs-{{ section.id }} summary::-webkit-details-marker {
+    #shopify-section-{{ section.id }} summary::-webkit-details-marker {
       display: none;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__icon {
+    #shopify-section-{{ section.id }} .main-faqs__icon {
       width: 20px;
       height: 20px;
       min-width: 20px;
@@ -148,8 +249,8 @@
       flex-shrink: 0;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__icon::before,
-    #MainFaqs-{{ section.id }} .main-faqs__icon::after {
+    #shopify-section-{{ section.id }} .main-faqs__icon::before,
+    #shopify-section-{{ section.id }} .main-faqs__icon::after {
       content: "";
       position: absolute;
       left: 50%;
@@ -159,27 +260,27 @@
       transition: opacity 0.2s ease;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__icon::before {
+    #shopify-section-{{ section.id }} .main-faqs__icon::before {
       width: 9px;
       height: 1.5px;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__icon::after {
+    #shopify-section-{{ section.id }} .main-faqs__icon::after {
       width: 1.5px;
       height: 9px;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__item[open] .main-faqs__icon::after {
+    #shopify-section-{{ section.id }} .main-faqs__item[open] .main-faqs__icon::after {
       opacity: 0;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__answer {
+    #shopify-section-{{ section.id }} .main-faqs__answer {
       display: grid;
       grid-template-rows: 0fr;
       transition: grid-template-rows 0.26s ease;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__answer > * {
+    #shopify-section-{{ section.id }} .main-faqs__answer-inner {
       overflow: hidden;
       margin: 0 0 1.4rem;
       color: #333;
@@ -187,16 +288,16 @@
       line-height: 1.55;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__item[open] .main-faqs__answer {
+    #shopify-section-{{ section.id }} .main-faqs__item[open] .main-faqs__answer {
       grid-template-rows: 1fr;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__help {
+    #shopify-section-{{ section.id }} .main-faqs__help {
       margin-top: 5rem;
       max-width: 640px;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__help-title {
+    #shopify-section-{{ section.id }} .main-faqs__help-title {
       margin: 0 0 1.2rem;
       font-size: 44px;
       line-height: 1.05;
@@ -204,46 +305,73 @@
       color: #101010;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__help-text {
-      margin-bottom: 0.8rem;
-      font-size: 22px;
-      line-height: 1.45;
+    #shopify-section-{{ section.id }} .main-faqs__help-text,
+    #shopify-section-{{ section.id }} .main-faqs__help-line {
+      font-size: var(--mf-help-fs, 16px);
+      font-weight: var(--mf-help-fw, 500);
+      line-height: var(--mf-help-lh, 1.5);
       color: #1f1f1f;
+      margin: 0;
     }
 
-    #MainFaqs-{{ section.id }} .main-faqs__help-line {
-      margin: 0.35rem 0 0;
-      font-size: 22px;
-      line-height: 1.45;
-      color: #1f1f1f;
+    #shopify-section-{{ section.id }} .main-faqs__help--has-ff .main-faqs__help-text,
+    #shopify-section-{{ section.id }} .main-faqs__help--has-ff .main-faqs__help-line {
+      font-family: var(--mf-help-ff);
+    }
+
+    #shopify-section-{{ section.id }} .main-faqs__help-text {
+      margin-bottom: 0.7rem;
+    }
+
+    #shopify-section-{{ section.id }} .main-faqs__help-line + .main-faqs__help-line {
+      margin-top: 0.35rem;
+    }
+
+    #shopify-section-{{ section.id }} .main-faqs__help-line {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    #shopify-section-{{ section.id }} .main-faqs__help-icon {
+      width: var(--mf-help-icon-size, 16px);
+      height: var(--mf-help-icon-size, 16px);
+      flex-shrink: 0;
+      display: inline-flex;
+      color: #6a6a6a;
+    }
+
+    #shopify-section-{{ section.id }} .main-faqs__help-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: currentColor;
+      display: block;
     }
 
     @media screen and (max-width: 989px) {
-      #MainFaqs-{{ section.id }} {
+      #shopify-section-{{ section.id }} .main-faqs {
         padding-top: calc({{ section.settings.padding_top }}px * 0.72);
         padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.72);
       }
 
-      #MainFaqs-{{ section.id }} .main-faqs__grid {
+      #shopify-section-{{ section.id }} .main-faqs__row {
         grid-template-columns: 1fr;
-        row-gap: 0;
       }
 
-      #MainFaqs-{{ section.id }} .main-faqs__category-title {
+      #shopify-section-{{ section.id }} .main-faqs__col--empty {
+        display: none;
+      }
+
+      #shopify-section-{{ section.id }} .main-faqs__category-title {
         margin-bottom: 1.2rem;
       }
 
-      #MainFaqs-{{ section.id }} .main-faqs__help {
+      #shopify-section-{{ section.id }} .main-faqs__help {
         margin-top: 3.6rem;
       }
 
-      #MainFaqs-{{ section.id }} .main-faqs__help-title {
+      #shopify-section-{{ section.id }} .main-faqs__help-title {
         font-size: 34px;
-      }
-
-      #MainFaqs-{{ section.id }} .main-faqs__help-text,
-      #MainFaqs-{{ section.id }} .main-faqs__help-line {
-        font-size: 18px;
       }
     }
   </style>
@@ -348,6 +476,63 @@
       "id": "help_hours",
       "label": "Help hours line",
       "default": "Sunday - Saturday | 8 AM - 8 PM (UAE / GMT+4)"
+    },
+    {
+      "type": "select",
+      "id": "help_font_family",
+      "label": "Help text font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "system", "label": "System" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "help_font_size",
+      "label": "Help text font size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "help_font_weight",
+      "label": "Help text font weight",
+      "default": "500",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "help_line_height",
+      "label": "Help text line height",
+      "min": 1.1,
+      "max": 2.0,
+      "step": 0.05,
+      "default": 1.5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_help_icons",
+      "label": "Show help icons",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "help_icon_size",
+      "label": "Help icon size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "default": 16
     },
     {
       "type": "range",
