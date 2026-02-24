@@ -1,0 +1,41 @@
+{
+  "sections": {
+    "purpose_beyond_gummy_wholesale": {
+      "type": "purpose-beyond-gummy",
+      "settings": {}
+    },
+    "marquee_strip_wholesale": {
+      "type": "marquee-strip",
+      "settings": {}
+    },
+    "designed_to_shine_wholesale": {
+      "type": "designed-to-shine",
+      "settings": {}
+    },
+    "built_planet_mind_wholesale": {
+      "type": "built-planet-mind",
+      "settings": {}
+    },
+    "we_refuse_section_wholesale": {
+      "type": "we-refuse-section",
+      "settings": {}
+    },
+    "what_if_wellness_wholesale": {
+      "type": "what-if-wellness",
+      "settings": {}
+    },
+    "main_faqs_wholesale": {
+      "type": "main-faqs",
+      "settings": {}
+    }
+  },
+  "order": [
+    "purpose_beyond_gummy_wholesale",
+    "marquee_strip_wholesale",
+    "designed_to_shine_wholesale",
+    "built_planet_mind_wholesale",
+    "we_refuse_section_wholesale",
+    "what_if_wellness_wholesale",
+    "main_faqs_wholesale"
+  ]
+}
