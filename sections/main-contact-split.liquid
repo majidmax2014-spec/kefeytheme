@@ -1,0 +1,1010 @@
+{%- liquid
+  assign mch_ff_main = ''
+  if section.settings.main_heading_font_family == 'system'
+    assign mch_ff_main = "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+  elsif section.settings.main_heading_font_family == 'heading'
+    assign mch_ff_main = 'var(--font-heading-family)'
+  elsif section.settings.main_heading_font_family == 'body'
+    assign mch_ff_main = 'var(--font-body-family)'
+  endif
+
+  assign mch_ff_left_h = ''
+  if section.settings.left_heading_font_family == 'system'
+    assign mch_ff_left_h = "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+  elsif section.settings.left_heading_font_family == 'heading'
+    assign mch_ff_left_h = 'var(--font-heading-family)'
+  elsif section.settings.left_heading_font_family == 'body'
+    assign mch_ff_left_h = 'var(--font-body-family)'
+  endif
+
+  assign mch_ff_left_b = ''
+  if section.settings.left_body_font_family == 'system'
+    assign mch_ff_left_b = "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+  elsif section.settings.left_body_font_family == 'heading'
+    assign mch_ff_left_b = 'var(--font-heading-family)'
+  elsif section.settings.left_body_font_family == 'body'
+    assign mch_ff_left_b = 'var(--font-body-family)'
+  endif
+
+  assign mch_ff_form_h = ''
+  if section.settings.form_heading_font_family == 'system'
+    assign mch_ff_form_h = "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+  elsif section.settings.form_heading_font_family == 'heading'
+    assign mch_ff_form_h = 'var(--font-heading-family)'
+  elsif section.settings.form_heading_font_family == 'body'
+    assign mch_ff_form_h = 'var(--font-body-family)'
+  endif
+
+  assign mch_ff_input = ''
+  if section.settings.input_font_family == 'system'
+    assign mch_ff_input = "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+  elsif section.settings.input_font_family == 'heading'
+    assign mch_ff_input = 'var(--font-heading-family)'
+  elsif section.settings.input_font_family == 'body'
+    assign mch_ff_input = 'var(--font-body-family)'
+  endif
+
+  assign mch_ff_button = ''
+  if section.settings.button_font_family == 'system'
+    assign mch_ff_button = "ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
+  elsif section.settings.button_font_family == 'heading'
+    assign mch_ff_button = 'var(--font-heading-family)'
+  elsif section.settings.button_font_family == 'body'
+    assign mch_ff_button = 'var(--font-body-family)'
+  endif
+-%}
+
+<section
+  id="main-contact-split-{{ section.id }}"
+  class="main-contact-split"
+  style="
+    --mch-main-fs: {{ section.settings.main_heading_font_size }}px;
+    --mch-main-fw: {{ section.settings.main_heading_font_weight }};
+    --mch-left-h-fs: {{ section.settings.left_heading_font_size }}px;
+    --mch-left-h-fw: {{ section.settings.left_heading_font_weight }};
+    --mch-left-b-fs: {{ section.settings.left_body_font_size }}px;
+    --mch-left-b-fw: {{ section.settings.left_body_font_weight }};
+    --mch-form-h-fs: {{ section.settings.form_heading_font_size }}px;
+    --mch-form-h-fw: {{ section.settings.form_heading_font_weight }};
+    --mch-input-fs: {{ section.settings.input_font_size }}px;
+    --mch-input-fw: {{ section.settings.input_font_weight }};
+    --mch-button-fs: {{ section.settings.button_font_size }}px;
+    --mch-button-fw: {{ section.settings.button_font_weight }};
+    {% if mch_ff_main != blank %}--mch-main-ff: {{ mch_ff_main }};{% endif %}
+    {% if mch_ff_left_h != blank %}--mch-left-h-ff: {{ mch_ff_left_h }};{% endif %}
+    {% if mch_ff_left_b != blank %}--mch-left-b-ff: {{ mch_ff_left_b }};{% endif %}
+    {% if mch_ff_form_h != blank %}--mch-form-h-ff: {{ mch_ff_form_h }};{% endif %}
+    {% if mch_ff_input != blank %}--mch-input-ff: {{ mch_ff_input }};{% endif %}
+    {% if mch_ff_button != blank %}--mch-button-ff: {{ mch_ff_button }};{% endif %}
+  "
+>
+  <div class="main-contact-split__inner page-width">
+    <header class="main-contact-split__header">
+      <h1 class="main-contact-split__main-heading">
+        <span class="main-contact-split__main-heading-text">{{ section.settings.main_heading }}</span>
+        <span class="main-contact-split__main-heading-highlight" aria-hidden="true"></span>
+      </h1>
+    </header>
+
+    <div class="main-contact-split__layout">
+      <div class="main-contact-split__left">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'intro' -%}
+              <div class="main-contact-split__block main-contact-split__intro" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}
+                  <h2 class="main-contact-split__left-heading">{{ block.settings.title }}</h2>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="main-contact-split__left-body rte">{{ block.settings.text }}</div>
+                {%- endif -%}
+                {%- if block.settings.email_label != blank or block.settings.email != blank -%}
+                  <p class="main-contact-split__left-body main-contact-split__email-line">
+                    {{ block.settings.email_label }}
+                    {%- if block.settings.email != blank -%}
+                      <a href="mailto:{{ block.settings.email | escape }}">{{ block.settings.email }}</a>
+                    {%- endif -%}
+                  </p>
+                {%- endif -%}
+              </div>
+
+            {%- when 'business' -%}
+              <div class="main-contact-split__block" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="main-contact-split__left-heading">{{ block.settings.heading }}</h3>
+                {%- endif -%}
+                {%- if block.settings.line != blank -%}
+                  <p class="main-contact-split__left-body">{{ block.settings.line }}</p>
+                {%- endif -%}
+              </div>
+
+            {%- when 'phone' -%}
+              <div class="main-contact-split__block" {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <h3 class="main-contact-split__left-heading">{{ block.settings.heading }}</h3>
+                {%- endif -%}
+                {%- if block.settings.line_1 != blank -%}
+                  <p class="main-contact-split__left-body">{{ block.settings.line_1 }}</p>
+                {%- endif -%}
+                {%- if block.settings.line_2 != blank -%}
+                  <p class="main-contact-split__left-body">{{ block.settings.line_2 }}</p>
+                {%- endif -%}
+              </div>
+          {%- endcase -%}
+        {%- endfor -%}
+
+        {%- assign office_count = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'office' -%}
+            {%- assign office_count = office_count | plus: 1 -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {%- if office_count > 0 -%}
+          <div class="main-contact-split__block main-contact-split__offices">
+            {%- if section.settings.offices_heading != blank -%}
+              <h3 class="main-contact-split__left-heading">{{ section.settings.offices_heading }}</h3>
+            {%- endif -%}
+            <div class="main-contact-split__offices-grid">
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'office' -%}
+                  <div class="main-contact-split__office-item" {{ block.shopify_attributes }}>
+                    {%- if block.settings.title != blank -%}
+                      <h4 class="main-contact-split__office-title">{{ block.settings.title }}</h4>
+                    {%- endif -%}
+                    {%- if block.settings.lines != blank -%}
+                      {%- assign office_lines = block.settings.lines | newline_to_br | split: '<br />' -%}
+                      {%- for line in office_lines -%}
+                        {%- assign line_trimmed = line | strip -%}
+                        {%- if line_trimmed != blank -%}
+                          <p class="main-contact-split__left-body">{{ line_trimmed }}</p>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="main-contact-split__right">
+        {%- if section.settings.form_heading != blank -%}
+          <h2 class="main-contact-split__form-heading">{{ section.settings.form_heading }}</h2>
+        {%- endif -%}
+
+        {%- form 'contact', id: 'ContactSplitForm', class: 'main-contact-split__form' -%}
+          {%- if form.posted_successfully? -%}
+            <p class="main-contact-split__message main-contact-split__message--success" tabindex="-1" autofocus>
+              {{ section.settings.success_message }}
+            </p>
+          {%- endif -%}
+          {%- if form.errors -%}
+            <div class="main-contact-split__message main-contact-split__message--error" role="alert">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[topic]" value="{{ section.settings.submission_topic }}">
+
+          <div class="main-contact-split__field">
+            <label class="main-contact-split__visually-hidden" for="ContactSplitName-{{ section.id }}">Name</label>
+            <input
+              id="ContactSplitName-{{ section.id }}"
+              class="main-contact-split__input"
+              type="text"
+              name="contact[name]"
+              value="{% if form.name %}{{ form.name }}{% endif %}"
+              placeholder="Name"
+              required
+            >
+          </div>
+
+          <div class="main-contact-split__field">
+            <label class="main-contact-split__visually-hidden" for="ContactSplitEmail-{{ section.id }}">Email Address</label>
+            <input
+              id="ContactSplitEmail-{{ section.id }}"
+              class="main-contact-split__input"
+              type="email"
+              name="contact[email]"
+              value="{% if form.email %}{{ form.email }}{% endif %}"
+              placeholder="Email Address"
+              autocorrect="off"
+              autocapitalize="off"
+              required
+            >
+          </div>
+
+          <div class="main-contact-split__field">
+            <label class="main-contact-split__visually-hidden" for="ContactSplitPhone-{{ section.id }}">Phone/Whatsapp</label>
+            <input
+              id="ContactSplitPhone-{{ section.id }}"
+              class="main-contact-split__input"
+              type="tel"
+              name="contact[phone]"
+              value="{% if form.phone %}{{ form.phone }}{% endif %}"
+              placeholder="Phone/Whatsapp"
+            >
+          </div>
+
+          <div class="main-contact-split__field">
+            <label class="main-contact-split__visually-hidden" for="ContactSplitMessage-{{ section.id }}">Message</label>
+            <textarea
+              id="ContactSplitMessage-{{ section.id }}"
+              class="main-contact-split__textarea"
+              name="contact[body]"
+              rows="7"
+              placeholder="Message"
+            >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          </div>
+
+          <button type="submit" class="main-contact-split__submit contact-split__submit button button--primary">
+            {{ section.settings.button_label }}
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    #shopify-section-{{ section.id }} .main-contact-split {
+      background: {{ section.settings.section_bg_color }};
+      padding-top: {{ section.settings.section_padding_top }}px;
+      padding-bottom: {{ section.settings.section_padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__inner {
+      max-width: 1200px;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__header {
+      text-align: center;
+      margin-bottom: 66px;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__main-heading {
+      margin: 0;
+      display: inline-block;
+      position: relative;
+      line-height: 1.1;
+      color: {{ section.settings.main_heading_color }};
+      font-size: var(--mch-main-fs, 46px);
+      font-weight: var(--mch-main-fw, 700);
+      {% if mch_ff_main != blank %}
+        font-family: var(--mch-main-ff);
+      {% endif %}
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__main-heading-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__main-heading-highlight {
+      position: absolute;
+      left: -0.22em;
+      right: -0.22em;
+      bottom: 0.1em;
+      height: 0.28em;
+      z-index: 0;
+      background: {{ section.settings.heading_highlight_color }};
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__layout {
+      display: grid;
+      grid-template-columns: minmax(0, 55%) minmax(0, 45%);
+      column-gap: 66px;
+      align-items: start;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__left {
+      color: {{ section.settings.left_body_color }};
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__block {
+      margin-bottom: 34px;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__left-heading,
+    #shopify-section-{{ section.id }} .main-contact-split__office-title {
+      margin: 0 0 8px;
+      color: {{ section.settings.left_heading_color }};
+      font-size: var(--mch-left-h-fs, 36px);
+      font-weight: var(--mch-left-h-fw, 700);
+      line-height: 1.24;
+      {% if mch_ff_left_h != blank %}
+        font-family: var(--mch-left-h-ff);
+      {% endif %}
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__office-title {
+      margin-bottom: 6px;
+      font-size: calc(var(--mch-left-h-fs, 36px) - 4px);
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__left-body,
+    #shopify-section-{{ section.id }} .main-contact-split__left .rte,
+    #shopify-section-{{ section.id }} .main-contact-split__left .rte p {
+      margin: 0 0 8px;
+      color: {{ section.settings.left_body_color }};
+      font-size: var(--mch-left-b-fs, 32px);
+      font-weight: var(--mch-left-b-fw, 400);
+      line-height: 1.42;
+      {% if mch_ff_left_b != blank %}
+        font-family: var(--mch-left-b-ff);
+      {% endif %}
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__email-line {
+      margin-top: 12px;
+      font-weight: 600;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__email-line a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__offices-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 34px;
+      row-gap: 24px;
+      margin-top: 8px;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__office-item {
+      position: relative;
+      padding-right: 22px;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__office-item + .main-contact-split__office-item {
+      padding-left: 34px;
+      border-left: 1px solid {{ section.settings.office_divider_color }};
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__right {
+      padding-top: 2px;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__form-heading {
+      margin: 0 0 24px;
+      color: {{ section.settings.form_heading_color }};
+      font-size: var(--mch-form-h-fs, 40px);
+      font-weight: var(--mch-form-h-fw, 700);
+      line-height: 1.25;
+      {% if mch_ff_form_h != blank %}
+        font-family: var(--mch-form-h-ff);
+      {% endif %}
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__form {
+      margin: 0;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__field {
+      margin-bottom: {{ section.settings.fields_gap }}px;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__input,
+    #shopify-section-{{ section.id }} .main-contact-split__textarea {
+      width: 100%;
+      border: 1px solid {{ section.settings.field_border_color }};
+      border-radius: 999px;
+      background: transparent;
+      color: {{ section.settings.input_text_color }};
+      padding: 14px 32px;
+      box-sizing: border-box;
+      font-size: var(--mch-input-fs, 34px);
+      font-weight: var(--mch-input-fw, 400);
+      line-height: 1.2;
+      box-shadow: none;
+      {% if mch_ff_input != blank %}
+        font-family: var(--mch-input-ff);
+      {% endif %}
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__input::placeholder,
+    #shopify-section-{{ section.id }} .main-contact-split__textarea::placeholder {
+      color: {{ section.settings.placeholder_color }};
+      opacity: 1;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__textarea {
+      border-radius: 30px;
+      min-height: 196px;
+      resize: vertical;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__input:focus,
+    #shopify-section-{{ section.id }} .main-contact-split__textarea:focus {
+      outline: none;
+      border-color: {{ section.settings.button_bg_color }};
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__submit {
+      width: 100%;
+      min-height: 78px;
+      margin-top: 4px;
+      border: 0 !important;
+      outline: none !important;
+      box-shadow: none !important;
+      border-radius: 999px;
+      background: {{ section.settings.button_bg_color }};
+      color: {{ section.settings.button_text_color }};
+      cursor: pointer;
+      font-size: var(--mch-button-fs, 40px);
+      font-weight: var(--mch-button-fw, 700);
+      line-height: 1.1;
+      {% if mch_ff_button != blank %}
+        font-family: var(--mch-button-ff);
+      {% endif %}
+    }
+
+    #shopify-section-{{ section.id }} .contact-split__submit::before {
+      content: none !important;
+      display: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .contact-split__submit::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__submit:hover {
+      opacity: 0.96;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__message {
+      margin: 0 0 16px;
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 14px;
+      line-height: 1.35;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__message--success {
+      border: 1px solid #b9e4c8;
+      background: #e8f8ec;
+      color: #1d7d3f;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__message--error {
+      border: 1px solid #f2c3c3;
+      background: #fff0f0;
+      color: #b22a2a;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__visually-hidden {
+      position: absolute !important;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
+      white-space: nowrap;
+    }
+
+    @media screen and (max-width: 989px) {
+      #shopify-section-{{ section.id }} .main-contact-split__header {
+        margin-bottom: 40px;
+      }
+
+      #shopify-section-{{ section.id }} .main-contact-split__layout {
+        grid-template-columns: 1fr;
+        row-gap: 36px;
+      }
+
+      #shopify-section-{{ section.id }} .main-contact-split__offices-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #shopify-section-{{ section.id }} .main-contact-split__office-item + .main-contact-split__office-item {
+        border-left: 0;
+        padding-left: 0;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Main Contact Split",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main heading",
+      "default": "Have any Questions or Comments?"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Send Us a Message - We Reply with Joy!"
+    },
+    {
+      "type": "text",
+      "id": "offices_heading",
+      "label": "Offices heading",
+      "default": "Our Offices"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Send Message"
+    },
+    {
+      "type": "richtext",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "<p>Thank you! Your message has been sent successfully.</p>"
+    },
+    {
+      "type": "text",
+      "id": "submission_topic",
+      "label": "Submission topic",
+      "default": "Contact Page"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section background",
+      "default": "#efefef"
+    },
+    {
+      "type": "color",
+      "id": "heading_highlight_color",
+      "label": "Heading highlight color",
+      "default": "#f3c620"
+    },
+    {
+      "type": "color",
+      "id": "main_heading_color",
+      "label": "Main heading color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "left_heading_color",
+      "label": "Left heading color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "left_body_color",
+      "label": "Left body text color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "office_divider_color",
+      "label": "Office divider color",
+      "default": "#bcbcbc"
+    },
+    {
+      "type": "color",
+      "id": "form_heading_color",
+      "label": "Form heading color",
+      "default": "#e5543a"
+    },
+    {
+      "type": "color",
+      "id": "field_border_color",
+      "label": "Field border color",
+      "default": "#b7b7b7"
+    },
+    {
+      "type": "color",
+      "id": "placeholder_color",
+      "label": "Placeholder color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "input_text_color",
+      "label": "Input text color",
+      "default": "#111111"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background color",
+      "default": "#49b2b5"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "fields_gap",
+      "label": "Fields gap",
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section padding top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section padding bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "default": 56
+    },
+    {
+      "type": "header",
+      "content": "Typography - Main heading"
+    },
+    {
+      "type": "select",
+      "id": "main_heading_font_family",
+      "label": "Main heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "system", "label": "System" },
+        { "value": "heading", "label": "Heading" },
+        { "value": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "main_heading_font_size",
+      "label": "Main heading font size",
+      "min": 16,
+      "max": 96,
+      "step": 1,
+      "default": 46
+    },
+    {
+      "type": "select",
+      "id": "main_heading_font_weight",
+      "label": "Main heading font weight",
+      "default": "700",
+      "options": [
+        { "value": "300", "label": "300" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography - Left headings"
+    },
+    {
+      "type": "select",
+      "id": "left_heading_font_family",
+      "label": "Left heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "system", "label": "System" },
+        { "value": "heading", "label": "Heading" },
+        { "value": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "left_heading_font_size",
+      "label": "Left heading font size",
+      "min": 16,
+      "max": 96,
+      "step": 1,
+      "default": 36
+    },
+    {
+      "type": "select",
+      "id": "left_heading_font_weight",
+      "label": "Left heading font weight",
+      "default": "700",
+      "options": [
+        { "value": "300", "label": "300" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography - Left body text"
+    },
+    {
+      "type": "select",
+      "id": "left_body_font_family",
+      "label": "Left body font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "system", "label": "System" },
+        { "value": "heading", "label": "Heading" },
+        { "value": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "left_body_font_size",
+      "label": "Left body font size",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "default": 32
+    },
+    {
+      "type": "select",
+      "id": "left_body_font_weight",
+      "label": "Left body font weight",
+      "default": "400",
+      "options": [
+        { "value": "300", "label": "300" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography - Form heading"
+    },
+    {
+      "type": "select",
+      "id": "form_heading_font_family",
+      "label": "Form heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "system", "label": "System" },
+        { "value": "heading", "label": "Heading" },
+        { "value": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "form_heading_font_size",
+      "label": "Form heading font size",
+      "min": 14,
+      "max": 72,
+      "step": 1,
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "form_heading_font_weight",
+      "label": "Form heading font weight",
+      "default": "700",
+      "options": [
+        { "value": "300", "label": "300" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography - Form input text"
+    },
+    {
+      "type": "select",
+      "id": "input_font_family",
+      "label": "Input font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "system", "label": "System" },
+        { "value": "heading", "label": "Heading" },
+        { "value": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "input_font_size",
+      "label": "Input font size",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "default": 34
+    },
+    {
+      "type": "select",
+      "id": "input_font_weight",
+      "label": "Input font weight",
+      "default": "400",
+      "options": [
+        { "value": "300", "label": "300" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography - Button text"
+    },
+    {
+      "type": "select",
+      "id": "button_font_family",
+      "label": "Button font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Inherit" },
+        { "value": "system", "label": "System" },
+        { "value": "heading", "label": "Heading" },
+        { "value": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 12,
+      "max": 60,
+      "step": 1,
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Button font weight",
+      "default": "700",
+      "options": [
+        { "value": "300", "label": "300" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "intro",
+      "name": "Intro",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "We’d love to hear from you!"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>The Kefey Team is always here to bring you smiles, support, and answers with a joyful touch.</p>"
+        },
+        {
+          "type": "text",
+          "id": "email_label",
+          "label": "Email label",
+          "default": "Please fill out the form below or email us directly at:"
+        },
+        {
+          "type": "text",
+          "id": "email",
+          "label": "Email",
+          "default": "hello@kefey.co"
+        }
+      ]
+    },
+    {
+      "type": "business",
+      "name": "Business",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Business Inquiries"
+        },
+        {
+          "type": "text",
+          "id": "line",
+          "label": "Line",
+          "default": "Wholesale & Distribution: wholesale@kefey.co"
+        }
+      ]
+    },
+    {
+      "type": "phone",
+      "name": "Phone",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Phone (Customer Support & Business): +1 (888) 888-8888"
+        },
+        {
+          "type": "text",
+          "id": "line_1",
+          "label": "Line 1",
+          "default": "Every day, 1:30 PM - 3:30 PM (Florida Time, Eastern Time)"
+        },
+        {
+          "type": "text",
+          "id": "line_2",
+          "label": "Line 2",
+          "default": "Please contact us during these hours to ensure we can assist you promptly."
+        }
+      ]
+    },
+    {
+      "type": "office",
+      "name": "Office",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "USA 🇺🇸"
+        },
+        {
+          "type": "textarea",
+          "id": "lines",
+          "label": "Lines (one per line)",
+          "default": "Kefey LLC\n16192 Coastal Highway\nLewes, Delaware 19958, USA"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Main Contact Split",
+      "blocks": [
+        { "type": "intro" },
+        { "type": "business" },
+        { "type": "phone" },
+        {
+          "type": "office",
+          "settings": {
+            "title": "USA 🇺🇸",
+            "lines": "Kefey LLC\n16192 Coastal Highway\nLewes, Delaware 19958, USA"
+          }
+        },
+        {
+          "type": "office",
+          "settings": {
+            "title": "UAE 🇦🇪",
+            "lines": "Kefey Life FZCO\nR6, JLT Cluster R\nPO Box 336851 - Dubai, UAE"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
