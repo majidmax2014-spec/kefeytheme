@@ -192,27 +192,25 @@
           <input type="hidden" name="contact[topic]" value="{{ section.settings.submission_topic }}">
 
           <div class="main-contact-split__field">
-            <label class="main-contact-split__visually-hidden" for="ContactSplitName-{{ section.id }}">Name</label>
+            <label class="main-contact-split__label" for="ContactSplitName-{{ section.id }}">Name</label>
             <input
               id="ContactSplitName-{{ section.id }}"
               class="main-contact-split__input"
               type="text"
               name="contact[name]"
               value="{% if form.name %}{{ form.name }}{% endif %}"
-              placeholder="Name"
               required
             >
           </div>
 
           <div class="main-contact-split__field">
-            <label class="main-contact-split__visually-hidden" for="ContactSplitEmail-{{ section.id }}">Email Address</label>
+            <label class="main-contact-split__label" for="ContactSplitEmail-{{ section.id }}">Email Address</label>
             <input
               id="ContactSplitEmail-{{ section.id }}"
               class="main-contact-split__input"
               type="email"
               name="contact[email]"
               value="{% if form.email %}{{ form.email }}{% endif %}"
-              placeholder="Email Address"
               autocorrect="off"
               autocapitalize="off"
               required
@@ -220,25 +218,23 @@
           </div>
 
           <div class="main-contact-split__field">
-            <label class="main-contact-split__visually-hidden" for="ContactSplitPhone-{{ section.id }}">Phone/Whatsapp</label>
+            <label class="main-contact-split__label" for="ContactSplitPhone-{{ section.id }}">Phone/Whatsapp</label>
             <input
               id="ContactSplitPhone-{{ section.id }}"
               class="main-contact-split__input"
               type="tel"
               name="contact[phone]"
               value="{% if form.phone %}{{ form.phone }}{% endif %}"
-              placeholder="Phone/Whatsapp"
             >
           </div>
 
           <div class="main-contact-split__field">
-            <label class="main-contact-split__visually-hidden" for="ContactSplitMessage-{{ section.id }}">Message</label>
+            <label class="main-contact-split__label" for="ContactSplitMessage-{{ section.id }}">Message</label>
             <textarea
               id="ContactSplitMessage-{{ section.id }}"
               class="main-contact-split__textarea"
               name="contact[body]"
               rows="7"
-              placeholder="Message"
             >{% if form.body %}{{ form.body }}{% endif %}</textarea>
           </div>
 
@@ -388,7 +384,25 @@
     }
 
     #shopify-section-{{ section.id }} .main-contact-split__field {
+      position: relative;
       margin-bottom: {{ section.settings.fields_gap }}px;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__label {
+      position: absolute;
+      top: -0.66rem;
+      left: 2rem;
+      z-index: 1;
+      background: {{ section.settings.section_bg_color }};
+      padding: 0 0.65rem;
+      color: {{ section.settings.placeholder_color }};
+      font-size: var(--mch-input-fs, 16px);
+      font-weight: var(--mch-input-fw, 400);
+      line-height: 1;
+      pointer-events: none;
+      {% if mch_ff_input != blank %}
+        font-family: var(--mch-input-ff);
+      {% endif %}
     }
 
     #shopify-section-{{ section.id }} .main-contact-split__input,
@@ -402,7 +416,7 @@
       border-radius: 999px;
       background: #ffffff;
       color: {{ section.settings.input_text_color }};
-      padding: 16px 24px 9px;
+      padding: 14px 24px;
       min-height: 62px;
       height: 62px;
       box-sizing: border-box;
@@ -416,20 +430,11 @@
       {% endif %}
     }
 
-    #shopify-section-{{ section.id }} .main-contact-split__input::placeholder,
-    #shopify-section-{{ section.id }} .main-contact-split__textarea::placeholder {
-      color: {{ section.settings.placeholder_color }};
-      opacity: 1;
-      font-size: inherit;
-      font-weight: inherit;
-      line-height: 1.2;
-    }
-
     #shopify-section-{{ section.id }} .main-contact-split__textarea {
       border-radius: 30px;
       min-height: 166px;
       height: auto;
-      padding: 20px 24px 14px;
+      padding: 20px 24px;
       line-height: 1.45;
       resize: vertical;
     }
