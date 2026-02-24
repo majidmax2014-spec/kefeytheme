@@ -42,7 +42,94 @@
     },
     "form": {
       "type": "main-contact-split",
-      "settings": {}
+      "blocks": {
+        "intro_xwFFCD": {
+          "type": "intro",
+          "settings": {
+            "title": "We’d love to hear from you!",
+            "text": "<p>The Kefey Team is always here to bring you smiles, support, and answers with a joyful touch.</p>",
+            "email_label": "Please fill out the form below or email us directly at:",
+            "email": "hello@kefey.co"
+          }
+        },
+        "business_ApjCDg": {
+          "type": "business",
+          "settings": {
+            "heading": "Business Inquiries",
+            "line": "Wholesale & Distribution: wholesale@kefey.co"
+          }
+        },
+        "phone_J7fiEd": {
+          "type": "phone",
+          "settings": {
+            "heading": "Phone (Customer Support & Business): +1 (888) 888-8888",
+            "line_1": "Every day, 1:30 PM - 3:30 PM (Florida Time, Eastern Time)",
+            "line_2": "Please contact us during these hours to ensure we can assist you promptly."
+          }
+        },
+        "office_DPdjgp": {
+          "type": "office",
+          "settings": {
+            "title": "USA",
+            "lines": "Kefey LLC\n16192 Coastal Highway\nLewes, Delaware 19958, USA"
+          }
+        },
+        "office_GeXUHd": {
+          "type": "office",
+          "settings": {
+            "title": "UAE",
+            "lines": "Kefey Life FZCO\nR6, JLT Cluster R\nPO Box 336851 - Dubai, UAE"
+          }
+        }
+      },
+      "block_order": [
+        "intro_xwFFCD",
+        "business_ApjCDg",
+        "phone_J7fiEd",
+        "office_DPdjgp",
+        "office_GeXUHd"
+      ],
+      "settings": {
+        "main_heading": "Have any Questions or Comments?",
+        "form_heading": "Send Us a Message - We Reply with Joy!",
+        "offices_heading": "Our Offices",
+        "button_label": "Send Message",
+        "success_message": "<p>Thank you! Your message has been sent successfully.</p>",
+        "submission_topic": "Contact Page",
+        "section_bg_color": "#ffffff",
+        "heading_highlight_color": "#f3c620",
+        "main_heading_color": "#111111",
+        "left_heading_color": "#111111",
+        "left_body_color": "#111111",
+        "office_divider_color": "#bcbcbc",
+        "form_heading_color": "#e5543a",
+        "field_border_color": "#b7b7b7",
+        "placeholder_color": "#111111",
+        "input_text_color": "#111111",
+        "button_bg_color": "#49b2b5",
+        "button_text_color": "#ffffff",
+        "fields_gap": 26,
+        "section_padding_top": 52,
+        "section_padding_bottom": 56,
+        "main_heading_font_family": "inherit",
+        "main_heading_font_size": 36,
+        "main_heading_font_weight": "700",
+        "left_heading_font_family": "inherit",
+        "left_heading_font_size": 18,
+        "left_heading_font_weight": "700",
+        "left_body_font_family": "inherit",
+        "left_body_font_size": 16,
+        "left_body_font_weight": "400",
+        "form_heading_font_family": "inherit",
+        "form_heading_font_size": 18,
+        "form_heading_font_weight": "700",
+        "input_font_family": "inherit",
+        "input_font_size": 16,
+        "input_font_weight": "400",
+        "button_font_family": "inherit",
+        "button_font_size": 30,
+        "button_font_weight": "500"
+      }
     }
   },
   "order": [
