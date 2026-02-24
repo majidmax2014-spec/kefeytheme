@@ -41,7 +41,7 @@
   right: 0;
   bottom: 0;
   height: 8px;
-  background: #2bb4a7;
+  background: var(--bpm-underline-color, #2bb4a7);
 }
 
 .built-planet-mind__heading-line--bottom {

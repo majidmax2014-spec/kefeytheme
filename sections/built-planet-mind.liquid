@@ -27,6 +27,7 @@
     --bpm-max: {{ section.settings.content_max_width }}px;
     --bpm-pt: {{ section.settings.padding_top }}px;
     --bpm-pb: {{ section.settings.padding_bottom }}px;
+    --bpm-underline-color: {{ section.settings.heading_underline_color }};
     --bpm-h-ff: {{ bpm_h_ff }};
     --bpm-h-fw: {{ section.settings.heading_font_weight }};
     --bpm-h-fs: {{ section.settings.heading_font_size }}px;
@@ -38,17 +39,23 @@
   <div class="built-planet-mind__inner">
     {% if section.settings.heading != blank %}
       {% assign heading_raw = section.settings.heading %}
+      {% assign top_line_class = 'built-planet-mind__heading-line' %}
+      {% if section.settings.show_heading_underline %}
+        {% assign top_line_class = top_line_class | append: ' built-planet-mind__heading-line--top' %}
+      {% endif %}
       {% if heading_raw contains '<strong>' and heading_raw contains '</strong>' %}
         {% assign heading_parts = heading_raw | split: '<strong>' %}
         {% assign heading_top = heading_parts[0] | strip %}
         {% assign heading_bottom_parts = heading_parts[1] | split: '</strong>' %}
         {% assign heading_bottom = heading_bottom_parts[0] | strip %}
         <h2 class="built-planet-mind__heading">
-          <span class="built-planet-mind__heading-line built-planet-mind__heading-line--top">{{ heading_top }}</span>
+          <span class="{{ top_line_class }}">{{ heading_top }}</span>
           <span class="built-planet-mind__heading-line built-planet-mind__heading-line--bottom">{{ heading_bottom }}</span>
         </h2>
       {% else %}
-        <h2 class="built-planet-mind__heading">{{ heading_raw }}</h2>
+        <h2 class="built-planet-mind__heading">
+          <span class="{{ top_line_class }}">{{ heading_raw }}</span>
+        </h2>
       {% endif %}
     {% endif %}
     {% if section.settings.accent_text != blank %}
@@ -71,6 +78,8 @@
     { "type": "richtext", "id": "body", "label": "Body", "default": "<p>The wellness industry produces millions of plastic containers every day that are used briefly, then discarded.</p>" },
     { "type": "color", "id": "bg_color", "label": "Background", "default": "#efefef" },
     { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#0d1f30" },
+    { "type": "checkbox", "id": "show_heading_underline", "label": "Show heading underline", "default": true },
+    { "type": "color", "id": "heading_underline_color", "label": "Heading underline color", "default": "#2bb4a7" },
     { "type": "color", "id": "accent_color", "label": "Accent color", "default": "#db5a45" },
     { "type": "color", "id": "body_color", "label": "Body color", "default": "#2e2e2e" },
     {
