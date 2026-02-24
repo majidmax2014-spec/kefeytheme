@@ -9,6 +9,29 @@
  */
 {
   "sections": {
+    "header_banner_prFdFC": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/faq-banner.png",
+        "heading": "Mood Gummies -",
+        "subheading": "Frequently Asked Questions",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 46,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 26,
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 360,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24
+      }
+    },
     "main_faqs_qx8Kp2": {
       "type": "main-faqs",
       "blocks": {
@@ -221,40 +244,18 @@
       "settings": {
         "max_width": 1160,
         "category_title_color": "#29b6b3",
-        "category_title_size": 44,
+        "category_title_size": 36,
         "column_gap": 40,
         "row_border_color": "#d8d8d8",
-        "row_padding_y": 16,
-        "question_size": 20,
+        "row_padding_y": 15,
+        "question_size": 16,
         "answer_size": 16,
         "help_title": "Need more help?",
         "help_text": "<p>Reach our Joyful Support Team anytime at:</p>",
         "help_email": "hello@kefey.co",
         "help_hours": "Sunday - Saturday | 8 AM - 8 PM (UAE / GMT+4)",
-        "padding_top": 40,
+        "padding_top": 56,
         "padding_bottom": 56
-      }
-    },
-    "header_banner_prFdFC": {
-      "type": "header-banner",
-      "name": "Header Banner",
-      "settings": {
-        "heading": "We reimagine wellness as joy",
-        "subheading": "Little rituals that care for you and the world around you",
-        "hb_heading_ff": "heading",
-        "hb_heading_fw": "700",
-        "hb_heading_fs": 56,
-        "hb_desc_ff": "body",
-        "hb_desc_fw": "500",
-        "hb_desc_fs": 24,
-        "banner_height_desktop": 460,
-        "banner_height_mobile": 360,
-        "content_max_width": 760,
-        "content_alignment": "left",
-        "content_padding_x": 64,
-        "overlay_enable": true,
-        "overlay_color": "#000000",
-        "overlay_opacity": 24
       }
     }
   },
