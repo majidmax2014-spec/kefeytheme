@@ -1,7 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
+    "header_banner_BYxBLw": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/contact-banner.png",
+        "heading": "Contact Us",
+        "subheading": "Say Hello to Kefey – We’d Love to Hear From You!",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 46,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 24,
+        "banner_height_desktop": 520,
+        "banner_height_mobile": 360,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24
+      }
+    },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "padding_top": 36,
         "padding_bottom": 36
@@ -19,6 +52,7 @@
     }
   },
   "order": [
+    "header_banner_BYxBLw",
     "main",
     "form"
   ]
