@@ -396,13 +396,15 @@
       appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
+      display: block;
       width: 100%;
       border: 1px solid {{ section.settings.field_border_color }};
       border-radius: 999px;
       background: #ffffff;
       color: {{ section.settings.input_text_color }};
-      padding: 0 24px;
-      min-height: 60px;
+      padding: 16px 24px 9px;
+      min-height: 62px;
+      height: 62px;
       box-sizing: border-box;
       font-size: var(--mch-input-fs, 16px);
       font-weight: var(--mch-input-fw, 400);
@@ -418,12 +420,16 @@
     #shopify-section-{{ section.id }} .main-contact-split__textarea::placeholder {
       color: {{ section.settings.placeholder_color }};
       opacity: 1;
+      font-size: inherit;
+      font-weight: inherit;
+      line-height: 1.2;
     }
 
     #shopify-section-{{ section.id }} .main-contact-split__textarea {
       border-radius: 30px;
       min-height: 166px;
-      padding: 20px 24px;
+      height: auto;
+      padding: 20px 24px 14px;
       line-height: 1.45;
       resize: vertical;
     }
