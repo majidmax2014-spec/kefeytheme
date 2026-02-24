@@ -109,6 +109,23 @@
         "padding_bottom": 40
       }
     },
+    "wholesale_signup_form_wF2mKQ": {
+      "type": "wholesale-signup-form",
+      "settings": {
+        "heading": "Wholesale Sign-Up Form",
+        "subheading_line_1": "Fill in the form below to apply for a Kefey Wholesale Account.",
+        "subheading_line_2": "Our team will review your request and get back to you promptly.",
+        "button_label": "Apply Now",
+        "support_prefix": "Questions? Reach us directly at:",
+        "support_email": "wholesale@kefey.co",
+        "business_type_options": "Retail Store,Distributor,Pharmacy,Wellness Clinic,Online Store,Other",
+        "accent_teal": "#46aeb2",
+        "highlight_color": "#f3c72d",
+        "border_color": "#b8b8b8",
+        "padding_top": 40,
+        "padding_bottom": 56
+      }
+    },
     "built_planet_mind_VG7MqA": {
       "type": "built-planet-mind",
       "name": "Lets Grow Together",
@@ -132,23 +149,6 @@
         "padding_top": 44,
         "padding_bottom": 40
       }
-    },
-    "wholesale_signup_form_wF2mKQ": {
-      "type": "wholesale-signup-form",
-      "settings": {
-        "heading": "Wholesale Sign-Up Form",
-        "subheading_line_1": "Fill in the form below to apply for a Kefey Wholesale Account.",
-        "subheading_line_2": "Our team will review your request and get back to you promptly.",
-        "button_label": "Apply Now",
-        "support_prefix": "Questions? Reach us directly at:",
-        "support_email": "wholesale@kefey.co",
-        "business_type_options": "Retail Store,Distributor,Pharmacy,Wellness Clinic,Online Store,Other",
-        "accent_teal": "#46aeb2",
-        "highlight_color": "#f3c72d",
-        "border_color": "#b8b8b8",
-        "padding_top": 40,
-        "padding_bottom": 56
-      }
     }
   },
   "order": [
@@ -156,7 +156,7 @@
     "built_planet_mind_wholesale",
     "purpose_beyond_gummy_wholesale",
     "we_refuse_section_wholesale",
-    "built_planet_mind_VG7MqA",
-    "wholesale_signup_form_wF2mKQ"
+    "wholesale_signup_form_wF2mKQ",
+    "built_planet_mind_VG7MqA"
   ]
 }
