@@ -1,0 +1,448 @@
+<section id="wholesale-signup-form" class="wholesale-signup-form">
+  <div class="wholesale-signup-form__container page-width">
+    <div class="wholesale-signup-form__header">
+      <h2 class="wholesale-signup-form__title">
+        <span class="wholesale-signup-form__title-text">{{ section.settings.heading }}</span>
+        <span class="wholesale-signup-form__title-highlight" aria-hidden="true"></span>
+      </h2>
+      {%- if section.settings.subheading_line_1 != blank -%}
+        <p class="wholesale-signup-form__subheading wholesale-signup-form__subheading--primary">{{ section.settings.subheading_line_1 }}</p>
+      {%- endif -%}
+      {%- if section.settings.subheading_line_2 != blank -%}
+        <p class="wholesale-signup-form__subheading">{{ section.settings.subheading_line_2 }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- form 'contact', id: 'WholesaleSignUpForm', class: 'wholesale-signup-form__form' -%}
+      {%- if form.posted_successfully? -%}
+        <div class="wholesale-signup-form__message wholesale-signup-form__message--success" tabindex="-1" autofocus>
+          Thanks! Your wholesale application has been submitted successfully.
+        </div>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <div class="wholesale-signup-form__message wholesale-signup-form__message--error" role="alert" tabindex="-1" autofocus>
+          {{ form.errors | default_errors }}
+        </div>
+      {%- endif -%}
+
+      <input type="hidden" name="contact[topic]" value="Wholesale Application">
+
+      <div class="wholesale-signup-form__grid">
+        <div class="wholesale-signup-form__field">
+          <label class="wholesale-signup-form__label" for="WholesaleName-{{ section.id }}">Personal Name</label>
+          <input
+            id="WholesaleName-{{ section.id }}"
+            class="wholesale-signup-form__input"
+            type="text"
+            name="contact[name]"
+            value="{% if form.name %}{{ form.name }}{% endif %}"
+            required
+          >
+        </div>
+
+        <div class="wholesale-signup-form__field">
+          <label class="wholesale-signup-form__label" for="WholesaleCompany-{{ section.id }}">Company Name</label>
+          <input
+            id="WholesaleCompany-{{ section.id }}"
+            class="wholesale-signup-form__input"
+            type="text"
+            name="contact[company]"
+            value="{% if form.company %}{{ form.company }}{% endif %}"
+            required
+          >
+        </div>
+
+        <div class="wholesale-signup-form__field">
+          <label class="wholesale-signup-form__label" for="WholesaleEmail-{{ section.id }}">Email Address</label>
+          <input
+            id="WholesaleEmail-{{ section.id }}"
+            class="wholesale-signup-form__input"
+            type="email"
+            name="contact[email]"
+            value="{% if form.email %}{{ form.email }}{% endif %}"
+            autocorrect="off"
+            autocapitalize="off"
+            required
+          >
+        </div>
+
+        <div class="wholesale-signup-form__field">
+          <label class="wholesale-signup-form__label" for="WholesalePhone-{{ section.id }}">Phone Number</label>
+          <input
+            id="WholesalePhone-{{ section.id }}"
+            class="wholesale-signup-form__input"
+            type="tel"
+            name="contact[phone]"
+            value="{% if form.phone %}{{ form.phone }}{% endif %}"
+          >
+        </div>
+
+        <div class="wholesale-signup-form__field wholesale-signup-form__field--select">
+          <label class="wholesale-signup-form__label" for="WholesaleBusinessType-{{ section.id }}">Business Type</label>
+          {%- assign type_options = section.settings.business_type_options | split: ',' -%}
+          {%- assign selected_type = form.business_type | default: '' -%}
+          <select
+            id="WholesaleBusinessType-{{ section.id }}"
+            class="wholesale-signup-form__input wholesale-signup-form__select"
+            name="contact[business_type]"
+            required
+          >
+            <option value="" {% if selected_type == '' %}selected{% endif %} disabled>Select business type</option>
+            {%- for option in type_options -%}
+              {%- assign option_trimmed = option | strip -%}
+              {%- if option_trimmed != blank -%}
+                <option value="{{ option_trimmed }}" {% if selected_type == option_trimmed %}selected{% endif %}>
+                  {{ option_trimmed }}
+                </option>
+              {%- endif -%}
+            {%- endfor -%}
+          </select>
+        </div>
+
+        <div class="wholesale-signup-form__field">
+          <label class="wholesale-signup-form__label" for="WholesaleVolume-{{ section.id }}">Estimated Order Volume</label>
+          <input
+            id="WholesaleVolume-{{ section.id }}"
+            class="wholesale-signup-form__input"
+            type="text"
+            name="contact[estimated_order_volume]"
+            value="{% if form.estimated_order_volume %}{{ form.estimated_order_volume }}{% endif %}"
+          >
+        </div>
+
+        <div class="wholesale-signup-form__field wholesale-signup-form__field--full">
+          <label class="wholesale-signup-form__label" for="WholesaleDetails-{{ section.id }}">Tell us about your business &amp; why you'd like to partner with Kefey®</label>
+          <textarea
+            id="WholesaleDetails-{{ section.id }}"
+            class="wholesale-signup-form__textarea"
+            name="contact[body]"
+            rows="10"
+          >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+        </div>
+      </div>
+
+      <button type="submit" class="wholesale-signup-form__submit button button--primary">
+        {{ section.settings.button_label }}
+      </button>
+    {%- endform -%}
+
+    <p class="wholesale-signup-form__support">
+      {{ section.settings.support_prefix }}
+      <a href="mailto:{{ section.settings.support_email | escape }}" class="wholesale-signup-form__support-link">
+        {{ section.settings.support_email }}
+      </a>
+    </p>
+  </div>
+
+  <style>
+    #shopify-section-{{ section.id }} .wholesale-signup-form {
+      background: #fff;
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__container {
+      max-width: 1020px;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__header {
+      text-align: center;
+      margin-bottom: 2.6rem;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__title {
+      margin: 0;
+      display: inline-block;
+      position: relative;
+      line-height: 1.1;
+      font-size: clamp(3.4rem, 3.2vw, 5.2rem);
+      font-weight: 700;
+      color: #111;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__title-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__title-highlight {
+      position: absolute;
+      left: -0.3em;
+      right: -0.3em;
+      bottom: 0.16em;
+      height: 0.34em;
+      background: {{ section.settings.highlight_color }};
+      z-index: 0;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__subheading {
+      margin: 0.2rem 0 0;
+      font-size: 20px;
+      line-height: 1.35;
+      color: #202020;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__subheading--primary {
+      margin-top: 1.4rem;
+      font-weight: 700;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__message {
+      margin-bottom: 1.8rem;
+      border-radius: 1.2rem;
+      padding: 1rem 1.2rem;
+      font-size: 1.5rem;
+      line-height: 1.35;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__message--success {
+      background: #e8f8ec;
+      color: #1d7d3f;
+      border: 1px solid #b9e4c8;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__message--error {
+      background: #fff0f0;
+      color: #b22a2a;
+      border: 1px solid #f2c3c3;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      column-gap: 18px;
+      row-gap: 18px;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__field {
+      position: relative;
+      min-width: 0;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__field--full {
+      grid-column: 1 / -1;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__label {
+      position: absolute;
+      top: -0.7rem;
+      left: 2.2rem;
+      background: #fff;
+      padding: 0 0.8rem;
+      font-size: 16px;
+      line-height: 1;
+      color: #1f1f1f;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__input,
+    #shopify-section-{{ section.id }} .wholesale-signup-form__textarea {
+      width: 100%;
+      border: 1px solid {{ section.settings.border_color }};
+      border-radius: 999px;
+      background: #fff;
+      color: #111;
+      font-size: 18px;
+      line-height: 1.3;
+      padding: 1.6rem 2.2rem;
+      box-sizing: border-box;
+      box-shadow: none;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__textarea {
+      border-radius: 2.6rem;
+      min-height: 260px;
+      resize: vertical;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__input:focus,
+    #shopify-section-{{ section.id }} .wholesale-signup-form__textarea:focus {
+      outline: none;
+      border-color: {{ section.settings.accent_teal }};
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.03);
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__field--select {
+      position: relative;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      padding-right: 4rem;
+      cursor: pointer;
+      background-image:
+        linear-gradient(45deg, transparent 50%, #111 50%),
+        linear-gradient(135deg, #111 50%, transparent 50%);
+      background-position:
+        calc(100% - 2.3rem) calc(50% - 2px),
+        calc(100% - 1.7rem) calc(50% - 2px);
+      background-size: 7px 7px, 7px 7px;
+      background-repeat: no-repeat;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__submit {
+      margin-top: 2.2rem;
+      width: 100%;
+      min-height: 64px;
+      border: 0;
+      border-radius: 999px;
+      background: {{ section.settings.accent_teal }};
+      color: #fff;
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.1;
+      cursor: pointer;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__submit:hover {
+      opacity: 0.95;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__support {
+      text-align: center;
+      margin: 2.2rem 0 0;
+      font-size: 40px;
+      line-height: 1.3;
+      color: #1b1b1b;
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__support-link {
+      color: {{ section.settings.accent_teal }};
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      word-break: break-word;
+    }
+
+    @media screen and (max-width: 989px) {
+      #shopify-section-{{ section.id }} .wholesale-signup-form {
+        padding-top: calc({{ section.settings.padding_top }}px * 0.75);
+        padding-bottom: calc({{ section.settings.padding_bottom }}px * 0.75);
+      }
+
+      #shopify-section-{{ section.id }} .wholesale-signup-form__grid {
+        grid-template-columns: 1fr;
+      }
+
+      #shopify-section-{{ section.id }} .wholesale-signup-form__title {
+        font-size: clamp(3rem, 7vw, 4.2rem);
+      }
+
+      #shopify-section-{{ section.id }} .wholesale-signup-form__subheading {
+        font-size: 17px;
+      }
+
+      #shopify-section-{{ section.id }} .wholesale-signup-form__input,
+      #shopify-section-{{ section.id }} .wholesale-signup-form__textarea {
+        font-size: 16px;
+      }
+
+      #shopify-section-{{ section.id }} .wholesale-signup-form__submit {
+        font-size: 30px;
+        min-height: 58px;
+      }
+
+      #shopify-section-{{ section.id }} .wholesale-signup-form__support {
+        font-size: 28px;
+      }
+    }
+  </style>
+</section>
+
+{% schema %}
+{
+  "name": "Wholesale Sign-Up Form",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Wholesale Sign-Up Form"
+    },
+    {
+      "type": "text",
+      "id": "subheading_line_1",
+      "label": "Subheading line 1",
+      "default": "Fill in the form below to apply for a Kefey Wholesale Account."
+    },
+    {
+      "type": "text",
+      "id": "subheading_line_2",
+      "label": "Subheading line 2",
+      "default": "Our team will review your request and get back to you promptly."
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Apply Now"
+    },
+    {
+      "type": "text",
+      "id": "support_prefix",
+      "label": "Support prefix text",
+      "default": "Questions? Reach us directly at:"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "default": "wholesale@kefey.co"
+    },
+    {
+      "type": "textarea",
+      "id": "business_type_options",
+      "label": "Business type options (comma separated)",
+      "default": "Retail Store,Distributor,Pharmacy,Wellness Clinic,Online Store,Other"
+    },
+    {
+      "type": "color",
+      "id": "accent_teal",
+      "label": "Accent teal",
+      "default": "#46AEB2"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Heading highlight color",
+      "default": "#F3C72D"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Input border color",
+      "default": "#B8B8B8"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 180,
+      "step": 4,
+      "default": 56
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wholesale Sign-Up Form"
+    }
+  ]
+}
+{% endschema %}
