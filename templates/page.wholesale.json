@@ -106,12 +106,34 @@
         "padding_top": 20,
         "padding_bottom": 40
       }
+    },
+    "built_planet_mind_VG7MqA": {
+      "type": "built-planet-mind",
+      "settings": {
+        "heading": "Let’s Grow Together!",
+        "accent_text": "",
+        "body": "<p>Together, let’s bring more joyful wellness to shelves around the world. With Kefey®, every gummy is a star – and every partner is family.</p>",
+        "bg_color": "#ffffff",
+        "heading_color": "#0d1f30",
+        "accent_color": "#db5a45",
+        "body_color": "#2e2e2e",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "heading_font_size": 48,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 18,
+        "content_max_width": 820,
+        "padding_top": 44,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
     "header_banner_B48DTT",
     "built_planet_mind_wholesale",
     "purpose_beyond_gummy_wholesale",
-    "we_refuse_section_wholesale"
+    "we_refuse_section_wholesale",
+    "built_planet_mind_VG7MqA"
   ]
 }
