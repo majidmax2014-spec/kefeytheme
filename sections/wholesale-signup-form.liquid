@@ -93,73 +93,74 @@
     </div>
 
     {%- form 'contact', id: 'WholesaleSignUpForm', class: 'wholesale-signup-form__form' -%}
-      {%- if form.posted_successfully? and section.settings.show_success_instead_of_form -%}
-        <div class="wholesale-signup-form__message wholesale-signup-form__message--success" tabindex="-1" autofocus>
-          {{ section.settings.success_message }}
+      {%- if form.errors -%}
+        <div class="wholesale-signup-form__message wholesale-signup-form__message--error" role="alert" tabindex="-1" autofocus>
+          {{ form.errors | default_errors }}
         </div>
-      {%- else -%}
-        {%- if form.posted_successfully? -%}
-          <div class="wholesale-signup-form__message wholesale-signup-form__message--success" tabindex="-1" autofocus>
-            {{ section.settings.success_message }}
-          </div>
-        {%- endif -%}
+      {%- endif -%}
 
-        {%- if form.errors -%}
-          <div class="wholesale-signup-form__message wholesale-signup-form__message--error" role="alert" tabindex="-1" autofocus>
-            {{ form.errors | default_errors }}
-          </div>
-        {%- endif -%}
+      <input type="hidden" name="contact[topic]" value="{{ section.settings.submission_topic }}">
 
-        <input type="hidden" name="contact[topic]" value="{{ section.settings.submission_topic }}">
-
-        <div class="wholesale-signup-form__grid">
+      <div class="wholesale-signup-form__grid">
         <div class="wholesale-signup-form__field">
           <label class="wholesale-signup-form__label" for="WholesaleName-{{ section.id }}">Personal Name</label>
           <input
             id="WholesaleName-{{ section.id }}"
-            class="wholesale-signup-form__input"
+            class="wholesale-signup-form__input js-wholesale-validate"
             type="text"
             name="contact[name]"
             value="{% if form.name %}{{ form.name }}{% endif %}"
+            data-required="true"
+            data-error-id="WholesaleNameError-{{ section.id }}"
             required
           >
+          <p id="WholesaleNameError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
         </div>
 
         <div class="wholesale-signup-form__field">
           <label class="wholesale-signup-form__label" for="WholesaleCompany-{{ section.id }}">Company Name</label>
           <input
             id="WholesaleCompany-{{ section.id }}"
-            class="wholesale-signup-form__input"
+            class="wholesale-signup-form__input js-wholesale-validate"
             type="text"
             name="contact[company]"
             value="{% if form.company %}{{ form.company }}{% endif %}"
+            data-required="true"
+            data-error-id="WholesaleCompanyError-{{ section.id }}"
             required
           >
+          <p id="WholesaleCompanyError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
         </div>
 
         <div class="wholesale-signup-form__field">
           <label class="wholesale-signup-form__label" for="WholesaleEmail-{{ section.id }}">Email Address</label>
           <input
             id="WholesaleEmail-{{ section.id }}"
-            class="wholesale-signup-form__input"
+            class="wholesale-signup-form__input js-wholesale-validate"
             type="email"
             name="contact[email]"
             value="{% if form.email %}{{ form.email }}{% endif %}"
             autocorrect="off"
             autocapitalize="off"
+            data-required="true"
+            data-email="true"
+            data-error-id="WholesaleEmailError-{{ section.id }}"
             required
           >
+          <p id="WholesaleEmailError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
         </div>
 
         <div class="wholesale-signup-form__field">
           <label class="wholesale-signup-form__label" for="WholesalePhone-{{ section.id }}">Phone Number</label>
           <input
             id="WholesalePhone-{{ section.id }}"
-            class="wholesale-signup-form__input"
+            class="wholesale-signup-form__input js-wholesale-validate"
             type="tel"
             name="contact[phone]"
             value="{% if form.phone %}{{ form.phone }}{% endif %}"
+            data-error-id="WholesalePhoneError-{{ section.id }}"
           >
+          <p id="WholesalePhoneError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
         </div>
 
         <div class="wholesale-signup-form__field wholesale-signup-form__field--select">
@@ -168,8 +169,10 @@
           {%- assign selected_type = form.business_type | default: '' -%}
           <select
             id="WholesaleBusinessType-{{ section.id }}"
-            class="wholesale-signup-form__input wholesale-signup-form__select"
+            class="wholesale-signup-form__input wholesale-signup-form__select js-wholesale-validate"
             name="contact[business_type]"
+            data-required="true"
+            data-error-id="WholesaleBusinessTypeError-{{ section.id }}"
             required
           >
             <option value="" {% if selected_type == '' %}selected{% endif %} disabled>Select business type</option>
@@ -182,46 +185,56 @@
               {%- endif -%}
             {%- endfor -%}
           </select>
+          <p id="WholesaleBusinessTypeError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
         </div>
 
         <div class="wholesale-signup-form__field">
           <label class="wholesale-signup-form__label" for="WholesaleVolume-{{ section.id }}">Estimated Order Volume</label>
           <input
             id="WholesaleVolume-{{ section.id }}"
-            class="wholesale-signup-form__input"
+            class="wholesale-signup-form__input js-wholesale-validate"
             type="text"
             name="contact[estimated_order_volume]"
             value="{% if form.estimated_order_volume %}{{ form.estimated_order_volume }}{% endif %}"
+            data-error-id="WholesaleVolumeError-{{ section.id }}"
           >
+          <p id="WholesaleVolumeError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
         </div>
 
         <div class="wholesale-signup-form__field wholesale-signup-form__field--full">
           <label class="wholesale-signup-form__label" for="WholesaleDetails-{{ section.id }}">Tell us about your business &amp; why you'd like to partner with Kefey®</label>
           <textarea
             id="WholesaleDetails-{{ section.id }}"
-            class="wholesale-signup-form__textarea"
+            class="wholesale-signup-form__textarea js-wholesale-validate"
             name="contact[body]"
             rows="10"
+            data-error-id="WholesaleDetailsError-{{ section.id }}"
           >{% if form.body %}{{ form.body }}{% endif %}</textarea>
+          <p id="WholesaleDetailsError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
         </div>
+      </div>
+
+      <button type="submit" class="wholesale-signup-form__submit wholesale-form__submit button button--primary">
+        {{ section.settings.button_label }}
+      </button>
+
+      {%- if form.posted_successfully? -%}
+        <div class="wholesale-signup-form__message wholesale-signup-form__message--success wholesale-signup-form__message--under-button" tabindex="-1" autofocus>
+          {{ section.settings.success_message }}
         </div>
+      {%- endif -%}
 
-        <button type="submit" class="wholesale-signup-form__submit wholesale-form__submit button button--primary">
-          {{ section.settings.button_label }}
-        </button>
+      {%- if section.settings.show_recipient_note -%}
+        <p class="wholesale-form__note wholesale-form__note--recipient">
+          Submissions are sent to the store notification email in Shopify Settings → Notifications. For routing to
+          {{ section.settings.recipient_note_email }}, use Shopify Flow or an app.
+        </p>
+      {%- endif -%}
 
-        {%- if section.settings.show_recipient_note -%}
-          <p class="wholesale-form__note wholesale-form__note--recipient">
-            Submissions are sent to the store notification email in Shopify Settings → Notifications. For routing to
-            {{ section.settings.recipient_note_email }}, use Shopify Flow or an app.
-          </p>
-        {%- endif -%}
-
-        {%- if section.settings.enable_autoresponder_note -%}
-          <p class="wholesale-form__note wholesale-form__note--autoresponder">
-            Theme code can’t send emails. To send an automatic thank-you email, use Shopify Flow/Shopify Email or a form app.
-          </p>
-        {%- endif -%}
+      {%- if section.settings.enable_autoresponder_note -%}
+        <p class="wholesale-form__note wholesale-form__note--autoresponder">
+          Theme code can’t send emails. To send an automatic thank-you email, use Shopify Flow/Shopify Email or a form app.
+        </p>
       {%- endif -%}
       {%- if form.posted_successfully? and section.settings.success_redirect_url != blank -%}
         <script>
@@ -308,6 +321,11 @@
       line-height: 1.35;
     }
 
+    #shopify-section-{{ section.id }} .wholesale-signup-form__message--under-button {
+      margin-top: 1.2rem;
+      margin-bottom: 0;
+    }
+
     #shopify-section-{{ section.id }} .wholesale-signup-form__message--success {
       background: #e8f8ec;
       color: #1d7d3f;
@@ -384,6 +402,20 @@
       outline: none;
       border-color: {{ section.settings.accent_teal }};
       box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.03);
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__input.is-error,
+    #shopify-section-{{ section.id }} .wholesale-signup-form__textarea.is-error {
+      border-color: #d93025 !important;
+      box-shadow: 0 0 0 1px rgba(217, 48, 37, 0.18);
+    }
+
+    #shopify-section-{{ section.id }} .wholesale-signup-form__field-error {
+      margin: 0.55rem 0 0;
+      min-height: 1.2em;
+      font-size: 13px;
+      line-height: 1.3;
+      color: #d93025;
     }
 
     #shopify-section-{{ section.id }} .wholesale-signup-form__field--select {
@@ -498,6 +530,92 @@
       }
     }
   </style>
+
+  <script>
+    (function () {
+      var root = document.getElementById('shopify-section-{{ section.id }}');
+      if (!root) return;
+
+      var form = root.querySelector('#WholesaleSignUpForm');
+      if (!form) return;
+
+      form.setAttribute('novalidate', 'novalidate');
+
+      var fields = Array.prototype.slice.call(form.querySelectorAll('.js-wholesale-validate'));
+      var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      function setError(field, message) {
+        var errorId = field.getAttribute('data-error-id');
+        var errorEl = errorId ? document.getElementById(errorId) : null;
+        field.classList.add('is-error');
+        field.setAttribute('aria-invalid', 'true');
+        if (errorEl) {
+          errorEl.textContent = message;
+          field.setAttribute('aria-describedby', errorId);
+        }
+      }
+
+      function clearError(field) {
+        var errorId = field.getAttribute('data-error-id');
+        var errorEl = errorId ? document.getElementById(errorId) : null;
+        field.classList.remove('is-error');
+        field.removeAttribute('aria-invalid');
+        field.removeAttribute('aria-describedby');
+        if (errorEl) errorEl.textContent = '';
+      }
+
+      function validateField(field) {
+        var value = (field.value || '').trim();
+        var isRequired = field.getAttribute('data-required') === 'true';
+        var isEmail = field.getAttribute('data-email') === 'true';
+
+        clearError(field);
+
+        if (isRequired && value === '') {
+          setError(field, 'This field is required.');
+          return false;
+        }
+
+        if (isEmail && value !== '' && !emailPattern.test(value)) {
+          setError(field, 'Please enter a valid email address.');
+          return false;
+        }
+
+        return true;
+      }
+
+      fields.forEach(function (field) {
+        var eventName = field.tagName.toLowerCase() === 'select' ? 'change' : 'input';
+        field.addEventListener(eventName, function () {
+          validateField(field);
+        });
+        field.addEventListener('blur', function () {
+          validateField(field);
+        });
+      });
+
+      form.addEventListener('submit', function (event) {
+        var firstInvalid = null;
+        var allValid = true;
+
+        fields.forEach(function (field) {
+          var valid = validateField(field);
+          if (!valid && !firstInvalid) firstInvalid = field;
+          if (!valid) allValid = false;
+        });
+
+        if (!allValid) {
+          event.preventDefault();
+          if (firstInvalid) firstInvalid.focus();
+        }
+      });
+
+      {% if form.posted_successfully? %}
+        try { form.reset(); } catch (e) {}
+        fields.forEach(function (field) { clearError(field); });
+      {% endif %}
+    })();
+  </script>
 </section>
 
 {% schema %}
@@ -671,12 +789,6 @@
       "id": "success_message",
       "label": "Success message",
       "default": "<p>Thank you! Your wholesale application has been received. Our team will contact you shortly.</p>"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_success_instead_of_form",
-      "label": "Show success message instead of form",
-      "default": true
     },
     {
       "type": "url",
