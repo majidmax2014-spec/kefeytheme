@@ -1,41 +1,117 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "purpose_beyond_gummy_wholesale": {
-      "type": "purpose-beyond-gummy",
-      "settings": {}
-    },
-    "marquee_strip_wholesale": {
-      "type": "marquee-strip",
-      "settings": {}
-    },
-    "designed_to_shine_wholesale": {
-      "type": "designed-to-shine",
-      "settings": {}
+    "header_banner_B48DTT": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/wholesale-banner.png",
+        "heading": "Wholesale & Distributors -",
+        "subheading": "Partner with Kefey®ine wellness as joy.",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 48,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 28,
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 360,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24
+      }
     },
     "built_planet_mind_wholesale": {
       "type": "built-planet-mind",
-      "settings": {}
+      "settings": {
+        "heading": "Welcome to the Kefey <strong>Wholesale Program!</strong>",
+        "accent_text": "",
+        "body": "<p>We’re excited to team up with distributors, retailers, and partners who share our mission of spreading joy, wellness, and smiles across the globe.</p>",
+        "bg_color": "#ffffff",
+        "heading_color": "#0d1f30",
+        "accent_color": "#db5a45",
+        "body_color": "#2e2e2e",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "heading_font_size": 48,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 18,
+        "content_max_width": 820,
+        "padding_top": 44,
+        "padding_bottom": 40
+      }
+    },
+    "purpose_beyond_gummy_wholesale": {
+      "type": "purpose-beyond-gummy",
+      "settings": {
+        "heading": "Why Partner with Kefey?",
+        "body": "<ul><li>Unique Products – Playful, science-backed, plant-based supplements designed for joyful wellness.</li><li>High-Demand Category – Gummies and wellness products are among the fastest-growing supplement formats worldwide.</li><li>Eco-Friendly Packaging – Trendy, collectible, and sustainable designs that stand out on shelves.</li><li>Global Brand Vision – With roots in the USA & UAE, Kefey is built to grow internationally.</li><li> Dedicated Support – Wholesale team ready to assist with logistics, product training, and marketing.</li></ul>",
+        "image": "shopify://shop_images/partner-kefey.png",
+        "panel_color": "#f2c718",
+        "title_bg_color": "#ea563a",
+        "title_color": "#ffffff",
+        "section_bg_color": "#ffffff",
+        "left_panel_color": "#f2c718",
+        "title_bar_color": "#ea563a",
+        "title_text_color": "#ffffff",
+        "body_color": "#1c1c1c",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "heading_font_size": 36,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 16,
+        "content_max_width": 1200,
+        "left_col_width": 45,
+        "min_height": 300,
+        "content_padding_left": 56,
+        "content_padding_right": 40,
+        "title_bar_offset_y": 16,
+        "title_bar_width": 78,
+        "padding_top": 44,
+        "padding_bottom": 52
+      }
     },
     "we_refuse_section_wholesale": {
       "type": "we-refuse-section",
-      "settings": {}
-    },
-    "what_if_wellness_wholesale": {
-      "type": "what-if-wellness",
-      "settings": {}
-    },
-    "main_faqs_wholesale": {
-      "type": "main-faqs",
-      "settings": {}
+      "settings": {
+        "heading": "Why a Star?",
+        "text": "<ul><li>Competitive wholesale pricing</li><li>Marketing materials & product images for promotion</li><li>Priority access to new product launches</li><li>Flexible order quantities</li><li>Fast & reliable worldwide shipping</li></ul>",
+        "right_image": "shopify://shop_images/why-star.png",
+        "section_bg": "#ffffff",
+        "title_bg": "#e95439",
+        "title_color": "#ffffff",
+        "right_bg": "#e6a537",
+        "text_color": "#1e1e1e",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "heading_font_size": 36,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 16,
+        "content_max_width": 1220,
+        "left_col_width": 42,
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
-    "purpose_beyond_gummy_wholesale",
-    "marquee_strip_wholesale",
-    "designed_to_shine_wholesale",
+    "header_banner_B48DTT",
     "built_planet_mind_wholesale",
-    "we_refuse_section_wholesale",
-    "what_if_wellness_wholesale",
-    "main_faqs_wholesale"
+    "purpose_beyond_gummy_wholesale",
+    "we_refuse_section_wholesale"
   ]
 }
