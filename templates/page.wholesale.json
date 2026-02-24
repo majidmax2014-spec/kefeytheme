@@ -40,6 +40,8 @@
         "body": "<p>We’re excited to team up with distributors, retailers, and partners who share our mission of spreading joy, wellness, and smiles across the globe.</p>",
         "bg_color": "#ffffff",
         "heading_color": "#0d1f30",
+        "show_heading_underline": true,
+        "heading_underline_color": "#2bb4a7",
         "accent_color": "#db5a45",
         "body_color": "#2e2e2e",
         "heading_font_family": "inherit",
@@ -109,12 +111,15 @@
     },
     "built_planet_mind_VG7MqA": {
       "type": "built-planet-mind",
+      "name": "Lets Grow Together",
       "settings": {
         "heading": "Let’s Grow Together!",
         "accent_text": "",
         "body": "<p>Together, let’s bring more joyful wellness to shelves around the world. With Kefey®, every gummy is a star – and every partner is family.</p>",
         "bg_color": "#ffffff",
         "heading_color": "#0d1f30",
+        "show_heading_underline": true,
+        "heading_underline_color": "#2bb4a7",
         "accent_color": "#db5a45",
         "body_color": "#2e2e2e",
         "heading_font_family": "inherit",
