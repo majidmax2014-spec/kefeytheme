@@ -129,7 +129,6 @@
         "input_font_weight": "400",
         "button_label": "Apply Now",
         "success_message": "<p>Thank you! Your wholesale application has been received. Our team will contact you shortly.</p>",
-        "show_success_instead_of_form": true,
         "success_redirect_url": "",
         "submission_topic": "Wholesale Application",
         "button_font_family": "inherit",
@@ -148,8 +147,8 @@
         "highlight_color": "#f3c72d",
         "border_color": "#b8b8b8",
         "field_row_gap": 50,
-        "padding_top": 40,
-        "padding_bottom": 56
+        "padding_top": 56,
+        "padding_bottom": 72
       }
     },
     "built_planet_mind_VG7MqA": {
