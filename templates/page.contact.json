@@ -108,6 +108,9 @@
         "input_text_color": "#111111",
         "button_bg_color": "#49b2b5",
         "button_text_color": "#ffffff",
+        "content_max_width": 1600,
+        "left_column_percent": 60,
+        "right_column_percent": 40,
         "fields_gap": 26,
         "section_padding_top": 52,
         "section_padding_bottom": 56,
@@ -127,7 +130,7 @@
         "input_font_size": 16,
         "input_font_weight": "400",
         "button_font_family": "inherit",
-        "button_font_size": 30,
+        "button_font_size": 26,
         "button_font_weight": "500"
       }
     }
