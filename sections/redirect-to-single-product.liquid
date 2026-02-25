@@ -1,24 +1,51 @@
 {%- liquid
-  assign target_product = section.settings.product
-  if target_product == blank
-    assign target_product = collections.all.products.first
+  assign target_url = section.settings.product_url
+  assign fallback_handle = section.settings.product_handle | handleize
+  if fallback_handle == blank and collections.all.products.first
+    assign fallback_handle = collections.all.products.first.handle
+  endif
+
+  if target_url == blank and fallback_handle != blank
+    assign target_url = '/products/' | append: fallback_handle
   endif
 -%}
 
 <section class="page-width" style="padding: 60px 0; text-align: center;">
   <p>Redirecting to product...</p>
-  {%- if target_product -%}
-    <p><a href="{{ target_product.url }}">Continue</a></p>
+  {%- if target_url != blank -%}
+    <p><a href="{{ target_url }}">Continue</a></p>
     <script>
-      window.location.replace({{ target_product.url | json }});
+      (function () {
+        var targetUrl = {{ target_url | json }};
+        if (!targetUrl) return;
+
+        try {
+          var parsedTarget = new URL(targetUrl, window.location.origin);
+          var currentPath = (window.location.pathname || '/').replace(/\/+$/, '') || '/';
+          var targetPath = (parsedTarget.pathname || '/').replace(/\/+$/, '') || '/';
+          if (currentPath !== targetPath) {
+            window.location.replace(parsedTarget.toString());
+          }
+        } catch (error) {
+          if (window.location.href !== targetUrl) {
+            window.location.replace(targetUrl);
+          }
+        }
+      })();
     </script>
+  {%- else -%}
+    <p>Please set a product URL in this section.</p>
   {%- endif -%}
 </section>
 
 {% schema %}
 {
-  "name": "Redirect To Single Product",
-  "settings": [{ "type": "product", "id": "product", "label": "Target product" }],
-  "presets": [{ "name": "Redirect To Single Product" }]
+  "name": "Redirect to product",
+  "class": "section-redirect-to-product",
+  "settings": [
+    { "type": "url", "id": "product_url", "label": "Single product URL" },
+    { "type": "text", "id": "product_handle", "label": "Fallback product handle", "default": "kefey-mood-gummies" }
+  ],
+  "presets": [{ "name": "Redirect to product" }]
 }
 {% endschema %}
