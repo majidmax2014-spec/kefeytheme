@@ -1,0 +1,61 @@
+{
+  "sections": {
+    "main_product_kefey": {
+      "type": "main-product-kefey",
+      "settings": {}
+    },
+    "benefits_kefey": {
+      "type": "product-benefits-kefey",
+      "settings": {}
+    },
+    "lifestyle_kefey": {
+      "type": "product-lifestyle-kefey",
+      "settings": {}
+    },
+    "ingredients_kefey": {
+      "type": "product-ingredients-kefey",
+      "settings": {}
+    },
+    "callouts_kefey": {
+      "type": "product-callouts-kefey",
+      "settings": {}
+    },
+    "howto_kefey": {
+      "type": "product-howto-kefey",
+      "settings": {}
+    },
+    "mini_testimonials_kefey": {
+      "type": "product-mini-testimonials-kefey",
+      "settings": {}
+    },
+    "faq_kefey": {
+      "type": "product-faq-kefey",
+      "settings": {}
+    },
+    "risk_free_existing": {
+      "type": "risk-free-banner",
+      "settings": {}
+    },
+    "joyful_routines_existing": {
+      "type": "kefey-testimonials-grid",
+      "settings": {}
+    },
+    "final_cta_kefey": {
+      "type": "product-final-cta-kefey",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main_product_kefey",
+    "benefits_kefey",
+    "lifestyle_kefey",
+    "ingredients_kefey",
+    "callouts_kefey",
+    "howto_kefey",
+    "mini_testimonials_kefey",
+    "faq_kefey",
+    "risk_free_existing",
+    "joyful_routines_existing",
+    "final_cta_kefey"
+  ]
+}

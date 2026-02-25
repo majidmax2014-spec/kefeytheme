@@ -1,0 +1,24 @@
+{%- liquid
+  assign target_product = section.settings.product
+  if target_product == blank
+    assign target_product = collections.all.products.first
+  endif
+-%}
+
+<section class="page-width" style="padding: 60px 0; text-align: center;">
+  <p>Redirecting to product...</p>
+  {%- if target_product -%}
+    <p><a href="{{ target_product.url }}">Continue</a></p>
+    <script>
+      window.location.replace({{ target_product.url | json }});
+    </script>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Redirect To Single Product",
+  "settings": [{ "type": "product", "id": "product", "label": "Target product" }],
+  "presets": [{ "name": "Redirect To Single Product" }]
+}
+{% endschema %}

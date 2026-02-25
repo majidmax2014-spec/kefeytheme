@@ -5,11 +5,26 @@
   {% render 'header-mega-menu' %}
 {% endcomment %}
 
+{%- liquid
+  assign header_shop_product = collections.all.products.first
+-%}
+
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
     {%- for link in section.settings.menu.links -%}
+      {%- liquid
+        assign is_shop_link = false
+        assign shop_title = link.title | downcase | strip
+        if shop_title == 'shop'
+          assign is_shop_link = true
+        endif
+        assign link_url = link.url
+        if is_shop_link and header_shop_product
+          assign link_url = header_shop_product.url
+        endif
+      -%}
       <li>
-        {%- if link.links != blank -%}
+        {%- if link.links != blank and is_shop_link == false -%}
           <header-menu>
             <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu">
               <summary
@@ -73,7 +88,7 @@
         {%- else -%}
           <a
             id="HeaderMenu-{{ link.handle }}"
-            href="{{ link.url }}"
+            href="{{ link_url }}"
             class="header__menu-item list-menu__item link link--text focus-inset"
             {% if link.current %}
               aria-current="page"

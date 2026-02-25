@@ -1,0 +1,73 @@
+<section class="kefey-product kefey-product-section">
+  <div class="page-width">
+    <h2 class="kefey-product__title" style="text-align:center;">{{ section.settings.heading }}</h2>
+    <p class="kefey-product__desc" style="text-align:center; max-width: 860px; margin: 0 auto 22px;">{{ section.settings.subheading }}</p>
+
+    <div class="kefey-product-benefits__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'benefit' -%}
+          <article class="kefey-product-benefits__card" {{ block.shopify_attributes }}>
+            <h3>{{ block.settings.title }}</h3>
+            <p class="kefey-product__desc">{{ block.settings.text }}</p>
+          </article>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="kefey-product-benefits__love">
+      <h3 class="kefey-product__title" style="margin-bottom: 8px;">{{ section.settings.love_heading }}</h3>
+      <p class="kefey-product__desc">{{ section.settings.love_text }}</p>
+      <ul class="kefey-product-benefits__bullets">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'love_bullet' -%}
+            <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Benefits Kefey",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Designed to Support Your Daily Balance" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Six key areas where Kefey Mood Gummies help support your routine." },
+    { "type": "text", "id": "love_heading", "label": "Love heading", "default": "Why You'll Love Kefey Mood Gummies" },
+    { "type": "text", "id": "love_text", "label": "Love text", "default": "Clean ingredients, craveable taste, and daily support you can feel." }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Stress Support" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Helps maintain calm and emotional steadiness throughout the day." }
+      ]
+    },
+    {
+      "type": "love_bullet",
+      "name": "Love bullet",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Plant-based formula" }]
+    }
+  ],
+  "max_blocks": 18,
+  "presets": [
+    {
+      "name": "Product Benefits Kefey",
+      "blocks": [
+        { "type": "benefit", "settings": { "title": "Stress Support", "text": "Helps maintain calm and emotional steadiness throughout the day." } },
+        { "type": "benefit", "settings": { "title": "Steady Energy", "text": "Supports more balanced day-to-day energy without jitters." } },
+        { "type": "benefit", "settings": { "title": "Focus", "text": "Helps reduce mental clutter and improve concentration." } },
+        { "type": "benefit", "settings": { "title": "Emotional Balance", "text": "Aids in balancing mood and promoting resilience." } },
+        { "type": "benefit", "settings": { "title": "Sleep Quality", "text": "Supports healthy sleep cycles and restful nights." } },
+        { "type": "benefit", "settings": { "title": "Daily Wellness", "text": "Complements an uplifting and mindful wellness routine." } },
+        { "type": "love_bullet", "settings": { "text": "Plant-based formula" } },
+        { "type": "love_bullet", "settings": { "text": "Great-tasting gummies" } },
+        { "type": "love_bullet", "settings": { "text": "Made for everyday use" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

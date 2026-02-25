@@ -1,0 +1,67 @@
+<section class="kefey-product kefey-product-section">
+  <div class="page-width kefey-product-howto__layout">
+    <div>
+      <h2 class="kefey-product__title">{{ section.settings.heading }}</h2>
+      <p class="kefey-product__desc" style="margin-bottom:10px;">{{ section.settings.subheading }}</p>
+      <ul style="margin:0; padding-left:18px;">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'instruction' -%}
+            <li class="kefey-product__desc" style="margin-bottom:8px;" {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+
+    <div class="kefey-product-howto__badges">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'badge' and block.settings.image != blank -%}
+          <div {{ block.shopify_attributes }}>
+            {{ block.settings.image | image_url: width: 220 | image_tag: loading: 'lazy', alt: block.settings.alt }}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product How To Kefey",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Two stars, twice daily." },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Chew slowly. Enjoy the taste. Take this as part of your ritual." }
+  ],
+  "blocks": [
+    {
+      "type": "instruction",
+      "name": "Instruction",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Take 2 gummies daily with or without food." }]
+    },
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Badge image" },
+        { "type": "text", "id": "alt", "label": "Alt text", "default": "Trust badge" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Product How To Kefey",
+      "blocks": [
+        { "type": "instruction", "settings": { "text": "Take 2 gummies daily." } },
+        { "type": "instruction", "settings": { "text": "Chew thoroughly before swallowing." } },
+        { "type": "instruction", "settings": { "text": "Use consistently for best results." } },
+        { "type": "badge" },
+        { "type": "badge" },
+        { "type": "badge" },
+        { "type": "badge" },
+        { "type": "badge" },
+        { "type": "badge" }
+      ]
+    }
+  ]
+}
+{% endschema %}

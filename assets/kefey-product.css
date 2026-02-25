@@ -1,0 +1,522 @@
+.kefey-product {
+  --kp-yellow: #f3c620;
+  --kp-teal: #47b4b6;
+  --kp-red: #e95a3a;
+  --kp-ink: #122033;
+  --kp-text: #1f1f1f;
+  --kp-muted: #646464;
+  --kp-line: #d5d5d5;
+  --kp-bg: #ffffff;
+  --kp-radius-pill: 999px;
+  --kp-radius-card: 22px;
+  --kp-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+}
+
+.kefey-product .page-width {
+  max-width: 1180px;
+}
+
+.kefey-product__title {
+  margin: 0 0 12px;
+  color: var(--kp-ink);
+  font-weight: 700;
+  line-height: 1.12;
+}
+
+.kefey-product__desc {
+  margin: 0;
+  color: var(--kp-text);
+  line-height: 1.45;
+}
+
+.kefey-product-main {
+  background: linear-gradient(180deg, #f4c835 0%, #efc026 100%);
+  padding: 28px 0 34px;
+}
+
+.kefey-product-main__shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
+}
+
+.kefey-product-main__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.kefey-product-main__headline {
+  max-width: 560px;
+}
+
+.kefey-product-main__brand {
+  font-size: clamp(2.8rem, 4vw, 4.8rem);
+}
+
+.kefey-product-main__sub {
+  margin: 10px 0 14px;
+  font-size: 1.6rem;
+}
+
+.kefey-product-main__icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.kefey-product-main__icon {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--kp-radius-pill);
+  background: rgba(255, 255, 255, 0.3);
+  padding: 7px 12px;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.kefey-product-main__hero-cta {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 12px 26px;
+  border-radius: var(--kp-radius-pill);
+  background: var(--kp-teal);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.kefey-product-main__media {
+  justify-self: center;
+  position: relative;
+}
+
+.kefey-product-main__pedestal {
+  position: absolute;
+  left: 50%;
+  bottom: -8px;
+  width: 78%;
+  height: 16px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.15);
+  filter: blur(5px);
+}
+
+.kefey-product-main__image {
+  width: min(100%, 320px);
+  height: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.kefey-product-main__purchase {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: var(--kp-shadow);
+  padding: 18px;
+}
+
+.kefey-product-main__purchase-title {
+  text-align: center;
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+.kefey-product-main__purchase-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.kefey-product-main__product-preview {
+  border-radius: 16px;
+  background: #f7f7f7;
+  padding: 12px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.kefey-product-main__thumb {
+  width: 95px;
+  border-radius: 12px;
+}
+
+.kefey-product-main__plan-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--kp-line);
+}
+
+.kefey-product-main__plan-btn {
+  border: 0;
+  background: #fff;
+  padding: 10px 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.kefey-product-main__plan-btn.is-active {
+  background: #ffee9c;
+}
+
+.kefey-product-main__price {
+  background: #59c7c9;
+  border-radius: 14px;
+  padding: 12px 14px;
+  color: #fff;
+}
+
+.kefey-product-main__price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.kefey-product-main__price-value {
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.kefey-product-main__price-compare {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.kefey-product-main__actions {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+}
+
+.kefey-product-main__qty {
+  display: inline-flex;
+  border: 1px solid var(--kp-line);
+  border-radius: var(--kp-radius-pill);
+  overflow: hidden;
+}
+
+.kefey-product-main__qty button {
+  border: 0;
+  background: #fff;
+  width: 38px;
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.kefey-product-main__qty input {
+  width: 44px;
+  border: 0;
+  text-align: center;
+}
+
+.kefey-product-main__atc {
+  min-height: 46px;
+  border: 0;
+  border-radius: var(--kp-radius-pill);
+  background: var(--kp-teal);
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kefey-product-main__trust {
+  margin: 8px 0 0;
+  color: var(--kp-muted);
+  font-size: 1.2rem;
+}
+
+.kefey-product-section {
+  padding: 44px 0;
+  background: #fff;
+}
+
+.kefey-product-section--yellow {
+  background: #f5c72f;
+}
+
+.kefey-product-section--teal {
+  background: var(--kp-teal);
+  color: #fff;
+}
+
+.kefey-product-benefits__grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.kefey-product-benefits__card {
+  border: 1px solid #ededed;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.kefey-product-benefits__card h3 {
+  margin: 0 0 6px;
+}
+
+.kefey-product-benefits__love {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.kefey-product-benefits__bullets {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  padding: 0;
+  margin: 12px 0 0;
+  list-style: none;
+}
+
+.kefey-product-benefits__bullets li {
+  background: #f5fbfb;
+  border: 1px solid #dbeef0;
+  border-radius: var(--kp-radius-pill);
+  padding: 8px 12px;
+  font-weight: 600;
+}
+
+.kefey-product-lifestyle__wrap {
+  display: grid;
+  gap: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.kefey-product-lifestyle__media {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.kefey-product-lifestyle__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.kefey-product-lifestyle__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.kefey-product-lifestyle__cards article {
+  padding: 14px;
+  min-height: 98px;
+}
+
+.kefey-product-lifestyle__cards article:nth-child(1) {
+  background: #65cfd3;
+}
+
+.kefey-product-lifestyle__cards article:nth-child(2) {
+  background: #f4c836;
+}
+
+.kefey-product-lifestyle__cards article:nth-child(3) {
+  background: #7fdde2;
+}
+
+.kefey-product-ingredients__track-wrap {
+  position: relative;
+}
+
+.kefey-product-ingredients__track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(220px, 1fr);
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.kefey-product-ingredients__track::-webkit-scrollbar {
+  display: none;
+}
+
+.kefey-product-ingredients__card {
+  scroll-snap-align: start;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+}
+
+.kefey-product-ingredients__card img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.kefey-product-ingredients__nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--kp-teal);
+  cursor: pointer;
+}
+
+.kefey-product-ingredients__nav--prev {
+  left: -16px;
+}
+
+.kefey-product-ingredients__nav--next {
+  right: -16px;
+}
+
+.kefey-product-callouts__layout {
+  display: grid;
+  gap: 16px;
+}
+
+.kefey-product-callouts__cards {
+  display: grid;
+  gap: 10px;
+}
+
+.kefey-product-callouts__cards article {
+  background: #50bfc4;
+  color: #fff;
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.kefey-product-callouts__image {
+  width: 100%;
+  border-radius: 16px;
+}
+
+.kefey-product-howto__layout {
+  display: grid;
+  gap: 24px;
+}
+
+.kefey-product-howto__badges {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.kefey-product-howto__badges img {
+  width: 100%;
+  max-width: 92px;
+}
+
+.kefey-product-mini-testimonials__grid {
+  display: grid;
+  gap: 12px;
+}
+
+.kefey-product-mini-testimonials__card {
+  border-radius: 14px;
+  background: #fff6b6;
+  padding: 16px;
+}
+
+.kefey-product-faq__item {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.kefey-product-faq__summary {
+  cursor: pointer;
+  padding: 14px 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.kefey-product-faq__summary::-webkit-details-marker {
+  display: none;
+}
+
+.kefey-product-faq__symbol {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid #c7c7c7;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+}
+
+.kefey-product-faq__item[open] .kefey-product-faq__symbol::before {
+  content: "-";
+}
+
+.kefey-product-faq__symbol::before {
+  content: "+";
+}
+
+.kefey-product-faq__content {
+  padding: 0 0 14px;
+}
+
+.kefey-product-final-cta {
+  text-align: center;
+}
+
+.kefey-product-final-cta__image {
+  width: min(100%, 460px);
+  border-radius: 16px;
+  margin: 14px auto 0;
+  display: block;
+}
+
+.kefey-product-final-cta__btn {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 32px;
+  border-radius: var(--kp-radius-pill);
+  background: var(--kp-teal);
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+@media (min-width: 990px) {
+  .kefey-product-main {
+    padding-top: 38px;
+  }
+
+  .kefey-product-main__hero {
+    grid-template-columns: minmax(0, 58%) minmax(0, 42%);
+    gap: 26px;
+  }
+
+  .kefey-product-main__purchase {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .kefey-product-benefits__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .kefey-product-callouts__layout {
+    grid-template-columns: minmax(0, 40%) minmax(0, 60%);
+    align-items: start;
+  }
+
+  .kefey-product-howto__layout {
+    grid-template-columns: minmax(0, 60%) minmax(0, 40%);
+    align-items: center;
+  }
+
+  .kefey-product-mini-testimonials__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

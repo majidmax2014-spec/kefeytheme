@@ -1,0 +1,53 @@
+<section class="kefey-product kefey-product-section">
+  <div class="page-width">
+    <div class="kefey-product-lifestyle__wrap">
+      <div class="kefey-product-lifestyle__media">
+        {%- if section.settings.left_image != blank -%}
+          {{ section.settings.left_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: section.settings.heading }}
+        {%- endif -%}
+        {%- if section.settings.right_image != blank -%}
+          {{ section.settings.right_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: section.settings.heading }}
+        {%- endif -%}
+      </div>
+      <div class="kefey-product-lifestyle__cards">
+        {%- for block in section.blocks -%}
+          <article {{ block.shopify_attributes }}>
+            <h3 class="kefey-product__title" style="font-size:1.9rem; margin-bottom:4px;">{{ block.settings.title }}</h3>
+            <p class="kefey-product__desc" style="font-size:1.3rem;">{{ block.settings.text }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Lifestyle Kefey",
+  "settings": [
+    { "type": "image_picker", "id": "left_image", "label": "Left image" },
+    { "type": "image_picker", "id": "right_image", "label": "Right image" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Made for your rhythm" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Simple, tasty gummies that fit any daily routine." }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Product Lifestyle Kefey",
+      "blocks": [
+        { "type": "card", "settings": { "title": "Natural ingredients", "text": "Powered by herbs and adaptogens." } },
+        { "type": "card", "settings": { "title": "No sugar crash", "text": "Steady support for your day." } },
+        { "type": "card", "settings": { "title": "Portable joy", "text": "Take your stars wherever you go." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

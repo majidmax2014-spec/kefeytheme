@@ -1,0 +1,35 @@
+<section class="kefey-product kefey-product-section">
+  <div class="page-width">
+    <h2 class="kefey-product__title" style="text-align:center;">{{ section.settings.heading }}</h2>
+    <div class="kefey-product-mini-testimonials__grid">
+      {%- for block in section.blocks -%}
+        <article class="kefey-product-mini-testimonials__card" {{ block.shopify_attributes }}>
+          <p style="margin:0 0 6px;">{{ block.settings.stars }}</p>
+          <p class="kefey-product__desc">{{ block.settings.quote }}</p>
+          <p style="margin:8px 0 0; font-weight:600;">{{ block.settings.name }}</p>
+        </article>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Mini Testimonials",
+  "settings": [{ "type": "text", "id": "heading", "label": "Heading", "default": "Joyful routines, that's why they stay." }],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "text", "id": "stars", "label": "Stars", "default": "★★★★★" },
+        { "type": "textarea", "id": "quote", "label": "Quote", "default": "These gummies became my favorite daily ritual." },
+        { "type": "text", "id": "name", "label": "Name", "default": "Aya" }
+      ]
+    }
+  ],
+  "presets": [
+    { "name": "Product Mini Testimonials", "blocks": [{ "type": "testimonial" }, { "type": "testimonial" }, { "type": "testimonial" }] }
+  ]
+}
+{% endschema %}

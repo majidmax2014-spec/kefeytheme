@@ -1,0 +1,154 @@
+{{ 'kefey-product.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'kefey-product.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign kefey_product = product
+  if kefey_product == blank and section.settings.product != blank
+    assign kefey_product = section.settings.product
+  endif
+  if kefey_product == blank
+    assign kefey_product = collections.all.products.first
+  endif
+-%}
+
+<section class="kefey-product kefey-product-main" id="KefeyProductMain-{{ section.id }}">
+  <div class="page-width kefey-product-main__shell">
+    <div class="kefey-product-main__hero">
+      <div class="kefey-product-main__headline">
+        <h1 class="kefey-product__title kefey-product-main__brand">{{ section.settings.heading }}</h1>
+        <p class="kefey-product__desc kefey-product-main__sub">{{ section.settings.subheading }}</p>
+        <div class="kefey-product-main__icons" role="list">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'hero_icon' -%}
+              <span class="kefey-product-main__icon" role="listitem" {{ block.shopify_attributes }}>
+                {{ block.settings.text }}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <a class="kefey-product-main__hero-cta" href="#KefeyPurchase-{{ section.id }}">{{ section.settings.cta_label }}</a>
+      </div>
+
+      <div class="kefey-product-main__media">
+        {%- if section.settings.hero_image != blank -%}
+          {{
+            section.settings.hero_image
+            | image_url: width: 860
+            | image_tag: class: 'kefey-product-main__image', loading: 'eager', alt: section.settings.heading
+          }}
+        {%- elsif kefey_product and kefey_product.featured_image -%}
+          {{
+            kefey_product.featured_image
+            | image_url: width: 860
+            | image_tag: class: 'kefey-product-main__image', loading: 'eager', alt: kefey_product.title
+          }}
+        {%- endif -%}
+        <span class="kefey-product-main__pedestal" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="kefey-product-main__purchase" id="KefeyPurchase-{{ section.id }}">
+      <p class="kefey-product-main__purchase-title">{{ section.settings.purchase_heading }}</p>
+
+      <div class="kefey-product-main__purchase-grid" data-kefey-plan-toggle>
+        <div class="kefey-product-main__product-preview">
+          {%- if kefey_product and kefey_product.featured_image -%}
+            {{
+              kefey_product.featured_image
+              | image_url: width: 260
+              | image_tag: class: 'kefey-product-main__thumb', loading: 'lazy', alt: kefey_product.title
+            }}
+          {%- endif -%}
+          <div>
+            <strong>{{ kefey_product.title }}</strong>
+            <p class="kefey-product-main__trust">{{ section.settings.preview_text }}</p>
+          </div>
+        </div>
+
+        <div class="kefey-product-main__plan-toggle" role="tablist" aria-label="Purchase plan">
+          <button class="kefey-product-main__plan-btn is-active" type="button" data-save="{{ section.settings.sub_badge }}">
+            {{ section.settings.sub_label }}
+          </button>
+          <button class="kefey-product-main__plan-btn" type="button" data-save="{{ section.settings.onetime_badge }}">
+            {{ section.settings.onetime_label }}
+          </button>
+        </div>
+
+        <div class="kefey-product-main__price">
+          <div class="kefey-product-main__price-row">
+            <span class="kefey-product-main__price-value">
+              {%- if kefey_product -%}
+                {{ kefey_product.price | money }}
+              {%- else -%}
+                {{ section.settings.fallback_price }}
+              {%- endif -%}
+            </span>
+            {%- if kefey_product and kefey_product.compare_at_price > kefey_product.price -%}
+              <span class="kefey-product-main__price-compare">{{ kefey_product.compare_at_price | money }}</span>
+            {%- endif -%}
+          </div>
+          <small data-kefey-compare>{{ section.settings.sub_badge }}</small>
+        </div>
+
+        {%- if kefey_product -%}
+          {%- form 'product', kefey_product, id: 'KefeyProductForm-' | append: section.id -%}
+            <input type="hidden" name="id" value="{{ kefey_product.selected_or_first_available_variant.id }}">
+            <div class="kefey-product-main__actions">
+              <label class="visually-hidden" for="KefeyQty-{{ section.id }}">Quantity</label>
+              <div class="kefey-product-main__qty">
+                <button type="button" aria-label="Decrease quantity" data-kefey-qty="down">-</button>
+                <input id="KefeyQty-{{ section.id }}" name="quantity" type="number" min="1" value="1">
+                <button type="button" aria-label="Increase quantity" data-kefey-qty="up">+</button>
+              </div>
+              <button class="kefey-product-main__atc" type="submit" {% unless kefey_product.available %}disabled{% endunless %}>
+                {{ section.settings.atc_label }}
+              </button>
+            </div>
+          {%- endform -%}
+        {%- endif -%}
+        <p class="kefey-product-main__trust">{{ section.settings.trust_text }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Main Product Kefey",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "kefey mood gummies" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Plant-based mood support to bring balance, joy, and calm to your daily rhythm." },
+    { "type": "text", "id": "cta_label", "label": "Hero CTA label", "default": "CHECKOUT NOW" },
+    { "type": "text", "id": "purchase_heading", "label": "Purchase heading", "default": "Never Run Out of Joy" },
+    { "type": "text", "id": "preview_text", "label": "Preview helper text", "default": "Mood support gummies · 60 count" },
+    { "type": "text", "id": "sub_label", "label": "Subscription label", "default": "Subscribe & Save" },
+    { "type": "text", "id": "onetime_label", "label": "One-time label", "default": "One-time Purchase" },
+    { "type": "text", "id": "sub_badge", "label": "Subscription badge text", "default": "SAVE 15% + FREE SHIPPING" },
+    { "type": "text", "id": "onetime_badge", "label": "One-time badge text", "default": "STANDARD PRICING" },
+    { "type": "text", "id": "fallback_price", "label": "Fallback price text", "default": "$39.00" },
+    { "type": "text", "id": "atc_label", "label": "Add to cart label", "default": "ADD TO CART" },
+    { "type": "text", "id": "trust_text", "label": "Trust microcopy", "default": "Free U.S. shipping over $50 · 30-day happiness guarantee" }
+  ],
+  "blocks": [
+    {
+      "type": "hero_icon",
+      "name": "Hero icon text",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Plant based" }]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Main Product Kefey",
+      "blocks": [
+        { "type": "hero_icon", "settings": { "text": "Plant based" } },
+        { "type": "hero_icon", "settings": { "text": "Mood support" } },
+        { "type": "hero_icon", "settings": { "text": "Vegan" } },
+        { "type": "hero_icon", "settings": { "text": "No artificial colors" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

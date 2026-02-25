@@ -1,0 +1,53 @@
+<section class="kefey-product kefey-product-section kefey-product-section--teal">
+  <div class="page-width">
+    <h2 class="kefey-product__title" style="text-align:center; color:#fff;">{{ section.settings.heading }}</h2>
+    <p class="kefey-product__desc" style="text-align:center; color:#eaf8f8; max-width:800px; margin:0 auto 18px;">{{ section.settings.subheading }}</p>
+
+    <div class="kefey-product-ingredients__track-wrap" data-kefey-ingredients>
+      <button class="kefey-product-ingredients__nav kefey-product-ingredients__nav--prev" type="button" data-kefey-prev aria-label="Previous ingredient">
+        &#8249;
+      </button>
+      <div class="kefey-product-ingredients__track" data-kefey-ingredients-track>
+        {%- for block in section.blocks -%}
+          <article class="kefey-product-ingredients__card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: block.settings.title }}
+            {%- endif -%}
+            <h3 class="kefey-product__title" style="font-size:1.8rem; color:#fff; margin-top:10px;">{{ block.settings.title }}</h3>
+            <p class="kefey-product__desc" style="color:#eaf8f8; font-size:1.3rem;">{{ block.settings.text }}</p>
+          </article>
+        {%- endfor -%}
+      </div>
+      <button class="kefey-product-ingredients__nav kefey-product-ingredients__nav--next" type="button" data-kefey-next aria-label="Next ingredient">
+        &#8250;
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Ingredients Kefey",
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Ingredients Behind the Kefey Mood Star" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "A thoughtful blend of botanicals to support calm, focus, and emotional balance." }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Ashwagandha" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Supports stress response and calm focus." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Ingredients Kefey",
+      "blocks": [{ "type": "ingredient" }, { "type": "ingredient" }, { "type": "ingredient" }]
+    }
+  ]
+}
+{% endschema %}

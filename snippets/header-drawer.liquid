@@ -6,6 +6,9 @@
 {% endcomment %}
 
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
+  {%- liquid
+    assign header_shop_product = collections.all.products.first
+  -%}
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
       class="header__icon header__icon--menu header__icon--summary link focus-inset"
@@ -22,8 +25,19 @@
           <nav class="menu-drawer__navigation">
             <ul class="menu-drawer__menu has-submenu list-menu" role="list">
               {%- for link in section.settings.menu.links -%}
+                {%- liquid
+                  assign is_shop_link = false
+                  assign shop_title = link.title | downcase | strip
+                  if shop_title == 'shop'
+                    assign is_shop_link = true
+                  endif
+                  assign link_url = link.url
+                  if is_shop_link and header_shop_product
+                    assign link_url = header_shop_product.url
+                  endif
+                -%}
                 <li>
-                  {%- if link.links != blank -%}
+                  {%- if link.links != blank and is_shop_link == false -%}
                     <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
                       <summary
                         id="HeaderDrawer-{{ link.handle }}"
@@ -122,7 +136,7 @@
                   {%- else -%}
                     <a
                       id="HeaderDrawer-{{ link.handle }}"
-                      href="{{ link.url }}"
+                      href="{{ link_url }}"
                       class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"
                       {% if link.current %}
                         aria-current="page"

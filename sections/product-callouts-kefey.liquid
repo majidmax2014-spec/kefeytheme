@@ -1,0 +1,47 @@
+<section class="kefey-product kefey-product-section kefey-product-section--yellow">
+  <div class="page-width kefey-product-callouts__layout">
+    <div class="kefey-product-callouts__cards">
+      {%- for block in section.blocks -%}
+        <article {{ block.shopify_attributes }}>
+          <h3 class="kefey-product__title" style="font-size:1.7rem; color:#fff;">{{ block.settings.title }}</h3>
+          <p class="kefey-product__desc" style="color:#f4ffff; font-size:1.3rem;">{{ block.settings.text }}</p>
+        </article>
+      {%- endfor -%}
+    </div>
+
+    <div>
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag: class: 'kefey-product-callouts__image', loading: 'lazy', alt: section.settings.heading }}
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h3 class="kefey-product__title" style="margin-top:10px; text-align:center;">{{ section.settings.heading }}</h3>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Callouts Kefey",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "heading", "label": "Bottom heading", "default": "All details, no confusion." }
+  ],
+  "blocks": [
+    {
+      "type": "callout",
+      "name": "Callout",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Every gummy matters" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Each serving is thoughtfully measured for consistency." }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Callouts Kefey",
+      "blocks": [{ "type": "callout" }, { "type": "callout" }, { "type": "callout" }, { "type": "callout" }]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,40 @@
+<section class="kefey-product kefey-product-section">
+  <div class="page-width">
+    <h2 class="kefey-product__title" style="text-align:center;">{{ section.settings.heading }}</h2>
+    <div class="kefey-product-faq">
+      {%- for block in section.blocks -%}
+        <details class="kefey-product-faq__item" {% if block.settings.open_default %}open{% endif %} {{ block.shopify_attributes }}>
+          <summary class="kefey-product-faq__summary">
+            <span>{{ block.settings.question }}</span>
+            <span class="kefey-product-faq__symbol" aria-hidden="true"></span>
+          </summary>
+          <div class="kefey-product-faq__content rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product FAQ Kefey",
+  "settings": [{ "type": "text", "id": "heading", "label": "Heading", "default": "Frequently Asked Questions" }],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "How many gummies should I take?" },
+        { "type": "richtext", "id": "answer", "label": "Answer", "default": "<p>Take two gummies daily, ideally at the same time each day.</p>" },
+        { "type": "checkbox", "id": "open_default", "label": "Open by default", "default": false }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product FAQ Kefey",
+      "blocks": [{ "type": "faq" }, { "type": "faq" }, { "type": "faq" }, { "type": "faq" }]
+    }
+  ]
+}
+{% endschema %}
