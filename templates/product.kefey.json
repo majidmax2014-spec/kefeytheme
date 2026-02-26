@@ -1,12 +1,40 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main_product_kefey": {
       "type": "main-product-kefey",
-      "settings": {}
+      "settings": {
+        "product": "mood-gummies",
+        "heading": "kefey mood gummies",
+        "subheading": "Plant-based mood support to bring balance, joy, and calm to your daily rhythm.",
+        "cta_label": "CHECKOUT NOW",
+        "purchase_heading": "Never Run Out of Joy",
+        "preview_text": "Mood support gummies · 60 count",
+        "sub_label": "Subscribe & Save",
+        "onetime_label": "One-time Purchase",
+        "sub_badge": "SAVE 15% + FREE SHIPPING",
+        "onetime_badge": "STANDARD PRICING",
+        "fallback_price": "$39.00",
+        "atc_label": "ADD TO CART",
+        "trust_text": "Free U.S. shipping over $50 · 30-day happiness guarantee"
+      }
     },
     "benefits_kefey": {
       "type": "product-benefits-kefey",
-      "settings": {}
+      "settings": {
+        "heading": "Designed to Support Your Daily Balance",
+        "subheading": "Six key areas where Kefey Mood Gummies help support your routine.",
+        "love_heading": "Why You'll Love Kefey Mood Gummies",
+        "love_text": "Clean ingredients, craveable taste, and daily support you can feel."
+      }
     },
     "lifestyle_kefey": {
       "type": "product-lifestyle-kefey",
@@ -14,35 +42,102 @@
     },
     "ingredients_kefey": {
       "type": "product-ingredients-kefey",
-      "settings": {}
+      "settings": {
+        "heading": "The Ingredients Behind the Kefey Mood Star",
+        "subheading": "A thoughtful blend of botanicals to support calm, focus, and emotional balance."
+      }
     },
     "callouts_kefey": {
       "type": "product-callouts-kefey",
-      "settings": {}
+      "settings": {
+        "heading": "All details, no confusion."
+      }
     },
     "howto_kefey": {
       "type": "product-howto-kefey",
-      "settings": {}
+      "settings": {
+        "heading": "Two stars, twice daily.",
+        "subheading": "Chew slowly. Enjoy the taste. Take this as part of your ritual."
+      }
     },
     "mini_testimonials_kefey": {
       "type": "product-mini-testimonials-kefey",
-      "settings": {}
+      "settings": {
+        "heading": "Joyful routines, that's why they stay."
+      }
     },
     "faq_kefey": {
       "type": "product-faq-kefey",
-      "settings": {}
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      }
     },
     "risk_free_existing": {
       "type": "risk-free-banner",
-      "settings": {}
+      "settings": {
+        "background_color": "#2bb4a7",
+        "section_height_desktop": 220,
+        "section_height_mobile": 180,
+        "padding_left_right": 40,
+        "heading": "TRY IT WITH CONFIDENCE!",
+        "text": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund.",
+        "button_label": "CHECKOUT NOW",
+        "button_link": "",
+        "button_style": "outline",
+        "heading_color": "#ffc94d",
+        "text_color": "#ffffff",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "button_bg_color": "#ffffff",
+        "badge_type": "text",
+        "badge_size": 160,
+        "badge_text_center": "kefey",
+        "badge_text_ring": "MONEYBACK GUARANTEED",
+        "left_decor_enabled": true,
+        "right_decor_enabled": true
+      }
     },
     "joyful_routines_existing": {
       "type": "kefey-testimonials-grid",
-      "settings": {}
+      "settings": {
+        "heading": "Joyful Routines. That’s Why They Stay!",
+        "heading_size": 36,
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 14,
+        "highlight_color": "#ffc94d",
+        "card_bg_color": "#ffe082",
+        "card_radius": 24,
+        "star_color": "#e15241",
+        "quote_color": "#2bb4a7",
+        "quote_icon_size": 72,
+        "quote_icon_margin_top": 0,
+        "quote_icon_margin_bottom": 12,
+        "show_decor_images": true,
+        "left_decor_width": 159,
+        "left_decor_offset_x": 0,
+        "left_decor_offset_y": 0,
+        "right_decor_width": 159,
+        "right_decor_offset_x": 0,
+        "right_decor_offset_y": 0,
+        "show_decorations": true,
+        "autoplay": false,
+        "autoplay_speed": 5000,
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     },
     "final_cta_kefey": {
       "type": "product-final-cta-kefey",
-      "settings": {}
+      "settings": {
+        "heading": "Sometimes, balance is just a tiny joyful bite away.",
+        "subheading": "Feel the shift.",
+        "button_label": "CHECKOUT NOW",
+        "button_link": ""
+      }
     }
   },
   "order": [
