@@ -1,0 +1,268 @@
+{{ 'kefey-product.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign heading_ff_value = 'inherit'
+  case section.settings.heading_font_family
+    when 'heading'
+      assign heading_ff_value = 'var(--font-heading-family)'
+    when 'body'
+      assign heading_ff_value = 'var(--font-body-family)'
+    when 'system'
+      assign heading_ff_value = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+    when 'custom'
+      if section.settings.heading_font_family_custom != blank
+        assign heading_ff_value = section.settings.heading_font_family_custom
+      endif
+  endcase
+
+  assign body_ff_value = 'inherit'
+  case section.settings.body_font_family
+    when 'heading'
+      assign body_ff_value = 'var(--font-heading-family)'
+    when 'body'
+      assign body_ff_value = 'var(--font-body-family)'
+    when 'system'
+      assign body_ff_value = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+    when 'custom'
+      if section.settings.body_font_family_custom != blank
+        assign body_ff_value = section.settings.body_font_family_custom
+      endif
+  endcase
+
+  assign cta_href = section.settings.cta_link
+  if cta_href == blank
+    assign cta_href = '#KefeyPurchase-main_product_kefey'
+  endif
+-%}
+
+<section
+  class="kefey-hero"
+  style="
+    --kh-pt: {{ section.settings.padding_top }}px;
+    --kh-pb: {{ section.settings.padding_bottom }}px;
+    --kh-max: {{ section.settings.content_max_width }}px;
+    --kh-left-max: {{ section.settings.left_col_max_width }}px;
+    --kh-heading-color: {{ section.settings.heading_color }};
+    --kh-body-color: {{ section.settings.body_color }};
+    --kh-btn-bg: {{ section.settings.button_bg_color }};
+    --kh-btn-color: {{ section.settings.button_text_color }};
+    --kh-h-ff: {{ heading_ff_value }};
+    --kh-h-fs-d: {{ section.settings.heading_font_size_desktop }}px;
+    --kh-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --kh-h-fw: {{ section.settings.heading_font_weight }};
+    --kh-h-lh: {{ section.settings.heading_line_height }};
+    --kh-h-ls: {{ section.settings.heading_letter_spacing }}px;
+    --kh-b-ff: {{ body_ff_value }};
+    --kh-b-fs-d: {{ section.settings.body_font_size_desktop }}px;
+    --kh-b-fs-m: {{ section.settings.body_font_size_mobile }}px;
+    --kh-b-fw: {{ section.settings.body_font_weight }};
+    --kh-b-lh: {{ section.settings.body_line_height }};
+    --kh-b-ls: {{ section.settings.body_letter_spacing }}px;
+    --kh-overlay: {{ section.settings.mobile_overlay_opacity | divided_by: 100.0 }};
+  "
+>
+  <div class="kefey-hero__bg" aria-hidden="true">
+    {%- if section.settings.background_image != blank -%}
+      {{
+        section.settings.background_image
+        | image_url: width: 3000
+        | image_tag:
+          class: 'kefey-hero__bg-image',
+          widths: '750, 990, 1200, 1500, 2000, 3000',
+          sizes: '100vw',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: ''
+      }}
+    {%- endif -%}
+  </div>
+
+  <div class="kefey-hero__overlay" aria-hidden="true"></div>
+
+  <div class="kefey-hero__container">
+    <div class="kefey-hero__grid">
+      <div class="kefey-hero__content">
+        {%- if section.settings.logo_image != blank -%}
+          {{
+            section.settings.logo_image
+            | image_url: width: 500
+            | image_tag:
+              class: 'kefey-hero__logo',
+              widths: '180, 240, 320, 500',
+              sizes: '(min-width: 990px) 320px, 220px',
+              loading: 'lazy',
+              alt: shop.name
+          }}
+        {%- endif -%}
+
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="kefey-hero__eyebrow">{{ section.settings.eyebrow }}</p>
+        {%- endif -%}
+
+        <h1 class="kefey-hero__heading">{{ section.settings.heading }}</h1>
+
+        {%- if section.settings.subheading != blank -%}
+          <p class="kefey-hero__subheading">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+
+        <a class="kefey-hero__cta" href="{{ cta_href }}">{{ section.settings.cta_label }}</a>
+
+        {%- if section.settings.description != blank -%}
+          <p class="kefey-hero__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="kefey-hero__badges" role="list" aria-label="Product highlights">
+            {%- for block in section.blocks -%}
+              <div class="kefey-hero__badge" role="listitem" {{ block.shopify_attributes }}>
+                <span class="kefey-hero__badge-icon" aria-hidden="true">
+                  {%- if block.settings.icon_svg != blank -%}
+                    {{ block.settings.icon_svg }}
+                  {%- elsif block.settings.icon_image != blank -%}
+                    {{
+                      block.settings.icon_image
+                      | image_url: width: 56
+                      | image_tag:
+                        class: 'kefey-hero__badge-image',
+                        widths: '28, 40, 56',
+                        sizes: '28px',
+                        loading: 'lazy',
+                        alt: ''
+                    }}
+                  {%- else -%}
+                    <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                      <path d="M12 2.6C7.2 2.6 3.3 6.5 3.3 11.3c0 6.2 6 10.2 8.3 11.5.2.1.5.1.7 0 2.3-1.2 8.3-5.3 8.3-11.5 0-4.8-3.9-8.7-8.6-8.7zm0 18.2c-1.7-1-6.8-4.5-6.8-9.5 0-3.8 3.1-6.9 6.8-6.9s6.8 3.1 6.8 6.9c0 5-5 8.5-6.8 9.5z"></path>
+                      <path d="M10.1 14.7l-2.2-2.2-1.2 1.2 3.4 3.4 6.7-6.7-1.2-1.2z"></path>
+                    </svg>
+                  {%- endif -%}
+                </span>
+                <span class="kefey-hero__badge-label">{{ block.settings.label }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="kefey-hero__media">
+        {%- if section.settings.product_image != blank -%}
+          {{
+            section.settings.product_image
+            | image_url: width: 1200
+            | image_tag:
+              class: 'kefey-hero__product',
+              widths: '420, 640, 860, 1200',
+              sizes: '(min-width: 990px) 42vw, 82vw',
+              loading: 'lazy',
+              alt: section.settings.heading
+          }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kefey Hero",
+  "class": "section-kefey-hero",
+  "settings": [
+    { "type": "header", "content": "Images" },
+    { "type": "image_picker", "id": "logo_image", "label": "White logo image" },
+    { "type": "image_picker", "id": "background_image", "label": "Background image (merged preferred)" },
+    { "type": "image_picker", "id": "product_image", "label": "Separate product image (optional)" },
+
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Live Full Live Kefey" },
+    { "type": "text", "id": "heading", "label": "Main heading", "default": "kefey" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Mood Gummies" },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description text",
+      "default": "A plant-based, star-shaped gummy designed to support your mood, energy, and daily balance."
+    },
+    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "SHOP NOW" },
+    { "type": "url", "id": "cta_link", "label": "CTA button link" },
+
+    { "type": "header", "content": "Typography - Heading" },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Theme heading font" },
+        { "value": "body", "label": "Theme body font" },
+        { "value": "system", "label": "System font stack" },
+        { "value": "custom", "label": "Custom (use field below)" }
+      ]
+    },
+    { "type": "text", "id": "heading_font_family_custom", "label": "Heading custom font family", "default": "" },
+    { "type": "range", "id": "heading_font_size_desktop", "label": "Heading font size desktop", "min": 40, "max": 220, "step": 2, "default": 102, "unit": "px" },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Heading font size mobile", "min": 24, "max": 120, "step": 2, "default": 64, "unit": "px" },
+    { "type": "range", "id": "heading_font_weight", "label": "Heading font weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "range", "id": "heading_line_height", "label": "Heading line height", "min": 0.8, "max": 1.6, "step": 0.1, "default": 1.0 },
+    { "type": "range", "id": "heading_letter_spacing", "label": "Heading letter spacing", "min": -2.0, "max": 6.0, "step": 0.1, "default": 0.0, "unit": "px" },
+
+    { "type": "header", "content": "Typography - Body" },
+    {
+      "type": "select",
+      "id": "body_font_family",
+      "label": "Body font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Theme heading font" },
+        { "value": "body", "label": "Theme body font" },
+        { "value": "system", "label": "System font stack" },
+        { "value": "custom", "label": "Custom (use field below)" }
+      ]
+    },
+    { "type": "text", "id": "body_font_family_custom", "label": "Body custom font family", "default": "" },
+    { "type": "range", "id": "body_font_size_desktop", "label": "Body font size desktop", "min": 12, "max": 44, "step": 1, "default": 40, "unit": "px" },
+    { "type": "range", "id": "body_font_size_mobile", "label": "Body font size mobile", "min": 10, "max": 34, "step": 1, "default": 24, "unit": "px" },
+    { "type": "range", "id": "body_font_weight", "label": "Body font weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "body_line_height", "label": "Body line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.3 },
+    { "type": "range", "id": "body_letter_spacing", "label": "Body letter spacing", "min": -1.0, "max": 4.0, "step": 0.1, "default": 0.0, "unit": "px" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "heading_color", "label": "Heading text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "body_color", "label": "Body text color", "default": "#FFFFFF" },
+    { "type": "color", "id": "button_bg_color", "label": "Button background color", "default": "#E85A3A" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 1000, "max": 1800, "step": 20, "default": 1340, "unit": "px" },
+    { "type": "range", "id": "left_col_max_width", "label": "Left column max width", "min": 420, "max": 860, "step": 10, "default": 650, "unit": "px" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 220, "step": 4, "default": 40, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 220, "step": 4, "default": 44, "unit": "px" },
+    { "type": "range", "id": "mobile_overlay_opacity", "label": "Mobile overlay opacity", "min": 0, "max": 70, "step": 5, "default": 20, "unit": "%" }
+  ],
+  "blocks": [
+    {
+      "type": "icon_item",
+      "name": "Icon + Label",
+      "settings": [
+        { "type": "image_picker", "id": "icon_image", "label": "Icon image" },
+        { "type": "textarea", "id": "icon_svg", "label": "Icon SVG (optional)" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Vegan" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "Kefey Hero",
+      "blocks": [
+        { "type": "icon_item", "settings": { "label": "Vegan" } },
+        { "type": "icon_item", "settings": { "label": "Gluten Free" } },
+        { "type": "icon_item", "settings": { "label": "Non GMO" } },
+        { "type": "icon_item", "settings": { "label": "Gelatin Free" } },
+        { "type": "icon_item", "settings": { "label": "Halal" } },
+        { "type": "icon_item", "settings": { "label": "Eco-Friendly" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -9,9 +9,14 @@
  */
 {
   "sections": {
+    "product_hero_kefey": {
+      "type": "product-hero-kefey",
+      "settings": {}
+    },
     "main_product_kefey": {
       "type": "main-product-kefey",
       "settings": {
+<<<<<<< HEAD
         "product": "mood-gummies",
         "heading": "kefey mood gummies",
         "subheading": "Plant-based mood support to bring balance, joy, and calm to your daily rhythm.",
@@ -25,6 +30,9 @@
         "fallback_price": "$39.00",
         "atc_label": "ADD TO CART",
         "trust_text": "Free U.S. shipping over $50 · 30-day happiness guarantee"
+=======
+        "show_hero": false
+>>>>>>> 94f4d8a (Refine product hero banner and typography controls)
       }
     },
     "benefits_kefey": {
@@ -141,6 +149,7 @@
     }
   },
   "order": [
+    "product_hero_kefey",
     "main_product_kefey",
     "benefits_kefey",
     "lifestyle_kefey",
