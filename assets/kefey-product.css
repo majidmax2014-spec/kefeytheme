@@ -230,6 +230,191 @@
   font-size: 1.2rem;
 }
 
+/* -------------------------------
+   Kefey Main Purchase Module
+------------------------------- */
+.kefey-product-main {
+  background: #ececec;
+  padding: 58px 0 82px;
+}
+
+.kefey-purchase {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.kefey-purchase__header {
+  text-align: center;
+}
+
+.kefey-purchase__heading {
+  margin: 0;
+  font-size: clamp(2.4rem, 2.8vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.kefey-purchase__heading span {
+  display: inline;
+  box-shadow: inset 0 -0.42em 0 var(--kp-highlight, #f4c820);
+}
+
+.kefey-purchase__subheading {
+  margin: 14px 0 0;
+  font-size: clamp(1.8rem, 1.45vw, 3rem);
+  font-weight: 700;
+  color: #202020;
+}
+
+.kefey-purchase__note {
+  margin: 10px 0 0;
+  color: #ed5133;
+  font-size: clamp(1.4rem, 1.1vw, 2.2rem);
+  font-weight: 500;
+}
+
+.kefey-purchase__grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.kefey-purchase__image-card {
+  border-radius: 22px;
+  background: #cfcfcf;
+  min-height: 290px;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.kefey-purchase__image {
+  width: min(100%, 390px);
+  height: auto;
+  display: block;
+}
+
+.kefey-purchase__plans {
+  display: grid;
+  gap: 10px;
+}
+
+.kefey-purchase__plan {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(24, 24, 24, 0.24);
+  text-align: left;
+  padding: 20px 24px;
+  cursor: pointer;
+}
+
+.kefey-purchase__plan--subscribe {
+  background: var(--kp-subscribe-bg, #f4ca2a);
+  color: #0b0b0b;
+}
+
+.kefey-purchase__plan--one-time {
+  background: var(--kp-onetime-bg, #49afb4);
+  color: #fff;
+}
+
+.kefey-purchase__plan.is-selected {
+  box-shadow: inset 0 0 0 2px rgba(14, 14, 14, 0.35);
+}
+
+.kefey-purchase__badge {
+  position: absolute;
+  right: -10px;
+  top: -13px;
+  background: #191919;
+  color: #fff;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.kefey-purchase__plan-title {
+  display: block;
+  font-size: clamp(1.8rem, 1.25vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.kefey-purchase__price-row {
+  margin-top: 4px;
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+}
+
+.kefey-purchase__price {
+  font-size: clamp(3.2rem, 3vw, 6rem);
+  font-weight: 800;
+  line-height: 0.95;
+}
+
+.kefey-purchase__each {
+  font-size: clamp(1.4rem, 0.95vw, 2rem);
+  font-weight: 700;
+}
+
+.kefey-purchase__total {
+  margin-left: 8px;
+  font-size: clamp(2.1rem, 1.3vw, 2.8rem);
+  font-weight: 700;
+}
+
+.kefey-purchase__compare {
+  text-decoration: line-through;
+  color: #e95539;
+  font-size: clamp(1.9rem, 1.2vw, 2.6rem);
+}
+
+.kefey-purchase__packs {
+  margin-top: 6px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.kefey-purchase__pack {
+  min-height: 52px;
+  border-radius: 999px;
+  border: 1px solid #888;
+  background: #fff;
+  color: #222;
+  font-size: clamp(1.6rem, 1.2vw, 2.8rem);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kefey-purchase__pack.is-selected {
+  background: #f4ca2a;
+  border-color: #717171;
+}
+
+.kefey-purchase__cta {
+  min-height: 64px;
+  border: 0;
+  background: var(--kp-cta-bg, #111111);
+  color: var(--kp-cta-color, #fff);
+  border-radius: 0;
+  font-size: clamp(2.2rem, 1.5vw, 3rem);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kefey-purchase__cta:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .kefey-product-section {
   padding: 44px 0;
   background: #fff;
@@ -502,6 +687,11 @@
     margin: 0 auto;
   }
 
+  .kefey-purchase__grid {
+    grid-template-columns: minmax(0, 41%) minmax(0, 59%);
+    gap: 8px;
+  }
+
   .kefey-product-benefits__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -518,6 +708,25 @@
 
   .kefey-product-mini-testimonials__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 989px) {
+  .kefey-product-main {
+    padding: 40px 0 48px;
+  }
+
+  .kefey-purchase__heading {
+    font-size: clamp(2.2rem, 8vw, 4rem);
+  }
+
+  .kefey-purchase__subheading {
+    font-size: 2rem;
+  }
+
+  .kefey-purchase__badge {
+    right: 8px;
+    top: -12px;
   }
 }
 
