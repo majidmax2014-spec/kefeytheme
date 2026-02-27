@@ -1,22 +1,87 @@
-<section class="kefey-product kefey-product-section">
+<section
+  class="kefey-lifestyle"
+  style="
+    --kl-highlight: {{ section.settings.highlight_bar_color }};
+    --kl-h-ff: {{ section.settings.heading_font_family }};
+    --kl-h-fs-d: {{ section.settings.heading_font_size_desktop }}px;
+    --kl-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --kl-h-fw: {{ section.settings.heading_font_weight }};
+    --kl-d-ff: {{ section.settings.desc_font_family }};
+    --kl-d-fs-d: {{ section.settings.desc_font_size_desktop }}px;
+    --kl-d-fs-m: {{ section.settings.desc_font_size_mobile }}px;
+    --kl-d-fw: {{ section.settings.desc_font_weight }};
+    --kl-d-lh: {{ section.settings.desc_line_height }};
+    --kl-ct-ff: {{ section.settings.card_title_font_family }};
+    --kl-ct-fs-d: {{ section.settings.card_title_font_size_desktop }}px;
+    --kl-ct-fs-m: {{ section.settings.card_title_font_size_mobile }}px;
+    --kl-ct-fw: {{ section.settings.card_title_font_weight }};
+    --kl-cb-ff: {{ section.settings.card_text_font_family }};
+    --kl-cb-fs-d: {{ section.settings.card_text_font_size_desktop }}px;
+    --kl-cb-fs-m: {{ section.settings.card_text_font_size_mobile }}px;
+    --kl-cb-fw: {{ section.settings.card_text_font_weight }};
+    --kl-cb-lh: {{ section.settings.card_text_line_height }};
+    --kl-pt: {{ section.settings.padding_top }}px;
+    --kl-pb: {{ section.settings.padding_bottom }}px;
+  "
+>
   <div class="page-width">
-    <div class="kefey-product-lifestyle__wrap">
-      <div class="kefey-product-lifestyle__media">
-        {%- if section.settings.left_image != blank -%}
-          {{ section.settings.left_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: section.settings.heading }}
-        {%- endif -%}
-        {%- if section.settings.right_image != blank -%}
-          {{ section.settings.right_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: section.settings.heading }}
+    <div class="kefey-lifestyle__header">
+      <h2 class="kefey-lifestyle__title"><span>{{ section.settings.title }}</span></h2>
+      <p class="kefey-lifestyle__desc">{{ section.settings.description }}</p>
+    </div>
+
+    <div class="kefey-lifestyle__media">
+      <div class="kefey-lifestyle__media-item">
+        {%- if section.settings.image_left != blank -%}
+          {{
+            section.settings.image_left
+            | image_url: width: 1200
+            | image_tag:
+              class: 'kefey-lifestyle__image',
+              widths: '420, 700, 900, 1200',
+              sizes: '(min-width: 990px) 33vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.title
+          }}
         {%- endif -%}
       </div>
-      <div class="kefey-product-lifestyle__cards">
-        {%- for block in section.blocks -%}
-          <article {{ block.shopify_attributes }}>
-            <h3 class="kefey-product__title" style="font-size:1.9rem; margin-bottom:4px;">{{ block.settings.title }}</h3>
-            <p class="kefey-product__desc" style="font-size:1.3rem;">{{ block.settings.text }}</p>
-          </article>
-        {%- endfor -%}
+      <div class="kefey-lifestyle__media-item">
+        {%- if section.settings.image_center != blank -%}
+          {{
+            section.settings.image_center
+            | image_url: width: 1200
+            | image_tag:
+              class: 'kefey-lifestyle__image',
+              widths: '420, 700, 900, 1200',
+              sizes: '(min-width: 990px) 33vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.title
+          }}
+        {%- endif -%}
       </div>
+      <div class="kefey-lifestyle__media-item">
+        {%- if section.settings.image_right != blank -%}
+          {{
+            section.settings.image_right
+            | image_url: width: 1200
+            | image_tag:
+              class: 'kefey-lifestyle__image',
+              widths: '420, 700, 900, 1200',
+              sizes: '(min-width: 990px) 33vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.title
+          }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="kefey-lifestyle__cards">
+      {%- for block in section.blocks -%}
+        <article class="kefey-lifestyle__card" style="--kl-card-bg: {{ block.settings.background_color }};" {{ block.shopify_attributes }}>
+          <h3 class="kefey-lifestyle__card-title">{{ block.settings.title }}</h3>
+          <p class="kefey-lifestyle__card-text">{{ block.settings.text }}</p>
+        </article>
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -25,14 +90,48 @@
 {
   "name": "Product Lifestyle Kefey",
   "settings": [
-    { "type": "image_picker", "id": "left_image", "label": "Left image" },
-    { "type": "image_picker", "id": "right_image", "label": "Right image" }
+    { "type": "text", "id": "title", "label": "Title", "default": "Why You’ll Love Kefey® Mood Gummies" },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Plant-based extracts, carefully selected and thoughtfully blended to support your mood, energy, and balance — the joyful way to feel your best."
+    },
+    { "type": "color", "id": "highlight_bar_color", "label": "Highlight bar color", "default": "#f4c820" },
+    { "type": "image_picker", "id": "image_left", "label": "Left image" },
+    { "type": "image_picker", "id": "image_center", "label": "Center image" },
+    { "type": "image_picker", "id": "image_right", "label": "Right image" },
+    { "type": "header", "content": "Heading Typography" },
+    { "type": "text", "id": "heading_font_family", "label": "Heading font family", "default": "inherit" },
+    { "type": "range", "id": "heading_font_size_desktop", "label": "Heading size desktop", "min": 20, "max": 90, "step": 1, "default": 56, "unit": "px" },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Heading size mobile", "min": 18, "max": 64, "step": 1, "default": 36, "unit": "px" },
+    { "type": "range", "id": "heading_font_weight", "label": "Heading font weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Description Typography" },
+    { "type": "text", "id": "desc_font_family", "label": "Description font family", "default": "inherit" },
+    { "type": "range", "id": "desc_font_size_desktop", "label": "Description size desktop", "min": 12, "max": 40, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "desc_font_size_mobile", "label": "Description size mobile", "min": 12, "max": 30, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "desc_font_weight", "label": "Description font weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "desc_line_height", "label": "Description line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 },
+    { "type": "header", "content": "Card Title Typography" },
+    { "type": "text", "id": "card_title_font_family", "label": "Card title font family", "default": "inherit" },
+    { "type": "range", "id": "card_title_font_size_desktop", "label": "Card title size desktop", "min": 14, "max": 56, "step": 1, "default": 42, "unit": "px" },
+    { "type": "range", "id": "card_title_font_size_mobile", "label": "Card title size mobile", "min": 14, "max": 42, "step": 1, "default": 28, "unit": "px" },
+    { "type": "range", "id": "card_title_font_weight", "label": "Card title font weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Card Text Typography" },
+    { "type": "text", "id": "card_text_font_family", "label": "Card text font family", "default": "inherit" },
+    { "type": "range", "id": "card_text_font_size_desktop", "label": "Card text size desktop", "min": 12, "max": 36, "step": 1, "default": 18, "unit": "px" },
+    { "type": "range", "id": "card_text_font_size_mobile", "label": "Card text size mobile", "min": 12, "max": 30, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "card_text_font_weight", "label": "Card text font weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "card_text_line_height", "label": "Card text line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 220, "step": 4, "default": 64, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 220, "step": 4, "default": 72, "unit": "px" }
   ],
   "blocks": [
     {
       "type": "card",
       "name": "Card",
       "settings": [
+        { "type": "color", "id": "background_color", "label": "Background color", "default": "#82c7cb" },
         { "type": "text", "id": "title", "label": "Title", "default": "Made for your rhythm" },
         { "type": "textarea", "id": "text", "label": "Text", "default": "Simple, tasty gummies that fit any daily routine." }
       ]
@@ -43,9 +142,30 @@
     {
       "name": "Product Lifestyle Kefey",
       "blocks": [
-        { "type": "card", "settings": { "title": "Natural ingredients", "text": "Powered by herbs and adaptogens." } },
-        { "type": "card", "settings": { "title": "No sugar crash", "text": "Steady support for your day." } },
-        { "type": "card", "settings": { "title": "Portable joy", "text": "Take your stars wherever you go." } }
+        {
+          "type": "card",
+          "settings": {
+            "background_color": "#82c7cb",
+            "title": "Made to Be Enjoyed",
+            "text": "A joyful daily moment that feels light, natural, and genuinely enjoyable."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "background_color": "#edd46a",
+            "title": "More Support, Fewer Steps",
+            "text": "A single, concentrated formula, created to replace a shelf full of supplements, often as many as 8 different products."
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "background_color": "#82c7cb",
+            "title": "You & the Planet in Mind",
+            "text": "From plant-based ingredients to Eco-friendly, Re-usable packaging. Every choice is made with care — for you and the planet."
+          }
+        }
       ]
     }
   ]

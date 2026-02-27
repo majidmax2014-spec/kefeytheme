@@ -578,45 +578,89 @@
   line-height: var(--kb-ib-lh, 1.45);
 }
 
-.kefey-product-lifestyle__wrap {
+/* -------------------------------
+   Kefey Lifestyle
+------------------------------- */
+.kefey-lifestyle {
+  background: #fff;
+  padding-top: var(--kl-pt, 64px);
+  padding-bottom: var(--kl-pb, 72px);
+}
+
+.kefey-lifestyle__header {
+  text-align: center;
+  max-width: 980px;
+  margin: 0 auto 36px;
+}
+
+.kefey-lifestyle__title {
+  margin: 0;
+  color: #1f1f1f;
+  font-family: var(--kl-h-ff, inherit);
+  font-size: var(--kl-h-fs-d, 56px);
+  font-weight: var(--kl-h-fw, 700);
+  line-height: 1.14;
+}
+
+.kefey-lifestyle__title span {
+  box-shadow: inset 0 -0.42em 0 var(--kl-highlight, #f4c820);
+}
+
+.kefey-lifestyle__desc {
+  margin: 16px auto 0;
+  max-width: 980px;
+  color: #202020;
+  font-family: var(--kl-d-ff, inherit);
+  font-size: var(--kl-d-fs-d, 20px);
+  font-weight: var(--kl-d-fw, 500);
+  line-height: var(--kl-d-lh, 1.4);
+}
+
+.kefey-lifestyle__media {
   display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-  border-radius: 20px;
-  overflow: hidden;
 }
 
-.kefey-product-lifestyle__media {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.kefey-lifestyle__media-item {
+  min-height: 250px;
 }
 
-.kefey-product-lifestyle__media img {
+.kefey-lifestyle__image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.kefey-product-lifestyle__cards {
+.kefey-lifestyle__cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
 }
 
-.kefey-product-lifestyle__cards article {
-  padding: 14px;
-  min-height: 98px;
+.kefey-lifestyle__card {
+  background: var(--kl-card-bg, #82c7cb);
+  padding: 30px 24px 34px;
+  text-align: center;
 }
 
-.kefey-product-lifestyle__cards article:nth-child(1) {
-  background: #65cfd3;
+.kefey-lifestyle__card-title {
+  margin: 0;
+  color: #1f1f1f;
+  font-family: var(--kl-ct-ff, inherit);
+  font-size: var(--kl-ct-fs-d, 42px);
+  font-weight: var(--kl-ct-fw, 700);
+  line-height: 1.2;
 }
 
-.kefey-product-lifestyle__cards article:nth-child(2) {
-  background: #f4c836;
-}
-
-.kefey-product-lifestyle__cards article:nth-child(3) {
-  background: #7fdde2;
+.kefey-lifestyle__card-text {
+  margin: 14px 0 0;
+  color: #1f1f1f;
+  font-family: var(--kl-cb-ff, inherit);
+  font-size: var(--kl-cb-fs-d, 18px);
+  font-weight: var(--kl-cb-fw, 500);
+  line-height: var(--kl-cb-lh, 1.4);
 }
 
 .kefey-product-ingredients__track-wrap {
@@ -911,6 +955,44 @@
 
   .kefey-benefits__item-text {
     font-size: var(--kb-ib-fs-m, 18px);
+  }
+
+  .kefey-lifestyle {
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .kefey-lifestyle__header {
+    margin-bottom: 26px;
+  }
+
+  .kefey-lifestyle__title {
+    font-size: var(--kl-h-fs-m, 36px);
+  }
+
+  .kefey-lifestyle__desc {
+    font-size: var(--kl-d-fs-m, 16px);
+  }
+
+  .kefey-lifestyle__media,
+  .kefey-lifestyle__cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .kefey-lifestyle__media-item {
+    min-height: 300px;
+  }
+
+  .kefey-lifestyle__card {
+    padding: 22px 18px 24px;
+  }
+
+  .kefey-lifestyle__card-title {
+    font-size: var(--kl-ct-fs-m, 28px);
+  }
+
+  .kefey-lifestyle__card-text {
+    font-size: var(--kl-cb-fs-m, 16px);
   }
 }
 
