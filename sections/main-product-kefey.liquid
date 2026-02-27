@@ -36,63 +36,68 @@
       </header>
 
       <div class="kefey-purchase__grid">
-        <div class="kefey-purchase__image-card">
-          {%- if section.settings.purchase_image != blank -%}
-            {{
-              section.settings.purchase_image
-              | image_url: width: 820
-              | image_tag:
-                class: 'kefey-purchase__image',
-                widths: '360, 560, 760, 820',
-                sizes: '(min-width: 990px) 440px, 90vw',
-                loading: 'lazy',
-                alt: kefey_product.title
-            }}
-          {%- elsif kefey_product and kefey_product.featured_image -%}
-            {{
-              kefey_product.featured_image
-              | image_url: width: 820
-              | image_tag:
-                class: 'kefey-purchase__image',
-                widths: '360, 560, 760, 820',
-                sizes: '(min-width: 990px) 440px, 90vw',
-                loading: 'lazy',
-                alt: kefey_product.title
-            }}
-          {%- endif -%}
-        </div>
-
-        <div class="kefey-purchase__plans">
-          <button class="kefey-purchase__plan kefey-purchase__plan--subscribe" type="button" data-plan="sub">
-            <span class="kefey-purchase__badge">{{ section.settings.badge_text }}</span>
-            <span class="kefey-purchase__plan-title">{{ section.settings.sub_label }}</span>
-            <span class="kefey-purchase__price-row">
-              <span class="kefey-purchase__price" data-sub-each>{{ section.settings.fallback_price }}</span>
-              <span class="kefey-purchase__each">each</span>
-              <span class="kefey-purchase__total">Total: <span data-sub-total>{{ section.settings.fallback_price }}</span></span>
-              <span class="kefey-purchase__compare" data-sub-compare>{{ section.settings.display_compare_price }}</span>
-            </span>
-          </button>
-
-          <button class="kefey-purchase__plan kefey-purchase__plan--one-time" type="button" data-plan="one">
-            <span class="kefey-purchase__plan-title">{{ section.settings.onetime_label }}</span>
-            <span class="kefey-purchase__price-row">
-              <span class="kefey-purchase__price" data-one-each>{{ section.settings.fallback_price }}</span>
-              <span class="kefey-purchase__each">each</span>
-            </span>
-          </button>
-
-          <div class="kefey-purchase__packs" role="group" aria-label="Pack selector">
-            <button class="kefey-purchase__pack" type="button" data-pack="5">{{ section.settings.pack_label_5 }}</button>
-            <button class="kefey-purchase__pack" type="button" data-pack="3">{{ section.settings.pack_label_3 }}</button>
-            <button class="kefey-purchase__pack" type="button" data-pack="1">{{ section.settings.pack_label_1 }}</button>
+        <div class="kefey-purchase__left">
+          <div class="kefey-purchase__image-card">
+            {%- if section.settings.purchase_image != blank -%}
+              {{
+                section.settings.purchase_image
+                | image_url: width: 820
+                | image_tag:
+                  class: 'kefey-purchase__image',
+                  widths: '360, 560, 760, 820',
+                  sizes: '(min-width: 990px) 440px, 90vw',
+                  loading: 'lazy',
+                  alt: kefey_product.title
+              }}
+            {%- elsif kefey_product and kefey_product.featured_image -%}
+              {{
+                kefey_product.featured_image
+                | image_url: width: 820
+                | image_tag:
+                  class: 'kefey-purchase__image',
+                  widths: '360, 560, 760, 820',
+                  sizes: '(min-width: 990px) 440px, 90vw',
+                  loading: 'lazy',
+                  alt: kefey_product.title
+              }}
+            {%- endif -%}
           </div>
-
-          <input type="hidden" value="{{ kefey_product.selected_or_first_available_variant.id }}" data-selected-variant-id>
-          <button class="kefey-purchase__cta" type="button" data-kefey-checkout>
-            {{ section.settings.atc_label }}
-          </button>
         </div>
+
+        <div class="kefey-purchase__right">
+          <div class="kefey-purchase__plans">
+            <button class="kefey-purchase__plan kefey-purchase__plan--subscribe" type="button" data-plan="sub">
+              <span class="kefey-purchase__badge">{{ section.settings.badge_text }}</span>
+              <span class="kefey-purchase__plan-title">{{ section.settings.sub_label }}</span>
+              <span class="kefey-purchase__price-row">
+                <span class="kefey-purchase__price" data-sub-each>{{ section.settings.fallback_price }}</span>
+                <span class="kefey-purchase__each">each</span>
+                <span class="kefey-purchase__total">Total: <span data-sub-total>{{ section.settings.fallback_price }}</span></span>
+                <span class="kefey-purchase__compare" data-sub-compare>{{ section.settings.display_compare_price }}</span>
+              </span>
+            </button>
+
+            <button class="kefey-purchase__plan kefey-purchase__plan--one-time" type="button" data-plan="one">
+              <span class="kefey-purchase__plan-title">{{ section.settings.onetime_label }}</span>
+              <span class="kefey-purchase__price-row">
+                <span class="kefey-purchase__price" data-one-each>{{ section.settings.fallback_price }}</span>
+                <span class="kefey-purchase__each">each</span>
+              </span>
+            </button>
+
+            <div class="kefey-purchase__packs" role="group" aria-label="Pack selector">
+              <button class="kefey-purchase__pack" type="button" data-pack="5">{{ section.settings.pack_label_5 }}</button>
+              <button class="kefey-purchase__pack" type="button" data-pack="3">{{ section.settings.pack_label_3 }}</button>
+              <button class="kefey-purchase__pack" type="button" data-pack="1">{{ section.settings.pack_label_1 }}</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="kefey-purchase__cta-row">
+        <input type="hidden" value="{{ kefey_product.selected_or_first_available_variant.id }}" data-selected-variant-id>
+        <button class="kefey-purchase__cta" type="button" data-kefey-checkout>
+          {{ section.settings.atc_label }}
+        </button>
       </div>
 
       {%- if kefey_product -%}
