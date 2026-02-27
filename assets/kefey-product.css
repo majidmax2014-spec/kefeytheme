@@ -663,56 +663,135 @@
   line-height: var(--kl-cb-lh, 1.4);
 }
 
-.kefey-product-ingredients__track-wrap {
+/* -------------------------------
+   Kefey Ingredients
+------------------------------- */
+.kefey-ingredients {
+  background: var(--ki-bg, #4bb3b5);
+  color: #fff;
+  padding: 68px 0 84px;
+}
+
+.kefey-ingredients__container {
   position: relative;
 }
 
-.kefey-product-ingredients__track {
+.kefey-ingredients__title {
+  margin: 0;
+  text-align: center;
+  color: var(--ki-heading-color, #fff);
+  font-family: var(--ki-h-ff, inherit);
+  font-size: var(--ki-h-fs-d, 58px);
+  font-weight: var(--ki-h-fw, 700);
+  letter-spacing: var(--ki-h-ls, 0px);
+  line-height: 1.16;
+}
+
+.kefey-ingredients__desc {
+  margin: 18px auto 0;
+  max-width: 1040px;
+  text-align: center;
+  color: var(--ki-desc-color, #fff);
+  font-family: var(--ki-d-ff, inherit);
+  font-size: var(--ki-d-fs-d, 22px);
+  font-weight: var(--ki-d-fw, 500);
+  line-height: var(--ki-d-lh, 1.4);
+}
+
+.kefey-ingredients__carousel {
+  position: relative;
+  margin-top: 46px;
+  padding: 0 70px;
+}
+
+.kefey-ingredients__track {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(220px, 1fr);
-  gap: 14px;
+  grid-auto-columns: calc((100% - (var(--ki-card-gap, 24px) * 2)) / 3);
+  gap: var(--ki-card-gap, 24px);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
 }
 
-.kefey-product-ingredients__track::-webkit-scrollbar {
+.kefey-ingredients__track::-webkit-scrollbar {
   display: none;
 }
 
-.kefey-product-ingredients__card {
+.kefey-ingredients__card {
   scroll-snap-align: start;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.38);
+  border: var(--ki-border-w, 1px) solid var(--ki-border-color, rgba(255, 255, 255, 0.75));
+  border-radius: var(--ki-card-radius, 16px);
+  background: transparent;
+  overflow: hidden;
 }
 
-.kefey-product-ingredients__card img {
+.kefey-ingredients__card-media {
+  margin: 10px;
+  border-radius: calc(var(--ki-card-radius, 16px) - 4px);
+  overflow: hidden;
+  background: #eadf87;
+  min-height: 220px;
+}
+
+.kefey-ingredients__image {
   width: 100%;
-  border-radius: 12px;
+  height: 100%;
+  display: block;
+  object-fit: cover;
 }
 
-.kefey-product-ingredients__nav {
+.kefey-ingredients__card-body {
+  padding: 12px 22px 24px;
+  text-align: center;
+}
+
+.kefey-ingredients__card-title {
+  margin: 0;
+  color: #fff;
+  font-family: var(--ki-ct-ff, inherit);
+  font-size: var(--ki-ct-fs-d, 20px);
+  font-weight: var(--ki-ct-fw, 700);
+  line-height: 1.25;
+}
+
+.kefey-ingredients__card-text {
+  margin: 10px 0 0;
+  color: #fff;
+  font-family: var(--ki-cb-ff, inherit);
+  font-size: var(--ki-cb-fs-d, 18px);
+  font-weight: var(--ki-cb-fw, 500);
+  line-height: var(--ki-cb-lh, 1.4);
+}
+
+.kefey-ingredients__arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   border: 0;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #fff;
-  color: var(--kp-teal);
+  background: transparent;
+  color: var(--ki-arrow-color, #fff);
+  width: var(--ki-arrow-size, 58px);
+  height: var(--ki-arrow-size, 58px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(var(--ki-arrow-size, 58px) * 1.05);
+  line-height: 1;
   cursor: pointer;
 }
 
-.kefey-product-ingredients__nav--prev {
-  left: -16px;
+.kefey-ingredients__arrow:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 2px;
 }
 
-.kefey-product-ingredients__nav--next {
-  right: -16px;
+.kefey-ingredients__arrow--prev {
+  left: 0;
+}
+
+.kefey-ingredients__arrow--next {
+  right: 0;
 }
 
 .kefey-product-callouts__layout {
@@ -993,6 +1072,44 @@
 
   .kefey-lifestyle__card-text {
     font-size: var(--kl-cb-fs-m, 16px);
+  }
+
+  .kefey-ingredients {
+    padding: 44px 0 54px;
+  }
+
+  .kefey-ingredients__title {
+    font-size: var(--ki-h-fs-m, 34px);
+  }
+
+  .kefey-ingredients__desc {
+    font-size: var(--ki-d-fs-m, 16px);
+  }
+
+  .kefey-ingredients__carousel {
+    margin-top: 28px;
+    padding: 0 12px;
+  }
+
+  .kefey-ingredients__track {
+    grid-auto-columns: 88%;
+    gap: 14px;
+  }
+
+  .kefey-ingredients__card-media {
+    min-height: 190px;
+  }
+
+  .kefey-ingredients__card-title {
+    font-size: var(--ki-ct-fs-m, 20px);
+  }
+
+  .kefey-ingredients__card-text {
+    font-size: var(--ki-cb-fs-m, 16px);
+  }
+
+  .kefey-ingredients__arrow {
+    display: none;
   }
 }
 

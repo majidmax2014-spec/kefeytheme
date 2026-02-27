@@ -7,7 +7,10 @@
       var prev = carousel.querySelector('[data-kefey-prev]');
       var next = carousel.querySelector('[data-kefey-next]');
       var step = function () {
-        return Math.max(220, Math.floor(track.clientWidth * 0.9));
+        var firstCard = track.querySelector(':scope > *');
+        if (!firstCard) return Math.max(220, Math.floor(track.clientWidth * 0.9));
+        var gap = parseFloat(window.getComputedStyle(track).columnGap || window.getComputedStyle(track).gap || '0');
+        return Math.floor(firstCard.getBoundingClientRect().width + gap);
       };
 
       if (prev) {

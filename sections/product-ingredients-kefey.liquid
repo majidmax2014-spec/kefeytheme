@@ -1,24 +1,69 @@
-<section class="kefey-product kefey-product-section kefey-product-section--teal">
-  <div class="page-width">
-    <h2 class="kefey-product__title" style="text-align:center; color:#fff;">{{ section.settings.heading }}</h2>
-    <p class="kefey-product__desc" style="text-align:center; color:#eaf8f8; max-width:800px; margin:0 auto 18px;">{{ section.settings.subheading }}</p>
+<section
+  class="kefey-ingredients"
+  style="
+    --ki-bg: {{ section.settings.background_color }};
+    --ki-heading-color: {{ section.settings.heading_color }};
+    --ki-desc-color: {{ section.settings.description_color }};
+    --ki-h-ff: {{ section.settings.heading_font_family }};
+    --ki-h-fs-d: {{ section.settings.heading_font_size_desktop }}px;
+    --ki-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --ki-h-fw: {{ section.settings.heading_font_weight }};
+    --ki-h-ls: {{ section.settings.heading_letter_spacing }}px;
+    --ki-d-ff: {{ section.settings.desc_font_family }};
+    --ki-d-fs-d: {{ section.settings.desc_font_size_desktop }}px;
+    --ki-d-fs-m: {{ section.settings.desc_font_size_mobile }}px;
+    --ki-d-fw: {{ section.settings.desc_font_weight }};
+    --ki-d-lh: {{ section.settings.desc_line_height }};
+    --ki-ct-ff: {{ section.settings.card_title_font_family }};
+    --ki-ct-fs-d: {{ section.settings.card_title_font_size_desktop }}px;
+    --ki-ct-fs-m: {{ section.settings.card_title_font_size_mobile }}px;
+    --ki-ct-fw: {{ section.settings.card_title_font_weight }};
+    --ki-cb-ff: {{ section.settings.card_text_font_family }};
+    --ki-cb-fs-d: {{ section.settings.card_text_font_size_desktop }}px;
+    --ki-cb-fs-m: {{ section.settings.card_text_font_size_mobile }}px;
+    --ki-cb-fw: {{ section.settings.card_text_font_weight }};
+    --ki-cb-lh: {{ section.settings.card_text_line_height }};
+    --ki-border-color: {{ section.settings.card_border_color }};
+    --ki-border-w: {{ section.settings.card_border_thickness }}px;
+    --ki-card-radius: {{ section.settings.card_radius }}px;
+    --ki-card-gap: {{ section.settings.card_gap }}px;
+    --ki-arrow-color: {{ section.settings.arrows_color }};
+    --ki-arrow-size: {{ section.settings.arrows_size }}px;
+  "
+>
+  <div class="page-width kefey-ingredients__container">
+    <h2 class="kefey-ingredients__title">{{ section.settings.heading }}</h2>
+    <p class="kefey-ingredients__desc">{{ section.settings.subheading }}</p>
 
-    <div class="kefey-product-ingredients__track-wrap" data-kefey-ingredients>
-      <button class="kefey-product-ingredients__nav kefey-product-ingredients__nav--prev" type="button" data-kefey-prev aria-label="Previous ingredient">
+    <div class="kefey-ingredients__carousel" data-kefey-ingredients>
+      <button class="kefey-ingredients__arrow kefey-ingredients__arrow--prev" type="button" data-kefey-prev aria-label="Previous ingredient">
         &#8249;
       </button>
-      <div class="kefey-product-ingredients__track" data-kefey-ingredients-track>
+      <div class="kefey-ingredients__track" data-kefey-ingredients-track>
         {%- for block in section.blocks -%}
-          <article class="kefey-product-ingredients__card" {{ block.shopify_attributes }}>
-            {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 500 | image_tag: loading: 'lazy', alt: block.settings.title }}
-            {%- endif -%}
-            <h3 class="kefey-product__title" style="font-size:1.8rem; color:#fff; margin-top:10px;">{{ block.settings.title }}</h3>
-            <p class="kefey-product__desc" style="color:#eaf8f8; font-size:1.3rem;">{{ block.settings.text }}</p>
+          <article class="kefey-ingredients__card" {{ block.shopify_attributes }}>
+            <div class="kefey-ingredients__card-media">
+              {%- if block.settings.ingredient_image != blank -%}
+                {{
+                  block.settings.ingredient_image
+                  | image_url: width: 900
+                  | image_tag:
+                    class: 'kefey-ingredients__image',
+                    widths: '280, 420, 640, 900',
+                    sizes: '(min-width: 990px) 26vw, 92vw',
+                    loading: 'lazy',
+                    alt: block.settings.title
+                }}
+              {%- endif -%}
+            </div>
+            <div class="kefey-ingredients__card-body">
+              <h3 class="kefey-ingredients__card-title">{{ block.settings.title }}</h3>
+              <p class="kefey-ingredients__card-text">{{ block.settings.description }}</p>
+            </div>
           </article>
         {%- endfor -%}
       </div>
-      <button class="kefey-product-ingredients__nav kefey-product-ingredients__nav--next" type="button" data-kefey-next aria-label="Next ingredient">
+      <button class="kefey-ingredients__arrow kefey-ingredients__arrow--next" type="button" data-kefey-next aria-label="Next ingredient">
         &#8250;
       </button>
     </div>
@@ -29,24 +74,85 @@
 {
   "name": "Product Ingredients Kefey",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "The Ingredients Behind the Kefey Mood Star" },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "A thoughtful blend of botanicals to support calm, focus, and emotional balance." }
+    { "type": "text", "id": "heading", "label": "Heading text", "default": "The Ingredients Behind the Kefey® Mood Star" },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Description text",
+      "default": "A signature Kefey® formulation powered by high-potency botanical extracts — naturally sweetened, sugar-free, and thoughtfully crafted to support real, everyday balance."
+    },
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#4bb3b5" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#ffffff" },
+    { "type": "color", "id": "description_color", "label": "Description color", "default": "#ffffff" },
+    { "type": "header", "content": "Heading Typography" },
+    { "type": "text", "id": "heading_font_family", "label": "Heading font family", "default": "inherit" },
+    { "type": "range", "id": "heading_font_size_desktop", "label": "Heading size desktop", "min": 20, "max": 90, "step": 1, "default": 58, "unit": "px" },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Heading size mobile", "min": 18, "max": 64, "step": 1, "default": 34, "unit": "px" },
+    { "type": "range", "id": "heading_font_weight", "label": "Heading weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "range", "id": "heading_letter_spacing", "label": "Heading letter spacing", "min": -2.0, "max": 4.0, "step": 0.1, "default": 0.0, "unit": "px" },
+    { "type": "header", "content": "Description Typography" },
+    { "type": "text", "id": "desc_font_family", "label": "Description font family", "default": "inherit" },
+    { "type": "range", "id": "desc_font_size_desktop", "label": "Description size desktop", "min": 12, "max": 36, "step": 1, "default": 22, "unit": "px" },
+    { "type": "range", "id": "desc_font_size_mobile", "label": "Description size mobile", "min": 12, "max": 28, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "desc_font_weight", "label": "Description weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "desc_line_height", "label": "Description line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 },
+    { "type": "header", "content": "Card Title Typography" },
+    { "type": "text", "id": "card_title_font_family", "label": "Card title font family", "default": "inherit" },
+    { "type": "range", "id": "card_title_font_size_desktop", "label": "Card title size desktop", "min": 14, "max": 48, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "card_title_font_size_mobile", "label": "Card title size mobile", "min": 14, "max": 40, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "card_title_font_weight", "label": "Card title weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Card Text Typography" },
+    { "type": "text", "id": "card_text_font_family", "label": "Card text font family", "default": "inherit" },
+    { "type": "range", "id": "card_text_font_size_desktop", "label": "Card text size desktop", "min": 12, "max": 32, "step": 1, "default": 18, "unit": "px" },
+    { "type": "range", "id": "card_text_font_size_mobile", "label": "Card text size mobile", "min": 12, "max": 28, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "card_text_font_weight", "label": "Card text weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "card_text_line_height", "label": "Card text line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 },
+    { "type": "header", "content": "Carousel Styling" },
+    { "type": "color", "id": "card_border_color", "label": "Card border color", "default": "rgba(255,255,255,0.75)" },
+    { "type": "range", "id": "card_border_thickness", "label": "Card border thickness", "min": 1, "max": 4, "step": 1, "default": 1, "unit": "px" },
+    { "type": "range", "id": "card_radius", "label": "Card radius", "min": 8, "max": 40, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "card_gap", "label": "Card gap", "min": 8, "max": 40, "step": 1, "default": 24, "unit": "px" },
+    { "type": "color", "id": "arrows_color", "label": "Arrows color", "default": "#ffffff" },
+    { "type": "range", "id": "arrows_size", "label": "Arrows size", "min": 24, "max": 80, "step": 1, "default": 58, "unit": "px" }
   ],
   "blocks": [
     {
       "type": "ingredient",
       "name": "Ingredient",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Ashwagandha" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Supports stress response and calm focus." }
+        { "type": "image_picker", "id": "ingredient_image", "label": "Ingredient image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Ashwagandha Root Extract" },
+        { "type": "textarea", "id": "description", "label": "Description", "default": "A well-known adaptogenic herb traditionally used to help the body adapt to occasional stress and support natural balance." }
       ]
     }
   ],
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Product Ingredients Kefey",
-      "blocks": [{ "type": "ingredient" }, { "type": "ingredient" }, { "type": "ingredient" }]
+      "blocks": [
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Ashwagandha Root Extract",
+            "description": "A well-known adaptogenic herb traditionally used to help the body adapt to occasional stress and support natural balance."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Gotu Kola Extract",
+            "description": "A powerful adaptogenic botanical traditionally used to support focus, clarity, and everyday mental balance."
+          }
+        },
+        {
+          "type": "ingredient",
+          "settings": {
+            "title": "Maca Root Extract",
+            "description": "An adaptogenic superfood, grown in the Andes, known for supporting natural vitality and balanced energy."
+          }
+        }
+      ]
     }
   ]
 }
