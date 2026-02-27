@@ -164,11 +164,114 @@
     },
     "benefits_kefey": {
       "type": "product-benefits-kefey",
+      "blocks": {
+        "benefit_KFdyfp": {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "svg",
+            "icon_svg": "",
+            "icon_bg_color": "#eb5a3b",
+            "icon_color": "#ffffff",
+            "title": "Stress Support",
+            "text": "Kefey® mood gummies supports a calm, balanced mood during busy days. Formulated with botanical extracts traditionally used to support relaxation and emotional ease."
+          }
+        },
+        "benefit_YjX8db": {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "svg",
+            "icon_svg": "",
+            "icon_bg_color": "#eb5a3b",
+            "icon_color": "#ffffff",
+            "title": "Steady Energy",
+            "text": "Our gummies Support steady, balanced energy throughout the day — without jitters or crashes.\nPowered by plant-based extracts traditionally used to support vitality, without caffeine."
+          }
+        },
+        "benefit_U8UNmN": {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "svg",
+            "icon_svg": "",
+            "icon_bg_color": "#eb5a3b",
+            "icon_color": "#ffffff",
+            "title": "Focus",
+            "text": "Kefey® stars support clarity and daily concentration. Designed to help you stay centered, present, and mentally engaged throughout your day."
+          }
+        },
+        "benefit_jerFxr": {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "svg",
+            "icon_svg": "",
+            "icon_bg_color": "#eb5a3b",
+            "icon_color": "#ffffff",
+            "title": "Emotional Balance",
+            "text": "Designed to support emotional wellbeing and inner balance, Kefey® gummies are a simple, enjoyable way to care for your mood — daily."
+          }
+        },
+        "benefit_HaEmEe": {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "svg",
+            "icon_svg": "",
+            "icon_bg_color": "#eb5a3b",
+            "icon_color": "#ffffff",
+            "title": "Sleep Quality",
+            "text": "Supports a calm, relaxed state that helps prepare the mind for rest. Gentle, non-stimulating ingredients in the gummies are designed to support a more peaceful night’s sleep."
+          }
+        },
+        "benefit_4CYFMT": {
+          "type": "benefit",
+          "settings": {
+            "icon_type": "svg",
+            "icon_svg": "",
+            "icon_bg_color": "#eb5a3b",
+            "icon_color": "#ffffff",
+            "title": "Daily Wellness",
+            "text": "An easy, enjoyable habit designed to support your daily balance. Kefey® gummies are plant-based, thoughtfully formulated, and made to feel good — inside and out."
+          }
+        }
+      },
+      "block_order": [
+        "benefit_KFdyfp",
+        "benefit_YjX8db",
+        "benefit_U8UNmN",
+        "benefit_jerFxr",
+        "benefit_HaEmEe",
+        "benefit_4CYFMT"
+      ],
       "settings": {
+        "background_color": "#ffffff",
+        "highlight_bar_color": "#f4c820",
+        "title_color": "#1f1f1f",
+        "divider_color": "#d5d5d5",
+        "divider_thickness": 1,
+        "padding_top": 64,
+        "padding_bottom": 72,
+        "grid_gap": 0,
+        "icon_circle_size_desktop": 58,
+        "icon_circle_size_mobile": 52,
+        "icon_size_desktop": 34,
+        "icon_size_mobile": 28,
+        "heading_font_family": "inherit",
+        "heading_font_size_desktop": 36,
+        "heading_font_size_mobile": 36,
+        "heading_font_weight": 700,
+        "desc_font_family": "inherit",
+        "desc_font_size_desktop": 20,
+        "desc_font_size_mobile": 16,
+        "desc_font_weight": 500,
+        "item_title_font_family": "inherit",
+        "item_title_font_size_desktop": 56,
+        "item_title_font_size_mobile": 36,
+        "item_title_font_weight": 500,
+        "item_text_font_family": "inherit",
+        "item_text_font_size_desktop": 16,
+        "item_text_font_size_mobile": 14,
+        "item_text_font_weight": 500,
+        "item_text_line_height": 1.5,
         "heading": "Designed to Support Your Daily Balance",
-        "subheading": "Six key areas where Kefey Mood Gummies help support your routine.",
-        "love_heading": "Why You'll Love Kefey Mood Gummies",
-        "love_text": "Clean ingredients, craveable taste, and daily support you can feel."
+        "subheading": "Plant-based extracts, carefully selected and thoughtfully blended to support your mood, energy, and balance — the joyful way to feel your best."
       }
     },
     "lifestyle_kefey": {
