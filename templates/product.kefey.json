@@ -169,6 +169,7 @@
           "type": "benefit",
           "settings": {
             "icon_type": "svg",
+            "icon_image": "shopify://shop_images/stress-icon.svg",
             "icon_svg": "",
             "icon_bg_color": "#eb5a3b",
             "icon_color": "#ffffff",
@@ -180,8 +181,9 @@
           "type": "benefit",
           "settings": {
             "icon_type": "svg",
+            "icon_image": "shopify://shop_images/energy-icon.svg",
             "icon_svg": "",
-            "icon_bg_color": "#eb5a3b",
+            "icon_bg_color": "#ffce2b",
             "icon_color": "#ffffff",
             "title": "Steady Energy",
             "text": "Our gummies Support steady, balanced energy throughout the day — without jitters or crashes.\nPowered by plant-based extracts traditionally used to support vitality, without caffeine."
@@ -190,9 +192,10 @@
         "benefit_U8UNmN": {
           "type": "benefit",
           "settings": {
-            "icon_type": "svg",
+            "icon_type": "image",
+            "icon_image": "shopify://shop_images/focus-icon.png",
             "icon_svg": "",
-            "icon_bg_color": "#eb5a3b",
+            "icon_bg_color": "#45b3b4",
             "icon_color": "#ffffff",
             "title": "Focus",
             "text": "Kefey® stars support clarity and daily concentration. Designed to help you stay centered, present, and mentally engaged throughout your day."
@@ -202,6 +205,7 @@
           "type": "benefit",
           "settings": {
             "icon_type": "svg",
+            "icon_image": "shopify://shop_images/emotion-icon.svg",
             "icon_svg": "",
             "icon_bg_color": "#eb5a3b",
             "icon_color": "#ffffff",
@@ -213,8 +217,9 @@
           "type": "benefit",
           "settings": {
             "icon_type": "svg",
+            "icon_image": "shopify://shop_images/sleep-icon.svg",
             "icon_svg": "",
-            "icon_bg_color": "#eb5a3b",
+            "icon_bg_color": "#ffce2b",
             "icon_color": "#ffffff",
             "title": "Sleep Quality",
             "text": "Supports a calm, relaxed state that helps prepare the mind for rest. Gentle, non-stimulating ingredients in the gummies are designed to support a more peaceful night’s sleep."
@@ -224,8 +229,9 @@
           "type": "benefit",
           "settings": {
             "icon_type": "svg",
+            "icon_image": "shopify://shop_images/daily-icon.svg",
             "icon_svg": "",
-            "icon_bg_color": "#eb5a3b",
+            "icon_bg_color": "#45b3b4",
             "icon_color": "#ffffff",
             "title": "Daily Wellness",
             "text": "An easy, enjoyable habit designed to support your daily balance. Kefey® gummies are plant-based, thoughtfully formulated, and made to feel good — inside and out."
@@ -262,8 +268,8 @@
         "desc_font_size_mobile": 16,
         "desc_font_weight": 500,
         "item_title_font_family": "inherit",
-        "item_title_font_size_desktop": 56,
-        "item_title_font_size_mobile": 36,
+        "item_title_font_size_desktop": 36,
+        "item_title_font_size_mobile": 24,
         "item_title_font_weight": 500,
         "item_text_font_family": "inherit",
         "item_text_font_size_desktop": 16,
