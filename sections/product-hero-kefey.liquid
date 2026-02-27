@@ -59,6 +59,15 @@
     --kh-b-lh: {{ section.settings.body_line_height }};
     --kh-b-ls: {{ section.settings.body_letter_spacing }}px;
     --kh-overlay: {{ section.settings.mobile_overlay_opacity | divided_by: 100.0 }};
+    --kefey-button-font-size-desktop: {{ section.settings.button_font_size_desktop }}px;
+    --kefey-button-font-size-mobile: {{ section.settings.button_font_size_mobile }}px;
+    --kefey-button-font-weight: {{ section.settings.button_font_weight }};
+    --kefey-button-letter-spacing: {{ section.settings.button_letter_spacing }}px;
+    --kefey-button-padding-vertical: {{ section.settings.button_padding_vertical }}px;
+    --kefey-button-padding-horizontal: {{ section.settings.button_padding_horizontal }}px;
+    --kefey-button-radius: {{ section.settings.button_border_radius }}px;
+    --kefey-banner-text-size-desktop: {{ section.settings.banner_text_font_size_desktop }}px;
+    --kefey-banner-text-size-mobile: {{ section.settings.banner_text_font_size_mobile }}px;
   "
 >
   <div class="kefey-hero__bg" aria-hidden="true">
@@ -231,6 +240,21 @@
     { "type": "color", "id": "body_color", "label": "Body text color", "default": "#FFFFFF" },
     { "type": "color", "id": "button_bg_color", "label": "Button background color", "default": "#E85A3A" },
     { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Button Typography" },
+    { "type": "range", "id": "button_font_size_desktop", "label": "Button font size desktop", "min": 10, "max": 40, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "button_font_size_mobile", "label": "Button font size mobile", "min": 10, "max": 30, "step": 1, "default": 14, "unit": "px" },
+    { "type": "range", "id": "button_font_weight", "label": "Button font weight", "min": 300, "max": 900, "step": 100, "default": 600 },
+    { "type": "range", "id": "button_letter_spacing", "label": "Button letter spacing", "min": -2.0, "max": 6.0, "step": 0.1, "default": 0.0, "unit": "px" },
+
+    { "type": "header", "content": "Button Padding" },
+    { "type": "range", "id": "button_padding_vertical", "label": "Button vertical padding", "min": 6, "max": 30, "step": 1, "default": 14, "unit": "px" },
+    { "type": "range", "id": "button_padding_horizontal", "label": "Button horizontal padding", "min": 10, "max": 60, "step": 1, "default": 28, "unit": "px" },
+    { "type": "range", "id": "button_border_radius", "label": "Button border radius", "min": 0, "max": 40, "step": 1, "default": 6, "unit": "px" },
+
+    { "type": "header", "content": "Banner Description Text" },
+    { "type": "range", "id": "banner_text_font_size_desktop", "label": "Banner text size desktop", "min": 12, "max": 60, "step": 1, "default": 18, "unit": "px" },
+    { "type": "range", "id": "banner_text_font_size_mobile", "label": "Banner text size mobile", "min": 12, "max": 40, "step": 1, "default": 16, "unit": "px" },
 
     { "type": "header", "content": "Layout" },
     { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 1000, "max": 1800, "step": 20, "default": 1340, "unit": "px" },

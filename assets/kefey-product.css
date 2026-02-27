@@ -623,15 +623,15 @@
   justify-content: center;
   margin-top: 22px;
   min-height: 54px;
-  padding: 10px 26px;
-  border-radius: 6px;
+  padding: var(--kefey-button-padding-vertical, 14px) var(--kefey-button-padding-horizontal, 28px);
+  border-radius: var(--kefey-button-radius, 6px);
   background: var(--kh-btn-bg, #e85a3a);
   color: var(--kh-btn-color, #fff);
   text-decoration: none;
   font-family: var(--kh-b-ff, inherit);
-  font-size: 31px;
-  font-weight: 700;
-  letter-spacing: 0;
+  font-size: var(--kefey-button-font-size-desktop, 16px);
+  font-weight: var(--kefey-button-font-weight, 600);
+  letter-spacing: var(--kefey-button-letter-spacing, 0px);
   line-height: 1;
 }
 
@@ -640,7 +640,7 @@
   max-width: 760px;
   color: var(--kh-body-color, #fff);
   font-family: var(--kh-b-ff, inherit);
-  font-size: clamp(22px, 2.25vw, 40px);
+  font-size: var(--kefey-banner-text-size-desktop, 18px);
   font-weight: var(--kh-b-fw, 500);
   line-height: 1.26;
   letter-spacing: var(--kh-b-ls, 0px);
@@ -745,12 +745,11 @@
 
   .kefey-hero__cta {
     min-height: 50px;
-    padding: 10px 22px;
-    font-size: 24px;
+    font-size: var(--kefey-button-font-size-mobile, 14px);
   }
 
   .kefey-hero__description {
-    font-size: var(--kh-b-fs-m, 24px);
+    font-size: var(--kefey-banner-text-size-mobile, 16px);
     max-width: 100%;
   }
 }
