@@ -36,7 +36,7 @@
 -%}
 
 <section
-  class="kefey-hero"
+  class="kefey-hero{% if section.settings.dot_enabled %} kefey-hero--dots{% endif %}"
   style="
     --kh-pt: {{ section.settings.padding_top }}px;
     --kh-pb: {{ section.settings.padding_bottom }}px;
@@ -68,6 +68,16 @@
     --kefey-button-radius: {{ section.settings.button_border_radius }}px;
     --kefey-banner-text-size-desktop: {{ section.settings.banner_text_font_size_desktop }}px;
     --kefey-banner-text-size-mobile: {{ section.settings.banner_text_font_size_mobile }}px;
+    --kefey-benefits-gap-desktop: {{ section.settings.benefits_gap_desktop }}px;
+    --kefey-benefits-gap-mobile: {{ section.settings.benefits_gap_mobile }}px;
+    --kefey-benefit-icon-size-desktop: {{ section.settings.icon_size_desktop }}px;
+    --kefey-benefit-icon-size-mobile: {{ section.settings.icon_size_mobile }}px;
+    --kefey-benefit-icon-opacity: {{ section.settings.icon_opacity | divided_by: 100.0 }};
+    --kefey-benefit-label-opacity: {{ section.settings.label_opacity | divided_by: 100.0 }};
+    --kefey-benefit-label-size-desktop: {{ section.settings.label_font_size_desktop }}px;
+    --kefey-benefit-label-size-mobile: {{ section.settings.label_font_size_mobile }}px;
+    --kefey-benefit-dot-size: {{ section.settings.dot_size }}px;
+    --kefey-benefit-dot-opacity: {{ section.settings.dot_opacity | divided_by: 100.0 }};
   "
 >
   <div class="kefey-hero__bg" aria-hidden="true">
@@ -121,23 +131,36 @@
         {%- endif -%}
 
         {%- if section.blocks.size > 0 -%}
-          <div class="kefey-hero__badges" role="list" aria-label="Product highlights">
+          <div class="kefey-hero__benefits" role="list" aria-label="Product highlights">
             {%- for block in section.blocks -%}
-              <div class="kefey-hero__badge" role="listitem" {{ block.shopify_attributes }}>
-                <span class="kefey-hero__badge-icon" aria-hidden="true">
-                  {%- if block.settings.icon_svg != blank -%}
+              <div class="kefey-hero__benefit" role="listitem" {{ block.shopify_attributes }}>
+                <span class="kefey-hero__benefit-icon" aria-hidden="true">
+                  {%- if block.settings.icon_type == 'image' and block.settings.icon_image != blank -%}
+                    {{
+                      block.settings.icon_image
+                      | image_url: width: 120
+                      | image_tag:
+                        class: 'kefey-hero__benefit-image',
+                        widths: '40, 60, 80, 100, 120',
+                        sizes: '(min-width: 990px) var(--kefey-benefit-icon-size-desktop, 72px), var(--kefey-benefit-icon-size-mobile, 52px)',
+                        loading: 'lazy',
+                        alt: ''
+                    }}
+                  {%- elsif block.settings.icon_type == 'svg' and block.settings.icon_svg != blank -%}
                     {{ block.settings.icon_svg }}
                   {%- elsif block.settings.icon_image != blank -%}
                     {{
                       block.settings.icon_image
-                      | image_url: width: 56
+                      | image_url: width: 120
                       | image_tag:
-                        class: 'kefey-hero__badge-image',
-                        widths: '28, 40, 56',
-                        sizes: '28px',
+                        class: 'kefey-hero__benefit-image',
+                        widths: '40, 60, 80, 100, 120',
+                        sizes: '(min-width: 990px) var(--kefey-benefit-icon-size-desktop, 72px), var(--kefey-benefit-icon-size-mobile, 52px)',
                         loading: 'lazy',
                         alt: ''
                     }}
+                  {%- elsif block.settings.icon_svg != blank -%}
+                    {{ block.settings.icon_svg }}
                   {%- else -%}
                     <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
                       <path d="M12 2.6C7.2 2.6 3.3 6.5 3.3 11.3c0 6.2 6 10.2 8.3 11.5.2.1.5.1.7 0 2.3-1.2 8.3-5.3 8.3-11.5 0-4.8-3.9-8.7-8.6-8.7zm0 18.2c-1.7-1-6.8-4.5-6.8-9.5 0-3.8 3.1-6.9 6.8-6.9s6.8 3.1 6.8 6.9c0 5-5 8.5-6.8 9.5z"></path>
@@ -145,7 +168,7 @@
                     </svg>
                   {%- endif -%}
                 </span>
-                <span class="kefey-hero__badge-label">{{ block.settings.label }}</span>
+                <span class="kefey-hero__benefit-label">{{ block.settings.label }}</span>
               </div>
             {%- endfor -%}
           </div>
@@ -256,6 +279,19 @@
     { "type": "range", "id": "banner_text_font_size_desktop", "label": "Banner text size desktop", "min": 12, "max": 60, "step": 1, "default": 18, "unit": "px" },
     { "type": "range", "id": "banner_text_font_size_mobile", "label": "Banner text size mobile", "min": 12, "max": 40, "step": 1, "default": 16, "unit": "px" },
 
+    { "type": "header", "content": "Benefits Row" },
+    { "type": "range", "id": "benefits_gap_desktop", "label": "Gap desktop", "min": 8, "max": 80, "step": 1, "default": 30, "unit": "px" },
+    { "type": "range", "id": "benefits_gap_mobile", "label": "Gap mobile", "min": 6, "max": 40, "step": 1, "default": 18, "unit": "px" },
+    { "type": "range", "id": "icon_size_desktop", "label": "Icon size desktop", "min": 24, "max": 120, "step": 1, "default": 72, "unit": "px" },
+    { "type": "range", "id": "icon_size_mobile", "label": "Icon size mobile", "min": 18, "max": 96, "step": 1, "default": 52, "unit": "px" },
+    { "type": "range", "id": "icon_opacity", "label": "Icon opacity", "min": 0, "max": 100, "step": 1, "default": 100, "unit": "%" },
+    { "type": "range", "id": "label_opacity", "label": "Label opacity", "min": 0, "max": 100, "step": 1, "default": 100, "unit": "%" },
+    { "type": "range", "id": "label_font_size_desktop", "label": "Label size desktop", "min": 10, "max": 40, "step": 1, "default": 34, "unit": "px" },
+    { "type": "range", "id": "label_font_size_mobile", "label": "Label size mobile", "min": 9, "max": 28, "step": 1, "default": 20, "unit": "px" },
+    { "type": "checkbox", "id": "dot_enabled", "label": "Show dot separators", "default": true },
+    { "type": "range", "id": "dot_size", "label": "Dot size", "min": 2, "max": 16, "step": 1, "default": 6, "unit": "px" },
+    { "type": "range", "id": "dot_opacity", "label": "Dot opacity", "min": 0, "max": 100, "step": 1, "default": 80, "unit": "%" },
+
     { "type": "header", "content": "Layout" },
     { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 1000, "max": 1800, "step": 20, "default": 1340, "unit": "px" },
     { "type": "range", "id": "left_col_max_width", "label": "Left column max width", "min": 420, "max": 860, "step": 10, "default": 650, "unit": "px" },
@@ -265,11 +301,21 @@
   ],
   "blocks": [
     {
-      "type": "icon_item",
-      "name": "Icon + Label",
+      "type": "benefit",
+      "name": "Benefit",
       "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon type",
+          "default": "image",
+          "options": [
+            { "value": "image", "label": "Image" },
+            { "value": "svg", "label": "SVG" }
+          ]
+        },
         { "type": "image_picker", "id": "icon_image", "label": "Icon image" },
-        { "type": "textarea", "id": "icon_svg", "label": "Icon SVG (optional)" },
+        { "type": "textarea", "id": "icon_svg", "label": "Icon SVG (paste raw SVG)" },
         { "type": "text", "id": "label", "label": "Label", "default": "Vegan" }
       ]
     }
@@ -279,12 +325,12 @@
     {
       "name": "Kefey Hero",
       "blocks": [
-        { "type": "icon_item", "settings": { "label": "Vegan" } },
-        { "type": "icon_item", "settings": { "label": "Gluten Free" } },
-        { "type": "icon_item", "settings": { "label": "Non GMO" } },
-        { "type": "icon_item", "settings": { "label": "Gelatin Free" } },
-        { "type": "icon_item", "settings": { "label": "Halal" } },
-        { "type": "icon_item", "settings": { "label": "Eco-Friendly" } }
+        { "type": "benefit", "settings": { "label": "Vegan" } },
+        { "type": "benefit", "settings": { "label": "Gluten Free" } },
+        { "type": "benefit", "settings": { "label": "Non GMO" } },
+        { "type": "benefit", "settings": { "label": "Gelatin Free" } },
+        { "type": "benefit", "settings": { "label": "Halal" } },
+        { "type": "benefit", "settings": { "label": "Eco-Friendly" } }
       ]
     }
   ]
