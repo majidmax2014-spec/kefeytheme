@@ -282,7 +282,65 @@
     },
     "lifestyle_kefey": {
       "type": "product-lifestyle-kefey",
-      "settings": {}
+      "blocks": {
+        "card_jHKz7G": {
+          "type": "card",
+          "settings": {
+            "background_color": "#45b3b4",
+            "title": "Made to Be Enjoyed",
+            "text": "A joyful daily moment that feels light, natural, and genuinely enjoyable."
+          }
+        },
+        "card_8UHgmy": {
+          "type": "card",
+          "settings": {
+            "background_color": "#ffce2b",
+            "title": "More Support, Fewer Steps",
+            "text": "A single, concentrated formula, created to replace a shelf full of supplements, often as many as 8 different products."
+          }
+        },
+        "card_yUmjqj": {
+          "type": "card",
+          "settings": {
+            "background_color": "#45b3b4",
+            "title": "You & the Planet in Mind",
+            "text": "From plant-based ingredients to Eco-friendly, Re-usable packaging.  Every choice is made with care — for you and the planet."
+          }
+        }
+      },
+      "block_order": [
+        "card_jHKz7G",
+        "card_8UHgmy",
+        "card_yUmjqj"
+      ],
+      "settings": {
+        "title": "Why You’ll Love Kefey® Mood Gummies",
+        "description": "Plant-based extracts, carefully selected and thoughtfully blended to support your mood, energy, and balance — the joyful way to feel your best.",
+        "highlight_bar_color": "#f4c820",
+        "image_left": "shopify://shop_images/lifestyle1.png",
+        "image_center": "shopify://shop_images/lifestyle2.png",
+        "image_right": "shopify://shop_images/lifestyle3.png",
+        "heading_font_family": "inherit",
+        "heading_font_size_desktop": 36,
+        "heading_font_size_mobile": 24,
+        "heading_font_weight": 700,
+        "desc_font_family": "inherit",
+        "desc_font_size_desktop": 16,
+        "desc_font_size_mobile": 14,
+        "desc_font_weight": 500,
+        "desc_line_height": 1.4,
+        "card_title_font_family": "inherit",
+        "card_title_font_size_desktop": 20,
+        "card_title_font_size_mobile": 16,
+        "card_title_font_weight": 700,
+        "card_text_font_family": "inherit",
+        "card_text_font_size_desktop": 16,
+        "card_text_font_size_mobile": 14,
+        "card_text_font_weight": 500,
+        "card_text_line_height": 1.4,
+        "padding_top": 64,
+        "padding_bottom": 72
+      }
     },
     "ingredients_kefey": {
       "type": "product-ingredients-kefey",
