@@ -11,6 +11,58 @@
   "sections": {
     "product_hero_kefey": {
       "type": "product-hero-kefey",
+      "blocks": {
+        "icon_item_KMfWV3": {
+          "type": "icon_item",
+          "settings": {
+            "icon_svg": "",
+            "label": "Vegan"
+          }
+        },
+        "icon_item_fVpA9U": {
+          "type": "icon_item",
+          "settings": {
+            "icon_svg": "",
+            "label": "Gluten Free"
+          }
+        },
+        "icon_item_6AEy9d": {
+          "type": "icon_item",
+          "settings": {
+            "icon_svg": "",
+            "label": "Non GMO"
+          }
+        },
+        "icon_item_VTKNkT": {
+          "type": "icon_item",
+          "settings": {
+            "icon_svg": "",
+            "label": "Gelatin Free"
+          }
+        },
+        "icon_item_qJ8WkK": {
+          "type": "icon_item",
+          "settings": {
+            "icon_svg": "",
+            "label": "Halal"
+          }
+        },
+        "icon_item_AeLkQW": {
+          "type": "icon_item",
+          "settings": {
+            "icon_svg": "",
+            "label": "Eco-Friendly"
+          }
+        }
+      },
+      "block_order": [
+        "icon_item_KMfWV3",
+        "icon_item_fVpA9U",
+        "icon_item_6AEy9d",
+        "icon_item_VTKNkT",
+        "icon_item_qJ8WkK",
+        "icon_item_AeLkQW"
+      ],
       "settings": {
         "logo_image": "shopify://shop_images/white-logo.png",
         "background_image": "shopify://shop_images/product-banner.png",
@@ -38,6 +90,15 @@
         "body_color": "#ffffff",
         "button_bg_color": "#e85a3a",
         "button_text_color": "#ffffff",
+        "button_font_size_desktop": 16,
+        "button_font_size_mobile": 14,
+        "button_font_weight": 600,
+        "button_letter_spacing": 0,
+        "button_padding_vertical": 10,
+        "button_padding_horizontal": 47,
+        "button_border_radius": 0,
+        "banner_text_font_size_desktop": 18,
+        "banner_text_font_size_mobile": 16,
         "content_max_width": 1340,
         "left_col_max_width": 650,
         "padding_top": 40,
