@@ -234,7 +234,7 @@
    Kefey Main Purchase Module
 ------------------------------- */
 .kefey-product-main {
-  background: #ececec;
+  background: #ffffff;
   padding: 58px 0 82px;
 }
 
@@ -249,8 +249,9 @@
 
 .kefey-purchase__heading {
   margin: 0;
-  font-size: clamp(2.4rem, 2.8vw, 4.8rem);
-  font-weight: 800;
+  font-family: var(--kp-h-ff, inherit);
+  font-size: var(--kp-h-fs-d, 56px);
+  font-weight: var(--kp-h-fw, 700);
   line-height: 1.1;
 }
 
@@ -261,16 +262,18 @@
 
 .kefey-purchase__subheading {
   margin: 14px 0 0;
-  font-size: clamp(1.8rem, 1.45vw, 3rem);
-  font-weight: 700;
+  font-family: var(--kp-h-ff, inherit);
+  font-size: calc(var(--kp-h-fs-d, 56px) * 0.42);
+  font-weight: var(--kp-h-fw, 700);
   color: #202020;
 }
 
 .kefey-purchase__note {
   margin: 10px 0 0;
   color: #ed5133;
-  font-size: clamp(1.4rem, 1.1vw, 2.2rem);
-  font-weight: 500;
+  font-family: var(--kp-t-ff, inherit);
+  font-size: var(--kp-t-fs-d, 20px);
+  font-weight: var(--kp-t-fw, 500);
 }
 
 .kefey-purchase__grid {
@@ -302,14 +305,15 @@
   width: 100%;
   display: grid;
   place-items: center;
-  padding: 20px;
+  padding: 0;
+  overflow: hidden;
 }
 
 .kefey-purchase__image {
-  width: min(100%, 390px);
+  width: 100%;
   height: 100%;
   max-height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   display: block;
 }
 
@@ -351,15 +355,17 @@
   color: #fff;
   border-radius: 999px;
   padding: 6px 14px;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-family: var(--kp-t-ff, inherit);
+  font-size: var(--kp-t-fs-d, 20px);
+  font-weight: var(--kp-t-fw, 500);
   line-height: 1;
 }
 
 .kefey-purchase__plan-title {
   display: block;
-  font-size: clamp(1.8rem, 1.25vw, 2.8rem);
-  font-weight: 700;
+  font-family: var(--kp-t-ff, inherit);
+  font-size: var(--kp-t-fs-d, 20px);
+  font-weight: var(--kp-t-fw, 500);
   line-height: 1.2;
 }
 
@@ -372,26 +378,31 @@
 }
 
 .kefey-purchase__price {
-  font-size: clamp(3.2rem, 3vw, 6rem);
-  font-weight: 800;
+  font-family: var(--kp-p-ff, inherit);
+  font-size: var(--kp-p-fs-d, 72px);
+  font-weight: var(--kp-p-fw, 700);
   line-height: 0.95;
 }
 
 .kefey-purchase__each {
-  font-size: clamp(1.4rem, 0.95vw, 2rem);
-  font-weight: 700;
+  font-family: var(--kp-t-ff, inherit);
+  font-size: var(--kp-t-fs-d, 20px);
+  font-weight: var(--kp-t-fw, 500);
 }
 
 .kefey-purchase__total {
   margin-left: 8px;
-  font-size: clamp(2.1rem, 1.3vw, 2.8rem);
-  font-weight: 700;
+  font-family: var(--kp-p-ff, inherit);
+  font-size: calc(var(--kp-p-fs-d, 72px) * 0.44);
+  font-weight: var(--kp-p-fw, 700);
 }
 
 .kefey-purchase__compare {
   text-decoration: line-through;
   color: #e95539;
-  font-size: clamp(1.9rem, 1.2vw, 2.6rem);
+  font-family: var(--kp-p-ff, inherit);
+  font-size: calc(var(--kp-p-fs-d, 72px) * 0.4);
+  font-weight: var(--kp-p-fw, 700);
 }
 
 .kefey-purchase__packs {
@@ -746,11 +757,30 @@
   }
 
   .kefey-purchase__heading {
-    font-size: clamp(2.2rem, 8vw, 4rem);
+    font-size: var(--kp-h-fs-m, 34px);
   }
 
   .kefey-purchase__subheading {
-    font-size: 2rem;
+    font-size: calc(var(--kp-h-fs-m, 34px) * 0.5);
+  }
+
+  .kefey-purchase__note,
+  .kefey-purchase__badge,
+  .kefey-purchase__plan-title,
+  .kefey-purchase__each {
+    font-size: var(--kp-t-fs-m, 16px);
+  }
+
+  .kefey-purchase__price {
+    font-size: var(--kp-p-fs-m, 48px);
+  }
+
+  .kefey-purchase__total {
+    font-size: calc(var(--kp-p-fs-m, 48px) * 0.44);
+  }
+
+  .kefey-purchase__compare {
+    font-size: calc(var(--kp-p-fs-m, 48px) * 0.4);
   }
 
   .kefey-purchase__badge {

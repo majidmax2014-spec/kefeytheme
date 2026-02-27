@@ -27,6 +27,18 @@
         --kp-onetime-bg: {{ section.settings.onetime_card_bg }};
         --kp-cta-bg: {{ section.settings.cta_bg_color }};
         --kp-cta-color: {{ section.settings.cta_text_color }};
+        --kp-h-ff: {{ section.settings.heading_font_family }};
+        --kp-h-fs-d: {{ section.settings.heading_font_size_desktop }}px;
+        --kp-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+        --kp-h-fw: {{ section.settings.heading_font_weight }};
+        --kp-t-ff: {{ section.settings.text_font_family }};
+        --kp-t-fs-d: {{ section.settings.text_font_size_desktop }}px;
+        --kp-t-fs-m: {{ section.settings.text_font_size_mobile }}px;
+        --kp-t-fw: {{ section.settings.text_font_weight }};
+        --kp-p-ff: {{ section.settings.price_font_family }};
+        --kp-p-fs-d: {{ section.settings.price_font_size_desktop }}px;
+        --kp-p-fs-m: {{ section.settings.price_font_size_mobile }}px;
+        --kp-p-fw: {{ section.settings.price_font_weight }};
       "
     >
       <header class="kefey-purchase__header">
@@ -38,18 +50,7 @@
       <div class="kefey-purchase__grid">
         <div class="kefey-purchase__left">
           <div class="kefey-purchase__image-card">
-            {%- if section.settings.purchase_image != blank -%}
-              {{
-                section.settings.purchase_image
-                | image_url: width: 820
-                | image_tag:
-                  class: 'kefey-purchase__image',
-                  widths: '360, 560, 760, 820',
-                  sizes: '(min-width: 990px) 440px, 90vw',
-                  loading: 'lazy',
-                  alt: kefey_product.title
-              }}
-            {%- elsif kefey_product and kefey_product.featured_image -%}
+            {%- if kefey_product and kefey_product.featured_image -%}
               {{
                 kefey_product.featured_image
                 | image_url: width: 820
@@ -111,13 +112,7 @@
 {
   "name": "Main Product Kefey",
   "settings": [
-    { "type": "checkbox", "id": "show_hero", "label": "Show legacy hero", "default": false },
     { "type": "product", "id": "product", "label": "Product" },
-    { "type": "image_picker", "id": "hero_image", "label": "Legacy hero image" },
-    { "type": "image_picker", "id": "purchase_image", "label": "Purchase module image" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "kefey mood gummies" },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Plant-based mood support to bring balance, joy, and calm to your daily rhythm." },
-    { "type": "text", "id": "cta_label", "label": "Hero CTA label", "default": "CHECKOUT NOW" },
     { "type": "text", "id": "purchase_heading", "label": "Purchase heading", "default": "Never Run Out of Joy" },
     { "type": "text", "id": "purchase_subheading", "label": "Purchase subheading", "default": "More Stars | More Balance | More Smiles" },
     { "type": "text", "id": "purchase_note", "label": "Purchase red note", "default": "Subscribe & receive your Kefey® Mood Gummies monthly." },
@@ -159,6 +154,21 @@
     { "type": "color", "id": "onetime_card_bg", "label": "One-time card background", "default": "#49afb4" },
     { "type": "color", "id": "cta_bg_color", "label": "Checkout button background", "default": "#111111" },
     { "type": "color", "id": "cta_text_color", "label": "Checkout button text color", "default": "#ffffff" },
+    { "type": "header", "content": "Heading Typography" },
+    { "type": "text", "id": "heading_font_family", "label": "Heading font family", "default": "inherit" },
+    { "type": "range", "id": "heading_font_size_desktop", "label": "Heading font size desktop", "min": 20, "max": 80, "step": 1, "default": 56, "unit": "px" },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Heading font size mobile", "min": 16, "max": 52, "step": 1, "default": 34, "unit": "px" },
+    { "type": "range", "id": "heading_font_weight", "label": "Heading font weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Text Typography" },
+    { "type": "text", "id": "text_font_family", "label": "Text font family", "default": "inherit" },
+    { "type": "range", "id": "text_font_size_desktop", "label": "Text font size desktop", "min": 12, "max": 40, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "text_font_size_mobile", "label": "Text font size mobile", "min": 10, "max": 32, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "text_font_weight", "label": "Text font weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "header", "content": "Price Typography" },
+    { "type": "text", "id": "price_font_family", "label": "Price font family", "default": "inherit" },
+    { "type": "range", "id": "price_font_size_desktop", "label": "Price font size desktop", "min": 20, "max": 96, "step": 1, "default": 72, "unit": "px" },
+    { "type": "range", "id": "price_font_size_mobile", "label": "Price font size mobile", "min": 18, "max": 72, "step": 1, "default": 48, "unit": "px" },
+    { "type": "range", "id": "price_font_weight", "label": "Price font weight", "min": 300, "max": 900, "step": 100, "default": 700 },
     { "type": "text", "id": "atc_label", "label": "Add to cart label", "default": "ADD TO CART" },
     { "type": "text", "id": "trust_text", "label": "Trust microcopy", "default": "Free U.S. shipping over $50 · 30-day happiness guarantee" }
   ],

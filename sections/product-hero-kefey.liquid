@@ -118,13 +118,11 @@
           <p class="kefey-hero__eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
 
-        <h1 class="kefey-hero__heading">{{ section.settings.heading }}</h1>
+        <h1 class="kefey-hero__heading">kefey</h1>
 
-        {%- if section.settings.subheading != blank -%}
-          <p class="kefey-hero__subheading">{{ section.settings.subheading }}</p>
-        {%- endif -%}
+        <p class="kefey-hero__subheading">Mood Gummies</p>
 
-        <a class="kefey-hero__cta" href="{{ cta_href }}">{{ section.settings.cta_label }}</a>
+        <a class="kefey-hero__cta" href="{{ cta_href }}">SHOP NOW</a>
 
         {%- if section.settings.description != blank -%}
           <p class="kefey-hero__description">{{ section.settings.description }}</p>
@@ -185,7 +183,7 @@
               widths: '420, 640, 860, 1200',
               sizes: '(min-width: 990px) 42vw, 82vw',
               loading: 'lazy',
-              alt: section.settings.heading
+              alt: shop.name
           }}
         {%- endif -%}
       </div>
@@ -205,15 +203,12 @@
 
     { "type": "header", "content": "Content" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Live Full Live Kefey" },
-    { "type": "text", "id": "heading", "label": "Main heading", "default": "kefey" },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Mood Gummies" },
     {
       "type": "textarea",
       "id": "description",
       "label": "Description text",
       "default": "A plant-based, star-shaped gummy designed to support your mood, energy, and daily balance."
     },
-    { "type": "text", "id": "cta_label", "label": "CTA button label", "default": "SHOP NOW" },
     { "type": "url", "id": "cta_link", "label": "CTA button link" },
 
     { "type": "header", "content": "Typography - Heading" },
