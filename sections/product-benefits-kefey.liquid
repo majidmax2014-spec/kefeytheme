@@ -1,29 +1,70 @@
-<section class="kefey-product kefey-product-section">
+<section
+  class="kefey-benefits"
+  style="
+    --kb-bg: {{ section.settings.background_color }};
+    --kb-highlight: {{ section.settings.highlight_bar_color }};
+    --kb-title-color: {{ section.settings.title_color }};
+    --kb-divider: {{ section.settings.divider_color }};
+    --kb-divider-thickness: {{ section.settings.divider_thickness }}px;
+    --kb-h-ff: {{ section.settings.heading_font_family }};
+    --kb-h-fs-d: {{ section.settings.heading_font_size_desktop }}px;
+    --kb-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --kb-h-fw: {{ section.settings.heading_font_weight }};
+    --kb-d-ff: {{ section.settings.desc_font_family }};
+    --kb-d-fs-d: {{ section.settings.desc_font_size_desktop }}px;
+    --kb-d-fs-m: {{ section.settings.desc_font_size_mobile }}px;
+    --kb-d-fw: {{ section.settings.desc_font_weight }};
+    --kb-it-ff: {{ section.settings.item_title_font_family }};
+    --kb-it-fs-d: {{ section.settings.item_title_font_size_desktop }}px;
+    --kb-it-fs-m: {{ section.settings.item_title_font_size_mobile }}px;
+    --kb-it-fw: {{ section.settings.item_title_font_weight }};
+    --kb-ib-ff: {{ section.settings.item_text_font_family }};
+    --kb-ib-fs-d: {{ section.settings.item_text_font_size_desktop }}px;
+    --kb-ib-fs-m: {{ section.settings.item_text_font_size_mobile }}px;
+    --kb-ib-fw: {{ section.settings.item_text_font_weight }};
+    --kb-ib-lh: {{ section.settings.item_text_line_height }};
+    --kb-icon-circle-d: {{ section.settings.icon_circle_size_desktop }}px;
+    --kb-icon-circle-m: {{ section.settings.icon_circle_size_mobile }}px;
+    --kb-icon-d: {{ section.settings.icon_size_desktop }}px;
+    --kb-icon-m: {{ section.settings.icon_size_mobile }}px;
+    --kb-grid-gap: {{ section.settings.grid_gap }}px;
+    --kb-pt: {{ section.settings.padding_top }}px;
+    --kb-pb: {{ section.settings.padding_bottom }}px;
+  "
+>
   <div class="page-width">
-    <h2 class="kefey-product__title" style="text-align:center;">{{ section.settings.heading }}</h2>
-    <p class="kefey-product__desc" style="text-align:center; max-width: 860px; margin: 0 auto 22px;">{{ section.settings.subheading }}</p>
-
-    <div class="kefey-product-benefits__grid">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'benefit' -%}
-          <article class="kefey-product-benefits__card" {{ block.shopify_attributes }}>
-            <h3>{{ block.settings.title }}</h3>
-            <p class="kefey-product__desc">{{ block.settings.text }}</p>
-          </article>
-        {%- endif -%}
-      {%- endfor -%}
+    <div class="kefey-benefits__header">
+      <h2 class="kefey-benefits__title"><span>{{ section.settings.heading }}</span></h2>
+      <p class="kefey-benefits__desc">{{ section.settings.subheading }}</p>
     </div>
 
-    <div class="kefey-product-benefits__love">
-      <h3 class="kefey-product__title" style="margin-bottom: 8px;">{{ section.settings.love_heading }}</h3>
-      <p class="kefey-product__desc">{{ section.settings.love_text }}</p>
-      <ul class="kefey-product-benefits__bullets">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'love_bullet' -%}
-            <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
+    <div class="kefey-benefits__grid">
+      {%- for block in section.blocks -%}
+        <article class="kefey-benefits__cell" {{ block.shopify_attributes }}>
+          <h3 class="kefey-benefits__item-title">{{ block.settings.title }}</h3>
+          <span
+            class="kefey-benefits__icon"
+            style="--kb-block-icon-bg: {{ block.settings.icon_bg_color }}; --kb-block-icon-color: {{ block.settings.icon_color }};"
+            aria-hidden="true"
+          >
+            {%- if block.settings.icon_type == 'svg' and block.settings.icon_svg != blank -%}
+              {{ block.settings.icon_svg }}
+            {%- elsif block.settings.icon_image != blank -%}
+              {{
+                block.settings.icon_image
+                | image_url: width: 140
+                | image_tag:
+                  class: 'kefey-benefits__icon-image',
+                  widths: '40, 70, 100, 140',
+                  sizes: '(min-width: 990px) var(--kb-icon-d, 34px), var(--kb-icon-m, 28px)',
+                  loading: 'lazy',
+                  alt: ''
+              }}
+            {%- endif -%}
+          </span>
+          <p class="kefey-benefits__item-text">{{ block.settings.text }}</p>
+        </article>
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -32,40 +73,77 @@
 {
   "name": "Product Benefits Kefey",
   "settings": [
+    { "type": "color", "id": "background_color", "label": "Background color", "default": "#ffffff" },
+    { "type": "color", "id": "highlight_bar_color", "label": "Highlight bar color", "default": "#f4c820" },
+    { "type": "color", "id": "title_color", "label": "Title color", "default": "#1f1f1f" },
+    { "type": "color", "id": "divider_color", "label": "Divider color", "default": "#d5d5d5" },
+    { "type": "range", "id": "divider_thickness", "label": "Divider thickness", "min": 1, "max": 4, "step": 1, "default": 1, "unit": "px" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 220, "step": 4, "default": 64, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 220, "step": 4, "default": 72, "unit": "px" },
+    { "type": "range", "id": "grid_gap", "label": "Grid gap", "min": 0, "max": 80, "step": 1, "default": 0, "unit": "px" },
+    { "type": "range", "id": "icon_circle_size_desktop", "label": "Icon circle size desktop", "min": 30, "max": 120, "step": 1, "default": 58, "unit": "px" },
+    { "type": "range", "id": "icon_circle_size_mobile", "label": "Icon circle size mobile", "min": 24, "max": 96, "step": 1, "default": 52, "unit": "px" },
+    { "type": "range", "id": "icon_size_desktop", "label": "Icon size desktop", "min": 16, "max": 72, "step": 1, "default": 34, "unit": "px" },
+    { "type": "range", "id": "icon_size_mobile", "label": "Icon size mobile", "min": 14, "max": 58, "step": 1, "default": 28, "unit": "px" },
+    { "type": "header", "content": "Heading Typography" },
+    { "type": "text", "id": "heading_font_family", "label": "Heading font family", "default": "inherit" },
+    { "type": "range", "id": "heading_font_size_desktop", "label": "Heading font size desktop", "min": 20, "max": 90, "step": 1, "default": 56, "unit": "px" },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Heading font size mobile", "min": 18, "max": 64, "step": 1, "default": 36, "unit": "px" },
+    { "type": "range", "id": "heading_font_weight", "label": "Heading font weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Description Typography" },
+    { "type": "text", "id": "desc_font_family", "label": "Description font family", "default": "inherit" },
+    { "type": "range", "id": "desc_font_size_desktop", "label": "Description font size desktop", "min": 12, "max": 40, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "desc_font_size_mobile", "label": "Description font size mobile", "min": 12, "max": 32, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "desc_font_weight", "label": "Description font weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "header", "content": "Item Title Typography" },
+    { "type": "text", "id": "item_title_font_family", "label": "Item title font family", "default": "inherit" },
+    { "type": "range", "id": "item_title_font_size_desktop", "label": "Item title size desktop", "min": 16, "max": 72, "step": 1, "default": 56, "unit": "px" },
+    { "type": "range", "id": "item_title_font_size_mobile", "label": "Item title size mobile", "min": 14, "max": 52, "step": 1, "default": 36, "unit": "px" },
+    { "type": "range", "id": "item_title_font_weight", "label": "Item title font weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "header", "content": "Item Text Typography" },
+    { "type": "text", "id": "item_text_font_family", "label": "Item text font family", "default": "inherit" },
+    { "type": "range", "id": "item_text_font_size_desktop", "label": "Item text size desktop", "min": 12, "max": 36, "step": 1, "default": 22, "unit": "px" },
+    { "type": "range", "id": "item_text_font_size_mobile", "label": "Item text size mobile", "min": 12, "max": 28, "step": 1, "default": 18, "unit": "px" },
+    { "type": "range", "id": "item_text_font_weight", "label": "Item text font weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "item_text_line_height", "label": "Item text line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.45 },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Designed to Support Your Daily Balance" },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Six key areas where Kefey Mood Gummies help support your routine." },
-    { "type": "text", "id": "love_heading", "label": "Love heading", "default": "Why You'll Love Kefey Mood Gummies" },
-    { "type": "text", "id": "love_text", "label": "Love text", "default": "Clean ingredients, craveable taste, and daily support you can feel." }
+    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Plant-based extracts, carefully selected and thoughtfully blended to support your mood, energy, and balance — the joyful way to feel your best." }
   ],
   "blocks": [
     {
       "type": "benefit",
       "name": "Benefit",
       "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon type",
+          "default": "svg",
+          "options": [
+            { "value": "image", "label": "Image" },
+            { "value": "svg", "label": "SVG" }
+          ]
+        },
+        { "type": "image_picker", "id": "icon_image", "label": "Icon image" },
+        { "type": "textarea", "id": "icon_svg", "label": "Icon SVG (raw)" },
+        { "type": "color", "id": "icon_bg_color", "label": "Icon circle background", "default": "#eb5a3b" },
+        { "type": "color", "id": "icon_color", "label": "Icon color", "default": "#ffffff" },
         { "type": "text", "id": "title", "label": "Title", "default": "Stress Support" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Helps maintain calm and emotional steadiness throughout the day." }
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Kefey mood gummies support a calm, balanced mood during busy days." }
       ]
-    },
-    {
-      "type": "love_bullet",
-      "name": "Love bullet",
-      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Plant-based formula" }]
     }
   ],
-  "max_blocks": 18,
+  "max_blocks": 12,
   "presets": [
     {
       "name": "Product Benefits Kefey",
       "blocks": [
-        { "type": "benefit", "settings": { "title": "Stress Support", "text": "Helps maintain calm and emotional steadiness throughout the day." } },
-        { "type": "benefit", "settings": { "title": "Steady Energy", "text": "Supports more balanced day-to-day energy without jitters." } },
-        { "type": "benefit", "settings": { "title": "Focus", "text": "Helps reduce mental clutter and improve concentration." } },
-        { "type": "benefit", "settings": { "title": "Emotional Balance", "text": "Aids in balancing mood and promoting resilience." } },
-        { "type": "benefit", "settings": { "title": "Sleep Quality", "text": "Supports healthy sleep cycles and restful nights." } },
-        { "type": "benefit", "settings": { "title": "Daily Wellness", "text": "Complements an uplifting and mindful wellness routine." } },
-        { "type": "love_bullet", "settings": { "text": "Plant-based formula" } },
-        { "type": "love_bullet", "settings": { "text": "Great-tasting gummies" } },
-        { "type": "love_bullet", "settings": { "text": "Made for everyday use" } }
+        { "type": "benefit", "settings": { "title": "Stress Support", "icon_bg_color": "#eb5a3b", "text": "Kefey mood gummies supports a calm, balanced mood during busy days. Formulated with botanical extracts traditionally used to support relaxation and emotional ease." } },
+        { "type": "benefit", "settings": { "title": "Steady Energy", "icon_bg_color": "#f4c820", "text": "Our gummies support steady, balanced energy throughout the day — without jitters or crashes. Powered by plant-based extracts traditionally used to support vitality, without caffeine." } },
+        { "type": "benefit", "settings": { "title": "Focus", "icon_bg_color": "#4bb3b5", "text": "Kefey stars support clarity and daily concentration. Designed to help you stay centered, present, and mentally engaged throughout your day." } },
+        { "type": "benefit", "settings": { "title": "Emotional Balance", "icon_bg_color": "#eb5a3b", "text": "Designed to support emotional wellbeing and inner balance, Kefey gummies are a simple, enjoyable way to care for your mood — daily." } },
+        { "type": "benefit", "settings": { "title": "Sleep Quality", "icon_bg_color": "#f4c820", "text": "Supports a calm, relaxed state that helps prepare the mind for rest. Gentle, non-stimulating ingredients in the gummies are designed to support a more peaceful night's sleep." } },
+        { "type": "benefit", "settings": { "title": "Daily Wellness", "icon_bg_color": "#4bb3b5", "text": "An easy, enjoyable habit designed to support your daily balance. Kefey gummies are plant-based, thoughtfully formulated, and made to feel good — inside and out." } }
       ]
     }
   ]

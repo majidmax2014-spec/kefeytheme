@@ -463,43 +463,119 @@
   color: #fff;
 }
 
-.kefey-product-benefits__grid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: minmax(0, 1fr);
+/* -------------------------------
+   Kefey Benefits
+------------------------------- */
+.kefey-benefits {
+  background: var(--kb-bg, #fff);
+  padding-top: var(--kb-pt, 64px);
+  padding-bottom: var(--kb-pb, 72px);
 }
 
-.kefey-product-benefits__card {
-  border: 1px solid #ededed;
-  border-radius: 16px;
-  padding: 16px;
-}
-
-.kefey-product-benefits__card h3 {
-  margin: 0 0 6px;
-}
-
-.kefey-product-benefits__love {
-  margin-top: 28px;
+.kefey-benefits__header {
   text-align: center;
+  margin: 0 auto 72px;
+  max-width: 980px;
 }
 
-.kefey-product-benefits__bullets {
+.kefey-benefits__title {
+  margin: 0;
+  color: var(--kb-title-color, #1f1f1f);
+  font-family: var(--kb-h-ff, inherit);
+  font-size: var(--kb-h-fs-d, 56px);
+  font-weight: var(--kb-h-fw, 700);
+  line-height: 1.15;
+}
+
+.kefey-benefits__title span {
+  box-shadow: inset 0 -0.42em 0 var(--kb-highlight, #f4c820);
+}
+
+.kefey-benefits__desc {
+  margin: 18px auto 0;
+  max-width: 980px;
+  color: #202020;
+  font-family: var(--kb-d-ff, inherit);
+  font-size: var(--kb-d-fs-d, 20px);
+  font-weight: var(--kb-d-fw, 500);
+  line-height: 1.45;
+}
+
+.kefey-benefits__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--kb-grid-gap, 0px);
+}
+
+.kefey-benefits__cell {
+  position: relative;
+  padding: 18px 42px 18px 0;
+  border-bottom: var(--kb-divider-thickness, 1px) solid var(--kb-divider, #d5d5d5);
+}
+
+.kefey-benefits__cell:nth-child(odd) {
+  border-right: var(--kb-divider-thickness, 1px) solid var(--kb-divider, #d5d5d5);
+  padding-left: 0;
+  padding-right: 34px;
+}
+
+.kefey-benefits__cell:nth-child(even) {
+  padding-left: 34px;
+  padding-right: 0;
+}
+
+.kefey-benefits__cell:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.kefey-benefits__item-title {
+  margin: 0;
+  color: #4bb3b5;
+  font-family: var(--kb-it-ff, inherit);
+  font-size: var(--kb-it-fs-d, 56px);
+  font-weight: var(--kb-it-fw, 500);
+  line-height: 1.18;
+}
+
+.kefey-benefits__icon {
+  margin-top: 20px;
+  width: var(--kb-icon-circle-d, 58px);
+  height: var(--kb-icon-circle-d, 58px);
+  border-radius: 50%;
+  background: var(--kb-block-icon-bg, #eb5a3b);
+  color: var(--kb-block-icon-color, #fff);
   display: inline-flex;
-  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 0;
-  margin: 12px 0 0;
-  list-style: none;
 }
 
-.kefey-product-benefits__bullets li {
-  background: #f5fbfb;
-  border: 1px solid #dbeef0;
-  border-radius: var(--kp-radius-pill);
-  padding: 8px 12px;
-  font-weight: 600;
+.kefey-benefits__icon svg {
+  width: var(--kb-icon-d, 34px);
+  height: var(--kb-icon-d, 34px);
+}
+
+.kefey-benefits__icon svg [fill]:not([fill='none']) {
+  fill: currentColor !important;
+}
+
+.kefey-benefits__icon svg [stroke]:not([stroke='none']) {
+  stroke: currentColor !important;
+}
+
+.kefey-benefits__icon-image {
+  width: var(--kb-icon-d, 34px);
+  height: var(--kb-icon-d, 34px);
+  object-fit: contain;
+  display: block;
+}
+
+.kefey-benefits__item-text {
+  margin: 20px 0 0;
+  color: #222;
+  font-family: var(--kb-ib-ff, inherit);
+  font-size: var(--kb-ib-fs-d, 22px);
+  font-weight: var(--kb-ib-fw, 500);
+  line-height: var(--kb-ib-lh, 1.45);
 }
 
 .kefey-product-lifestyle__wrap {
@@ -732,10 +808,6 @@
     height: 100%;
   }
 
-  .kefey-product-benefits__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .kefey-product-callouts__layout {
     grid-template-columns: minmax(0, 40%) minmax(0, 60%);
     align-items: start;
@@ -790,6 +862,55 @@
 
   .kefey-purchase__cta-row {
     margin-top: 12px;
+  }
+
+  .kefey-benefits {
+    padding-top: 44px;
+    padding-bottom: 52px;
+  }
+
+  .kefey-benefits__header {
+    margin-bottom: 34px;
+  }
+
+  .kefey-benefits__title {
+    font-size: var(--kb-h-fs-m, 36px);
+  }
+
+  .kefey-benefits__desc {
+    font-size: var(--kb-d-fs-m, 16px);
+  }
+
+  .kefey-benefits__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .kefey-benefits__cell {
+    padding: 18px 0;
+    border-right: 0 !important;
+  }
+
+  .kefey-benefits__cell:last-child {
+    border-bottom: 0;
+  }
+
+  .kefey-benefits__item-title {
+    font-size: var(--kb-it-fs-m, 36px);
+  }
+
+  .kefey-benefits__icon {
+    width: var(--kb-icon-circle-m, 52px);
+    height: var(--kb-icon-circle-m, 52px);
+  }
+
+  .kefey-benefits__icon svg,
+  .kefey-benefits__icon-image {
+    width: var(--kb-icon-m, 28px);
+    height: var(--kb-icon-m, 28px);
+  }
+
+  .kefey-benefits__item-text {
+    font-size: var(--kb-ib-fs-m, 18px);
   }
 }
 
