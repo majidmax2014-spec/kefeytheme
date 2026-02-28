@@ -1266,6 +1266,7 @@
 }
 
 .kefey-final-cta__divider {
+  display: block !important;
   position: absolute;
   top: 0;
   bottom: 0;
