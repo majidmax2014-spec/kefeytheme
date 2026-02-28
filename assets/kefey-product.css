@@ -829,7 +829,7 @@
 .kefey-callouts__left-text {
   margin: 20px 0 0;
   color: var(--kc-light-text, #fff);
-  text-align: left;
+  text-align: center;
   font-family: var(--kc-lt-ff, inherit);
   font-size: var(--kc-lt-fs-d, 18px);
   font-weight: var(--kc-lt-fw, 500);
@@ -841,6 +841,7 @@
   margin-top: auto;
   display: flex;
   justify-content: center;
+  align-items: flex-end;
 }
 
 .kefey-callouts__left-image {
@@ -865,11 +866,12 @@
 
 .kefey-callouts__box--table {
   padding: 0;
-  border-radius: var(--kc-box-radius, 18px);
-  overflow: hidden;
+  border-radius: 0;
+  overflow: visible;
 }
 
-.kefey-callouts__box1-header {
+.kefey-callouts__box1-header,
+.kefey-callouts__box1-heading {
   background: var(--kc-white-header, #fff);
   color: var(--kc-teal, #4bb3b5);
   text-align: center;
@@ -887,8 +889,8 @@
 .kefey-callouts__box1-body {
   padding: 14px 18px 20px;
   border-top: 0;
-  border-bottom-left-radius: var(--kc-box-radius, 18px);
-  border-bottom-right-radius: var(--kc-box-radius, 18px);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .kefey-callouts__box1-amount {
