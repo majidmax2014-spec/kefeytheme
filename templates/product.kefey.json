@@ -1021,7 +1021,7 @@
         "default_position": 50,
         "slider_bg_color": "#f4c820",
         "divider_color": "#ffffff",
-        "divider_width": 1,
+        "divider_width": 3,
         "handle_size": 68,
         "handle_bg_color": "#ffffff",
         "handle_icon_color": "#4bb3b5",
