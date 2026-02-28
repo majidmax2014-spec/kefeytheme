@@ -21,6 +21,7 @@
     --kf-b-fw: {{ section.settings.button_font_weight }};
     --kf-slider-h-d: {{ section.settings.slider_height_desktop }}px;
     --kf-slider-h-m: {{ section.settings.slider_height_mobile }}px;
+    --kf-slider-max-w: {{ section.settings.slider_max_width }}px;
     --kf-slider-bg: {{ section.settings.slider_bg_color }};
     --kf-divider-color: {{ section.settings.divider_color }};
     --kf-divider-w: {{ section.settings.divider_width }}px;
@@ -33,8 +34,8 @@
 >
   <div class="page-width kefey-final-cta__inner">
     <h2 class="kefey-final-cta__heading">
-      <span class="kefey-final-cta__heading-line1">{{ section.settings.heading_line_1 }}</span>
-      <span class="kefey-final-cta__heading-line2">{{ section.settings.heading_line_2 }}</span>
+      <span class="kefey-final-cta__line1">{{ section.settings.heading_line_1 }}</span>
+      <span class="kefey-final-cta__line2">{{ section.settings.heading_line_2 }}</span>
     </h2>
 
     <p class="kefey-final-cta__shift">{{ section.settings.shift_text }}</p>
@@ -103,11 +104,12 @@
     { "type": "checkbox", "id": "underline_enabled", "label": "Enable underline", "default": true },
     { "type": "color", "id": "underline_color", "label": "Underline color", "default": "#f4c820" },
     { "type": "range", "id": "underline_height", "label": "Underline height", "min": 4, "max": 24, "step": 1, "default": 12, "unit": "px" },
-    { "type": "range", "id": "underline_offset", "label": "Underline vertical offset", "min": -8, "max": 12, "step": 1, "default": 0, "unit": "px" },
+    { "type": "range", "id": "underline_offset", "label": "Underline vertical offset", "min": -8, "max": 12, "step": 1, "default": 8, "unit": "px" },
     { "type": "range", "id": "underline_extra_width", "label": "Underline extra width", "min": 0, "max": 80, "step": 2, "default": 20, "unit": "px" },
     { "type": "header", "content": "Slider Images" },
     { "type": "image_picker", "id": "before_image", "label": "Before image (left)" },
     { "type": "image_picker", "id": "after_image", "label": "After image (right)" },
+    { "type": "range", "id": "slider_max_width", "label": "Slider max width", "min": 900, "max": 1100, "step": 10, "default": 1020, "unit": "px" },
     { "type": "range", "id": "slider_height_desktop", "label": "Slider height desktop", "min": 220, "max": 900, "step": 10, "default": 560, "unit": "px" },
     { "type": "range", "id": "slider_height_mobile", "label": "Slider height mobile", "min": 180, "max": 620, "step": 10, "default": 360, "unit": "px" },
     { "type": "range", "id": "default_position", "label": "Default slider position", "min": 0, "max": 100, "step": 1, "default": 50, "unit": "%" },
