@@ -588,6 +588,80 @@
     },
     "certifications_kefey": {
       "type": "product-certifications-kefey",
+      "blocks": {
+        "logo_kgNPN4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/certificate01.png",
+            "alt": "Certification logo",
+            "link": "",
+            "opacity": 100
+          }
+        },
+        "logo_RgpwFF": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/certificate02.png",
+            "alt": "Certification logo",
+            "link": "",
+            "opacity": 100
+          }
+        },
+        "logo_aCUBXT": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/certificate03.png",
+            "alt": "Certification logo",
+            "link": "",
+            "opacity": 100
+          }
+        },
+        "logo_FhDKQa": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/certificate04.png",
+            "alt": "Certification logo",
+            "link": "",
+            "opacity": 100
+          }
+        },
+        "logo_jXFdGr": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/certificate05.png",
+            "alt": "Certification logo",
+            "link": "",
+            "opacity": 100
+          }
+        },
+        "logo_wVVxK9": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/certificate06.png",
+            "alt": "Certification logo",
+            "link": "",
+            "opacity": 100
+          }
+        },
+        "logo_qAnU7D": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/certificate07.png",
+            "alt": "Certification logo",
+            "link": "",
+            "opacity": 100
+          }
+        }
+      },
+      "block_order": [
+        "logo_kgNPN4",
+        "logo_RgpwFF",
+        "logo_aCUBXT",
+        "logo_FhDKQa",
+        "logo_jXFdGr",
+        "logo_wVVxK9",
+        "logo_qAnU7D"
+      ],
       "settings": {
         "show_heading": false,
         "heading": "Certifications",
@@ -595,19 +669,13 @@
         "section_bg_color": "#ffffff",
         "section_padding_top": 24,
         "section_padding_bottom": 24,
-        "logo_height_desktop": 96,
+        "logo_height_desktop": 160,
         "logo_height_mobile": 68,
         "gap_desktop": 34,
         "gap_mobile": 16,
         "arrows_enabled": true,
         "arrows_size": 48,
         "arrows_color": "#111111"
-      }
-    },
-    "mini_testimonials_kefey": {
-      "type": "product-mini-testimonials-kefey",
-      "settings": {
-        "heading": "Joyful routines, that's why they stay."
       }
     },
     "faq_kefey": {
@@ -618,9 +686,24 @@
     },
     "risk_free_existing": {
       "type": "risk-free-banner",
+      "blocks": {
+        "decor_wQaAn9": {
+          "type": "decor",
+          "settings": {
+            "decor_image": "shopify://shop_images/right-decor.png",
+            "width": 200,
+            "top": 50,
+            "right": 1,
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "decor_wQaAn9"
+      ],
       "settings": {
         "background_color": "#2bb4a7",
-        "section_height_desktop": 220,
+        "section_height_desktop": 280,
         "section_height_mobile": 180,
         "padding_left_right": 40,
         "heading": "TRY IT WITH CONFIDENCE!",
@@ -633,11 +716,13 @@
         "button_text_color": "#ffffff",
         "button_border_color": "#ffffff",
         "button_bg_color": "#ffffff",
-        "badge_type": "text",
+        "badge_type": "image",
+        "badge_image": "shopify://shop_images/money-back.png",
         "badge_size": 160,
         "badge_text_center": "kefey",
         "badge_text_ring": "MONEYBACK GUARANTEED",
         "left_decor_enabled": true,
+        "left_decor_image": "shopify://shop_images/left-decor.png",
         "right_decor_enabled": true
       }
     },
@@ -693,7 +778,6 @@
     "callouts_kefey",
     "howto_kefey",
     "certifications_kefey",
-    "mini_testimonials_kefey",
     "faq_kefey",
     "risk_free_existing",
     "joyful_routines_existing",
