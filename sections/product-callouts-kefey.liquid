@@ -1,21 +1,125 @@
-<section class="kefey-product kefey-product-section kefey-product-section--yellow">
-  <div class="page-width kefey-product-callouts__layout">
-    <div class="kefey-product-callouts__cards">
-      {%- for block in section.blocks -%}
-        <article {{ block.shopify_attributes }}>
-          <h3 class="kefey-product__title" style="font-size:1.7rem; color:#fff;">{{ block.settings.title }}</h3>
-          <p class="kefey-product__desc" style="color:#f4ffff; font-size:1.3rem;">{{ block.settings.text }}</p>
+{%- assign right_width = 100 | minus: section.settings.left_column_width_percent -%}
+<section
+  class="kefey-callouts"
+  style="
+    --kc-left-col: {{ section.settings.left_column_width_percent }}%;
+    --kc-right-col: {{ right_width }}%;
+    --kc-bg: {{ section.settings.section_bg_color }};
+    --kc-teal: {{ section.settings.teal_box_color }};
+    --kc-white-header: {{ section.settings.white_header_bg_color }};
+    --kc-light-text: {{ section.settings.light_text_color }};
+    --kc-dark-text: {{ section.settings.dark_text_color }};
+    --kc-line-opacity: {{ section.settings.divider_line_opacity | divided_by: 100.0 }};
+    --kc-lh-ff: {{ section.settings.left_headline_font_family }};
+    --kc-lh-fs-d: {{ section.settings.left_headline_font_size_desktop }}px;
+    --kc-lh-fs-m: {{ section.settings.left_headline_font_size_mobile }}px;
+    --kc-lh-fw: {{ section.settings.left_headline_font_weight }};
+    --kc-lt-ff: {{ section.settings.left_text_font_family }};
+    --kc-lt-fs-d: {{ section.settings.left_text_font_size_desktop }}px;
+    --kc-lt-fs-m: {{ section.settings.left_text_font_size_mobile }}px;
+    --kc-lt-fw: {{ section.settings.left_text_font_weight }};
+    --kc-lt-lh: {{ section.settings.left_text_line_height }};
+    --kc-b1h-ff: {{ section.settings.box1_heading_font_family }};
+    --kc-b1h-fs-d: {{ section.settings.box1_heading_font_size_desktop }}px;
+    --kc-b1h-fs-m: {{ section.settings.box1_heading_font_size_mobile }}px;
+    --kc-b1h-fw: {{ section.settings.box1_heading_font_weight }};
+    --kc-tbl-ff: {{ section.settings.table_font_family }};
+    --kc-tbl-fs-d: {{ section.settings.table_font_size_desktop }}px;
+    --kc-tbl-fs-m: {{ section.settings.table_font_size_mobile }}px;
+    --kc-tbl-fw: {{ section.settings.table_font_weight }};
+    --kc-tbl-lh: {{ section.settings.table_line_height }};
+    --kc-b2t-ff: {{ section.settings.box2_title_font_family }};
+    --kc-b2t-fs-d: {{ section.settings.box2_title_font_size_desktop }}px;
+    --kc-b2t-fs-m: {{ section.settings.box2_title_font_size_mobile }}px;
+    --kc-b2t-fw: {{ section.settings.box2_title_font_weight }};
+    --kc-b2b-ff: {{ section.settings.box2_text_font_family }};
+    --kc-b2b-fs-d: {{ section.settings.box2_text_font_size_desktop }}px;
+    --kc-b2b-fs-m: {{ section.settings.box2_text_font_size_mobile }}px;
+    --kc-b2b-fw: {{ section.settings.box2_text_font_weight }};
+    --kc-b2b-lh: {{ section.settings.box2_text_line_height }};
+    --kc-b3t-ff: {{ section.settings.box3_title_font_family }};
+    --kc-b3t-fs-d: {{ section.settings.box3_title_font_size_desktop }}px;
+    --kc-b3t-fs-m: {{ section.settings.box3_title_font_size_mobile }}px;
+    --kc-b3t-fw: {{ section.settings.box3_title_font_weight }};
+    --kc-b3b-ff: {{ section.settings.box3_text_font_family }};
+    --kc-b3b-fs-d: {{ section.settings.box3_text_font_size_desktop }}px;
+    --kc-b3b-fs-m: {{ section.settings.box3_text_font_size_mobile }}px;
+    --kc-b3b-fw: {{ section.settings.box3_text_font_weight }};
+    --kc-b3b-lh: {{ section.settings.box3_text_line_height }};
+    --kc-bh-ff: {{ section.settings.bottom_heading_font_family }};
+    --kc-bh-fs-d: {{ section.settings.bottom_heading_font_size_desktop }}px;
+    --kc-bh-fs-m: {{ section.settings.bottom_heading_font_size_mobile }}px;
+    --kc-bh-fw: {{ section.settings.bottom_heading_font_weight }};
+    --kc-bt-ff: {{ section.settings.bottom_text_font_family }};
+    --kc-bt-fs-d: {{ section.settings.bottom_text_font_size_desktop }}px;
+    --kc-bt-fs-m: {{ section.settings.bottom_text_font_size_mobile }}px;
+    --kc-bt-fw: {{ section.settings.bottom_text_font_weight }};
+    --kc-bt-lh: {{ section.settings.bottom_text_line_height }};
+  "
+>
+  <div class="page-width">
+    <div class="kefey-callouts__grid">
+      <div class="kefey-callouts__left">
+        <div class="kefey-callouts__left-headline">{{ section.settings.left_headline_text }}</div>
+        <p class="kefey-callouts__left-text">{{ section.settings.left_paragraph_text }}</p>
+        <div class="kefey-callouts__left-image-wrap">
+          {%- if section.settings.left_image != blank -%}
+            {{
+              section.settings.left_image
+              | image_url: width: 1400
+              | image_tag:
+                class: 'kefey-callouts__left-image',
+                widths: '420, 700, 900, 1200, 1400',
+                sizes: '(min-width: 990px) 42vw, 92vw',
+                loading: 'lazy',
+                alt: section.settings.left_headline_text
+            }}
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="kefey-callouts__right">
+        <article class="kefey-callouts__box kefey-callouts__box--table">
+          <div class="kefey-callouts__box1-header">{{ section.settings.box1_heading_text }}</div>
+          <div class="kefey-callouts__box1-body">
+            <div class="kefey-callouts__box1-amount">{{ section.settings.box1_amount_label }}</div>
+            <div class="kefey-callouts__table-row">
+              <span class="kefey-callouts__table-label">{{ section.settings.box1_row1_label }}</span>
+              <span class="kefey-callouts__table-value">{{ section.settings.box1_row1_value }}</span>
+            </div>
+            <div class="kefey-callouts__table-row">
+              <span class="kefey-callouts__table-label">{{ section.settings.box1_row2_label }}</span>
+              <span class="kefey-callouts__table-value">{{ section.settings.box1_row2_value }}</span>
+            </div>
+            <div class="kefey-callouts__table-row">
+              <span class="kefey-callouts__table-label">{{ section.settings.box1_row3_label }}</span>
+              <span class="kefey-callouts__table-value">{{ section.settings.box1_row3_value }}</span>
+            </div>
+            <div class="kefey-callouts__table-row">
+              <span class="kefey-callouts__table-label">{{ section.settings.box1_row4_label }}</span>
+              <span class="kefey-callouts__table-value">{{ section.settings.box1_row4_value }}</span>
+            </div>
+          </div>
         </article>
-      {%- endfor -%}
+
+        <article class="kefey-callouts__box kefey-callouts__box--blend">
+          <div class="kefey-callouts__box-title-row">
+            <h3 class="kefey-callouts__box-title">{{ section.settings.box2_title_text }}</h3>
+            <span class="kefey-callouts__box-mg">{{ section.settings.box2_mg_text }}</span>
+          </div>
+          <p class="kefey-callouts__box-text">{{ section.settings.box2_body_text }}</p>
+        </article>
+
+        <article class="kefey-callouts__box kefey-callouts__box--other">
+          <h3 class="kefey-callouts__box-title">{{ section.settings.box3_title_text }}</h3>
+          <p class="kefey-callouts__box-text">{{ section.settings.box3_body_text }}</p>
+        </article>
+      </div>
     </div>
 
-    <div>
-      {%- if section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 1200 | image_tag: class: 'kefey-product-callouts__image', loading: 'lazy', alt: section.settings.heading }}
-      {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <h3 class="kefey-product__title" style="margin-top:10px; text-align:center;">{{ section.settings.heading }}</h3>
-      {%- endif -%}
+    <div class="kefey-callouts__bottom">
+      <h3 class="kefey-callouts__bottom-heading">{{ section.settings.bottom_heading_text }}</h3>
+      <p class="kefey-callouts__bottom-text">{{ section.settings.bottom_body_text }}</p>
     </div>
   </div>
 </section>
@@ -24,23 +128,108 @@
 {
   "name": "Product Callouts Kefey",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "heading", "label": "Bottom heading", "default": "All details, no confusion." }
-  ],
-  "blocks": [
+    { "type": "range", "id": "left_column_width_percent", "label": "Left column width %", "min": 30, "max": 60, "step": 1, "default": 45, "unit": "%" },
+    { "type": "color", "id": "section_bg_color", "label": "Section background", "default": "#f4c820" },
+    { "type": "color", "id": "teal_box_color", "label": "Teal box color", "default": "#4bb3b5" },
+    { "type": "color", "id": "white_header_bg_color", "label": "White header background", "default": "#ffffff" },
+    { "type": "color", "id": "light_text_color", "label": "Light text color", "default": "#ffffff" },
+    { "type": "color", "id": "dark_text_color", "label": "Dark text color", "default": "#1f1f1f" },
+    { "type": "range", "id": "divider_line_opacity", "label": "Divider line opacity", "min": 0, "max": 100, "step": 1, "default": 45, "unit": "%" },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "left_headline_text", "label": "Left headline", "default": "Each Serving (2 Gummies) = Nature, Concentrated with Joy" },
+    { "type": "textarea", "id": "left_paragraph_text", "label": "Left paragraph", "default": "Every two Kefey Mood Gummies combine premium plant extracts and essential nutrients — thoughtfully balanced to support calm, focus, and daily wellbeing." },
+    { "type": "image_picker", "id": "left_image", "label": "Left image" },
+    { "type": "text", "id": "box1_heading_text", "label": "Box 1 heading", "default": "Each Serving Contains:" },
+    { "type": "text", "id": "box1_amount_label", "label": "Box 1 amount label", "default": "Amount Per 2 Gummies" },
+    { "type": "text", "id": "box1_row1_label", "label": "Box 1 row 1 label", "default": "Calories" },
+    { "type": "text", "id": "box1_row1_value", "label": "Box 1 row 1 value", "default": "15" },
+    { "type": "text", "id": "box1_row2_label", "label": "Box 1 row 2 label", "default": "Sodium" },
+    { "type": "text", "id": "box1_row2_value", "label": "Box 1 row 2 value", "default": "10 mg" },
+    { "type": "text", "id": "box1_row3_label", "label": "Box 1 row 3 label", "default": "Total Carbohydrate" },
+    { "type": "text", "id": "box1_row3_value", "label": "Box 1 row 3 value", "default": "3 g" },
+    { "type": "text", "id": "box1_row4_label", "label": "Box 1 row 4 label", "default": "Zinc" },
+    { "type": "text", "id": "box1_row4_value", "label": "Box 1 row 4 value", "default": "1.7 mg" },
+    { "type": "text", "id": "box2_title_text", "label": "Box 2 title", "default": "Blend of Premium Quality Herbal Extracts" },
+    { "type": "text", "id": "box2_mg_text", "label": "Box 2 mg text", "default": "600 mg" },
     {
-      "type": "callout",
-      "name": "Callout",
-      "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Every gummy matters" },
-        { "type": "textarea", "id": "text", "label": "Text", "default": "Each serving is thoughtfully measured for consistency." }
-      ]
-    }
+      "type": "textarea",
+      "id": "box2_body_text",
+      "label": "Box 2 body",
+      "default": "Ashwagandha Root Extract (Withania Somnifera), Maca Root Extract (Lepidium Meyenii), Gotu Kola Extract (Centella Asiatica), Vervain Extract (Verbena Officinalis), Moringa Leaf Extract (Moringa Oleifera), Korean Red Ginseng Root & Stem Extract (Panax Ginseng), Milk thistle Seeds Extract (Silybum Marianum)."
+    },
+    { "type": "text", "id": "box3_title_text", "label": "Box 3 title", "default": "Other Ingredients" },
+    {
+      "type": "textarea",
+      "id": "box3_body_text",
+      "label": "Box 3 body",
+      "default": "Maltitol Syrup, Isomalt, Erythritol, Pectin, Malic Acid, Sodium Citrate, Citric Acid, Calcium Lactate, Natural Strawberry Flavor, Beet Root Powder (Color), Stevia Leaf Extract, Coconut Oil (Coating)."
+    },
+    { "type": "text", "id": "bottom_heading_text", "label": "Bottom heading", "default": "Does NOT Contain" },
+    {
+      "type": "textarea",
+      "id": "bottom_body_text",
+      "label": "Bottom text",
+      "default": "Sugar, Yeast, Wheat, Eggs, Gluten, Soy, Gelatin, Peanuts, Shellfish, Dairy, Synthetic Colors, Agave, Palm Oil, and Bee Products."
+    },
+    { "type": "header", "content": "Left Headline Typography" },
+    { "type": "text", "id": "left_headline_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "left_headline_font_size_desktop", "label": "Size desktop", "min": 14, "max": 72, "step": 1, "default": 24, "unit": "px" },
+    { "type": "range", "id": "left_headline_font_size_mobile", "label": "Size mobile", "min": 14, "max": 52, "step": 1, "default": 32, "unit": "px" },
+    { "type": "range", "id": "left_headline_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Left Paragraph Typography" },
+    { "type": "text", "id": "left_text_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "left_text_font_size_desktop", "label": "Size desktop", "min": 12, "max": 36, "step": 1, "default": 18, "unit": "px" },
+    { "type": "range", "id": "left_text_font_size_mobile", "label": "Size mobile", "min": 12, "max": 30, "step": 1, "default": 22, "unit": "px" },
+    { "type": "range", "id": "left_text_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "left_text_line_height", "label": "Line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 },
+    { "type": "header", "content": "Box 1 Heading Typography" },
+    { "type": "text", "id": "box1_heading_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "box1_heading_font_size_desktop", "label": "Size desktop", "min": 14, "max": 56, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "box1_heading_font_size_mobile", "label": "Size mobile", "min": 14, "max": 40, "step": 1, "default": 30, "unit": "px" },
+    { "type": "range", "id": "box1_heading_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Table Typography" },
+    { "type": "text", "id": "table_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "table_font_size_desktop", "label": "Size desktop", "min": 12, "max": 36, "step": 1, "default": 16, "unit": "px" },
+    { "type": "range", "id": "table_font_size_mobile", "label": "Size mobile", "min": 12, "max": 28, "step": 1, "default": 22, "unit": "px" },
+    { "type": "range", "id": "table_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "table_line_height", "label": "Line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 },
+    { "type": "header", "content": "Box 2 Title Typography" },
+    { "type": "text", "id": "box2_title_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "box2_title_font_size_desktop", "label": "Size desktop", "min": 14, "max": 48, "step": 1, "default": 18, "unit": "px" },
+    { "type": "range", "id": "box2_title_font_size_mobile", "label": "Size mobile", "min": 14, "max": 40, "step": 1, "default": 26, "unit": "px" },
+    { "type": "range", "id": "box2_title_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Box 2 Text Typography" },
+    { "type": "text", "id": "box2_text_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "box2_text_font_size_desktop", "label": "Size desktop", "min": 12, "max": 32, "step": 1, "default": 14, "unit": "px" },
+    { "type": "range", "id": "box2_text_font_size_mobile", "label": "Size mobile", "min": 12, "max": 28, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "box2_text_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "box2_text_line_height", "label": "Line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 },
+    { "type": "header", "content": "Box 3 Title Typography" },
+    { "type": "text", "id": "box3_title_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "box3_title_font_size_desktop", "label": "Size desktop", "min": 14, "max": 48, "step": 1, "default": 18, "unit": "px" },
+    { "type": "range", "id": "box3_title_font_size_mobile", "label": "Size mobile", "min": 14, "max": 40, "step": 1, "default": 26, "unit": "px" },
+    { "type": "range", "id": "box3_title_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Box 3 Text Typography" },
+    { "type": "text", "id": "box3_text_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "box3_text_font_size_desktop", "label": "Size desktop", "min": 12, "max": 32, "step": 1, "default": 14, "unit": "px" },
+    { "type": "range", "id": "box3_text_font_size_mobile", "label": "Size mobile", "min": 12, "max": 28, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "box3_text_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "box3_text_line_height", "label": "Line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 },
+    { "type": "header", "content": "Bottom Typography" },
+    { "type": "text", "id": "bottom_heading_font_family", "label": "Heading font family", "default": "inherit" },
+    { "type": "range", "id": "bottom_heading_font_size_desktop", "label": "Heading size desktop", "min": 16, "max": 56, "step": 1, "default": 24, "unit": "px" },
+    { "type": "range", "id": "bottom_heading_font_size_mobile", "label": "Heading size mobile", "min": 16, "max": 44, "step": 1, "default": 32, "unit": "px" },
+    { "type": "range", "id": "bottom_heading_font_weight", "label": "Heading weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "text", "id": "bottom_text_font_family", "label": "Text font family", "default": "inherit" },
+    { "type": "range", "id": "bottom_text_font_size_desktop", "label": "Text size desktop", "min": 12, "max": 40, "step": 1, "default": 18, "unit": "px" },
+    { "type": "range", "id": "bottom_text_font_size_mobile", "label": "Text size mobile", "min": 12, "max": 32, "step": 1, "default": 24, "unit": "px" },
+    { "type": "range", "id": "bottom_text_font_weight", "label": "Text weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "range", "id": "bottom_text_line_height", "label": "Text line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 }
   ],
+  "blocks": [],
   "presets": [
     {
-      "name": "Product Callouts Kefey",
-      "blocks": [{ "type": "callout" }, { "type": "callout" }, { "type": "callout" }, { "type": "callout" }]
+      "name": "Product Callouts Kefey"
     }
   ]
 }
