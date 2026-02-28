@@ -728,6 +728,55 @@
     },
     "joyful_routines_existing": {
       "type": "kefey-testimonials-grid",
+      "blocks": {
+        "testimonial_xNcVLR": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
+            "customer_name": "Maya"
+          }
+        },
+        "testimonial_nxWRkW": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
+            "customer_name": "Maya"
+          }
+        },
+        "testimonial_UbFCiF": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
+            "customer_name": "Maya"
+          }
+        },
+        "testimonial_JckTUY": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
+            "customer_name": "Maya"
+          }
+        },
+        "testimonial_TVBaF3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
+            "customer_name": "Maya"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_xNcVLR",
+        "testimonial_nxWRkW",
+        "testimonial_UbFCiF",
+        "testimonial_JckTUY",
+        "testimonial_TVBaF3"
+      ],
       "settings": {
         "heading": "Joyful Routines. That’s Why They Stay!",
         "heading_size": 36,
@@ -741,9 +790,10 @@
         "card_radius": 24,
         "star_color": "#e15241",
         "quote_color": "#2bb4a7",
+        "quote_icon": "shopify://shop_images/quote.svg",
         "quote_icon_size": 72,
-        "quote_icon_margin_top": 0,
-        "quote_icon_margin_bottom": 12,
+        "quote_icon_margin_top": -52,
+        "quote_icon_margin_bottom": 56,
         "show_decor_images": true,
         "left_decor_width": 159,
         "left_decor_offset_x": 0,
