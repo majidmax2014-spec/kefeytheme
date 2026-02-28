@@ -518,9 +518,72 @@
     },
     "howto_kefey": {
       "type": "product-howto-kefey",
+      "blocks": {
+        "bullet_iBALTW": {
+          "type": "bullet",
+          "settings": {
+            "text": "With or without food"
+          }
+        },
+        "bullet_HfqC7B": {
+          "type": "bullet",
+          "settings": {
+            "text": "No rush."
+          }
+        },
+        "bullet_DchxfM": {
+          "type": "bullet",
+          "settings": {
+            "text": "No rules."
+          }
+        },
+        "bullet_TeyhEw": {
+          "type": "bullet",
+          "settings": {
+            "text": "Just consistency."
+          }
+        }
+      },
+      "block_order": [
+        "bullet_iBALTW",
+        "bullet_HfqC7B",
+        "bullet_DchxfM",
+        "bullet_TeyhEw"
+      ],
       "settings": {
+        "eyebrow": "MADE TO BE ENJOYED",
         "heading": "Two stars, twice daily.",
-        "subheading": "Chew slowly. Enjoy the taste. Take this as part of your ritual."
+        "subheading": "Chew slowly. Enjoy the taste. Take in the moment.",
+        "right_image": "shopify://shop_images/star-gummy.png",
+        "padding_top": 32,
+        "padding_bottom": 12,
+        "content_max_width": 1360,
+        "column_gap": 40,
+        "left_column_width_percent": 46,
+        "wavy_line_color": "#4bb3b5",
+        "wavy_line_thickness": 3,
+        "wavy_line_width": 220,
+        "wavy_line_offset": 8,
+        "eyebrow_font_family": "inherit",
+        "eyebrow_font_size_desktop": 20,
+        "eyebrow_font_size_mobile": 20,
+        "eyebrow_font_weight": 700,
+        "heading_font_family": "inherit",
+        "heading_font_size_desktop": 36,
+        "heading_font_size_mobile": 24,
+        "heading_font_weight": 700,
+        "heading_color": "#e75b3a",
+        "subheading_font_family": "inherit",
+        "subheading_font_size_desktop": 16,
+        "subheading_font_size_mobile": 14,
+        "subheading_font_weight": 700,
+        "subheading_color": "#0f0f0f",
+        "bullets_font_family": "inherit",
+        "bullets_font_size_desktop": 16,
+        "bullets_font_size_mobile": 14,
+        "bullets_font_weight": 500,
+        "bullets_color": "#0f0f0f",
+        "bullet_gap": 10
       }
     },
     "mini_testimonials_kefey": {
