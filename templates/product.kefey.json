@@ -542,27 +542,20 @@
           "settings": {
             "text": "Just consistency."
           }
-        },
-        "bullet_cyzrwe": {
-          "type": "bullet",
-          "settings": {
-            "text": "With or without food"
-          }
         }
       },
       "block_order": [
         "bullet_iBALTW",
         "bullet_HfqC7B",
         "bullet_DchxfM",
-        "bullet_TeyhEw",
-        "bullet_cyzrwe"
+        "bullet_TeyhEw"
       ],
       "settings": {
         "eyebrow": "MADE TO BE ENJOYED",
         "heading": "Two stars, twice daily.",
         "subheading": "Chew slowly. Enjoy the taste. Take in the moment.",
         "right_image": "shopify://shop_images/star-gummy.png",
-        "padding_top": 12,
+        "padding_top": 32,
         "padding_bottom": 12,
         "content_max_width": 1360,
         "column_gap": 40,
@@ -593,131 +586,63 @@
         "bullet_gap": 10
       }
     },
-    "text_marquee_bar_rkJTFJ": {
-      "type": "text-marquee-bar",
-      "blocks": {
-        "item_JMeHVA": {
-          "type": "item",
-          "settings": {
-            "text": "FRIENDLY"
-          }
-        },
-        "item_4TAkHQ": {
-          "type": "item",
-          "settings": {
-            "text": "ECO FRIENDLY"
-          }
-        },
-        "item_UTaAdH": {
-          "type": "item",
-          "settings": {
-            "text": "SUGAR FREE"
-          }
-        },
-        "item_iUTL74": {
-          "type": "item",
-          "settings": {
-            "text": "GELATIN FREE"
-          }
-        },
-        "item_ByYjjw": {
-          "type": "item",
-          "settings": {
-            "text": "GLUTEN FREE"
-          }
-        },
-        "item_yaPkrh": {
-          "type": "item",
-          "settings": {
-            "text": "NON–GMO"
-          }
-        },
-        "item_rFWFRH": {
-          "type": "item",
-          "settings": {
-            "text": "GMP CERTIFIED"
-          }
-        },
-        "item_6XR9fP": {
-          "type": "item",
-          "settings": {
-            "text": "KOSHER"
-          }
-        },
-        "item_4qz4kz": {
-          "type": "item",
-          "settings": {
-            "text": "HALAL"
-          }
-        }
-      },
-      "block_order": [
-        "item_JMeHVA",
-        "item_4TAkHQ",
-        "item_UTaAdH",
-        "item_iUTL74",
-        "item_ByYjjw",
-        "item_yaPkrh",
-        "item_rFWFRH",
-        "item_6XR9fP",
-        "item_4qz4kz"
-      ],
-      "name": "Text Marquee Bar",
+    "certifications_kefey": {
+      "type": "product-certifications-kefey",
       "settings": {
-        "enabled": true,
-        "background_color": "#f4c820",
-        "text_color": "#FFFFFF",
-        "bar_height_desktop": 80,
-        "bar_height_mobile": 60,
-        "font_size_desktop": 20,
-        "font_size_mobile": 16,
-        "font_weight": "700",
-        "letter_spacing": 1,
-        "gap": 28,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "separator_text": "|",
-        "speed": 18,
-        "direction": "left",
-        "enable_rtl": false,
-        "pause_on_hover": true,
-        "pause_on_focus": true,
-        "aria_label": "Scrolling product benefits"
+        "show_heading": false,
+        "heading": "Certifications",
+        "container_max_width": 1320,
+        "section_bg_color": "#ffffff",
+        "section_padding_top": 24,
+        "section_padding_bottom": 24,
+        "logo_height_desktop": 96,
+        "logo_height_mobile": 68,
+        "gap_desktop": 34,
+        "gap_mobile": 16,
+        "arrows_enabled": true,
+        "arrows_size": 48,
+        "arrows_color": "#111111"
+      }
+    },
+    "mini_testimonials_kefey": {
+      "type": "product-mini-testimonials-kefey",
+      "settings": {
+        "heading": "Joyful routines, that's why they stay."
+      }
+    },
+    "faq_kefey": {
+      "type": "product-faq-kefey",
+      "settings": {
+        "heading": "Frequently Asked Questions"
+      }
+    },
+    "risk_free_existing": {
+      "type": "risk-free-banner",
+      "settings": {
+        "background_color": "#2bb4a7",
+        "section_height_desktop": 220,
+        "section_height_mobile": 180,
+        "padding_left_right": 40,
+        "heading": "TRY IT WITH CONFIDENCE!",
+        "text": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund.",
+        "button_label": "CHECKOUT NOW",
+        "button_link": "",
+        "button_style": "outline",
+        "heading_color": "#ffc94d",
+        "text_color": "#ffffff",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "button_bg_color": "#ffffff",
+        "badge_type": "text",
+        "badge_size": 160,
+        "badge_text_center": "kefey",
+        "badge_text_ring": "MONEYBACK GUARANTEED",
+        "left_decor_enabled": true,
+        "right_decor_enabled": true
       }
     },
     "joyful_routines_existing": {
       "type": "kefey-testimonials-grid",
-      "blocks": {
-        "testimonial_rR6rFL": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
-            "customer_name": "Maya"
-          }
-        },
-        "testimonial_y4RePw": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
-            "customer_name": "Maya"
-          }
-        },
-        "testimonial_tdXJdf": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
-            "customer_name": "Maya"
-          }
-        }
-      },
-      "block_order": [
-        "testimonial_rR6rFL",
-        "testimonial_y4RePw",
-        "testimonial_tdXJdf"
-      ],
       "settings": {
         "heading": "Joyful Routines. That’s Why They Stay!",
         "heading_size": 36,
@@ -731,10 +656,9 @@
         "card_radius": 24,
         "star_color": "#e15241",
         "quote_color": "#2bb4a7",
-        "quote_icon": "shopify://shop_images/quote.svg",
         "quote_icon_size": 72,
-        "quote_icon_margin_top": -52,
-        "quote_icon_margin_bottom": 42,
+        "quote_icon_margin_top": 0,
+        "quote_icon_margin_bottom": 12,
         "show_decor_images": true,
         "left_decor_width": 159,
         "left_decor_offset_x": 0,
@@ -748,54 +672,6 @@
         "color_scheme": "scheme-1",
         "padding_top": 40,
         "padding_bottom": 40
-      }
-    },
-    "faq_kefey": {
-      "type": "product-faq-kefey",
-      "settings": {
-        "heading": "Frequently Asked Questions"
-      }
-    },
-    "risk_free_existing": {
-      "type": "risk-free-banner",
-      "blocks": {
-        "decor_3nwTa8": {
-          "type": "decor",
-          "settings": {
-            "decor_image": "shopify://shop_images/right-decor.png",
-            "width": 200,
-            "top": 45,
-            "right": 1,
-            "alt": ""
-          }
-        }
-      },
-      "block_order": [
-        "decor_3nwTa8"
-      ],
-      "settings": {
-        "background_color": "#2bb4a7",
-        "section_height_desktop": 283,
-        "section_height_mobile": 180,
-        "padding_left_right": 40,
-        "heading": "TRY IT WITH CONFIDENCE!",
-        "text": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund.",
-        "button_label": "CHECKOUT NOW",
-        "button_link": "",
-        "button_style": "outline",
-        "heading_color": "#ffc94d",
-        "text_color": "#ffffff",
-        "button_text_color": "#ffffff",
-        "button_border_color": "#ffffff",
-        "button_bg_color": "#ffffff",
-        "badge_type": "image",
-        "badge_image": "shopify://shop_images/money-back.png",
-        "badge_size": 160,
-        "badge_text_center": "",
-        "badge_text_ring": "",
-        "left_decor_enabled": true,
-        "left_decor_image": "shopify://shop_images/left-decor.png",
-        "right_decor_enabled": true
       }
     },
     "final_cta_kefey": {
@@ -816,10 +692,11 @@
     "ingredients_kefey",
     "callouts_kefey",
     "howto_kefey",
-    "text_marquee_bar_rkJTFJ",
-    "joyful_routines_existing",
+    "certifications_kefey",
+    "mini_testimonials_kefey",
     "faq_kefey",
     "risk_free_existing",
+    "joyful_routines_existing",
     "final_cta_kefey"
   ]
 }

@@ -1197,6 +1197,102 @@
   font-weight: 700;
 }
 
+/* -------------------------------
+   Kefey Certifications
+------------------------------- */
+.kefey-certs {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  background: var(--kcerts-bg, #fff);
+  padding-top: var(--kcerts-pt, 24px);
+  padding-bottom: var(--kcerts-pb, 24px);
+}
+
+.kefey-certs__inner {
+  width: min(100%, var(--kcerts-max, 1320px));
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.kefey-certs__heading {
+  margin: 0 0 14px;
+  text-align: center;
+}
+
+.kefey-certs__carousel {
+  position: relative;
+  padding: 0 48px;
+}
+
+.kefey-certs__track {
+  display: flex;
+  align-items: center;
+  gap: var(--kcerts-gap-d, 34px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.kefey-certs__track::-webkit-scrollbar {
+  display: none;
+}
+
+.kefey-certs__item {
+  flex: 0 0 auto;
+  scroll-snap-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: var(--kcerts-item-opacity, 1);
+}
+
+.kefey-certs__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kefey-certs__logo {
+  height: var(--kcerts-logo-h-d, 96px);
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  display: block;
+}
+
+.kefey-certs__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--kcerts-arrow-size, 48px);
+  height: var(--kcerts-arrow-size, 48px);
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--kcerts-arrow-color, #111);
+  font-size: calc(var(--kcerts-arrow-size, 48px) * 0.9);
+  line-height: 1;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kefey-certs__arrow:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+.kefey-certs__arrow--prev {
+  left: 0;
+}
+
+.kefey-certs__arrow--next {
+  right: 0;
+}
+
 @media (min-width: 990px) {
   .kefey-product-main {
     padding-top: 38px;
@@ -1483,6 +1579,27 @@
   .kefey-howto__right-image {
     max-height: none;
     width: min(100%, 620px);
+  }
+
+  .kefey-certs__inner {
+    padding: 0 14px;
+  }
+
+  .kefey-certs__carousel {
+    padding: 0;
+  }
+
+  .kefey-certs__track {
+    gap: var(--kcerts-gap-m, 16px);
+  }
+
+  .kefey-certs__logo {
+    height: var(--kcerts-logo-h-m, 68px);
+    max-width: 170px;
+  }
+
+  .kefey-certs__arrow {
+    display: none;
   }
 }
 
