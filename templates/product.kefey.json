@@ -410,9 +410,7 @@
     },
     "callouts_kefey": {
       "type": "product-callouts-kefey",
-      "settings": {
-        "heading": "All details, no confusion."
-      }
+      "settings": {}
     },
     "howto_kefey": {
       "type": "product-howto-kefey",
