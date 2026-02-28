@@ -1,25 +1,87 @@
-<section class="kefey-product kefey-product-section">
-  <div class="page-width kefey-product-howto__layout">
-    <div>
-      <h2 class="kefey-product__title">{{ section.settings.heading }}</h2>
-      <p class="kefey-product__desc" style="margin-bottom:10px;">{{ section.settings.subheading }}</p>
-      <ul style="margin:0; padding-left:18px;">
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'instruction' -%}
-            <li class="kefey-product__desc" style="margin-bottom:8px;" {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
-          {%- endif -%}
-        {%- endfor -%}
-      </ul>
-    </div>
-
-    <div class="kefey-product-howto__badges">
-      {%- for block in section.blocks -%}
-        {%- if block.type == 'badge' and block.settings.image != blank -%}
-          <div {{ block.shopify_attributes }}>
-            {{ block.settings.image | image_url: width: 220 | image_tag: loading: 'lazy', alt: block.settings.alt }}
+<section
+  class="kefey-howto"
+  style="
+    --khw-pt: {{ section.settings.padding_top }}px;
+    --khw-pb: {{ section.settings.padding_bottom }}px;
+    --khw-max: {{ section.settings.content_max_width }}px;
+    --khw-gap: {{ section.settings.column_gap }}px;
+    --khw-left: {{ section.settings.left_column_width_percent }}%;
+    --khw-right: {{ 100 | minus: section.settings.left_column_width_percent }}%;
+    --khw-wave-color: {{ section.settings.wavy_line_color }};
+    --khw-wave-thickness: {{ section.settings.wavy_line_thickness }}px;
+    --khw-wave-width: {{ section.settings.wavy_line_width }}px;
+    --khw-wave-offset: {{ section.settings.wavy_line_offset }}px;
+    --khw-eb-ff: {{ section.settings.eyebrow_font_family }};
+    --khw-eb-fs-d: {{ section.settings.eyebrow_font_size_desktop }}px;
+    --khw-eb-fs-m: {{ section.settings.eyebrow_font_size_mobile }}px;
+    --khw-eb-fw: {{ section.settings.eyebrow_font_weight }};
+    --khw-h-ff: {{ section.settings.heading_font_family }};
+    --khw-h-fs-d: {{ section.settings.heading_font_size_desktop }}px;
+    --khw-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --khw-h-fw: {{ section.settings.heading_font_weight }};
+    --khw-h-color: {{ section.settings.heading_color }};
+    --khw-sh-ff: {{ section.settings.subheading_font_family }};
+    --khw-sh-fs-d: {{ section.settings.subheading_font_size_desktop }}px;
+    --khw-sh-fs-m: {{ section.settings.subheading_font_size_mobile }}px;
+    --khw-sh-fw: {{ section.settings.subheading_font_weight }};
+    --khw-sh-color: {{ section.settings.subheading_color }};
+    --khw-b-ff: {{ section.settings.bullets_font_family }};
+    --khw-b-fs-d: {{ section.settings.bullets_font_size_desktop }}px;
+    --khw-b-fs-m: {{ section.settings.bullets_font_size_mobile }}px;
+    --khw-b-fw: {{ section.settings.bullets_font_weight }};
+    --khw-b-color: {{ section.settings.bullets_color }};
+    --khw-b-gap: {{ section.settings.bullet_gap }}px;
+  "
+>
+  <div class="page-width">
+    <div class="kefey-howto__layout">
+      <div class="kefey-howto__left">
+        {%- if section.settings.left_image != blank -%}
+          <div class="kefey-howto__left-media">
+            {{
+              section.settings.left_image
+              | image_url: width: 840
+              | image_tag:
+                class: 'kefey-howto__left-image',
+                widths: '320, 520, 700, 840',
+                sizes: '(min-width: 990px) 22vw, 86vw',
+                loading: 'lazy',
+                alt: section.settings.eyebrow
+            }}
           </div>
         {%- endif -%}
-      {%- endfor -%}
+
+        <p class="kefey-howto__eyebrow">{{ section.settings.eyebrow }}</p>
+        <span class="kefey-howto__wave" aria-hidden="true">
+          <svg viewBox="0 0 160 16" preserveAspectRatio="none" focusable="false" aria-hidden="true">
+            <path d="M0 8c10 0 10-8 20-8s10 8 20 8 10-8 20-8 10 8 20 8 10-8 20-8 10 8 20 8 10-8 20-8 10 8 20 8"></path>
+          </svg>
+        </span>
+        <h2 class="kefey-howto__heading">{{ section.settings.heading }}</h2>
+        <p class="kefey-howto__subheading">{{ section.settings.subheading }}</p>
+        <ul class="kefey-howto__bullets">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'bullet' -%}
+              <li {{ block.shopify_attributes }}>{{ block.settings.text }}</li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+
+      <div class="kefey-howto__right">
+        {%- if section.settings.right_image != blank -%}
+          {{
+            section.settings.right_image
+            | image_url: width: 1400
+            | image_tag:
+              class: 'kefey-howto__right-image',
+              widths: '420, 760, 1000, 1400',
+              sizes: '(min-width: 990px) 42vw, 92vw',
+              loading: 'lazy',
+              alt: section.settings.heading
+          }}
+        {%- endif -%}
+      </div>
     </div>
   </div>
 </section>
@@ -28,22 +90,50 @@
 {
   "name": "Product How To Kefey",
   "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "MADE TO BE ENJOYED" },
     { "type": "text", "id": "heading", "label": "Heading", "default": "Two stars, twice daily." },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Chew slowly. Enjoy the taste. Take this as part of your ritual." }
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Chew slowly. Enjoy the taste. Take in the moment." },
+    { "type": "image_picker", "id": "left_image", "label": "Left image (optional)" },
+    { "type": "image_picker", "id": "right_image", "label": "Right image" },
+    { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 220, "step": 4, "default": 64, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 220, "step": 4, "default": 66, "unit": "px" },
+    { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 1000, "max": 1800, "step": 20, "default": 1360, "unit": "px" },
+    { "type": "range", "id": "column_gap", "label": "Column gap", "min": 10, "max": 140, "step": 2, "default": 40, "unit": "px" },
+    { "type": "range", "id": "left_column_width_percent", "label": "Left column width %", "min": 30, "max": 65, "step": 1, "default": 46, "unit": "%" },
+    { "type": "color", "id": "wavy_line_color", "label": "Wavy line color", "default": "#4bb3b5" },
+    { "type": "range", "id": "wavy_line_thickness", "label": "Wavy line thickness", "min": 1, "max": 6, "step": 1, "default": 3, "unit": "px" },
+    { "type": "range", "id": "wavy_line_width", "label": "Wavy line width", "min": 60, "max": 280, "step": 2, "default": 220, "unit": "px" },
+    { "type": "range", "id": "wavy_line_offset", "label": "Wavy line offset", "min": 0, "max": 26, "step": 1, "default": 8, "unit": "px" },
+    { "type": "header", "content": "Eyebrow Typography" },
+    { "type": "text", "id": "eyebrow_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "eyebrow_font_size_desktop", "label": "Size desktop", "min": 10, "max": 40, "step": 1, "default": 22, "unit": "px" },
+    { "type": "range", "id": "eyebrow_font_size_mobile", "label": "Size mobile", "min": 10, "max": 34, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "eyebrow_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Heading Typography" },
+    { "type": "text", "id": "heading_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "heading_font_size_desktop", "label": "Size desktop", "min": 20, "max": 96, "step": 1, "default": 64, "unit": "px" },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Size mobile", "min": 18, "max": 72, "step": 1, "default": 48, "unit": "px" },
+    { "type": "range", "id": "heading_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#e75b3a" },
+    { "type": "header", "content": "Subheading Typography" },
+    { "type": "text", "id": "subheading_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "subheading_font_size_desktop", "label": "Size desktop", "min": 14, "max": 56, "step": 1, "default": 30, "unit": "px" },
+    { "type": "range", "id": "subheading_font_size_mobile", "label": "Size mobile", "min": 14, "max": 42, "step": 1, "default": 30, "unit": "px" },
+    { "type": "range", "id": "subheading_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "color", "id": "subheading_color", "label": "Subheading color", "default": "#0f0f0f" },
+    { "type": "header", "content": "Bullets Typography" },
+    { "type": "text", "id": "bullets_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "bullets_font_size_desktop", "label": "Size desktop", "min": 14, "max": 48, "step": 1, "default": 24, "unit": "px" },
+    { "type": "range", "id": "bullets_font_size_mobile", "label": "Size mobile", "min": 14, "max": 36, "step": 1, "default": 22, "unit": "px" },
+    { "type": "range", "id": "bullets_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 500 },
+    { "type": "color", "id": "bullets_color", "label": "Bullets color", "default": "#0f0f0f" },
+    { "type": "range", "id": "bullet_gap", "label": "Bullet gap", "min": 2, "max": 40, "step": 1, "default": 10, "unit": "px" }
   ],
   "blocks": [
     {
-      "type": "instruction",
-      "name": "Instruction",
-      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "Take 2 gummies daily with or without food." }]
-    },
-    {
-      "type": "badge",
-      "name": "Badge",
-      "settings": [
-        { "type": "image_picker", "id": "image", "label": "Badge image" },
-        { "type": "text", "id": "alt", "label": "Alt text", "default": "Trust badge" }
-      ]
+      "type": "bullet",
+      "name": "Bullet",
+      "settings": [{ "type": "text", "id": "text", "label": "Text", "default": "With or without food" }]
     }
   ],
   "max_blocks": 12,
@@ -51,15 +141,10 @@
     {
       "name": "Product How To Kefey",
       "blocks": [
-        { "type": "instruction", "settings": { "text": "Take 2 gummies daily." } },
-        { "type": "instruction", "settings": { "text": "Chew thoroughly before swallowing." } },
-        { "type": "instruction", "settings": { "text": "Use consistently for best results." } },
-        { "type": "badge" },
-        { "type": "badge" },
-        { "type": "badge" },
-        { "type": "badge" },
-        { "type": "badge" },
-        { "type": "badge" }
+        { "type": "bullet", "settings": { "text": "With or without food" } },
+        { "type": "bullet", "settings": { "text": "No rush." } },
+        { "type": "bullet", "settings": { "text": "No rules." } },
+        { "type": "bullet", "settings": { "text": "Just consistency." } }
       ]
     }
   ]
