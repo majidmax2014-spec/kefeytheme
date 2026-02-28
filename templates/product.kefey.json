@@ -758,9 +758,24 @@
     },
     "risk_free_existing": {
       "type": "risk-free-banner",
+      "blocks": {
+        "decor_3nwTa8": {
+          "type": "decor",
+          "settings": {
+            "decor_image": "shopify://shop_images/right-decor.png",
+            "width": 200,
+            "top": 45,
+            "right": 1,
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "decor_3nwTa8"
+      ],
       "settings": {
         "background_color": "#2bb4a7",
-        "section_height_desktop": 220,
+        "section_height_desktop": 283,
         "section_height_mobile": 180,
         "padding_left_right": 40,
         "heading": "TRY IT WITH CONFIDENCE!",
@@ -773,12 +788,13 @@
         "button_text_color": "#ffffff",
         "button_border_color": "#ffffff",
         "button_bg_color": "#ffffff",
-        "badge_type": "text",
+        "badge_type": "image",
         "badge_image": "shopify://shop_images/money-back.png",
         "badge_size": 160,
-        "badge_text_center": "kefey",
-        "badge_text_ring": "MONEYBACK GUARANTEED",
+        "badge_text_center": "",
+        "badge_text_ring": "",
         "left_decor_enabled": true,
+        "left_decor_image": "shopify://shop_images/left-decor.png",
         "right_decor_enabled": true
       }
     },
