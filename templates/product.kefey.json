@@ -678,12 +678,6 @@
         "arrows_color": "#111111"
       }
     },
-    "faq_kefey": {
-      "type": "product-faq-kefey",
-      "settings": {
-        "heading": "Frequently Asked Questions"
-      }
-    },
     "risk_free_existing": {
       "type": "risk-free-banner",
       "blocks": {
@@ -781,7 +775,7 @@
         "heading": "Joyful Routines. That’s Why They Stay!",
         "heading_size": 36,
         "heading_font_family": "inherit",
-        "heading_font_weight": "inherit",
+        "heading_font_weight": "700",
         "text_font_family": "inherit",
         "text_font_weight": "inherit",
         "text_font_size": 14,
@@ -809,6 +803,113 @@
         "padding_bottom": 40
       }
     },
+    "our_story_intro_meUKqr": {
+      "type": "our-story-intro",
+      "name": "Our Story Intro",
+      "settings": {
+        "heading": "Frequently Asked Questions",
+        "highlight_color": "#2BB4A7",
+        "heading_size": 36,
+        "heading_font_family": "heading",
+        "heading_font_weight": "700",
+        "body_text": "",
+        "accent_text": "",
+        "accent_color": "#E15241",
+        "body_font_size": 18,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "accent_font_size": 22,
+        "padding_top": 52,
+        "padding_bottom": 20,
+        "max_width": 880,
+        "text_alignment": "center"
+      }
+    },
+    "main_faqs_c7RTat": {
+      "type": "main-faqs",
+      "blocks": {
+        "category_g6aa7m": {
+          "type": "category",
+          "settings": {
+            "title": ""
+          }
+        },
+        "faq_qLHQBH": {
+          "type": "faq",
+          "settings": {
+            "question": "Is Kefey® safe for daily use?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        },
+        "faq_yTj7FV": {
+          "type": "faq",
+          "settings": {
+            "question": "What if it’s not for me?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        },
+        "faq_J8QCBn": {
+          "type": "faq",
+          "settings": {
+            "question": "Does it contain sugar or caffeine?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        },
+        "faq_dU96GC": {
+          "type": "faq",
+          "settings": {
+            "question": "How long until I feel the difference?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        },
+        "faq_4bCRWk": {
+          "type": "faq",
+          "settings": {
+            "question": "Where is Kefey® made?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        },
+        "faq_33fYa9": {
+          "type": "faq",
+          "settings": {
+            "question": "Is Kefey® packaging eco-friendly?",
+            "answer": "<p>Add your answer here.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category_g6aa7m",
+        "faq_qLHQBH",
+        "faq_yTj7FV",
+        "faq_J8QCBn",
+        "faq_dU96GC",
+        "faq_4bCRWk",
+        "faq_33fYa9"
+      ],
+      "name": "Main FAQs",
+      "settings": {
+        "max_width": 1160,
+        "category_title_color": "#29B6B3",
+        "category_title_size": 44,
+        "column_gap": 40,
+        "row_border_color": "#D8D8D8",
+        "row_padding_y": 16,
+        "question_size": 20,
+        "answer_size": 16,
+        "help_title": "",
+        "help_text": "",
+        "help_email": "",
+        "help_hours": "",
+        "help_font_family": "inherit",
+        "help_font_size": 16,
+        "help_font_weight": "500",
+        "help_line_height": 1.5,
+        "show_help_icons": true,
+        "help_icon_size": 16,
+        "padding_top": 40,
+        "padding_bottom": 56
+      }
+    },
     "final_cta_kefey": {
       "type": "product-final-cta-kefey",
       "settings": {
@@ -828,9 +929,10 @@
     "callouts_kefey",
     "howto_kefey",
     "certifications_kefey",
-    "faq_kefey",
     "risk_free_existing",
     "joyful_routines_existing",
+    "our_story_intro_meUKqr",
+    "main_faqs_c7RTat",
     "final_cta_kefey"
   ]
 }
