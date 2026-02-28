@@ -410,7 +410,111 @@
     },
     "callouts_kefey": {
       "type": "product-callouts-kefey",
-      "settings": {}
+      "blocks": {
+        "nutrition_row_zfb3Hh": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Calories",
+            "value": "15"
+          }
+        },
+        "nutrition_row_McUzAD": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Sodium",
+            "value": "10 mg"
+          }
+        },
+        "nutrition_row_c8njQE": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Total Carbohydrate",
+            "value": "3 g"
+          }
+        },
+        "nutrition_row_VcPmUz": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Zinc",
+            "value": "1.7 mg"
+          }
+        }
+      },
+      "block_order": [
+        "nutrition_row_zfb3Hh",
+        "nutrition_row_McUzAD",
+        "nutrition_row_c8njQE",
+        "nutrition_row_VcPmUz"
+      ],
+      "settings": {
+        "left_column_width_percent": 45,
+        "section_bg_color": "#f4c820",
+        "teal_box_color": "#4bb3b5",
+        "white_header_bg_color": "#ffffff",
+        "light_text_color": "#ffffff",
+        "dark_text_color": "#1f1f1f",
+        "divider_line_opacity": 45,
+        "box_radius": 0,
+        "box_border_color": "#ffffff73",
+        "box_border_thickness": 1,
+        "left_headline": "Each Serving (2 Gummies) = Nature, Concentrated with Joy",
+        "left_body": "Every two Kefey Mood Gummies combine premium plant extracts and essential nutrients — thoughtfully balanced to support calm, focus, and daily wellbeing.",
+        "left_image": "shopify://shop_images/gummies.png",
+        "box1_heading": "Each Serving Contains:",
+        "box1_amount_label": "Amount Per 2 Gummies",
+        "box2_title": "Blend of Premium Quality Herbal Extracts",
+        "box2_amount": "600 mg",
+        "box2_body": "Ashwagandha Root Extract (Withania Somnifera), Maca Root Extract (Lepidium Meyenii), Gotu Kola Extract (Centella Asiatica), Vervain Extract (Verbena Officinalis), Moringa Leaf Extract (Moringa Oleifera), Korean Red Ginseng Root & Stem Extract (Panax Ginseng), Milk thistle Seeds Extract (Silybum Marianum).",
+        "box3_title": "Other Ingredients",
+        "box3_body": "Maltitol Syrup, Isomalt, Erythritol, Pectin, Malic Acid, Sodium Citrate, Citric Acid, Calcium Lactate, Natural Strawberry Flavor, Beet Root Powder (Color), Stevia Leaf Extract, Coconut Oil (Coating).",
+        "bottom_heading": "Does NOT Contain",
+        "bottom_body": "Sugar, Yeast, Wheat, Eggs, Gluten, Soy, Gelatin, Peanuts, Shellfish, Dairy, Synthetic Colors, Agave, Palm Oil, and Bee Products.",
+        "left_headline_font_family": "inherit",
+        "left_headline_font_size_desktop": 24,
+        "left_headline_font_size_mobile": 32,
+        "left_headline_font_weight": 700,
+        "left_text_font_family": "inherit",
+        "left_text_font_size_desktop": 16,
+        "left_text_font_size_mobile": 14,
+        "left_text_font_weight": 500,
+        "left_text_line_height": 1.4,
+        "box1_heading_font_family": "inherit",
+        "box1_heading_font_size_desktop": 20,
+        "box1_heading_font_size_mobile": 30,
+        "box1_heading_font_weight": 700,
+        "table_font_family": "inherit",
+        "table_font_size_desktop": 16,
+        "table_font_size_mobile": 22,
+        "table_font_weight": 500,
+        "table_line_height": 1.4,
+        "box2_title_font_family": "inherit",
+        "box2_title_font_size_desktop": 16,
+        "box2_title_font_size_mobile": 26,
+        "box2_title_font_weight": 700,
+        "box2_text_font_family": "inherit",
+        "box2_text_font_size_desktop": 16,
+        "box2_text_font_size_mobile": 20,
+        "box2_text_font_weight": 500,
+        "box2_text_line_height": 1.4,
+        "box3_title_font_family": "inherit",
+        "box3_title_font_size_desktop": 16,
+        "box3_title_font_size_mobile": 26,
+        "box3_title_font_weight": 700,
+        "box3_text_font_family": "inherit",
+        "box3_text_font_size_desktop": 16,
+        "box3_text_font_size_mobile": 20,
+        "box3_text_font_weight": 500,
+        "box3_text_line_height": 1.4,
+        "bottom_heading_font_family": "inherit",
+        "bottom_heading_font_size_desktop": 24,
+        "bottom_heading_font_size_mobile": 32,
+        "bottom_heading_font_weight": 700,
+        "bottom_text_font_family": "inherit",
+        "bottom_text_font_size_desktop": 16,
+        "bottom_text_font_size_mobile": 24,
+        "bottom_text_font_weight": 500,
+        "bottom_text_line_height": 1.4
+      }
     },
     "howto_kefey": {
       "type": "product-howto-kefey",
