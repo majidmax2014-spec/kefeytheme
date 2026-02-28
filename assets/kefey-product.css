@@ -859,10 +859,14 @@
   background: var(--kc-teal, #4bb3b5);
   color: var(--kc-light-text, #fff);
   padding: 22px 24px;
+  border: var(--kc-box-border-w, 1px) solid var(--kc-box-border-color, rgba(255, 255, 255, 0.45));
+  border-radius: var(--kc-box-radius, 18px);
 }
 
 .kefey-callouts__box--table {
   padding: 0;
+  border-radius: var(--kc-box-radius, 18px);
+  overflow: hidden;
 }
 
 .kefey-callouts__box1-header {
@@ -874,10 +878,17 @@
   font-weight: var(--kc-b1h-fw, 700);
   line-height: 1.2;
   padding: 18px 20px;
+  border-top-left-radius: var(--kc-box-radius, 18px);
+  border-top-right-radius: var(--kc-box-radius, 18px);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 .kefey-callouts__box1-body {
   padding: 14px 18px 20px;
+  border-top: 0;
+  border-bottom-left-radius: var(--kc-box-radius, 18px);
+  border-bottom-right-radius: var(--kc-box-radius, 18px);
 }
 
 .kefey-callouts__box1-amount {
@@ -972,7 +983,7 @@
 }
 
 .kefey-callouts__bottom {
-  margin-top: 28px;
+  margin-top: 6px;
   text-align: center;
 }
 
@@ -987,7 +998,7 @@
 
 .kefey-callouts__bottom-text {
   margin: 10px auto 0;
-  max-width: 900px;
+  max-width: 100%;
   color: var(--kc-light-text, #fff);
   font-family: var(--kc-bt-ff, inherit);
   font-size: var(--kc-bt-fs-d, 18px);

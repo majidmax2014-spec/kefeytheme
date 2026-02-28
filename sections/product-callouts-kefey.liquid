@@ -10,6 +10,9 @@
     --kc-light-text: {{ section.settings.light_text_color }};
     --kc-dark-text: {{ section.settings.dark_text_color }};
     --kc-line-opacity: {{ section.settings.divider_line_opacity | divided_by: 100.0 }};
+    --kc-box-radius: {{ section.settings.box_radius }}px;
+    --kc-box-border-color: {{ section.settings.box_border_color }};
+    --kc-box-border-w: {{ section.settings.box_border_thickness }}px;
     --kc-lh-ff: {{ section.settings.left_headline_font_family }};
     --kc-lh-fs-d: {{ section.settings.left_headline_font_size_desktop }}px;
     --kc-lh-fs-m: {{ section.settings.left_headline_font_size_mobile }}px;
@@ -60,8 +63,8 @@
   <div class="page-width">
     <div class="kefey-callouts__grid">
       <div class="kefey-callouts__left">
-        <div class="kefey-callouts__left-headline">{{ section.settings.left_headline_text }}</div>
-        <p class="kefey-callouts__left-text">{{ section.settings.left_paragraph_text }}</p>
+        <div class="kefey-callouts__left-headline">{{ section.settings.left_headline }}</div>
+        <p class="kefey-callouts__left-text">{{ section.settings.left_body }}</p>
         <div class="kefey-callouts__left-image-wrap">
           {%- if section.settings.left_image != blank -%}
             {{
@@ -72,7 +75,7 @@
                 widths: '420, 700, 900, 1200, 1400',
                 sizes: '(min-width: 990px) 42vw, 92vw',
                 loading: 'lazy',
-                alt: section.settings.left_headline_text
+                alt: section.settings.left_headline
             }}
           {%- endif -%}
         </div>
@@ -80,46 +83,38 @@
 
       <div class="kefey-callouts__right">
         <article class="kefey-callouts__box kefey-callouts__box--table">
-          <div class="kefey-callouts__box1-header">{{ section.settings.box1_heading_text }}</div>
+          <div class="kefey-callouts__box1-header">{{ section.settings.box1_heading }}</div>
           <div class="kefey-callouts__box1-body">
             <div class="kefey-callouts__box1-amount">{{ section.settings.box1_amount_label }}</div>
-            <div class="kefey-callouts__table-row">
-              <span class="kefey-callouts__table-label">{{ section.settings.box1_row1_label }}</span>
-              <span class="kefey-callouts__table-value">{{ section.settings.box1_row1_value }}</span>
-            </div>
-            <div class="kefey-callouts__table-row">
-              <span class="kefey-callouts__table-label">{{ section.settings.box1_row2_label }}</span>
-              <span class="kefey-callouts__table-value">{{ section.settings.box1_row2_value }}</span>
-            </div>
-            <div class="kefey-callouts__table-row">
-              <span class="kefey-callouts__table-label">{{ section.settings.box1_row3_label }}</span>
-              <span class="kefey-callouts__table-value">{{ section.settings.box1_row3_value }}</span>
-            </div>
-            <div class="kefey-callouts__table-row">
-              <span class="kefey-callouts__table-label">{{ section.settings.box1_row4_label }}</span>
-              <span class="kefey-callouts__table-value">{{ section.settings.box1_row4_value }}</span>
-            </div>
+            {%- for block in section.blocks -%}
+              {%- if block.type == 'nutrition_row' -%}
+                <div class="kefey-callouts__table-row" {{ block.shopify_attributes }}>
+                  <span class="kefey-callouts__table-label">{{ block.settings.label }}</span>
+                  <span class="kefey-callouts__table-value">{{ block.settings.value }}</span>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
           </div>
         </article>
 
         <article class="kefey-callouts__box kefey-callouts__box--blend">
           <div class="kefey-callouts__box-title-row">
-            <h3 class="kefey-callouts__box-title">{{ section.settings.box2_title_text }}</h3>
-            <span class="kefey-callouts__box-mg">{{ section.settings.box2_mg_text }}</span>
+            <h3 class="kefey-callouts__box-title">{{ section.settings.box2_title }}</h3>
+            <span class="kefey-callouts__box-mg">{{ section.settings.box2_amount }}</span>
           </div>
-          <p class="kefey-callouts__box-text">{{ section.settings.box2_body_text }}</p>
+          <p class="kefey-callouts__box-text">{{ section.settings.box2_body }}</p>
         </article>
 
         <article class="kefey-callouts__box kefey-callouts__box--other">
-          <h3 class="kefey-callouts__box-title">{{ section.settings.box3_title_text }}</h3>
-          <p class="kefey-callouts__box-text">{{ section.settings.box3_body_text }}</p>
+          <h3 class="kefey-callouts__box-title">{{ section.settings.box3_title }}</h3>
+          <p class="kefey-callouts__box-text">{{ section.settings.box3_body }}</p>
+        </article>
+
+        <article class="kefey-callouts__bottom">
+          <h3 class="kefey-callouts__bottom-heading">{{ section.settings.bottom_heading }}</h3>
+          <p class="kefey-callouts__bottom-text">{{ section.settings.bottom_body }}</p>
         </article>
       </div>
-    </div>
-
-    <div class="kefey-callouts__bottom">
-      <h3 class="kefey-callouts__bottom-heading">{{ section.settings.bottom_heading_text }}</h3>
-      <p class="kefey-callouts__bottom-text">{{ section.settings.bottom_body_text }}</p>
     </div>
   </div>
 </section>
@@ -135,39 +130,34 @@
     { "type": "color", "id": "light_text_color", "label": "Light text color", "default": "#ffffff" },
     { "type": "color", "id": "dark_text_color", "label": "Dark text color", "default": "#1f1f1f" },
     { "type": "range", "id": "divider_line_opacity", "label": "Divider line opacity", "min": 0, "max": 100, "step": 1, "default": 45, "unit": "%" },
+    { "type": "range", "id": "box_radius", "label": "Box radius", "min": 0, "max": 40, "step": 1, "default": 18, "unit": "px" },
+    { "type": "color", "id": "box_border_color", "label": "Box border color", "default": "rgba(255,255,255,0.45)" },
+    { "type": "range", "id": "box_border_thickness", "label": "Box border thickness", "min": 1, "max": 4, "step": 1, "default": 1, "unit": "px" },
     { "type": "header", "content": "Content" },
-    { "type": "text", "id": "left_headline_text", "label": "Left headline", "default": "Each Serving (2 Gummies) = Nature, Concentrated with Joy" },
-    { "type": "textarea", "id": "left_paragraph_text", "label": "Left paragraph", "default": "Every two Kefey Mood Gummies combine premium plant extracts and essential nutrients — thoughtfully balanced to support calm, focus, and daily wellbeing." },
+    { "type": "textarea", "id": "left_headline", "label": "Left headline", "default": "Each Serving (2 Gummies) = Nature, Concentrated with Joy" },
+    { "type": "textarea", "id": "left_body", "label": "Left body", "default": "Every two Kefey Mood Gummies combine premium plant extracts and essential nutrients — thoughtfully balanced to support calm, focus, and daily wellbeing." },
     { "type": "image_picker", "id": "left_image", "label": "Left image" },
-    { "type": "text", "id": "box1_heading_text", "label": "Box 1 heading", "default": "Each Serving Contains:" },
+    { "type": "text", "id": "box1_heading", "label": "Box 1 heading", "default": "Each Serving Contains:" },
     { "type": "text", "id": "box1_amount_label", "label": "Box 1 amount label", "default": "Amount Per 2 Gummies" },
-    { "type": "text", "id": "box1_row1_label", "label": "Box 1 row 1 label", "default": "Calories" },
-    { "type": "text", "id": "box1_row1_value", "label": "Box 1 row 1 value", "default": "15" },
-    { "type": "text", "id": "box1_row2_label", "label": "Box 1 row 2 label", "default": "Sodium" },
-    { "type": "text", "id": "box1_row2_value", "label": "Box 1 row 2 value", "default": "10 mg" },
-    { "type": "text", "id": "box1_row3_label", "label": "Box 1 row 3 label", "default": "Total Carbohydrate" },
-    { "type": "text", "id": "box1_row3_value", "label": "Box 1 row 3 value", "default": "3 g" },
-    { "type": "text", "id": "box1_row4_label", "label": "Box 1 row 4 label", "default": "Zinc" },
-    { "type": "text", "id": "box1_row4_value", "label": "Box 1 row 4 value", "default": "1.7 mg" },
-    { "type": "text", "id": "box2_title_text", "label": "Box 2 title", "default": "Blend of Premium Quality Herbal Extracts" },
-    { "type": "text", "id": "box2_mg_text", "label": "Box 2 mg text", "default": "600 mg" },
+    { "type": "text", "id": "box2_title", "label": "Box 2 title", "default": "Blend of Premium Quality Herbal Extracts" },
+    { "type": "text", "id": "box2_amount", "label": "Box 2 amount", "default": "600 mg" },
     {
       "type": "textarea",
-      "id": "box2_body_text",
+      "id": "box2_body",
       "label": "Box 2 body",
       "default": "Ashwagandha Root Extract (Withania Somnifera), Maca Root Extract (Lepidium Meyenii), Gotu Kola Extract (Centella Asiatica), Vervain Extract (Verbena Officinalis), Moringa Leaf Extract (Moringa Oleifera), Korean Red Ginseng Root & Stem Extract (Panax Ginseng), Milk thistle Seeds Extract (Silybum Marianum)."
     },
-    { "type": "text", "id": "box3_title_text", "label": "Box 3 title", "default": "Other Ingredients" },
+    { "type": "text", "id": "box3_title", "label": "Box 3 title", "default": "Other Ingredients" },
     {
       "type": "textarea",
-      "id": "box3_body_text",
+      "id": "box3_body",
       "label": "Box 3 body",
       "default": "Maltitol Syrup, Isomalt, Erythritol, Pectin, Malic Acid, Sodium Citrate, Citric Acid, Calcium Lactate, Natural Strawberry Flavor, Beet Root Powder (Color), Stevia Leaf Extract, Coconut Oil (Coating)."
     },
-    { "type": "text", "id": "bottom_heading_text", "label": "Bottom heading", "default": "Does NOT Contain" },
+    { "type": "text", "id": "bottom_heading", "label": "Bottom heading", "default": "Does NOT Contain" },
     {
       "type": "textarea",
-      "id": "bottom_body_text",
+      "id": "bottom_body",
       "label": "Bottom text",
       "default": "Sugar, Yeast, Wheat, Eggs, Gluten, Soy, Gelatin, Peanuts, Shellfish, Dairy, Synthetic Colors, Agave, Palm Oil, and Bee Products."
     },
@@ -226,10 +216,25 @@
     { "type": "range", "id": "bottom_text_font_weight", "label": "Text weight", "min": 300, "max": 900, "step": 100, "default": 500 },
     { "type": "range", "id": "bottom_text_line_height", "label": "Text line height", "min": 1.0, "max": 2.0, "step": 0.1, "default": 1.4 }
   ],
-  "blocks": [],
+  "blocks": [
+    {
+      "type": "nutrition_row",
+      "name": "Nutrition row",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Calories" },
+        { "type": "text", "id": "value", "label": "Value", "default": "15" }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "Product Callouts Kefey"
+      "name": "Product Callouts Kefey",
+      "blocks": [
+        { "type": "nutrition_row", "settings": { "label": "Calories", "value": "15" } },
+        { "type": "nutrition_row", "settings": { "label": "Sodium", "value": "10 mg" } },
+        { "type": "nutrition_row", "settings": { "label": "Total Carbohydrate", "value": "3 g" } },
+        { "type": "nutrition_row", "settings": { "label": "Zinc", "value": "1.7 mg" } }
+      ]
     }
   ]
 }
