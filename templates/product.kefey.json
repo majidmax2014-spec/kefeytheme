@@ -1022,7 +1022,7 @@
         "slider_bg_color": "#f4c820",
         "divider_color": "#ffffff",
         "divider_width": 3,
-        "handle_size": 68,
+        "handle_size": 60,
         "handle_bg_color": "#ffffff",
         "handle_icon_color": "#4bb3b5",
         "heading_font_family": "inherit",
