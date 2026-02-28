@@ -23,6 +23,8 @@
     --kf-slider-h-m: {{ section.settings.slider_height_mobile }}px;
     --kf-slider-bg: {{ section.settings.slider_bg_color }};
     --kf-divider-color: {{ section.settings.divider_color }};
+    --kf-divider-w: {{ section.settings.divider_width }}px;
+    --kf-handle-size: {{ section.settings.handle_size }}px;
     --kf-handle-bg: {{ section.settings.handle_bg_color }};
     --kf-handle-icon: {{ section.settings.handle_icon_color }};
     --kf-btn-bg: {{ section.settings.button_bg_color }};
@@ -37,7 +39,7 @@
 
     <p class="kefey-final-cta__shift">{{ section.settings.shift_text }}</p>
 
-    <div class="kefey-final-cta__slider" data-kefey-beforeafter data-slider style="--pos:50%;">
+    <div class="kefey-final-cta__slider" data-kefey-beforeafter data-slider data-default-position="{{ section.settings.default_position }}" style="--pos: {{ section.settings.default_position }}%;">
       <div class="kefey-final-cta__images" data-kefey-ba-track>
         <div class="kefey-final-cta__layer kefey-final-cta__layer--after">
           {%- if section.settings.after_image != blank -%}
@@ -80,7 +82,7 @@
         aria-label="Before and after comparison"
         aria-valuemin="0"
         aria-valuemax="100"
-        aria-valuenow="50"
+        aria-valuenow="{{ section.settings.default_position }}"
         data-kefey-ba-handle
       >
         <span class="kefey-final-cta__handle-icon" aria-hidden="true"></span>
@@ -108,8 +110,11 @@
     { "type": "image_picker", "id": "after_image", "label": "After image (right)" },
     { "type": "range", "id": "slider_height_desktop", "label": "Slider height desktop", "min": 220, "max": 900, "step": 10, "default": 560, "unit": "px" },
     { "type": "range", "id": "slider_height_mobile", "label": "Slider height mobile", "min": 180, "max": 620, "step": 10, "default": 360, "unit": "px" },
+    { "type": "range", "id": "default_position", "label": "Default slider position", "min": 0, "max": 100, "step": 1, "default": 50, "unit": "%" },
     { "type": "color", "id": "slider_bg_color", "label": "Slider background", "default": "#f4c820" },
     { "type": "color", "id": "divider_color", "label": "Divider color", "default": "#ffffff" },
+    { "type": "range", "id": "divider_width", "label": "Divider width", "min": 1, "max": 8, "step": 1, "default": 2, "unit": "px" },
+    { "type": "range", "id": "handle_size", "label": "Handle size", "min": 28, "max": 120, "step": 2, "default": 56, "unit": "px" },
     { "type": "color", "id": "handle_bg_color", "label": "Handle background", "default": "#ffffff" },
     { "type": "color", "id": "handle_icon_color", "label": "Handle icon color", "default": "#4bb3b5" },
     { "type": "header", "content": "Heading Typography" },

@@ -26,6 +26,116 @@
     });
   }
 
+  function initCertCarousels(scope) {
+    var carousels = (scope || document).querySelectorAll('[data-kefey-certs]');
+    carousels.forEach(function (carousel) {
+      var track = carousel.querySelector('[data-kefey-certs-track]');
+      if (!track) return;
+
+      var prev = carousel.querySelector('[data-kefey-certs-prev]');
+      var next = carousel.querySelector('[data-kefey-certs-next]');
+      var step = function () {
+        return Math.max(240, Math.floor(track.clientWidth * 0.9));
+      };
+
+      if (prev) {
+        prev.addEventListener('click', function () {
+          track.scrollBy({ left: -step(), behavior: 'smooth' });
+        });
+      }
+      if (next) {
+        next.addEventListener('click', function () {
+          track.scrollBy({ left: step(), behavior: 'smooth' });
+        });
+      }
+    });
+  }
+
+  function initFinalCtaSlider(scope) {
+    var sliders = (scope || document).querySelectorAll('[data-kefey-beforeafter]');
+    sliders.forEach(function (slider) {
+      var track = slider.querySelector('[data-kefey-ba-track]');
+      var handle = slider.querySelector('[data-kefey-ba-handle]');
+      if (!track || !handle) return;
+
+      var defaultPos = parseFloat(slider.getAttribute('data-default-position') || '50');
+      var value = isNaN(defaultPos) ? 50 : defaultPos;
+      var dragging = false;
+
+      function clamp(num, min, max) {
+        return Math.min(max, Math.max(min, num));
+      }
+
+      function setValue(next) {
+        value = clamp(next, 0, 100);
+        slider.style.setProperty('--pos', value + '%');
+        handle.setAttribute('aria-valuenow', String(Math.round(value)));
+      }
+
+      function pointToValue(clientX) {
+        var rect = track.getBoundingClientRect();
+        if (rect.width <= 0) return value;
+        return ((clientX - rect.left) / rect.width) * 100;
+      }
+
+      function onPointerMove(clientX) {
+        setValue(pointToValue(clientX));
+      }
+
+      function onMouseMove(evt) {
+        if (!dragging) return;
+        onPointerMove(evt.clientX);
+      }
+
+      function onTouchMove(evt) {
+        if (!dragging || !evt.touches || !evt.touches.length) return;
+        evt.preventDefault();
+        onPointerMove(evt.touches[0].clientX);
+      }
+
+      function endDrag() {
+        dragging = false;
+        document.removeEventListener('mousemove', onMouseMove);
+        document.removeEventListener('mouseup', endDrag);
+        document.removeEventListener('touchmove', onTouchMove);
+        document.removeEventListener('touchend', endDrag);
+      }
+
+      function startDrag(evt) {
+        evt.preventDefault();
+        dragging = true;
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchmove', onTouchMove, { passive: false });
+        document.addEventListener('touchend', endDrag);
+      }
+
+      slider.addEventListener('click', function (evt) {
+        if (dragging) return;
+        if (evt.target === handle || handle.contains(evt.target)) return;
+        onPointerMove(evt.clientX);
+      });
+
+      handle.addEventListener('mousedown', startDrag);
+      handle.addEventListener('touchstart', function (evt) {
+        if (!evt.touches || !evt.touches.length) return;
+        startDrag(evt);
+      }, { passive: false });
+
+      handle.addEventListener('keydown', function (evt) {
+        if (evt.key === 'ArrowLeft') {
+          evt.preventDefault();
+          setValue(value - 2);
+        } else if (evt.key === 'ArrowRight') {
+          evt.preventDefault();
+          setValue(value + 2);
+        }
+      });
+
+      setValue(value);
+    });
+  }
+
   function initFaqAria(scope) {
     var items = (scope || document).querySelectorAll('.kefey-product-faq__item');
     items.forEach(function (item) {
@@ -230,6 +340,8 @@
 
   function init(scope) {
     initIngredientsCarousels(scope);
+    initCertCarousels(scope);
+    initFinalCtaSlider(scope);
     initFaqAria(scope);
     initPurchaseModule(scope);
   }

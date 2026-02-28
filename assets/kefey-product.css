@@ -1266,7 +1266,7 @@
   top: 0;
   bottom: 0;
   left: var(--pos, 50%);
-  width: 2px;
+  width: var(--kf-divider-w, 2px);
   background: var(--kf-divider-color, #fff);
   transform: translateX(-50%);
   pointer-events: none;
@@ -1276,8 +1276,8 @@
   position: absolute;
   left: var(--pos, 50%);
   top: 50%;
-  width: 56px;
-  height: 56px;
+  width: var(--kf-handle-size, 56px);
+  height: var(--kf-handle-size, 56px);
   transform: translate(-50%, -50%);
   border: 0;
   border-radius: 50%;
@@ -1296,8 +1296,8 @@
 
 .kefey-final-cta__handle-icon {
   position: relative;
-  width: 12px;
-  height: 16px;
+  width: calc(var(--kf-handle-size, 56px) * 0.22);
+  height: calc(var(--kf-handle-size, 56px) * 0.3);
 }
 
 .kefey-final-cta__handle-icon::before,
@@ -1305,7 +1305,7 @@
   content: "";
   position: absolute;
   top: 0;
-  width: 4px;
+  width: max(2px, calc(var(--kf-handle-size, 56px) * 0.07));
   height: 100%;
   border-radius: 2px;
   background: var(--kf-handle-icon, #4bb3b5);
@@ -1767,8 +1767,8 @@
   }
 
   .kefey-final-cta__handle {
-    width: 48px;
-    height: 48px;
+    width: min(var(--kf-handle-size, 56px), 48px);
+    height: min(var(--kf-handle-size, 56px), 48px);
   }
 
   .kefey-final-cta__btn {
