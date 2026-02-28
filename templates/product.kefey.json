@@ -678,46 +678,96 @@
         "arrows_color": "#111111"
       }
     },
-    "risk_free_existing": {
-      "type": "risk-free-banner",
+    "text_marquee_bar_f7CQmU": {
+      "type": "text-marquee-bar",
       "blocks": {
-        "decor_wQaAn9": {
-          "type": "decor",
+        "item_ze6iYN": {
+          "type": "item",
           "settings": {
-            "decor_image": "shopify://shop_images/right-decor.png",
-            "width": 200,
-            "top": 50,
-            "right": 1,
-            "alt": ""
+            "text": "FRIENDLY"
+          }
+        },
+        "item_dfnAcL": {
+          "type": "item",
+          "settings": {
+            "text": "ECO FRIENDLY"
+          }
+        },
+        "item_diAfQA": {
+          "type": "item",
+          "settings": {
+            "text": "SUGAR FREE"
+          }
+        },
+        "item_mW8RwC": {
+          "type": "item",
+          "settings": {
+            "text": "GELATIN FREE"
+          }
+        },
+        "item_L9XTJb": {
+          "type": "item",
+          "settings": {
+            "text": "GLUTEN FREE"
+          }
+        },
+        "item_DdqT8a": {
+          "type": "item",
+          "settings": {
+            "text": "NON–GMO"
+          }
+        },
+        "item_Htd99f": {
+          "type": "item",
+          "settings": {
+            "text": "GMP CERTIFIED"
+          }
+        },
+        "item_xDD7yX": {
+          "type": "item",
+          "settings": {
+            "text": "KOSHER"
+          }
+        },
+        "item_E9fXqV": {
+          "type": "item",
+          "settings": {
+            "text": "HALAL"
           }
         }
       },
       "block_order": [
-        "decor_wQaAn9"
+        "item_ze6iYN",
+        "item_dfnAcL",
+        "item_diAfQA",
+        "item_mW8RwC",
+        "item_L9XTJb",
+        "item_DdqT8a",
+        "item_Htd99f",
+        "item_xDD7yX",
+        "item_E9fXqV"
       ],
+      "name": "Text Marquee Bar",
       "settings": {
-        "background_color": "#2bb4a7",
-        "section_height_desktop": 280,
-        "section_height_mobile": 180,
-        "padding_left_right": 40,
-        "heading": "TRY IT WITH CONFIDENCE!",
-        "text": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund.",
-        "button_label": "CHECKOUT NOW",
-        "button_link": "",
-        "button_style": "outline",
-        "heading_color": "#ffc94d",
-        "text_color": "#ffffff",
-        "button_text_color": "#ffffff",
-        "button_border_color": "#ffffff",
-        "button_bg_color": "#ffffff",
-        "badge_type": "image",
-        "badge_image": "shopify://shop_images/money-back.png",
-        "badge_size": 160,
-        "badge_text_center": "kefey",
-        "badge_text_ring": "MONEYBACK GUARANTEED",
-        "left_decor_enabled": true,
-        "left_decor_image": "shopify://shop_images/left-decor.png",
-        "right_decor_enabled": true
+        "enabled": true,
+        "background_color": "#f4c820",
+        "text_color": "#121212",
+        "bar_height_desktop": 80,
+        "bar_height_mobile": 60,
+        "font_size_desktop": 20,
+        "font_size_mobile": 16,
+        "font_weight": "700",
+        "letter_spacing": 1,
+        "gap": 28,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "separator_text": "|",
+        "speed": 18,
+        "direction": "left",
+        "enable_rtl": false,
+        "pause_on_hover": true,
+        "pause_on_focus": true,
+        "aria_label": "Scrolling product benefits"
       }
     },
     "joyful_routines_existing": {
@@ -910,6 +960,48 @@
         "padding_bottom": 56
       }
     },
+    "risk_free_existing": {
+      "type": "risk-free-banner",
+      "blocks": {
+        "decor_wQaAn9": {
+          "type": "decor",
+          "settings": {
+            "decor_image": "shopify://shop_images/right-decor.png",
+            "width": 200,
+            "top": 50,
+            "right": 1,
+            "alt": ""
+          }
+        }
+      },
+      "block_order": [
+        "decor_wQaAn9"
+      ],
+      "settings": {
+        "background_color": "#2bb4a7",
+        "section_height_desktop": 280,
+        "section_height_mobile": 180,
+        "padding_left_right": 40,
+        "heading": "TRY IT WITH CONFIDENCE!",
+        "text": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund.",
+        "button_label": "CHECKOUT NOW",
+        "button_link": "",
+        "button_style": "outline",
+        "heading_color": "#ffc94d",
+        "text_color": "#ffffff",
+        "button_text_color": "#ffffff",
+        "button_border_color": "#ffffff",
+        "button_bg_color": "#ffffff",
+        "badge_type": "image",
+        "badge_image": "shopify://shop_images/money-back.png",
+        "badge_size": 160,
+        "badge_text_center": "kefey",
+        "badge_text_ring": "MONEYBACK GUARANTEED",
+        "left_decor_enabled": true,
+        "left_decor_image": "shopify://shop_images/left-decor.png",
+        "right_decor_enabled": true
+      }
+    },
     "final_cta_kefey": {
       "type": "product-final-cta-kefey",
       "settings": {
@@ -923,6 +1015,7 @@
         "underline_extra_width": 20,
         "before_image": "shopify://shop_images/slider1.png",
         "after_image": "shopify://shop_images/slider2.png",
+        "slider_max_width": 1020,
         "slider_height_desktop": 560,
         "slider_height_mobile": 360,
         "default_position": 50,
@@ -961,10 +1054,11 @@
     "callouts_kefey",
     "howto_kefey",
     "certifications_kefey",
-    "risk_free_existing",
+    "text_marquee_bar_f7CQmU",
     "joyful_routines_existing",
     "our_story_intro_meUKqr",
     "main_faqs_c7RTat",
+    "risk_free_existing",
     "final_cta_kefey"
   ]
 }
