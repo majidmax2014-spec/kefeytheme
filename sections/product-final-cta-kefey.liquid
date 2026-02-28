@@ -1,10 +1,11 @@
 <section
   class="kefey-final-cta"
   style="
+    --kf-underline-enabled: {% if section.settings.underline_enabled %}1{% else %}0{% endif %};
     --kf-underline-color: {{ section.settings.underline_color }};
     --kf-underline-h: {{ section.settings.underline_height }}px;
     --kf-underline-offset: {{ section.settings.underline_offset }}px;
-    --kf-underline-extra: {{ section.settings.underline_extra_padding }}px;
+    --kf-underline-extra: {{ section.settings.underline_extra_width }}px;
     --kf-h-ff: {{ section.settings.heading_font_family }};
     --kf-h-fs-d: {{ section.settings.heading_font_size_desktop }}px;
     --kf-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
@@ -30,13 +31,13 @@
 >
   <div class="page-width kefey-final-cta__inner">
     <h2 class="kefey-final-cta__heading">
-      <span class="kefey-final-cta__line kefey-final-cta__line--first">{{ section.settings.heading_line_1 }}</span>
-      <span class="kefey-final-cta__line">{{ section.settings.heading_line_2 }}</span>
+      <span class="kefey-final-cta__heading-line1">{{ section.settings.heading_line_1 }}</span>
+      <span class="kefey-final-cta__heading-line2">{{ section.settings.heading_line_2 }}</span>
     </h2>
 
     <p class="kefey-final-cta__shift">{{ section.settings.shift_text }}</p>
 
-    <div class="kefey-final-cta__slider" data-kefey-beforeafter>
+    <div class="kefey-final-cta__slider" data-kefey-beforeafter data-slider style="--pos:50%;">
       <div class="kefey-final-cta__images" data-kefey-ba-track>
         <div class="kefey-final-cta__layer kefey-final-cta__layer--after">
           {%- if section.settings.after_image != blank -%}
@@ -50,6 +51,8 @@
                 loading: 'lazy',
                 alt: section.settings.shift_text
             }}
+          {%- else -%}
+            <div class="kefey-final-cta__placeholder" aria-hidden="true"></div>
           {%- endif -%}
         </div>
         <div class="kefey-final-cta__layer kefey-final-cta__layer--before" data-kefey-ba-before>
@@ -64,6 +67,8 @@
                 loading: 'lazy',
                 alt: section.settings.shift_text
             }}
+          {%- else -%}
+            <div class="kefey-final-cta__placeholder" aria-hidden="true"></div>
           {%- endif -%}
         </div>
       </div>
@@ -93,10 +98,11 @@
     { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Sometimes, balance is just" },
     { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "a small joyful habit away." },
     { "type": "text", "id": "shift_text", "label": "Shift text", "default": "FEEL THE SHIFT." },
+    { "type": "checkbox", "id": "underline_enabled", "label": "Enable underline", "default": true },
     { "type": "color", "id": "underline_color", "label": "Underline color", "default": "#f4c820" },
     { "type": "range", "id": "underline_height", "label": "Underline height", "min": 4, "max": 24, "step": 1, "default": 12, "unit": "px" },
     { "type": "range", "id": "underline_offset", "label": "Underline vertical offset", "min": -8, "max": 12, "step": 1, "default": 0, "unit": "px" },
-    { "type": "range", "id": "underline_extra_padding", "label": "Underline extra width", "min": 0, "max": 80, "step": 2, "default": 20, "unit": "px" },
+    { "type": "range", "id": "underline_extra_width", "label": "Underline extra width", "min": 0, "max": 80, "step": 2, "default": 20, "unit": "px" },
     { "type": "header", "content": "Slider Images" },
     { "type": "image_picker", "id": "before_image", "label": "Before image (left)" },
     { "type": "image_picker", "id": "after_image", "label": "After image (right)" },
