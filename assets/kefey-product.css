@@ -1175,26 +1175,159 @@
   padding: 0 0 14px;
 }
 
-.kefey-product-final-cta {
+/* -------------------------------
+   Kefey Final CTA
+------------------------------- */
+.kefey-final-cta {
+  background: #ececec;
+  padding: 56px 0 66px;
+}
+
+.kefey-final-cta__inner {
   text-align: center;
 }
 
-.kefey-product-final-cta__image {
-  width: min(100%, 460px);
-  border-radius: 16px;
-  margin: 14px auto 0;
+.kefey-final-cta__heading {
+  margin: 0;
+  font-family: var(--kf-h-ff, inherit);
+  font-size: var(--kf-h-fs-d, 64px);
+  font-weight: var(--kf-h-fw, 700);
+  line-height: 1.08;
+  color: #111;
+}
+
+.kefey-final-cta__line {
   display: block;
 }
 
-.kefey-product-final-cta__btn {
+.kefey-final-cta__line--first {
+  position: relative;
   display: inline-block;
-  margin-top: 16px;
-  padding: 12px 32px;
-  border-radius: var(--kp-radius-pill);
-  background: var(--kp-teal);
-  color: #fff;
+  padding: 0 var(--kf-underline-extra, 20px);
+}
+
+.kefey-final-cta__line--first::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--kf-underline-h, 12px);
+  background: var(--kf-underline-color, #f4c820);
+  bottom: var(--kf-underline-offset, 0px);
+  z-index: -1;
+}
+
+.kefey-final-cta__shift {
+  margin: 34px 0 0;
+  color: #111;
+  font-family: var(--kf-s-ff, inherit);
+  font-size: var(--kf-s-fs-d, 26px);
+  font-weight: var(--kf-s-fw, 700);
+  letter-spacing: var(--kf-s-ls, 0px);
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.kefey-final-cta__slider {
+  width: min(100%, 960px);
+  height: var(--kf-slider-h-d, 560px);
+  margin: 24px auto 0;
+  position: relative;
+  background: var(--kf-slider-bg, #f4c820);
+  overflow: hidden;
+}
+
+.kefey-final-cta__images,
+.kefey-final-cta__layer {
+  position: absolute;
+  inset: 0;
+}
+
+.kefey-final-cta__layer--before {
+  width: 50%;
+  overflow: hidden;
+}
+
+.kefey-final-cta__image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.kefey-final-cta__divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: var(--kf-divider-color, #fff);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.kefey-final-cta__handle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 56px;
+  height: 56px;
+  transform: translate(-50%, -50%);
+  border: 0;
+  border-radius: 50%;
+  background: var(--kf-handle-bg, #fff);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.kefey-final-cta__handle:focus-visible {
+  outline: 2px solid #111;
+  outline-offset: 2px;
+}
+
+.kefey-final-cta__handle-icon {
+  position: relative;
+  width: 12px;
+  height: 16px;
+}
+
+.kefey-final-cta__handle-icon::before,
+.kefey-final-cta__handle-icon::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--kf-handle-icon, #4bb3b5);
+}
+
+.kefey-final-cta__handle-icon::before {
+  left: 1px;
+}
+
+.kefey-final-cta__handle-icon::after {
+  right: 1px;
+}
+
+.kefey-final-cta__btn {
+  display: inline-flex;
+  margin-top: 28px;
+  min-height: 64px;
+  min-width: 340px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 30px;
   text-decoration: none;
-  font-weight: 700;
+  background: var(--kf-btn-bg, #4bb3b5);
+  color: var(--kf-btn-color, #fff);
+  font-family: var(--kf-b-ff, inherit);
+  font-size: var(--kf-b-fs-d, 24px);
+  font-weight: var(--kf-b-fw, 700);
+  line-height: 1;
 }
 
 /* -------------------------------
@@ -1600,6 +1733,37 @@
 
   .kefey-certs__arrow {
     display: none;
+  }
+
+  .kefey-final-cta {
+    padding: 36px 0 46px;
+  }
+
+  .kefey-final-cta__heading {
+    font-size: var(--kf-h-fs-m, 40px);
+  }
+
+  .kefey-final-cta__shift {
+    margin-top: 18px;
+    font-size: var(--kf-s-fs-m, 22px);
+  }
+
+  .kefey-final-cta__slider {
+    width: 100%;
+    height: var(--kf-slider-h-m, 360px);
+    margin-top: 18px;
+  }
+
+  .kefey-final-cta__handle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .kefey-final-cta__btn {
+    min-width: 0;
+    width: min(100%, 430px);
+    margin-top: 18px;
+    font-size: var(--kf-b-fs-m, 20px);
   }
 }
 

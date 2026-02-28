@@ -1,11 +1,88 @@
-<section class="kefey-product kefey-product-section kefey-product-section--yellow">
-  <div class="page-width kefey-product-final-cta">
-    <h2 class="kefey-product__title">{{ section.settings.heading }}</h2>
-    <p class="kefey-product__desc">{{ section.settings.subheading }}</p>
-    {%- if section.settings.image != blank -%}
-      {{ section.settings.image | image_url: width: 920 | image_tag: class: 'kefey-product-final-cta__image', loading: 'lazy', alt: section.settings.heading }}
-    {%- endif -%}
-    <a class="kefey-product-final-cta__btn" href="{{ section.settings.button_link }}">{{ section.settings.button_label }}</a>
+<section
+  class="kefey-final-cta"
+  style="
+    --kf-underline-color: {{ section.settings.underline_color }};
+    --kf-underline-h: {{ section.settings.underline_height }}px;
+    --kf-underline-offset: {{ section.settings.underline_offset }}px;
+    --kf-underline-extra: {{ section.settings.underline_extra_padding }}px;
+    --kf-h-ff: {{ section.settings.heading_font_family }};
+    --kf-h-fs-d: {{ section.settings.heading_font_size_desktop }}px;
+    --kf-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --kf-h-fw: {{ section.settings.heading_font_weight }};
+    --kf-s-ff: {{ section.settings.shift_font_family }};
+    --kf-s-fs-d: {{ section.settings.shift_font_size_desktop }}px;
+    --kf-s-fs-m: {{ section.settings.shift_font_size_mobile }}px;
+    --kf-s-fw: {{ section.settings.shift_font_weight }};
+    --kf-s-ls: {{ section.settings.shift_letter_spacing }}px;
+    --kf-b-ff: {{ section.settings.button_font_family }};
+    --kf-b-fs-d: {{ section.settings.button_font_size_desktop }}px;
+    --kf-b-fs-m: {{ section.settings.button_font_size_mobile }}px;
+    --kf-b-fw: {{ section.settings.button_font_weight }};
+    --kf-slider-h-d: {{ section.settings.slider_height_desktop }}px;
+    --kf-slider-h-m: {{ section.settings.slider_height_mobile }}px;
+    --kf-slider-bg: {{ section.settings.slider_bg_color }};
+    --kf-divider-color: {{ section.settings.divider_color }};
+    --kf-handle-bg: {{ section.settings.handle_bg_color }};
+    --kf-handle-icon: {{ section.settings.handle_icon_color }};
+    --kf-btn-bg: {{ section.settings.button_bg_color }};
+    --kf-btn-color: {{ section.settings.button_text_color }};
+  "
+>
+  <div class="page-width kefey-final-cta__inner">
+    <h2 class="kefey-final-cta__heading">
+      <span class="kefey-final-cta__line kefey-final-cta__line--first">{{ section.settings.heading_line_1 }}</span>
+      <span class="kefey-final-cta__line">{{ section.settings.heading_line_2 }}</span>
+    </h2>
+
+    <p class="kefey-final-cta__shift">{{ section.settings.shift_text }}</p>
+
+    <div class="kefey-final-cta__slider" data-kefey-beforeafter>
+      <div class="kefey-final-cta__images" data-kefey-ba-track>
+        <div class="kefey-final-cta__layer kefey-final-cta__layer--after">
+          {%- if section.settings.after_image != blank -%}
+            {{
+              section.settings.after_image
+              | image_url: width: 1800
+              | image_tag:
+                class: 'kefey-final-cta__image',
+                widths: '600, 900, 1200, 1600, 1800',
+                sizes: '(min-width: 990px) 960px, 94vw',
+                loading: 'lazy',
+                alt: section.settings.shift_text
+            }}
+          {%- endif -%}
+        </div>
+        <div class="kefey-final-cta__layer kefey-final-cta__layer--before" data-kefey-ba-before>
+          {%- if section.settings.before_image != blank -%}
+            {{
+              section.settings.before_image
+              | image_url: width: 1800
+              | image_tag:
+                class: 'kefey-final-cta__image',
+                widths: '600, 900, 1200, 1600, 1800',
+                sizes: '(min-width: 990px) 960px, 94vw',
+                loading: 'lazy',
+                alt: section.settings.shift_text
+            }}
+          {%- endif -%}
+        </div>
+      </div>
+      <div class="kefey-final-cta__divider" data-kefey-ba-divider></div>
+      <button
+        class="kefey-final-cta__handle"
+        type="button"
+        role="slider"
+        aria-label="Before and after comparison"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="50"
+        data-kefey-ba-handle
+      >
+        <span class="kefey-final-cta__handle-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <a class="kefey-final-cta__btn" href="{{ section.settings.cta_link | default: '/cart' }}">{{ section.settings.cta_label }}</a>
   </div>
 </section>
 
@@ -13,11 +90,42 @@
 {
   "name": "Product Final CTA Kefey",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Sometimes, balance is just a tiny joyful bite away." },
-    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Feel the shift." },
-    { "type": "image_picker", "id": "image", "label": "Image" },
-    { "type": "text", "id": "button_label", "label": "Button label", "default": "CHECKOUT NOW" },
-    { "type": "url", "id": "button_link", "label": "Button link" }
+    { "type": "text", "id": "heading_line_1", "label": "Heading line 1", "default": "Sometimes, balance is just" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2", "default": "a small joyful habit away." },
+    { "type": "text", "id": "shift_text", "label": "Shift text", "default": "FEEL THE SHIFT." },
+    { "type": "color", "id": "underline_color", "label": "Underline color", "default": "#f4c820" },
+    { "type": "range", "id": "underline_height", "label": "Underline height", "min": 4, "max": 24, "step": 1, "default": 12, "unit": "px" },
+    { "type": "range", "id": "underline_offset", "label": "Underline vertical offset", "min": -8, "max": 12, "step": 1, "default": 0, "unit": "px" },
+    { "type": "range", "id": "underline_extra_padding", "label": "Underline extra width", "min": 0, "max": 80, "step": 2, "default": 20, "unit": "px" },
+    { "type": "header", "content": "Slider Images" },
+    { "type": "image_picker", "id": "before_image", "label": "Before image (left)" },
+    { "type": "image_picker", "id": "after_image", "label": "After image (right)" },
+    { "type": "range", "id": "slider_height_desktop", "label": "Slider height desktop", "min": 220, "max": 900, "step": 10, "default": 560, "unit": "px" },
+    { "type": "range", "id": "slider_height_mobile", "label": "Slider height mobile", "min": 180, "max": 620, "step": 10, "default": 360, "unit": "px" },
+    { "type": "color", "id": "slider_bg_color", "label": "Slider background", "default": "#f4c820" },
+    { "type": "color", "id": "divider_color", "label": "Divider color", "default": "#ffffff" },
+    { "type": "color", "id": "handle_bg_color", "label": "Handle background", "default": "#ffffff" },
+    { "type": "color", "id": "handle_icon_color", "label": "Handle icon color", "default": "#4bb3b5" },
+    { "type": "header", "content": "Heading Typography" },
+    { "type": "text", "id": "heading_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "heading_font_size_desktop", "label": "Size desktop", "min": 20, "max": 96, "step": 1, "default": 64, "unit": "px" },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Size mobile", "min": 18, "max": 72, "step": 1, "default": 40, "unit": "px" },
+    { "type": "range", "id": "heading_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "header", "content": "Shift Typography" },
+    { "type": "text", "id": "shift_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "shift_font_size_desktop", "label": "Size desktop", "min": 12, "max": 72, "step": 1, "default": 26, "unit": "px" },
+    { "type": "range", "id": "shift_font_size_mobile", "label": "Size mobile", "min": 12, "max": 56, "step": 1, "default": 22, "unit": "px" },
+    { "type": "range", "id": "shift_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "range", "id": "shift_letter_spacing", "label": "Letter spacing", "min": -2.0, "max": 8.0, "step": 0.1, "default": 0.0, "unit": "px" },
+    { "type": "header", "content": "Button Typography" },
+    { "type": "text", "id": "button_font_family", "label": "Font family", "default": "inherit" },
+    { "type": "range", "id": "button_font_size_desktop", "label": "Size desktop", "min": 12, "max": 48, "step": 1, "default": 24, "unit": "px" },
+    { "type": "range", "id": "button_font_size_mobile", "label": "Size mobile", "min": 12, "max": 36, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range", "id": "button_font_weight", "label": "Weight", "min": 300, "max": 900, "step": 100, "default": 700 },
+    { "type": "color", "id": "button_bg_color", "label": "Button background", "default": "#4bb3b5" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#ffffff" },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "CHECKOUT NOW" },
+    { "type": "url", "id": "cta_link", "label": "Button link" }
   ],
   "presets": [{ "name": "Product Final CTA Kefey" }]
 }
