@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "cart-items": {
@@ -10,30 +19,51 @@
     },
     "cart-footer": {
       "type": "main-cart-footer",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "padding_top": 20,
-        "padding_bottom": 40
-      },
       "blocks": {
         "subtotal": {
           "type": "subtotal",
-          "settings": {
-          }
+          "settings": {}
         },
         "buttons": {
           "type": "buttons",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
         "subtotal",
         "buttons"
-      ]
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
+    },
+    "header_banner_b9xhCr": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "heading": "We reimagine wellness as joy",
+        "subheading": "Little rituals that care for you and the world around you",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 56,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 24,
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 360,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24
+      }
     }
   },
   "order": [
+    "header_banner_b9xhCr",
     "cart-items",
     "cart-footer"
   ]
