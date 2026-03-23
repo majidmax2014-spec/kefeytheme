@@ -1,5 +1,14 @@
 {{ 'component-cart.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign checkout_ff = 'inherit'
+  if section.settings.checkout_font_family == 'heading'
+    assign checkout_ff = 'var(--font-heading-family)'
+  elsif section.settings.checkout_font_family == 'body'
+    assign checkout_ff = 'var(--font-body-family)'
+  endif
+-%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -7,7 +16,7 @@
   }
 
   #main-cart-footer {
-    --k-checkout-family: {{ section.settings.checkout_font_family | default: 'inherit' }};
+    --k-checkout-family: {{ checkout_ff }};
     --k-checkout-size: {{ section.settings.checkout_font_size }}px;
     --k-checkout-weight: {{ section.settings.checkout_font_weight }};
   }
@@ -86,10 +95,15 @@
       "content": "Checkout button typography"
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "checkout_font_family",
       "label": "Font family",
-      "default": "var(--font-heading-family)"
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",

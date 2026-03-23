@@ -3,6 +3,92 @@
 {{ 'component-price.css' | asset_url | stylesheet_tag }}
 {{ 'component-discounts.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign offers_heading_ff = 'inherit'
+  if section.settings.offers_heading_font_family == 'heading'
+    assign offers_heading_ff = 'var(--font-heading-family)'
+  elsif section.settings.offers_heading_font_family == 'body'
+    assign offers_heading_ff = 'var(--font-body-family)'
+  endif
+
+  assign offer_title_ff = 'inherit'
+  if section.settings.offer_title_font_family == 'heading'
+    assign offer_title_ff = 'var(--font-heading-family)'
+  elsif section.settings.offer_title_font_family == 'body'
+    assign offer_title_ff = 'var(--font-body-family)'
+  endif
+
+  assign offer_line_ff = 'inherit'
+  if section.settings.offer_line_font_family == 'heading'
+    assign offer_line_ff = 'var(--font-heading-family)'
+  elsif section.settings.offer_line_font_family == 'body'
+    assign offer_line_ff = 'var(--font-body-family)'
+  endif
+
+  assign offer_button_ff = 'inherit'
+  if section.settings.offer_button_font_family == 'heading'
+    assign offer_button_ff = 'var(--font-heading-family)'
+  elsif section.settings.offer_button_font_family == 'body'
+    assign offer_button_ff = 'var(--font-body-family)'
+  endif
+
+  assign table_heading_ff = 'inherit'
+  if section.settings.table_heading_font_family == 'heading'
+    assign table_heading_ff = 'var(--font-heading-family)'
+  elsif section.settings.table_heading_font_family == 'body'
+    assign table_heading_ff = 'var(--font-body-family)'
+  endif
+
+  assign product_title_ff = 'inherit'
+  if section.settings.product_title_font_family == 'heading'
+    assign product_title_ff = 'var(--font-heading-family)'
+  elsif section.settings.product_title_font_family == 'body'
+    assign product_title_ff = 'var(--font-body-family)'
+  endif
+
+  assign product_meta_ff = 'inherit'
+  if section.settings.product_meta_font_family == 'heading'
+    assign product_meta_ff = 'var(--font-heading-family)'
+  elsif section.settings.product_meta_font_family == 'body'
+    assign product_meta_ff = 'var(--font-body-family)'
+  endif
+
+  assign product_price_ff = 'inherit'
+  if section.settings.product_price_font_family == 'heading'
+    assign product_price_ff = 'var(--font-heading-family)'
+  elsif section.settings.product_price_font_family == 'body'
+    assign product_price_ff = 'var(--font-body-family)'
+  endif
+
+  assign upsell_label_ff = 'inherit'
+  if section.settings.upsell_label_font_family == 'heading'
+    assign upsell_label_ff = 'var(--font-heading-family)'
+  elsif section.settings.upsell_label_font_family == 'body'
+    assign upsell_label_ff = 'var(--font-body-family)'
+  endif
+
+  assign upsell_button_ff = 'inherit'
+  if section.settings.upsell_button_font_family == 'heading'
+    assign upsell_button_ff = 'var(--font-heading-family)'
+  elsif section.settings.upsell_button_font_family == 'body'
+    assign upsell_button_ff = 'var(--font-body-family)'
+  endif
+
+  assign upsell_total_ff = 'inherit'
+  if section.settings.upsell_total_font_family == 'heading'
+    assign upsell_total_ff = 'var(--font-heading-family)'
+  elsif section.settings.upsell_total_font_family == 'body'
+    assign upsell_total_ff = 'var(--font-body-family)'
+  endif
+
+  assign remove_label_ff = 'inherit'
+  if section.settings.remove_font_family == 'heading'
+    assign remove_label_ff = 'var(--font-heading-family)'
+  elsif section.settings.remove_font_family == 'body'
+    assign remove_label_ff = 'var(--font-body-family)'
+  endif
+-%}
+
 {%- style -%}
   .section-{{ section.id }}-padding {
     padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
@@ -10,52 +96,52 @@
   }
 
   .kefey-cart-page {
-    --k-offers-heading-family: {{ section.settings.offers_heading_font_family | default: 'inherit' }};
+    --k-offers-heading-family: {{ offers_heading_ff }};
     --k-offers-heading-size: {{ section.settings.offers_heading_font_size }}px;
     --k-offers-heading-weight: {{ section.settings.offers_heading_font_weight }};
 
-    --k-offer-title-family: {{ section.settings.offer_title_font_family | default: 'inherit' }};
+    --k-offer-title-family: {{ offer_title_ff }};
     --k-offer-title-size: {{ section.settings.offer_title_font_size }}px;
     --k-offer-title-weight: {{ section.settings.offer_title_font_weight }};
 
-    --k-offer-line-family: {{ section.settings.offer_line_font_family | default: 'inherit' }};
+    --k-offer-line-family: {{ offer_line_ff }};
     --k-offer-line1-size: {{ section.settings.offer_line1_font_size }}px;
     --k-offer-line2-size: {{ section.settings.offer_line2_font_size }}px;
     --k-offer-line-weight: {{ section.settings.offer_line_font_weight }};
 
-    --k-offer-button-family: {{ section.settings.offer_button_font_family | default: 'inherit' }};
+    --k-offer-button-family: {{ offer_button_ff }};
     --k-offer-button-size: {{ section.settings.offer_button_font_size }}px;
     --k-offer-button-weight: {{ section.settings.offer_button_font_weight }};
 
-    --k-table-heading-family: {{ section.settings.table_heading_font_family | default: 'inherit' }};
+    --k-table-heading-family: {{ table_heading_ff }};
     --k-table-heading-size: {{ section.settings.table_heading_font_size }}px;
     --k-table-heading-weight: {{ section.settings.table_heading_font_weight }};
 
-    --k-product-title-family: {{ section.settings.product_title_font_family | default: 'inherit' }};
+    --k-product-title-family: {{ product_title_ff }};
     --k-product-title-size: {{ section.settings.product_title_font_size }}px;
     --k-product-title-weight: {{ section.settings.product_title_font_weight }};
 
-    --k-product-meta-family: {{ section.settings.product_meta_font_family | default: 'inherit' }};
+    --k-product-meta-family: {{ product_meta_ff }};
     --k-product-meta-size: {{ section.settings.product_meta_font_size }}px;
     --k-product-meta-weight: {{ section.settings.product_meta_font_weight }};
 
-    --k-product-price-family: {{ section.settings.product_price_font_family | default: 'inherit' }};
+    --k-product-price-family: {{ product_price_ff }};
     --k-product-price-size: {{ section.settings.product_price_font_size }}px;
     --k-product-price-weight: {{ section.settings.product_price_font_weight }};
 
-    --k-upsell-label-family: {{ section.settings.upsell_label_font_family | default: 'inherit' }};
+    --k-upsell-label-family: {{ upsell_label_ff }};
     --k-upsell-label-size: {{ section.settings.upsell_label_font_size }}px;
     --k-upsell-label-weight: {{ section.settings.upsell_label_font_weight }};
 
-    --k-upsell-button-family: {{ section.settings.upsell_button_font_family | default: 'inherit' }};
+    --k-upsell-button-family: {{ upsell_button_ff }};
     --k-upsell-button-size: {{ section.settings.upsell_button_font_size }}px;
     --k-upsell-button-weight: {{ section.settings.upsell_button_font_weight }};
 
-    --k-upsell-total-family: {{ section.settings.upsell_total_font_family | default: 'inherit' }};
+    --k-upsell-total-family: {{ upsell_total_ff }};
     --k-upsell-total-size: {{ section.settings.upsell_total_font_size }}px;
     --k-upsell-total-weight: {{ section.settings.upsell_total_font_weight }};
 
-    --k-remove-family: {{ section.settings.remove_font_family | default: 'inherit' }};
+    --k-remove-family: {{ remove_label_ff }};
     --k-remove-size: {{ section.settings.remove_font_size }}px;
     --k-remove-weight: {{ section.settings.remove_font_weight }};
   }
@@ -609,10 +695,15 @@
       "content": "Typography controls"
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "offers_heading_font_family",
       "label": "Offers heading font family",
-      "default": "var(--font-heading-family)"
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -634,10 +725,15 @@
       "default": 700
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "offer_title_font_family",
       "label": "Offer title font family",
-      "default": "var(--font-heading-family)"
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -659,10 +755,15 @@
       "default": 700
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "offer_line_font_family",
       "label": "Offer text font family",
-      "default": "var(--font-body-family)"
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -694,10 +795,15 @@
       "default": 600
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "offer_button_font_family",
       "label": "Offer button font family",
-      "default": "var(--font-heading-family)"
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -719,10 +825,15 @@
       "default": 700
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "table_heading_font_family",
       "label": "Table heading font family",
-      "default": "var(--font-body-family)"
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -744,10 +855,15 @@
       "default": 500
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "product_title_font_family",
       "label": "Product title font family",
-      "default": "var(--font-heading-family)"
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -769,10 +885,15 @@
       "default": 500
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "product_meta_font_family",
       "label": "Product meta font family",
-      "default": "var(--font-body-family)"
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -794,10 +915,15 @@
       "default": 500
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "product_price_font_family",
       "label": "Price font family",
-      "default": "var(--font-heading-family)"
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -819,10 +945,15 @@
       "default": 400
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "remove_font_family",
       "label": "Remove label font family",
-      "default": "var(--font-body-family)"
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -844,10 +975,15 @@
       "default": 500
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "upsell_label_font_family",
       "label": "Upsell label font family",
-      "default": "var(--font-heading-family)"
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -869,10 +1005,15 @@
       "default": 500
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "upsell_button_font_family",
       "label": "Upsell button font family",
-      "default": "var(--font-heading-family)"
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
@@ -894,10 +1035,15 @@
       "default": 600
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "upsell_total_font_family",
       "label": "Upsell total font family",
-      "default": "var(--font-heading-family)"
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
     },
     {
       "type": "range",
