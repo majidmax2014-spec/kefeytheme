@@ -41,6 +41,70 @@
       <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
         <div class="js-contents">
           {%- if cart != empty -%}
+            <div class="kefey-cart-offers" aria-label="Cart offers">
+              {%- if section.settings.offers_heading != blank -%}
+                <h2 class="kefey-cart-offers__heading">
+                  <span>{{ section.settings.offers_heading }}</span>
+                </h2>
+              {%- endif -%}
+
+              <div class="kefey-cart-offers__grid">
+                <article class="kefey-cart-offer-card">
+                  {%- if section.settings.offer_left_image != blank -%}
+                    <div class="kefey-cart-offer-card__image-wrap">
+                      {{
+                        section.settings.offer_left_image
+                        | image_url: width: 260
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '140,180,220,260',
+                          class: 'kefey-cart-offer-card__image',
+                          alt: section.settings.offer_left_title
+                      }}
+                    </div>
+                  {%- endif -%}
+
+                  <div class="kefey-cart-offer-card__content">
+                    <h3>{{ section.settings.offer_left_title }}</h3>
+                    <p class="kefey-cart-offer-card__line1">{{ section.settings.offer_left_line1 }}</p>
+                    <p class="kefey-cart-offer-card__line2">{{ section.settings.offer_left_line2 }}</p>
+                    {%- if section.settings.offer_left_button_label != blank -%}
+                      <a href="{{ section.settings.offer_left_button_link | default: '#' }}" class="kefey-cart-offer-card__button">
+                        {{ section.settings.offer_left_button_label }}
+                      </a>
+                    {%- endif -%}
+                  </div>
+                </article>
+
+                <article class="kefey-cart-offer-card">
+                  <div class="kefey-cart-offer-card__content">
+                    <h3>{{ section.settings.offer_right_title }}</h3>
+                    <p class="kefey-cart-offer-card__line1">{{ section.settings.offer_right_line1 }}</p>
+                    <p class="kefey-cart-offer-card__line2">{{ section.settings.offer_right_line2 }}</p>
+                    {%- if section.settings.offer_right_button_label != blank -%}
+                      <a href="{{ section.settings.offer_right_button_link | default: '#' }}" class="kefey-cart-offer-card__button">
+                        {{ section.settings.offer_right_button_label }}
+                      </a>
+                    {%- endif -%}
+                  </div>
+
+                  {%- if section.settings.offer_right_image != blank -%}
+                    <div class="kefey-cart-offer-card__image-wrap kefey-cart-offer-card__image-wrap--right">
+                      {{
+                        section.settings.offer_right_image
+                        | image_url: width: 260
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '140,180,220,260',
+                          class: 'kefey-cart-offer-card__image',
+                          alt: section.settings.offer_right_title
+                      }}
+                    </div>
+                  {%- endif -%}
+                </article>
+              </div>
+            </div>
+
             <table class="cart-items kefey-cart-table" role="table">
               <caption class="visually-hidden">
                 {{ 'sections.cart.title' | t }}
@@ -277,6 +341,84 @@
       "unit": "px",
       "label": "Bottom padding",
       "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Top offers strip"
+    },
+    {
+      "type": "text",
+      "id": "offers_heading",
+      "label": "Heading",
+      "default": "One step away from Joy in a Gummy!"
+    },
+    {
+      "type": "image_picker",
+      "id": "offer_left_image",
+      "label": "Left offer image"
+    },
+    {
+      "type": "text",
+      "id": "offer_left_title",
+      "label": "Left offer title",
+      "default": "BIG SMILE BUNDLE"
+    },
+    {
+      "type": "text",
+      "id": "offer_left_line1",
+      "label": "Left offer line 1",
+      "default": "Buy 4 Mood Gummies & SAVE 25%"
+    },
+    {
+      "type": "text",
+      "id": "offer_left_line2",
+      "label": "Left offer line 2",
+      "default": "Because Joy is Better When it's Shared!"
+    },
+    {
+      "type": "text",
+      "id": "offer_left_button_label",
+      "label": "Left offer button label",
+      "default": "GRAB THE DEAL"
+    },
+    {
+      "type": "url",
+      "id": "offer_left_button_link",
+      "label": "Left offer button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "offer_right_image",
+      "label": "Right offer image"
+    },
+    {
+      "type": "text",
+      "id": "offer_right_title",
+      "label": "Right offer title",
+      "default": "JOYFUL TRIO"
+    },
+    {
+      "type": "text",
+      "id": "offer_right_line1",
+      "label": "Right offer line 1",
+      "default": "Buy 3 Mood Gummies & SAVE 15%"
+    },
+    {
+      "type": "text",
+      "id": "offer_right_line2",
+      "label": "Right offer line 2",
+      "default": "More Star, More. Smiles!"
+    },
+    {
+      "type": "text",
+      "id": "offer_right_button_label",
+      "label": "Right offer button label",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "offer_right_button_link",
+      "label": "Right offer button link"
     },
     {
       "type": "header",
