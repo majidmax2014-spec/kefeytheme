@@ -9,6 +9,57 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
+  .kefey-cart-page {
+    --k-offers-heading-family: {{ section.settings.offers_heading_font_family | default: 'inherit' }};
+    --k-offers-heading-size: {{ section.settings.offers_heading_font_size }}px;
+    --k-offers-heading-weight: {{ section.settings.offers_heading_font_weight }};
+
+    --k-offer-title-family: {{ section.settings.offer_title_font_family | default: 'inherit' }};
+    --k-offer-title-size: {{ section.settings.offer_title_font_size }}px;
+    --k-offer-title-weight: {{ section.settings.offer_title_font_weight }};
+
+    --k-offer-line-family: {{ section.settings.offer_line_font_family | default: 'inherit' }};
+    --k-offer-line1-size: {{ section.settings.offer_line1_font_size }}px;
+    --k-offer-line2-size: {{ section.settings.offer_line2_font_size }}px;
+    --k-offer-line-weight: {{ section.settings.offer_line_font_weight }};
+
+    --k-offer-button-family: {{ section.settings.offer_button_font_family | default: 'inherit' }};
+    --k-offer-button-size: {{ section.settings.offer_button_font_size }}px;
+    --k-offer-button-weight: {{ section.settings.offer_button_font_weight }};
+
+    --k-table-heading-family: {{ section.settings.table_heading_font_family | default: 'inherit' }};
+    --k-table-heading-size: {{ section.settings.table_heading_font_size }}px;
+    --k-table-heading-weight: {{ section.settings.table_heading_font_weight }};
+
+    --k-product-title-family: {{ section.settings.product_title_font_family | default: 'inherit' }};
+    --k-product-title-size: {{ section.settings.product_title_font_size }}px;
+    --k-product-title-weight: {{ section.settings.product_title_font_weight }};
+
+    --k-product-meta-family: {{ section.settings.product_meta_font_family | default: 'inherit' }};
+    --k-product-meta-size: {{ section.settings.product_meta_font_size }}px;
+    --k-product-meta-weight: {{ section.settings.product_meta_font_weight }};
+
+    --k-product-price-family: {{ section.settings.product_price_font_family | default: 'inherit' }};
+    --k-product-price-size: {{ section.settings.product_price_font_size }}px;
+    --k-product-price-weight: {{ section.settings.product_price_font_weight }};
+
+    --k-upsell-label-family: {{ section.settings.upsell_label_font_family | default: 'inherit' }};
+    --k-upsell-label-size: {{ section.settings.upsell_label_font_size }}px;
+    --k-upsell-label-weight: {{ section.settings.upsell_label_font_weight }};
+
+    --k-upsell-button-family: {{ section.settings.upsell_button_font_family | default: 'inherit' }};
+    --k-upsell-button-size: {{ section.settings.upsell_button_font_size }}px;
+    --k-upsell-button-weight: {{ section.settings.upsell_button_font_weight }};
+
+    --k-upsell-total-family: {{ section.settings.upsell_total_font_family | default: 'inherit' }};
+    --k-upsell-total-size: {{ section.settings.upsell_total_font_size }}px;
+    --k-upsell-total-weight: {{ section.settings.upsell_total_font_weight }};
+
+    --k-remove-family: {{ section.settings.remove_font_family | default: 'inherit' }};
+    --k-remove-size: {{ section.settings.remove_font_size }}px;
+    --k-remove-weight: {{ section.settings.remove_font_weight }};
+  }
+
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
@@ -20,6 +71,7 @@
 {%- unless settings.cart_type == 'drawer' -%}
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
+<script src="{{ 'kefey-cart-offers.js' | asset_url }}" defer="defer"></script>
 
 <cart-items class="kefey-cart-page{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width kefey-cart-shell">
@@ -69,9 +121,17 @@
                     <p class="kefey-cart-offer-card__line1">{{ section.settings.offer_left_line1 }}</p>
                     <p class="kefey-cart-offer-card__line2">{{ section.settings.offer_left_line2 }}</p>
                     {%- if section.settings.offer_left_button_label != blank -%}
-                      <a href="{{ section.settings.offer_left_button_link | default: '#' }}" class="kefey-cart-offer-card__button">
+                      <button
+                        type="button"
+                        class="kefey-cart-offer-card__button"
+                        data-cart-offer-button
+                        data-variant-id="{{ section.settings.offer_left_variant_id | strip }}"
+                        data-quantity="{{ section.settings.offer_left_quantity }}"
+                        data-discount-code="{{ section.settings.offer_left_discount_code | strip }}"
+                        data-fallback-url="{{ section.settings.offer_left_button_link | default: '#' }}"
+                      >
                         {{ section.settings.offer_left_button_label }}
-                      </a>
+                      </button>
                     {%- endif -%}
                   </div>
                 </article>
@@ -82,9 +142,17 @@
                     <p class="kefey-cart-offer-card__line1">{{ section.settings.offer_right_line1 }}</p>
                     <p class="kefey-cart-offer-card__line2">{{ section.settings.offer_right_line2 }}</p>
                     {%- if section.settings.offer_right_button_label != blank -%}
-                      <a href="{{ section.settings.offer_right_button_link | default: '#' }}" class="kefey-cart-offer-card__button">
+                      <button
+                        type="button"
+                        class="kefey-cart-offer-card__button"
+                        data-cart-offer-button
+                        data-variant-id="{{ section.settings.offer_right_variant_id | strip }}"
+                        data-quantity="{{ section.settings.offer_right_quantity }}"
+                        data-discount-code="{{ section.settings.offer_right_discount_code | strip }}"
+                        data-fallback-url="{{ section.settings.offer_right_button_link | default: '#' }}"
+                      >
                         {{ section.settings.offer_right_button_label }}
-                      </a>
+                      </button>
                     {%- endif -%}
                   </div>
 
@@ -241,7 +309,7 @@
                             class="kefey-cart-remove"
                             aria-label="{{ 'sections.cart.remove_title' | t: title: item.title | escape }}"
                           >
-                            {{ 'sections.cart.remove' | t }}
+                            {{ section.settings.remove_label }}
                           </a>
                         </cart-remove-button>
                       </div>
@@ -276,16 +344,31 @@
               <div class="kefey-cart-upsell-left">
                 <p class="kefey-cart-upsell-text">{{ section.settings.upsell_label }}</p>
                 {%- if section.settings.upsell_button_label != blank -%}
-                  <a class="kefey-cart-upsell-button" href="{{ section.settings.upsell_button_link | default: '#' }}">
+                  <button
+                    type="button"
+                    class="kefey-cart-upsell-button"
+                    data-cart-offer-button
+                    data-upsell-add
+                    data-variant-id="{{ section.settings.upsell_variant_id | strip }}"
+                    data-quantity="1"
+                    data-discount-code="{{ section.settings.upsell_discount_code | strip }}"
+                    data-fallback-url="{{ section.settings.upsell_button_link | default: '#' }}"
+                  >
                     {{ section.settings.upsell_button_label }}
-                  </a>
+                  </button>
                 {%- endif -%}
               </div>
 
-              <div class="kefey-cart-upsell-qty" aria-hidden="true">
-                <button type="button" disabled>-</button>
-                <span>0</span>
-                <button type="button" disabled>+</button>
+              <div
+                class="kefey-cart-upsell-qty"
+                data-upsell-counter
+                data-qty="0"
+                data-min="0"
+                data-max="{{ section.settings.upsell_max_qty }}"
+              >
+                <button type="button" data-upsell-change="-1" aria-label="Decrease upsell quantity">-</button>
+                <span data-upsell-qty-display>0</span>
+                <button type="button" data-upsell-change="1" aria-label="Increase upsell quantity">+</button>
               </div>
 
               <p class="kefey-cart-upsell-total">TOTAL: {{ cart.total_price | money }}</p>
@@ -422,6 +505,50 @@
     },
     {
       "type": "header",
+      "content": "Offer functionality"
+    },
+    {
+      "type": "text",
+      "id": "offer_left_variant_id",
+      "label": "Left offer variant ID"
+    },
+    {
+      "type": "range",
+      "id": "offer_left_quantity",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "label": "Left offer quantity",
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "offer_left_discount_code",
+      "label": "Left offer discount code",
+      "default": "SAVE25"
+    },
+    {
+      "type": "text",
+      "id": "offer_right_variant_id",
+      "label": "Right offer variant ID"
+    },
+    {
+      "type": "range",
+      "id": "offer_right_quantity",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "label": "Right offer quantity",
+      "default": 3
+    },
+    {
+      "type": "text",
+      "id": "offer_right_discount_code",
+      "label": "Right offer discount code",
+      "default": "SAVE15"
+    },
+    {
+      "type": "header",
       "content": "Subscription text"
     },
     {
@@ -429,6 +556,12 @@
       "id": "switch_purchase_label",
       "label": "Switch link label",
       "default": "SWITCH TO ONE-TIME PURCHASE"
+    },
+    {
+      "type": "text",
+      "id": "remove_label",
+      "label": "Remove label",
+      "default": "REMOVE"
     },
     {
       "type": "header",
@@ -447,9 +580,343 @@
       "default": "ADD 1 EXTRA TUBE & GET 10% OFF!"
     },
     {
+      "type": "text",
+      "id": "upsell_variant_id",
+      "label": "Upsell variant ID"
+    },
+    {
+      "type": "range",
+      "id": "upsell_max_qty",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "label": "Upsell max quantity",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "upsell_discount_code",
+      "label": "Upsell discount code (10% code)",
+      "default": "SAVE10"
+    },
+    {
       "type": "url",
       "id": "upsell_button_link",
       "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Typography controls"
+    },
+    {
+      "type": "text",
+      "id": "offers_heading_font_family",
+      "label": "Offers heading font family",
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "range",
+      "id": "offers_heading_font_size",
+      "min": 12,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Offers heading font size",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "offers_heading_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Offers heading font weight",
+      "default": 700
+    },
+    {
+      "type": "text",
+      "id": "offer_title_font_family",
+      "label": "Offer title font family",
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "range",
+      "id": "offer_title_font_size",
+      "min": 12,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Offer title font size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "offer_title_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Offer title font weight",
+      "default": 700
+    },
+    {
+      "type": "text",
+      "id": "offer_line_font_family",
+      "label": "Offer text font family",
+      "default": "var(--font-body-family)"
+    },
+    {
+      "type": "range",
+      "id": "offer_line1_font_size",
+      "min": 10,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Offer line 1 font size",
+      "default": 23
+    },
+    {
+      "type": "range",
+      "id": "offer_line2_font_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Offer line 2 font size",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "offer_line_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Offer text font weight",
+      "default": 600
+    },
+    {
+      "type": "text",
+      "id": "offer_button_font_family",
+      "label": "Offer button font family",
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "range",
+      "id": "offer_button_font_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Offer button font size",
+      "default": 19
+    },
+    {
+      "type": "range",
+      "id": "offer_button_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Offer button font weight",
+      "default": 700
+    },
+    {
+      "type": "text",
+      "id": "table_heading_font_family",
+      "label": "Table heading font family",
+      "default": "var(--font-body-family)"
+    },
+    {
+      "type": "range",
+      "id": "table_heading_font_size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Table heading font size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "table_heading_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Table heading font weight",
+      "default": 500
+    },
+    {
+      "type": "text",
+      "id": "product_title_font_family",
+      "label": "Product title font family",
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "range",
+      "id": "product_title_font_size",
+      "min": 12,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Product title font size",
+      "default": 31
+    },
+    {
+      "type": "range",
+      "id": "product_title_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Product title font weight",
+      "default": 500
+    },
+    {
+      "type": "text",
+      "id": "product_meta_font_family",
+      "label": "Product meta font family",
+      "default": "var(--font-body-family)"
+    },
+    {
+      "type": "range",
+      "id": "product_meta_font_size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Product meta font size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "product_meta_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Product meta font weight",
+      "default": 500
+    },
+    {
+      "type": "text",
+      "id": "product_price_font_family",
+      "label": "Price font family",
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "range",
+      "id": "product_price_font_size",
+      "min": 10,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Price font size",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "product_price_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Price font weight",
+      "default": 400
+    },
+    {
+      "type": "text",
+      "id": "remove_font_family",
+      "label": "Remove label font family",
+      "default": "var(--font-body-family)"
+    },
+    {
+      "type": "range",
+      "id": "remove_font_size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Remove label font size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "remove_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Remove label font weight",
+      "default": 500
+    },
+    {
+      "type": "text",
+      "id": "upsell_label_font_family",
+      "label": "Upsell label font family",
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "range",
+      "id": "upsell_label_font_size",
+      "min": 10,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Upsell label font size",
+      "default": 35
+    },
+    {
+      "type": "range",
+      "id": "upsell_label_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Upsell label font weight",
+      "default": 500
+    },
+    {
+      "type": "text",
+      "id": "upsell_button_font_family",
+      "label": "Upsell button font family",
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "range",
+      "id": "upsell_button_font_size",
+      "min": 10,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Upsell button font size",
+      "default": 27
+    },
+    {
+      "type": "range",
+      "id": "upsell_button_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Upsell button font weight",
+      "default": 600
+    },
+    {
+      "type": "text",
+      "id": "upsell_total_font_family",
+      "label": "Upsell total font family",
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "range",
+      "id": "upsell_total_font_size",
+      "min": 10,
+      "max": 72,
+      "step": 1,
+      "unit": "px",
+      "label": "Upsell total font size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "upsell_total_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Upsell total font weight",
+      "default": 500
     }
   ]
 }

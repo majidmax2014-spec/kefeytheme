@@ -6,6 +6,12 @@
     padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
+  #main-cart-footer {
+    --k-checkout-family: {{ section.settings.checkout_font_family | default: 'inherit' }};
+    --k-checkout-size: {{ section.settings.checkout_font_size }}px;
+    --k-checkout-weight: {{ section.settings.checkout_font_weight }};
+  }
+
   @media screen and (min-width: 750px) {
     .section-{{ section.id }}-padding {
       padding-top: {{ section.settings.padding_top }}px;
@@ -74,6 +80,35 @@
       "unit": "px",
       "label": "Bottom padding",
       "default": 56
+    },
+    {
+      "type": "header",
+      "content": "Checkout button typography"
+    },
+    {
+      "type": "text",
+      "id": "checkout_font_family",
+      "label": "Font family",
+      "default": "var(--font-heading-family)"
+    },
+    {
+      "type": "range",
+      "id": "checkout_font_size",
+      "min": 10,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size",
+      "default": 21
+    },
+    {
+      "type": "range",
+      "id": "checkout_font_weight",
+      "min": 100,
+      "max": 900,
+      "step": 100,
+      "label": "Font weight",
+      "default": 700
     }
   ],
   "blocks": [

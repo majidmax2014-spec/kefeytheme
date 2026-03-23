@@ -1,7 +1,7 @@
 cart-items,
 .kefey-cart-footer {
   display: block;
-  background: #ececec;
+  background: #ffffff;
 }
 
 .kefey-cart-shell {
@@ -58,8 +58,9 @@ cart-items,
   border-radius: 0;
   background: #46b3b9;
   color: #fff;
-  font-size: 2.1rem;
-  font-weight: 700;
+  font-family: var(--k-checkout-family, inherit);
+  font-size: var(--k-checkout-size, 2.1rem);
+  font-weight: var(--k-checkout-weight, 700);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
