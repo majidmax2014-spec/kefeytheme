@@ -2605,7 +2605,8 @@ input[type='checkbox'] {
 .header__heading-logo {
   max-height: 34px;
 }
-.header__inline-menu .list-menu--inline > li > a {
+.header__inline-menu .list-menu--inline > li > a,
+.header__inline-menu .list-menu--inline > li > header-menu summary.header__menu-item {
   font-weight: 700;
 }
 
