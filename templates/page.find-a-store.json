@@ -34,7 +34,6 @@
       "type": "find-store-intro",
       "name": "Find store intro",
       "settings": {
-        "heading_before": "",
         "heading_highlight": "Find",
         "heading_after": " a Store",
         "highlight_color": "#FFD166",

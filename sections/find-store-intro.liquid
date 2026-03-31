@@ -14,6 +14,10 @@
   elsif section.settings.body_font_family == 'body'
     assign b_ff = 'var(--font-body-family)'
   endif
+
+  assign intro_hb = section.settings.heading_before | strip
+  assign intro_hh = section.settings.heading_highlight | strip
+  assign intro_ha = section.settings.heading_after | strip
 -%}
 
 <section
@@ -34,16 +38,16 @@
   "
 >
   <div class="fs-intro__inner">
-    {% if section.settings.heading_before != blank or section.settings.heading_highlight != blank or section.settings.heading_after != blank %}
+    {% if intro_hb != blank or intro_hh != blank or intro_ha != blank %}
       <h2 class="fs-intro__title">
-        {% if section.settings.heading_before != blank %}
-          <span>{{ section.settings.heading_before }}</span>
+        {% if intro_hb != blank %}
+          <span>{{ intro_hb }}</span>
         {% endif %}
-        {% if section.settings.heading_highlight != blank %}
-          <span class="fs-intro__find">{{ section.settings.heading_highlight }}</span>
+        {% if intro_hh != blank %}
+          <span class="fs-intro__find">{{ intro_hh }}</span>
         {% endif %}
-        {% if section.settings.heading_after != blank %}
-          <span>{{ section.settings.heading_after }}</span>
+        {% if intro_ha != blank %}
+          <span>{{ intro_ha }}</span>
         {% endif %}
       </h2>
     {% endif %}
@@ -66,7 +70,8 @@
       "type": "text",
       "id": "heading_before",
       "label": "Heading (before highlight)",
-      "default": ""
+      "info": "Optional text before the highlighted word. Clear the field if not needed.",
+      "default": " "
     },
     {
       "type": "text",
