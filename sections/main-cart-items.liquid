@@ -204,8 +204,17 @@
 
                   <div class="kefey-cart-offer-card__content">
                     <h3>{{ section.settings.offer_left_title }}</h3>
-                    <p class="kefey-cart-offer-card__line1">{{ section.settings.offer_left_line1 }}</p>
-                    <p class="kefey-cart-offer-card__line2">{{ section.settings.offer_left_line2 }}</p>
+                    <p class="kefey-cart-offer-card__copy">
+                      {%- if section.settings.offer_left_line1 != blank -%}
+                        {{- section.settings.offer_left_line1 -}}
+                      {%- endif -%}
+                      {%- if section.settings.offer_left_line1 != blank and section.settings.offer_left_line2 != blank -%}
+                        {{ ' ' }}
+                      {%- endif -%}
+                      {%- if section.settings.offer_left_line2 != blank -%}
+                        {{- section.settings.offer_left_line2 -}}
+                      {%- endif -%}
+                    </p>
                     {%- if section.settings.offer_left_button_label != blank -%}
                       <button
                         type="button"
@@ -225,8 +234,17 @@
                 <article class="kefey-cart-offer-card">
                   <div class="kefey-cart-offer-card__content">
                     <h3>{{ section.settings.offer_right_title }}</h3>
-                    <p class="kefey-cart-offer-card__line1">{{ section.settings.offer_right_line1 }}</p>
-                    <p class="kefey-cart-offer-card__line2">{{ section.settings.offer_right_line2 }}</p>
+                    <p class="kefey-cart-offer-card__copy">
+                      {%- if section.settings.offer_right_line1 != blank -%}
+                        {{- section.settings.offer_right_line1 -}}
+                      {%- endif -%}
+                      {%- if section.settings.offer_right_line1 != blank and section.settings.offer_right_line2 != blank -%}
+                        {{ ' ' }}
+                      {%- endif -%}
+                      {%- if section.settings.offer_right_line2 != blank -%}
+                        {{- section.settings.offer_right_line2 -}}
+                      {%- endif -%}
+                    </p>
                     {%- if section.settings.offer_right_button_label != blank -%}
                       <button
                         type="button"
@@ -427,8 +445,22 @@
             </table>
 
             <div class="kefey-cart-upsell-row">
-              <div class="kefey-cart-upsell-left">
-                <p class="kefey-cart-upsell-text">{{ section.settings.upsell_label }}</p>
+              <div class="kefey-cart-upsell-text" aria-label="{{ section.settings.upsell_label | escape }}">
+                {%- assign upsell_parts = section.settings.upsell_label | split: ',' -%}
+                {%- if upsell_parts.size > 1 -%}
+                  <span class="kefey-cart-upsell-text__line1">{{ upsell_parts | first | strip }},</span>
+                  <span class="kefey-cart-upsell-text__line2">
+                    {%- for part in upsell_parts offset: 1 -%}
+                      {{- part | strip -}}
+                      {%- unless forloop.last -%}, {% endunless %}
+                    {%- endfor -%}
+                  </span>
+                {%- else -%}
+                  <span class="kefey-cart-upsell-text__single">{{ section.settings.upsell_label }}</span>
+                {%- endif -%}
+              </div>
+
+              <div class="kefey-cart-upsell-actions">
                 {%- if section.settings.upsell_button_label != blank -%}
                   <button
                     type="button"
@@ -443,18 +475,18 @@
                     {{ section.settings.upsell_button_label }}
                   </button>
                 {%- endif -%}
-              </div>
 
-              <div
-                class="kefey-cart-upsell-qty"
-                data-upsell-counter
-                data-qty="0"
-                data-min="0"
-                data-max="{{ section.settings.upsell_max_qty }}"
-              >
-                <button type="button" data-upsell-change="-1" aria-label="Decrease upsell quantity">-</button>
-                <span data-upsell-qty-display>0</span>
-                <button type="button" data-upsell-change="1" aria-label="Increase upsell quantity">+</button>
+                <div
+                  class="kefey-cart-upsell-qty"
+                  data-upsell-counter
+                  data-qty="0"
+                  data-min="0"
+                  data-max="{{ section.settings.upsell_max_qty }}"
+                >
+                  <button type="button" data-upsell-change="-1" aria-label="Decrease upsell quantity">-</button>
+                  <span data-upsell-qty-display>0</span>
+                  <button type="button" data-upsell-change="1" aria-label="Increase upsell quantity">+</button>
+                </div>
               </div>
 
               <p class="kefey-cart-upsell-total">TOTAL: {{ cart.total_price | money }}</p>
@@ -843,7 +875,7 @@
       "step": 1,
       "unit": "px",
       "label": "Table heading font size",
-      "default": 16
+      "default": 12
     },
     {
       "type": "range",

@@ -13,13 +13,24 @@
 
 .kefey-cart-offers__heading span {
   display: inline-block;
-  padding: 0 2.6rem 0.2rem;
+  position: relative;
+  padding: 0 0.4rem 1rem;
   font-family: var(--k-offers-heading-family, inherit);
   font-size: var(--k-offers-heading-size, 3.6rem);
   font-weight: var(--k-offers-heading-weight, 700);
   letter-spacing: 0.02em;
   color: #101010;
-  background: linear-gradient(to top, #fee431 0 44%, transparent 44% 100%);
+  background: none;
+}
+
+.kefey-cart-offers__heading span::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 0.75rem;
+  background: #fee431;
 }
 
 .kefey-cart-offers__grid {
@@ -75,22 +86,13 @@
   color: #fff;
 }
 
-.kefey-cart-offer-card__line1 {
+.kefey-cart-offer-card__copy {
   margin: 0.8rem 0 0;
   font-family: var(--k-offer-line-family, inherit);
   font-size: var(--k-offer-line1-size, 1.6rem);
   font-weight: var(--k-offer-line-weight, 600);
-  line-height: 1.15;
+  line-height: 1.35;
   color: #fff;
-}
-
-.kefey-cart-offer-card__line2 {
-  margin: 0.3rem 0 0;
-  font-family: var(--k-offer-line-family, inherit);
-  font-size: var(--k-offer-line2-size, 1.6rem);
-  font-weight: var(--k-offer-line-weight, 600);
-  line-height: 1.15;
-  color: rgba(255, 255, 255, 0.94);
 }
 
 .kefey-cart-offer-card__button {
@@ -101,8 +103,9 @@
   cursor: pointer;
   min-height: 4rem;
   margin-top: 1rem;
-  padding: 0.3rem 2.4rem 0;
-  background: #f4d632;
+  padding: 0.45rem 2.4rem;
+  border-radius: 0.25rem;
+  background: #fee431;
   color: #ffffff;
   text-decoration: none;
   font-family: var(--k-offer-button-family, inherit);
@@ -127,15 +130,15 @@
 }
 
 .kefey-cart-table thead th {
-  border-bottom: 0.1rem solid #d0d0d0;
-  color: #757575;
+  border-bottom: 0.1rem solid #e0e0e0;
+  color: #9a9a9a;
   font-family: var(--k-table-heading-family, inherit);
-  font-size: var(--k-table-heading-size, 1.6rem);
+  font-size: var(--k-table-heading-size, 1.2rem);
   font-weight: var(--k-table-heading-weight, 500);
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   text-align: left;
-  padding: 0 0 1rem;
+  padding: 0 0 0.85rem;
 }
 
 .kefey-cart-table__qty-heading {
@@ -326,7 +329,7 @@
   font-size: var(--k-product-price-size, 3.6rem);
   font-weight: var(--k-product-price-weight, 400);
   letter-spacing: 0.03em;
-  color: #4a4a4a;
+  color: #101010;
 }
 
 .cart-item .loading__spinner {
@@ -357,28 +360,47 @@
 }
 
 .kefey-cart-upsell-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(12rem, 22rem) minmax(0, 1fr) auto;
   align-items: center;
-  gap: 2rem;
+  column-gap: 2rem;
+  row-gap: 1.2rem;
   padding: 2.4rem 0;
   border-bottom: 0.1rem solid #d0d0d0;
   border-top: 0.1rem solid #d0d0d0;
 }
 
-.kefey-cart-upsell-left {
-  display: flex;
-  align-items: center;
-  gap: 2.6rem;
-}
-
 .kefey-cart-upsell-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   margin: 0;
   font-family: var(--k-upsell-label-family, inherit);
   font-size: var(--k-upsell-label-size, 3.6rem);
   font-weight: var(--k-upsell-label-weight, 500);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #2f2f2f;
+  color: #101010;
+  line-height: 1.05;
+}
+
+.kefey-cart-upsell-text__line1,
+.kefey-cart-upsell-text__line2,
+.kefey-cart-upsell-text__single {
+  display: block;
+}
+
+.kefey-cart-upsell-text__line2 {
+  margin-top: 0.15em;
+}
+
+.kefey-cart-upsell-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem 1.8rem;
 }
 
 .kefey-cart-upsell-button {
@@ -389,7 +411,8 @@
   cursor: pointer;
   min-height: 4.4rem;
   padding: 0.9rem 1.8rem;
-  background: #ee593a;
+  border-radius: 0.25rem;
+  background: #ef6347;
   color: #fff;
   font-family: var(--k-upsell-button-family, inherit);
   font-size: var(--k-upsell-button-size, 1.8rem);
@@ -405,7 +428,7 @@
 }
 
 .kefey-cart-upsell-qty {
-  margin-left: auto;
+  flex-shrink: 0;
   width: 12.2rem;
   min-height: 3.6rem;
   border: 0.1rem solid #c8c8c8;
@@ -434,11 +457,11 @@
   min-width: 17rem;
   margin: 0;
   text-align: right;
-  color: #575757;
+  color: #101010;
   font-family: var(--k-upsell-total-family, inherit);
   font-size: var(--k-upsell-total-size, 3.6rem);
-  font-weight: var(--k-upsell-total-weight, 500);
-  letter-spacing: 0.08em;
+  font-weight: var(--k-upsell-total-weight, 700);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
 }
@@ -486,31 +509,16 @@
     font-size: 2rem;
   }
 
-  .kefey-cart-upsell-row {
-    flex-wrap: wrap;
-    row-gap: 1.2rem;
-  }
-
-  .kefey-cart-upsell-left {
-    width: 100%;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
   .kefey-cart-upsell-button {
     min-height: 3.8rem;
-  }
-
-  .kefey-cart-upsell-total {
-    margin-left: auto;
   }
 }
 
 @media screen and (max-width: 749px) {
   .kefey-cart-offers__heading span {
     font-size: min(var(--k-offers-heading-size, 3.6rem), 7.2vw);
-    padding-left: 1.2rem;
-    padding-right: 1.2rem;
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
   }
 
   .kefey-cart-offers__grid {
@@ -546,6 +554,19 @@
   .cart-item__totals {
     margin-left: 11.2rem;
     margin-top: 1rem;
+    text-align: left;
+  }
+
+  .kefey-cart-upsell-row {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+  }
+
+  .kefey-cart-upsell-actions {
+    justify-content: flex-start;
+  }
+
+  .kefey-cart-upsell-total {
     text-align: left;
   }
 
