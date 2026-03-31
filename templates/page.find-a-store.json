@@ -31,7 +31,7 @@
       }
     },
     "find_store_intro": {
-      "type": "kefey-find-store-intro",
+      "type": "find-store-intro",
       "name": "Find store intro",
       "settings": {
         "heading_before": "",
@@ -52,7 +52,7 @@
       }
     },
     "find_store_region_us": {
-      "type": "kefey-find-store-region",
+      "type": "find-store-region",
       "name": "Find store — United States",
       "blocks": {
         "us_logo_1": { "type": "logo", "settings": {} },
@@ -87,7 +87,7 @@
       }
     },
     "find_store_region_uae": {
-      "type": "kefey-find-store-region",
+      "type": "find-store-region",
       "name": "Find store — UAE",
       "blocks": {
         "uae_logo_1": { "type": "logo", "settings": {} },
@@ -122,7 +122,7 @@
       }
     },
     "find_store_worldwide": {
-      "type": "kefey-find-store-worldwide",
+      "type": "find-store-worldwide",
       "name": "Find store worldwide",
       "settings": {
         "heading": "Growing worldwide",
@@ -139,7 +139,7 @@
       }
     },
     "find_store_contact": {
-      "type": "kefey-find-store-contact",
+      "type": "find-store-contact",
       "name": "Find store contact",
       "settings": {
         "heading": "Wholesale & retail inquiries",
@@ -155,7 +155,7 @@
       }
     },
     "find_store_impact": {
-      "type": "kefey-find-store-impact",
+      "type": "find-store-impact",
       "name": "Find store impact",
       "settings": {
         "row1_left_bg": "#EF6347",
