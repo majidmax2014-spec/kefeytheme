@@ -2,6 +2,25 @@
   margin: 0;
 }
 
+/* Square corners: bundle cards, qty, upsell, theme buttons/inputs on cart */
+.kefey-cart-page {
+  --buttons-radius: 0;
+  --buttons-radius-outset: 0;
+  --inputs-radius: 0;
+  --inputs-radius-outset: 0;
+  --text-boxes-radius: 0;
+}
+
+.kefey-cart-page .button,
+.kefey-cart-page button,
+.kefey-cart-page .quantity,
+.kefey-cart-page .quantity__button,
+.kefey-cart-page .quantity__input,
+.kefey-cart-upsell-qty,
+.kefey-cart-upsell-qty button {
+  border-radius: 0 !important;
+}
+
 .kefey-cart-offers {
   padding: 0 0 3.6rem;
 }
@@ -41,7 +60,7 @@
 
 .kefey-cart-offer-card {
   background: #ef6347;
-  border-radius: 2.4rem;
+  border-radius: 0;
   min-height: 17.6rem;
   display: flex;
   align-items: center;
@@ -104,7 +123,7 @@
   min-height: 4rem;
   margin-top: 1rem;
   padding: 0.45rem 2.4rem;
-  border-radius: 0.6rem;
+  border-radius: 0;
   background: #fee431;
   color: #ffffff;
   text-decoration: none;
@@ -182,7 +201,7 @@
   display: block;
   width: 9.4rem;
   height: 9rem;
-  border-radius: 0.3rem;
+  border-radius: 0;
   overflow: hidden;
 }
 
@@ -407,7 +426,7 @@
   cursor: pointer;
   min-height: 4.4rem;
   padding: 0.9rem 1.8rem;
-  border-radius: 0.25rem;
+  border-radius: 0;
   background: #ef6347;
   color: #fff;
   font-family: var(--k-upsell-button-family, inherit);

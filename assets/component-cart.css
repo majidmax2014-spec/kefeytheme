@@ -4,6 +4,22 @@ cart-items,
   background: #ffffff;
 }
 
+/* Square corners on cart: override theme radius tokens + dynamic checkout */
+.kefey-cart-page,
+.kefey-cart-footer {
+  --buttons-radius: 0;
+  --buttons-radius-outset: 0;
+  --inputs-radius: 0;
+  --inputs-radius-outset: 0;
+  --text-boxes-radius: 0;
+}
+
+.kefey-cart-footer .cart__dynamic-checkout-buttons .shopify-payment-button__button--unbranded,
+.kefey-cart-footer .cart__dynamic-checkout-buttons [class*='shopify-payment-button'],
+.kefey-cart-footer .additional-checkout-buttons button {
+  border-radius: 0 !important;
+}
+
 /* Matches theme content width (.page-width uses the same token; avoids 94rem override). */
 .kefey-cart-shell {
   max-width: var(--page-width);
@@ -69,7 +85,7 @@ cart-items,
   font-weight: var(--k-checkout-weight, 700);
   letter-spacing: 0.04em;
   text-transform: none;
-  border-radius: 0.5rem;
+  border-radius: 0;
 }
 
 .cart__checkout-button:after,
