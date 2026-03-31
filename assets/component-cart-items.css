@@ -19,7 +19,7 @@
   font-weight: var(--k-offers-heading-weight, 700);
   letter-spacing: 0.02em;
   color: #101010;
-  background: linear-gradient(to top, #f1d52d 0 44%, transparent 44% 100%);
+  background: linear-gradient(to top, #fee431 0 44%, transparent 44% 100%);
 }
 
 .kefey-cart-offers__grid {
@@ -29,7 +29,8 @@
 }
 
 .kefey-cart-offer-card {
-  background: #ee593a;
+  background: #ef6347;
+  border-radius: 1.2rem;
   min-height: 17.6rem;
   display: flex;
   align-items: center;
@@ -126,8 +127,8 @@
 }
 
 .kefey-cart-table thead th {
-  border-bottom: 0.1rem solid #9f9f9f;
-  color: #2f2f2f;
+  border-bottom: 0.1rem solid #d0d0d0;
+  color: #757575;
   font-family: var(--k-table-heading-family, inherit);
   font-size: var(--k-table-heading-size, 1.6rem);
   font-weight: var(--k-table-heading-weight, 500);
@@ -148,7 +149,7 @@
 }
 
 .kefey-cart-table tbody tr {
-  border-bottom: 0.1rem solid #9f9f9f;
+  border-bottom: 0.1rem solid #d0d0d0;
 }
 
 .kefey-cart-table td {
@@ -360,7 +361,8 @@
   align-items: center;
   gap: 2rem;
   padding: 2.4rem 0;
-  border-bottom: 0.1rem solid #9f9f9f;
+  border-bottom: 0.1rem solid #d0d0d0;
+  border-top: 0.1rem solid #d0d0d0;
 }
 
 .kefey-cart-upsell-left {
@@ -399,7 +401,7 @@
 }
 
 .kefey-cart-upsell-button:hover {
-  background: #e34f2f;
+  background: #d9553a;
 }
 
 .kefey-cart-upsell-qty {
