@@ -273,9 +273,17 @@
 
 .kefey-cart-qty-wrap {
   display: inline-flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.7rem;
+  justify-content: center;
+  gap: 0.6rem 1.2rem;
+}
+
+.kefey-cart-qty-wrap cart-remove-button {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .kefey-cart-page .quantity {
@@ -308,14 +316,15 @@
 
 .kefey-cart-remove {
   font-family: var(--k-remove-family, inherit);
-  font-size: var(--k-remove-size, 16px) !important;
+  font-size: clamp(10px, calc(var(--k-remove-size, 16px) * 0.68), 12px) !important;
   font-weight: var(--k-remove-weight, 500);
-  letter-spacing: 0.09em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #2f2f2f;
   text-decoration: none;
-  border-bottom: 0.1rem solid #454545;
-  line-height: 1.1;
+  border-bottom: 0.08rem solid #6a6a6a;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .cart-item__totals {
