@@ -97,52 +97,52 @@
 
   .kefey-cart-page {
     --k-offers-heading-family: {{ offers_heading_ff }};
-    --k-offers-heading-size: {{ section.settings.offers_heading_font_size }}px;
+    --k-offers-heading-size: 16px;
     --k-offers-heading-weight: {{ section.settings.offers_heading_font_weight }};
 
     --k-offer-title-family: {{ offer_title_ff }};
-    --k-offer-title-size: {{ section.settings.offer_title_font_size }}px;
+    --k-offer-title-size: 16px;
     --k-offer-title-weight: {{ section.settings.offer_title_font_weight }};
 
     --k-offer-line-family: {{ offer_line_ff }};
-    --k-offer-line1-size: {{ section.settings.offer_line1_font_size }}px;
-    --k-offer-line2-size: {{ section.settings.offer_line2_font_size }}px;
+    --k-offer-line1-size: 16px;
+    --k-offer-line2-size: 16px;
     --k-offer-line-weight: {{ section.settings.offer_line_font_weight }};
 
     --k-offer-button-family: {{ offer_button_ff }};
-    --k-offer-button-size: {{ section.settings.offer_button_font_size }}px;
+    --k-offer-button-size: 16px;
     --k-offer-button-weight: {{ section.settings.offer_button_font_weight }};
 
     --k-table-heading-family: {{ table_heading_ff }};
-    --k-table-heading-size: {{ section.settings.table_heading_font_size }}px;
+    --k-table-heading-size: 16px;
     --k-table-heading-weight: {{ section.settings.table_heading_font_weight }};
 
     --k-product-title-family: {{ product_title_ff }};
-    --k-product-title-size: {{ section.settings.product_title_font_size }}px;
+    --k-product-title-size: 16px;
     --k-product-title-weight: {{ section.settings.product_title_font_weight }};
 
     --k-product-meta-family: {{ product_meta_ff }};
-    --k-product-meta-size: {{ section.settings.product_meta_font_size }}px;
+    --k-product-meta-size: 16px;
     --k-product-meta-weight: {{ section.settings.product_meta_font_weight }};
 
     --k-product-price-family: {{ product_price_ff }};
-    --k-product-price-size: {{ section.settings.product_price_font_size }}px;
+    --k-product-price-size: 16px;
     --k-product-price-weight: {{ section.settings.product_price_font_weight }};
 
     --k-upsell-label-family: {{ upsell_label_ff }};
-    --k-upsell-label-size: {{ section.settings.upsell_label_font_size }}px;
+    --k-upsell-label-size: 16px;
     --k-upsell-label-weight: {{ section.settings.upsell_label_font_weight }};
 
     --k-upsell-button-family: {{ upsell_button_ff }};
-    --k-upsell-button-size: {{ section.settings.upsell_button_font_size }}px;
+    --k-upsell-button-size: 16px;
     --k-upsell-button-weight: {{ section.settings.upsell_button_font_weight }};
 
     --k-upsell-total-family: {{ upsell_total_ff }};
-    --k-upsell-total-size: {{ section.settings.upsell_total_font_size }}px;
+    --k-upsell-total-size: 16px;
     --k-upsell-total-weight: {{ section.settings.upsell_total_font_weight }};
 
     --k-remove-family: {{ remove_label_ff }};
-    --k-remove-size: {{ section.settings.remove_font_size }}px;
+    --k-remove-size: 16px;
     --k-remove-weight: {{ section.settings.remove_font_weight }};
   }
 
@@ -445,20 +445,7 @@
             </table>
 
             <div class="kefey-cart-upsell-row">
-              <div class="kefey-cart-upsell-text" aria-label="{{ section.settings.upsell_label | escape }}">
-                {%- assign upsell_parts = section.settings.upsell_label | split: ',' -%}
-                {%- if upsell_parts.size > 1 -%}
-                  <span class="kefey-cart-upsell-text__line1">{{ upsell_parts | first | strip }},</span>
-                  <span class="kefey-cart-upsell-text__line2">
-                    {%- for part in upsell_parts offset: 1 -%}
-                      {{- part | strip -}}
-                      {%- unless forloop.last -%}, {% endunless %}
-                    {%- endfor -%}
-                  </span>
-                {%- else -%}
-                  <span class="kefey-cart-upsell-text__single">{{ section.settings.upsell_label }}</span>
-                {%- endif -%}
-              </div>
+              <p class="kefey-cart-upsell-text">{{ section.settings.upsell_label }}</p>
 
               <div class="kefey-cart-upsell-actions">
                 {%- if section.settings.upsell_button_label != blank -%}

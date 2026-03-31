@@ -16,7 +16,7 @@
   position: relative;
   padding: 0 0.4rem 1rem;
   font-family: var(--k-offers-heading-family, inherit);
-  font-size: var(--k-offers-heading-size, 3.6rem);
+  font-size: var(--k-offers-heading-size, 16px);
   font-weight: var(--k-offers-heading-weight, 700);
   letter-spacing: 0.02em;
   color: #101010;
@@ -29,7 +29,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 0.75rem;
+  height: 0.45rem;
   background: #fee431;
 }
 
@@ -78,7 +78,7 @@
 .kefey-cart-offer-card__content h3 {
   margin: 0;
   font-family: var(--k-offer-title-family, inherit);
-  font-size: var(--k-offer-title-size, 3.6rem);
+  font-size: var(--k-offer-title-size, 16px);
   font-weight: var(--k-offer-title-weight, 700);
   line-height: 1;
   letter-spacing: 0.02em;
@@ -89,7 +89,7 @@
 .kefey-cart-offer-card__copy {
   margin: 0.8rem 0 0;
   font-family: var(--k-offer-line-family, inherit);
-  font-size: var(--k-offer-line1-size, 1.6rem);
+  font-size: var(--k-offer-line1-size, 16px);
   font-weight: var(--k-offer-line-weight, 600);
   line-height: 1.35;
   color: #fff;
@@ -109,7 +109,7 @@
   color: #ffffff;
   text-decoration: none;
   font-family: var(--k-offer-button-family, inherit);
-  font-size: var(--k-offer-button-size, 1.9rem);
+  font-size: var(--k-offer-button-size, 16px);
   line-height: 1;
   font-weight: var(--k-offer-button-weight, 700);
   letter-spacing: 0.04em;
@@ -133,7 +133,7 @@
   border-bottom: 0.1rem solid #e0e0e0;
   color: #9a9a9a;
   font-family: var(--k-table-heading-family, inherit);
-  font-size: var(--k-table-heading-size, 1.2rem);
+  font-size: var(--k-table-heading-size, 16px);
   font-weight: var(--k-table-heading-weight, 500);
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -205,7 +205,7 @@
   display: block;
   margin: 0;
   font-family: var(--k-product-title-family, inherit);
-  font-size: var(--k-product-title-size, 3.6rem);
+  font-size: var(--k-product-title-size, 16px);
   line-height: 1.1;
   font-weight: var(--k-product-title-weight, 500);
   letter-spacing: 0.08em;
@@ -217,7 +217,7 @@
 .kefey-cart-plan {
   margin: 0.6rem 0 0;
   font-family: var(--k-product-meta-family, inherit);
-  font-size: var(--k-product-meta-size, 1.6rem);
+  font-size: var(--k-product-meta-size, 16px);
   font-weight: var(--k-product-meta-weight, 500);
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -228,7 +228,7 @@
   display: inline-block;
   margin-top: 0.5rem;
   font-family: var(--k-product-meta-family, inherit);
-  font-size: calc(var(--k-product-meta-size, 1.6rem) * 0.75);
+  font-size: var(--k-product-meta-size, 16px);
   font-weight: var(--k-product-meta-weight, 500);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -242,7 +242,7 @@
 .cart-item__discounted-prices {
   margin-top: 0.9rem;
   font-family: var(--k-product-price-family, inherit);
-  font-size: var(--k-product-price-size, 3.6rem);
+  font-size: var(--k-product-price-size, 16px);
   font-weight: var(--k-product-price-weight, 400);
   line-height: 1;
   letter-spacing: 0.06em;
@@ -255,7 +255,7 @@
 
 .cart-item__old-price {
   opacity: 0.65;
-  font-size: 1.9rem;
+  font-size: 16px;
 }
 
 .cart-item__final-price {
@@ -280,7 +280,7 @@
 
 .kefey-cart-page .quantity {
   width: 12.2rem;
-  min-height: 3.6rem;
+  min-height: 3.2rem;
   border: 0.1rem solid #c8c8c8;
   border-radius: 0;
   background: #ffffff;
@@ -294,13 +294,13 @@
 .kefey-cart-page .quantity__button {
   width: 3.2rem;
   color: #2f2f2f;
-  font-size: 2.5rem;
-  font-weight: 300;
+  font-size: 16px !important;
+  font-weight: 400;
   line-height: 1;
 }
 
 .kefey-cart-page .quantity__input {
-  font-size: 2.8rem;
+  font-size: 16px !important;
   font-weight: 400;
   color: #2e2e2e;
   min-width: 2.8rem;
@@ -308,7 +308,7 @@
 
 .kefey-cart-remove {
   font-family: var(--k-remove-family, inherit);
-  font-size: var(--k-remove-size, 1.6rem);
+  font-size: 16px !important;
   font-weight: var(--k-remove-weight, 500);
   letter-spacing: 0.09em;
   text-transform: uppercase;
@@ -326,7 +326,7 @@
 .cart-item__totals .price--end,
 .cart-item__totals .cart-item__old-price {
   font-family: var(--k-product-price-family, inherit);
-  font-size: var(--k-product-price-size, 3.6rem);
+  font-size: var(--k-product-price-size, 16px);
   font-weight: var(--k-product-price-weight, 400);
   letter-spacing: 0.03em;
   color: #101010;
@@ -371,28 +371,15 @@
 }
 
 .kefey-cart-upsell-text {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
   margin: 0;
   font-family: var(--k-upsell-label-family, inherit);
-  font-size: var(--k-upsell-label-size, 3.6rem);
+  font-size: var(--k-upsell-label-size, 16px);
   font-weight: var(--k-upsell-label-weight, 500);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: #101010;
-  line-height: 1.05;
-}
-
-.kefey-cart-upsell-text__line1,
-.kefey-cart-upsell-text__line2,
-.kefey-cart-upsell-text__single {
-  display: block;
-}
-
-.kefey-cart-upsell-text__line2 {
-  margin-top: 0.15em;
+  line-height: 1.25;
+  white-space: nowrap;
 }
 
 .kefey-cart-upsell-actions {
@@ -415,7 +402,7 @@
   background: #ef6347;
   color: #fff;
   font-family: var(--k-upsell-button-family, inherit);
-  font-size: var(--k-upsell-button-size, 1.8rem);
+  font-size: var(--k-upsell-button-size, 16px);
   font-weight: var(--k-upsell-button-weight, 600);
   letter-spacing: 0.07em;
   text-transform: uppercase;
@@ -430,7 +417,7 @@
 .kefey-cart-upsell-qty {
   flex-shrink: 0;
   width: 12.2rem;
-  min-height: 3.6rem;
+  min-height: 3.2rem;
   border: 0.1rem solid #c8c8c8;
   background: #ffffff;
   display: grid;
@@ -443,12 +430,12 @@
   background: transparent;
   border: 0;
   color: #2f2f2f;
-  font-size: 2.5rem;
+  font-size: 16px !important;
   padding: 0;
 }
 
 .kefey-cart-upsell-qty span {
-  font-size: 2.8rem;
+  font-size: 16px !important;
   color: #2f2f2f;
   line-height: 1;
 }
@@ -459,7 +446,7 @@
   text-align: right;
   color: #101010;
   font-family: var(--k-upsell-total-family, inherit);
-  font-size: var(--k-upsell-total-size, 3.6rem);
+  font-size: var(--k-upsell-total-size, 16px);
   font-weight: var(--k-upsell-total-weight, 700);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -501,12 +488,12 @@
   .kefey-cart-page .quantity__button,
   .kefey-cart-upsell-qty button {
     width: 2.8rem;
-    font-size: 2rem;
+    font-size: 16px !important;
   }
 
   .kefey-cart-page .quantity__input,
   .kefey-cart-upsell-qty span {
-    font-size: 2rem;
+    font-size: 16px !important;
   }
 
   .kefey-cart-upsell-button {
@@ -516,9 +503,13 @@
 
 @media screen and (max-width: 749px) {
   .kefey-cart-offers__heading span {
-    font-size: min(var(--k-offers-heading-size, 3.6rem), 7.2vw);
+    font-size: 16px;
     padding-left: 0.2rem;
     padding-right: 0.2rem;
+  }
+
+  .kefey-cart-upsell-text {
+    white-space: normal;
   }
 
   .kefey-cart-offers__grid {

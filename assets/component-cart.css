@@ -63,7 +63,7 @@ cart-items,
   background: #5bbcb9;
   color: #fff;
   font-family: var(--k-checkout-family, inherit);
-  font-size: var(--k-checkout-size, 2.1rem);
+  font-size: var(--k-checkout-size, 16px);
   font-weight: var(--k-checkout-weight, 700);
   letter-spacing: 0.12em;
   text-transform: uppercase;
