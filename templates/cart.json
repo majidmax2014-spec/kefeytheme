@@ -13,8 +13,9 @@
       "type": "header-banner",
       "name": "Header Banner",
       "settings": {
-        "heading": "We reimagine wellness as joy",
-        "subheading": "Little rituals that care for you and the world around you",
+        "background_image": "shopify://shop_images/header-banner.png",
+        "heading": "Cart",
+        "subheading": "One step away from Joy in a Gummy!",
         "hb_heading_ff": "heading",
         "hb_heading_fw": "700",
         "hb_heading_fs": 56,
