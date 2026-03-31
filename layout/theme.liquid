@@ -298,7 +298,25 @@
     </script>
   </head>
 
-  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  {%- liquid
+    assign kefey_policy_layout_class = ''
+    assign kefey_load_policy_css = false
+    if request.page_type == 'policy'
+      assign kefey_load_policy_css = true
+    elsif request.page_type == 'page' and page.handle != blank
+      assign _policy_handles = settings.policy_layout_page_handles | default: 'consumer-health-data-privacy-policy' | split: ','
+      for _part in _policy_handles
+        if kefey_load_policy_css == false
+          assign _h = _part | strip
+          if _h != '' and page.handle == _h
+            assign kefey_load_policy_css = true
+            assign kefey_policy_layout_class = ' page--kefey-policy-layout'
+          endif
+        endif
+      endfor
+    endif
+  -%}
+  <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}{{ kefey_policy_layout_class }}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -374,9 +392,9 @@
     {%- endif -%}
 
     {%- comment -%}
-      After Shopify-injected policy-*.css so max-width can exceed 560px / 65ch.
+      After Shopify-injected policy-*.css (policy pages) or for CMS pages listed in theme settings.
     {%- endcomment -%}
-    {%- if request.page_type == 'policy' -%}
+    {%- if kefey_load_policy_css -%}
       {{ 'shopify-policy-overrides.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
   </body>

@@ -17,6 +17,7 @@
     "type_body_font": "poppins_n4",
     "body_scale": 100,
     "page_width": 1200,
+    "policy_layout_page_handles": "consumer-health-data-privacy-policy",
     "spacing_sections": 0,
     "spacing_grid_horizontal": 8,
     "spacing_grid_vertical": 8,
