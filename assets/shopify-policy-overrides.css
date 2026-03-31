@@ -1,14 +1,20 @@
 /*
- * Overrides Shopify storefront policy.css (.shopify-policy__container max-width: 560px / 65ch).
- * Loaded at end of <body> on policy pages so it wins in the cascade.
- * Typography matches theme body (family, size, line-height) from :root / body.
+ * Overrides Shopify storefront policy.css (narrow max-width).
+ * Body copy (p, li, tables) uses theme body font. Headings are not overridden —
+ * Shopify policy styles + browser defaults apply to h1–h6 and .shopify-policy__title.
  */
 
 .shopify-policy__container {
   max-width: 1200px !important;
   width: 100%;
   box-sizing: border-box;
+}
 
+/* Body text only — leaves heading sizes, weights, and title styling as Shopify shows */
+.shopify-policy__container p,
+.shopify-policy__container li,
+.shopify-policy__container td,
+.shopify-policy__container th {
   font-family: var(--font-body-family);
   font-style: var(--font-body-style);
   font-weight: var(--font-body-weight);
@@ -19,29 +25,12 @@
 }
 
 @media screen and (min-width: 750px) {
-  .shopify-policy__container {
+  .shopify-policy__container p,
+  .shopify-policy__container li,
+  .shopify-policy__container td,
+  .shopify-policy__container th {
     font-size: 1.6rem;
   }
-}
-
-/* Use body font + base size for headings and text (overrides browser defaults) */
-.shopify-policy__container h1,
-.shopify-policy__container h2,
-.shopify-policy__container h3,
-.shopify-policy__container h4,
-.shopify-policy__container h5,
-.shopify-policy__container h6,
-.shopify-policy__container p,
-.shopify-policy__container li,
-.shopify-policy__container td,
-.shopify-policy__container th,
-.shopify-policy__container a,
-.shopify-policy__container .shopify-policy__title {
-  font-family: inherit;
-  font-size: inherit;
-  font-style: var(--font-body-style);
-  font-weight: var(--font-body-weight);
-  line-height: inherit;
 }
 
 .shopify-policy__container strong,
