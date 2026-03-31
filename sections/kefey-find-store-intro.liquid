@@ -1,0 +1,205 @@
+{{ 'kefey-find-store.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign h_ff = 'var(--font-body-family)'
+  endif
+
+  assign b_ff = 'inherit'
+  if section.settings.body_font_family == 'heading'
+    assign b_ff = 'var(--font-heading-family)'
+  elsif section.settings.body_font_family == 'body'
+    assign b_ff = 'var(--font-body-family)'
+  endif
+-%}
+
+<section
+  id="FindStoreIntro-{{ section.id }}"
+  class="fs-intro"
+  style="
+    --fs-intro-highlight: {{ section.settings.highlight_color }};
+    --fs-intro-pt: {{ section.settings.padding_top }}px;
+    --fs-intro-pb: {{ section.settings.padding_bottom }}px;
+    --fs-intro-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --fs-intro-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --fs-intro-max: {{ section.settings.max_width }}px;
+    --fs-intro-heading-ff: {{ h_ff }};
+    --fs-intro-heading-fw: {{ section.settings.heading_font_weight }};
+    --fs-intro-heading-fs: {{ section.settings.heading_size }}px;
+    --fs-intro-body-ff: {{ b_ff }};
+    --fs-intro-body-fs: {{ section.settings.body_font_size }}px;
+  "
+>
+  <div class="fs-intro__inner">
+    {% if section.settings.heading_before != blank or section.settings.heading_highlight != blank or section.settings.heading_after != blank %}
+      <h2 class="fs-intro__title">
+        {% if section.settings.heading_before != blank %}
+          <span>{{ section.settings.heading_before }}</span>
+        {% endif %}
+        {% if section.settings.heading_highlight != blank %}
+          <span class="fs-intro__find">{{ section.settings.heading_highlight }}</span>
+        {% endif %}
+        {% if section.settings.heading_after != blank %}
+          <span>{{ section.settings.heading_after }}</span>
+        {% endif %}
+      </h2>
+    {% endif %}
+
+    {% if section.settings.body != blank %}
+      <div class="fs-intro__body rte">
+        {{ section.settings.body }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Find store intro",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_before",
+      "label": "Heading (before highlight)",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Heading (highlighted word)",
+      "default": "Find"
+    },
+    {
+      "type": "text",
+      "id": "heading_after",
+      "label": "Heading (after highlight)",
+      "default": " a Store"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight color",
+      "default": "#FFD166"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Discover where Kefey is stocked near you and shop with retailers you trust.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font",
+      "default": "heading",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (px)",
+      "min": 24,
+      "max": 72,
+      "step": 1,
+      "default": 42
+    },
+    {
+      "type": "select",
+      "id": "body_font_family",
+      "label": "Body font",
+      "default": "body",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "body_font_size",
+      "label": "Body size (px)",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Content max width (px)",
+      "min": 600,
+      "max": 1400,
+      "step": 10,
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 32
+    }
+  ],
+  "presets": [
+    {
+      "name": "Find store intro"
+    }
+  ]
+}
+{% endschema %}

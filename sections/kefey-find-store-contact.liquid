@@ -1,0 +1,146 @@
+{{ 'kefey-find-store.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign h_ff = 'var(--font-body-family)'
+  endif
+
+  assign b_ff = 'inherit'
+  if section.settings.body_font_family == 'heading'
+    assign b_ff = 'var(--font-heading-family)'
+  elsif section.settings.body_font_family == 'body'
+    assign b_ff = 'var(--font-body-family)'
+  endif
+-%}
+
+<section
+  id="FindStoreContact-{{ section.id }}"
+  class="fs-contact"
+  style="
+    --fs-contact-max: {{ section.settings.max_width }}px;
+    --fs-contact-border: {{ section.settings.border_color }};
+    --fs-contact-heading-color: {{ section.settings.heading_color }};
+    --fs-contact-heading-ff: {{ h_ff }};
+    --fs-contact-heading-fs: {{ section.settings.heading_size }}px;
+    --fs-contact-body-ff: {{ b_ff }};
+    --fs-contact-pt: {{ section.settings.padding_top }}px;
+    --fs-contact-pb: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="fs-contact__inner">
+    {% if section.settings.heading != blank %}
+      <h2 class="fs-contact__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.body != blank %}
+      <div class="fs-contact__body rte">
+        {{ section.settings.body }}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Find store contact",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Wholesale & retail inquiries"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>For wholesale or partnership questions, email <strong>hello@kefey.co</strong></p>"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#EF6347"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#D0D0D0"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font",
+      "default": "heading",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size (px)",
+      "min": 18,
+      "max": 36,
+      "step": 1,
+      "default": 22
+    },
+    {
+      "type": "select",
+      "id": "body_font_family",
+      "label": "Body font",
+      "default": "body",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Box max width (px)",
+      "min": 400,
+      "max": 900,
+      "step": 10,
+      "default": 720
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Section padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Find store contact"
+    }
+  ]
+}
+{% endschema %}

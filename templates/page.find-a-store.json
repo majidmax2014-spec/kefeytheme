@@ -1,0 +1,198 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "find_store_header_banner": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "heading": "Wherever you Shop, Kefey is There",
+        "subheading": "Find Kefey in trusted stores near you — and online at Kefey.co.",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 46,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 22,
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 360,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#38A3A5",
+        "overlay_opacity": 44
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "find_store_intro": {
+      "type": "kefey-find-store-intro",
+      "name": "Find store intro",
+      "settings": {
+        "heading_before": "",
+        "heading_highlight": "Find",
+        "heading_after": " a Store",
+        "highlight_color": "#FFD166",
+        "body": "<p>Whether you prefer shopping in person or browsing from home, Kefey is available through retailers you know and trust.</p>",
+        "heading_font_family": "heading",
+        "heading_font_weight": "700",
+        "heading_size": 42,
+        "body_font_family": "body",
+        "body_font_size": 16,
+        "max_width": 1200,
+        "padding_top": 48,
+        "padding_bottom": 40,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 32
+      }
+    },
+    "find_store_region_us": {
+      "type": "kefey-find-store-region",
+      "name": "Find store — United States",
+      "blocks": {
+        "us_logo_1": { "type": "logo", "settings": {} },
+        "us_logo_2": { "type": "logo", "settings": {} },
+        "us_logo_3": { "type": "logo", "settings": {} },
+        "us_logo_4": { "type": "logo", "settings": {} },
+        "us_logo_5": { "type": "logo", "settings": {} },
+        "us_logo_6": { "type": "logo", "settings": {} },
+        "us_logo_7": { "type": "logo", "settings": {} },
+        "us_logo_8": { "type": "logo", "settings": {} }
+      },
+      "block_order": [
+        "us_logo_1",
+        "us_logo_2",
+        "us_logo_3",
+        "us_logo_4",
+        "us_logo_5",
+        "us_logo_6",
+        "us_logo_7",
+        "us_logo_8"
+      ],
+      "settings": {
+        "region_title": "United States",
+        "sublabel": "Available at:",
+        "footer": "<p>Also shop online at <strong>Kefey.co</strong> with shipping within the United States.</p>",
+        "title_font_family": "heading",
+        "title_size": 24,
+        "body_font_family": "body",
+        "max_width": 1200,
+        "padding_top": 24,
+        "padding_bottom": 32
+      }
+    },
+    "find_store_region_uae": {
+      "type": "kefey-find-store-region",
+      "name": "Find store — UAE",
+      "blocks": {
+        "uae_logo_1": { "type": "logo", "settings": {} },
+        "uae_logo_2": { "type": "logo", "settings": {} },
+        "uae_logo_3": { "type": "logo", "settings": {} },
+        "uae_logo_4": { "type": "logo", "settings": {} },
+        "uae_logo_5": { "type": "logo", "settings": {} },
+        "uae_logo_6": { "type": "logo", "settings": {} },
+        "uae_logo_7": { "type": "logo", "settings": {} },
+        "uae_logo_8": { "type": "logo", "settings": {} }
+      },
+      "block_order": [
+        "uae_logo_1",
+        "uae_logo_2",
+        "uae_logo_3",
+        "uae_logo_4",
+        "uae_logo_5",
+        "uae_logo_6",
+        "uae_logo_7",
+        "uae_logo_8"
+      ],
+      "settings": {
+        "region_title": "United Arab Emirates",
+        "sublabel": "Available at:",
+        "footer": "<p>Also shop online at <strong>Kefey.co</strong> for delivery in the UAE.</p>",
+        "title_font_family": "heading",
+        "title_size": 24,
+        "body_font_family": "body",
+        "max_width": 1200,
+        "padding_top": 16,
+        "padding_bottom": 40
+      }
+    },
+    "find_store_worldwide": {
+      "type": "kefey-find-store-worldwide",
+      "name": "Find store worldwide",
+      "settings": {
+        "heading": "Growing worldwide",
+        "body": "<p>We are always adding new retail partners. Check back soon if you do not see a store in your area yet.</p>",
+        "background_color": "#EF6344",
+        "corner_radius": 12,
+        "show_decor": false,
+        "heading_font_family": "heading",
+        "heading_size": 28,
+        "body_font_family": "body",
+        "max_width": 1200,
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "find_store_contact": {
+      "type": "kefey-find-store-contact",
+      "name": "Find store contact",
+      "settings": {
+        "heading": "Wholesale & retail inquiries",
+        "body": "<p>For stocking Kefey or partnership questions, reach us at <strong>wholesale@kefey.co</strong></p>",
+        "heading_color": "#EF6347",
+        "border_color": "#D0D0D0",
+        "heading_font_family": "heading",
+        "heading_size": 22,
+        "body_font_family": "body",
+        "max_width": 720,
+        "padding_top": 40,
+        "padding_bottom": 48
+      }
+    },
+    "find_store_impact": {
+      "type": "kefey-find-store-impact",
+      "name": "Find store impact",
+      "settings": {
+        "row1_left_bg": "#EF6347",
+        "row1_heading": "Kefey FOR GOOD",
+        "row1_text": "<p>Every purchase supports initiatives that nourish communities and protect the planet.</p>",
+        "row1_button_label": "Learn more",
+        "row1_button_link": "/pages/about",
+        "row2_left_bg": "#38A3A5",
+        "row2_left_text": "<p><strong>Vitamin Angels</strong> helps underserved children and mothers access life-changing nutrients.</p>",
+        "row2_right_bg": "#90BE6D",
+        "row2_right_text": "<p><strong>One Tree Planted</strong> supports global reforestation — one tree at a time.</p>",
+        "heading_font_family": "heading",
+        "panel_heading_size": 24,
+        "body_font_family": "body",
+        "max_width": 1200,
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "find_store_header_banner",
+    "main",
+    "find_store_intro",
+    "find_store_region_us",
+    "find_store_region_uae",
+    "find_store_worldwide",
+    "find_store_contact",
+    "find_store_impact"
+  ]
+}

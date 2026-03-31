@@ -1,0 +1,259 @@
+{{ 'kefey-find-store.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign h_ff = 'var(--font-body-family)'
+  endif
+
+  assign b_ff = 'inherit'
+  if section.settings.body_font_family == 'heading'
+    assign b_ff = 'var(--font-heading-family)'
+  elsif section.settings.body_font_family == 'body'
+    assign b_ff = 'var(--font-body-family)'
+  endif
+-%}
+
+<section
+  id="FindStoreImpact-{{ section.id }}"
+  class="fs-impact"
+  style="
+    --fs-impact-max: {{ section.settings.max_width }}px;
+    --fs-impact-coral: {{ section.settings.row1_left_bg }};
+    --fs-impact-teal: {{ section.settings.row2_left_bg }};
+    --fs-impact-lime: {{ section.settings.row2_right_bg }};
+    --fs-impact-heading-ff: {{ h_ff }};
+    --fs-impact-body-ff: {{ b_ff }};
+    --fs-impact-panel-title-fs: {{ section.settings.panel_heading_size }}px;
+    --fs-impact-pb: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="fs-impact__inner">
+    <div class="fs-impact__row">
+      <div class="fs-impact__panel fs-impact__panel--coral">
+        {% if section.settings.row1_heading != blank %}
+          <h2 class="fs-impact__panel-heading">{{ section.settings.row1_heading }}</h2>
+        {% endif %}
+        {% if section.settings.row1_text != blank %}
+          <div class="fs-impact__panel-text rte">
+            {{ section.settings.row1_text }}
+          </div>
+        {% endif %}
+        {% if section.settings.row1_button_label != blank and section.settings.row1_button_link != blank %}
+          <a href="{{ section.settings.row1_button_link }}" class="fs-impact__btn">
+            {{ section.settings.row1_button_label }}
+          </a>
+        {% endif %}
+      </div>
+      <div class="fs-impact__media">
+        {% if section.settings.row1_image != blank %}
+          {%- assign row1_alt = section.settings.row1_image.alt | default: '' | escape -%}
+          {{
+            section.settings.row1_image
+            | image_url: width: 1400
+            | image_tag:
+              loading: 'lazy',
+              class: 'fs-impact__row1-img',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              widths: '375, 550, 750, 1100, 1400',
+              alt: row1_alt
+          }}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="fs-impact__row">
+      <div class="fs-impact__panel fs-impact__panel--teal">
+        {% if section.settings.row2_left_logo != blank %}
+          {%- assign row2_l_alt = section.settings.row2_left_logo.alt | default: '' | escape -%}
+          <div class="fs-impact__partner-logo">
+            {{
+              section.settings.row2_left_logo
+              | image_url: width: 320
+              | image_tag: loading: 'lazy', alt: row2_l_alt
+            }}
+          </div>
+        {% endif %}
+        {% if section.settings.row2_left_text != blank %}
+          <div class="fs-impact__partner-text rte">
+            {{ section.settings.row2_left_text }}
+          </div>
+        {% endif %}
+      </div>
+      <div class="fs-impact__panel fs-impact__panel--lime">
+        {% if section.settings.row2_right_logo != blank %}
+          {%- assign row2_r_alt = section.settings.row2_right_logo.alt | default: '' | escape -%}
+          <div class="fs-impact__partner-logo">
+            {{
+              section.settings.row2_right_logo
+              | image_url: width: 320
+              | image_tag: loading: 'lazy', alt: row2_r_alt
+            }}
+          </div>
+        {% endif %}
+        {% if section.settings.row2_right_text != blank %}
+          <div class="fs-impact__partner-text rte">
+            {{ section.settings.row2_right_text }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Find store impact",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Row 1 — Kefey for Good"
+    },
+    {
+      "type": "color",
+      "id": "row1_left_bg",
+      "label": "Left panel background",
+      "default": "#EF6347"
+    },
+    {
+      "type": "text",
+      "id": "row1_heading",
+      "label": "Heading",
+      "default": "Kefey FOR GOOD"
+    },
+    {
+      "type": "richtext",
+      "id": "row1_text",
+      "label": "Text",
+      "default": "<p>We partner with organizations that help people and the planet thrive.</p>"
+    },
+    {
+      "type": "text",
+      "id": "row1_button_label",
+      "label": "Button label",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "row1_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "row1_image",
+      "label": "Right image"
+    },
+    {
+      "type": "header",
+      "content": "Row 2 — Partners"
+    },
+    {
+      "type": "color",
+      "id": "row2_left_bg",
+      "label": "Left panel (teal)",
+      "default": "#38A3A5"
+    },
+    {
+      "type": "image_picker",
+      "id": "row2_left_logo",
+      "label": "Left partner logo"
+    },
+    {
+      "type": "richtext",
+      "id": "row2_left_text",
+      "label": "Left text",
+      "default": "<p>Vitamin Angels — helping underserved communities access essential nutrients.</p>"
+    },
+    {
+      "type": "color",
+      "id": "row2_right_bg",
+      "label": "Right panel (lime)",
+      "default": "#90BE6D"
+    },
+    {
+      "type": "image_picker",
+      "id": "row2_right_logo",
+      "label": "Right partner logo"
+    },
+    {
+      "type": "richtext",
+      "id": "row2_right_text",
+      "label": "Right text",
+      "default": "<p>One Tree Planted — reforestation for a healthier planet.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font",
+      "default": "heading",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "panel_heading_size",
+      "label": "Panel heading size (px)",
+      "min": 18,
+      "max": 36,
+      "step": 1,
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "body_font_family",
+      "label": "Body font",
+      "default": "body",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Content max width (px)",
+      "min": 900,
+      "max": 1400,
+      "step": 10,
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Section padding top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Section padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Find store impact"
+    }
+  ]
+}
+{% endschema %}
