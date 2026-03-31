@@ -1,0 +1,10 @@
+/*
+ * Overrides Shopify storefront policy.css (.shopify-policy__container max-width: 560px / 65ch).
+ * Loaded at end of <body> on policy pages so it wins in the cascade.
+ */
+
+.shopify-policy__container {
+  max-width: 1200px !important;
+  width: 100%;
+  box-sizing: border-box;
+}

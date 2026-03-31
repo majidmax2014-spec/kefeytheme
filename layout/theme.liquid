@@ -372,5 +372,12 @@
     {%- if settings.cart_type == 'drawer' -%}
       <script src="{{ 'cart-drawer.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    {%- comment -%}
+      After Shopify-injected policy-*.css so max-width can exceed 560px / 65ch.
+    {%- endcomment -%}
+    {%- if request.page_type == 'policy' -%}
+      {{ 'shopify-policy-overrides.css' | asset_url | stylesheet_tag }}
+    {%- endif -%}
   </body>
 </html>
