@@ -1,0 +1,224 @@
+{{ 'thank-you-page.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign h_ff = 'var(--font-body-family)'
+  endif
+
+  assign b_ff = 'inherit'
+  if section.settings.body_font_family == 'heading'
+    assign b_ff = 'var(--font-heading-family)'
+  elsif section.settings.body_font_family == 'body'
+    assign b_ff = 'var(--font-body-family)'
+  endif
+-%}
+
+<section
+  id="ThankYouHero-{{ section.id }}"
+  class="ty-hero"
+  style="
+    --ty-hero-teal: {{ section.settings.teal_color }};
+    --ty-hero-max: {{ section.settings.max_width }}px;
+    --ty-hero-pt: {{ section.settings.padding_top }}px;
+    --ty-hero-pb: {{ section.settings.padding_bottom }}px;
+    --ty-hero-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --ty-hero-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --ty-hero-heading-ff: {{ h_ff }};
+    --ty-hero-body-ff: {{ b_ff }};
+    --ty-hero-h1-fs: {{ section.settings.heading_1_size }}px;
+    --ty-hero-h2-fs: {{ section.settings.heading_2_size }}px;
+    --ty-hero-sub-fs: {{ section.settings.subheading_size }}px;
+  "
+>
+  <div class="ty-hero__inner">
+    {% if section.settings.heading_1 != blank %}
+      <h1 class="ty-hero__eyebrow">{{ section.settings.heading_1 }}</h1>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <p class="ty-hero__sub">{{ section.settings.subheading }}</p>
+    {% endif %}
+    {% if section.settings.heading_2 != blank %}
+      <h2 class="ty-hero__title">{{ section.settings.heading_2 }}</h2>
+    {% endif %}
+    {% if section.settings.body != blank %}
+      <div class="ty-hero__body rte">
+        {{ section.settings.body }}
+      </div>
+    {% endif %}
+    {% if section.settings.order_number_display != blank %}
+      <p class="ty-hero__order">{{ section.settings.order_number_display }}</p>
+    {% endif %}
+    {% if section.settings.track_label != blank and section.settings.track_url != blank %}
+      <a href="{{ section.settings.track_url }}" class="ty-hero__track">
+        {{ section.settings.track_label }}
+      </a>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Thank you hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Primary heading",
+      "default": "Thank you for your purchase"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "High-Five for Joy!"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Secondary heading",
+      "default": "Your order was successful"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Woohoo! Your Kefey stars are packed with joy and on their way. Get ready to unwrap a smile soon!</p>"
+    },
+    {
+      "type": "text",
+      "id": "order_number_display",
+      "label": "Order line (static page)",
+      "info": "Shown as plain text. Use a placeholder; real post-checkout uses Checkout UI extensions.",
+      "default": "ORDER #12345"
+    },
+    {
+      "type": "text",
+      "id": "track_label",
+      "label": "Track button label",
+      "default": "TRACK MY ORDER"
+    },
+    {
+      "type": "url",
+      "id": "track_url",
+      "label": "Track button link",
+      "info": "Often /account or your tracking page."
+    },
+    {
+      "type": "color",
+      "id": "teal_color",
+      "label": "Primary heading color",
+      "default": "#4FB4B2"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font",
+      "default": "heading",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_1_size",
+      "label": "Primary heading size (px)",
+      "min": 24,
+      "max": 48,
+      "step": 1,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size (px)",
+      "min": 16,
+      "max": 28,
+      "step": 1,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "heading_2_size",
+      "label": "Secondary heading size (px)",
+      "min": 20,
+      "max": 40,
+      "step": 1,
+      "default": 26
+    },
+    {
+      "type": "select",
+      "id": "body_font_family",
+      "label": "Body font",
+      "default": "body",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Content max width (px)",
+      "min": 520,
+      "max": 900,
+      "step": 10,
+      "default": 720
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 32
+    }
+  ],
+  "presets": [
+    {
+      "name": "Thank you hero"
+    }
+  ]
+}
+{% endschema %}

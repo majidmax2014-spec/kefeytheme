@@ -1,0 +1,88 @@
+{
+  "layout": "theme",
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "thank_you_hero": {
+      "type": "thank-you-hero",
+      "name": "Thank you hero",
+      "settings": {
+        "heading_1": "Thank you for your purchase",
+        "subheading": "High-Five for Joy!",
+        "heading_2": "Your order was successful",
+        "body": "<p>Woohoo! Your Kefey stars are packed with joy and on their way. Get ready to unwrap a smile soon!</p>",
+        "order_number_display": "ORDER #12345",
+        "track_label": "TRACK MY ORDER",
+        "track_url": "/account",
+        "teal_color": "#4FB4B2",
+        "heading_font_family": "heading",
+        "heading_1_size": 32,
+        "subheading_size": 18,
+        "heading_2_size": 26,
+        "body_font_family": "body",
+        "max_width": 720,
+        "padding_top": 48,
+        "padding_bottom": 32,
+        "padding_top_mobile": 32
+      }
+    },
+    "thank_you_cards": {
+      "type": "thank-you-cards",
+      "name": "Thank you cards",
+      "settings": {
+        "card1_title": "Stay Connected with Kefey",
+        "card1_body": "<p>Follow us for joyful tips, colorful moments &amp; surprises!</p>",
+        "card1_btn_label": "FOLLOW US",
+        "card1_btn_url": "/pages/about",
+        "card1_bg": "#4FB4B2",
+        "card2_title": "Join the Joy Club",
+        "card2_body": "<p>Want more joy in your inbox? Subscribe now &amp; get our Joyful Drinks e-Book FREE!</p>",
+        "card2_btn_label": "SUBSCRIBE NOW",
+        "card2_btn_url": "/pages/contact",
+        "card2_bg": "#4FB4B2",
+        "card3_title": "A Little Extra Joy",
+        "card3_body": "<p>Did you know? Our EcoTube is reusable! Turn it into a pen holder, mini vase, or even a smile bank.</p>",
+        "card3_bg": "#E95D3F",
+        "heading_font_family": "heading",
+        "card_title_size": 20,
+        "body_font_family": "body",
+        "max_width": 1100,
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    },
+    "thank_you_impact": {
+      "type": "find-store-impact",
+      "name": "Kefey for Good",
+      "settings": {
+        "row1_left_bg": "#E95D3F",
+        "row1_heading": "Kefey FOR GOOD",
+        "row1_text": "<p>At the Heart of Kefey, Joy Creates Impact.</p>",
+        "row1_button_label": "Learn More",
+        "row1_button_link": "/pages/about",
+        "row2_left_bg": "#4FB4B2",
+        "row2_left_text": "<p>Kefey's impact: 20,000 Women &amp; Children Reached.</p>",
+        "row2_right_bg": "#88C154",
+        "row2_right_text": "<p>Proudly supporting global Reforestation efforts.</p>",
+        "heading_font_family": "heading",
+        "panel_heading_size": 24,
+        "body_font_family": "body",
+        "max_width": 1200,
+        "padding_top": 24,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "thank_you_hero",
+    "thank_you_cards",
+    "thank_you_impact"
+  ]
+}
