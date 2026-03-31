@@ -1,0 +1,91 @@
+/* Legal / policy page typography — only when .kefey-main-page--legal is on the section */
+
+.kefey-main-page--legal {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
+@media screen and (min-width: 990px) {
+  .page-width.page-width--narrow.kefey-main-page--legal {
+    max-width: var(--legal-content-max-width, 72.6rem);
+  }
+}
+
+.kefey-main-page--legal .main-page-title {
+  font-family: var(--legal-title-font-family, inherit);
+  color: var(--legal-title-color, #70b9be);
+  font-size: var(--legal-title-font-size, 3.6rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  margin-top: 0;
+  margin-bottom: 2.4rem;
+  text-transform: var(--legal-title-text-transform, uppercase);
+}
+
+.kefey-main-page--legal .rte {
+  font-family: var(--legal-body-font-family, inherit);
+  color: var(--legal-body-color, #333333);
+  font-size: var(--legal-body-font-size, 1.6rem);
+  line-height: var(--legal-body-line-height, 1.65);
+  font-weight: 400;
+}
+
+.kefey-main-page--legal .rte h1,
+.kefey-main-page--legal .rte h2,
+.kefey-main-page--legal .rte h3,
+.kefey-main-page--legal .rte h4,
+.kefey-main-page--legal .rte h5,
+.kefey-main-page--legal .rte h6 {
+  font-family: var(--legal-section-font-family, inherit);
+  color: var(--legal-section-heading-color, #101010);
+  font-size: var(--legal-section-heading-font-size, 1.8rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: 0.04em;
+  margin-top: 2.8rem;
+  margin-bottom: 1rem;
+  text-transform: var(--legal-section-text-transform, uppercase);
+}
+
+.kefey-main-page--legal .rte h1:first-child,
+.kefey-main-page--legal .rte h2:first-child,
+.kefey-main-page--legal .rte > *:first-child {
+  margin-top: 0;
+}
+
+.kefey-main-page--legal .rte p {
+  margin-top: 0;
+  margin-bottom: var(--legal-paragraph-spacing, 1.6rem);
+}
+
+.kefey-main-page--legal .rte p:last-child {
+  margin-bottom: 0;
+}
+
+.kefey-main-page--legal .rte ul,
+.kefey-main-page--legal .rte ol {
+  margin-top: 0;
+  margin-bottom: var(--legal-paragraph-spacing, 1.6rem);
+  padding-left: 2rem;
+}
+
+.kefey-main-page--legal .rte li {
+  margin-bottom: 0.6rem;
+}
+
+.kefey-main-page--legal .rte a {
+  color: var(--legal-body-color, #333333);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
+.kefey-main-page--legal .rte a:hover {
+  opacity: 0.85;
+}
+
+.kefey-main-page--legal .rte strong {
+  font-weight: 700;
+  color: var(--legal-section-heading-color, #101010);
+}

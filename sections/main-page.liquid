@@ -1,4 +1,42 @@
 {{ 'section-main-page.css' | asset_url | stylesheet_tag }}
+{%- if section.settings.enable_legal_typography -%}
+  {{ 'section-main-page-legal.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
+{%- liquid
+  assign legal_title_ff = 'inherit'
+  if section.settings.legal_title_font_family == 'heading'
+    assign legal_title_ff = 'var(--font-heading-family)'
+  elsif section.settings.legal_title_font_family == 'body'
+    assign legal_title_ff = 'var(--font-body-family)'
+  endif
+
+  assign legal_section_ff = 'inherit'
+  if section.settings.legal_section_font_family == 'heading'
+    assign legal_section_ff = 'var(--font-heading-family)'
+  elsif section.settings.legal_section_font_family == 'body'
+    assign legal_section_ff = 'var(--font-body-family)'
+  endif
+
+  assign legal_body_ff = 'inherit'
+  if section.settings.legal_body_font_family == 'heading'
+    assign legal_body_ff = 'var(--font-heading-family)'
+  elsif section.settings.legal_body_font_family == 'body'
+    assign legal_body_ff = 'var(--font-body-family)'
+  endif
+
+  assign legal_title_transform = 'none'
+  if section.settings.legal_title_uppercase
+    assign legal_title_transform = 'uppercase'
+  endif
+
+  assign legal_section_transform = 'none'
+  if section.settings.legal_section_heading_uppercase
+    assign legal_section_transform = 'uppercase'
+  endif
+
+  assign legal_line_height = section.settings.legal_body_line_height | default: 165 | times: 0.01
+-%}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -12,10 +50,31 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  {%- if section.settings.enable_legal_typography -%}
+    .kefey-main-page--legal.section-{{ section.id }}-padding {
+      --legal-title-font-family: {{ legal_title_ff }};
+      --legal-section-font-family: {{ legal_section_ff }};
+      --legal-body-font-family: {{ legal_body_ff }};
+      --legal-title-color: {{ section.settings.legal_title_color }};
+      --legal-section-heading-color: {{ section.settings.legal_section_heading_color }};
+      --legal-body-color: {{ section.settings.legal_body_color }};
+      --legal-title-font-size: {{ section.settings.legal_title_font_size }}px;
+      --legal-section-heading-font-size: {{ section.settings.legal_section_heading_font_size }}px;
+      --legal-body-font-size: {{ section.settings.legal_body_font_size }}px;
+      --legal-body-line-height: {{ legal_line_height }};
+      --legal-paragraph-spacing: {{ section.settings.legal_paragraph_spacing }}px;
+      --legal-content-max-width: {{ section.settings.legal_content_max_width }}px;
+      --legal-title-text-transform: {{ legal_title_transform }};
+      --legal-section-text-transform: {{ legal_section_transform }};
+    }
+  {%- endif -%}
 {%- endstyle -%}
 
-<div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+<div
+  class="page-width page-width--narrow section-{{ section.id }}-padding{% if section.settings.enable_legal_typography %} kefey-main-page--legal{% endif %}"
+>
+  <h1 class="main-page-title page-title{% unless section.settings.enable_legal_typography %} h0{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ page.title | escape }}
   </h1>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
@@ -29,6 +88,143 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "header",
+      "content": "Legal & policy typography"
+    },
+    {
+      "type": "paragraph",
+      "content": "Turn on for Terms, Privacy, and similar long-form pages. Use the “page.terms” template to keep other pages unchanged, or enable here and adjust colors per store."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_legal_typography",
+      "label": "Enable legal document typography",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "legal_title_font_family",
+      "label": "Page title font",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "legal_section_font_family",
+      "label": "Section headings font (H2–H6 in content)",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "legal_body_font_family",
+      "label": "Body text font",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "legal_title_color",
+      "label": "Page title color",
+      "default": "#70B9BE"
+    },
+    {
+      "type": "color",
+      "id": "legal_section_heading_color",
+      "label": "Section heading color",
+      "default": "#101010"
+    },
+    {
+      "type": "color",
+      "id": "legal_body_color",
+      "label": "Body text color",
+      "default": "#333333"
+    },
+    {
+      "type": "range",
+      "id": "legal_title_font_size",
+      "min": 20,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "label": "Page title font size",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "legal_section_heading_font_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Section heading font size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "legal_body_font_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Body font size",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "legal_title_uppercase",
+      "label": "Uppercase page title",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "legal_section_heading_uppercase",
+      "label": "Uppercase section headings in content",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "legal_body_line_height",
+      "min": 130,
+      "max": 200,
+      "step": 5,
+      "label": "Body line height",
+      "default": 165,
+      "info": "1.65 = 165"
+    },
+    {
+      "type": "range",
+      "id": "legal_paragraph_spacing",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below paragraphs & lists",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "legal_content_max_width",
+      "min": 480,
+      "max": 1200,
+      "step": 20,
+      "unit": "px",
+      "label": "Content column max width",
+      "default": 720
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
