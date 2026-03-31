@@ -15,7 +15,6 @@
     assign b_ff = 'var(--font-body-family)'
   endif
 
-  assign intro_hb = section.settings.heading_before | strip
   assign intro_hh = section.settings.heading_highlight | strip
   assign intro_ha = section.settings.heading_after | strip
 -%}
@@ -38,11 +37,8 @@
   "
 >
   <div class="fs-intro__inner">
-    {% if intro_hb != blank or intro_hh != blank or intro_ha != blank %}
+    {% if intro_hh != blank or intro_ha != blank %}
       <h2 class="fs-intro__title">
-        {% if intro_hb != blank %}
-          <span>{{ intro_hb }}</span>
-        {% endif %}
         {% if intro_hh != blank %}
           <span class="fs-intro__find">{{ intro_hh }}</span>
         {% endif %}
@@ -66,13 +62,6 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    {
-      "type": "text",
-      "id": "heading_before",
-      "label": "Heading (before highlight)",
-      "info": "Optional text before the highlighted word. Clear the field if not needed.",
-      "default": " "
-    },
     {
       "type": "text",
       "id": "heading_highlight",
