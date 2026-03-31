@@ -93,6 +93,7 @@
         "remove_font_family": "body",
         "remove_font_size": 16,
         "remove_font_weight": 500,
+        "quantity_font_size": 16,
         "upsell_label_font_family": "heading",
         "upsell_label_font_size": 16,
         "upsell_label_font_weight": 500,
