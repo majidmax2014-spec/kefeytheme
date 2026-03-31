@@ -41,7 +41,7 @@
 
 .kefey-cart-offer-card {
   background: #ef6347;
-  border-radius: 1.2rem;
+  border-radius: 2.4rem;
   min-height: 17.6rem;
   display: flex;
   align-items: center;
@@ -104,7 +104,7 @@
   min-height: 4rem;
   margin-top: 1rem;
   padding: 0.45rem 2.4rem;
-  border-radius: 0.25rem;
+  border-radius: 0.6rem;
   background: #fee431;
   color: #ffffff;
   text-decoration: none;
