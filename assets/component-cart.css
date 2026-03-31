@@ -4,9 +4,13 @@ cart-items,
   background: #ffffff;
 }
 
+/* Matches theme content width (.page-width uses the same token; avoids 94rem override). */
 .kefey-cart-shell {
-  max-width: 94rem;
-  margin: 0 auto;
+  max-width: var(--page-width);
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
 }
 
 .cart__empty-text,
