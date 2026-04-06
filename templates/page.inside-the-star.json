@@ -79,6 +79,17 @@
         "text_font_family": "inherit",
         "text_font_weight": "inherit",
         "text_font_size": 16,
+        "show_button": false,
+        "button_label": "FIND YOUR STAR",
+        "button_link": "",
+        "button_show_arrow": true,
+        "button_background": "#49b2b2",
+        "button_text_color": "#ffffff",
+        "button_font_size": 14,
+        "button_padding_y": 14,
+        "button_padding_x": 22,
+        "button_margin_top": 20,
+        "button_margin_top_mobile": 18,
         "content_max_width": 1200,
         "left_col_width": 60,
         "min_height": 290,
@@ -274,6 +285,49 @@
         "margin_bottom": 20,
         "pause_on_hover": true
       }
+    },
+    "purpose_beyond_gummy_GKmGPP": {
+      "type": "purpose-beyond-gummy",
+      "name": "Purpose Beyond Gummy",
+      "settings": {
+        "heading": "Designed to Be Enjoyed & Crafted with Care.",
+        "body": "<p>Kefey® gummies are carefully balanced to deliver a clean, naturally pleasant taste, so your daily ritual feels light, effortless, and genuinely enjoyable. A moment you look forward to, not just another task to complete.<br/><br/><strong>Inside every Kefey® star is a simple idea:</strong> self-care should be effective, intentional, and a pleasure, not a chore.<br/>Kefey® is designed with respect for you, and for the world around you.<br/>Because thoughtful choices don’t just feel better, they leave a lighter footprint — on you, and on the planet.<br/>Kefey®, thoughtfully packaged. Sustainably minded.<br/><br/></p>",
+        "image": "shopify://shop_images/designed-crafted.png",
+        "panel_color": "#f2c718",
+        "title_bg_color": "#ea563a",
+        "title_color": "#ffffff",
+        "section_bg_color": "#ffffff",
+        "left_panel_color": "#f2c718",
+        "title_bar_color": "#ea563a",
+        "title_text_color": "#ffffff",
+        "body_color": "#1c1c1c",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "heading_font_size": 36,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 16,
+        "show_button": true,
+        "button_label": "FIND YOUR STAR",
+        "button_link": "",
+        "button_show_arrow": true,
+        "button_background": "#49b2b2",
+        "button_text_color": "#ffffff",
+        "button_font_size": 14,
+        "button_padding_y": 14,
+        "button_padding_x": 22,
+        "button_margin_top": 20,
+        "button_margin_top_mobile": 18,
+        "content_max_width": 1200,
+        "left_col_width": 40,
+        "min_height": 290,
+        "content_padding_left": 56,
+        "content_padding_right": 40,
+        "title_bar_offset_y": 16,
+        "title_bar_width": 78,
+        "padding_top": 44,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
@@ -283,6 +337,7 @@
     "kefey_star_defines_giRQe7",
     "kefey_plant_based_banner_KHqxr7",
     "kefey_free_from_heading_PLdayY",
-    "marquee_strip_gfxGk7"
+    "marquee_strip_gfxGk7",
+    "purpose_beyond_gummy_GKmGPP"
   ]
 }
