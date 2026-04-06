@@ -16,6 +16,7 @@
           "type": "slide",
           "settings": {
             "desktop_bg_image": "shopify://shop_images/slide1.png",
+            "mobile_bg_image": "shopify://shop_images/home_banner.png",
             "heading": "Wellness That Makes You Smile",
             "body_text": "<p>A Daily Ritual • Plant-Based • Sugar-Free • Planet-Kind</p>",
             "button_label": "SHOP NOW",
@@ -123,6 +124,8 @@
       "settings": {
         "heading": "Every Mood Has a Face",
         "heading_size": 36,
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
         "show_highlight": true,
         "highlight_color": "#ffc94d",
         "section_padding_top": 40,
@@ -339,6 +342,11 @@
       "settings": {
         "heading": "Joyful Routines, Shared By Real People.",
         "heading_size": 36,
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 14,
         "highlight_color": "#ffc94d",
         "card_bg_color": "#ffe082",
         "card_radius": 24,
@@ -613,9 +621,13 @@
       "settings": {
         "heading": "Kefey in Real Life",
         "heading_size": 36,
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
         "highlight_color": "#f5c524",
         "background_color": "#ffffff",
         "caption_font_size": 14,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
         "padding_top": 40,
         "padding_bottom": 32,
         "autoplay": true,
