@@ -257,17 +257,18 @@
       "type": "find-store-worldwide",
       "name": "Find store worldwide",
       "settings": {
-        "heading": "Growing worldwide",
-        "body": "<p>We are always adding new retail partners. Check back soon if you do not see a store in your area yet.</p>",
-        "background_color": "#ef6344",
+        "heading": "Worldwide Availability",
+        "body": "<p>No matter where you live, Kefey Mood Gummies can be delivered straight to your door.</p><p><strong>We ship worldwide — over 150+ countries and counting.</strong></p>",
+        "background_color": "#e85d3f",
+        "heading_highlight_color": "#4db6ac",
         "corner_radius": 12,
         "show_decor": false,
         "heading_font_family": "heading",
-        "heading_size": 28,
+        "heading_size": 32,
         "body_font_family": "body",
         "max_width": 1200,
-        "padding_top": 24,
-        "padding_bottom": 24
+        "padding_top": 32,
+        "padding_bottom": 32
       }
     },
     "find_store_contact": {

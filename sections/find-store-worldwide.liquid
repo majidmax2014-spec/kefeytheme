@@ -43,7 +43,14 @@
 
     <div class="fs-worldwide__content">
       {% if section.settings.heading != blank %}
-        <h2 class="fs-worldwide__heading">{{ section.settings.heading }}</h2>
+        <h2 class="fs-worldwide__heading">
+          <span class="fs-worldwide__heading-text">{{ section.settings.heading | escape }}</span>
+          <span
+            class="fs-worldwide__heading-highlight"
+            style="background-color: {{ section.settings.heading_highlight_color }};"
+            aria-hidden="true"
+          ></span>
+        </h2>
       {% endif %}
       {% if section.settings.body != blank %}
         <div class="fs-worldwide__body rte">
@@ -64,19 +71,26 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Worldwide"
+      "default": "Worldwide Availability"
     },
     {
       "type": "richtext",
       "id": "body",
       "label": "Body",
-      "default": "<p>Kefey is growing globally. Check back for new retail partners in your region.</p>"
+      "default": "<p>No matter where you live, Kefey Mood Gummies can be delivered straight to your door.</p><p><strong>We ship worldwide — over 150+ countries and counting.</strong></p>"
     },
     {
       "type": "color",
       "id": "background_color",
-      "label": "Background",
-      "default": "#EF6344"
+      "label": "Banner background",
+      "default": "#E85D3F"
+    },
+    {
+      "type": "color",
+      "id": "heading_highlight_color",
+      "label": "Heading underline (highlight)",
+      "default": "#4DB6AC",
+      "info": "Teal bar behind the lower part of the heading, same style as Testimonials."
     },
     {
       "type": "range",
@@ -119,7 +133,7 @@
       "min": 20,
       "max": 48,
       "step": 1,
-      "default": 28
+      "default": 32
     },
     {
       "type": "select",
@@ -151,7 +165,7 @@
       "min": 0,
       "max": 80,
       "step": 4,
-      "default": 24
+      "default": 32
     },
     {
       "type": "range",
@@ -160,7 +174,7 @@
       "min": 0,
       "max": 80,
       "step": 4,
-      "default": 24
+      "default": 32
     }
   ],
   "presets": [
