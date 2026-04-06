@@ -28,9 +28,9 @@ class KefeyTestimonialsCarousel {
   
   getSlidesPerView() {
     const width = window.innerWidth;
-    if (width >= 1024) return 3; // Desktop: 3 items
-    if (width >= 768) return 2;  // Tablet: 2 items
-    return 1; // Mobile: 1 item
+    if (width >= 1024) return 3;
+    if (width >= 750) return 2;
+    return 1;
   }
   
   init() {
@@ -40,7 +40,8 @@ class KefeyTestimonialsCarousel {
     this.createDots();
     this.attachEvents();
     this.updateCarousel();
-    
+    requestAnimationFrame(() => this.updateCarousel());
+
     if (this.autoplay) {
       this.startAutoplay();
     }
@@ -51,6 +52,7 @@ class KefeyTestimonialsCarousel {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         this.updateSlidesPerView();
+        this.createDots();
         this.updateCarousel();
       }, 250);
     });
@@ -179,15 +181,28 @@ class KefeyTestimonialsCarousel {
     const firstSlide = this.slides[0];
     if (!firstSlide || !this.viewport) return;
 
-    const gap = parseFloat(getComputedStyle(this.track).columnGap || getComputedStyle(this.track).gap || '0') || 0;
+    const gapStyle = getComputedStyle(this.track).gap || getComputedStyle(this.track).columnGap || '0';
+    const gap = parseFloat(gapStyle) || 0;
     const slideWidth = firstSlide.getBoundingClientRect().width;
     const step = slideWidth + gap;
     const viewportWidth = this.viewport.clientWidth;
     const trackWidth = this.track.scrollWidth;
-    const maxTranslate = Math.max(0, trackWidth - viewportWidth);
-    const target = this.currentIndex * step;
-    const clamped = Math.max(0, Math.min(target, maxTranslate));
-    this.track.style.transform = `translateX(-${clamped}px)`;
+
+    const mobilePeek = viewportWidth < 750 && this.slidesPerView === 1;
+
+    let translatePx;
+    if (mobilePeek) {
+      const T = this.currentIndex * step + slideWidth / 2 - viewportWidth / 2;
+      const TMax = (this.slides.length - 1) * step + slideWidth / 2 - viewportWidth / 2;
+      const TMin = slideWidth / 2 - viewportWidth / 2;
+      translatePx = Math.max(TMin, Math.min(T, TMax));
+    } else {
+      const maxTranslate = Math.max(0, trackWidth - viewportWidth);
+      const target = this.currentIndex * step;
+      translatePx = Math.max(0, Math.min(target, maxTranslate));
+    }
+
+    this.track.style.transform = `translateX(-${translatePx}px)`;
     
     // Update arrows - disable at ends (non-looping)
     if (this.prevBtn) {
