@@ -208,14 +208,17 @@
       "type": "find-store-contact",
       "name": "Find store contact",
       "settings": {
-        "heading": "Wholesale & retail inquiries",
-        "body": "<p>For stocking Kefey or partnership questions, reach us at <strong>wholesale@kefey.co</strong></p>",
-        "heading_color": "#EF6347",
-        "border_color": "#D0D0D0",
+        "heading": "Want Kefey in Your Store?",
+        "body": "<p>If you're a retailer or distributor interested in carrying Kefey, we'd love to connect.</p><p>Get in touch at: <strong>wholesale@kefey.co</strong></p>",
+        "heading_color": "#f05a30",
+        "border_color": "#000000",
+        "border_width": 1,
+        "legend_background": "#ffffff",
         "heading_font_family": "heading",
-        "heading_size": 22,
+        "heading_size": 26,
         "body_font_family": "body",
-        "max_width": 720,
+        "body_font_size": 16,
+        "max_width": 960,
         "padding_top": 40,
         "padding_bottom": 48
       }

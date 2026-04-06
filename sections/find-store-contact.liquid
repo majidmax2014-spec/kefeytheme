@@ -22,17 +22,20 @@
   style="
     --fs-contact-max: {{ section.settings.max_width }}px;
     --fs-contact-border: {{ section.settings.border_color }};
+    --fs-contact-border-w: {{ section.settings.border_width }}px;
     --fs-contact-heading-color: {{ section.settings.heading_color }};
     --fs-contact-heading-ff: {{ h_ff }};
     --fs-contact-heading-fs: {{ section.settings.heading_size }}px;
     --fs-contact-body-ff: {{ b_ff }};
+    --fs-contact-body-fs: {{ section.settings.body_font_size }}px;
     --fs-contact-pt: {{ section.settings.padding_top }}px;
     --fs-contact-pb: {{ section.settings.padding_bottom }}px;
+    --fs-contact-legend-bg: {{ section.settings.legend_background }};
   "
 >
   <div class="fs-contact__inner">
     {% if section.settings.heading != blank %}
-      <h2 class="fs-contact__heading">{{ section.settings.heading }}</h2>
+      <h2 class="fs-contact__heading">{{ section.settings.heading | escape }}</h2>
     {% endif %}
     {% if section.settings.body != blank %}
       <div class="fs-contact__body rte">
@@ -52,25 +55,42 @@
       "type": "text",
       "id": "heading",
       "label": "Heading",
-      "default": "Wholesale & retail inquiries"
+      "default": "Want Kefey in Your Store?"
     },
     {
       "type": "richtext",
       "id": "body",
       "label": "Body",
-      "default": "<p>For wholesale or partnership questions, email <strong>hello@kefey.co</strong></p>"
+      "default": "<p>If you're a retailer or distributor interested in carrying Kefey, we'd love to connect.</p><p>Get in touch at: <strong>wholesale@kefey.co</strong></p>"
     },
     {
       "type": "color",
       "id": "heading_color",
       "label": "Heading color",
-      "default": "#EF6347"
+      "default": "#F05A30"
     },
     {
       "type": "color",
       "id": "border_color",
       "label": "Border color",
-      "default": "#D0D0D0"
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "legend_background",
+      "label": "Heading gap fill (behind title)",
+      "default": "#FFFFFF",
+      "info": "Should match the page background so the top border appears broken behind the heading."
     },
     {
       "type": "header",
@@ -91,9 +111,9 @@
       "id": "heading_size",
       "label": "Heading size (px)",
       "min": 18,
-      "max": 36,
+      "max": 40,
       "step": 1,
-      "default": 22
+      "default": 26
     },
     {
       "type": "select",
@@ -106,6 +126,15 @@
       ]
     },
     {
+      "type": "range",
+      "id": "body_font_size",
+      "label": "Body size (px)",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16
+    },
+    {
       "type": "header",
       "content": "Layout"
     },
@@ -114,9 +143,9 @@
       "id": "max_width",
       "label": "Box max width (px)",
       "min": 400,
-      "max": 900,
+      "max": 1200,
       "step": 10,
-      "default": 720
+      "default": 960
     },
     {
       "type": "range",

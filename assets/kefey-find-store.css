@@ -330,39 +330,81 @@
   }
 }
 
-/* ---------- Contact box ---------- */
+/* ---------- Contact box (fieldset-style top border + centered legend heading) ---------- */
 .fs-contact {
   padding: var(--fs-contact-pt, 4rem) 1.5rem var(--fs-contact-pb, 4.8rem);
   background: #ffffff;
 }
 
 .fs-contact__inner {
-  max-width: var(--fs-contact-max, 720px);
+  position: relative;
+  max-width: var(--fs-contact-max, 960px);
   margin: 0 auto;
-  border: 0.1rem solid var(--fs-contact-border, #d0d0d0);
-  border-radius: 0.4rem;
-  padding: 2.8rem 2rem;
+  border: var(--fs-contact-border-w, 1px) solid var(--fs-contact-border, #000000);
+  border-radius: 0;
+  padding: clamp(2.35rem, 4.5vw, 3.35rem) clamp(1.5rem, 4vw, 2.85rem) clamp(2.6rem, 4.5vw, 3.6rem);
   text-align: center;
+  background: #ffffff;
 }
 
 .fs-contact__heading {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  z-index: 1;
   margin: 0;
+  padding: 0 clamp(0.65rem, 2.5vw, 1.15rem);
+  max-width: calc(100% - 2rem);
+  background-color: var(--fs-contact-legend-bg, #ffffff);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
   font-family: var(--fs-contact-heading-ff, inherit);
   font-weight: 700;
-  font-size: var(--fs-contact-heading-fs, 2.2rem);
-  color: var(--fs-contact-heading-color, #ef6347);
+  font-size: var(--fs-contact-heading-fs, 1.625rem);
+  line-height: 1.22;
+  color: var(--fs-contact-heading-color, #f05a30);
+  text-align: center;
+  text-wrap: balance;
 }
 
 .fs-contact__body {
-  margin-top: 1.2rem;
+  margin: 0;
+  padding-top: 0.15rem;
   font-family: var(--fs-contact-body-ff, inherit);
-  font-size: 1.6rem;
-  line-height: 1.6;
-  color: #3a3a3a;
+  font-size: var(--fs-contact-body-fs, 1rem);
+  line-height: 1.65;
+  color: #101010;
 }
 
 .fs-contact__body p {
   margin: 0;
+}
+
+.fs-contact__body p + p {
+  margin-top: 0.7em;
+}
+
+.fs-contact__body strong {
+  font-weight: 700;
+}
+
+@media screen and (max-width: 749px) {
+  .fs-contact__inner {
+    padding: 2.1rem 1.2rem 2.35rem;
+  }
+
+  .fs-contact__heading {
+    max-width: calc(100% - 1.25rem);
+    padding: 0 0.6rem;
+    font-size: min(var(--fs-contact-heading-fs, 1.625rem), 18px);
+    line-height: 1.28;
+  }
+
+  .fs-contact__body {
+    font-size: calc(var(--fs-contact-body-fs, 16px) * 0.9375);
+    line-height: 1.62;
+  }
 }
 
 /* ---------- Impact stack ---------- */
