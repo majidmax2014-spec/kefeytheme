@@ -40,6 +40,13 @@
     --pbg-t-ff: {{ pbg_t_ff }};
     --pbg-t-fw: {{ section.settings.text_font_weight }};
     --pbg-t-fs: {{ section.settings.text_font_size }}px;
+    --pbg-btn-bg: {{ section.settings.button_background }};
+    --pbg-btn-color: {{ section.settings.button_text_color }};
+    --pbg-btn-fs: {{ section.settings.button_font_size }}px;
+    --pbg-btn-pad-y: {{ section.settings.button_padding_y }}px;
+    --pbg-btn-pad-x: {{ section.settings.button_padding_x }}px;
+    --pbg-btn-mt: {{ section.settings.button_margin_top }}px;
+    --pbg-btn-mt-m: {{ section.settings.button_margin_top_mobile }}px;
   "
 >
   <div class="purpose-beyond-gummy__inner">
@@ -69,6 +76,20 @@
       <div class="purpose-beyond-gummy__text-panel">
         {% if section.settings.body != blank %}
           <div class="purpose-beyond-gummy__body rte">{{ section.settings.body }}</div>
+        {% endif %}
+
+        {% if section.settings.show_button and section.settings.button_label != blank %}
+          <div class="purpose-beyond-gummy__btn-wrap">
+            <a
+              href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+              class="purpose-beyond-gummy__btn"
+            >
+              <span class="purpose-beyond-gummy__btn-label">{{ section.settings.button_label }}</span>
+              {% if section.settings.button_show_arrow %}
+                <span class="purpose-beyond-gummy__btn-arrow" aria-hidden="true">→</span>
+              {% endif %}
+            </a>
+          </div>
         {% endif %}
 
         {% if section.settings.decor_image != blank %}
@@ -213,6 +234,95 @@
       ]
     },
     { "type": "range", "id": "text_font_size", "label": "Body font size", "min": 10, "max": 32, "step": 1, "default": 20 },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "FIND YOUR STAR"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_show_arrow",
+      "label": "Show arrow after label",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#49b2b2"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 11,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button padding vertical",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button padding horizontal",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "button_margin_top",
+      "label": "Space above button (desktop)",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_margin_top_mobile",
+      "label": "Space above button (mobile)",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
     {
       "type": "range",
       "id": "content_max_width",

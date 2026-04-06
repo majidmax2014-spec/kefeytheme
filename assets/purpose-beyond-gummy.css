@@ -92,6 +92,47 @@
   margin-bottom: 0;
 }
 
+.purpose-beyond-gummy__btn-wrap {
+  margin-top: var(--pbg-btn-mt, 20px);
+  text-align: left;
+}
+
+.purpose-beyond-gummy__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  padding: var(--pbg-btn-pad-y, 14px) var(--pbg-btn-pad-x, 22px);
+  background: var(--pbg-btn-bg, #49b2b2);
+  color: var(--pbg-btn-color, #ffffff);
+  font-family: var(--pbg-t-ff, inherit);
+  font-size: var(--pbg-btn-fs, 14px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.purpose-beyond-gummy__btn:hover {
+  opacity: 0.92;
+}
+
+.purpose-beyond-gummy__btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.purpose-beyond-gummy__btn-arrow {
+  font-weight: 700;
+  line-height: 1;
+}
+
 .purpose-beyond-gummy__decor {
   position: absolute;
   right: 22px;
@@ -131,10 +172,22 @@
   }
 
   .purpose-beyond-gummy__titlebar {
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     top: 10px;
     width: calc(100% - 18px);
+    max-width: 100%;
     padding: 12px 16px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .purpose-beyond-gummy__heading {
+    text-align: center;
+  }
+
+  .purpose-beyond-gummy__btn-wrap {
+    margin-top: var(--pbg-btn-mt-m, var(--pbg-btn-mt, 20px));
   }
 
   .purpose-beyond-gummy__decor {
@@ -146,15 +199,27 @@
 
 @media screen and (max-width: 749px) {
   .purpose-beyond-gummy__titlebar {
-    width: calc(100% - 10px);
+    width: calc(100% - 16px);
     padding: 10px 12px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .purpose-beyond-gummy__heading {
     font-size: var(--pbg-h-fs, 48px);
+    text-align: center;
   }
 
   .purpose-beyond-gummy__text-panel {
     padding: 68px 14px 20px;
+  }
+
+  .purpose-beyond-gummy__btn-wrap {
+    text-align: left;
+  }
+
+  .purpose-beyond-gummy__btn {
+    width: auto;
+    max-width: 100%;
   }
 }
