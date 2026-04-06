@@ -39,14 +39,12 @@
   <div class="fs-intro__inner">
     {% if intro_hh != blank or intro_ha != blank %}
       <h2 class="fs-intro__title">
-        <span class="fs-intro__title-mark">
-          {% if intro_hh != blank %}
-            <span class="fs-intro__find">{{ intro_hh }}</span>
-          {% endif %}
-          {% if intro_ha != blank %}
-            <span class="fs-intro__title-rest">{{ intro_ha }}</span>
-          {% endif %}
-        </span>
+        {% if intro_hh != blank %}
+          <span class="fs-intro__find">{{ intro_hh }}</span>
+        {% endif %}
+        {% if intro_ha != blank %}
+          <span>{{ intro_ha }}</span>
+        {% endif %}
       </h2>
     {% endif %}
 

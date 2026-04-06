@@ -22,32 +22,22 @@
   letter-spacing: 0.02em;
 }
 
-/* Full heading phrase: desktop = marker bar behind lower half; mobile = solid highlight block */
-.fs-intro__title-mark {
+.fs-intro__title .fs-intro__find {
   position: relative;
   display: inline-block;
 }
 
-@media screen and (min-width: 750px) {
-  .fs-intro__title-mark::after {
-    content: '';
-    position: absolute;
-    z-index: 0;
-    left: -0.14em;
-    right: -0.14em;
-    bottom: 0.08em;
-    height: clamp(10px, 0.34em, 13px);
-    background-color: var(--fs-intro-highlight, #ffd166);
-    border-radius: 0.1rem;
-    transform: rotate(-0.35deg);
-    pointer-events: none;
-  }
-
-  .fs-intro__title-mark .fs-intro__find,
-  .fs-intro__title-mark .fs-intro__title-rest {
-    position: relative;
-    z-index: 1;
-  }
+.fs-intro__title .fs-intro__find::after {
+  content: '';
+  position: absolute;
+  left: -0.1em;
+  right: -0.1em;
+  bottom: 0.1em;
+  height: 0.55em;
+  background: linear-gradient(180deg, transparent 35%, var(--fs-intro-highlight, #ffd166) 35%);
+  z-index: -1;
+  border-radius: 0.1rem;
+  transform: rotate(-0.5deg);
 }
 
 .fs-intro__body {
@@ -71,19 +61,6 @@
 
   .fs-intro__title {
     font-size: min(var(--fs-intro-heading-fs, 3.6rem), 8vw);
-  }
-
-  /* Solid highlight behind full title (cap-height band), slightly wider than text */
-  .fs-intro__title-mark {
-    padding: 0.1em 0.42em 0.16em;
-    background: var(--fs-intro-highlight, #ffd166);
-    border-radius: 0.2rem;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-  }
-
-  .fs-intro__title-mark::after {
-    content: none;
   }
 }
 
