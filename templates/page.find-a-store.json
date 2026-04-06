@@ -262,13 +262,18 @@
         "heading": "Worldwide Availability",
         "body": "<p>No matter where you live, Kefey Mood Gummies can be delivered straight to your door. <strong>We ship worldwide — over 150+ countries and counting.</strong></p>",
         "background_color": "#ef6344",
+        "heading_highlight_color": "#4db6ac",
         "corner_radius": 0,
         "show_decor": true,
         "decor_image": "shopify://shop_images/find-store-decor.png",
+        "decor_width": 19,
+        "decor_offset_x": -34,
+        "decor_offset_y": -24,
         "heading_font_family": "heading",
         "heading_size": 28,
         "body_font_family": "body",
         "max_width": 1200,
+        "content_max_width_pct": 66,
         "padding_top": 24,
         "padding_bottom": 24
       }
