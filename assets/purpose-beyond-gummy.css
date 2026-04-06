@@ -225,13 +225,13 @@
 @media screen and (max-width: 749px) {
   .purpose-beyond-gummy__titlebar {
     right: 8px;
-    top: 10px;
+    top: -20px;
     padding: 9px 12px 9px 14px;
     max-width: min(calc(100% - 16px), 300px);
   }
 
   .purpose-beyond-gummy__heading {
-    font-size: clamp(12px, 3.5vw, 16px);
+    font-size: clamp(16px, 3.5vw, 17px);
   }
 
   .purpose-beyond-gummy__text-panel {
