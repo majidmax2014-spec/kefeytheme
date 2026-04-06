@@ -1,0 +1,29 @@
+{
+  "layout": "theme",
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "name": "Page content",
+      "settings": {
+        "enable_legal_typography": false,
+        "legal_title_font_family": "heading",
+        "legal_section_font_family": "heading",
+        "legal_body_font_family": "body",
+        "legal_title_color": "#70b9be",
+        "legal_section_heading_color": "#101010",
+        "legal_body_color": "#333333",
+        "legal_title_font_size": 36,
+        "legal_section_heading_font_size": 18,
+        "legal_body_font_size": 16,
+        "legal_title_uppercase": true,
+        "legal_section_heading_uppercase": true,
+        "legal_body_line_height": 165,
+        "legal_paragraph_spacing": 16,
+        "legal_content_max_width": 720,
+        "padding_top": 36,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": ["main"]
+}
