@@ -46,6 +46,12 @@
     --kh-m-row-gap: {{ section.settings.mobile_grid_row_gap }}px;
     --kh-m-media-mt: {{ section.settings.mobile_media_margin_top }}px;
     --kh-m-bg-pos: {{ section.settings.mobile_background_image_position }};
+    --kh-m-logo-max: {{ section.settings.mobile_logo_max_width }}px;
+    --kh-sub-fs-m: {{ section.settings.mood_gummies_font_size_mobile }}px;
+    --kefey-button-padding-vertical-mobile: {{ section.settings.button_padding_vertical_mobile }}px;
+    --kefey-button-padding-horizontal-mobile: {{ section.settings.button_padding_horizontal_mobile }}px;
+    --kefey-button-min-height-mobile: {{ section.settings.button_min_height_mobile }}px;
+    --kefey-benefit-dot-size-mobile: {{ section.settings.dot_size_mobile }}px;
     --kh-max: {{ section.settings.content_max_width }}px;
     --kh-left-max: {{ section.settings.left_col_max_width }}px;
     --kh-heading-color: {{ section.settings.heading_color }};
@@ -414,6 +420,69 @@
       "step": 2,
       "default": 0,
       "unit": "px"
+    },
+
+    { "type": "header", "content": "Mobile — logo, Mood Gummies, button, dots" },
+    {
+      "type": "range",
+      "id": "mobile_logo_max_width",
+      "label": "Logo max width (mobile)",
+      "min": 100,
+      "max": 320,
+      "step": 4,
+      "default": 240,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mood_gummies_font_size_mobile",
+      "label": "\"Mood Gummies\" text size (mobile)",
+      "min": 14,
+      "max": 44,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_vertical_mobile",
+      "label": "Button vertical padding (mobile)",
+      "min": 6,
+      "max": 28,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_padding_horizontal_mobile",
+      "label": "Button horizontal padding (mobile)",
+      "min": 8,
+      "max": 56,
+      "step": 1,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "button_min_height_mobile",
+      "label": "Button min height (mobile)",
+      "min": 36,
+      "max": 72,
+      "step": 2,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "dot_size_mobile",
+      "label": "Dot size between benefits (mobile)",
+      "min": 2,
+      "max": 18,
+      "step": 1,
+      "default": 12,
+      "unit": "px",
+      "info": "Only when “Show dot separators” is enabled."
     }
   ],
   "blocks": [

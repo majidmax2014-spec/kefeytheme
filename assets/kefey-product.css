@@ -2080,7 +2080,7 @@
   }
 
   .kefey-hero__logo {
-    width: min(100%, 240px);
+    width: min(100%, var(--kh-m-logo-max, 240px));
   }
 
   .kefey-hero__eyebrow {
@@ -2092,11 +2092,13 @@
   }
 
   .kefey-hero__subheading {
-    font-size: clamp(22px, 6vw, 32px);
+    font-size: var(--kh-sub-fs-m, 28px);
   }
 
   .kefey-hero__cta {
-    min-height: 50px;
+    min-height: var(--kefey-button-min-height-mobile, 50px);
+    padding: var(--kefey-button-padding-vertical-mobile, var(--kefey-button-padding-vertical, 14px))
+      var(--kefey-button-padding-horizontal-mobile, var(--kefey-button-padding-horizontal, 28px));
     font-size: var(--kefey-button-font-size-mobile, 14px);
   }
 
@@ -2119,6 +2121,8 @@
   }
 
   .kefey-hero--dots .kefey-hero__benefit:not(:last-child)::after {
+    width: var(--kefey-benefit-dot-size-mobile, var(--kefey-benefit-dot-size, 6px));
+    height: var(--kefey-benefit-dot-size-mobile, var(--kefey-benefit-dot-size, 6px));
     right: calc(var(--kefey-benefits-gap-mobile, 18px) / -2);
   }
 }
