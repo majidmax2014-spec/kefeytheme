@@ -212,10 +212,16 @@
 }
 
 @media screen and (max-width: 749px) {
+  .angled-carousel {
+    --side-padding: 30px !important;
+    padding-bottom: 0;
+  }
+
   .angled-carousel__title {
     font-size: 19px;
     font-weight: 700;
   }
+
   .angled-carousel__highlight {
     height: 10px;
     bottom: -4px;

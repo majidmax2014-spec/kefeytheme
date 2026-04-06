@@ -651,4 +651,25 @@
   }
 }
 
+/* Phone (≤749px): fixed orange + impact row heights */
+@media (max-width: 749px) {
+  .fk {
+    --fk-row1-hm: 238px !important;
+    --fk-row2-h: 120px !important;
+  }
+
+  .fk__row--top,
+  .fk__top-inner {
+    min-height: var(--fk-row1-hm, 238px) !important;
+  }
+
+  .fk__top-inner {
+    padding: 0;
+  }
+
+  .fk__policy-menu {
+    max-width: min(30rem, 100%);
+  }
+}
+
 
