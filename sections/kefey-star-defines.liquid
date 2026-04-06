@@ -21,11 +21,21 @@
   elsif left_pct > 70
     assign left_pct = 70
   endif
+
+  assign ksd_img_alt = ''
+  if section.settings.image != blank and section.settings.image.alt != blank
+    assign ksd_img_alt = section.settings.image.alt | escape
+  elsif section.settings.heading != blank
+    assign ksd_img_alt = section.settings.heading | strip_html | truncate: 120 | escape
+  endif
+  if ksd_img_alt == blank
+    assign ksd_img_alt = shop.name | escape
+  endif
 -%}
 
 <section
   id="KefeyStarDefines-{{ section.id }}"
-  class="ksd"
+  class="ksd{% if section.settings.media_position == 'left' %} ksd--media-left{% endif %}"
   style="
     --ksd-section-bg: {{ section.settings.section_background }};
     --ksd-max: {{ section.settings.content_max_width }}px;
@@ -68,6 +78,12 @@
     --ksd-t-fs-m: {{ section.settings.text_font_size_mobile }}px;
     --ksd-t-fw: {{ section.settings.text_font_weight }};
     --ksd-decor-mobile: {% if section.settings.show_decor_on_mobile %}block{% else %}none{% endif %};
+    --ksd-decor-doodle-top: {{ section.settings.decor_doodle_offset_top }}px;
+    --ksd-decor-doodle-right: {{ section.settings.decor_doodle_offset_right }}px;
+    --ksd-decor-doodle-max: {{ section.settings.decor_doodle_max_width }}px;
+    --ksd-decor-star-top: {{ section.settings.decor_star_offset_top }}px;
+    --ksd-decor-star-right: {{ section.settings.decor_star_offset_right }}px;
+    --ksd-decor-star-max: {{ section.settings.decor_star_max_width }}px;
   "
 >
   <div class="ksd__inner">
@@ -114,10 +130,11 @@
             section.settings.image
             | image_url: width: 2000
             | image_tag:
+              class: 'ksd__img',
               loading: 'lazy',
               widths: '400,600,800,1000,1200,1600,2000',
               sizes: '(min-width: 990px) 50vw, 100vw',
-              alt: section.settings.image.alt | default: section.settings.heading | strip_html | escape
+              alt: ksd_img_alt
           }}
         {%- else -%}
           {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -443,6 +460,16 @@
       "content": "Image"
     },
     {
+      "type": "select",
+      "id": "media_position",
+      "label": "Image column (desktop)",
+      "options": [
+        { "value": "right", "label": "Right (list on left)" },
+        { "value": "left", "label": "Left (list on right)" }
+      ],
+      "default": "right"
+    },
+    {
       "type": "image_picker",
       "id": "image",
       "label": "Image"
@@ -492,6 +519,74 @@
       "id": "show_decor_on_mobile",
       "label": "Show decor on mobile",
       "default": false
+    },
+    {
+      "type": "paragraph",
+      "content": "Doodle position (from top-right of the section block)"
+    },
+    {
+      "type": "range",
+      "id": "decor_doodle_offset_top",
+      "min": -80,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Doodle offset from top",
+      "default": -16
+    },
+    {
+      "type": "range",
+      "id": "decor_doodle_offset_right",
+      "min": -80,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Doodle offset from right",
+      "default": -12
+    },
+    {
+      "type": "range",
+      "id": "decor_doodle_max_width",
+      "min": 80,
+      "max": 320,
+      "step": 4,
+      "unit": "px",
+      "label": "Doodle max width",
+      "default": 200
+    },
+    {
+      "type": "paragraph",
+      "content": "Star icon position"
+    },
+    {
+      "type": "range",
+      "id": "decor_star_offset_top",
+      "min": 0,
+      "max": 400,
+      "step": 4,
+      "unit": "px",
+      "label": "Star offset from top",
+      "default": 140
+    },
+    {
+      "type": "range",
+      "id": "decor_star_offset_right",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Star offset from right",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "decor_star_max_width",
+      "min": 32,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Star max width",
+      "default": 56
     },
     {
       "type": "header",

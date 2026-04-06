@@ -49,6 +49,12 @@
   padding-top: var(--ksd-grid-pt, 52px);
 }
 
+/* Image on left, yellow list on right (desktop) */
+.ksd--media-left .ksd__grid {
+  grid-template-columns: minmax(0, 1fr) minmax(0, var(--ksd-left-pct, 50%));
+  grid-template-areas: "media panel";
+}
+
 .ksd__panel {
   grid-area: panel;
   background: var(--ksd-panel-bg, #f9d342);
@@ -129,15 +135,28 @@
   background: var(--ksd-media-bg, #e8f4f3);
   min-height: var(--ksd-row-min-h, 320px);
   overflow: hidden;
+  align-self: stretch;
 }
 
-.ksd__media img {
+/* Absolute fill avoids collapsed height when grid row height is ambiguous */
+.ksd__media .ksd__img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   min-height: var(--ksd-row-min-h, 320px);
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+.ksd__media .placeholder-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  min-height: var(--ksd-row-min-h, 320px);
+  object-fit: cover;
 }
 
 .ksd__decor {
@@ -147,17 +166,17 @@
 }
 
 .ksd__decor--doodle {
-  top: -4%;
-  right: -2%;
-  width: min(28%, 200px);
-  max-width: 200px;
+  top: var(--ksd-decor-doodle-top, -16px);
+  right: var(--ksd-decor-doodle-right, -12px);
+  width: min(28%, var(--ksd-decor-doodle-max, 200px));
+  max-width: var(--ksd-decor-doodle-max, 200px);
 }
 
 .ksd__decor--star {
-  top: 42%;
-  right: 3%;
-  width: min(12%, 56px);
-  max-width: 56px;
+  top: var(--ksd-decor-star-top, 140px);
+  right: var(--ksd-decor-star-right, 12px);
+  width: min(12%, var(--ksd-decor-star-max, 56px));
+  max-width: var(--ksd-decor-star-max, 56px);
 }
 
 .ksd__decor img {
@@ -201,10 +220,21 @@
     min-height: var(--ksd-media-min-h-m, 260px);
   }
 
-  .ksd__media img {
+  .ksd__media .ksd__img {
+    position: relative;
+    inset: auto;
     min-height: var(--ksd-media-min-h-m, 260px);
+    height: auto;
     max-height: var(--ksd-media-max-h-m, 420px);
     object-fit: cover;
+  }
+
+  .ksd__media .placeholder-svg {
+    position: relative;
+    inset: auto;
+    min-height: var(--ksd-media-min-h-m, 260px);
+    height: auto;
+    max-height: var(--ksd-media-max-h-m, 420px);
   }
 
   .ksd__panel {
