@@ -57,10 +57,43 @@
         "padding_top": 36,
         "padding_bottom": 48
       }
+    },
+    "purpose_beyond_gummy_UDF6Kr": {
+      "type": "purpose-beyond-gummy",
+      "name": "Purpose Beyond Gummy",
+      "settings": {
+        "heading": "A Focused Daily Ritual",
+        "body": "<p><strong>Your daily pause — a small, star-shaped moment in a busy world.</strong><br/><br/>Kefey® gummies are designed to be a single, intentional daily ritual. Each Kefey® star is formulated with highly potent botanical extracts, bringing together clean formulation, purposeful concentration, and a taste you can genuinely enjoy.<br/><br/></p>",
+        "image": "shopify://shop_images/Focused_Daily_Ritual.png",
+        "panel_color": "#f2c718",
+        "title_bg_color": "#ea563a",
+        "title_color": "#ffffff",
+        "section_bg_color": "#ffffff",
+        "left_panel_color": "#f2c718",
+        "title_bar_color": "#ea563a",
+        "title_text_color": "#ffffff",
+        "body_color": "#1c1c1c",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "heading_font_size": 48,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 16,
+        "content_max_width": 1200,
+        "left_col_width": 50,
+        "min_height": 290,
+        "content_padding_left": 56,
+        "content_padding_right": 40,
+        "title_bar_offset_y": 16,
+        "title_bar_width": 78,
+        "padding_top": 44,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "header_banner_iQ3tzf",
-    "main"
+    "main",
+    "purpose_beyond_gummy_UDF6Kr"
   ]
 }
