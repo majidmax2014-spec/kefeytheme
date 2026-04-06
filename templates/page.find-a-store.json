@@ -283,11 +283,17 @@
       "name": "Find store contact",
       "settings": {
         "heading": "Want Kefey in Your Store?",
+<<<<<<< HEAD
         "body": "<p>If you're a retailer or distributor interested in carrying Kefey, we'd love to connect.</p><p>Get in touch at: <strong>wholesale@kefey.co</strong></p>",
         "heading_color": "#f05a30",
         "border_color": "#000000",
         "border_width": 1,
         "legend_background": "#ffffff",
+=======
+        "body": "<p>If you’re a retailer or distributor interested in carrying Kefey, we’d love to connect. Get in touch at: <strong>wholesale@kefey.co</strong></p>",
+        "heading_color": "#ef6347",
+        "border_color": "#d0d0d0",
+>>>>>>> 1e25b36886ba3dfde8b6ed67c89755f2ba741716
         "heading_font_family": "heading",
         "heading_size": 26,
         "body_font_family": "body",
