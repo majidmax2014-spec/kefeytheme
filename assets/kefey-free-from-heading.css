@@ -1,0 +1,126 @@
+/* Kefey — Free From style heading (testimonials-like bar + stacked copy) */
+
+.kff {
+  background: var(--kff-bg, #ffffff);
+  margin-top: var(--kff-mt, 0px);
+  margin-bottom: var(--kff-mb, 0px);
+}
+
+.kff__inner {
+  width: 100%;
+  max-width: var(--kff-max, 900px);
+  margin: 0 auto;
+  padding: var(--kff-pt, 48px) var(--kff-px, 24px) var(--kff-pb, 48px);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.kff__title-wrap {
+  margin: 0 0 var(--kff-gap-title, 20px);
+}
+
+.kff__title {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  font-family: var(--kff-h-ff, inherit);
+  font-weight: var(--kff-h-fw, 700);
+  font-size: var(--kff-h-fs, 40px);
+  line-height: var(--kff-h-lh, 1.12);
+  letter-spacing: var(--kff-h-track, 0);
+  color: var(--kff-h-color, #111111);
+}
+
+.kff__title-text {
+  position: relative;
+  z-index: 1;
+}
+
+.kff__title-bar {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--kff-bar-bg, #4fb0ae);
+  border-radius: var(--kff-bar-radius, 2px);
+  left: calc(-1 * var(--kff-bar-pad, 0.04em));
+  right: calc(-1 * var(--kff-bar-pad, 0.04em));
+  height: var(--kff-bar-h-d, 12px);
+  bottom: var(--kff-bar-b-d, -6px);
+}
+
+.kff__sub {
+  margin: 0 0 var(--kff-gap-sub, 16px);
+  font-family: var(--kff-s-ff, inherit);
+  font-weight: var(--kff-s-fw, 600);
+  font-size: var(--kff-s-fs, 18px);
+  line-height: var(--kff-s-lh, 1.45);
+  color: var(--kff-s-color, #111111);
+  text-align: center;
+}
+
+.kff__sub p {
+  margin: 0 0 0.35em;
+  text-align: center;
+}
+
+.kff__sub p:last-child {
+  margin-bottom: 0;
+}
+
+.kff__note {
+  margin: 0;
+  font-family: var(--kff-n-ff, inherit);
+  font-weight: var(--kff-n-fw, 400);
+  font-size: var(--kff-n-fs, 16px);
+  line-height: var(--kff-n-lh, 1.5);
+  color: var(--kff-n-color, #333333);
+  text-align: center;
+}
+
+.kff__note--italic {
+  font-style: italic;
+}
+
+.kff__note p {
+  margin: 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 749px) {
+  .kff {
+    margin-top: var(--kff-mt-m, var(--kff-mt, 0px));
+    margin-bottom: var(--kff-mb-m, var(--kff-mb, 0px));
+  }
+
+  .kff__inner {
+    padding: var(--kff-pt-m, 36px) var(--kff-px-m, 20px) var(--kff-pb-m, 40px);
+  }
+
+  .kff__title-wrap {
+    margin-bottom: var(--kff-gap-title-m, 16px);
+  }
+
+  .kff__title {
+    font-size: min(var(--kff-h-fs-m, 28px), var(--kff-h-fs, 40px));
+    line-height: var(--kff-h-lh-m, 1.12);
+  }
+
+  /* Bar sits behind lower portion of letters (mobile comp) */
+  .kff__title-bar {
+    height: var(--kff-bar-h-m, 0.42em);
+    min-height: var(--kff-bar-h-m-min, 14px);
+    max-height: var(--kff-bar-h-m-max, 22px);
+    bottom: var(--kff-bar-b-m, 0.1em);
+  }
+
+  .kff__sub {
+    font-size: min(var(--kff-s-fs-m, 15px), var(--kff-s-fs, 18px));
+    line-height: var(--kff-s-lh-m, 1.45);
+    margin-bottom: var(--kff-gap-sub-m, 14px);
+  }
+
+  .kff__note {
+    font-size: min(var(--kff-n-fs-m, 15px), var(--kff-n-fs, 16px));
+    line-height: var(--kff-n-lh-m, 1.5);
+  }
+}

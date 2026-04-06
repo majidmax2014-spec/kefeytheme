@@ -1,0 +1,616 @@
+{{ 'kefey-free-from-heading.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign kff_h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign kff_h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign kff_h_ff = 'var(--font-body-family)'
+  endif
+
+  assign kff_s_ff = 'inherit'
+  if section.settings.sub_font_family == 'heading'
+    assign kff_s_ff = 'var(--font-heading-family)'
+  elsif section.settings.sub_font_family == 'body'
+    assign kff_s_ff = 'var(--font-body-family)'
+  endif
+
+  assign kff_n_ff = 'inherit'
+  if section.settings.note_font_family == 'heading'
+    assign kff_n_ff = 'var(--font-heading-family)'
+  elsif section.settings.note_font_family == 'body'
+    assign kff_n_ff = 'var(--font-body-family)'
+  endif
+-%}
+
+<section
+  id="KefeyFreeFrom-{{ section.id }}"
+  class="kff"
+  style="
+    --kff-bg: {{ section.settings.section_background }};
+    --kff-mt: {{ section.settings.margin_top }}px;
+    --kff-mb: {{ section.settings.margin_bottom }}px;
+    --kff-mt-m: {{ section.settings.margin_top_mobile }}px;
+    --kff-mb-m: {{ section.settings.margin_bottom_mobile }}px;
+    --kff-max: {{ section.settings.content_max_width }}px;
+    --kff-pt: {{ section.settings.padding_top }}px;
+    --kff-pb: {{ section.settings.padding_bottom }}px;
+    --kff-px: {{ section.settings.padding_horizontal }}px;
+    --kff-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --kff-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --kff-px-m: {{ section.settings.padding_horizontal_mobile }}px;
+    --kff-gap-title: {{ section.settings.gap_after_heading }}px;
+    --kff-gap-title-m: {{ section.settings.gap_after_heading_mobile }}px;
+    --kff-gap-sub: {{ section.settings.gap_after_sub }}px;
+    --kff-gap-sub-m: {{ section.settings.gap_after_sub_mobile }}px;
+    --kff-h-ff: {{ kff_h_ff }};
+    --kff-h-fw: {{ section.settings.heading_font_weight }};
+    --kff-h-fs: {{ section.settings.heading_font_size }}px;
+    --kff-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --kff-h-lh: {{ section.settings.heading_line_height | times: 0.01 }};
+    --kff-h-lh-m: {{ section.settings.heading_line_height_mobile | times: 0.01 }};
+    --kff-h-track: {{ section.settings.heading_letter_spacing | times: 0.001 }}em;
+    --kff-h-color: {{ section.settings.heading_color }};
+    --kff-bar-bg: {{ section.settings.bar_color }};
+    --kff-bar-radius: {{ section.settings.bar_border_radius }}px;
+    --kff-bar-pad: {{ section.settings.bar_extend | times: 0.01 }}em;
+    --kff-bar-h-d: {{ section.settings.bar_height_desktop }}px;
+    --kff-bar-b-d: {{ section.settings.bar_offset_bottom_desktop }}px;
+    --kff-bar-h-m: {{ section.settings.bar_height_mobile_frac | times: 0.01 }}em;
+    --kff-bar-h-m-min: {{ section.settings.bar_height_mobile_min }}px;
+    --kff-bar-h-m-max: {{ section.settings.bar_height_mobile_max }}px;
+    --kff-bar-b-m: {{ section.settings.bar_offset_bottom_mobile | times: 0.01 }}em;
+    --kff-s-ff: {{ kff_s_ff }};
+    --kff-s-fw: {{ section.settings.sub_font_weight }};
+    --kff-s-fs: {{ section.settings.sub_font_size }}px;
+    --kff-s-fs-m: {{ section.settings.sub_font_size_mobile }}px;
+    --kff-s-lh: {{ section.settings.sub_line_height | times: 0.01 }};
+    --kff-s-lh-m: {{ section.settings.sub_line_height_mobile | times: 0.01 }};
+    --kff-s-color: {{ section.settings.sub_color }};
+    --kff-n-ff: {{ kff_n_ff }};
+    --kff-n-fw: {{ section.settings.note_font_weight }};
+    --kff-n-fs: {{ section.settings.note_font_size }}px;
+    --kff-n-fs-m: {{ section.settings.note_font_size_mobile }}px;
+    --kff-n-lh: {{ section.settings.note_line_height | times: 0.01 }};
+    --kff-n-lh-m: {{ section.settings.note_line_height_mobile | times: 0.01 }};
+    --kff-n-color: {{ section.settings.note_color }};
+  "
+>
+  <div class="kff__inner">
+    {%- if section.settings.heading != blank -%}
+      <div class="kff__title-wrap">
+        <h2 class="kff__title">
+          <span class="kff__title-text">{{ section.settings.heading }}</span>
+          <span class="kff__title-bar" aria-hidden="true"></span>
+        </h2>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.subtext != blank -%}
+      <div class="kff__sub rte">{{ section.settings.subtext }}</div>
+    {%- endif -%}
+
+    {%- if section.settings.note != blank -%}
+      <div class="kff__note{% if section.settings.note_italic %} kff__note--italic{% endif %} rte">{{ section.settings.note }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kefey free-from heading",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section"
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin bottom",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin top (mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Margin bottom (mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 16,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 16,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top (mobile)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 16,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding bottom (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal (mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 520,
+      "max": 1100,
+      "step": 10,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 900
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Text",
+      "default": "Free From"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color",
+      "default": "#111111"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Font weight",
+      "default": "700",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 22,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size (desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size (mobile)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height",
+      "min": 100,
+      "max": 140,
+      "step": 1,
+      "label": "Line height (desktop, %)",
+      "default": 112
+    },
+    {
+      "type": "range",
+      "id": "heading_line_height_mobile",
+      "min": 100,
+      "max": 140,
+      "step": 1,
+      "label": "Line height (mobile, %)",
+      "default": 112
+    },
+    {
+      "type": "range",
+      "id": "heading_letter_spacing",
+      "min": -20,
+      "max": 80,
+      "step": 2,
+      "label": "Letter spacing (×0.001 em)",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Teal bar (testimonials style)"
+    },
+    {
+      "type": "color",
+      "id": "bar_color",
+      "label": "Bar color",
+      "default": "#4fb0ae"
+    },
+    {
+      "type": "range",
+      "id": "bar_height_desktop",
+      "min": 4,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Bar thickness (desktop)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "bar_offset_bottom_desktop",
+      "min": -20,
+      "max": 12,
+      "step": 2,
+      "unit": "px",
+      "label": "Bar vertical position desktop (px, negative = below text)",
+      "default": -6
+    },
+    {
+      "type": "range",
+      "id": "bar_extend",
+      "min": 0,
+      "max": 16,
+      "step": 1,
+      "label": "Bar width past text (×0.01 em each side)",
+      "default": 4
+    },
+    {
+      "type": "range",
+      "id": "bar_border_radius",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "label": "Bar corner radius",
+      "default": 2
+    },
+    {
+      "type": "paragraph",
+      "content": "On mobile the bar sits behind the lower part of the heading (like split-line highlights)."
+    },
+    {
+      "type": "range",
+      "id": "bar_height_mobile_frac",
+      "min": 30,
+      "max": 52,
+      "step": 1,
+      "label": "Bar height (mobile, % of em)",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "bar_height_mobile_min",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Bar min height (mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "bar_height_mobile_max",
+      "min": 14,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Bar max height (mobile)",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "bar_offset_bottom_mobile",
+      "min": 4,
+      "max": 24,
+      "step": 1,
+      "label": "Bar vertical position (mobile, ×0.01 em)",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Subtext (pipe list)"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Text",
+      "default": "<p>Gelatin | Gluten | Dairy | Soy</p><p>Artificial colors | Common allergens</p>"
+    },
+    {
+      "type": "color",
+      "id": "sub_color",
+      "label": "Color",
+      "default": "#111111"
+    },
+    {
+      "type": "select",
+      "id": "sub_font_family",
+      "label": "Font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "sub_font_weight",
+      "label": "Font weight",
+      "default": "600",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "sub_font_size",
+      "min": 12,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size (desktop)",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "sub_font_size_mobile",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size (mobile)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "sub_line_height",
+      "min": 110,
+      "max": 170,
+      "step": 2,
+      "label": "Line height (desktop, %)",
+      "default": 145
+    },
+    {
+      "type": "range",
+      "id": "sub_line_height_mobile",
+      "min": 110,
+      "max": 170,
+      "step": 2,
+      "label": "Line height (mobile, %)",
+      "default": 145
+    },
+    {
+      "type": "header",
+      "content": "Note (parentheses line)"
+    },
+    {
+      "type": "richtext",
+      "id": "note",
+      "label": "Text",
+      "default": "<p>(Including yeast, wheat, eggs, peanuts, shellfish, agave & salicylates)</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "note_italic",
+      "label": "Italic",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "note_color",
+      "label": "Color",
+      "default": "#333333"
+    },
+    {
+      "type": "select",
+      "id": "note_font_family",
+      "label": "Font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "note_font_weight",
+      "label": "Font weight",
+      "default": "400",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "note_font_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size (desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "note_font_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font size (mobile)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "note_line_height",
+      "min": 110,
+      "max": 170,
+      "step": 2,
+      "label": "Line height (desktop, %)",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "note_line_height_mobile",
+      "min": 110,
+      "max": 170,
+      "step": 2,
+      "label": "Line height (mobile, %)",
+      "default": 150
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "gap_after_heading",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below heading (desktop)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "gap_after_heading_mobile",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below heading (mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "gap_after_sub",
+      "min": 8,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below subtext (desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "gap_after_sub_mobile",
+      "min": 8,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below subtext (mobile)",
+      "default": 14
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kefey free-from heading"
+    }
+  ]
+}
+{% endschema %}
