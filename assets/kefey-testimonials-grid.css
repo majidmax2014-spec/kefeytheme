@@ -210,6 +210,14 @@
   }
 }
 
+/* Mobile: hide side decor images and soft gradient blobs */
+@media (max-width: 749px) {
+  .kefey-testimonials-grid__decor-img,
+  .kefey-testimonials-grid__decor {
+    display: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .kefey-testimonials-grid__track {
     transition: none;

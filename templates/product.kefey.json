@@ -822,7 +822,8 @@
         "testimonial_TVBaF3"
       ],
       "settings": {
-        "heading": "Joyful Routines. That’s Why They Stay!",
+        "heading": "Joyful Routines. That's Why",
+        "heading_line_2": "They Stay!",
         "heading_size": 36,
         "heading_font_family": "inherit",
         "heading_font_weight": "700",

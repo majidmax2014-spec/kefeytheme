@@ -32,9 +32,20 @@
   <div class="kefey-testimonials-grid__inner page-width">
     {% if section.settings.heading != blank %}
       <div class="kefey-testimonials-grid__header">
-        <h2 class="kefey-testimonials-grid__title">
-          <span class="kefey-testimonials-grid__title-text">{{ section.settings.heading }}</span>
-          <span class="kefey-testimonials-grid__highlight" style="background-color: {{ section.settings.highlight_color }};"></span>
+        {%- assign ktg_heading_line2 = section.settings.heading_line_2 | strip -%}
+        <h2 class="kefey-testimonials-grid__title{% if ktg_heading_line2 != blank %} kefey-testimonials-grid__title--split{% endif %}">
+          {% if ktg_heading_line2 != blank %}
+            <span class="kefey-testimonials-grid__title-line">
+              <span class="kefey-testimonials-grid__title-line-inner">
+                <span class="kefey-testimonials-grid__title-text">{{ section.settings.heading }}</span>
+                <span class="kefey-testimonials-grid__highlight" style="background-color: {{ section.settings.highlight_color }};"></span>
+              </span>
+            </span>
+            <span class="kefey-testimonials-grid__title-line kefey-testimonials-grid__title-line--plain">{{ ktg_heading_line2 }}</span>
+          {% else %}
+            <span class="kefey-testimonials-grid__title-text">{{ section.settings.heading }}</span>
+            <span class="kefey-testimonials-grid__highlight" style="background-color: {{ section.settings.highlight_color }};"></span>
+          {% endif %}
         </h2>
       </div>
     {% endif %}
@@ -123,8 +134,9 @@
   font-family: var(--ktg-h-ff, inherit);
   font-weight: var(--ktg-h-fw, inherit);
   font-size: var(--ktg-h-fs, 36px);
-  line-height: 1.1;
+  line-height: 1.12;
   margin: 0;
+  color: rgb(var(--color-foreground));
 }
 .kefey-testimonials-grid__title-text {
   position: relative;
@@ -137,6 +149,38 @@
   height: 12px;
   bottom: -6px;
   z-index: 0;
+  border-radius: 2px;
+  pointer-events: none;
+}
+.kefey-testimonials-grid__title--split {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.06em;
+}
+.kefey-testimonials-grid__title-line {
+  display: block;
+  width: 100%;
+}
+.kefey-testimonials-grid__title-line-inner {
+  position: relative;
+  display: inline-block;
+  max-width: 100%;
+}
+.kefey-testimonials-grid__title--split .kefey-testimonials-grid__title-line-inner .kefey-testimonials-grid__highlight {
+  left: -0.04em;
+  right: -0.04em;
+  bottom: 0.12em;
+  height: 0.48em;
+  min-height: 15px;
+  max-height: 22px;
+}
+.kefey-testimonials-grid__title-line--plain {
+  position: relative;
+  z-index: 1;
+  font-weight: inherit;
+  line-height: 1.12;
 }
 {% endstyle %}
 
@@ -146,7 +190,8 @@
   "tag": "section",
   "class": "section",
   "settings": [
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Joyful Routines. That’s Why They Stay!" },
+    { "type": "text", "id": "heading", "label": "Heading line 1 (yellow highlight)", "default": "Joyful Routines. That's Why" },
+    { "type": "text", "id": "heading_line_2", "label": "Heading line 2 (no highlight)", "default": "They Stay!", "info": "Leave blank for a single-line title with one highlight under the full heading." },
     { "type": "range", "id": "heading_size", "label": "Heading size", "min": 20, "max": 64, "step": 1, "default": 36 },
     {
       "type": "select",

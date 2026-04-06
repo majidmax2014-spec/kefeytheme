@@ -340,10 +340,11 @@
       ],
       "name": "Testimonials",
       "settings": {
-        "heading": "Joyful Routines, Shared By Real People.",
+        "heading": "Joyful Routines. That's Why",
+        "heading_line_2": "They Stay!",
         "heading_size": 36,
         "heading_font_family": "inherit",
-        "heading_font_weight": "inherit",
+        "heading_font_weight": "700",
         "text_font_family": "inherit",
         "text_font_weight": "inherit",
         "text_font_size": 14,
