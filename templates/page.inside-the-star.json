@@ -34,6 +34,55 @@
         "overlay_opacity": 24
       }
     },
+    "kefey_star_defines_star": {
+      "type": "kefey-star-defines",
+      "name": "What defines each star",
+      "settings": {
+        "heading": "What defines each Kefey® star",
+        "title_bar_background": "#4fb0ae",
+        "title_text_color": "#ffffff",
+        "title_bar_width": 86,
+        "title_bar_offset_y": 8,
+        "title_bar_padding_y": 14,
+        "title_bar_padding_x": 28,
+        "title_bar_padding_y_mobile": 12,
+        "title_bar_padding_x_mobile": 16,
+        "heading_font_family": "inherit",
+        "heading_font_weight": "700",
+        "heading_font_size": 28,
+        "heading_font_size_mobile": 20,
+        "list_richtext": "<ul><li>Highly Effective Botanical Extracts</li><li>Sugar-Free</li><li>Naturally Sweetened</li><li>Vegan (Pectin-Based)</li><li>Non-GMO</li><li>Halal</li><li>Made in the USA</li><li>GMP-certified & FDA-registered facilities</li></ul>",
+        "panel_background": "#f9d342",
+        "list_text_color": "#ffffff",
+        "text_font_family": "inherit",
+        "text_font_weight": "600",
+        "text_font_size": 17,
+        "text_font_size_mobile": 16,
+        "list_max_width": 520,
+        "left_column_width": 50,
+        "row_min_height": 360,
+        "grid_padding_top": 52,
+        "panel_padding_top": 40,
+        "panel_padding_bottom": 44,
+        "panel_padding_left": 48,
+        "panel_padding_right": 48,
+        "panel_padding_top_mobile": 36,
+        "panel_padding_bottom_mobile": 40,
+        "panel_padding_x_mobile": 28,
+        "media_background": "#e8f4f3",
+        "media_min_height_mobile": 260,
+        "media_max_height_mobile": 420,
+        "show_decor_on_mobile": false,
+        "content_max_width": 1320,
+        "section_padding_x": 20,
+        "section_padding_x_mobile": 16,
+        "section_padding_top": 40,
+        "section_padding_bottom": 48,
+        "section_padding_top_mobile": 24,
+        "section_padding_bottom_mobile": 32,
+        "section_background": "#ffffff"
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -93,6 +142,7 @@
   },
   "order": [
     "header_banner_iQ3tzf",
+    "kefey_star_defines_star",
     "main",
     "purpose_beyond_gummy_UDF6Kr"
   ]

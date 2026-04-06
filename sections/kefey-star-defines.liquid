@@ -1,0 +1,583 @@
+{{ 'kefey-star-defines.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign ksd_h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign ksd_h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign ksd_h_ff = 'var(--font-body-family)'
+  endif
+
+  assign ksd_t_ff = 'inherit'
+  if section.settings.text_font_family == 'heading'
+    assign ksd_t_ff = 'var(--font-heading-family)'
+  elsif section.settings.text_font_family == 'body'
+    assign ksd_t_ff = 'var(--font-body-family)'
+  endif
+
+  assign left_pct = section.settings.left_column_width | default: 50
+  if left_pct < 30
+    assign left_pct = 30
+  elsif left_pct > 70
+    assign left_pct = 70
+  endif
+-%}
+
+<section
+  id="KefeyStarDefines-{{ section.id }}"
+  class="ksd"
+  style="
+    --ksd-section-bg: {{ section.settings.section_background }};
+    --ksd-max: {{ section.settings.content_max_width }}px;
+    --ksd-px: {{ section.settings.section_padding_x }}px;
+    --ksd-px-m: {{ section.settings.section_padding_x_mobile }}px;
+    --ksd-pt: {{ section.settings.section_padding_top }}px;
+    --ksd-pb: {{ section.settings.section_padding_bottom }}px;
+    --ksd-pt-m: {{ section.settings.section_padding_top_mobile }}px;
+    --ksd-pb-m: {{ section.settings.section_padding_bottom_mobile }}px;
+    --ksd-title-bg: {{ section.settings.title_bar_background }};
+    --ksd-title-color: {{ section.settings.title_text_color }};
+    --ksd-title-w: {{ section.settings.title_bar_width }}%;
+    --ksd-title-y: {{ section.settings.title_bar_offset_y }}px;
+    --ksd-title-pad-y: {{ section.settings.title_bar_padding_y }}px;
+    --ksd-title-pad-x: {{ section.settings.title_bar_padding_x }}px;
+    --ksd-title-pad-y-m: {{ section.settings.title_bar_padding_y_mobile }}px;
+    --ksd-title-pad-x-m: {{ section.settings.title_bar_padding_x_mobile }}px;
+    --ksd-grid-pt: {{ section.settings.grid_padding_top }}px;
+    --ksd-left-pct: {{ left_pct }}%;
+    --ksd-row-min-h: {{ section.settings.row_min_height }}px;
+    --ksd-panel-bg: {{ section.settings.panel_background }};
+    --ksd-panel-pt: {{ section.settings.panel_padding_top }}px;
+    --ksd-panel-pb: {{ section.settings.panel_padding_bottom }}px;
+    --ksd-panel-pl: {{ section.settings.panel_padding_left }}px;
+    --ksd-panel-pr: {{ section.settings.panel_padding_right }}px;
+    --ksd-panel-pt-m: {{ section.settings.panel_padding_top_mobile }}px;
+    --ksd-panel-pb-m: {{ section.settings.panel_padding_bottom_mobile }}px;
+    --ksd-panel-px-m: {{ section.settings.panel_padding_x_mobile }}px;
+    --ksd-list-color: {{ section.settings.list_text_color }};
+    --ksd-list-max: {{ section.settings.list_max_width }}px;
+    --ksd-media-bg: {{ section.settings.media_background }};
+    --ksd-media-min-h-m: {{ section.settings.media_min_height_mobile }}px;
+    --ksd-media-max-h-m: {{ section.settings.media_max_height_mobile }}px;
+    --ksd-h-ff: {{ ksd_h_ff }};
+    --ksd-h-fs: {{ section.settings.heading_font_size }}px;
+    --ksd-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --ksd-h-fw: {{ section.settings.heading_font_weight }};
+    --ksd-t-ff: {{ ksd_t_ff }};
+    --ksd-t-fs: {{ section.settings.text_font_size }}px;
+    --ksd-t-fs-m: {{ section.settings.text_font_size_mobile }}px;
+    --ksd-t-fw: {{ section.settings.text_font_weight }};
+    --ksd-decor-mobile: {% if section.settings.show_decor_on_mobile %}block{% else %}none{% endif %};
+  "
+>
+  <div class="ksd__inner">
+    {%- if section.settings.decor_doodle != blank -%}
+      <div class="ksd__decor ksd__decor--doodle" aria-hidden="true">
+        {{ section.settings.decor_doodle | image_url: width: 400 | image_tag: loading: 'lazy', widths: '200,400', sizes: '200px' }}
+      </div>
+    {%- endif -%}
+    {%- if section.settings.decor_star != blank -%}
+      <div class="ksd__decor ksd__decor--star" aria-hidden="true">
+        {{ section.settings.decor_star | image_url: width: 120 | image_tag: loading: 'lazy', widths: '56,120', sizes: '56px' }}
+      </div>
+    {%- endif -%}
+
+    <div class="ksd__titlebar">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="ksd__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+    </div>
+
+    <div class="ksd__grid">
+      <div class="ksd__panel">
+        {%- if section.settings.list_richtext != blank -%}
+          <div class="ksd__list ksd__list--rte rte">
+            {{ section.settings.list_richtext }}
+          </div>
+        {%- else -%}
+          <ul class="ksd__list">
+            <li>{{ 'Highly Effective Botanical Extracts' }}</li>
+            <li>{{ 'Sugar-Free' }}</li>
+            <li>{{ 'Naturally Sweetened' }}</li>
+            <li>{{ 'Vegan (Pectin-Based)' }}</li>
+            <li>{{ 'Non-GMO' }}</li>
+            <li>{{ 'Halal' }}</li>
+            <li>{{ 'Made in the USA' }}</li>
+            <li>{{ 'GMP-certified & FDA-registered facilities' }}</li>
+          </ul>
+        {%- endif -%}
+      </div>
+
+      <div class="ksd__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 2000
+            | image_tag:
+              loading: 'lazy',
+              widths: '400,600,800,1000,1200,1600,2000',
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              alt: section.settings.image.alt | default: section.settings.heading | strip_html | escape
+          }}
+        {%- else -%}
+          {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kefey star defines",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "What defines each Kefey® star"
+    },
+    {
+      "type": "color",
+      "id": "title_bar_background",
+      "label": "Title bar background",
+      "default": "#4fb0ae"
+    },
+    {
+      "type": "color",
+      "id": "title_text_color",
+      "label": "Title text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "title_bar_width",
+      "min": 60,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "Title bar width (desktop)",
+      "default": 86
+    },
+    {
+      "type": "range",
+      "id": "title_bar_offset_y",
+      "min": -40,
+      "max": 80,
+      "step": 1,
+      "unit": "px",
+      "label": "Title bar vertical offset (desktop)",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "title_bar_padding_y",
+      "min": 6,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Title bar padding vertical",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "title_bar_padding_x",
+      "min": 12,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Title bar padding horizontal",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "title_bar_padding_y_mobile",
+      "min": 6,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Title bar padding vertical (mobile)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "title_bar_padding_x_mobile",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Title bar padding horizontal (mobile)",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ],
+      "default": "700"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading font size (desktop)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading font size (mobile)",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "List & panel"
+    },
+    {
+      "type": "richtext",
+      "id": "list_richtext",
+      "label": "Feature list",
+      "info": "Use a bulleted list. Leave blank to use the default bullets.",
+      "default": "<ul><li>Highly Effective Botanical Extracts</li><li>Sugar-Free</li><li>Naturally Sweetened</li><li>Vegan (Pectin-Based)</li><li>Non-GMO</li><li>Halal</li><li>Made in the USA</li><li>GMP-certified & FDA-registered facilities</li></ul>"
+    },
+    {
+      "type": "color",
+      "id": "panel_background",
+      "label": "Panel background (yellow)",
+      "default": "#f9d342"
+    },
+    {
+      "type": "color",
+      "id": "list_text_color",
+      "label": "List text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "List font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_weight",
+      "label": "List font weight",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ],
+      "default": "600"
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "List font size (desktop)",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "List font size (mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "list_max_width",
+      "min": 200,
+      "max": 720,
+      "step": 10,
+      "unit": "px",
+      "label": "List max width",
+      "default": 520
+    },
+    {
+      "type": "range",
+      "id": "left_column_width",
+      "min": 30,
+      "max": 70,
+      "step": 1,
+      "unit": "%",
+      "label": "Left column width (list panel, desktop)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "row_min_height",
+      "min": 220,
+      "max": 560,
+      "step": 10,
+      "unit": "px",
+      "label": "Row minimum height (desktop)",
+      "default": 360
+    },
+    {
+      "type": "range",
+      "id": "grid_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below title bar (desktop)",
+      "default": 52
+    },
+    {
+      "type": "range",
+      "id": "panel_padding_top",
+      "min": 16,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Panel padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "panel_padding_bottom",
+      "min": 16,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Panel padding bottom",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "panel_padding_left",
+      "min": 16,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Panel padding left",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "panel_padding_right",
+      "min": 16,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Panel padding right",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "panel_padding_top_mobile",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Panel padding top (mobile)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "panel_padding_bottom_mobile",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Panel padding bottom (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "panel_padding_x_mobile",
+      "min": 16,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "label": "Panel padding horizontal (mobile)",
+      "default": 28
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "color",
+      "id": "media_background",
+      "label": "Image area background",
+      "default": "#e8f4f3"
+    },
+    {
+      "type": "range",
+      "id": "media_min_height_mobile",
+      "min": 180,
+      "max": 520,
+      "step": 10,
+      "unit": "px",
+      "label": "Image min height (mobile)",
+      "default": 260
+    },
+    {
+      "type": "range",
+      "id": "media_max_height_mobile",
+      "min": 240,
+      "max": 640,
+      "step": 10,
+      "unit": "px",
+      "label": "Image max height (mobile)",
+      "default": 420
+    },
+    {
+      "type": "header",
+      "content": "Decor (optional)"
+    },
+    {
+      "type": "image_picker",
+      "id": "decor_doodle",
+      "label": "Doodle (top right, desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "decor_star",
+      "label": "Star icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_decor_on_mobile",
+      "label": "Show decor on mobile",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 900,
+      "max": 1600,
+      "step": 10,
+      "unit": "px",
+      "label": "Content max width",
+      "default": 1320
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Section horizontal padding",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "section_padding_x_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Section horizontal padding (mobile)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Section padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Section padding bottom",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Section padding top (mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Section padding bottom (mobile)",
+      "default": 32
+    },
+    {
+      "type": "color",
+      "id": "section_background",
+      "label": "Section background",
+      "default": "#ffffff"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kefey star defines"
+    }
+  ]
+}
+{% endschema %}
