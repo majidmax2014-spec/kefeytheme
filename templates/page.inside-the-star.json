@@ -17,21 +17,31 @@
         "bg_image_desktop": "shopify://shop_images/inside-the-star.png",
         "bg_image_mobile": "shopify://shop_images/inside-the-star-mobile.png",
         "heading": "Inside the Star–",
-        "subheading": "Thoughtfully formulated. \nNaturally sweetened. \nMade to be enjoyed.",
+        "subheading": "Thoughtfully formulated. Naturally sweetened. Made to be enjoyed.",
+        "subheading_richtext": "<p>Thoughtfully formulated. Naturally sweetened.</p><p><strong>Made to be enjoyed.</strong></p>",
         "hb_heading_ff": "heading",
         "hb_heading_fw": "700",
         "hb_heading_fs": 46,
         "hb_desc_ff": "body",
-        "hb_desc_fw": "500",
+        "hb_desc_fw": "400",
         "hb_desc_fs": 24,
+        "hb_heading_fs_mobile": 32,
+        "hb_desc_fs_mobile": 20,
+        "hb_desc_strong_weight": "700",
         "banner_height_desktop": 460,
-        "banner_height_mobile": 360,
+        "banner_height_mobile": 520,
         "content_max_width": 760,
         "content_alignment": "left",
         "content_padding_x": 64,
         "overlay_enable": true,
         "overlay_color": "#000000",
-        "overlay_opacity": 24
+        "overlay_opacity": 24,
+        "overlay_opacity_mobile": 0,
+        "mobile_vertical_align": "top",
+        "mobile_content_padding_top": 44,
+        "mobile_content_padding_x": 22,
+        "mobile_text_alignment": "left",
+        "mobile_image_anchor": "bottom"
       }
     },
     "main": {

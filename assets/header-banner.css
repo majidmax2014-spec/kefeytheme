@@ -75,13 +75,56 @@
   font-size: var(--hb-desc-fs, 24px);
 }
 
+.header-banner__subheading--rte p {
+  margin: 0 0 0.4em;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+.header-banner__subheading--rte p:last-child {
+  margin-bottom: 0;
+}
+
+.header-banner__subheading--rte strong {
+  font-weight: var(--hb-desc-fw-strong, 700);
+}
+
 @media screen and (max-width: 749px) {
+  .header-banner__overlay {
+    background: var(--hb-overlay-color-mobile, var(--hb-overlay-color, rgba(0, 0, 0, 0.24)));
+  }
+
   .header-banner {
     height: var(--hb-h-m, 360px);
   }
 
   .header-banner__content-wrap {
     height: var(--hb-h-m, 360px);
+    padding-left: var(--hb-m-px, 24px);
+    padding-right: var(--hb-m-px, 24px);
+  }
+
+  .header-banner--m-top .header-banner__content-wrap {
+    align-items: flex-start;
+    padding-top: var(--hb-m-pt, 40px);
+    box-sizing: border-box;
+  }
+
+  .header-banner--m-text-left .header-banner__content-wrap {
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .header-banner--m-text-center .header-banner__content-wrap {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .header-banner--m-img-bottom .header-banner__media img {
+    object-position: center bottom;
   }
 
   .header-banner__heading {
@@ -90,5 +133,10 @@
 
   .header-banner__subheading {
     font-size: var(--hb-desc-fs-m, 19px);
+    margin-top: 0.85rem;
+  }
+
+  .header-banner__subheading--rte {
+    line-height: 1.35;
   }
 }

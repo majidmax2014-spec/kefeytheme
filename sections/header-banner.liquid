@@ -2,6 +2,18 @@
 
 {%- liquid
   assign overlay_alpha = section.settings.overlay_opacity | divided_by: 100.0
+  assign overlay_alpha_mobile = section.settings.overlay_opacity_mobile | divided_by: 100.0
+
+  assign hb_heading_fs_m = section.settings.hb_heading_fs | times: 0.75 | round: 0
+  if section.settings.hb_heading_fs_mobile > 0
+    assign hb_heading_fs_m = section.settings.hb_heading_fs_mobile
+  endif
+
+  assign hb_desc_fs_m = section.settings.hb_desc_fs | times: 0.8 | round: 0
+  if section.settings.hb_desc_fs_mobile > 0
+    assign hb_desc_fs_m = section.settings.hb_desc_fs_mobile
+  endif
+
   assign bg_desktop = section.settings.bg_image_desktop
   if bg_desktop == blank
     assign bg_desktop = section.settings.background_image
@@ -28,21 +40,25 @@
 
 <section
   id="HeaderBanner-{{ section.id }}"
-  class="header-banner header-banner--{{ section.settings.content_alignment }}"
+  class="header-banner header-banner--{{ section.settings.content_alignment }} header-banner--m-{{ section.settings.mobile_vertical_align }}{% if section.settings.mobile_text_alignment == 'left' %} header-banner--m-text-left{% elsif section.settings.mobile_text_alignment == 'center' %} header-banner--m-text-center{% endif %}{% if section.settings.mobile_image_anchor == 'bottom' %} header-banner--m-img-bottom{% endif %}"
   style="
     --hb-h: {{ section.settings.banner_height_desktop }}px;
     --hb-h-m: {{ section.settings.banner_height_mobile }}px;
     --hb-content-max: {{ section.settings.content_max_width }}px;
     --hb-content-pad-x: {{ section.settings.content_padding_x }}px;
+    --hb-m-px: {{ section.settings.mobile_content_padding_x }}px;
+    --hb-m-pt: {{ section.settings.mobile_content_padding_top }}px;
     --hb-overlay-color: {{ section.settings.overlay_color | color_modify: 'alpha', overlay_alpha }};
+    --hb-overlay-color-mobile: {{ section.settings.overlay_color | color_modify: 'alpha', overlay_alpha_mobile }};
     --hb-heading-ff: {{ hb_heading_ff }};
     --hb-heading-fw: {{ section.settings.hb_heading_fw }};
     --hb-heading-fs: {{ section.settings.hb_heading_fs }}px;
-    --hb-heading-fs-m: {{ section.settings.hb_heading_fs | times: 0.75 | round: 0 }}px;
+    --hb-heading-fs-m: {{ hb_heading_fs_m }}px;
     --hb-desc-ff: {{ hb_desc_ff }};
     --hb-desc-fw: {{ section.settings.hb_desc_fw }};
     --hb-desc-fs: {{ section.settings.hb_desc_fs }}px;
-    --hb-desc-fs-m: {{ section.settings.hb_desc_fs | times: 0.8 | round: 0 }}px;
+    --hb-desc-fs-m: {{ hb_desc_fs_m }}px;
+    --hb-desc-fw-strong: {{ section.settings.hb_desc_strong_weight }};
   "
 >
   <div class="header-banner__media">
@@ -87,7 +103,9 @@
       {% if section.settings.heading != blank %}
         <h1 class="header-banner__heading">{{ section.settings.heading }}</h1>
       {% endif %}
-      {% if section.settings.subheading != blank %}
+      {% if section.settings.subheading_richtext != blank %}
+        <div class="header-banner__subheading header-banner__subheading--rte rte">{{ section.settings.subheading_richtext }}</div>
+      {% elsif section.settings.subheading != blank %}
         <div class="header-banner__subheading">{{ section.settings.subheading | newline_to_br }}</div>
       {% endif %}
     </div>
@@ -124,8 +142,15 @@
     {
       "type": "textarea",
       "id": "subheading",
-      "label": "Subheading text",
-      "default": "Little rituals that care for you and the world around you"
+      "label": "Subheading text (plain)",
+      "default": "Little rituals that care for you and the world around you",
+      "info": "Used when rich subheading is empty. Line breaks become new lines."
+    },
+    {
+      "type": "richtext",
+      "id": "subheading_richtext",
+      "label": "Subheading (rich text)",
+      "info": "Optional. When set, replaces plain subheading. Use bold for lines like “Made to be enjoyed.”"
     },
     {
       "type": "header",
@@ -205,6 +230,37 @@
     },
     {
       "type": "range",
+      "id": "hb_heading_fs_mobile",
+      "label": "Heading font size mobile (0 = auto)",
+      "min": 0,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "hb_desc_fs_mobile",
+      "label": "Description font size mobile (0 = auto)",
+      "min": 0,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "hb_desc_strong_weight",
+      "label": "Description bold weight (rich text)",
+      "default": "700",
+      "options": [
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
       "id": "banner_height_desktop",
       "label": "Banner height desktop (px)",
       "min": 300,
@@ -269,6 +325,70 @@
       "max": 80,
       "step": 2,
       "default": 24
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity_mobile",
+      "label": "Overlay opacity mobile (%)",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "select",
+      "id": "mobile_vertical_align",
+      "label": "Mobile content vertical position",
+      "default": "center",
+      "options": [
+        { "value": "center", "label": "Center (default)" },
+        { "value": "top", "label": "Top (text in upper area)" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "mobile_content_padding_top",
+      "label": "Mobile padding top (when top-aligned)",
+      "min": 12,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "mobile_content_padding_x",
+      "label": "Mobile horizontal padding",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Mobile text alignment",
+      "default": "match",
+      "options": [
+        { "value": "match", "label": "Match desktop" },
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "mobile_image_anchor",
+      "label": "Mobile background image focus",
+      "default": "center",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom (product at base)" }
+      ]
     }
   ],
   "presets": [
