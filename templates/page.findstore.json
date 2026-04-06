@@ -71,16 +71,39 @@
     },
     "find_store_region_us": {
       "type": "find-store-region",
-      "name": "Find store — United States",
       "blocks": {
-        "us_logo_1": { "type": "logo", "settings": {} },
-        "us_logo_2": { "type": "logo", "settings": {} },
-        "us_logo_3": { "type": "logo", "settings": {} },
-        "us_logo_4": { "type": "logo", "settings": {} },
-        "us_logo_5": { "type": "logo", "settings": {} },
-        "us_logo_6": { "type": "logo", "settings": {} },
-        "us_logo_7": { "type": "logo", "settings": {} },
-        "us_logo_8": { "type": "logo", "settings": {} }
+        "us_logo_1": {
+          "type": "logo",
+          "settings": {}
+        },
+        "us_logo_2": {
+          "type": "logo",
+          "settings": {}
+        },
+        "us_logo_3": {
+          "type": "logo",
+          "settings": {}
+        },
+        "us_logo_4": {
+          "type": "logo",
+          "settings": {}
+        },
+        "us_logo_5": {
+          "type": "logo",
+          "settings": {}
+        },
+        "us_logo_6": {
+          "type": "logo",
+          "settings": {}
+        },
+        "us_logo_7": {
+          "type": "logo",
+          "settings": {}
+        },
+        "us_logo_8": {
+          "type": "logo",
+          "settings": {}
+        }
       },
       "block_order": [
         "us_logo_1",
@@ -92,6 +115,7 @@
         "us_logo_7",
         "us_logo_8"
       ],
+      "name": "Find store — United States",
       "settings": {
         "region_title": "United States",
         "sublabel": "Available at:",
@@ -106,16 +130,39 @@
     },
     "find_store_region_uae": {
       "type": "find-store-region",
-      "name": "Find store — UAE",
       "blocks": {
-        "uae_logo_1": { "type": "logo", "settings": {} },
-        "uae_logo_2": { "type": "logo", "settings": {} },
-        "uae_logo_3": { "type": "logo", "settings": {} },
-        "uae_logo_4": { "type": "logo", "settings": {} },
-        "uae_logo_5": { "type": "logo", "settings": {} },
-        "uae_logo_6": { "type": "logo", "settings": {} },
-        "uae_logo_7": { "type": "logo", "settings": {} },
-        "uae_logo_8": { "type": "logo", "settings": {} }
+        "uae_logo_1": {
+          "type": "logo",
+          "settings": {}
+        },
+        "uae_logo_2": {
+          "type": "logo",
+          "settings": {}
+        },
+        "uae_logo_3": {
+          "type": "logo",
+          "settings": {}
+        },
+        "uae_logo_4": {
+          "type": "logo",
+          "settings": {}
+        },
+        "uae_logo_5": {
+          "type": "logo",
+          "settings": {}
+        },
+        "uae_logo_6": {
+          "type": "logo",
+          "settings": {}
+        },
+        "uae_logo_7": {
+          "type": "logo",
+          "settings": {}
+        },
+        "uae_logo_8": {
+          "type": "logo",
+          "settings": {}
+        }
       },
       "block_order": [
         "uae_logo_1",
@@ -127,6 +174,7 @@
         "uae_logo_7",
         "uae_logo_8"
       ],
+      "name": "Find store — UAE",
       "settings": {
         "region_title": "United Arab Emirates",
         "sublabel": "Available at:",
@@ -146,7 +194,6 @@
         "heading": "Worldwide Availability",
         "body": "<p>No matter where you live, Kefey Mood Gummies can be delivered straight to your door.</p><p><strong>We ship worldwide — over 150+ countries and counting.</strong></p>",
         "background_color": "#e85d3f",
-        "heading_highlight_color": "#4db6ac",
         "corner_radius": 12,
         "show_decor": false,
         "heading_font_family": "heading",
