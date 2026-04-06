@@ -14,14 +14,20 @@
       "type": "header-banner",
       "name": "Header Banner",
       "settings": {
-        "heading": "Wherever you Shop, Kefey is There",
-        "subheading": "Find Kefey in trusted stores near you — and online at Kefey.co.",
+        "bg_image_desktop": "shopify://shop_images/find-store-banner.png",
+        "bg_image_mobile": "shopify://shop_images/find-store-banner-mobile.png",
+        "heading": "Wherever you Shop, Kefey is Never Far.",
+        "subheading": "Find Kefey in Trusted Stores, Pharmacies & Online Across the World.",
+        "subheading_richtext": "",
         "hb_heading_ff": "heading",
         "hb_heading_fw": "700",
         "hb_heading_fs": 46,
         "hb_desc_ff": "body",
         "hb_desc_fw": "500",
         "hb_desc_fs": 22,
+        "hb_heading_fs_mobile": 0,
+        "hb_desc_fs_mobile": 0,
+        "hb_desc_strong_weight": "700",
         "banner_height_desktop": 460,
         "banner_height_mobile": 360,
         "content_max_width": 760,
@@ -29,7 +35,13 @@
         "content_padding_x": 64,
         "overlay_enable": true,
         "overlay_color": "#38a3a5",
-        "overlay_opacity": 44
+        "overlay_opacity": 44,
+        "overlay_opacity_mobile": 24,
+        "mobile_vertical_align": "center",
+        "mobile_content_padding_top": 40,
+        "mobile_content_padding_x": 24,
+        "mobile_text_alignment": "match",
+        "mobile_image_anchor": "center"
       }
     },
     "main": {
