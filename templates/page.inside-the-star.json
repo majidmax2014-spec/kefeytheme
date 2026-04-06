@@ -1,8 +1,42 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "layout": "theme",
   "sections": {
+    "header_banner_iQ3tzf": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "bg_image_desktop": "shopify://shop_images/inside-the-star.png",
+        "bg_image_mobile": "shopify://shop_images/inside-the-star-mobile.png",
+        "heading": "Inside the Star–",
+        "subheading": "Thoughtfully formulated. \nNaturally sweetened. \nMade to be enjoyed.",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 46,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 24,
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 360,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24
+      }
+    },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "name": "Page content",
       "settings": {
         "enable_legal_typography": false,
@@ -25,5 +59,8 @@
       }
     }
   },
-  "order": ["main"]
+  "order": [
+    "header_banner_iQ3tzf",
+    "main"
+  ]
 }
