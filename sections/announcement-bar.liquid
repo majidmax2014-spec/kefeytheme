@@ -64,13 +64,41 @@
         </div>
       </div>
       <style>
-        .announcement-countdown__container{display:flex;align-items:center;justify-content:center;gap:1.6rem;width:100%;}
-        .announcement-countdown__message{text-transform:uppercase;margin:0;}
-        .announcement-countdown__timer{display:flex;align-items:center;gap:.6rem;color:var(--countdown-accent,#FFC72C);}
-        .announcement-countdown__group{display:flex;align-items:baseline;gap:.2rem;}
-        .announcement-countdown__num{min-width:2ch;display:inline-block;text-align:center;font-weight:700;color:var(--countdown-accent,#FFC72C);}
-        .announcement-countdown__label{opacity:.95;font-size:.9em;color:var(--countdown-accent,#FFC72C);}
-        .announcement-countdown__sep{opacity:.9;color:var(--countdown-accent,#FFC72C);}
+        .announcement-countdown__container{
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          gap:clamp(0.5rem, 2vw, 1.6rem);
+          width:100%;
+          max-width:100%;
+          flex-wrap:nowrap;
+          box-sizing:border-box;
+          padding-left:0.6rem;
+          padding-right:0.6rem;
+        }
+        .announcement-countdown__message{
+          text-transform:uppercase;
+          margin:0;
+          white-space:nowrap;
+          flex:0 1 auto;
+          min-width:0;
+          font-size:clamp(0.55rem, 2.35vw, 0.85rem);
+          line-height:1.2;
+          letter-spacing:0.02em;
+        }
+        .announcement-countdown__timer{
+          display:flex;
+          align-items:center;
+          gap:clamp(0.2rem, 1vw, 0.6rem);
+          flex-shrink:0;
+          white-space:nowrap;
+          color:var(--countdown-accent,#FFC72C);
+          font-size:clamp(0.55rem, 2.35vw, 0.8rem);
+        }
+        .announcement-countdown__group{display:flex;align-items:baseline;gap:.15rem;}
+        .announcement-countdown__num{min-width:1.8ch;display:inline-block;text-align:center;font-weight:700;color:var(--countdown-accent,#FFC72C);}
+        .announcement-countdown__label{opacity:.95;font-size:.85em;color:var(--countdown-accent,#FFC72C);}
+        .announcement-countdown__sep{opacity:.9;color:var(--countdown-accent,#FFC72C);padding:0 0.1rem;}
       </style>
     {%- endif -%}
     {%- if section.settings.show_social and social_icons -%}
