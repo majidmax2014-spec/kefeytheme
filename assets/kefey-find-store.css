@@ -390,20 +390,33 @@
 }
 
 @media screen and (max-width: 749px) {
+  /* Match framed desktop look on small screens: crisp black frame, room for 2-line title */
+  .fs-contact {
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
   .fs-contact__inner {
-    padding: 2.1rem 1.2rem 2.35rem;
+    width: 100%;
+    max-width: min(var(--fs-contact-max, 960px), 95%);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2.35rem clamp(1rem, 4vw, 1.35rem) 2.5rem;
+    border-color: var(--fs-contact-border-m, var(--fs-contact-border, #000000));
+    border-width: var(--fs-contact-border-w, 1px);
   }
 
   .fs-contact__heading {
-    max-width: calc(100% - 1.25rem);
-    padding: 0 0.6rem;
-    font-size: min(var(--fs-contact-heading-fs, 1.625rem), 18px);
-    line-height: 1.28;
+    max-width: min(100%, 92vw);
+    padding: 0 clamp(0.45rem, 2vw, 0.85rem);
+    font-size: clamp(15px, 3.85vw + 7px, min(var(--fs-contact-heading-fs, 26px), 21px));
+    line-height: 1.2;
+    text-wrap: auto;
   }
 
   .fs-contact__body {
-    font-size: calc(var(--fs-contact-body-fs, 16px) * 0.9375);
-    line-height: 1.62;
+    font-size: var(--fs-contact-body-fs, 16px);
+    line-height: 1.65;
   }
 }
 

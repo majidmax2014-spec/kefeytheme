@@ -22,6 +22,7 @@
   style="
     --fs-contact-max: {{ section.settings.max_width }}px;
     --fs-contact-border: {{ section.settings.border_color }};
+    --fs-contact-border-m: {{ section.settings.border_color_mobile }};
     --fs-contact-border-w: {{ section.settings.border_width }}px;
     --fs-contact-heading-color: {{ section.settings.heading_color }};
     --fs-contact-heading-ff: {{ h_ff }};
@@ -72,8 +73,15 @@
     {
       "type": "color",
       "id": "border_color",
-      "label": "Border color",
+      "label": "Border color (desktop)",
       "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "border_color_mobile",
+      "label": "Border color (mobile)",
+      "default": "#000000",
+      "info": "Use black (#000000) for the framed look; set the same as desktop if you want one color everywhere."
     },
     {
       "type": "range",
