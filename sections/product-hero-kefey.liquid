@@ -36,10 +36,16 @@
 -%}
 
 <section
-  class="kefey-hero{% if section.settings.dot_enabled %} kefey-hero--dots{% endif %}"
+  class="kefey-hero{% if section.settings.dot_enabled %} kefey-hero--dots{% endif %}{% if section.settings.mobile_text_alignment == 'center' %} kefey-hero--m-text-center{% endif %}"
   style="
     --kh-pt: {{ section.settings.padding_top }}px;
     --kh-pb: {{ section.settings.padding_bottom }}px;
+    --kh-m-pt: {{ section.settings.mobile_padding_top }}px;
+    --kh-m-pb: {{ section.settings.mobile_padding_bottom }}px;
+    --kh-m-gutter: {{ section.settings.mobile_horizontal_inset }}px;
+    --kh-m-row-gap: {{ section.settings.mobile_grid_row_gap }}px;
+    --kh-m-media-mt: {{ section.settings.mobile_media_margin_top }}px;
+    --kh-m-bg-pos: {{ section.settings.mobile_background_image_position }};
     --kh-max: {{ section.settings.content_max_width }}px;
     --kh-left-max: {{ section.settings.left_col_max_width }}px;
     --kh-heading-color: {{ section.settings.heading_color }};
@@ -81,7 +87,42 @@
   "
 >
   <div class="kefey-hero__bg" aria-hidden="true">
-    {%- if section.settings.background_image != blank -%}
+    {%- if section.settings.background_image != blank and section.settings.background_image_mobile != blank -%}
+      {{
+        section.settings.background_image
+        | image_url: width: 3000
+        | image_tag:
+          class: 'kefey-hero__bg-image kefey-hero__bg-image--desktop',
+          widths: '750, 990, 1200, 1500, 2000, 3000',
+          sizes: '100vw',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: ''
+      }}
+      {{
+        section.settings.background_image_mobile
+        | image_url: width: 2000
+        | image_tag:
+          class: 'kefey-hero__bg-image kefey-hero__bg-image--mobile',
+          widths: '750, 990, 1200, 1500, 2000',
+          sizes: '100vw',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: ''
+      }}
+    {%- elsif section.settings.background_image_mobile != blank -%}
+      {{
+        section.settings.background_image_mobile
+        | image_url: width: 2000
+        | image_tag:
+          class: 'kefey-hero__bg-image',
+          widths: '750, 990, 1200, 1500, 2000',
+          sizes: '100vw',
+          loading: 'eager',
+          fetchpriority: 'high',
+          alt: ''
+      }}
+    {%- elsif section.settings.background_image != blank -%}
       {{
         section.settings.background_image
         | image_url: width: 3000
@@ -196,7 +237,26 @@
   "settings": [
     { "type": "header", "content": "Images" },
     { "type": "image_picker", "id": "logo_image", "label": "White logo image" },
-    { "type": "image_picker", "id": "background_image", "label": "Background image (merged preferred)" },
+    { "type": "image_picker", "id": "background_image", "label": "Background image (desktop / default)" },
+    {
+      "type": "image_picker",
+      "id": "background_image_mobile",
+      "label": "Background image (mobile)",
+      "info": "Optional. Used below 990px. If empty, the desktop background is used on mobile. Upload a portrait-friendly image for stacked mobile layouts."
+    },
+    {
+      "type": "select",
+      "id": "mobile_background_image_position",
+      "label": "Mobile background focal point",
+      "default": "center center",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "top center", "label": "Top" },
+        { "value": "bottom center", "label": "Bottom" },
+        { "value": "center left", "label": "Center left" },
+        { "value": "center right", "label": "Center right" }
+      ]
+    },
     { "type": "image_picker", "id": "product_image", "label": "Separate product image (optional)" },
 
     { "type": "header", "content": "Content" },
@@ -290,7 +350,71 @@
     { "type": "range", "id": "left_col_max_width", "label": "Left column max width", "min": 420, "max": 860, "step": 10, "default": 650, "unit": "px" },
     { "type": "range", "id": "padding_top", "label": "Padding top", "min": 0, "max": 220, "step": 4, "default": 40, "unit": "px" },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom", "min": 0, "max": 220, "step": 4, "default": 44, "unit": "px" },
-    { "type": "range", "id": "mobile_overlay_opacity", "label": "Mobile overlay opacity", "min": 0, "max": 70, "step": 5, "default": 20, "unit": "%" }
+    { "type": "range", "id": "mobile_overlay_opacity", "label": "Mobile overlay opacity", "min": 0, "max": 70, "step": 5, "default": 20, "unit": "%" },
+
+    { "type": "header", "content": "Mobile layout (screens < 990px)" },
+    {
+      "type": "select",
+      "id": "mobile_text_alignment",
+      "label": "Text & CTA alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 40,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 44,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_horizontal_inset",
+      "label": "Side inset (mobile)",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 14,
+      "unit": "px",
+      "info": "Space from the left and right edges of the hero (content + product area)."
+    },
+    {
+      "type": "range",
+      "id": "mobile_grid_row_gap",
+      "label": "Space above product image",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "default": 24,
+      "unit": "px",
+      "info": "Gap between the text block and the product image when stacked."
+    },
+    {
+      "type": "range",
+      "id": "mobile_media_margin_top",
+      "label": "Extra margin above product image",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "default": 0,
+      "unit": "px"
+    }
   ],
   "blocks": [
     {

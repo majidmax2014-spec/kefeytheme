@@ -1809,6 +1809,11 @@
   display: block;
 }
 
+/* Desktop vs mobile background (when both are set in theme editor) */
+.kefey-hero__bg-image--mobile {
+  display: none;
+}
+
 .kefey-hero__overlay {
   z-index: 1;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0.06) 40%, rgba(0, 0, 0, 0) 75%);
@@ -1994,6 +1999,14 @@
 }
 
 @media (min-width: 990px) {
+  .kefey-hero__bg-image--mobile {
+    display: none !important;
+  }
+
+  .kefey-hero__bg-image--desktop {
+    display: block !important;
+  }
+
   .kefey-hero__grid {
     grid-template-columns: minmax(0, 58%) minmax(0, 42%);
   }
@@ -2007,6 +2020,21 @@
 @media (max-width: 989px) {
   .kefey-hero {
     min-height: 0;
+    padding-top: var(--kh-m-pt, var(--kh-pt, 40px));
+    padding-bottom: var(--kh-m-pb, var(--kh-pb, 44px));
+  }
+
+  .kefey-hero__bg-image--desktop {
+    display: none !important;
+  }
+
+  .kefey-hero__bg-image--mobile {
+    display: block !important;
+    object-position: var(--kh-m-bg-pos, center center);
+  }
+
+  .kefey-hero__bg-image:only-child {
+    object-position: var(--kh-m-bg-pos, center center);
   }
 
   .kefey-hero__overlay {
@@ -2014,7 +2042,41 @@
   }
 
   .kefey-hero__container {
-    width: min(100% - 28px, var(--kh-max, 1340px));
+    width: min(100% - calc(var(--kh-m-gutter, 14px) * 2), var(--kh-max, 1340px));
+  }
+
+  .kefey-hero__grid {
+    row-gap: var(--kh-m-row-gap, 24px);
+  }
+
+  .kefey-hero__media {
+    margin-top: var(--kh-m-media-mt, 0);
+  }
+
+  .kefey-hero--m-text-center .kefey-hero__content {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .kefey-hero--m-text-center .kefey-hero__logo {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .kefey-hero--m-text-center .kefey-hero__eyebrow {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .kefey-hero--m-text-center .kefey-hero__benefits {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .kefey-hero--m-text-center .kefey-hero__product {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .kefey-hero__logo {
