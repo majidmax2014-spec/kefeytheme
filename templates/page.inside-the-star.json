@@ -194,6 +194,23 @@
         "padding_bottom_mobile": 44,
         "padding_horizontal_mobile": 20
       }
+    },
+    "marquee_strip_gfxGk7": {
+      "type": "marquee-strip",
+      "name": "Marquee Strip",
+      "settings": {
+        "text": "Because thoughtful formulation is part of good design.",
+        "background_color": "#45b3b4",
+        "text_color": "#FFFFFF",
+        "font_size": 16,
+        "font_weight": "500",
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 16,
+        "duration": 30,
+        "padding_y": 12,
+        "pause_on_hover": true
+      }
     }
   },
   "order": [
@@ -201,6 +218,7 @@
     "main",
     "purpose_beyond_gummy_UDF6Kr",
     "kefey_star_defines_giRQe7",
-    "kefey_plant_based_banner_KHqxr7"
+    "kefey_plant_based_banner_KHqxr7",
+    "marquee_strip_gfxGk7"
   ]
 }
