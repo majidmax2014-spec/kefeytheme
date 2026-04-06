@@ -5,6 +5,8 @@
   width: 100%;
   left: 50%;
   right: 50%;
+  margin-top: var(--kpb-mt, 0px);
+  margin-bottom: var(--kpb-mb, 0px);
   margin-left: -50vw;
   margin-right: -50vw;
   background: var(--kpb-bg, #e85433);
@@ -101,6 +103,11 @@
 }
 
 @media screen and (max-width: 749px) {
+  .kpb {
+    margin-top: var(--kpb-mt-m, var(--kpb-mt, 0px));
+    margin-bottom: var(--kpb-mb-m, var(--kpb-mb, 0px));
+  }
+
   .kpb__shell {
     min-height: 0;
     padding: var(--kpb-pt-m, 40px) var(--kpb-px-m, 20px) var(--kpb-pb-m, 44px);

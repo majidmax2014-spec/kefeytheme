@@ -2,6 +2,8 @@
   position: relative;
   width: 100%;
   overflow: hidden;
+  margin-top: var(--ms-mt, 0px);
+  margin-bottom: var(--ms-mb, 0px);
   background: var(--bg, #e95a3a);
   color: var(--tc, #ffffff);
   padding-top: var(--py, 8px);

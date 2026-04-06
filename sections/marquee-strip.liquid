@@ -25,6 +25,8 @@
     --ms-t-ff: {{ ms_t_ff }};
     --dur: {{ section.settings.duration }}s;
     --py: {{ section.settings.padding_y }}px;
+    --ms-mt: {{ section.settings.margin_top }}px;
+    --ms-mb: {{ section.settings.margin_bottom }}px;
   "
 >
   <div class="marquee-strip__inner" aria-label="Marquee">
@@ -141,6 +143,26 @@
       "max": 24,
       "step": 1,
       "default": 8
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "checkbox",
