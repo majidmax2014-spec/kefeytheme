@@ -17,13 +17,20 @@
 
   assign intro_hh = section.settings.heading_highlight | strip
   assign intro_ha = section.settings.heading_after | strip
+  assign intro_heading_full = intro_hh
+  if intro_ha != blank
+    if intro_heading_full != blank
+      assign intro_heading_full = intro_heading_full | append: ' ' | append: intro_ha
+    else
+      assign intro_heading_full = intro_ha
+    endif
+  endif
 -%}
 
 <section
   id="FindStoreIntro-{{ section.id }}"
   class="fs-intro"
   style="
-    --fs-intro-highlight: {{ section.settings.highlight_color }};
     --fs-intro-pt: {{ section.settings.padding_top }}px;
     --fs-intro-pb: {{ section.settings.padding_bottom }}px;
     --fs-intro-pt-m: {{ section.settings.padding_top_mobile }}px;
@@ -37,14 +44,14 @@
   "
 >
   <div class="fs-intro__inner">
-    {% if intro_hh != blank or intro_ha != blank %}
+    {% if intro_heading_full != blank %}
       <h2 class="fs-intro__title">
-        {% if intro_hh != blank %}
-          <span class="fs-intro__find">{{ intro_hh }}</span>
-        {% endif %}
-        {% if intro_ha != blank %}
-          <span>{{ intro_ha }}</span>
-        {% endif %}
+        <span class="fs-intro__title-text">{{ intro_heading_full | escape }}</span>
+        <span
+          class="fs-intro__highlight"
+          style="background-color: {{ section.settings.highlight_color }};"
+          aria-hidden="true"
+        ></span>
       </h2>
     {% endif %}
 
@@ -71,8 +78,9 @@
     {
       "type": "text",
       "id": "heading_after",
-      "label": "Heading (after highlight)",
-      "default": " a Store"
+      "label": "Heading (rest of line)",
+      "default": "a Store",
+      "info": "Shown after the first part with a space (e.g. Find + a Store → Find a Store). One yellow highlight sits behind the full title, matching Testimonials."
     },
     {
       "type": "color",
