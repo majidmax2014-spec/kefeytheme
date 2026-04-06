@@ -210,6 +210,17 @@
   .angled-carousel__panel--left { width: calc(var(--panel-left-width, 220px) * .7); }
   .angled-carousel__panel--right { width: calc(var(--panel-right-width, 220px) * .7); }
 }
+
+@media screen and (max-width: 749px) {
+  .angled-carousel__title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .angled-carousel__highlight {
+    height: 10px;
+    bottom: -4px;
+  }
+}
 @media screen and (min-width: 990px) {
   .angled-carousel { --tilt: var(--tilt-deg-desktop, 10deg); }
 }

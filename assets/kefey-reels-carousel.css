@@ -296,6 +296,17 @@
   }
 }
 
+@media (max-width: 749px) {
+  .kefey-reels-carousel__title {
+    font-size: 20px;
+    font-weight: 700;
+  }
+  .kefey-reels-carousel__highlight {
+    height: 10px;
+    bottom: -4px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .kefey-reels-carousel__viewport {
     scroll-behavior: auto !important;
