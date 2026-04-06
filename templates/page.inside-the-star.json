@@ -147,46 +147,12 @@
         "section_padding_bottom_mobile": 32,
         "section_background": "#ffffff"
       }
-    },
-    "kefey_plant_based_banner_star": {
-      "type": "kefey-plant-based-banner",
-      "name": "Plant-based banner",
-      "settings": {
-        "heading": "PLANT-BASED & THOUGHTFULLY FORMULATED",
-        "body": "<p>Made with pectin (fruit-derived fiber) instead of gelatin, Kefey® gummies are designed to be plant-based, clean, and thoughtfully composed.</p>",
-        "heading_uppercase": true,
-        "background_color": "#e85433",
-        "heading_color": "#ffffff",
-        "text_color": "#ffffff",
-        "heading_font_family": "inherit",
-        "heading_font_weight": "700",
-        "heading_font_size": 32,
-        "heading_font_size_mobile": 22,
-        "heading_letter_spacing": 40,
-        "heading_margin_bottom": 16,
-        "heading_margin_bottom_mobile": 12,
-        "text_font_family": "inherit",
-        "text_font_weight": "400",
-        "text_font_size": 17,
-        "text_font_size_mobile": 15,
-        "show_decor_on_mobile": false,
-        "shell_max_width": 1600,
-        "content_max_width": 720,
-        "min_height_desktop": 0,
-        "padding_top": 56,
-        "padding_bottom": 56,
-        "padding_horizontal": 40,
-        "padding_top_mobile": 40,
-        "padding_bottom_mobile": 44,
-        "padding_horizontal_mobile": 20
-      }
     }
   },
   "order": [
     "header_banner_iQ3tzf",
     "main",
     "purpose_beyond_gummy_UDF6Kr",
-    "kefey_star_defines_giRQe7",
-    "kefey_plant_based_banner_star"
+    "kefey_star_defines_giRQe7"
   ]
 }
