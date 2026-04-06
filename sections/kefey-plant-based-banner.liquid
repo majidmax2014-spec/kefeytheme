@@ -1,0 +1,533 @@
+{{ 'kefey-plant-based-banner.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign kpb_h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign kpb_h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign kpb_h_ff = 'var(--font-body-family)'
+  endif
+
+  assign kpb_t_ff = 'inherit'
+  if section.settings.text_font_family == 'heading'
+    assign kpb_t_ff = 'var(--font-heading-family)'
+  elsif section.settings.text_font_family == 'body'
+    assign kpb_t_ff = 'var(--font-body-family)'
+  endif
+-%}
+
+<section
+  id="KefeyPlantBased-{{ section.id }}"
+  class="kpb"
+  style="
+    --kpb-bg: {{ section.settings.background_color }};
+    --kpb-shell-max: {{ section.settings.shell_max_width }}px;
+    --kpb-min-h: {{ section.settings.min_height_desktop }}px;
+    --kpb-pt: {{ section.settings.padding_top }}px;
+    --kpb-pb: {{ section.settings.padding_bottom }}px;
+    --kpb-px: {{ section.settings.padding_horizontal }}px;
+    --kpb-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --kpb-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --kpb-px-m: {{ section.settings.padding_horizontal_mobile }}px;
+    --kpb-content-max: {{ section.settings.content_max_width }}px;
+    --kpb-heading-color: {{ section.settings.heading_color }};
+    --kpb-text: {{ section.settings.text_color }};
+    --kpb-heading-gap: {{ section.settings.heading_margin_bottom }}px;
+    --kpb-heading-gap-m: {{ section.settings.heading_margin_bottom_mobile }}px;
+    --kpb-heading-track: {{ section.settings.heading_letter_spacing | times: 0.001 }}em;
+    --kpb-h-ff: {{ kpb_h_ff }};
+    --kpb-h-fw: {{ section.settings.heading_font_weight }};
+    --kpb-h-fs: {{ section.settings.heading_font_size }}px;
+    --kpb-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --kpb-t-ff: {{ kpb_t_ff }};
+    --kpb-t-fw: {{ section.settings.text_font_weight }};
+    --kpb-t-fs: {{ section.settings.text_font_size }}px;
+    --kpb-t-fs-m: {{ section.settings.text_font_size_mobile }}px;
+    --kpb-decor-l-w: {{ section.settings.left_decor_width }}px;
+    --kpb-decor-l-x: {{ section.settings.left_decor_offset_x }}px;
+    --kpb-decor-l-y: {{ section.settings.left_decor_offset_y }}px;
+    --kpb-decor-l-op: {{ section.settings.left_decor_opacity | times: 0.01 }};
+    --kpb-decor-r-w: {{ section.settings.right_decor_width }}px;
+    --kpb-decor-r-x: {{ section.settings.right_decor_offset_x }}px;
+    --kpb-decor-r-y: {{ section.settings.right_decor_offset_y }}px;
+    --kpb-decor-r-op: {{ section.settings.right_decor_opacity | times: 0.01 }};
+    --kpb-decor-mobile: {% if section.settings.show_decor_on_mobile %}block{% else %}none{% endif %};
+  "
+>
+  <div class="kpb__shell">
+    {%- if section.settings.left_decor_image != blank -%}
+      {%- liquid
+        assign kpb_l_alt = section.settings.left_decor_alt | strip
+        if kpb_l_alt == blank
+          assign kpb_l_alt = ''
+        else
+          assign kpb_l_alt = kpb_l_alt | escape
+        endif
+      -%}
+      <div
+        class="kpb__decor kpb__decor--left"
+        style="opacity: var(--kpb-decor-l-op, 1); z-index: {{ section.settings.left_decor_z_index }};"
+        {% if kpb_l_alt == blank %}
+          aria-hidden="true"
+        {% endif %}
+      >
+        {{
+          section.settings.left_decor_image
+          | image_url: width: 900
+          | image_tag:
+            loading: 'lazy',
+            widths: '200,360,540,720,900',
+            sizes: '(max-width: 749px) 40vw, min(42vw, 360px)',
+            alt: kpb_l_alt
+        }}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.right_decor_image != blank -%}
+      {%- liquid
+        assign kpb_r_alt = section.settings.right_decor_alt | strip
+        if kpb_r_alt == blank
+          assign kpb_r_alt = ''
+        else
+          assign kpb_r_alt = kpb_r_alt | escape
+        endif
+      -%}
+      <div
+        class="kpb__decor kpb__decor--right"
+        style="opacity: var(--kpb-decor-r-op, 1); z-index: {{ section.settings.right_decor_z_index }};"
+        {% if kpb_r_alt == blank %}
+          aria-hidden="true"
+        {% endif %}
+      >
+        {{
+          section.settings.right_decor_image
+          | image_url: width: 900
+          | image_tag:
+            loading: 'lazy',
+            widths: '200,360,540,720,900',
+            sizes: '(max-width: 749px) 38vw, min(38vw, 320px)',
+            alt: kpb_r_alt
+        }}
+      </div>
+    {%- endif -%}
+
+    <div class="kpb__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="kpb__heading{% if section.settings.heading_uppercase %} kpb__heading--uppercase{% endif %}">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="kpb__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kefey plant-based banner",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "PLANT-BASED & THOUGHTFULLY FORMULATED"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>Made with pectin (fruit-derived fiber) instead of gelatin, Kefey® gummies are designed to be plant-based, clean, and thoughtfully composed.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_uppercase",
+      "label": "Heading uppercase",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#e85433"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Body text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "default": "700",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "min": 14,
+      "max": 56,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading font size (desktop)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading font size (mobile)",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "heading_letter_spacing",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "label": "Heading letter spacing (×0.001 em)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "min": 4,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below heading (desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom_mobile",
+      "min": 4,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Space below heading (mobile)",
+      "default": 12
+    },
+    {
+      "type": "select",
+      "id": "text_font_family",
+      "label": "Body font family",
+      "default": "inherit",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_font_weight",
+      "label": "Body font weight",
+      "default": "400",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Body font size (desktop)",
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "text_font_size_mobile",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Body font size (mobile)",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Left decor"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_decor_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "left_decor_alt",
+      "label": "Alt text (optional)",
+      "info": "Leave empty for decorative-only graphics."
+    },
+    {
+      "type": "range",
+      "id": "left_decor_width",
+      "min": 80,
+      "max": 480,
+      "step": 5,
+      "unit": "px",
+      "label": "Width",
+      "default": 260
+    },
+    {
+      "type": "range",
+      "id": "left_decor_offset_x",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Left decor horizontal offset",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "left_decor_offset_y",
+      "min": -160,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "left_decor_opacity",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "left_decor_z_index",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Stack order (z-index)",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Right decor"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_decor_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "right_decor_alt",
+      "label": "Alt text (optional)"
+    },
+    {
+      "type": "range",
+      "id": "right_decor_width",
+      "min": 80,
+      "max": 480,
+      "step": 5,
+      "unit": "px",
+      "label": "Width",
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "right_decor_offset_x",
+      "min": -200,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Right decor horizontal offset",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "right_decor_offset_y",
+      "min": -160,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Vertical offset",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "right_decor_opacity",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "right_decor_z_index",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Stack order (z-index)",
+      "default": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "show_decor_on_mobile",
+      "label": "Show side decors on mobile",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "shell_max_width",
+      "min": 1000,
+      "max": 1800,
+      "step": 20,
+      "unit": "px",
+      "label": "Shell max width (decors + content)",
+      "default": 1600
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 480,
+      "max": 920,
+      "step": 10,
+      "unit": "px",
+      "label": "Text block max width",
+      "default": 720
+    },
+    {
+      "type": "range",
+      "id": "min_height_desktop",
+      "min": 0,
+      "max": 480,
+      "step": 8,
+      "unit": "px",
+      "label": "Minimum height (desktop, 0 = auto)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal",
+      "min": 16,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 24,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding top (mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 24,
+      "max": 96,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding bottom (mobile)",
+      "default": 44
+    },
+    {
+      "type": "range",
+      "id": "padding_horizontal_mobile",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Padding horizontal (mobile)",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kefey plant-based banner"
+    }
+  ]
+}
+{% endschema %}
