@@ -188,7 +188,7 @@
         "margin_bottom": 20,
         "margin_top_mobile": 0,
         "margin_bottom_mobile": 0,
-        "shell_max_width": 2000,
+        "shell_max_width": 1920,
         "content_max_width": 890,
         "min_height_desktop": 0,
         "padding_top": 56,
@@ -197,17 +197,6 @@
         "padding_top_mobile": 40,
         "padding_bottom_mobile": 44,
         "padding_horizontal_mobile": 20
-      }
-    },
-    "kefey_free_from_heading_star": {
-      "type": "kefey-free-from-heading",
-      "name": "Free from heading",
-      "settings": {
-        "section_background": "#ffffff",
-        "heading": "Free From",
-        "subtext": "<p>Gelatin | Gluten | Dairy | Soy</p><p>Artificial colors | Common allergens</p>",
-        "note": "<p>(Including yeast, wheat, eggs, peanuts, shellfish, agave & salicylates)</p>",
-        "note_italic": true
       }
     },
     "marquee_strip_gfxGk7": {
@@ -236,7 +225,6 @@
     "purpose_beyond_gummy_UDF6Kr",
     "kefey_star_defines_giRQe7",
     "kefey_plant_based_banner_KHqxr7",
-    "kefey_free_from_heading_star",
     "marquee_strip_gfxGk7"
   ]
 }
