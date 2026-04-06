@@ -38,7 +38,10 @@
         </h2>
       </div>
     {% endif %}
+  </div>
 
+  {%- comment -%} Full-bleed carousel (sibling of page-width) so mobile peek + centering use real viewport width {%- endcomment -%}
+  <div class="kefey-testimonials-grid__carousel-outer">
     <div class="kefey-testimonials-grid__carousel-wrapper">
       <div class="kefey-testimonials-grid__viewport" aria-roledescription="carousel">
         <ul class="kefey-testimonials-grid__track" role="list" tabindex="0" aria-label="Testimonials carousel">
@@ -82,7 +85,9 @@
       <button class="kefey-testimonials-grid__arrow kefey-testimonials-grid__arrow--next" type="button" aria-label="Next testimonials" tabindex="0">
         <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
       </button>
+    </div>
 
+    <div class="kefey-testimonials-grid__dots-row page-width">
       <div class="kefey-testimonials-grid__dots" role="tablist" aria-label="Testimonials pagination"></div>
     </div>
   </div>

@@ -183,9 +183,41 @@
 .kefey-testimonials-grid {
   overflow: hidden;
 }
+
+/* Mobile: must not clip full-bleed carousel (peek cards sit outside content box) */
+@media (max-width: 749px) {
+  .kefey-testimonials-grid {
+    overflow: visible;
+  }
+}
+
 .kefey-testimonials-grid__inner {
   position: relative;
   z-index: 1;
+}
+
+/* Desktop/tablet: align with page width; mobile: broken out below */
+.kefey-testimonials-grid__carousel-outer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: var(--page-width, 120rem);
+  margin-left: auto;
+  margin-right: auto;
+  padding-inline: 1.5rem;
+  box-sizing: border-box;
+}
+
+.kefey-testimonials-grid__dots-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  padding-bottom: 0.25rem;
+  box-sizing: border-box;
+}
+
+.kefey-testimonials-grid__dots-row .kefey-testimonials-grid__dots {
+  margin-top: 1.5rem;
 }
 .kefey-testimonials-grid__decor-img {
   position: absolute;
@@ -217,17 +249,28 @@
   }
 }
 @media (max-width: 749px) {
-  .kefey-testimonials-grid__carousel-wrapper {
+  /* True viewport bleed (works when parent is page-width or padded main) */
+  .kefey-testimonials-grid__carousel-outer {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    padding-inline: 0;
+    box-sizing: border-box;
+  }
+
+  .kefey-testimonials-grid__carousel-wrapper {
+    width: 100%;
   }
 
   .kefey-testimonials-grid__viewport {
     overflow: hidden;
     padding-top: clamp(2.25rem, 8vw, 3rem);
     cursor: grab;
+    touch-action: pan-x pinch-zoom;
   }
 
   .kefey-testimonials-grid__viewport:active {
@@ -238,14 +281,19 @@
     gap: var(--ktg-gap-mobile, 1rem);
   }
 
-  /* Peek of prev/next cards; width vs viewport (centered slide via JS) */
+  /* Card width < viewport so neighbors peek; basis uses viewport */
   .kefey-testimonials-grid__slide {
-    flex: 0 0 min(88vw, 360px);
+    flex: 0 0 calc(100vw - 2.75rem);
+    max-width: 20.5rem;
     min-width: 0;
   }
 
   .kefey-testimonials-grid__arrow {
     display: none;
+  }
+
+  .kefey-testimonials-grid__dots-row {
+    padding-inline: 1.5rem;
   }
 
   .kefey-testimonials-grid__card {

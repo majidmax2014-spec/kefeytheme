@@ -17,8 +17,9 @@ class KefeyTestimonialsCarousel {
     this.autoplaySpeed = parseInt(section.dataset.speed) || 5000;
     this.autoplayTimer = null;
     this.isDragging = false;
-    this.startX = 0;
-    this.scrollLeft = 0;
+    this.dragStartX = 0;
+    this.dragStartTranslate = 0;
+    this._translatePx = 0;
     
     this.slidesPerView = this.getSlidesPerView();
     this.maxIndex = Math.max(0, this.slides.length - this.slidesPerView);
@@ -121,33 +122,94 @@ class KefeyTestimonialsCarousel {
     }
   }
   
+  isMobilePeekLayout() {
+    return window.innerWidth < 750 && this.slidesPerView === 1;
+  }
+
   handlePointerDown(e) {
+    if (!this.viewport || window.innerWidth >= 750) return;
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
     this.isDragging = true;
-    this.startX = e.pageX - this.viewport.offsetLeft;
-    this.scrollLeft = this.viewport.scrollLeft;
+    this.dragStartX = e.clientX;
+    this.dragStartTranslate = this._translatePx;
+    this.track.style.transition = 'none';
     this.viewport.style.cursor = 'grabbing';
     this.stopAutoplay();
+    try {
+      this.viewport.setPointerCapture(e.pointerId);
+    } catch (_) {}
   }
-  
+
   handlePointerMove(e) {
-    if (!this.isDragging) return;
+    if (!this.isDragging || !this.track || !this.slides[0] || !this.viewport) return;
     e.preventDefault();
-    const x = e.pageX - this.viewport.offsetLeft;
-    const walk = (x - this.startX) * 2;
-    this.viewport.scrollLeft = this.scrollLeft - walk;
+    const firstSlide = this.slides[0];
+    const gapStyle = getComputedStyle(this.track).gap || '0';
+    const gap = parseFloat(gapStyle) || 0;
+    const slideWidth = firstSlide.getBoundingClientRect().width;
+    const step = slideWidth + gap;
+    const vw = this.viewport.clientWidth;
+    const n = this.slides.length;
+    const delta = e.clientX - this.dragStartX;
+    let newT = this.dragStartTranslate - delta;
+
+    if (this.isMobilePeekLayout()) {
+      const TMin = slideWidth / 2 - vw / 2;
+      const TMax = (n - 1) * step + slideWidth / 2 - vw / 2;
+      newT = Math.max(TMin, Math.min(newT, TMax));
+    } else {
+      const trackWidth = this.track.scrollWidth;
+      const maxTranslate = Math.max(0, trackWidth - vw);
+      newT = Math.max(0, Math.min(newT, maxTranslate));
+    }
+
+    this.track.style.transform = `translateX(-${newT}px)`;
   }
-  
-  handlePointerUp() {
+
+  handlePointerUp(e) {
     if (!this.isDragging) return;
     this.isDragging = false;
     this.viewport.style.cursor = 'grab';
-    
-    // Snap to nearest slide
-    const slideWidth = this.slides[0].offsetWidth + 24; // 24px gap
-    const scrollPos = this.viewport.scrollLeft;
-    const newIndex = Math.round(scrollPos / slideWidth);
-    this.goTo(newIndex);
-    
+    try {
+      if (e.pointerId != null) this.viewport.releasePointerCapture(e.pointerId);
+    } catch (_) {}
+
+    const firstSlide = this.slides[0];
+    if (!firstSlide || !this.viewport) return;
+
+    const gapStyle = getComputedStyle(this.track).gap || '0';
+    const gap = parseFloat(gapStyle) || 0;
+    const slideWidth = firstSlide.getBoundingClientRect().width;
+    const step = slideWidth + gap;
+    const vw = this.viewport.clientWidth;
+    const n = this.slides.length;
+
+    const m = this.track.style.transform.match(/translateX\(-([\d.]+)px\)/);
+    let currentT = m ? parseFloat(m[1]) : this._translatePx;
+
+    const mobilePeek = this.isMobilePeekLayout();
+    let bestIndex = 0;
+    let bestDiff = Infinity;
+
+    for (let i = 0; i < n; i++) {
+      let ideal;
+      if (mobilePeek) {
+        ideal = i * step + slideWidth / 2 - vw / 2;
+        const TMin = slideWidth / 2 - vw / 2;
+        const TMax = (n - 1) * step + slideWidth / 2 - vw / 2;
+        ideal = Math.max(TMin, Math.min(ideal, TMax));
+      } else {
+        ideal = i * step;
+      }
+      const d = Math.abs(currentT - ideal);
+      if (d < bestDiff) {
+        bestDiff = d;
+        bestIndex = i;
+      }
+    }
+
+    this.goTo(bestIndex);
+
     if (this.autoplay) {
       this.startAutoplay();
     }
@@ -202,6 +264,8 @@ class KefeyTestimonialsCarousel {
       translatePx = Math.max(0, Math.min(target, maxTranslate));
     }
 
+    this._translatePx = translatePx;
+    this.track.style.transition = '';
     this.track.style.transform = `translateX(-${translatePx}px)`;
     
     // Update arrows - disable at ends (non-looping)
