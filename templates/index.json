@@ -492,7 +492,7 @@
         "letter_spacing": 1,
         "gap": 28,
         "margin_top": 72,
-        "margin_bottom": 72,
+        "margin_bottom": 12,
         "separator_text": "|",
         "speed": 18,
         "direction": "left",
