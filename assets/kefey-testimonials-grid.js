@@ -17,9 +17,8 @@ class KefeyTestimonialsCarousel {
     this.autoplaySpeed = parseInt(section.dataset.speed) || 5000;
     this.autoplayTimer = null;
     this.isDragging = false;
-    this.dragStartX = 0;
-    this.dragStartTranslate = 0;
-    this._translatePx = 0;
+    this.startX = 0;
+    this.scrollLeft = 0;
     
     this.slidesPerView = this.getSlidesPerView();
     this.maxIndex = Math.max(0, this.slides.length - this.slidesPerView);
@@ -29,9 +28,9 @@ class KefeyTestimonialsCarousel {
   
   getSlidesPerView() {
     const width = window.innerWidth;
-    if (width >= 1024) return 3;
-    if (width >= 750) return 2;
-    return 1;
+    if (width >= 1024) return 3; // Desktop: 3 items
+    if (width >= 768) return 2;  // Tablet: 2 items
+    return 1; // Mobile: 1 item
   }
   
   init() {
@@ -41,8 +40,7 @@ class KefeyTestimonialsCarousel {
     this.createDots();
     this.attachEvents();
     this.updateCarousel();
-    requestAnimationFrame(() => this.updateCarousel());
-
+    
     if (this.autoplay) {
       this.startAutoplay();
     }
@@ -53,7 +51,6 @@ class KefeyTestimonialsCarousel {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         this.updateSlidesPerView();
-        this.createDots();
         this.updateCarousel();
       }, 250);
     });
@@ -122,94 +119,33 @@ class KefeyTestimonialsCarousel {
     }
   }
   
-  isMobilePeekLayout() {
-    return window.innerWidth < 750 && this.slidesPerView === 1;
-  }
-
   handlePointerDown(e) {
-    if (!this.viewport || window.innerWidth >= 750) return;
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
     this.isDragging = true;
-    this.dragStartX = e.clientX;
-    this.dragStartTranslate = this._translatePx;
-    this.track.style.transition = 'none';
+    this.startX = e.pageX - this.viewport.offsetLeft;
+    this.scrollLeft = this.viewport.scrollLeft;
     this.viewport.style.cursor = 'grabbing';
     this.stopAutoplay();
-    try {
-      this.viewport.setPointerCapture(e.pointerId);
-    } catch (_) {}
   }
-
+  
   handlePointerMove(e) {
-    if (!this.isDragging || !this.track || !this.slides[0] || !this.viewport) return;
+    if (!this.isDragging) return;
     e.preventDefault();
-    const firstSlide = this.slides[0];
-    const gapStyle = getComputedStyle(this.track).gap || '0';
-    const gap = parseFloat(gapStyle) || 0;
-    const slideWidth = firstSlide.getBoundingClientRect().width;
-    const step = slideWidth + gap;
-    const vw = this.viewport.clientWidth;
-    const n = this.slides.length;
-    const delta = e.clientX - this.dragStartX;
-    let newT = this.dragStartTranslate - delta;
-
-    if (this.isMobilePeekLayout()) {
-      const TMin = slideWidth / 2 - vw / 2;
-      const TMax = (n - 1) * step + slideWidth / 2 - vw / 2;
-      newT = Math.max(TMin, Math.min(newT, TMax));
-    } else {
-      const trackWidth = this.track.scrollWidth;
-      const maxTranslate = Math.max(0, trackWidth - vw);
-      newT = Math.max(0, Math.min(newT, maxTranslate));
-    }
-
-    this.track.style.transform = `translateX(-${newT}px)`;
+    const x = e.pageX - this.viewport.offsetLeft;
+    const walk = (x - this.startX) * 2;
+    this.viewport.scrollLeft = this.scrollLeft - walk;
   }
-
-  handlePointerUp(e) {
+  
+  handlePointerUp() {
     if (!this.isDragging) return;
     this.isDragging = false;
     this.viewport.style.cursor = 'grab';
-    try {
-      if (e.pointerId != null) this.viewport.releasePointerCapture(e.pointerId);
-    } catch (_) {}
-
-    const firstSlide = this.slides[0];
-    if (!firstSlide || !this.viewport) return;
-
-    const gapStyle = getComputedStyle(this.track).gap || '0';
-    const gap = parseFloat(gapStyle) || 0;
-    const slideWidth = firstSlide.getBoundingClientRect().width;
-    const step = slideWidth + gap;
-    const vw = this.viewport.clientWidth;
-    const n = this.slides.length;
-
-    const m = this.track.style.transform.match(/translateX\(-([\d.]+)px\)/);
-    let currentT = m ? parseFloat(m[1]) : this._translatePx;
-
-    const mobilePeek = this.isMobilePeekLayout();
-    let bestIndex = 0;
-    let bestDiff = Infinity;
-
-    for (let i = 0; i < n; i++) {
-      let ideal;
-      if (mobilePeek) {
-        ideal = i * step + slideWidth / 2 - vw / 2;
-        const TMin = slideWidth / 2 - vw / 2;
-        const TMax = (n - 1) * step + slideWidth / 2 - vw / 2;
-        ideal = Math.max(TMin, Math.min(ideal, TMax));
-      } else {
-        ideal = i * step;
-      }
-      const d = Math.abs(currentT - ideal);
-      if (d < bestDiff) {
-        bestDiff = d;
-        bestIndex = i;
-      }
-    }
-
-    this.goTo(bestIndex);
-
+    
+    // Snap to nearest slide
+    const slideWidth = this.slides[0].offsetWidth + 24; // 24px gap
+    const scrollPos = this.viewport.scrollLeft;
+    const newIndex = Math.round(scrollPos / slideWidth);
+    this.goTo(newIndex);
+    
     if (this.autoplay) {
       this.startAutoplay();
     }
@@ -243,30 +179,15 @@ class KefeyTestimonialsCarousel {
     const firstSlide = this.slides[0];
     if (!firstSlide || !this.viewport) return;
 
-    const gapStyle = getComputedStyle(this.track).gap || getComputedStyle(this.track).columnGap || '0';
-    const gap = parseFloat(gapStyle) || 0;
+    const gap = parseFloat(getComputedStyle(this.track).columnGap || getComputedStyle(this.track).gap || '0') || 0;
     const slideWidth = firstSlide.getBoundingClientRect().width;
     const step = slideWidth + gap;
     const viewportWidth = this.viewport.clientWidth;
     const trackWidth = this.track.scrollWidth;
-
-    const mobilePeek = viewportWidth < 750 && this.slidesPerView === 1;
-
-    let translatePx;
-    if (mobilePeek) {
-      const T = this.currentIndex * step + slideWidth / 2 - viewportWidth / 2;
-      const TMax = (this.slides.length - 1) * step + slideWidth / 2 - viewportWidth / 2;
-      const TMin = slideWidth / 2 - viewportWidth / 2;
-      translatePx = Math.max(TMin, Math.min(T, TMax));
-    } else {
-      const maxTranslate = Math.max(0, trackWidth - viewportWidth);
-      const target = this.currentIndex * step;
-      translatePx = Math.max(0, Math.min(target, maxTranslate));
-    }
-
-    this._translatePx = translatePx;
-    this.track.style.transition = '';
-    this.track.style.transform = `translateX(-${translatePx}px)`;
+    const maxTranslate = Math.max(0, trackWidth - viewportWidth);
+    const target = this.currentIndex * step;
+    const clamped = Math.max(0, Math.min(target, maxTranslate));
+    this.track.style.transform = `translateX(-${clamped}px)`;
     
     // Update arrows - disable at ends (non-looping)
     if (this.prevBtn) {

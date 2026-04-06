@@ -25,7 +25,7 @@
 <section
   id="TestimonialsCarousel-{{ section.id }}"
   class="kefey-testimonials-grid color-{{ section.settings.color_scheme }}"
-  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-text: {{ section.settings.card_text_color | default: '#1a1a1a' }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-gap: 2.4rem; --ktg-gap-mobile: 1rem; --ktg-quote-icon-size: {{ section.settings.quote_icon_size | default: 72 }}px; --ktg-quote-icon-mt: {{ section.settings.quote_icon_margin_top | default: 0 }}px; --ktg-quote-icon-mb: {{ section.settings.quote_icon_margin_bottom | default: 12 }}px; --ktg-decor-left-w: {{ section.settings.left_decor_width | default: 160 }}px; --ktg-decor-left-x: {{ section.settings.left_decor_offset_x | default: 0 }}px; --ktg-decor-left-y: {{ section.settings.left_decor_offset_y | default: 0 }}px; --ktg-decor-right-w: {{ section.settings.right_decor_width | default: 160 }}px; --ktg-decor-right-x: {{ section.settings.right_decor_offset_x | default: 0 }}px; --ktg-decor-right-y: {{ section.settings.right_decor_offset_y | default: 0 }}px; --ktg-h-ff: {{ ktg_h_ff }}; --ktg-h-fw: {{ section.settings.heading_font_weight }}; --ktg-h-fs: {{ section.settings.heading_size }}px; --ktg-t-ff: {{ ktg_t_ff }}; --ktg-t-fw: {{ section.settings.text_font_weight }}; --ktg-t-fs: {{ section.settings.text_font_size }}px;"
+  style="--ktg-card-bg: {{ section.settings.card_bg_color }}; --ktg-card-radius: {{ section.settings.card_radius }}px; --ktg-star-color: {{ section.settings.star_color }}; --ktg-quote-color: {{ section.settings.quote_color }}; --ktg-gap: 2.4rem; --ktg-quote-icon-size: {{ section.settings.quote_icon_size | default: 72 }}px; --ktg-quote-icon-mt: {{ section.settings.quote_icon_margin_top | default: 0 }}px; --ktg-quote-icon-mb: {{ section.settings.quote_icon_margin_bottom | default: 12 }}px; --ktg-decor-left-w: {{ section.settings.left_decor_width | default: 160 }}px; --ktg-decor-left-x: {{ section.settings.left_decor_offset_x | default: 0 }}px; --ktg-decor-left-y: {{ section.settings.left_decor_offset_y | default: 0 }}px; --ktg-decor-right-w: {{ section.settings.right_decor_width | default: 160 }}px; --ktg-decor-right-x: {{ section.settings.right_decor_offset_x | default: 0 }}px; --ktg-decor-right-y: {{ section.settings.right_decor_offset_y | default: 0 }}px; --ktg-h-ff: {{ ktg_h_ff }}; --ktg-h-fw: {{ section.settings.heading_font_weight }}; --ktg-h-fs: {{ section.settings.heading_size }}px; --ktg-t-ff: {{ ktg_t_ff }}; --ktg-t-fw: {{ section.settings.text_font_weight }}; --ktg-t-fs: {{ section.settings.text_font_size }}px;"
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
 >
@@ -38,10 +38,7 @@
         </h2>
       </div>
     {% endif %}
-  </div>
 
-  {%- comment -%} Full-bleed carousel (sibling of page-width) so mobile peek + centering use real viewport width {%- endcomment -%}
-  <div class="kefey-testimonials-grid__carousel-outer">
     <div class="kefey-testimonials-grid__carousel-wrapper">
       <div class="kefey-testimonials-grid__viewport" aria-roledescription="carousel">
         <ul class="kefey-testimonials-grid__track" role="list" tabindex="0" aria-label="Testimonials carousel">
@@ -60,14 +57,13 @@
                       <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                     </svg>
                   {% endfor %}
-                  {% assign empty_star_count = 5 | minus: rating %}
-                  {% if empty_star_count > 0 %}
-                    {% for i in (1..empty_star_count) %}
+                  {% for i in (rating..4) %}
+                    {% if forloop.first == false %}
                       <svg class="kefey-testimonials-grid__star kefey-testimonials-grid__star--empty" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
                         <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
                       </svg>
-                    {% endfor %}
-                  {% endif %}
+                    {% endif %}
+                  {% endfor %}
                 </div>
                 <div class="kefey-testimonials-grid__content rte">{{ block.settings.review_text }}</div>
                 {% if block.settings.customer_name != blank %}
@@ -85,9 +81,7 @@
       <button class="kefey-testimonials-grid__arrow kefey-testimonials-grid__arrow--next" type="button" aria-label="Next testimonials" tabindex="0">
         <span class="svg-wrapper">{{ 'icon-caret.svg' | inline_asset_content }}</span>
       </button>
-    </div>
 
-    <div class="kefey-testimonials-grid__dots-row page-width">
       <div class="kefey-testimonials-grid__dots" role="tablist" aria-label="Testimonials pagination"></div>
     </div>
   </div>
@@ -138,26 +132,11 @@
 }
 .kefey-testimonials-grid__highlight {
   position: absolute;
+  left: 0;
+  right: 0;
+  height: 12px;
+  bottom: -6px;
   z-index: 0;
-  left: 5%;
-  width: 90%;
-  top: 0.15em;
-  height: 0.55em;
-  min-height: 12px;
-  border-radius: 2px;
-}
-@media (max-width: 749px) {
-  .kefey-testimonials-grid__header {
-    margin-bottom: 2rem;
-    padding-inline: 0.5rem;
-  }
-  .kefey-testimonials-grid__highlight {
-    left: 4%;
-    width: 88%;
-    top: 0.12em;
-    height: 0.58em;
-    min-height: 14px;
-  }
 }
 {% endstyle %}
 
@@ -221,9 +200,8 @@
     },
     { "type": "range", "id": "text_font_size", "label": "Body font size", "min": 10, "max": 32, "step": 1, "default": 14 },
     { "type": "color", "id": "highlight_color", "label": "Highlight color", "default": "#FFC94D" },
-    { "type": "color", "id": "card_bg_color", "label": "Card background", "default": "#FFF3C4" },
-    { "type": "color", "id": "card_text_color", "label": "Card text color", "default": "#1a1a1a" },
-    { "type": "range", "id": "card_radius", "label": "Card corner radius", "min": 0, "max": 48, "step": 1, "default": 26 },
+    { "type": "color", "id": "card_bg_color", "label": "Card background", "default": "#FFE082" },
+    { "type": "range", "id": "card_radius", "label": "Card corner radius", "min": 0, "max": 48, "step": 1, "default": 24 },
     { "type": "color", "id": "star_color", "label": "Star color", "default": "#E15241" },
     { "type": "color", "id": "quote_color", "label": "Quote color", "default": "#2BB4A7" },
     { "type": "image_picker", "id": "quote_icon", "label": "Quote icon (SVG/PNG)" },
