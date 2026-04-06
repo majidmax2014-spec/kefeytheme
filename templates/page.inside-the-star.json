@@ -184,6 +184,10 @@
         "right_decor_opacity": 100,
         "right_decor_z_index": 1,
         "show_decor_on_mobile": false,
+        "margin_top": 10,
+        "margin_bottom": 20,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
         "shell_max_width": 1800,
         "content_max_width": 890,
         "min_height_desktop": 0,
@@ -201,7 +205,7 @@
       "settings": {
         "text": "Because thoughtful formulation is part of good design.",
         "background_color": "#45b3b4",
-        "text_color": "#FFFFFF",
+        "text_color": "#ffffff",
         "font_size": 16,
         "font_weight": "500",
         "text_font_family": "inherit",
@@ -209,6 +213,8 @@
         "text_font_size": 16,
         "duration": 30,
         "padding_y": 12,
+        "margin_top": 10,
+        "margin_bottom": 20,
         "pause_on_hover": true
       }
     }
