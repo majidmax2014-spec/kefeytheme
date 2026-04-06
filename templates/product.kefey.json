@@ -16,6 +16,7 @@
           "type": "benefit",
           "settings": {
             "icon_type": "image",
+            "icon_image": "shopify://shop_images/vegan.png",
             "icon_svg": "",
             "label": "Vegan"
           }
@@ -24,6 +25,7 @@
           "type": "benefit",
           "settings": {
             "icon_type": "image",
+            "icon_image": "shopify://shop_images/gluten-free.png",
             "icon_svg": "",
             "label": "Gluten Free"
           }
@@ -32,6 +34,7 @@
           "type": "benefit",
           "settings": {
             "icon_type": "image",
+            "icon_image": "shopify://shop_images/non-gmo.png",
             "icon_svg": "",
             "label": "Non GMO"
           }
@@ -40,6 +43,7 @@
           "type": "benefit",
           "settings": {
             "icon_type": "image",
+            "icon_image": "shopify://shop_images/gelatin-free.png",
             "icon_svg": "",
             "label": "Gelatin Free"
           }
@@ -48,6 +52,7 @@
           "type": "benefit",
           "settings": {
             "icon_type": "image",
+            "icon_image": "shopify://shop_images/halal.png",
             "icon_svg": "",
             "label": "Halal"
           }
@@ -56,6 +61,7 @@
           "type": "benefit",
           "settings": {
             "icon_type": "svg",
+            "icon_image": "shopify://shop_images/eco-friendly.png",
             "icon_svg": "",
             "label": "Eco-Friendly"
           }
