@@ -109,7 +109,7 @@
         "button_padding_horizontal": 47,
         "button_border_radius": 0,
         "banner_text_font_size_desktop": 18,
-        "banner_text_font_size_mobile": 16,
+        "banner_text_font_size_mobile": 12,
         "benefits_gap_desktop": 30,
         "benefits_gap_mobile": 10,
         "icon_size_desktop": 70,
@@ -127,11 +127,17 @@
         "padding_bottom": 44,
         "mobile_overlay_opacity": 20,
         "mobile_text_alignment": "left",
-        "mobile_padding_top": 40,
-        "mobile_padding_bottom": 44,
+        "mobile_padding_top": 68,
+        "mobile_padding_bottom": 120,
         "mobile_horizontal_inset": 14,
         "mobile_grid_row_gap": 24,
-        "mobile_media_margin_top": 0
+        "mobile_media_margin_top": 0,
+        "mobile_logo_max_width": 168,
+        "mood_gummies_font_size_mobile": 22,
+        "button_padding_vertical_mobile": 11,
+        "button_padding_horizontal_mobile": 21,
+        "button_min_height_mobile": 40,
+        "dot_size_mobile": 6
       }
     },
     "main_product_kefey": {
