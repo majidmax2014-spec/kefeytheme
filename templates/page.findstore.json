@@ -22,14 +22,23 @@
         "hb_desc_ff": "body",
         "hb_desc_fw": "500",
         "hb_desc_fs": 22,
+        "hb_heading_fs_mobile": 32,
+        "hb_desc_fs_mobile": 20,
+        "hb_desc_strong_weight": "700",
         "banner_height_desktop": 460,
-        "banner_height_mobile": 360,
+        "banner_height_mobile": 520,
         "content_max_width": 760,
         "content_alignment": "left",
         "content_padding_x": 64,
         "overlay_enable": true,
         "overlay_color": "#38A3A5",
-        "overlay_opacity": 44
+        "overlay_opacity": 44,
+        "overlay_opacity_mobile": 0,
+        "mobile_vertical_align": "top",
+        "mobile_content_padding_top": 44,
+        "mobile_content_padding_x": 22,
+        "mobile_text_alignment": "left",
+        "mobile_image_anchor": "bottom"
       }
     },
     "main": {
