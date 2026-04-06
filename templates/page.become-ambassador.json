@@ -1,33 +1,73 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
       "type": "main-page",
       "disabled": true,
       "settings": {
+        "enable_legal_typography": false,
+        "legal_title_font_family": "heading",
+        "legal_section_font_family": "heading",
+        "legal_body_font_family": "body",
+        "legal_title_color": "#70b9be",
+        "legal_section_heading_color": "#101010",
+        "legal_body_color": "#333333",
+        "legal_title_font_size": 36,
+        "legal_section_heading_font_size": 18,
+        "legal_body_font_size": 16,
+        "legal_title_uppercase": true,
+        "legal_section_heading_uppercase": true,
+        "legal_body_line_height": 165,
+        "legal_paragraph_spacing": 16,
+        "legal_content_max_width": 720,
         "padding_top": 28,
         "padding_bottom": 28
       }
     },
+    "header_banner_w7R6fp": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "bg_image_desktop": "shopify://shop_images/becom-ambasdor-header.png",
+        "bg_image_mobile": "shopify://shop_images/becom-ambasdor-header-mobile.png",
+        "heading": "Turn Your Influence Into Joy & Real Income",
+        "subheading": "",
+        "subheading_richtext": "<p><strong>Join the Kefey Ambassador Program </strong></p><p>Creators, Influencers & Wellness Lovers: This is Your Space to Shine, Share & Earn.</p>",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 40,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 24,
+        "hb_heading_fs_mobile": 0,
+        "hb_desc_fs_mobile": 0,
+        "hb_desc_strong_weight": "700",
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 360,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24,
+        "overlay_opacity_mobile": 0,
+        "mobile_vertical_align": "top",
+        "mobile_content_padding_top": 44,
+        "mobile_content_padding_x": 22,
+        "mobile_text_alignment": "match",
+        "mobile_image_anchor": "bottom"
+      }
+    },
     "ambassador_program": {
       "type": "kefey-ambassador",
-      "name": "Ambassador program",
-      "settings": {
-        "intro": "<p>At Kefey®, we believe that joy inspires action, and great opportunities deserve to be shared. Become part of our global Ambassador community and help introduce Kefey Gummies to people everywhere. Whether you're a content creator, an influencer, or simply someone who loves sharing things that genuinely make a difference, Kefey gives you a simple and rewarding way to turn positivity into real income.</p>",
-        "section_heading": "Why Become a Kefey Ambassador?",
-        "heading_highlight_color": "#4db6ac",
-        "heading_font_family": "heading",
-        "heading_size": 28,
-        "body_font_family": "body",
-        "body_font_size": 16,
-        "benefit_title_size": 17,
-        "benefit_body_size": 16,
-        "max_width": 1200,
-        "content_max_width_pct": 66,
-        "padding_top": 48,
-        "padding_bottom": 64,
-        "padding_top_mobile": 32,
-        "padding_bottom_mobile": 48
-      },
       "blocks": {
         "benefit_realtime": {
           "type": "benefit",
@@ -79,11 +119,30 @@
         "benefit_share",
         "benefit_global",
         "benefit_aov"
-      ]
+      ],
+      "name": "Ambassador program",
+      "settings": {
+        "intro": "<p>At Kefey®, we believe that joy inspires action, and great opportunities deserve to be shared. Become part of our global Ambassador community and help introduce Kefey Gummies to people everywhere. Whether you're a content creator, an influencer, or simply someone who loves sharing things that genuinely make a difference, Kefey gives you a simple and rewarding way to turn positivity into real income.</p>",
+        "section_heading": "Why Become a Kefey Ambassador?",
+        "heading_highlight_color": "#4db6ac",
+        "heading_font_family": "heading",
+        "heading_size": 28,
+        "body_font_family": "body",
+        "body_font_size": 16,
+        "benefit_title_size": 17,
+        "benefit_body_size": 16,
+        "max_width": 1200,
+        "content_max_width_pct": 66,
+        "padding_top": 48,
+        "padding_bottom": 64,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 48
+      }
     }
   },
   "order": [
     "main",
+    "header_banner_w7R6fp",
     "ambassador_program"
   ]
 }
