@@ -25,9 +25,13 @@
     --fs-ww-max: {{ section.settings.max_width }}px;
     --fs-ww-pt: {{ section.settings.padding_top }}px;
     --fs-ww-pb: {{ section.settings.padding_bottom }}px;
+    --fs-ww-content-mw: {{ section.settings.content_max_width_pct }}%;
     --fs-ww-heading-ff: {{ h_ff }};
     --fs-ww-heading-fs: {{ section.settings.heading_size }}px;
     --fs-ww-body-ff: {{ b_ff }};
+    --fs-ww-decor-w: {{ section.settings.decor_width }}%;
+    --fs-ww-decor-x: {{ section.settings.decor_offset_x }}px;
+    --fs-ww-decor-y: {{ section.settings.decor_offset_y }}px;
   "
 >
   <div class="fs-worldwide__inner">
@@ -113,6 +117,39 @@
       "label": "Decorative image"
     },
     {
+      "type": "range",
+      "id": "decor_width",
+      "label": "Decor width",
+      "min": 8,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 28,
+      "info": "Width relative to the banner (not the full page)."
+    },
+    {
+      "type": "range",
+      "id": "decor_offset_x",
+      "label": "Decor horizontal offset",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Positive moves the image left (away from the right edge)."
+    },
+    {
+      "type": "range",
+      "id": "decor_offset_y",
+      "label": "Decor vertical offset",
+      "min": -100,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 0,
+      "info": "Positive moves the image up."
+    },
+    {
       "type": "header",
       "content": "Typography"
     },
@@ -157,6 +194,17 @@
       "max": 1400,
       "step": 10,
       "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "content_max_width_pct",
+      "label": "Text block max width",
+      "min": 40,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 66,
+      "info": "Percentage of the banner width for the heading and body column."
     },
     {
       "type": "range",

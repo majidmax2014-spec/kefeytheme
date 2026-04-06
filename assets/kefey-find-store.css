@@ -226,7 +226,7 @@
 .fs-worldwide__content {
   position: relative;
   z-index: 1;
-  max-width: 42rem;
+  max-width: var(--fs-ww-content-mw, 66%);
   margin: 0 auto;
   text-align: center;
 }
@@ -285,9 +285,9 @@
 
 .fs-worldwide__decor {
   position: absolute;
-  right: 1.2rem;
-  bottom: 0.8rem;
-  width: min(28%, 12rem);
+  right: calc(1.2rem + var(--fs-ww-decor-x, 0px));
+  bottom: calc(0.8rem + var(--fs-ww-decor-y, 0px));
+  width: var(--fs-ww-decor-w, 28%);
   z-index: 0;
   pointer-events: none;
   opacity: 0.95;
@@ -302,10 +302,6 @@
 @media screen and (max-width: 749px) {
   .fs-worldwide__inner {
     padding: 2.5rem 1.5rem 2.75rem;
-  }
-
-  .fs-worldwide__content {
-    max-width: min(100%, 26rem);
   }
 
   .fs-worldwide__heading {
@@ -330,7 +326,6 @@
   }
 
   .fs-worldwide__decor {
-    width: 35%;
     opacity: 0.7;
   }
 }
