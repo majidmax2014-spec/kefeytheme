@@ -23,10 +23,20 @@
     --ty-cards-max: {{ section.settings.max_width }}px;
     --ty-cards-pt: {{ section.settings.padding_top }}px;
     --ty-cards-pb: {{ section.settings.padding_bottom }}px;
+    --ty-cards-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --ty-cards-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --ty-cards-gap: {{ section.settings.grid_gap }}px;
+    --ty-cards-card-pad: {{ section.settings.card_padding }}px;
     --ty-cards-heading-ff: {{ h_ff }};
     --ty-cards-body-ff: {{ b_ff }};
     --ty-cards-title-fs: {{ section.settings.card_title_size }}px;
-    --ty-cards-btn-fg: {{ section.settings.card1_bg }};
+    --ty-cards-title-fw: {{ section.settings.card_title_weight }};
+    --ty-cards-title-style: {{ section.settings.card_title_style }};
+    --ty-cards-body-fs: {{ section.settings.card_body_size }}px;
+    --ty-cards-body-fw: {{ section.settings.card_body_weight }};
+    --ty-cards-body-style: {{ section.settings.card_body_style }};
+    --ty-cards-btn-fs: {{ section.settings.card_btn_size }}px;
+    --ty-cards-btn-fw: {{ section.settings.card_btn_weight }};
   "
 >
   <div class="ty-cards__inner">
@@ -140,7 +150,7 @@
       "type": "color",
       "id": "card1_bg",
       "label": "Background",
-      "default": "#4FB4B2"
+      "default": "#4DB6AC"
     },
     {
       "type": "header",
@@ -173,7 +183,7 @@
       "type": "color",
       "id": "card2_bg",
       "label": "Background",
-      "default": "#4FB4B2"
+      "default": "#4DB6AC"
     },
     {
       "type": "header",
@@ -205,16 +215,16 @@
       "type": "color",
       "id": "card3_bg",
       "label": "Background",
-      "default": "#E95D3F"
+      "default": "#EF6C4D"
     },
     {
       "type": "header",
-      "content": "Typography"
+      "content": "Typography — card titles"
     },
     {
       "type": "select",
       "id": "heading_font_family",
-      "label": "Title font",
+      "label": "Font family",
       "default": "heading",
       "options": [
         { "value": "heading", "label": "Heading font" },
@@ -224,20 +234,101 @@
     {
       "type": "range",
       "id": "card_title_size",
-      "label": "Card title size (px)",
-      "min": 18,
+      "label": "Size (px)",
+      "min": 16,
       "max": 32,
       "step": 1,
       "default": 20
     },
     {
       "type": "select",
+      "id": "card_title_weight",
+      "label": "Weight",
+      "default": "700",
+      "options": [
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_title_style",
+      "label": "Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography — card body"
+    },
+    {
+      "type": "select",
       "id": "body_font_family",
-      "label": "Body font",
+      "label": "Font family",
       "default": "body",
       "options": [
         { "value": "heading", "label": "Heading font" },
         { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "card_body_size",
+      "label": "Size (px)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "card_body_weight",
+      "label": "Weight",
+      "default": "400",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "card_body_style",
+      "label": "Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography — card buttons"
+    },
+    {
+      "type": "range",
+      "id": "card_btn_size",
+      "label": "Button text size (px)",
+      "min": 11,
+      "max": 16,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "card_btn_weight",
+      "label": "Button weight",
+      "default": "700",
+      "options": [
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
       ]
     },
     {
@@ -255,19 +346,55 @@
     },
     {
       "type": "range",
+      "id": "grid_gap",
+      "label": "Gap between cards (px)",
+      "min": 8,
+      "max": 32,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card inner padding (px)",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "default": 36
+    },
+    {
+      "type": "range",
       "id": "padding_top",
-      "label": "Padding top",
+      "label": "Section padding top",
       "min": 0,
       "max": 80,
       "step": 4,
-      "default": 24
+      "default": 16
     },
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "Padding bottom",
+      "label": "Section padding bottom",
       "min": 0,
       "max": 100,
+      "step": 4,
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 80,
       "step": 4,
       "default": 48
     }

@@ -29,8 +29,22 @@
     --ty-hero-heading-ff: {{ h_ff }};
     --ty-hero-body-ff: {{ b_ff }};
     --ty-hero-h1-fs: {{ section.settings.heading_1_size }}px;
-    --ty-hero-h2-fs: {{ section.settings.heading_2_size }}px;
+    --ty-hero-h1-fw: {{ section.settings.heading_1_weight }};
+    --ty-hero-h1-style: {{ section.settings.heading_1_style }};
     --ty-hero-sub-fs: {{ section.settings.subheading_size }}px;
+    --ty-hero-sub-fw: {{ section.settings.subheading_weight }};
+    --ty-hero-sub-style: {{ section.settings.subheading_style }};
+    --ty-hero-h2-fs: {{ section.settings.heading_2_size }}px;
+    --ty-hero-h2-fw: {{ section.settings.heading_2_weight }};
+    --ty-hero-h2-style: {{ section.settings.heading_2_style }};
+    --ty-hero-body-fs: {{ section.settings.body_size }}px;
+    --ty-hero-body-fw: {{ section.settings.body_weight }};
+    --ty-hero-body-style: {{ section.settings.body_style }};
+    --ty-hero-order-fs: {{ section.settings.order_size }}px;
+    --ty-hero-order-fw: {{ section.settings.order_weight }};
+    --ty-hero-track-fs: {{ section.settings.track_size }}px;
+    --ty-hero-track-fw: {{ section.settings.track_weight }};
+    --ty-hero-track-border: {{ section.settings.track_border_width }}px;
   "
 >
   <div class="ty-hero__inner">
@@ -87,13 +101,13 @@
       "type": "richtext",
       "id": "body",
       "label": "Body",
-      "default": "<p>Woohoo! Your Kefey stars are packed with joy and on their way. Get ready to unwrap a smile soon!</p>"
+      "default": "<p>Woohoo!</p><p>Your Kefey stars are packed with joy and on their way.</p><p>Get ready to unwrap a smile soon!</p>"
     },
     {
       "type": "text",
       "id": "order_number_display",
       "label": "Order line (static page)",
-      "info": "Shown as plain text. Use a placeholder; real post-checkout uses Checkout UI extensions.",
+      "info": "Plain text placeholder; post-checkout order status uses Checkout.",
       "default": "ORDER #12345"
     },
     {
@@ -106,22 +120,22 @@
       "type": "url",
       "id": "track_url",
       "label": "Track button link",
-      "info": "Often /account or your tracking page."
+      "info": "e.g. /account or your tracking URL."
     },
     {
       "type": "color",
       "id": "teal_color",
       "label": "Primary heading color",
-      "default": "#4FB4B2"
+      "default": "#4DB6AC"
     },
     {
       "type": "header",
-      "content": "Typography"
+      "content": "Typography — primary heading"
     },
     {
       "type": "select",
       "id": "heading_font_family",
-      "label": "Heading font",
+      "label": "Font family (headings)",
       "default": "heading",
       "options": [
         { "value": "heading", "label": "Heading font" },
@@ -131,39 +145,205 @@
     {
       "type": "range",
       "id": "heading_1_size",
-      "label": "Primary heading size (px)",
-      "min": 24,
+      "label": "Size (px)",
+      "min": 20,
       "max": 48,
       "step": 1,
       "default": 32
     },
     {
+      "type": "select",
+      "id": "heading_1_weight",
+      "label": "Weight",
+      "default": "500",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_1_style",
+      "label": "Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography — subheading"
+    },
+    {
       "type": "range",
       "id": "subheading_size",
-      "label": "Subheading size (px)",
-      "min": 16,
+      "label": "Size (px)",
+      "min": 12,
       "max": 28,
       "step": 1,
-      "default": 18
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "subheading_weight",
+      "label": "Weight",
+      "default": "400",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "subheading_style",
+      "label": "Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography — secondary heading"
     },
     {
       "type": "range",
       "id": "heading_2_size",
-      "label": "Secondary heading size (px)",
-      "min": 20,
+      "label": "Size (px)",
+      "min": 18,
       "max": 40,
       "step": 1,
-      "default": 26
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "heading_2_weight",
+      "label": "Weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_2_style",
+      "label": "Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography — body"
     },
     {
       "type": "select",
       "id": "body_font_family",
-      "label": "Body font",
+      "label": "Font family",
       "default": "body",
       "options": [
         { "value": "heading", "label": "Heading font" },
         { "value": "body", "label": "Body font" }
       ]
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "label": "Size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "body_weight",
+      "label": "Weight",
+      "default": "400",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "body_style",
+      "label": "Style",
+      "default": "normal",
+      "options": [
+        { "value": "normal", "label": "Normal" },
+        { "value": "italic", "label": "Italic" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Typography — order line & button"
+    },
+    {
+      "type": "range",
+      "id": "order_size",
+      "label": "Order line size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "order_weight",
+      "label": "Order line weight",
+      "default": "600",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "track_size",
+      "label": "Track button text size (px)",
+      "min": 11,
+      "max": 18,
+      "step": 1,
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "track_weight",
+      "label": "Track button weight",
+      "default": "700",
+      "options": [
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "track_border_width",
+      "label": "Track button border (px)",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
     },
     {
       "type": "header",
@@ -185,7 +365,7 @@
       "min": 0,
       "max": 120,
       "step": 4,
-      "default": 48
+      "default": 56
     },
     {
       "type": "range",
@@ -194,7 +374,7 @@
       "min": 0,
       "max": 120,
       "step": 4,
-      "default": 32
+      "default": 28
     },
     {
       "type": "range",
@@ -203,7 +383,7 @@
       "min": 0,
       "max": 100,
       "step": 4,
-      "default": 32
+      "default": 36
     },
     {
       "type": "range",
@@ -212,7 +392,7 @@
       "min": 0,
       "max": 100,
       "step": 4,
-      "default": 32
+      "default": 28
     }
   ],
   "presets": [

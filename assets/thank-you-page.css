@@ -1,7 +1,7 @@
-/* Thank You page — internal sections (header/footer from theme) */
+/* Thank You page — storefront template (theme header/footer) */
 
 .ty-hero {
-  padding: var(--ty-hero-pt, 4.8rem) 1.5rem var(--ty-hero-pb, 3.2rem);
+  padding: var(--ty-hero-pt, 56px) 1.5rem var(--ty-hero-pb, 28px);
   background: #ffffff;
   text-align: center;
 }
@@ -14,66 +14,76 @@
 .ty-hero__eyebrow {
   margin: 0;
   font-family: var(--ty-hero-heading-ff, inherit);
-  font-weight: 700;
-  font-size: var(--ty-hero-h1-fs, 3.2rem);
-  line-height: 1.15;
-  color: var(--ty-hero-teal, #4fb4b2);
-  letter-spacing: 0.02em;
+  font-weight: var(--ty-hero-h1-fw, 500);
+  font-style: var(--ty-hero-h1-style, normal);
+  font-size: var(--ty-hero-h1-fs, 32px);
+  line-height: 1.2;
+  color: var(--ty-hero-teal, #4db6ac);
+  letter-spacing: 0.01em;
 }
 
 .ty-hero__sub {
-  margin: 1rem 0 0;
+  margin: 0.75rem 0 0;
   font-family: var(--ty-hero-body-ff, inherit);
-  font-size: var(--ty-hero-sub-fs, 1.8rem);
-  font-weight: 600;
+  font-size: var(--ty-hero-sub-fs, 16px);
+  font-weight: var(--ty-hero-sub-fw, 400);
+  font-style: var(--ty-hero-sub-style, normal);
+  line-height: 1.4;
   color: #101010;
 }
 
 .ty-hero__title {
-  margin: 1.6rem 0 0;
+  margin: 1.25rem 0 0;
   font-family: var(--ty-hero-heading-ff, inherit);
-  font-weight: 700;
-  font-size: var(--ty-hero-h2-fs, 2.6rem);
+  font-weight: var(--ty-hero-h2-fw, 700);
+  font-style: var(--ty-hero-h2-style, normal);
+  font-size: var(--ty-hero-h2-fs, 28px);
   line-height: 1.2;
   color: #101010;
 }
 
 .ty-hero__body {
-  margin: 1.6rem auto 0;
-  max-width: 36rem;
+  margin: 1.25rem auto 0;
+  max-width: 32rem;
   font-family: var(--ty-hero-body-ff, inherit);
-  font-size: 1.6rem;
-  line-height: 1.6;
-  color: #3a3a3a;
+  font-size: var(--ty-hero-body-fs, 15px);
+  font-weight: var(--ty-hero-body-fw, 400);
+  font-style: var(--ty-hero-body-style, normal);
+  line-height: 1.55;
+  color: #101010;
 }
 
 .ty-hero__body p {
   margin: 0;
 }
 
+.ty-hero__body p + p {
+  margin-top: 0.45rem;
+}
+
 .ty-hero__order {
-  margin: 2.4rem 0 0;
+  margin: 1.75rem 0 0;
   font-family: var(--ty-hero-heading-ff, inherit);
-  font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: 0.12em;
+  font-weight: var(--ty-hero-order-fw, 600);
+  font-size: var(--ty-hero-order-fs, 15px);
+  letter-spacing: 0.06em;
   color: #101010;
 }
 
 .ty-hero__track {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 4.8rem;
-  padding: 0 2.8rem;
-  border: 0.2rem solid #101010;
+  min-height: 3.25rem;
+  padding: 0.65rem 2.5rem;
+  border: var(--ty-hero-track-border, 2px) solid #101010;
   background: transparent;
   color: #101010;
   font-family: var(--ty-hero-body-ff, inherit);
-  font-weight: 700;
-  font-size: 1.3rem;
-  letter-spacing: 0.14em;
+  font-weight: var(--ty-hero-track-fw, 700);
+  font-size: var(--ty-hero-track-fs, 13px);
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
@@ -86,18 +96,24 @@
 
 @media screen and (max-width: 749px) {
   .ty-hero {
-    padding-top: var(--ty-hero-pt-m, 3.2rem);
-    padding-bottom: var(--ty-hero-pb-m, 3.2rem);
+    padding-top: var(--ty-hero-pt-m, 36px);
+    padding-bottom: var(--ty-hero-pb-m, 28px);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
   }
 
   .ty-hero__eyebrow {
-    font-size: min(var(--ty-hero-h1-fs, 3.2rem), 8vw);
+    font-size: min(var(--ty-hero-h1-fs, 32px), 7.5vw);
+  }
+
+  .ty-hero__title {
+    font-size: min(var(--ty-hero-h2-fs, 28px), 6.5vw);
   }
 }
 
 /* Card grid */
 .ty-cards {
-  padding: var(--ty-cards-pt, 2.4rem) 1.5rem var(--ty-cards-pb, 4.8rem);
+  padding: var(--ty-cards-pt, 16px) 1.5rem var(--ty-cards-pb, 56px);
   background: #ffffff;
 }
 
@@ -109,18 +125,18 @@
 .ty-cards__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1.6rem;
+  gap: var(--ty-cards-gap, 16px);
 }
 
 .ty-cards__card {
-  border-radius: 0.6rem;
-  padding: 2.4rem 2rem;
+  border-radius: 4px;
+  padding: var(--ty-cards-card-pad, 36px) calc(var(--ty-cards-card-pad, 36px) * 0.75);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 16rem;
+  min-height: 14rem;
 }
 
 .ty-cards__card--wide {
@@ -131,53 +147,73 @@
 .ty-cards__card-title {
   margin: 0;
   font-family: var(--ty-cards-heading-ff, inherit);
-  font-weight: 700;
-  font-size: var(--ty-cards-title-fs, 2rem);
-  line-height: 1.2;
+  font-weight: var(--ty-cards-title-fw, 700);
+  font-style: var(--ty-cards-title-style, normal);
+  font-size: var(--ty-cards-title-fs, 20px);
+  line-height: 1.25;
   color: #ffffff;
 }
 
 .ty-cards__card-body {
-  margin: 1rem 0 0;
+  margin: 0.85rem 0 0;
   font-family: var(--ty-cards-body-ff, inherit);
-  font-size: 1.5rem;
+  font-size: var(--ty-cards-body-fs, 15px);
+  font-weight: var(--ty-cards-body-fw, 400);
+  font-style: var(--ty-cards-body-style, normal);
   line-height: 1.5;
   color: #ffffff;
-  max-width: 28rem;
+  max-width: 26rem;
 }
 
 .ty-cards__card-body p {
   margin: 0;
 }
 
+.ty-cards__card-body p + p {
+  margin-top: 0.4rem;
+}
+
 .ty-cards__btn {
-  margin-top: 1.6rem;
+  margin-top: 1.35rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 4.4rem;
-  padding: 0 2rem;
+  min-height: 2.75rem;
+  padding: 0 1.75rem;
   background: #ffffff;
-  color: var(--ty-cards-btn-fg, #4fb4b2);
+  color: var(--ty-cards-btn-fg, #4db6ac);
   text-decoration: none;
   font-family: var(--ty-cards-body-ff, inherit);
-  font-weight: 700;
-  font-size: 1.3rem;
-  letter-spacing: 0.08em;
+  font-weight: var(--ty-cards-btn-fw, 700);
+  font-size: var(--ty-cards-btn-fs, 13px);
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  border-radius: 0.3rem;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
 }
 
 .ty-cards__btn:hover {
-  opacity: 0.92;
+  opacity: 0.94;
 }
 
 @media screen and (max-width: 749px) {
+  .ty-cards {
+    padding-top: var(--ty-cards-pt-m, 12px);
+    padding-bottom: var(--ty-cards-pb-m, 48px);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
   .ty-cards__grid {
     grid-template-columns: 1fr;
   }
 
   .ty-cards__card--wide {
     grid-column: auto;
+  }
+
+  .ty-cards__card {
+    min-height: 0;
   }
 }
