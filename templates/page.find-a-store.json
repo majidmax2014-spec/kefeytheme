@@ -282,8 +282,8 @@
       "type": "find-store-contact",
       "name": "Find store contact",
       "settings": {
-        "heading": "Wholesale & retail inquiries",
-        "body": "<p>For stocking Kefey or partnership questions, reach us at <strong>wholesale@kefey.co</strong></p>",
+        "heading": "Want Kefey in Your Store?",
+        "body": "<p>If you’re a retailer or distributor interested in carrying Kefey, we’d love to connect. Get in touch at: <strong>wholesale@kefey.co</strong></p>",
         "heading_color": "#ef6347",
         "border_color": "#d0d0d0",
         "heading_font_family": "heading",
