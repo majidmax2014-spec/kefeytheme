@@ -29,8 +29,26 @@
   "
 >
   <div class="fs-region__inner">
-    {% if section.settings.region_title != blank %}
-      <h2 class="fs-region__heading">{{ section.settings.region_title }}</h2>
+    {% if section.settings.region_title != blank or section.settings.flag_image != blank %}
+      <h2 class="fs-region__heading">
+        {% if section.settings.region_title != blank %}
+          <span class="fs-region__heading-text">{{ section.settings.region_title | escape }}</span>
+        {% endif %}
+        {% if section.settings.flag_image != blank %}
+          <span class="fs-region__flag" aria-hidden="true">
+            {{
+              section.settings.flag_image
+              | image_url: width: 128
+              | image_tag:
+                class: 'fs-region__flag-img',
+                alt: '',
+                loading: 'lazy',
+                widths: '64, 96, 128',
+                sizes: '(max-width: 749px) 28px, 34px'
+            }}
+          </span>
+        {% endif %}
+      </h2>
     {% endif %}
 
     {% if section.settings.sublabel != blank %}
@@ -95,6 +113,12 @@
       "id": "region_title",
       "label": "Region title",
       "default": "United States"
+    },
+    {
+      "type": "image_picker",
+      "id": "flag_image",
+      "label": "Flag icon",
+      "info": "Shown inline to the right of the title on desktop and mobile (e.g. country flag)."
     },
     {
       "type": "text",

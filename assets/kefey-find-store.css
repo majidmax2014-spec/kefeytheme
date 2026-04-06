@@ -89,12 +89,38 @@
 }
 
 .fs-region__heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem 0.75rem;
   margin: 0;
   font-family: var(--fs-region-title-ff, inherit);
   font-weight: 700;
   font-size: var(--fs-region-title-fs, 2.4rem);
+  line-height: 1.2;
   color: #101010;
   text-align: left;
+}
+
+.fs-region__heading-text {
+  min-width: 0;
+}
+
+.fs-region__flag {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  line-height: 0;
+}
+
+.fs-region__flag-img {
+  display: block;
+  width: 34px;
+  height: auto;
+  max-height: 1.15em;
+  object-fit: contain;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
 }
 
 .fs-region__sublabel {
@@ -150,15 +176,35 @@
   color: #3a3a3a;
 }
 
-@media screen and (max-width: 989px) {
+/* Desktop: 4×2 logo grid; mobile (≤749px): 2×4 like design */
+@media screen and (max-width: 749px) {
   .fs-region__grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
   }
-}
 
-@media screen and (max-width: 549px) {
-  .fs-region__grid {
-    grid-template-columns: 1fr;
+  .fs-region__heading {
+    font-size: min(var(--fs-region-title-fs, 2.4rem), 1.35rem + 1.5vw);
+  }
+
+  .fs-region__flag-img {
+    width: 28px;
+    max-height: 1.2em;
+  }
+
+  .fs-region__sublabel {
+    font-size: 1.4rem;
+    margin-top: 0.45rem;
+  }
+
+  .fs-region__footer {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+  }
+
+  .fs-region__logo-cell {
+    padding: 1rem;
   }
 }
 
