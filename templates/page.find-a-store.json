@@ -160,6 +160,7 @@
       "name": "Find store — United States",
       "settings": {
         "region_title": "United States",
+        "flag_image": "shopify://shop_images/USA-icon.png",
         "sublabel": "Available at:",
         "footer": "<p>Also shop online at <strong>Kefey.co</strong> with shipping within the United States.</p>",
         "title_font_family": "heading",
@@ -243,6 +244,7 @@
       "name": "Find store — UAE",
       "settings": {
         "region_title": "United Arab Emirates",
+        "flag_image": "shopify://shop_images/uae-icon.png",
         "sublabel": "Available at:",
         "footer": "<p>Also shop online at <strong>Kefey.co</strong> for delivery in the UAE.</p>",
         "title_font_family": "heading",
