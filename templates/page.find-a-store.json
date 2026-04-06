@@ -293,7 +293,7 @@
         "heading_size": 26,
         "body_font_family": "body",
         "body_font_size": 16,
-        "max_width": 960,
+        "max_width": 1200,
         "padding_top": 40,
         "padding_bottom": 48
       }

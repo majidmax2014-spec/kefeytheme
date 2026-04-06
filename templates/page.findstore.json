@@ -212,7 +212,6 @@
         "body": "<p>If you're a retailer or distributor interested in carrying Kefey, we'd love to connect.</p><p>Get in touch at: <strong>wholesale@kefey.co</strong></p>",
         "heading_color": "#f05a30",
         "border_color": "#000000",
-        "border_color_mobile": "#000000",
         "border_width": 1,
         "legend_background": "#ffffff",
         "heading_font_family": "heading",
