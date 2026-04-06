@@ -35,6 +35,8 @@
         "autoplay": true,
         "autoplay_speed": 5000,
         "show_dots": true,
+        "dot_active_color": "#38b2ac",
+        "dot_inactive_color": "#d1d5db",
         "show_arrows": false,
         "content_max_width": 650,
         "hero_heading_size": 66,

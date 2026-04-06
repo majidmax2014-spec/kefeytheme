@@ -24,7 +24,7 @@
 <section
   id="HeroSlider-{{ section.id }}"
   class="hero-slider"
-  style="--hero-height-desktop: {{ section.settings.height_desktop | default: 600 }}px; --hero-height-mobile: {{ section.settings.height_mobile | default: 480 }}px; --hero-overlay-opacity: {{ section.settings.overlay_opacity | at_most: 60 | divided_by: 100.0 }}; --hero-heading-size: {{ section.settings.hero_heading_size | default: 72 }}px; --hero-subheading-size: {{ section.settings.hero_subheading_size | default: 18 }}px; --hero-btn-text-size: {{ section.settings.hero_button_text_size | default: 14 }}px; --hero-btn-py: {{ section.settings.hero_button_padding_y | default: 12 }}px; --hero-btn-px: {{ section.settings.hero_button_padding_x | default: 28 }}px; --hero-content-xmargin: {{ section.settings.hero_content_side_margin | default: 0 }}px; --hero-btn-bw: {{ section.settings.hero_btn_border_width | default: 1 }}px; --hero-btn-bs: {{ section.settings.hero_btn_border_style | default: 'solid' }}; --hero-btn-bc: {{ section.settings.hero_btn_border_color | default: '#FFFFFF' }}; --hero-btn-radius: {{ section.settings.hero_btn_radius | default: 0 }}px; --hero-btn-bg: {{ section.settings.hero_btn_bg | default: '#FFFFFF' }}; --hero-btn-tc: {{ section.settings.hero_btn_text_color | default: '#111111' }}; --hs-heading-ff: {{ hs_heading_ff }}; --hs-heading-fw: {{ section.settings.hero_heading_font_weight | default: '800' }}; --hs-subheading-ff: {{ hs_subheading_ff }}; --hs-subheading-fw: {{ section.settings.hero_subheading_font_weight | default: '600' }}; --hs-btn-ff: {{ hs_btn_ff }}; --hs-btn-fw: {{ section.settings.hero_button_font_weight | default: '700' }};"
+  style="--hero-height-desktop: {{ section.settings.height_desktop | default: 600 }}px; --hero-height-mobile: {{ section.settings.height_mobile | default: 480 }}px; --hero-overlay-opacity: {{ section.settings.overlay_opacity | at_most: 60 | divided_by: 100.0 }}; --hero-heading-size: {{ section.settings.hero_heading_size | default: 72 }}px; --hero-subheading-size: {{ section.settings.hero_subheading_size | default: 18 }}px; --hero-btn-text-size: {{ section.settings.hero_button_text_size | default: 14 }}px; --hero-btn-py: {{ section.settings.hero_button_padding_y | default: 12 }}px; --hero-btn-px: {{ section.settings.hero_button_padding_x | default: 28 }}px; --hero-content-xmargin: {{ section.settings.hero_content_side_margin | default: 0 }}px; --hero-btn-bw: {{ section.settings.hero_btn_border_width | default: 1 }}px; --hero-btn-bs: {{ section.settings.hero_btn_border_style | default: 'solid' }}; --hero-btn-bc: {{ section.settings.hero_btn_border_color | default: '#FFFFFF' }}; --hero-btn-radius: {{ section.settings.hero_btn_radius | default: 0 }}px; --hero-btn-bg: {{ section.settings.hero_btn_bg | default: '#FFFFFF' }}; --hero-btn-tc: {{ section.settings.hero_btn_text_color | default: '#111111' }}; --hero-dot-active: {{ section.settings.dot_active_color | default: '#38b2ac' }}; --hero-dot-inactive: {{ section.settings.dot_inactive_color | default: '#d1d5db' }}; --hs-heading-ff: {{ hs_heading_ff }}; --hs-heading-fw: {{ section.settings.hero_heading_font_weight | default: '800' }}; --hs-subheading-ff: {{ hs_subheading_ff }}; --hs-subheading-fw: {{ section.settings.hero_subheading_font_weight | default: '600' }}; --hs-btn-ff: {{ hs_btn_ff }}; --hs-btn-fw: {{ section.settings.hero_button_font_weight | default: '700' }};"
   data-btn-border="{{ section.settings.hero_btn_show_border }}"
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
@@ -147,6 +147,18 @@
       "id": "show_dots",
       "label": "Show dots",
       "default": true
+    },
+    {
+      "type": "color",
+      "id": "dot_active_color",
+      "label": "Dot color (active slide)",
+      "default": "#38b2ac"
+    },
+    {
+      "type": "color",
+      "id": "dot_inactive_color",
+      "label": "Dot color (other slides)",
+      "default": "#d1d5db"
     },
     {
       "type": "checkbox",
