@@ -128,7 +128,7 @@
         "mobile_overlay_opacity": 20,
         "mobile_text_alignment": "left",
         "mobile_padding_top": 20,
-        "mobile_padding_bottom": 120,
+        "mobile_padding_bottom": 300,
         "mobile_horizontal_inset": 14,
         "mobile_grid_row_gap": 24,
         "mobile_media_margin_top": 0,
