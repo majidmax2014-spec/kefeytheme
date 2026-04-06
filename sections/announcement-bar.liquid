@@ -99,23 +99,35 @@
         .announcement-countdown__num{min-width:1.8ch;display:inline-block;text-align:center;font-weight:700;color:var(--countdown-accent,#FFC72C);}
         .announcement-countdown__label{opacity:.95;font-size:.85em;color:var(--countdown-accent,#FFC72C);}
         .announcement-countdown__sep{opacity:.9;color:var(--countdown-accent,#FFC72C);padding:0 0.1rem;}
+        .announcement-countdown .announcement-bar__message.announcement-countdown__message{
+          min-height:0;
+          padding-top:0.35rem;
+          padding-bottom:0.35rem;
+        }
         @media screen and (max-width: 749px) {
           .announcement-countdown__container{
             flex-direction:column;
             flex-wrap:nowrap;
             align-items:center;
             justify-content:center;
-            gap:0.45rem;
-            padding-top:0.35rem;
-            padding-bottom:0.35rem;
+            gap:0.1rem;
+            row-gap:0.1rem;
+            padding-top:0.25rem;
+            padding-bottom:0.25rem;
           }
-          .announcement-countdown__message{
+          .announcement-countdown .announcement-bar__message.announcement-countdown__message{
+            padding-top:0;
+            padding-bottom:0;
+          }
+          .announcement-countdown__message,
+          .announcement-countdown__message.h5{
             width:100%;
             text-align:center;
             white-space:normal;
-            font-size:clamp(0.62rem, 2.8vw, 0.78rem);
-            line-height:1.25;
-            padding:0 0.4rem;
+            font-size:clamp(0.78rem, 4vw, 1rem);
+            line-height:1.2;
+            margin:0;
+            padding:0 0.5rem;
             box-sizing:border-box;
           }
           .announcement-countdown__message span{
@@ -126,15 +138,19 @@
             width:100%;
             justify-content:center;
             flex-shrink:0;
-            font-size:clamp(0.68rem, 3.2vw, 0.88rem);
-            gap:0.35rem;
-            padding:0 0.4rem;
+            font-size:clamp(0.82rem, 4.4vw, 1.08rem);
+            gap:0.4rem;
+            margin:0;
+            padding:0 0.5rem;
             box-sizing:border-box;
+          }
+          .announcement-countdown__timer .announcement-countdown__label{
+            font-size:0.88em;
           }
           .announcement-countdown__container > .link{
             width:100%;
             text-align:center;
-            margin-top:0.15rem;
+            margin-top:0.2rem;
           }
         }
       </style>
