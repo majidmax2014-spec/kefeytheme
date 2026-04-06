@@ -5,7 +5,7 @@
   style="
     --rf-bg: {{ section.settings.background_color | default: '#3FB6B4' }};
     --rf-height-desktop: {{ section.settings.section_height_desktop | default: 220 }}px;
-    --rf-height-mobile: {{ section.settings.section_height_mobile | default: 180 }}px;
+    --rf-height-mobile: {{ section.settings.section_height_mobile | default: 280 }}px;
     --rf-pad-x: {{ section.settings.padding_left_right | default: 40 }}px;
     --rf-heading: {{ section.settings.heading_color | default: '#FFC94D' }};
     --rf-text: {{ section.settings.text_color | default: '#FFFFFF' }};
@@ -71,7 +71,7 @@
             <text class="rf-badge__ring" fill="#fff" font-size="14" letter-spacing="2">
               <textPath startOffset="0" textLength="452" href="#rf-badge-path-{{ section.id }}">{{ badge_ring }}</textPath>
             </text>
-            <text class="rf-badge__center" x="100" y="108" text-anchor="middle" fill="#2BB4A7" font-weight="700" font-size="26">{{ badge_center }}</text>
+            <text class="rf-badge__center" x="100" y="108" text-anchor="middle" fill="#ffffff" font-weight="700" font-size="26">{{ badge_center }}</text>
           </svg>
         {%- endif -%}
       </div>
@@ -101,7 +101,7 @@
   "settings": [
     { "type": "color", "id": "background_color", "label": "Background color", "default": "#2BB4A7" },
     { "type": "number", "id": "section_height_desktop", "label": "Height desktop (px)", "default": 220 },
-    { "type": "number", "id": "section_height_mobile", "label": "Height mobile (px)", "default": 180 },
+    { "type": "number", "id": "section_height_mobile", "label": "Height mobile (px, min; content can grow)", "default": 280 },
     { "type": "number", "id": "padding_left_right", "label": "Side padding (px)", "default": 40 },
 
     { "type": "text", "id": "heading", "label": "Heading", "default": "TRY IT WITH CONFIDENCE!" },

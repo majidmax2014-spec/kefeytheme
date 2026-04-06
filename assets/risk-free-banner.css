@@ -11,9 +11,7 @@
   align-items: center;
   overflow: hidden;
 }
-@media (max-width: 749px) {
-  .rf-banner { min-height: var(--rf-height-mobile, 180px); }
-}
+
 .rf-banner__inner {
   position: relative;
   width: 100%;
@@ -25,12 +23,7 @@
   justify-content: center;
   min-height: var(--rf-height-desktop, 220px);
 }
-@media (max-width: 749px) {
-  .rf-banner__inner {
-    min-height: var(--rf-height-mobile, 180px);
-    padding-block: 18px;
-  }
-}
+
 .rf-banner__decor {
   position: absolute;
   height: auto;
@@ -39,16 +32,19 @@
   z-index: var(--decor-z, 0);
   opacity: var(--decor-opacity, 1);
 }
+
 .rf-banner__decor--left {
   left: 0;
   top: 50%;
   transform: translate(var(--decor-x, 0px), calc(-50% + var(--decor-y, 0px)));
 }
+
 .rf-banner__decor--right {
   width: var(--w, 80px);
   right: var(--right, 20px);
   top: var(--top, 20px);
 }
+
 .rf-banner__center {
   position: relative;
   z-index: 2;
@@ -57,11 +53,11 @@
   gap: 100px;
   max-width: 900px;
 }
-@media (max-width: 989px) {
+
+@media (max-width: 989px) and (min-width: 750px) {
   .rf-banner__center {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
+    gap: clamp(2rem, 5vw, 4rem);
+    max-width: min(900px, 100%);
   }
 }
 
@@ -70,18 +66,22 @@
   display: grid;
   place-items: center;
 }
+
 .rf-badge {
   width: var(--rf-badge-size, 160px);
   height: var(--rf-badge-size, 160px);
 }
+
 .rf-badge__img {
   width: var(--rf-badge-size, 160px);
   height: auto;
 }
+
 .rf-badge__ring {
   font-family: var(--font-body-family);
   text-transform: uppercase;
 }
+
 .rf-badge__center {
   font-family: var(--font-heading-family);
   text-transform: lowercase;
@@ -91,23 +91,26 @@
   color: var(--rf-text, #fff);
   flex: 1;
 }
+
 .rf-banner__heading {
   margin: 0 0 12px 0;
   color: var(--rf-heading, #FFC94D);
   font-family: var(--font-heading-family);
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: .04em;
+  letter-spacing: 0.04em;
   font-size: var(--rf-heading-fs, 40px);
   line-height: 1.2;
 }
+
 .rf-banner__text {
   font-size: var(--rf-text-fs, 16px);
-  opacity: .98;
+  opacity: 0.98;
   margin: 0 0 16px 0;
   line-height: 1.5;
   white-space: pre-line;
 }
+
 .rf-banner__btn {
   display: inline-block;
   margin-top: 0;
@@ -121,12 +124,92 @@
   font-size: var(--rf-btn-fs, 14px);
   letter-spacing: 0.05em;
 }
+
 .rf-banner__btn:hover {
   opacity: 0.9;
 }
+
 .rf-banner__btn--solid {
   background: var(--rf-btn-bg, #fff);
   color: var(--rf-btn-text, #0a0a0a);
 }
 
+/* Mobile (≤749px): stack — badge top, yellow headline, white body, outline CTA; hide side decors */
+@media (max-width: 749px) {
+  .rf-banner {
+    min-height: var(--rf-height-mobile, 280px);
+    align-items: stretch;
+  }
 
+  .rf-banner__inner {
+    min-height: var(--rf-height-mobile, 280px);
+    padding-block: clamp(1.5rem, 6vw, 2.25rem);
+    padding-inline: clamp(1rem, 5vw, 1.5rem);
+  }
+
+  .rf-banner__decor {
+    display: none;
+  }
+
+  .rf-banner__center {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.875rem, 3.5vw, 1.35rem);
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .rf-banner__badge {
+    order: -1;
+  }
+
+  .rf-badge,
+  .rf-badge__img {
+    width: min(var(--rf-badge-size, 160px), 46vw);
+    max-width: 168px;
+  }
+
+  .rf-badge {
+    height: min(var(--rf-badge-size, 160px), 46vw);
+    max-height: 168px;
+  }
+
+  .rf-badge__img {
+    height: auto;
+  }
+
+  .rf-banner__content {
+    flex: none;
+    width: 100%;
+    max-width: 22.5rem;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rf-banner__heading {
+    margin: 0 0 0.5rem;
+    font-size: clamp(1.05rem, 5.1vw, var(--rf-heading-fs, 40px));
+    line-height: 1.18;
+  }
+
+  .rf-banner__text {
+    margin: 0 0 1.15rem;
+    font-size: clamp(0.875rem, 3.65vw, var(--rf-text-fs, 16px));
+    line-height: 1.45;
+  }
+
+  .rf-banner__text p {
+    margin: 0;
+  }
+
+  .rf-banner__btn {
+    margin-top: 0.15rem;
+    padding: 0.75rem 1.85rem;
+    font-size: clamp(0.75rem, 3.1vw, var(--rf-btn-fs, 14px));
+  }
+}
