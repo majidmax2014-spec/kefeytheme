@@ -1,0 +1,132 @@
+/* Reusable page sections: highlight heading + text block (desktop + mobile) */
+
+.kps-shell {
+  max-width: var(--kps-max, 1200px);
+  margin: 0 auto;
+  padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+}
+
+.kps-column {
+  width: 100%;
+  max-width: var(--kps-content-mw, 100%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---------- Highlight heading ---------- */
+.kph {
+  padding: var(--kph-pt, 2.5rem) 0 var(--kph-pb, 2.5rem);
+}
+
+.kph__wrap--center {
+  text-align: center;
+}
+
+.kph__wrap--left {
+  text-align: left;
+}
+
+.kph__wrap--right {
+  text-align: right;
+}
+
+.kph__title {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  font-family: var(--kph-ff, inherit);
+  font-weight: var(--kph-fw, 700);
+  font-size: var(--kph-fs, 1.75rem);
+  line-height: 1.12;
+  color: var(--kph-color, #101010);
+  text-wrap: balance;
+}
+
+.kph__title-text {
+  position: relative;
+  z-index: 1;
+}
+
+.kph__title-highlight {
+  position: absolute;
+  left: -0.04em;
+  right: -0.04em;
+  bottom: 0.12em;
+  height: 0.48em;
+  min-height: 15px;
+  max-height: 22px;
+  z-index: 0;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+/* ---------- Text block ---------- */
+.kpt {
+  padding: var(--kpt-pt, 2rem) 0 var(--kpt-pb, 2rem);
+}
+
+.kpt__body {
+  margin: 0;
+  font-family: var(--kpt-ff, inherit);
+  font-size: var(--kpt-fs, 1rem);
+  font-weight: var(--kpt-fw, 400);
+  line-height: var(--kpt-lh, 1.65);
+  color: var(--kpt-color, #101010);
+}
+
+.kpt__body--center {
+  text-align: center;
+}
+
+.kpt__body--left {
+  text-align: left;
+}
+
+.kpt__body--right {
+  text-align: right;
+}
+
+.kpt__body p {
+  margin: 0;
+}
+
+.kpt__body p + p {
+  margin-top: 0.75em;
+}
+
+.kpt__body strong {
+  font-weight: 700;
+}
+
+@media screen and (max-width: 749px) {
+  .kps-column {
+    max-width: 100%;
+  }
+
+  .kph {
+    padding: var(--kph-pt-m, 1.75rem) 0 var(--kph-pb-m, 1.75rem);
+  }
+
+  .kph__title {
+    font-size: min(var(--kph-fs, 1.75rem), 19px);
+    line-height: 1.12;
+    text-wrap: auto;
+  }
+
+  .kph__title-highlight {
+    bottom: 0.1em;
+    height: 0.42em;
+    min-height: 11px;
+    max-height: 15px;
+  }
+
+  .kpt {
+    padding: var(--kpt-pt-m, 1.5rem) 0 var(--kpt-pb-m, 1.5rem);
+  }
+
+  .kpt__body {
+    font-size: calc(var(--kpt-fs, 16px) * 0.97);
+    line-height: 1.58;
+  }
+}

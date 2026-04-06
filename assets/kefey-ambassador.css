@@ -1,0 +1,153 @@
+/* Become an Ambassador — intro + testimonial-style heading + benefit list */
+
+.ka {
+  padding: var(--ka-pt, 3.2rem) 1.5rem var(--ka-pb, 4.8rem);
+  background: #ffffff;
+}
+
+.ka__shell {
+  max-width: var(--ka-max, 1200px);
+  margin: 0 auto;
+}
+
+.ka__column {
+  width: 100%;
+  max-width: var(--ka-content-mw, 66%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ka__intro {
+  margin: 0;
+  text-align: center;
+  font-family: var(--ka-body-ff, inherit);
+  font-size: var(--ka-body-fs, 1rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: #101010;
+}
+
+.ka__intro p {
+  margin: 0;
+}
+
+.ka__intro p + p {
+  margin-top: 0.75em;
+}
+
+/* Subheading — same highlight geometry as testimonials / find-store intro */
+.ka__heading {
+  position: relative;
+  display: inline-block;
+  margin: clamp(2rem, 4vw, 2.75rem) 0 0;
+  font-family: var(--ka-heading-ff, inherit);
+  font-weight: 700;
+  font-size: var(--ka-heading-fs, 1.75rem);
+  line-height: 1.12;
+  color: #101010;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.ka__heading-wrap {
+  text-align: center;
+}
+
+.ka__heading-text {
+  position: relative;
+  z-index: 1;
+}
+
+.ka__heading-highlight {
+  position: absolute;
+  left: -0.04em;
+  right: -0.04em;
+  bottom: 0.12em;
+  height: 0.48em;
+  min-height: 15px;
+  max-height: 22px;
+  z-index: 0;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.ka__benefits {
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+  text-align: left;
+}
+
+.ka__benefit + .ka__benefit {
+  margin-top: clamp(1.35rem, 3vw, 1.85rem);
+}
+
+.ka__benefit-title {
+  margin: 0;
+  font-family: var(--ka-heading-ff, inherit);
+  font-weight: 700;
+  font-size: var(--ka-benefit-title-fs, 1.05rem);
+  line-height: 1.3;
+  color: #101010;
+}
+
+.ka__benefit-desc {
+  margin: 0.45rem 0 0;
+  font-family: var(--ka-body-ff, inherit);
+  font-size: var(--ka-benefit-body-fs, 1rem);
+  font-weight: 400;
+  line-height: 1.65;
+  color: #101010;
+}
+
+.ka__benefit-desc p {
+  margin: 0;
+}
+
+.ka__benefit-desc p + p {
+  margin-top: 0.5em;
+}
+
+@media screen and (max-width: 749px) {
+  .ka {
+    padding: var(--ka-pt-m, 2.25rem) 1.25rem var(--ka-pb-m, 3.25rem);
+  }
+
+  .ka__column {
+    max-width: 100%;
+  }
+
+  .ka__intro {
+    font-size: calc(var(--ka-body-fs, 16px) * 0.97);
+    line-height: 1.58;
+  }
+
+  .ka__heading {
+    margin-top: 1.65rem;
+    font-size: 19px;
+    font-weight: 700;
+    line-height: 1.12;
+    text-wrap: auto;
+  }
+
+  .ka__heading-highlight {
+    bottom: 0.1em;
+    height: 0.42em;
+    min-height: 11px;
+    max-height: 15px;
+  }
+
+  .ka__benefits {
+    margin-top: 1.85rem;
+  }
+
+  .ka__benefit + .ka__benefit {
+    margin-top: 1.5rem;
+  }
+
+  .ka__benefit-title {
+    font-size: calc(var(--ka-benefit-title-fs, 17px) * 0.98);
+  }
+
+  .ka__benefit-desc {
+    font-size: calc(var(--ka-benefit-body-fs, 16px) * 0.97);
+  }
+}

@@ -1,0 +1,258 @@
+{{ 'kefey-ambassador.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign h_ff = 'var(--font-body-family)'
+  endif
+
+  assign b_ff = 'inherit'
+  if section.settings.body_font_family == 'heading'
+    assign b_ff = 'var(--font-heading-family)'
+  elsif section.settings.body_font_family == 'body'
+    assign b_ff = 'var(--font-body-family)'
+  endif
+-%}
+
+<section
+  id="KefeyAmbassador-{{ section.id }}"
+  class="ka"
+  style="
+    --ka-max: {{ section.settings.max_width }}px;
+    --ka-content-mw: {{ section.settings.content_max_width_pct }}%;
+    --ka-pt: {{ section.settings.padding_top }}px;
+    --ka-pb: {{ section.settings.padding_bottom }}px;
+    --ka-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --ka-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --ka-heading-ff: {{ h_ff }};
+    --ka-heading-fs: {{ section.settings.heading_size }}px;
+    --ka-body-ff: {{ b_ff }};
+    --ka-body-fs: {{ section.settings.body_font_size }}px;
+    --ka-benefit-title-fs: {{ section.settings.benefit_title_size }}px;
+    --ka-benefit-body-fs: {{ section.settings.benefit_body_size }}px;
+  "
+>
+  <div class="ka__shell">
+    <div class="ka__column">
+      {% if section.settings.intro != blank %}
+        <div class="ka__intro rte">
+          {{ section.settings.intro }}
+        </div>
+      {% endif %}
+
+      {% if section.settings.section_heading != blank %}
+        <div class="ka__heading-wrap">
+          <h2 class="ka__heading">
+            <span class="ka__heading-text">{{ section.settings.section_heading | escape }}</span>
+            <span
+              class="ka__heading-highlight"
+              style="background-color: {{ section.settings.heading_highlight_color }};"
+              aria-hidden="true"
+            ></span>
+          </h2>
+        </div>
+      {% endif %}
+
+      {% if section.blocks.size > 0 %}
+        <div class="ka__benefits">
+          {% for block in section.blocks %}
+            {% if block.type == 'benefit' %}
+              <article class="ka__benefit" {{ block.shopify_attributes }}>
+                {% if block.settings.title != blank %}
+                  <h3 class="ka__benefit-title">{{ block.settings.title | escape }}</h3>
+                {% endif %}
+                {% if block.settings.description != blank %}
+                  <div class="ka__benefit-desc rte">
+                    {{ block.settings.description }}
+                  </div>
+                {% endif %}
+              </article>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ambassador program",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "intro",
+      "label": "Introduction",
+      "default": "<p>At Kefey®, we believe that joy inspires action, and great opportunities deserve to be shared.</p>"
+    },
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section heading",
+      "default": "Why Become a Kefey Ambassador?"
+    },
+    {
+      "type": "color",
+      "id": "heading_highlight_color",
+      "label": "Heading highlight color",
+      "default": "#4DB6AC",
+      "info": "Teal bar behind the heading — same style as Testimonials."
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading & benefit titles font",
+      "default": "heading",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Section heading size (px)",
+      "min": 18,
+      "max": 40,
+      "step": 1,
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "body_font_family",
+      "label": "Body font",
+      "default": "body",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "body_font_size",
+      "label": "Intro body size (px)",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "benefit_title_size",
+      "label": "Benefit title size (px)",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 17
+    },
+    {
+      "type": "range",
+      "id": "benefit_body_size",
+      "label": "Benefit description size (px)",
+      "min": 14,
+      "max": 20,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Outer max width (px)",
+      "min": 800,
+      "max": 1400,
+      "step": 10,
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "content_max_width_pct",
+      "label": "Content column width",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 66,
+      "info": "Percentage of the outer container (100% on small screens)."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Benefit title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Describe this benefit for ambassadors.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ambassador program",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" }
+      ]
+    }
+  ]
+}
+{% endschema %}

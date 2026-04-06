@@ -1,0 +1,194 @@
+{{ 'kefey-page-sections.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign b_ff = 'inherit'
+  if section.settings.font_family == 'heading'
+    assign b_ff = 'var(--font-heading-family)'
+  elsif section.settings.font_family == 'body'
+    assign b_ff = 'var(--font-body-family)'
+  endif
+
+  assign align_class = 'kpt__body--center'
+  if section.settings.text_alignment == 'left'
+    assign align_class = 'kpt__body--left'
+  elsif section.settings.text_alignment == 'right'
+    assign align_class = 'kpt__body--right'
+  endif
+-%}
+
+<section
+  id="KefeyPageText-{{ section.id }}"
+  class="kpt"
+  style="
+    background-color: {{ section.settings.background_color }};
+    --kps-max: {{ section.settings.max_width }}px;
+    --kps-content-mw: {{ section.settings.content_max_width_pct }}%;
+    --kpt-pt: {{ section.settings.padding_top }}px;
+    --kpt-pb: {{ section.settings.padding_bottom }}px;
+    --kpt-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --kpt-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --kpt-ff: {{ b_ff }};
+    --kpt-fw: {{ section.settings.font_weight }};
+    --kpt-fs: {{ section.settings.font_size }}px;
+    --kpt-color: {{ section.settings.text_color }};
+    --kpt-lh: {{ section.settings.line_height | times: 0.01 }};
+  "
+>
+  <div class="kps-shell">
+    <div class="kps-column">
+      {% if section.settings.body != blank %}
+        <div class="kpt__body rte {{ align_class }}">
+          {{ section.settings.body }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kefey page text",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Text",
+      "default": "<p>Add your paragraph here. You can use bold, links, and multiple paragraphs.</p>"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Alignment",
+      "default": "center",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#101010"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font",
+      "default": "body",
+      "options": [
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "font_weight",
+      "label": "Font weight",
+      "default": "400",
+      "options": [
+        { "value": "400", "label": "400 (regular)" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font size (px)",
+      "min": 14,
+      "max": 22,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "label": "Line height",
+      "min": 130,
+      "max": 200,
+      "step": 2,
+      "default": 165,
+      "info": "Percentage (165 = 1.65 line height)."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Outer max width (px)",
+      "min": 600,
+      "max": 1400,
+      "step": 10,
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "content_max_width_pct",
+      "label": "Text column width",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 66,
+      "info": "Relative to the outer container. Full width of column on small screens."
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom (desktop)",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Padding top (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Padding bottom (mobile)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kefey page text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,89 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "ambassador_program": {
+      "type": "kefey-ambassador",
+      "name": "Ambassador program",
+      "settings": {
+        "intro": "<p>At Kefey®, we believe that joy inspires action, and great opportunities deserve to be shared. Become part of our global Ambassador community and help introduce Kefey Gummies to people everywhere. Whether you're a content creator, an influencer, or simply someone who loves sharing things that genuinely make a difference, Kefey gives you a simple and rewarding way to turn positivity into real income.</p>",
+        "section_heading": "Why Become a Kefey Ambassador?",
+        "heading_highlight_color": "#4db6ac",
+        "heading_font_family": "heading",
+        "heading_size": 28,
+        "body_font_family": "body",
+        "body_font_size": 16,
+        "benefit_title_size": 17,
+        "benefit_body_size": 16,
+        "max_width": 1200,
+        "content_max_width_pct": 66,
+        "padding_top": 48,
+        "padding_bottom": 64,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 48
+      },
+      "blocks": {
+        "benefit_realtime": {
+          "type": "benefit",
+          "settings": {
+            "title": "Real-Time Insights",
+            "description": "<p>Access a clean, intuitive dashboard that shows your clicks, sales, and commissions instantly — so you always know exactly how you're performing.</p>"
+          }
+        },
+        "benefit_payouts": {
+          "type": "benefit",
+          "settings": {
+            "title": "Fast Payouts",
+            "description": "<p>Get rewarded without delays. Our payout process is fast, transparent, and designed to support your growth.</p>"
+          }
+        },
+        "benefit_portal": {
+          "type": "benefit",
+          "settings": {
+            "title": "All-in-One Ambassador Portal",
+            "description": "<p>Manage everything from one place. Track your Kefey.ca sales, receive your personalized affiliate link, and share your unique promo code with your audience effortlessly.</p>"
+          }
+        },
+        "benefit_share": {
+          "type": "benefit",
+          "settings": {
+            "title": "Share & Earn",
+            "description": "<p>Give your community 15% off every order, while you earn a 15% commission on each sale. A win-win built for long-term success.</p>"
+          }
+        },
+        "benefit_global": {
+          "type": "benefit",
+          "settings": {
+            "title": "Global Availability",
+            "description": "<p>No matter where your audience lives, they can order Kefey. Earn commissions from followers worldwide – we ship to 150+ countries.</p>"
+          }
+        },
+        "benefit_aov": {
+          "type": "benefit",
+          "settings": {
+            "title": "High Average Order Value (AOV)",
+            "description": "<p>With an average order of $50+, your commissions add up fast. The more joy you share, the more you earn!</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_realtime",
+        "benefit_payouts",
+        "benefit_portal",
+        "benefit_share",
+        "benefit_global",
+        "benefit_aov"
+      ]
+    }
+  },
+  "order": [
+    "main",
+    "ambassador_program"
+  ]
+}
