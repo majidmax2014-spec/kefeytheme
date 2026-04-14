@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "enable_legal_typography": false,
         "legal_title_font_family": "heading",
@@ -30,9 +31,44 @@
         "padding_top": 28,
         "padding_bottom": 28
       }
+    },
+    "header_banner_8CAxxh": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "bg_image_desktop": "shopify://shop_images/kefey-for-good-banner.png",
+        "bg_image_mobile": "shopify://shop_images/kefey-for-good-banner-m.png",
+        "heading": "Wellness, guided by purpose.",
+        "subheading": "Because what we give, matters as much as what we create.",
+        "subheading_richtext": "",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 42,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 22,
+        "hb_heading_fs_mobile": 0,
+        "hb_desc_fs_mobile": 0,
+        "hb_desc_strong_weight": "700",
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 500,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24,
+        "overlay_opacity_mobile": 0,
+        "mobile_vertical_align": "top",
+        "mobile_content_padding_top": 44,
+        "mobile_content_padding_x": 22,
+        "mobile_text_alignment": "left",
+        "mobile_image_anchor": "bottom"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "header_banner_8CAxxh"
   ]
 }
