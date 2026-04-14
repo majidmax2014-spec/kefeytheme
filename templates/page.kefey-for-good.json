@@ -43,11 +43,6 @@
         "mobile_image_anchor": "bottom"
       }
     },
-    "kefey_connected_care": {
-      "type": "kefey-connected-care",
-      "name": "Connected care",
-      "settings": {}
-    },
     "kefey_free_from_heading_DxnHUR": {
       "type": "kefey-free-from-heading",
       "name": "Kefey free-from heading",
@@ -213,6 +208,64 @@
         "right_footer_font_size": 15
       }
     },
+    "kefey_connected_care_U4m6H6": {
+      "type": "kefey-connected-care",
+      "name": "Kefey connected care",
+      "settings": {
+        "section_background": "#ffffff",
+        "content_max_width": 1200,
+        "padding_top": 56,
+        "padding_bottom": 56,
+        "padding_horizontal": 32,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_horizontal_mobile": 20,
+        "heading": "A <strong>Connected Kind of Care</strong>",
+        "heading_font_family": "heading",
+        "heading_font_weight": "700",
+        "heading_font_size": 36,
+        "heading_font_size_mobile": 22,
+        "heading_line_height": 100,
+        "heading_line_height_mobile": 140,
+        "heading_letter_spacing": 0,
+        "heading_color": "#111111",
+        "bar_color": "#ffd333",
+        "bar_height_desktop": 14,
+        "bar_offset_bottom_desktop": -4,
+        "bar_extend": 4,
+        "bar_border_radius": 2,
+        "bar_height_mobile_frac": 42,
+        "bar_height_mobile_min": 12,
+        "bar_height_mobile_max": 22,
+        "bar_offset_bottom_mobile": 10,
+        "intro_text": "<p>For Kefey®, doing good is not only about where we give, but also about how we create.</p>",
+        "intro_font_family": "body",
+        "intro_font_weight": "400",
+        "intro_font_size": 16,
+        "intro_font_size_mobile": 14,
+        "intro_line_height": 145,
+        "intro_line_height_mobile": 145,
+        "intro_color": "#111111",
+        "image": "shopify://shop_images/connected-img.png",
+        "image_max_width": 100,
+        "image_max_width_mobile": 100,
+        "image_border_radius": 0,
+        "bottom_text": "<p>From paper-based tubes to reusable boxes, our choices are designed to borrow from nature with care, and give back with intention.</p>",
+        "bottom_font_family": "body",
+        "bottom_font_weight": "400",
+        "bottom_font_size": 18,
+        "bottom_font_size_mobile": 15,
+        "bottom_line_height": 145,
+        "bottom_line_height_mobile": 145,
+        "bottom_color": "#111111",
+        "gap_heading_intro": 24,
+        "gap_heading_intro_mobile": 20,
+        "gap_intro_image": 40,
+        "gap_intro_image_mobile": 28,
+        "gap_image_bottom": 40,
+        "gap_image_bottom_mobile": 28
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -240,9 +293,9 @@
   "order": [
     "header_banner_8CAxxh",
     "kefey_free_from_heading_DxnHUR",
-    "kefey_connected_care",
-    "kefey_dual_partnerships",
     "we_refuse_section_44hDTM",
+    "kefey_dual_partnerships",
+    "kefey_connected_care_U4m6H6",
     "main"
   ]
 }
