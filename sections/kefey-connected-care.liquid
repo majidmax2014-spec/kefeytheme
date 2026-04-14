@@ -96,6 +96,7 @@
     {% endif %}
 
     {% if section.settings.image != blank %}
+      {% capture kcc_single_img_sizes %}(max-width: 749px) 100vw, min(90vw, {{ section.settings.content_max_width }}px){% endcapture %}
       <div class="kcc__media">
         {% if section.settings.image_mobile != blank %}
           <picture>
@@ -125,7 +126,7 @@
             | image_tag:
               loading: 'lazy',
               widths: '375, 550, 750, 1100, 1400, 1600',
-              sizes: '(max-width: 749px) 100vw, min(90vw, {{ section.settings.content_max_width }}px)',
+              sizes: kcc_single_img_sizes,
               alt: section.settings.image.alt
           }}
         {% endif %}
