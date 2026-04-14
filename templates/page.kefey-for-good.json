@@ -266,6 +266,49 @@
         "gap_image_bottom_mobile": 28
       }
     },
+    "purpose_beyond_gummy_jbw9Dn": {
+      "type": "purpose-beyond-gummy",
+      "name": "Purpose Beyond Gummy",
+      "settings": {
+        "heading": "Purpose, Made Meaningful",
+        "body": "<p>Every Kefey® product represents a conscious choice: to design thoughtfully, to give intentionally, and to build a brand where joy and intention move together.<br/><br/>Because true wellness doesn’t stop at how it feels. It extends to the impact left behind.</p>",
+        "image": "shopify://shop_images/purpose.png",
+        "panel_color": "#f2c718",
+        "title_bg_color": "#e95439",
+        "title_color": "#ffffff",
+        "section_bg_color": "#ffffff",
+        "left_panel_color": "#f2c718",
+        "title_bar_color": "#e95439",
+        "title_text_color": "#ffffff",
+        "body_color": "#1c1c1c",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "heading_font_size": 36,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 16,
+        "show_button": false,
+        "button_label": "FIND YOUR STAR",
+        "button_link": "",
+        "button_show_arrow": true,
+        "button_background": "#49b2b2",
+        "button_text_color": "#ffffff",
+        "button_font_size": 14,
+        "button_padding_y": 14,
+        "button_padding_x": 22,
+        "button_margin_top": 20,
+        "button_margin_top_mobile": 18,
+        "content_max_width": 1200,
+        "left_col_width": 50,
+        "min_height": 290,
+        "content_padding_left": 56,
+        "content_padding_right": 40,
+        "title_bar_offset_y": 16,
+        "title_bar_width": 78,
+        "padding_top": 44,
+        "padding_bottom": 52
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -296,6 +339,7 @@
     "we_refuse_section_44hDTM",
     "kefey_dual_partnerships",
     "kefey_connected_care_U4m6H6",
+    "purpose_beyond_gummy_jbw9Dn",
     "main"
   ]
 }
