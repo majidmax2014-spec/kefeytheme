@@ -122,11 +122,36 @@
         "gap_after_sub": 16,
         "gap_after_sub_mobile": 14
       }
+    },
+    "we_refuse_section_44hDTM": {
+      "type": "we-refuse-section",
+      "name": "We Refuse Section",
+      "settings": {
+        "heading": "We believe in Joyful Wellness:",
+        "text": "<p>a way of supporting mind, body, and heart with optimism and lightness, while remaining deeply thoughtful about the world we are part of.<br/>Because true wellness should feel good, do good, and inspire good.</p>",
+        "right_image": "shopify://shop_images/we-belive.png",
+        "section_bg": "#efefef",
+        "title_bg": "#e95439",
+        "title_color": "#ffffff",
+        "right_bg": "#69c6de",
+        "text_color": "#1e1e1e",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "heading_font_size": 36,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 16,
+        "content_max_width": 1220,
+        "left_col_width": 42,
+        "padding_top": 20,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
     "main",
     "header_banner_8CAxxh",
-    "kefey_free_from_heading_DxnHUR"
+    "kefey_free_from_heading_DxnHUR",
+    "we_refuse_section_44hDTM"
   ]
 }
