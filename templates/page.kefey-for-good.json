@@ -43,6 +43,11 @@
         "mobile_image_anchor": "bottom"
       }
     },
+    "kefey_connected_care": {
+      "type": "kefey-connected-care",
+      "name": "Connected care",
+      "settings": {}
+    },
     "kefey_free_from_heading_DxnHUR": {
       "type": "kefey-free-from-heading",
       "name": "Kefey free-from heading",
@@ -235,8 +240,9 @@
   "order": [
     "header_banner_8CAxxh",
     "kefey_free_from_heading_DxnHUR",
-    "we_refuse_section_44hDTM",
+    "kefey_connected_care",
     "kefey_dual_partnerships",
+    "we_refuse_section_44hDTM",
     "main"
   ]
 }

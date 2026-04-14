@@ -1,0 +1,146 @@
+/* Kefey — Connected care (heading + bar, intro, image, closing copy) */
+
+.kcc {
+  background: var(--kcc-bg, #ffffff);
+  margin: 0;
+}
+
+.kcc__inner {
+  width: 100%;
+  max-width: var(--kcc-max, 960px);
+  margin: 0 auto;
+  padding: var(--kcc-pt, 56px) var(--kcc-px, 32px) var(--kcc-pb, 56px);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.kcc__title-wrap {
+  margin: 0 0 var(--kcc-gap-h-intro, 24px);
+}
+
+.kcc__title {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  font-family: var(--kcc-h-ff, inherit);
+  font-weight: var(--kcc-h-fw, 700);
+  font-size: var(--kcc-h-fs, 40px);
+  line-height: var(--kcc-h-lh, 1.12);
+  letter-spacing: var(--kcc-h-track, 0);
+  color: var(--kcc-h-color, #111111);
+}
+
+.kcc__title-text {
+  position: relative;
+  z-index: 1;
+}
+
+.kcc__title-text strong {
+  font-weight: 700;
+}
+
+.kcc__title-bar {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  background: var(--kcc-bar-bg, #ffd333);
+  border-radius: var(--kcc-bar-radius, 2px);
+  left: calc(-1 * var(--kcc-bar-pad, 0.04em));
+  right: calc(-1 * var(--kcc-bar-pad, 0.04em));
+  height: var(--kcc-bar-h-d, 14px);
+  bottom: var(--kcc-bar-b-d, -4px);
+}
+
+.kcc__intro {
+  margin: 0 0 var(--kcc-gap-intro-img, 40px);
+  font-family: var(--kcc-intro-ff, inherit);
+  font-weight: var(--kcc-intro-fw, 400);
+  font-size: var(--kcc-intro-fs, 18px);
+  line-height: var(--kcc-intro-lh, 1.45);
+  color: var(--kcc-intro-color, #111111);
+  text-align: center;
+}
+
+.kcc__intro p {
+  margin: 0 0 0.5em;
+  text-align: center;
+}
+
+.kcc__intro p:last-child {
+  margin-bottom: 0;
+}
+
+.kcc__media {
+  margin: 0 auto var(--kcc-gap-img-bottom, 40px);
+  max-width: var(--kcc-img-max, 100%);
+}
+
+.kcc__media picture {
+  display: block;
+  width: 100%;
+}
+
+.kcc__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--kcc-img-radius, 0);
+  vertical-align: middle;
+}
+
+.kcc__bottom {
+  margin: 0;
+  font-family: var(--kcc-bot-ff, inherit);
+  font-weight: var(--kcc-bot-fw, 400);
+  font-size: var(--kcc-bot-fs, 18px);
+  line-height: var(--kcc-bot-lh, 1.45);
+  color: var(--kcc-bot-color, #111111);
+  text-align: center;
+}
+
+.kcc__bottom p {
+  margin: 0 0 0.5em;
+  text-align: center;
+}
+
+.kcc__bottom p:last-child {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 749px) {
+  .kcc__inner {
+    padding: var(--kcc-pt-m, 40px) var(--kcc-px-m, 20px) var(--kcc-pb-m, 40px);
+  }
+
+  .kcc__title-wrap {
+    margin-bottom: var(--kcc-gap-h-intro-m, 20px);
+  }
+
+  .kcc__title {
+    font-size: min(var(--kcc-h-fs-m, 26px), var(--kcc-h-fs, 40px));
+    line-height: var(--kcc-h-lh-m, 1.15);
+  }
+
+  .kcc__title-bar {
+    height: var(--kcc-bar-h-m, 0.42em);
+    min-height: var(--kcc-bar-h-m-min, 12px);
+    max-height: var(--kcc-bar-h-m-max, 22px);
+    bottom: var(--kcc-bar-b-m, 0.1em);
+  }
+
+  .kcc__intro {
+    margin-bottom: var(--kcc-gap-intro-img-m, 28px);
+    font-size: min(var(--kcc-intro-fs-m, 15px), var(--kcc-intro-fs, 18px));
+    line-height: var(--kcc-intro-lh-m, 1.45);
+  }
+
+  .kcc__media {
+    margin-bottom: var(--kcc-gap-img-bottom-m, 28px);
+    max-width: var(--kcc-img-max-m, 100%);
+  }
+
+  .kcc__bottom {
+    font-size: min(var(--kcc-bot-fs-m, 15px), var(--kcc-bot-fs, 18px));
+    line-height: var(--kcc-bot-lh-m, 1.45);
+  }
+}
