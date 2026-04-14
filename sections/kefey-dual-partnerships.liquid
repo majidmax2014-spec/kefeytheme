@@ -1,0 +1,1170 @@
+{{ 'kefey-dual-partnerships.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign l_tag_ff = 'inherit'
+  if section.settings.left_tagline_font_family == 'heading'
+    assign l_tag_ff = 'var(--font-heading-family)'
+  elsif section.settings.left_tagline_font_family == 'body'
+    assign l_tag_ff = 'var(--font-body-family)'
+  endif
+
+  assign l_ch_ff = 'inherit'
+  if section.settings.left_content_heading_font_family == 'heading'
+    assign l_ch_ff = 'var(--font-heading-family)'
+  elsif section.settings.left_content_heading_font_family == 'body'
+    assign l_ch_ff = 'var(--font-body-family)'
+  endif
+
+  assign l_body_ff = 'inherit'
+  if section.settings.left_body_font_family == 'heading'
+    assign l_body_ff = 'var(--font-heading-family)'
+  elsif section.settings.left_body_font_family == 'body'
+    assign l_body_ff = 'var(--font-body-family)'
+  endif
+
+  assign l_foot_ff = 'inherit'
+  if section.settings.left_footer_font_family == 'heading'
+    assign l_foot_ff = 'var(--font-heading-family)'
+  elsif section.settings.left_footer_font_family == 'body'
+    assign l_foot_ff = 'var(--font-body-family)'
+  endif
+
+  assign r_tag_ff = 'inherit'
+  if section.settings.right_tagline_font_family == 'heading'
+    assign r_tag_ff = 'var(--font-heading-family)'
+  elsif section.settings.right_tagline_font_family == 'body'
+    assign r_tag_ff = 'var(--font-body-family)'
+  endif
+
+  assign r_ch_ff = 'inherit'
+  if section.settings.right_content_heading_font_family == 'heading'
+    assign r_ch_ff = 'var(--font-heading-family)'
+  elsif section.settings.right_content_heading_font_family == 'body'
+    assign r_ch_ff = 'var(--font-body-family)'
+  endif
+
+  assign r_body_ff = 'inherit'
+  if section.settings.right_body_font_family == 'heading'
+    assign r_body_ff = 'var(--font-heading-family)'
+  elsif section.settings.right_body_font_family == 'body'
+    assign r_body_ff = 'var(--font-body-family)'
+  endif
+
+  assign r_foot_ff = 'inherit'
+  if section.settings.right_footer_font_family == 'heading'
+    assign r_foot_ff = 'var(--font-heading-family)'
+  elsif section.settings.right_footer_font_family == 'body'
+    assign r_foot_ff = 'var(--font-body-family)'
+  endif
+
+  assign l_tag_fw = section.settings.left_tagline_font_weight
+  assign l_ch_fw = section.settings.left_content_heading_font_weight
+  assign l_body_fw = section.settings.left_body_font_weight
+  assign l_foot_fw = section.settings.left_footer_font_weight
+
+  assign r_tag_fw = section.settings.right_tagline_font_weight
+  assign r_ch_fw = section.settings.right_content_heading_font_weight
+  assign r_body_fw = section.settings.right_body_font_weight
+  assign r_foot_fw = section.settings.right_footer_font_weight
+
+  assign l_img_class = ''
+  assign l_img_aspect = 'auto'
+  assign l_img_fit = 'cover'
+  case section.settings.left_image_aspect_ratio
+    when '16_9'
+      assign l_img_aspect = '16 / 9'
+    when '4_3'
+      assign l_img_aspect = '4 / 3'
+    when '1_1'
+      assign l_img_aspect = '1 / 1'
+    when '3_4'
+      assign l_img_aspect = '3 / 4'
+    else
+      assign l_img_class = 'kefey-dual-partnerships__image-wrap--natural'
+      assign l_img_fit = 'contain'
+  endcase
+
+  assign r_img_class = ''
+  assign r_img_aspect = 'auto'
+  assign r_img_fit = 'cover'
+  assign left_header_alt = section.settings.left_header_logo.alt | default: 'Partner logo'
+  assign right_header_alt = section.settings.right_header_logo.alt | default: 'Partner logo'
+  case section.settings.right_image_aspect_ratio
+    when '16_9'
+      assign r_img_aspect = '16 / 9'
+    when '4_3'
+      assign r_img_aspect = '4 / 3'
+    when '1_1'
+      assign r_img_aspect = '1 / 1'
+    when '3_4'
+      assign r_img_aspect = '3 / 4'
+    else
+      assign r_img_class = 'kefey-dual-partnerships__image-wrap--natural'
+      assign r_img_fit = 'contain'
+  endcase
+-%}
+
+<section
+  id="KefeyDualPartnerships-{{ section.id }}"
+  class="kefey-dual-partnerships"
+  style="
+    --kdp-section-pt: {{ section.settings.padding_top }}px;
+    --kdp-section-pb: {{ section.settings.padding_bottom }}px;
+    --kdp-mobile-font-scale: {{ section.settings.mobile_typography_scale }};
+  "
+>
+  <div
+    class="kefey-dual-partnerships__inner"
+    style="padding-top: var(--kdp-section-pt); padding-bottom: var(--kdp-section-pb);"
+  >
+    <div class="kefey-dual-partnerships__grid">
+      <div
+        class="kefey-dual-partnerships__col kefey-dual-partnerships__col--left"
+        style="
+          background: {{ section.settings.left_background_color }};
+          --kdp-col-text: {{ section.settings.left_text_color }};
+          --kdp-col-pad-top: {{ section.settings.left_padding_top }}px;
+          --kdp-col-pad-bottom: {{ section.settings.left_padding_bottom }}px;
+          --kdp-col-pad-x: {{ section.settings.left_padding_horizontal }}px;
+          --kdp-header-gap: {{ section.settings.left_header_bottom_spacing }}px;
+          --kdp-logo-tagline-gap: {{ section.settings.left_logo_tagline_spacing }}px;
+          --kdp-header-logo-max: {{ section.settings.left_header_logo_max_width }}px;
+          --kdp-image-text-gap: {{ section.settings.left_image_text_spacing }}px;
+          --kdp-heading-body-gap: {{ section.settings.left_heading_body_spacing }}px;
+          --kdp-body-p-spacing: {{ section.settings.left_body_paragraph_spacing }}px;
+          --kdp-footer-top: {{ section.settings.left_footer_top_spacing }}px;
+          --kdp-footer-logo-max: {{ section.settings.left_footer_logo_max_width }}px;
+          --kdp-image-radius: {{ section.settings.left_image_border_radius }}px;
+          --kdp-tag-ff: {{ l_tag_ff }};
+          --kdp-tag-fw: {{ l_tag_fw }};
+          --kdp-tag-fs: {{ section.settings.left_tagline_font_size }}px;
+          --kdp-tag-lh: {{ section.settings.left_tagline_line_height | divided_by: 100.0 }};
+          --kdp-ch-ff: {{ l_ch_ff }};
+          --kdp-ch-fw: {{ l_ch_fw }};
+          --kdp-ch-fs: {{ section.settings.left_content_heading_font_size }}px;
+          --kdp-ch-lh: {{ section.settings.left_content_heading_line_height | divided_by: 100.0 }};
+          --kdp-body-ff: {{ l_body_ff }};
+          --kdp-body-fw: {{ l_body_fw }};
+          --kdp-body-fs: {{ section.settings.left_body_font_size }}px;
+          --kdp-body-lh: {{ section.settings.left_body_line_height | divided_by: 100.0 }};
+          --kdp-foot-ff: {{ l_foot_ff }};
+          --kdp-foot-fw: {{ l_foot_fw }};
+          --kdp-foot-fs: {{ section.settings.left_footer_font_size }}px;
+          --kdp-image-aspect: {{ l_img_aspect }};
+          --kdp-image-fit: {{ l_img_fit }};
+        "
+      >
+        <div class="kefey-dual-partnerships__header">
+          {% if section.settings.left_header_logo != blank %}
+            <div class="kefey-dual-partnerships__header-logo">
+              {{
+                section.settings.left_header_logo
+                | image_url: width: 600
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '200, 360, 480, 600',
+                  sizes: '(max-width: 989px) 60vw, 30vw',
+                  alt: left_header_alt
+              }}
+            </div>
+          {% endif %}
+          {% if section.settings.left_header_tagline != blank %}
+            <div class="kefey-dual-partnerships__tagline rte">{{ section.settings.left_header_tagline }}</div>
+          {% endif %}
+        </div>
+
+        {% if section.settings.left_image != blank %}
+          <div class="kefey-dual-partnerships__image-wrap {{ l_img_class }}">
+            {{
+              section.settings.left_image
+              | image_url: width: 1600
+              | image_tag:
+                loading: 'lazy',
+                widths: '375, 550, 750, 1100, 1500, 1600',
+                sizes: '(max-width: 989px) 100vw, 50vw',
+                alt: section.settings.left_image.alt
+            }}
+          </div>
+        {% endif %}
+
+        <div class="kefey-dual-partnerships__content">
+          {% if section.settings.left_content_heading != blank %}
+            <h2 class="kefey-dual-partnerships__content-heading">{{ section.settings.left_content_heading }}</h2>
+          {% endif %}
+          {% if section.settings.left_body != blank %}
+            <div class="kefey-dual-partnerships__body rte">{{ section.settings.left_body }}</div>
+          {% endif %}
+        </div>
+
+        {% if section.settings.left_footer_logo != blank or section.settings.left_learn_more_label != blank %}
+          <div class="kefey-dual-partnerships__footer">
+            <div class="kefey-dual-partnerships__learn-row">
+              {% if section.settings.left_learn_more_url != blank %}
+                <a
+                  href="{{ section.settings.left_learn_more_url }}"
+                  class="kefey-dual-partnerships__learn-link"
+                  {% if section.settings.left_learn_more_new_tab %}
+                    target="_blank" rel="noopener noreferrer"
+                  {% endif %}
+                >
+                  {% if section.settings.left_learn_more_label != blank %}
+                    <span>{{ section.settings.left_learn_more_label }}</span>
+                  {% endif %}
+                  {% if section.settings.left_show_learn_arrow %}
+                    <span class="kefey-dual-partnerships__learn-arrow" aria-hidden="true">{{ section.settings.learn_more_arrow_text }}</span>
+                  {% endif %}
+                  {% if section.settings.left_footer_logo != blank %}
+                    <span class="kefey-dual-partnerships__footer-logo">
+                      {{
+                        section.settings.left_footer_logo
+                        | image_url: width: 400
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '120, 200, 300, 400',
+                          sizes: '160px',
+                          alt: section.settings.left_footer_logo.alt
+                      }}
+                    </span>
+                  {% endif %}
+                </a>
+              {% else %}
+                <div class="kefey-dual-partnerships__learn-link" role="presentation" style="pointer-events: none;">
+                  {% if section.settings.left_learn_more_label != blank %}
+                    <span>{{ section.settings.left_learn_more_label }}</span>
+                  {% endif %}
+                  {% if section.settings.left_show_learn_arrow %}
+                    <span class="kefey-dual-partnerships__learn-arrow" aria-hidden="true">{{ section.settings.learn_more_arrow_text }}</span>
+                  {% endif %}
+                  {% if section.settings.left_footer_logo != blank %}
+                    <span class="kefey-dual-partnerships__footer-logo">
+                      {{
+                        section.settings.left_footer_logo
+                        | image_url: width: 400
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '120, 200, 300, 400',
+                          sizes: '160px',
+                          alt: section.settings.left_footer_logo.alt
+                      }}
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+
+      <div
+        class="kefey-dual-partnerships__col kefey-dual-partnerships__col--right"
+        style="
+          background: {{ section.settings.right_background_color }};
+          --kdp-col-text: {{ section.settings.right_text_color }};
+          --kdp-col-pad-top: {{ section.settings.right_padding_top }}px;
+          --kdp-col-pad-bottom: {{ section.settings.right_padding_bottom }}px;
+          --kdp-col-pad-x: {{ section.settings.right_padding_horizontal }}px;
+          --kdp-header-gap: {{ section.settings.right_header_bottom_spacing }}px;
+          --kdp-logo-tagline-gap: {{ section.settings.right_logo_tagline_spacing }}px;
+          --kdp-header-logo-max: {{ section.settings.right_header_logo_max_width }}px;
+          --kdp-image-text-gap: {{ section.settings.right_image_text_spacing }}px;
+          --kdp-heading-body-gap: {{ section.settings.right_heading_body_spacing }}px;
+          --kdp-body-p-spacing: {{ section.settings.right_body_paragraph_spacing }}px;
+          --kdp-footer-top: {{ section.settings.right_footer_top_spacing }}px;
+          --kdp-footer-logo-max: {{ section.settings.right_footer_logo_max_width }}px;
+          --kdp-image-radius: {{ section.settings.right_image_border_radius }}px;
+          --kdp-tag-ff: {{ r_tag_ff }};
+          --kdp-tag-fw: {{ r_tag_fw }};
+          --kdp-tag-fs: {{ section.settings.right_tagline_font_size }}px;
+          --kdp-tag-lh: {{ section.settings.right_tagline_line_height | divided_by: 100.0 }};
+          --kdp-ch-ff: {{ r_ch_ff }};
+          --kdp-ch-fw: {{ r_ch_fw }};
+          --kdp-ch-fs: {{ section.settings.right_content_heading_font_size }}px;
+          --kdp-ch-lh: {{ section.settings.right_content_heading_line_height | divided_by: 100.0 }};
+          --kdp-body-ff: {{ r_body_ff }};
+          --kdp-body-fw: {{ r_body_fw }};
+          --kdp-body-fs: {{ section.settings.right_body_font_size }}px;
+          --kdp-body-lh: {{ section.settings.right_body_line_height | divided_by: 100.0 }};
+          --kdp-foot-ff: {{ r_foot_ff }};
+          --kdp-foot-fw: {{ r_foot_fw }};
+          --kdp-foot-fs: {{ section.settings.right_footer_font_size }}px;
+          --kdp-image-aspect: {{ r_img_aspect }};
+          --kdp-image-fit: {{ r_img_fit }};
+        "
+      >
+        <div class="kefey-dual-partnerships__header">
+          {% if section.settings.right_header_logo != blank %}
+            <div class="kefey-dual-partnerships__header-logo">
+              {{
+                section.settings.right_header_logo
+                | image_url: width: 600
+                | image_tag:
+                  loading: 'lazy',
+                  widths: '200, 360, 480, 600',
+                  sizes: '(max-width: 989px) 60vw, 30vw',
+                  alt: right_header_alt
+              }}
+            </div>
+          {% endif %}
+          {% if section.settings.right_header_tagline != blank %}
+            <div class="kefey-dual-partnerships__tagline rte">{{ section.settings.right_header_tagline }}</div>
+          {% endif %}
+        </div>
+
+        {% if section.settings.right_image != blank %}
+          <div class="kefey-dual-partnerships__image-wrap {{ r_img_class }}">
+            {{
+              section.settings.right_image
+              | image_url: width: 1600
+              | image_tag:
+                loading: 'lazy',
+                widths: '375, 550, 750, 1100, 1500, 1600',
+                sizes: '(max-width: 989px) 100vw, 50vw',
+                alt: section.settings.right_image.alt
+            }}
+          </div>
+        {% endif %}
+
+        <div class="kefey-dual-partnerships__content">
+          {% if section.settings.right_content_heading != blank %}
+            <h2 class="kefey-dual-partnerships__content-heading">{{ section.settings.right_content_heading }}</h2>
+          {% endif %}
+          {% if section.settings.right_body != blank %}
+            <div class="kefey-dual-partnerships__body rte">{{ section.settings.right_body }}</div>
+          {% endif %}
+        </div>
+
+        {% if section.settings.right_footer_logo != blank or section.settings.right_learn_more_label != blank %}
+          <div class="kefey-dual-partnerships__footer">
+            <div class="kefey-dual-partnerships__learn-row">
+              {% if section.settings.right_learn_more_url != blank %}
+                <a
+                  href="{{ section.settings.right_learn_more_url }}"
+                  class="kefey-dual-partnerships__learn-link"
+                  {% if section.settings.right_learn_more_new_tab %}
+                    target="_blank" rel="noopener noreferrer"
+                  {% endif %}
+                >
+                  {% if section.settings.right_learn_more_label != blank %}
+                    <span>{{ section.settings.right_learn_more_label }}</span>
+                  {% endif %}
+                  {% if section.settings.right_show_learn_arrow %}
+                    <span class="kefey-dual-partnerships__learn-arrow" aria-hidden="true">{{ section.settings.learn_more_arrow_text }}</span>
+                  {% endif %}
+                  {% if section.settings.right_footer_logo != blank %}
+                    <span class="kefey-dual-partnerships__footer-logo">
+                      {{
+                        section.settings.right_footer_logo
+                        | image_url: width: 400
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '120, 200, 300, 400',
+                          sizes: '160px',
+                          alt: section.settings.right_footer_logo.alt
+                      }}
+                    </span>
+                  {% endif %}
+                </a>
+              {% else %}
+                <div class="kefey-dual-partnerships__learn-link" role="presentation" style="pointer-events: none;">
+                  {% if section.settings.right_learn_more_label != blank %}
+                    <span>{{ section.settings.right_learn_more_label }}</span>
+                  {% endif %}
+                  {% if section.settings.right_show_learn_arrow %}
+                    <span class="kefey-dual-partnerships__learn-arrow" aria-hidden="true">{{ section.settings.learn_more_arrow_text }}</span>
+                  {% endif %}
+                  {% if section.settings.right_footer_logo != blank %}
+                    <span class="kefey-dual-partnerships__footer-logo">
+                      {{
+                        section.settings.right_footer_logo
+                        | image_url: width: 400
+                        | image_tag:
+                          loading: 'lazy',
+                          widths: '120, 200, 300, 400',
+                          sizes: '160px',
+                          alt: section.settings.right_footer_logo.alt
+                      }}
+                    </span>
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Kefey dual partnerships",
+  "tag": "section",
+  "class": "section section--kefey-dual-partnerships",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_typography_scale",
+      "label": "Mobile font scale (%)",
+      "min": 80,
+      "max": 100,
+      "step": 1,
+      "default": 90
+    },
+    {
+      "type": "text",
+      "id": "learn_more_arrow_text",
+      "label": "Learn more arrow text",
+      "default": "→"
+    },
+    {
+      "type": "header",
+      "content": "Column 1 — content"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_header_logo",
+      "label": "Header logo"
+    },
+    {
+      "type": "richtext",
+      "id": "left_header_tagline",
+      "label": "Tagline (under logo)",
+      "default": "<p>Kefey's Impact: 20,000 Women & Children Reached.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Main image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "left_content_heading",
+      "label": "Content heading",
+      "default": "Kefey's Impact: 20,000 Women & Children Reached in the Last Year"
+    },
+    {
+      "type": "richtext",
+      "id": "left_body",
+      "label": "Body",
+      "default": "<p>Add your partnership story here.</p>"
+    },
+    {
+      "type": "text",
+      "id": "left_learn_more_label",
+      "label": "Learn more label",
+      "default": "Learn more about"
+    },
+    {
+      "type": "url",
+      "id": "left_learn_more_url",
+      "label": "Learn more link"
+    },
+    {
+      "type": "checkbox",
+      "id": "left_learn_more_new_tab",
+      "label": "Open learn more in new tab",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "left_show_learn_arrow",
+      "label": "Show arrow before footer logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "left_footer_logo",
+      "label": "Footer logo (next to learn more)"
+    },
+    {
+      "type": "header",
+      "content": "Column 1 — colors & spacing"
+    },
+    {
+      "type": "color",
+      "id": "left_background_color",
+      "label": "Background",
+      "default": "#4fb1b1"
+    },
+    {
+      "type": "color",
+      "id": "left_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "left_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "left_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "left_padding_horizontal",
+      "label": "Padding horizontal",
+      "min": 12,
+      "max": 80,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "left_header_logo_max_width",
+      "label": "Header logo max width",
+      "min": 80,
+      "max": 400,
+      "step": 4,
+      "default": 220
+    },
+    {
+      "type": "range",
+      "id": "left_footer_logo_max_width",
+      "label": "Footer logo max width",
+      "min": 80,
+      "max": 320,
+      "step": 4,
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "left_header_bottom_spacing",
+      "label": "Space below header block",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "left_logo_tagline_spacing",
+      "label": "Space between logo and tagline",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "left_image_text_spacing",
+      "label": "Space below image",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "left_heading_body_spacing",
+      "label": "Space below content heading",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "left_body_paragraph_spacing",
+      "label": "Paragraph spacing (body)",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "left_footer_top_spacing",
+      "label": "Space above learn more row",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "left_image_border_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "left_image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "default": "natural",
+      "options": [
+        { "value": "natural", "label": "Natural" },
+        { "value": "16_9", "label": "16:9" },
+        { "value": "4_3", "label": "4:3" },
+        { "value": "1_1", "label": "1:1" },
+        { "value": "3_4", "label": "3:4" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Column 1 — typography"
+    },
+    {
+      "type": "select",
+      "id": "left_tagline_font_family",
+      "label": "Tagline font",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "left_tagline_font_weight",
+      "label": "Tagline weight",
+      "default": "400",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "left_tagline_font_size",
+      "label": "Tagline size (px)",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "left_tagline_line_height",
+      "label": "Tagline line height (%)",
+      "min": 110,
+      "max": 180,
+      "step": 5,
+      "default": 135
+    },
+    {
+      "type": "select",
+      "id": "left_content_heading_font_family",
+      "label": "Content heading font",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "left_content_heading_font_weight",
+      "label": "Content heading weight",
+      "default": "700",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "left_content_heading_font_size",
+      "label": "Content heading size (px)",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "left_content_heading_line_height",
+      "label": "Content heading line height (%)",
+      "min": 100,
+      "max": 150,
+      "step": 5,
+      "default": 120
+    },
+    {
+      "type": "select",
+      "id": "left_body_font_family",
+      "label": "Body font",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "left_body_font_weight",
+      "label": "Body weight",
+      "default": "400",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "left_body_font_size",
+      "label": "Body size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "left_body_line_height",
+      "label": "Body line height (%)",
+      "min": 120,
+      "max": 200,
+      "step": 5,
+      "default": 150
+    },
+    {
+      "type": "select",
+      "id": "left_footer_font_family",
+      "label": "Learn more row font",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "left_footer_font_weight",
+      "label": "Learn more weight",
+      "default": "500",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "left_footer_font_size",
+      "label": "Learn more size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Column 2 — content"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_header_logo",
+      "label": "Header logo"
+    },
+    {
+      "type": "richtext",
+      "id": "right_header_tagline",
+      "label": "Tagline (under logo)",
+      "default": "<p>Proudly Supporting Global Reforestation Efforts.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Main image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "right_content_heading",
+      "label": "Content heading",
+      "default": "Growing Good, Naturally"
+    },
+    {
+      "type": "richtext",
+      "id": "right_body",
+      "label": "Body",
+      "default": "<p>Add your partnership story here.</p>"
+    },
+    {
+      "type": "text",
+      "id": "right_learn_more_label",
+      "label": "Learn more label",
+      "default": "Learn more about"
+    },
+    {
+      "type": "url",
+      "id": "right_learn_more_url",
+      "label": "Learn more link"
+    },
+    {
+      "type": "checkbox",
+      "id": "right_learn_more_new_tab",
+      "label": "Open learn more in new tab",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "right_show_learn_arrow",
+      "label": "Show arrow before footer logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "right_footer_logo",
+      "label": "Footer logo (next to learn more)"
+    },
+    {
+      "type": "header",
+      "content": "Column 2 — colors & spacing"
+    },
+    {
+      "type": "color",
+      "id": "right_background_color",
+      "label": "Background",
+      "default": "#8bc34a"
+    },
+    {
+      "type": "color",
+      "id": "right_text_color",
+      "label": "Text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "right_padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "right_padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "right_padding_horizontal",
+      "label": "Padding horizontal",
+      "min": 12,
+      "max": 80,
+      "step": 2,
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "right_header_logo_max_width",
+      "label": "Header logo max width",
+      "min": 80,
+      "max": 400,
+      "step": 4,
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "right_footer_logo_max_width",
+      "label": "Footer logo max width",
+      "min": 80,
+      "max": 320,
+      "step": 4,
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "right_header_bottom_spacing",
+      "label": "Space below header block",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "right_logo_tagline_spacing",
+      "label": "Space between logo and tagline",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "right_image_text_spacing",
+      "label": "Space below image",
+      "min": 0,
+      "max": 64,
+      "step": 2,
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "right_heading_body_spacing",
+      "label": "Space below content heading",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "right_body_paragraph_spacing",
+      "label": "Paragraph spacing (body)",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "right_footer_top_spacing",
+      "label": "Space above learn more row",
+      "min": 0,
+      "max": 80,
+      "step": 2,
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "right_image_border_radius",
+      "label": "Image corner radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "right_image_aspect_ratio",
+      "label": "Image aspect ratio",
+      "default": "natural",
+      "options": [
+        { "value": "natural", "label": "Natural" },
+        { "value": "16_9", "label": "16:9" },
+        { "value": "4_3", "label": "4:3" },
+        { "value": "1_1", "label": "1:1" },
+        { "value": "3_4", "label": "3:4" }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Column 2 — typography"
+    },
+    {
+      "type": "select",
+      "id": "right_tagline_font_family",
+      "label": "Tagline font",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "right_tagline_font_weight",
+      "label": "Tagline weight",
+      "default": "400",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "right_tagline_font_size",
+      "label": "Tagline size (px)",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "right_tagline_line_height",
+      "label": "Tagline line height (%)",
+      "min": 110,
+      "max": 180,
+      "step": 5,
+      "default": 135
+    },
+    {
+      "type": "select",
+      "id": "right_content_heading_font_family",
+      "label": "Content heading font",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "right_content_heading_font_weight",
+      "label": "Content heading weight",
+      "default": "700",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "right_content_heading_font_size",
+      "label": "Content heading size (px)",
+      "min": 16,
+      "max": 48,
+      "step": 1,
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "right_content_heading_line_height",
+      "label": "Content heading line height (%)",
+      "min": 100,
+      "max": 150,
+      "step": 5,
+      "default": 120
+    },
+    {
+      "type": "select",
+      "id": "right_body_font_family",
+      "label": "Body font",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "right_body_font_weight",
+      "label": "Body weight",
+      "default": "400",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "right_body_font_size",
+      "label": "Body size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "right_body_line_height",
+      "label": "Body line height (%)",
+      "min": 120,
+      "max": 200,
+      "step": 5,
+      "default": 150
+    },
+    {
+      "type": "select",
+      "id": "right_footer_font_family",
+      "label": "Learn more row font",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "right_footer_font_weight",
+      "label": "Learn more weight",
+      "default": "500",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "right_footer_font_size",
+      "label": "Learn more size (px)",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kefey dual partnerships"
+    }
+  ]
+}
+{% endschema %}

@@ -9,6 +9,11 @@
  */
 {
   "sections": {
+    "kefey_dual_partnerships": {
+      "type": "kefey-dual-partnerships",
+      "name": "Dual partnerships",
+      "settings": {}
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -149,9 +154,10 @@
     }
   },
   "order": [
-    "main",
     "header_banner_8CAxxh",
     "kefey_free_from_heading_DxnHUR",
-    "we_refuse_section_44hDTM"
+    "kefey_dual_partnerships",
+    "we_refuse_section_44hDTM",
+    "main"
   ]
 }

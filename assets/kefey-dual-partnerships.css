@@ -1,0 +1,260 @@
+/* Full-width two-column partnership strip (50 / 50) */
+.kefey-dual-partnerships {
+  --kdp-mobile-scale: calc(var(--kdp-mobile-font-scale, 90) / 100);
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.kefey-dual-partnerships__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  width: 100%;
+  min-height: 0;
+}
+
+.kefey-dual-partnerships__col {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  color: var(--kdp-col-text, #ffffff);
+  padding: var(--kdp-col-pad-top, 40px) var(--kdp-col-pad-x, 32px) var(--kdp-col-pad-bottom, 40px);
+  box-sizing: border-box;
+}
+
+.kefey-dual-partnerships__header {
+  text-align: center;
+  margin-bottom: var(--kdp-header-gap, 20px);
+}
+
+.kefey-dual-partnerships__header-logo {
+  display: block;
+  margin: 0 auto var(--kdp-logo-tagline-gap, 16px);
+  max-width: var(--kdp-header-logo-max, 220px);
+  width: auto;
+  height: auto;
+}
+
+.kefey-dual-partnerships__header-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.kefey-dual-partnerships__tagline {
+  margin: 0;
+  font-family: var(--kdp-tag-ff, inherit);
+  font-size: var(--kdp-tag-fs, 16px);
+  font-weight: var(--kdp-tag-fw, 400);
+  line-height: var(--kdp-tag-lh, 1.35);
+  color: inherit;
+}
+
+.kefey-dual-partnerships__tagline p {
+  margin: 0;
+}
+
+.kefey-dual-partnerships__image-wrap {
+  position: relative;
+  width: 100%;
+  margin: 0 0 var(--kdp-image-text-gap, 24px);
+  overflow: hidden;
+  border-radius: var(--kdp-image-radius, 0);
+  aspect-ratio: var(--kdp-image-aspect, auto);
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.kefey-dual-partnerships__image-wrap--natural {
+  aspect-ratio: auto;
+}
+
+.kefey-dual-partnerships__image-wrap img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: var(--kdp-image-fit, cover);
+  vertical-align: middle;
+}
+
+.kefey-dual-partnerships__image-wrap--natural img {
+  height: auto;
+  object-fit: contain;
+}
+
+.kefey-dual-partnerships__content {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.kefey-dual-partnerships__content-heading {
+  margin: 0 0 var(--kdp-heading-body-gap, 16px);
+  font-family: var(--kdp-ch-ff, inherit);
+  font-size: var(--kdp-ch-fs, 28px);
+  font-weight: var(--kdp-ch-fw, 700);
+  line-height: var(--kdp-ch-lh, 1.2);
+  color: inherit;
+  text-align: left;
+}
+
+.kefey-dual-partnerships__body.rte {
+  font-family: var(--kdp-body-ff, inherit);
+  font-size: var(--kdp-body-fs, 16px);
+  font-weight: var(--kdp-body-fw, 400);
+  line-height: var(--kdp-body-lh, 1.5);
+  color: inherit;
+  text-align: left;
+}
+
+.kefey-dual-partnerships__body.rte > *:first-child {
+  margin-top: 0;
+}
+
+.kefey-dual-partnerships__body.rte > *:last-child {
+  margin-bottom: 0;
+}
+
+.kefey-dual-partnerships__body.rte p {
+  margin: 0 0 var(--kdp-body-p-spacing, 12px);
+}
+
+.kefey-dual-partnerships__body.rte ul,
+.kefey-dual-partnerships__body.rte ol {
+  margin: 0 0 12px;
+  padding-left: 1.2em;
+}
+
+.kefey-dual-partnerships__body.rte li + li {
+  margin-top: 6px;
+}
+
+.kefey-dual-partnerships__body.rte strong {
+  font-weight: 700;
+}
+
+.kefey-dual-partnerships__footer {
+  margin-top: auto;
+  padding-top: var(--kdp-footer-top, 28px);
+  flex-shrink: 0;
+}
+
+.kefey-dual-partnerships__learn-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px 14px;
+}
+
+.kefey-dual-partnerships__learn-link {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  text-decoration: none;
+  color: inherit;
+  font-family: var(--kdp-foot-ff, inherit);
+  font-size: var(--kdp-foot-fs, 15px);
+  font-weight: var(--kdp-foot-fw, 500);
+  line-height: 1.3;
+}
+
+.kefey-dual-partnerships__learn-link:hover {
+  opacity: 0.92;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.kefey-dual-partnerships__learn-arrow {
+  display: inline-block;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+.kefey-dual-partnerships__footer-logo {
+  display: block;
+  max-width: var(--kdp-footer-logo-max, 160px);
+  width: auto;
+  height: auto;
+  flex-shrink: 0;
+}
+
+.kefey-dual-partnerships__footer-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 989px) {
+  .kefey-dual-partnerships__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Horizontal padding matches image breakout (see --kdp-mobile-pad-x) */
+  .kefey-dual-partnerships__col {
+    --kdp-mobile-pad-x: max(1.375rem, var(--kdp-col-pad-x, 32px));
+    padding-top: calc(var(--kdp-col-pad-top, 40px) * var(--kdp-mobile-scale));
+    padding-bottom: calc(var(--kdp-col-pad-bottom, 40px) * var(--kdp-mobile-scale));
+    padding-left: var(--kdp-mobile-pad-x);
+    padding-right: var(--kdp-mobile-pad-x);
+  }
+
+  /* Mobile comp: logo + tagline left-aligned */
+  .kefey-dual-partnerships__header {
+    text-align: left;
+  }
+
+  .kefey-dual-partnerships__header-logo {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .kefey-dual-partnerships__header-logo img {
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  .kefey-dual-partnerships__tagline {
+    text-align: left;
+    font-size: calc(var(--kdp-tag-fs, 16px) * var(--kdp-mobile-scale));
+  }
+
+  .kefey-dual-partnerships__tagline p {
+    text-align: left;
+  }
+
+  /* Hero image: full width of colored block (edge to edge) */
+  .kefey-dual-partnerships__image-wrap {
+    width: calc(100% + 2 * var(--kdp-mobile-pad-x));
+    max-width: none;
+    margin-left: calc(-1 * var(--kdp-mobile-pad-x));
+    margin-right: calc(-1 * var(--kdp-mobile-pad-x));
+    border-radius: 0 !important;
+  }
+
+  .kefey-dual-partnerships__content-heading {
+    font-size: calc(var(--kdp-ch-fs, 28px) * var(--kdp-mobile-scale));
+    line-height: 1.18;
+  }
+
+  .kefey-dual-partnerships__body.rte {
+    font-size: calc(var(--kdp-body-fs, 16px) * var(--kdp-mobile-scale));
+  }
+
+  .kefey-dual-partnerships__learn-link {
+    font-size: calc(var(--kdp-foot-fs, 15px) * var(--kdp-mobile-scale));
+    padding: 0.35rem 0;
+    min-height: 2.75rem;
+    align-items: center;
+  }
+
+  .kefey-dual-partnerships__footer {
+    margin-top: 0;
+    padding-top: var(--kdp-footer-top, 28px);
+  }
+}
