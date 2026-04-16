@@ -149,51 +149,61 @@
     </div>
   {% endif %}
 
-  <div class="eef__inner">
+  <div class="eef__shell">
     <div class="eef__intro">
       {% if section.settings.intro_heading != blank %}
-        <div class="eef__title-wrap">
-          <h2 class="eef__title">
-            <span class="eef__title-text">{{ section.settings.intro_heading }}</span>
-            <span class="eef__title-bar" aria-hidden="true"></span>
-          </h2>
+        <div class="eef__cont">
+          <div class="eef__title-wrap">
+            <h2 class="eef__title">
+              <span class="eef__title-text">{{ section.settings.intro_heading }}</span>
+              <span class="eef__title-bar" aria-hidden="true"></span>
+            </h2>
+          </div>
         </div>
       {% endif %}
       {% if section.settings.intro_body != blank %}
-        <div class="eef__panel rte">{{ section.settings.intro_body }}</div>
+        <div class="eef__panel-bleed">
+          <div class="eef__cont">
+            <div class="eef__panel rte">{{ section.settings.intro_body }}</div>
+          </div>
+        </div>
       {% endif %}
     </div>
 
     {% if section.settings.product_image != blank %}
       <div class="eef__product">
-        <div class="eef__circle-wrap">
-          <div class="eef__circle" aria-hidden="true"></div>
-          {{
-            section.settings.product_image
-            | image_url: width: 1600
-            | image_tag:
-              class: 'eef__product-img',
-              loading: 'lazy',
-              widths: '360, 560, 760, 960, 1200, 1600',
-              sizes: '(max-width: 749px) 90vw, min(80vw, 900px)',
-              alt: section.settings.product_image.alt
-          }}
+        <div class="eef__cont">
+          <div class="eef__circle-wrap">
+            <div class="eef__circle" aria-hidden="true"></div>
+            {{
+              section.settings.product_image
+              | image_url: width: 1600
+              | image_tag:
+                class: 'eef__product-img',
+                loading: 'lazy',
+                widths: '360, 560, 760, 960, 1200, 1600',
+                sizes: '(max-width: 749px) 90vw, min(80vw, 900px)',
+                alt: section.settings.product_image.alt
+            }}
+          </div>
         </div>
       </div>
     {% endif %}
 
     <div class="eef__fsc">
-      {% if section.settings.fsc_heading != blank %}
-        <div class="eef__title-wrap">
-          <h2 class="eef__title">
-            <span class="eef__title-text">{{ section.settings.fsc_heading }}</span>
-            <span class="eef__title-bar" aria-hidden="true"></span>
-          </h2>
-        </div>
-      {% endif %}
-      {% if section.settings.fsc_body != blank %}
-        <div class="eef__fsc-body rte">{{ section.settings.fsc_body }}</div>
-      {% endif %}
+      <div class="eef__cont">
+        {% if section.settings.fsc_heading != blank %}
+          <div class="eef__title-wrap">
+            <h2 class="eef__title">
+              <span class="eef__title-text">{{ section.settings.fsc_heading }}</span>
+              <span class="eef__title-bar" aria-hidden="true"></span>
+            </h2>
+          </div>
+        {% endif %}
+        {% if section.settings.fsc_body != blank %}
+          <div class="eef__fsc-body rte">{{ section.settings.fsc_body }}</div>
+        {% endif %}
+      </div>
     </div>
   </div>
 </section>
@@ -208,7 +218,7 @@
     { "type": "color", "id": "section_background", "label": "Section background", "default": "#ffffff" },
     { "type": "image_picker", "id": "bg_desktop", "label": "Background image (desktop)" },
     { "type": "image_picker", "id": "bg_mobile", "label": "Background image (mobile)", "info": "Optional. Uses desktop image on phones if empty." },
-    { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 720, "max": 1200, "step": 8, "default": 960 },
+    { "type": "range", "id": "content_max_width", "label": "Content max width (px)", "min": 960, "max": 1400, "step": 8, "default": 1200 },
     { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 4, "default": 48 },
     { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 4, "default": 48 },
     { "type": "range", "id": "padding_horizontal", "label": "Padding horizontal (desktop)", "min": 12, "max": 48, "step": 2, "default": 24 },

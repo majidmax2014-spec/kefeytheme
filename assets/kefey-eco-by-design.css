@@ -1,9 +1,16 @@
 /* Kefey — Eco by design (optional bg, heading+bar, accent panel, product+circle, FSC block) */
 
+/* Full-bleed section (edge-to-edge within viewport) */
 .eef {
   position: relative;
-  width: 100%;
-  overflow: hidden;
+  left: 50%;
+  right: 50%;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  overflow-x: clip;
+  overflow-y: hidden;
   background: var(--eef-section-bg, #ffffff);
 }
 
@@ -29,12 +36,34 @@
   object-position: center center;
 }
 
-.eef__inner {
+.eef__shell {
   position: relative;
   z-index: 1;
-  max-width: var(--eef-max, 960px);
-  margin: 0 auto;
-  padding: var(--eef-pt, 48px) var(--eef-px, 24px) var(--eef-pb, 48px);
+  width: 100%;
+  padding: var(--eef-pt, 48px) 0 var(--eef-pb, 48px);
+  box-sizing: border-box;
+}
+
+/* Center column for headings, product, FSC (default 1200px) */
+.eef__cont {
+  width: 100%;
+  max-width: var(--eef-max, 1200px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--eef-px, 24px);
+  padding-right: var(--eef-px, 24px);
+  box-sizing: border-box;
+}
+
+/* Orange intro: full width of section; copy stays inside .eef__cont (max 1200px) */
+.eef__panel-bleed {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding-top: var(--eef-intro-py, 28px);
+  padding-bottom: var(--eef-intro-py, 28px);
+  background: var(--eef-intro-bg, #e95439);
+  color: var(--eef-intro-color, #ffffff);
   box-sizing: border-box;
 }
 
@@ -78,11 +107,11 @@
 
 .eef__panel {
   margin: 0 0 var(--eef-gap-panel-product, 40px);
-  padding: var(--eef-intro-py, 28px) var(--eef-intro-px, 28px);
-  background: var(--eef-intro-bg, #e95439);
-  color: var(--eef-intro-color, #ffffff);
+  padding: 0 var(--eef-intro-px, 16px);
   text-align: center;
   box-sizing: border-box;
+  background: transparent;
+  color: inherit;
 }
 
 .eef__panel .rte {
@@ -169,8 +198,18 @@
 }
 
 @media screen and (max-width: 749px) {
-  .eef__inner {
-    padding: var(--eef-pt-m, 36px) var(--eef-px-m, 18px) var(--eef-pb-m, 36px);
+  .eef__shell {
+    padding: var(--eef-pt-m, 36px) 0 var(--eef-pb-m, 36px);
+  }
+
+  .eef__cont {
+    padding-left: var(--eef-px-m, 18px);
+    padding-right: var(--eef-px-m, 18px);
+  }
+
+  .eef__panel-bleed {
+    padding-top: var(--eef-intro-py-m, 22px);
+    padding-bottom: var(--eef-intro-py-m, 22px);
   }
 
   .eef__title-wrap {
@@ -191,7 +230,8 @@
 
   .eef__panel {
     margin-bottom: var(--eef-gap-panel-product-m, 28px);
-    padding: var(--eef-intro-py-m, 22px) var(--eef-intro-px-m, 18px);
+    padding-left: var(--eef-intro-px-m, 12px);
+    padding-right: var(--eef-intro-px-m, 12px);
   }
 
   .eef__panel .rte {
