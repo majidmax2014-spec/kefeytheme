@@ -9,6 +9,29 @@
  */
 {
   "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "enable_legal_typography": false,
+        "legal_title_font_family": "heading",
+        "legal_section_font_family": "heading",
+        "legal_body_font_family": "body",
+        "legal_title_color": "#70b9be",
+        "legal_section_heading_color": "#101010",
+        "legal_body_color": "#333333",
+        "legal_title_font_size": 36,
+        "legal_section_heading_font_size": 18,
+        "legal_body_font_size": 16,
+        "legal_title_uppercase": true,
+        "legal_section_heading_uppercase": true,
+        "legal_body_line_height": 165,
+        "legal_paragraph_spacing": 16,
+        "legal_content_max_width": 720,
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
     "header_banner_xWtMXY": {
       "type": "header-banner",
       "name": "Header Banner",
@@ -43,38 +66,67 @@
         "mobile_image_anchor": "bottom"
       }
     },
-    "kefey_eco_by_design": {
-      "type": "kefey-eco-by-design",
-      "name": "Eco by design",
-      "settings": {}
-    },
-    "main": {
-      "type": "main-page",
-      "disabled": true,
+    "kefey_free_from_heading_UbUQNt": {
+      "type": "kefey-free-from-heading",
+      "name": "Kefey free-from heading",
       "settings": {
-        "enable_legal_typography": false,
-        "legal_title_font_family": "heading",
-        "legal_section_font_family": "heading",
-        "legal_body_font_family": "body",
-        "legal_title_color": "#70b9be",
-        "legal_section_heading_color": "#101010",
-        "legal_body_color": "#333333",
-        "legal_title_font_size": 36,
-        "legal_section_heading_font_size": 18,
-        "legal_body_font_size": 16,
-        "legal_title_uppercase": true,
-        "legal_section_heading_uppercase": true,
-        "legal_body_line_height": 165,
-        "legal_paragraph_spacing": 16,
-        "legal_content_max_width": 720,
-        "padding_top": 28,
-        "padding_bottom": 28
+        "section_background": "#ffffff",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "padding_horizontal": 24,
+        "padding_top_mobile": 36,
+        "padding_bottom_mobile": 40,
+        "padding_horizontal_mobile": 20,
+        "content_max_width": 900,
+        "heading": "Because Wellness Shouldn’t Cost The Planet",
+        "heading_color": "#111111",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "700",
+        "heading_font_size": 36,
+        "heading_font_size_mobile": 24,
+        "heading_line_height": 100,
+        "heading_line_height_mobile": 112,
+        "heading_letter_spacing": 0,
+        "bar_color": "#4fb0ae",
+        "bar_height_desktop": 12,
+        "bar_offset_bottom_desktop": -6,
+        "bar_extend": 4,
+        "bar_border_radius": 2,
+        "bar_height_mobile_frac": 42,
+        "bar_height_mobile_min": 14,
+        "bar_height_mobile_max": 22,
+        "bar_offset_bottom_mobile": 10,
+        "subtext": "",
+        "sub_color": "#111111",
+        "sub_font_family": "inherit",
+        "sub_font_weight": "600",
+        "sub_font_size": 18,
+        "sub_font_size_mobile": 15,
+        "sub_line_height": 144,
+        "sub_line_height_mobile": 144,
+        "note": "<p>Most supplements still rely on plastic jars — and even when recycled, plastic continues to leave a lasting environmental footprint.<br/><br/>At Kefey®, we believe wellness should make you feel good — and the planet, too. That’s why our mission goes beyond creating joyful, plant-based products.<br/>Kefey chose a different path, one we believe represents a better standard for the future of wellness.<br/><br/>Our primary packaging is paper-based and FSC-certified, designed without plastic bottles, without PET jars, and without any compromise in quality.</p>",
+        "note_italic": true,
+        "note_color": "#333333",
+        "note_font_family": "inherit",
+        "note_font_weight": "400",
+        "note_font_size": 16,
+        "note_font_size_mobile": 15,
+        "note_line_height": 150,
+        "note_line_height_mobile": 150,
+        "gap_after_heading": 20,
+        "gap_after_heading_mobile": 16,
+        "gap_after_sub": 16,
+        "gap_after_sub_mobile": 14
       }
     }
   },
   "order": [
+    "main",
     "header_banner_xWtMXY",
-    "kefey_eco_by_design",
-    "main"
+    "kefey_free_from_heading_UbUQNt"
   ]
 }
