@@ -87,6 +87,9 @@
   max-width: none;
   height: auto;
   transform: translate(var(--fk-kids-x, 0px), var(--fk-kids-y, -8px));
+  object-fit: var(--fk-kids-object-fit, cover);
+  object-position: var(--fk-kids-object-position, center center);
+  border-radius: var(--fk-kids-radius, 0);
 }
 
 .fk__row--impact {
@@ -464,15 +467,13 @@
     box-sizing: border-box;
   }
 
-  /* Full height of orange row: image fills column (crop with object-fit) */
+  /* Full height of orange row: image fills column (fit/position from theme settings) */
   .fk__kids-image {
     align-self: stretch;
     width: auto;
-    max-width: min(52vw, 280px);
+    max-width: min(calc(var(--fk-kids-mobile-max-vw, 52) * 1vw), var(--fk-kids-mobile-max-px, 280px));
     height: 100%;
     aspect-ratio: unset;
-    object-fit: cover;
-    object-position: center 22%;
     transform: translate(var(--fk-kids-x, 0px), var(--fk-kids-y, 0px));
     -webkit-mask-image: none;
     mask-image: none;

@@ -93,6 +93,11 @@
     --fk-kids-size: {{ section.settings.kids_image_width }}px;
     --fk-kids-x: {{ section.settings.kids_offset_x }}px;
     --fk-kids-y: {{ section.settings.kids_offset_y }}px;
+    --fk-kids-object-fit: {{ section.settings.kids_object_fit }};
+    --fk-kids-object-position: {{ section.settings.kids_object_position }};
+    --fk-kids-radius: {{ section.settings.kids_border_radius }}px;
+    --fk-kids-mobile-max-vw: {{ section.settings.kids_mobile_max_vw }};
+    --fk-kids-mobile-max-px: {{ section.settings.kids_mobile_max_px }}px;
     --fk-row2-left-logo-w: {{ section.settings.row2_left_logo_width }}px;
     --fk-row2-right-logo-w: {{ section.settings.row2_right_logo_width }}px;
     --fk-brand-logo-w: {{ section.settings.brand_logo_width }}px;
@@ -353,9 +358,37 @@
     { "type": "image_picker", "id": "kids_image", "label": "Kids image" },
     { "type": "range", "id": "row1_height_desktop", "label": "Row height desktop (px)", "min": 220, "max": 480, "step": 4, "default": 304 },
     { "type": "range", "id": "row1_height_mobile", "label": "Row height mobile (px)", "min": 220, "max": 460, "step": 4, "default": 280 },
-    { "type": "range", "id": "kids_image_width", "label": "Kids image width (px)", "min": 200, "max": 780, "step": 10, "default": 500 },
+    { "type": "range", "id": "kids_image_width", "label": "Kids image width desktop (px)", "min": 200, "max": 780, "step": 10, "default": 500 },
     { "type": "range", "id": "kids_offset_x", "label": "Kids image offset X", "min": -200, "max": 200, "step": 4, "default": 0 },
     { "type": "range", "id": "kids_offset_y", "label": "Kids image offset Y", "min": -120, "max": 120, "step": 4, "default": -8 },
+    {
+      "type": "select",
+      "id": "kids_object_fit",
+      "label": "Kids image object fit",
+      "default": "cover",
+      "options": [
+        { "value": "cover", "label": "Cover (fill frame, may crop)" },
+        { "value": "contain", "label": "Contain (show whole image)" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "kids_object_position",
+      "label": "Kids image focal point",
+      "info": "Used with Cover to choose which part of the photo stays visible.",
+      "default": "center 22%",
+      "options": [
+        { "value": "center center", "label": "Center" },
+        { "value": "center top", "label": "Top" },
+        { "value": "center bottom", "label": "Bottom" },
+        { "value": "center 22%", "label": "Slightly above center" },
+        { "value": "left center", "label": "Left" },
+        { "value": "right center", "label": "Right" }
+      ]
+    },
+    { "type": "range", "id": "kids_border_radius", "label": "Kids image corner radius", "min": 0, "max": 32, "step": 2, "default": 0 },
+    { "type": "range", "id": "kids_mobile_max_vw", "label": "Kids image mobile max width (vw)", "min": 30, "max": 85, "step": 1, "default": 52 },
+    { "type": "range", "id": "kids_mobile_max_px", "label": "Kids image mobile max width (px)", "min": 160, "max": 420, "step": 10, "default": 280 },
     { "type":"range", "id":"ff_top_heading_fs", "label":"Top heading font size (px)", "min": 14, "max": 72, "step": 1, "default": 28 },
     {
       "type":"select",
