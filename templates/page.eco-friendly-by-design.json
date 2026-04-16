@@ -9,8 +9,43 @@
  */
 {
   "sections": {
+    "header_banner_xWtMXY": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "bg_image_desktop": "shopify://shop_images/Eco-friendly-desktop.png",
+        "bg_image_mobile": "shopify://shop_images/Eco-friendly-mobile.png",
+        "heading": "Plastic-Free Where It Matters Most — The Container.",
+        "subheading": "A new standard in supplement packaging, designed to care for you & the planet.",
+        "subheading_richtext": "",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 46,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 18,
+        "hb_heading_fs_mobile": 26,
+        "hb_desc_fs_mobile": 16,
+        "hb_desc_strong_weight": "700",
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 550,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24,
+        "overlay_opacity_mobile": 0,
+        "mobile_vertical_align": "top",
+        "mobile_content_padding_top": 44,
+        "mobile_content_padding_x": 22,
+        "mobile_text_alignment": "match",
+        "mobile_image_anchor": "bottom"
+      }
+    },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "enable_legal_typography": false,
         "legal_title_font_family": "heading",
@@ -33,6 +68,7 @@
     }
   },
   "order": [
+    "header_banner_xWtMXY",
     "main"
   ]
 }
