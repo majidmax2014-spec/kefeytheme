@@ -1,0 +1,379 @@
+{{ 'kefey-eco-by-design.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign h_ff = 'var(--font-body-family)'
+  endif
+
+  assign intro_ff = 'inherit'
+  if section.settings.intro_font_family == 'heading'
+    assign intro_ff = 'var(--font-heading-family)'
+  elsif section.settings.intro_font_family == 'body'
+    assign intro_ff = 'var(--font-body-family)'
+  endif
+
+  assign fsc_ff = 'inherit'
+  if section.settings.fsc_font_family == 'heading'
+    assign fsc_ff = 'var(--font-heading-family)'
+  elsif section.settings.fsc_font_family == 'body'
+    assign fsc_ff = 'var(--font-body-family)'
+  endif
+
+  assign bar_pad_em = section.settings.bar_extend | times: 0.01
+  assign bar_h_m_em = section.settings.bar_height_mobile_frac | times: 0.01
+  assign bar_b_m_em = section.settings.bar_offset_bottom_mobile | times: 0.01
+-%}
+
+<section
+  id="KefeyEcoByDesign-{{ section.id }}"
+  class="eef"
+  style="
+    --eef-section-bg: {{ section.settings.section_background }};
+    --eef-max: {{ section.settings.content_max_width }}px;
+    --eef-pt: {{ section.settings.padding_top }}px;
+    --eef-pb: {{ section.settings.padding_bottom }}px;
+    --eef-px: {{ section.settings.padding_horizontal }}px;
+    --eef-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --eef-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --eef-px-m: {{ section.settings.padding_horizontal_mobile }}px;
+    --eef-gap-title-panel: {{ section.settings.gap_heading_to_panel }}px;
+    --eef-gap-title-panel-m: {{ section.settings.gap_heading_to_panel_mobile }}px;
+    --eef-gap-panel-product: {{ section.settings.gap_panel_to_product }}px;
+    --eef-gap-panel-product-m: {{ section.settings.gap_panel_to_product_mobile }}px;
+    --eef-gap-product-fsc: {{ section.settings.gap_product_to_fsc }}px;
+    --eef-gap-product-fsc-m: {{ section.settings.gap_product_to_fsc_mobile }}px;
+    --eef-gap-title-fsc-body: {{ section.settings.gap_fsc_heading_to_body }}px;
+    --eef-h-ff: {{ h_ff }};
+    --eef-h-fw: {{ section.settings.heading_font_weight }};
+    --eef-h-fs: {{ section.settings.heading_font_size }}px;
+    --eef-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --eef-h-lh: {{ section.settings.heading_line_height | times: 0.01 }};
+    --eef-h-lh-m: {{ section.settings.heading_line_height_mobile | times: 0.01 }};
+    --eef-h-track: {{ section.settings.heading_letter_spacing | times: 0.001 }}em;
+    --eef-h-color: {{ section.settings.heading_color }};
+    --eef-bar-bg: {{ section.settings.bar_color }};
+    --eef-bar-radius: {{ section.settings.bar_border_radius }}px;
+    --eef-bar-pad: {{ bar_pad_em }}em;
+    --eef-bar-h-d: {{ section.settings.bar_height_desktop }}px;
+    --eef-bar-b-d: {{ section.settings.bar_offset_bottom_desktop }}px;
+    --eef-bar-h-m: {{ bar_h_m_em }}em;
+    --eef-bar-h-m-min: {{ section.settings.bar_height_mobile_min }}px;
+    --eef-bar-h-m-max: {{ section.settings.bar_height_mobile_max }}px;
+    --eef-bar-b-m: {{ bar_b_m_em }}em;
+    --eef-intro-bg: {{ section.settings.intro_panel_background }};
+    --eef-intro-color: {{ section.settings.intro_text_color }};
+    --eef-intro-px: {{ section.settings.intro_padding_horizontal }}px;
+    --eef-intro-py: {{ section.settings.intro_padding_vertical }}px;
+    --eef-intro-px-m: {{ section.settings.intro_padding_horizontal_mobile }}px;
+    --eef-intro-py-m: {{ section.settings.intro_padding_vertical_mobile }}px;
+    --eef-intro-ff: {{ intro_ff }};
+    --eef-intro-fw: {{ section.settings.intro_font_weight }};
+    --eef-intro-fs: {{ section.settings.intro_font_size }}px;
+    --eef-intro-fs-m: {{ section.settings.intro_font_size_mobile }}px;
+    --eef-intro-lh: {{ section.settings.intro_line_height | times: 0.01 }};
+    --eef-intro-lh-m: {{ section.settings.intro_line_height_mobile | times: 0.01 }};
+    --eef-intro-p-gap: {{ section.settings.intro_paragraph_gap }}px;
+    --eef-circle-bg: {{ section.settings.circle_background }};
+    --eef-circle-max: {{ section.settings.circle_max_width }}px;
+    --eef-circle-wrap-min: {{ section.settings.circle_wrap_min_height }}px;
+    --eef-circle-wrap-min-m: {{ section.settings.circle_wrap_min_height_mobile }}px;
+    --eef-product-pct: {{ section.settings.product_image_width_pct }}%;
+    --eef-product-pct-m: {{ section.settings.product_image_width_pct_mobile }}%;
+    --eef-product-max-px: {{ section.settings.product_image_max_width }}px;
+    --eef-product-max-px-m: {{ section.settings.product_image_max_width_mobile }}px;
+    --eef-fsc-bg: {{ section.settings.fsc_block_background }};
+    --eef-fsc-color: {{ section.settings.fsc_text_color }};
+    --eef-fsc-px: {{ section.settings.fsc_padding_horizontal }}px;
+    --eef-fsc-py: {{ section.settings.fsc_padding_vertical }}px;
+    --eef-fsc-radius: {{ section.settings.fsc_block_radius }}px;
+    --eef-fsc-text-max: {{ section.settings.fsc_text_max_width }}px;
+    --eef-fsc-ff: {{ fsc_ff }};
+    --eef-fsc-fw: {{ section.settings.fsc_font_weight }};
+    --eef-fsc-fs: {{ section.settings.fsc_font_size }}px;
+    --eef-fsc-fs-m: {{ section.settings.fsc_font_size_mobile }}px;
+    --eef-fsc-lh: {{ section.settings.fsc_line_height | times: 0.01 }};
+    --eef-fsc-lh-m: {{ section.settings.fsc_line_height_mobile | times: 0.01 }};
+    --eef-fsc-p-gap: {{ section.settings.fsc_paragraph_gap }}px;
+  "
+>
+  {% if section.settings.bg_desktop != blank or section.settings.bg_mobile != blank %}
+    <div class="eef__bg-wrap" aria-hidden="true">
+      {% if section.settings.bg_mobile != blank and section.settings.bg_desktop != blank %}
+        <picture>
+          <source
+            media="(max-width: 749px)"
+            srcset="
+              {{ section.settings.bg_mobile | image_url: width: 550 }} 550w,
+              {{ section.settings.bg_mobile | image_url: width: 750 }} 750w,
+              {{ section.settings.bg_mobile | image_url: width: 1100 }} 1100w
+            "
+            sizes="100vw"
+          >
+          {{
+            section.settings.bg_desktop
+            | image_url: width: 2400
+            | image_tag:
+              class: 'eef__bg-img',
+              loading: 'lazy',
+              widths: '750, 1100, 1500, 2000, 2400',
+              sizes: '100vw',
+              alt: ''
+          }}
+        </picture>
+      {% elsif section.settings.bg_mobile != blank %}
+        {{
+          section.settings.bg_mobile
+          | image_url: width: 1600
+          | image_tag:
+            class: 'eef__bg-img',
+            loading: 'lazy',
+            widths: '550, 750, 1100, 1600',
+            sizes: '100vw',
+            alt: ''
+        }}
+      {% else %}
+        {{
+          section.settings.bg_desktop
+          | image_url: width: 2400
+          | image_tag:
+            class: 'eef__bg-img',
+            loading: 'lazy',
+            widths: '750, 1100, 1500, 2000, 2400',
+            sizes: '100vw',
+            alt: ''
+        }}
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="eef__inner">
+    <div class="eef__intro">
+      {% if section.settings.intro_heading != blank %}
+        <div class="eef__title-wrap">
+          <h2 class="eef__title">
+            <span class="eef__title-text">{{ section.settings.intro_heading }}</span>
+            <span class="eef__title-bar" aria-hidden="true"></span>
+          </h2>
+        </div>
+      {% endif %}
+      {% if section.settings.intro_body != blank %}
+        <div class="eef__panel rte">{{ section.settings.intro_body }}</div>
+      {% endif %}
+    </div>
+
+    {% if section.settings.product_image != blank %}
+      <div class="eef__product">
+        <div class="eef__circle-wrap">
+          <div class="eef__circle" aria-hidden="true"></div>
+          {{
+            section.settings.product_image
+            | image_url: width: 1600
+            | image_tag:
+              class: 'eef__product-img',
+              loading: 'lazy',
+              widths: '360, 560, 760, 960, 1200, 1600',
+              sizes: '(max-width: 749px) 90vw, min(80vw, 900px)',
+              alt: section.settings.product_image.alt
+          }}
+        </div>
+      </div>
+    {% endif %}
+
+    <div class="eef__fsc">
+      {% if section.settings.fsc_heading != blank %}
+        <div class="eef__title-wrap">
+          <h2 class="eef__title">
+            <span class="eef__title-text">{{ section.settings.fsc_heading }}</span>
+            <span class="eef__title-bar" aria-hidden="true"></span>
+          </h2>
+        </div>
+      {% endif %}
+      {% if section.settings.fsc_body != blank %}
+        <div class="eef__fsc-body rte">{{ section.settings.fsc_body }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Eco by design",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Section layout" },
+    { "type": "color", "id": "section_background", "label": "Section background", "default": "#ffffff" },
+    { "type": "image_picker", "id": "bg_desktop", "label": "Background image (desktop)" },
+    { "type": "image_picker", "id": "bg_mobile", "label": "Background image (mobile)", "info": "Optional. Uses desktop image on phones if empty." },
+    { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 720, "max": 1200, "step": 8, "default": 960 },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 4, "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 4, "default": 48 },
+    { "type": "range", "id": "padding_horizontal", "label": "Padding horizontal (desktop)", "min": 12, "max": 48, "step": 2, "default": 24 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 100, "step": 4, "default": 36 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 100, "step": 4, "default": 36 },
+    { "type": "range", "id": "padding_horizontal_mobile", "label": "Padding horizontal (mobile)", "min": 12, "max": 32, "step": 2, "default": 18 },
+
+    { "type": "header", "content": "Headings (yellow bar style)" },
+    {
+      "type": "inline_richtext",
+      "id": "intro_heading",
+      "label": "Intro heading",
+      "default": "Designed with Intention"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "fsc_heading",
+      "label": "FSC heading",
+      "default": "What does FSC-certified mean?"
+    },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading weight",
+      "default": "700",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    { "type": "range", "id": "heading_font_size", "label": "Heading size (desktop)", "min": 22, "max": 56, "step": 1, "default": 36 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 40, "step": 1, "default": 24 },
+    { "type": "range", "id": "heading_line_height", "label": "Heading line height (%)", "min": 100, "max": 140, "step": 2, "default": 112 },
+    { "type": "range", "id": "heading_line_height_mobile", "label": "Heading line height mobile (%)", "min": 100, "max": 140, "step": 2, "default": 114 },
+    { "type": "range", "id": "heading_letter_spacing", "label": "Heading letter spacing", "min": -50, "max": 200, "step": 5, "default": 0 },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#111111" },
+    { "type": "color", "id": "bar_color", "label": "Yellow bar color", "default": "#ffce2b" },
+    { "type": "range", "id": "bar_height_desktop", "label": "Bar height (desktop)", "min": 6, "max": 28, "step": 1, "default": 12 },
+    { "type": "range", "id": "bar_offset_bottom_desktop", "label": "Bar offset (desktop)", "min": -14, "max": 14, "step": 1, "default": -6 },
+    { "type": "range", "id": "bar_extend", "label": "Bar extend (×0.01 em)", "min": 0, "max": 20, "step": 1, "default": 4 },
+    { "type": "range", "id": "bar_border_radius", "label": "Bar corner radius", "min": 0, "max": 12, "step": 1, "default": 2 },
+    { "type": "range", "id": "bar_height_mobile_frac", "label": "Bar height mobile (em ×100)", "min": 28, "max": 52, "step": 1, "default": 42 },
+    { "type": "range", "id": "bar_height_mobile_min", "label": "Bar height mobile min (px)", "min": 8, "max": 24, "step": 1, "default": 12 },
+    { "type": "range", "id": "bar_height_mobile_max", "label": "Bar height mobile max (px)", "min": 16, "max": 32, "step": 1, "default": 22 },
+    { "type": "range", "id": "bar_offset_bottom_mobile", "label": "Bar offset mobile (×0.01 em)", "min": 0, "max": 24, "step": 1, "default": 10 },
+
+    { "type": "header", "content": "Intro text box" },
+    {
+      "type": "richtext",
+      "id": "intro_body",
+      "label": "Intro text",
+      "default": "<p>Eco-friendly choices shouldn\u2019t feel like an afterthought. They should be built into the design from the start. That\u2019s why Kefey\u2019s packaging was thoughtfully created to replace single-use plastic with a paper-based alternative that is functional, durable, and responsibly sourced.</p><p>From the materials we choose to the way our packaging is designed to be reused, every detail reflects our commitment to reducing waste while maintaining the high quality, freshness, and premium experience our customers expect.</p>"
+    },
+    { "type": "color", "id": "intro_panel_background", "label": "Text box background", "default": "#e95439" },
+    { "type": "color", "id": "intro_text_color", "label": "Text box text color", "default": "#ffffff" },
+    { "type": "range", "id": "intro_padding_horizontal", "label": "Text box padding X", "min": 12, "max": 56, "step": 2, "default": 28 },
+    { "type": "range", "id": "intro_padding_vertical", "label": "Text box padding Y", "min": 12, "max": 56, "step": 2, "default": 28 },
+    { "type": "range", "id": "intro_padding_horizontal_mobile", "label": "Text box padding X (mobile)", "min": 12, "max": 40, "step": 2, "default": 18 },
+    { "type": "range", "id": "intro_padding_vertical_mobile", "label": "Text box padding Y (mobile)", "min": 12, "max": 44, "step": 2, "default": 22 },
+    {
+      "type": "select",
+      "id": "intro_font_family",
+      "label": "Text font",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "intro_font_weight",
+      "label": "Text weight",
+      "default": "400",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" }
+      ]
+    },
+    { "type": "range", "id": "intro_font_size", "label": "Text size (desktop)", "min": 14, "max": 22, "step": 1, "default": 17 },
+    { "type": "range", "id": "intro_font_size_mobile", "label": "Text size (mobile)", "min": 12, "max": 20, "step": 1, "default": 15 },
+    { "type": "range", "id": "intro_line_height", "label": "Text line height (%)", "min": 120, "max": 200, "step": 5, "default": 150 },
+    { "type": "range", "id": "intro_line_height_mobile", "label": "Text line height mobile (%)", "min": 120, "max": 200, "step": 5, "default": 145 },
+    { "type": "range", "id": "intro_paragraph_gap", "label": "Paragraph spacing", "min": 0, "max": 28, "step": 2, "default": 14 },
+
+    { "type": "header", "content": "Center product" },
+    { "type": "image_picker", "id": "product_image", "label": "Product image (includes artwork)" },
+    { "type": "color", "id": "circle_background", "label": "Circle behind product", "default": "#36b2b2" },
+    { "type": "range", "id": "circle_max_width", "label": "Circle max width (px)", "min": 280, "max": 720, "step": 10, "default": 560 },
+    { "type": "range", "id": "circle_wrap_min_height", "label": "Product area min height (desktop)", "min": 280, "max": 640, "step": 10, "default": 420 },
+    { "type": "range", "id": "circle_wrap_min_height_mobile", "label": "Product area min height (mobile)", "min": 240, "max": 520, "step": 10, "default": 320 },
+    { "type": "range", "id": "product_image_width_pct", "label": "Product width (% of circle)", "min": 50, "max": 95, "step": 1, "default": 78 },
+    { "type": "range", "id": "product_image_width_pct_mobile", "label": "Product width (% mobile)", "min": 55, "max": 98, "step": 1, "default": 88 },
+    { "type": "range", "id": "product_image_max_width", "label": "Product max width (px)", "min": 280, "max": 640, "step": 10, "default": 520 },
+    { "type": "range", "id": "product_image_max_width_mobile", "label": "Product max width mobile (px)", "min": 260, "max": 480, "step": 10, "default": 400 },
+
+    { "type": "header", "content": "FSC block" },
+    {
+      "type": "richtext",
+      "id": "fsc_body",
+      "label": "FSC body text",
+      "default": "<p>FSC\u00ae (Forest Stewardship Council) certification ensures that the paper used in our packaging comes from responsibly managed forests, where trees are replanted, ecosystems are protected, and local communities are respected.</p><p>It\u2019s one of the most trusted global standards for sustainable paper sourcing.</p>"
+    },
+    { "type": "color", "id": "fsc_block_background", "label": "FSC block background", "default": "#ffffff" },
+    { "type": "color", "id": "fsc_text_color", "label": "FSC text color", "default": "#111111" },
+    { "type": "range", "id": "fsc_text_max_width", "label": "FSC text max width", "min": 560, "max": 960, "step": 10, "default": 820 },
+    { "type": "range", "id": "fsc_padding_horizontal", "label": "FSC padding X", "min": 0, "max": 40, "step": 2, "default": 8 },
+    { "type": "range", "id": "fsc_padding_vertical", "label": "FSC padding Y", "min": 0, "max": 40, "step": 2, "default": 8 },
+    { "type": "range", "id": "fsc_block_radius", "label": "FSC block corner radius", "min": 0, "max": 24, "step": 2, "default": 0 },
+    {
+      "type": "select",
+      "id": "fsc_font_family",
+      "label": "FSC text font",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "fsc_font_weight",
+      "label": "FSC text weight",
+      "default": "400",
+      "options": [
+        { "value": "inherit", "label": "inherit" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" }
+      ]
+    },
+    { "type": "range", "id": "fsc_font_size", "label": "FSC text size (desktop)", "min": 14, "max": 22, "step": 1, "default": 17 },
+    { "type": "range", "id": "fsc_font_size_mobile", "label": "FSC text size (mobile)", "min": 12, "max": 20, "step": 1, "default": 15 },
+    { "type": "range", "id": "fsc_line_height", "label": "FSC line height (%)", "min": 120, "max": 200, "step": 5, "default": 150 },
+    { "type": "range", "id": "fsc_line_height_mobile", "label": "FSC line height mobile (%)", "min": 120, "max": 200, "step": 5, "default": 145 },
+    { "type": "range", "id": "fsc_paragraph_gap", "label": "FSC paragraph spacing", "min": 0, "max": 28, "step": 2, "default": 14 },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "gap_heading_to_panel", "label": "Intro heading → text box", "min": 0, "max": 48, "step": 2, "default": 20 },
+    { "type": "range", "id": "gap_heading_to_panel_mobile", "label": "Intro heading → text box (mobile)", "min": 0, "max": 40, "step": 2, "default": 16 },
+    { "type": "range", "id": "gap_panel_to_product", "label": "Text box → product", "min": 0, "max": 80, "step": 2, "default": 40 },
+    { "type": "range", "id": "gap_panel_to_product_mobile", "label": "Text box → product (mobile)", "min": 0, "max": 64, "step": 2, "default": 28 },
+    { "type": "range", "id": "gap_product_to_fsc", "label": "Product → FSC block", "min": 0, "max": 80, "step": 2, "default": 44 },
+    { "type": "range", "id": "gap_product_to_fsc_mobile", "label": "Product → FSC block (mobile)", "min": 0, "max": 64, "step": 2, "default": 32 },
+    { "type": "range", "id": "gap_fsc_heading_to_body", "label": "FSC heading → body", "min": 0, "max": 40, "step": 2, "default": 20 }
+  ],
+  "presets": [{ "name": "Eco by design" }]
+}
+{% endschema %}

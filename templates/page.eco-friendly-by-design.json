@@ -43,6 +43,11 @@
         "mobile_image_anchor": "bottom"
       }
     },
+    "kefey_eco_by_design": {
+      "type": "kefey-eco-by-design",
+      "name": "Eco by design",
+      "settings": {}
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -69,6 +74,7 @@
   },
   "order": [
     "header_banner_xWtMXY",
+    "kefey_eco_by_design",
     "main"
   ]
 }
