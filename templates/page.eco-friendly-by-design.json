@@ -418,6 +418,62 @@
         "padding_top": 32,
         "padding_bottom": 40
       }
+    },
+    "kefey_logo_text_marquee_LFXmJA": {
+      "type": "kefey-logo-text-marquee",
+      "blocks": {
+        "item_nhEQa6": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": "+ Trees / forest - without people"
+          }
+        },
+        "item_iH6CRk": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": "+ Trees / forest - without people"
+          }
+        },
+        "item_HtLkRw": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": "+ Trees / forest - without people"
+          }
+        }
+      },
+      "block_order": [
+        "item_nhEQa6",
+        "item_iH6CRk",
+        "item_HtLkRw"
+      ],
+      "name": "Kefey logo text marquee",
+      "settings": {
+        "background_color": "#47b8bb",
+        "text_color": "#ffffff",
+        "text_font_family": "heading",
+        "text_font_weight": "500",
+        "text_size_desktop": 18,
+        "text_size_mobile": 17,
+        "logo_height_desktop": 36,
+        "logo_height_mobile": 14,
+        "bar_height_desktop": 76,
+        "bar_height_mobile": 48,
+        "item_gap_desktop": 24,
+        "item_gap_mobile": 12,
+        "separator": "|",
+        "separator_color": "#ffffff",
+        "separator_size_desktop": 42,
+        "separator_size_mobile": 23,
+        "speed_seconds": 24,
+        "direction": "left",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0
+      }
     }
   },
   "order": [
@@ -428,6 +484,7 @@
     "purpose_beyond_gummy_pkaAdb",
     "kefey_free_from_heading_C7yfCn",
     "kefey_luxury_sustainability_RWQG4n",
-    "we_refuse_section_NmBR4F"
+    "we_refuse_section_NmBR4F",
+    "kefey_logo_text_marquee_LFXmJA"
   ]
 }
