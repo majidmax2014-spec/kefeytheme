@@ -1,0 +1,109 @@
+{{ 'kefey-luxury-sustainability.css' | asset_url | stylesheet_tag }}
+
+<section
+  id="KefeyLuxurySustainability-{{ section.id }}"
+  class="kls"
+  style="
+    --kls-bg: {{ section.settings.section_background }};
+    --kls-max: {{ section.settings.content_max_width }}px;
+    --kls-pt: {{ section.settings.padding_top }}px;
+    --kls-pb: {{ section.settings.padding_bottom }}px;
+    --kls-px: {{ section.settings.padding_horizontal }}px;
+    --kls-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --kls-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --kls-px-m: {{ section.settings.padding_horizontal_mobile }}px;
+    --kls-divider: {{ section.settings.divider_color }};
+    --kls-cta-color: {{ section.settings.cta_color }};
+    --kls-bar-color: {{ section.settings.heading_bar_color }};
+  "
+>
+  <div class="kls__shell">
+    {% if section.settings.heading != blank %}
+      <h2 class="kls__heading">
+        <span class="kls__heading-text">{{ section.settings.heading }}</span>
+        <span class="kls__heading-bar" aria-hidden="true"></span>
+      </h2>
+    {% endif %}
+
+    {% if section.settings.body != blank %}
+      <div class="kls__body rte">{{ section.settings.body }}</div>
+    {% endif %}
+
+    <div class="kls__cards" role="list">
+      {% for block in section.blocks %}
+        <article class="kls__card" role="listitem" {{ block.shopify_attributes }}>
+          {% if block.settings.image != blank %}
+            {{
+              block.settings.image
+              | image_url: width: 1000
+              | image_tag:
+                class: 'kls__card-image',
+                loading: 'lazy',
+                widths: '360, 540, 720, 900, 1000',
+                sizes: '(max-width: 749px) 100vw, 25vw',
+                alt: block.settings.caption
+            }}
+          {% endif %}
+          {% if block.settings.caption != blank %}
+            <h3 class="kls__card-caption">{{ block.settings.caption }}</h3>
+          {% endif %}
+        </article>
+      {% endfor %}
+    </div>
+
+    {% if section.settings.cta_text != blank %}
+      <p class="kls__cta">{{ section.settings.cta_text }}</p>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Luxury sustainability",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "color", "id": "section_background", "label": "Background", "default": "#f3f3f3" },
+    { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 960, "max": 1400, "step": 8, "default": 1200 },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 4, "default": 44 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 4, "default": 42 },
+    { "type": "range", "id": "padding_horizontal", "label": "Padding horizontal (desktop)", "min": 12, "max": 56, "step": 2, "default": 24 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 80, "step": 2, "default": 20 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 80, "step": 2, "default": 22 },
+    { "type": "range", "id": "padding_horizontal_mobile", "label": "Padding horizontal (mobile)", "min": 8, "max": 28, "step": 2, "default": 12 },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Luxury Meets Sustainability" },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text",
+      "default": "<p>Your Kefey tube is designed to stay - not to be thrown away. It's meant to live on your desk, your shelf, and in your everyday routine.</p><p>From pen holder to mini planter or tea container, our packaging invites creativity and conscious living long after the gummies are gone.</p><p>The same thoughtful approach applies to our shipping boxes - intentionally designed to be reused, repurposed, and enjoyed again.</p><p>Because sustainability isn't just a feature, it's a way of life.</p>"
+    },
+    { "type": "color", "id": "heading_bar_color", "label": "Heading highlight color", "default": "#f3c100" },
+    { "type": "color", "id": "divider_color", "label": "Card divider color", "default": "#f3c100" },
+    { "type": "text", "id": "cta_text", "label": "Bottom CTA", "default": "Share how you reuse your Kefey tube and tag us @Kefey.co" },
+    { "type": "color", "id": "cta_color", "label": "Bottom CTA color", "default": "#e74f3d" }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Card",
+      "limit": 4,
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "text", "id": "caption", "label": "Caption", "default": "Reusable Shipping Box" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Luxury sustainability",
+      "blocks": [
+        { "type": "item", "settings": { "caption": "Reusable Shipping Box" } },
+        { "type": "item", "settings": { "caption": "Kefey Tube as a Tea Container" } },
+        { "type": "item", "settings": { "caption": "Kefey Tube as a Mini Planter" } },
+        { "type": "item", "settings": { "caption": "Kefey Tube as a Pen Holder" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
