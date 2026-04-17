@@ -415,6 +415,8 @@
         "text_font_size": 16,
         "content_max_width": 1220,
         "left_col_width": 50,
+        "left_text_padding_top": 154,
+        "left_text_padding_top_mobile": 28,
         "padding_top": 32,
         "padding_bottom": 40
       }
@@ -486,7 +488,7 @@
         "heading_font_weight": "600",
         "body_text": "<p>When you choose Kefey®, you’re choosing thoughtful design, conscious materials, and a brand committed to doing better, for people and for the planet.</p>",
         "accent_text": "Sustainability, Designed to Be Felt.",
-        "accent_color": "#E15241",
+        "accent_color": "#e15241",
         "body_font_size": 16,
         "text_font_family": "inherit",
         "text_font_weight": "inherit",
