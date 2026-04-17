@@ -1,0 +1,112 @@
+.ktm {
+  width: 100%;
+  background: var(--ktm-bg, #47b8bb);
+  padding-top: var(--ktm-pt, 0);
+  padding-bottom: var(--ktm-pb, 0);
+}
+
+.ktm__viewport {
+  width: 100%;
+  height: var(--ktm-bar-h, 76px);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.ktm__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: ktm-scroll var(--ktm-speed, 24s) linear infinite;
+  will-change: transform;
+}
+
+.ktm__track--right {
+  animation-name: ktm-scroll-right;
+}
+
+.ktm__group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.ktm__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ktm-gap, 24px);
+  padding-left: calc(var(--ktm-gap, 24px) * 0.5);
+  padding-right: calc(var(--ktm-gap, 24px) * 0.5);
+  white-space: nowrap;
+}
+
+.ktm__logo {
+  height: var(--ktm-logo-h, 24px);
+  width: auto;
+  max-width: none;
+  display: block;
+  object-fit: contain;
+}
+
+.ktm__text {
+  color: var(--ktm-color, #ffffff);
+  font-family: var(--ktm-text-ff, inherit);
+  font-size: var(--ktm-text-size, 39px);
+  font-weight: var(--ktm-text-fw, 700);
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.ktm__sep {
+  color: var(--ktm-sep-color, #ffffff);
+  font-size: var(--ktm-sep-size, 42px);
+  line-height: 1;
+  transform: translateY(-2%);
+}
+
+@keyframes ktm-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes ktm-scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .ktm {
+    padding-top: var(--ktm-pt-m, 0);
+    padding-bottom: var(--ktm-pb-m, 0);
+  }
+
+  .ktm__viewport {
+    height: var(--ktm-bar-h-m, 48px);
+  }
+
+  .ktm__item {
+    gap: var(--ktm-gap-m, 12px);
+    padding-left: calc(var(--ktm-gap-m, 12px) * 0.5);
+    padding-right: calc(var(--ktm-gap-m, 12px) * 0.5);
+  }
+
+  .ktm__logo {
+    height: var(--ktm-logo-h-m, 14px);
+  }
+
+  .ktm__text {
+    font-size: var(--ktm-text-size-m, 17px);
+  }
+
+  .ktm__sep {
+    font-size: var(--ktm-sep-size-m, 23px);
+  }
+}
