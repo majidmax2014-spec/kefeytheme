@@ -330,24 +330,28 @@
         "item_T6XyY3": {
           "type": "item",
           "settings": {
+            "image": "shopify://shop_images/shipping-box.png",
             "caption": "Reusable Shipping Box"
           }
         },
         "item_chajWz": {
           "type": "item",
           "settings": {
+            "image": "shopify://shop_images/tuebs-as-tea-container.png",
             "caption": "Kefey Tube as a Tea Container"
           }
         },
         "item_eccnpk": {
           "type": "item",
           "settings": {
+            "image": "shopify://shop_images/tube-as-planter.png",
             "caption": "Kefey Tube as a Mini Planter"
           }
         },
         "item_nk7Qnx": {
           "type": "item",
           "settings": {
+            "image": "shopify://shop_images/tube-pen-holder.png",
             "caption": "Kefey Tube as a Pen Holder"
           }
         }
