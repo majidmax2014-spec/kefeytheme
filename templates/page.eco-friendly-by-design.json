@@ -474,6 +474,28 @@
         "padding_top_mobile": 0,
         "padding_bottom_mobile": 0
       }
+    },
+    "our_story_intro_wMxkQV": {
+      "type": "our-story-intro",
+      "name": "Our Story Intro",
+      "settings": {
+        "heading": "Choose Better. Feel Proud. Inspire Change.",
+        "highlight_color": "#ffc72c",
+        "heading_size": 36,
+        "heading_font_family": "inherit",
+        "heading_font_weight": "600",
+        "body_text": "<p>When you choose Kefey®, you’re choosing thoughtful design, conscious materials, and a brand committed to doing better, for people and for the planet.</p>",
+        "accent_text": "Sustainability, Designed to Be Felt.",
+        "accent_color": "#E15241",
+        "body_font_size": 16,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "accent_font_size": 22,
+        "padding_top": 52,
+        "padding_bottom": 56,
+        "max_width": 880,
+        "text_alignment": "center"
+      }
     }
   },
   "order": [
@@ -485,6 +507,7 @@
     "kefey_free_from_heading_C7yfCn",
     "kefey_luxury_sustainability_RWQG4n",
     "we_refuse_section_NmBR4F",
-    "kefey_logo_text_marquee_LFXmJA"
+    "kefey_logo_text_marquee_LFXmJA",
+    "our_story_intro_wMxkQV"
   ]
 }
