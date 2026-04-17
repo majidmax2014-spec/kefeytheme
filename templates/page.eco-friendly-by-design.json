@@ -199,12 +199,56 @@
         "gap_product_to_fsc_mobile": 32,
         "gap_fsc_heading_to_body": 20
       }
+    },
+    "purpose_beyond_gummy_pkaAdb": {
+      "type": "purpose-beyond-gummy",
+      "name": "Purpose Beyond Gummy",
+      "settings": {
+        "heading": "Quality, Safety & Freshness — Inside & Out",
+        "body": "<p>Our packaging isn’t just eco-friendly, it’s designed to meet high food-grade standards while protecting what matters most.<br/><br/>Crafted from FSC-certified paper and printed with soy-based inks, every material is carefully selected to support product quality, consumer safety, and environmental responsibility.<br/><br/>A dual-layer closure and a premium aluminum cap ensure a tighter seal, easy re-closing, and long-lasting freshness, without compromising the elegant, high-quality look of the tube.<br/><br/>To preserve freshness without relying on plastic containers, an aluminum inner lining protects your gummies from light, moisture, and air, keeping them fresh and stable for up to 24 months.<br/> Clean Protection. Thoughtful Materials. Responsible Performance.</p>",
+        "image": "shopify://shop_images/quality-safety-freshnes.png",
+        "panel_color": "#f2c718",
+        "title_bg_color": "#e15241",
+        "title_color": "#ffffff",
+        "section_bg_color": "#ffffff",
+        "left_panel_color": "#f2c718",
+        "title_bar_color": "#e15241",
+        "title_text_color": "#ffffff",
+        "body_color": "#1c1c1c",
+        "heading_font_family": "inherit",
+        "heading_font_weight": "inherit",
+        "heading_font_size": 36,
+        "text_font_family": "inherit",
+        "text_font_weight": "inherit",
+        "text_font_size": 16,
+        "show_button": false,
+        "button_label": "FIND YOUR STAR",
+        "button_link": "",
+        "button_show_arrow": true,
+        "button_background": "#49b2b2",
+        "button_text_color": "#ffffff",
+        "button_font_size": 14,
+        "button_padding_y": 14,
+        "button_padding_x": 22,
+        "button_margin_top": 20,
+        "button_margin_top_mobile": 18,
+        "content_max_width": 1200,
+        "left_col_width": 40,
+        "min_height": 290,
+        "content_padding_left": 56,
+        "content_padding_right": 40,
+        "title_bar_offset_y": 16,
+        "title_bar_width": 80,
+        "padding_top": 44,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
     "main",
     "header_banner_xWtMXY",
     "kefey_free_from_heading_UbUQNt",
-    "kefey_eco_by_design_XEqKtn"
+    "kefey_eco_by_design_XEqKtn",
+    "purpose_beyond_gummy_pkaAdb"
   ]
 }
