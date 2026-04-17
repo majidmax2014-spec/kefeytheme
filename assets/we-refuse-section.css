@@ -40,7 +40,7 @@
 
 .we-refuse-section__left {
   background: #ffffff;
-  padding: 120px clamp(20px, 6vw, 88px) 16px;
+  padding: var(--wrs-left-pt, 120px) clamp(20px, 6vw, 88px) 16px;
 }
 
 .we-refuse-section__text {
@@ -138,7 +138,7 @@
   .we-refuse-section__left {
     order: 2;
     width: 100%;
-    padding: 28px 22px 32px;
+    padding: var(--wrs-left-pt-m, 28px) 22px 32px;
     box-sizing: border-box;
     text-align: left;
     background: #ffffff;
