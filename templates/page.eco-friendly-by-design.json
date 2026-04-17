@@ -320,7 +320,7 @@
         "text_font_size": 16,
         "content_max_width": 1220,
         "left_col_width": 50,
-        "padding_top": 20,
+        "padding_top": 32,
         "padding_bottom": 40
       }
     }
