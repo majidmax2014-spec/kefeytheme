@@ -415,7 +415,7 @@
         "cta_font_weight": "600",
         "cta_font_size": 16,
         "cta_font_size_mobile": 13,
-        "cta_line_height": 124,
+        "cta_line_height": 90,
         "cta_color": "#e74f3d"
       }
     }
