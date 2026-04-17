@@ -1,5 +1,35 @@
 {{ 'kefey-luxury-sustainability.css' | asset_url | stylesheet_tag }}
 
+{%- liquid
+  assign heading_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign heading_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign heading_ff = 'var(--font-body-family)'
+  endif
+
+  assign body_ff = 'inherit'
+  if section.settings.body_font_family == 'heading'
+    assign body_ff = 'var(--font-heading-family)'
+  elsif section.settings.body_font_family == 'body'
+    assign body_ff = 'var(--font-body-family)'
+  endif
+
+  assign caption_ff = 'inherit'
+  if section.settings.caption_font_family == 'heading'
+    assign caption_ff = 'var(--font-heading-family)'
+  elsif section.settings.caption_font_family == 'body'
+    assign caption_ff = 'var(--font-body-family)'
+  endif
+
+  assign cta_ff = 'inherit'
+  if section.settings.cta_font_family == 'heading'
+    assign cta_ff = 'var(--font-heading-family)'
+  elsif section.settings.cta_font_family == 'body'
+    assign cta_ff = 'var(--font-body-family)'
+  endif
+-%}
+
 <section
   id="KefeyLuxurySustainability-{{ section.id }}"
   class="kls"
@@ -12,9 +42,48 @@
     --kls-pt-m: {{ section.settings.padding_top_mobile }}px;
     --kls-pb-m: {{ section.settings.padding_bottom_mobile }}px;
     --kls-px-m: {{ section.settings.padding_horizontal_mobile }}px;
+    --kls-body-max: {{ section.settings.body_max_width }}px;
+    --kls-gap-heading-body: {{ section.settings.gap_heading_to_body }}px;
+    --kls-gap-body-cards: {{ section.settings.gap_body_to_cards }}px;
+    --kls-gap-card-caption: {{ section.settings.gap_card_to_caption }}px;
+    --kls-gap-cards-cta: {{ section.settings.gap_cards_to_cta }}px;
+    --kls-heading-ff: {{ heading_ff }};
+    --kls-heading-fw: {{ section.settings.heading_font_weight }};
+    --kls-heading-fs: {{ section.settings.heading_font_size }}px;
+    --kls-heading-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --kls-heading-lh: {{ section.settings.heading_line_height | times: 0.01 }};
+    --kls-heading-lh-m: {{ section.settings.heading_line_height_mobile | times: 0.01 }};
+    --kls-heading-color: {{ section.settings.heading_color }};
+    --kls-heading-bar-height: {{ section.settings.heading_bar_height }}px;
+    --kls-heading-bar-height-m: {{ section.settings.heading_bar_height_mobile }}px;
+    --kls-body-ff: {{ body_ff }};
+    --kls-body-fw: {{ section.settings.body_font_weight }};
+    --kls-body-fs: {{ section.settings.body_font_size }}px;
+    --kls-body-fs-m: {{ section.settings.body_font_size_mobile }}px;
+    --kls-body-lh: {{ section.settings.body_line_height | times: 0.01 }};
+    --kls-body-lh-m: {{ section.settings.body_line_height_mobile | times: 0.01 }};
+    --kls-body-color: {{ section.settings.body_color }};
+    --kls-caption-ff: {{ caption_ff }};
+    --kls-caption-fw: {{ section.settings.caption_font_weight }};
+    --kls-caption-fs: {{ section.settings.caption_font_size }}px;
+    --kls-caption-fs-m: {{ section.settings.caption_font_size_mobile }}px;
+    --kls-caption-lh: {{ section.settings.caption_line_height | times: 0.01 }};
+    --kls-caption-lh-m: {{ section.settings.caption_line_height_mobile | times: 0.01 }};
+    --kls-caption-color: {{ section.settings.caption_color }};
+    --kls-cta-ff: {{ cta_ff }};
+    --kls-cta-fw: {{ section.settings.cta_font_weight }};
+    --kls-cta-fs: {{ section.settings.cta_font_size }}px;
+    --kls-cta-fs-m: {{ section.settings.cta_font_size_mobile }}px;
+    --kls-cta-lh: {{ section.settings.cta_line_height | times: 0.01 }};
     --kls-divider: {{ section.settings.divider_color }};
+    --kls-divider-w: {{ section.settings.divider_width }}px;
     --kls-cta-color: {{ section.settings.cta_color }};
     --kls-bar-color: {{ section.settings.heading_bar_color }};
+    --kls-image-height: {{ section.settings.image_height_desktop }}px;
+    --kls-image-height-m: {{ section.settings.image_height_mobile }}px;
+    --kls-image-fit: {{ section.settings.image_fit }};
+    --kls-image-pos: {{ section.settings.image_position }};
+    --kls-image-radius: {{ section.settings.image_corner_radius }}px;
   "
 >
   <div class="kls__shell">
@@ -35,11 +104,11 @@
           {% if block.settings.image != blank %}
             {{
               block.settings.image
-              | image_url: width: 1000
+              | image_url: width: 1200
               | image_tag:
                 class: 'kls__card-image',
                 loading: 'lazy',
-                widths: '360, 540, 720, 900, 1000',
+                widths: '360, 540, 720, 900, 1100, 1200',
                 sizes: '(max-width: 749px) 100vw, 25vw',
                 alt: block.settings.caption
             }}
@@ -63,6 +132,7 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    { "type": "header", "content": "Layout" },
     { "type": "color", "id": "section_background", "label": "Background", "default": "#f3f3f3" },
     { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 960, "max": 1400, "step": 8, "default": 1200 },
     { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 4, "default": 44 },
@@ -71,16 +141,177 @@
     { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 80, "step": 2, "default": 20 },
     { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 80, "step": 2, "default": 22 },
     { "type": "range", "id": "padding_horizontal_mobile", "label": "Padding horizontal (mobile)", "min": 8, "max": 28, "step": 2, "default": 12 },
+    { "type": "range", "id": "body_max_width", "label": "Body max width", "min": 520, "max": 1200, "step": 10, "default": 900 },
+    { "type": "range", "id": "gap_heading_to_body", "label": "Gap: heading to body", "min": 0, "max": 40, "step": 2, "default": 16 },
+    { "type": "range", "id": "gap_body_to_cards", "label": "Gap: body to cards", "min": 0, "max": 56, "step": 2, "default": 30 },
+    { "type": "range", "id": "gap_card_to_caption", "label": "Gap: image to caption", "min": 0, "max": 24, "step": 2, "default": 12 },
+    { "type": "range", "id": "gap_cards_to_cta", "label": "Gap: cards to CTA", "min": 0, "max": 48, "step": 2, "default": 24 },
+
+    { "type": "header", "content": "Heading style" },
     { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Luxury Meets Sustainability" },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "default": "700",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    { "type": "range", "id": "heading_font_size", "label": "Heading size (desktop)", "min": 20, "max": 64, "step": 1, "default": 48 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Heading size (mobile)", "min": 16, "max": 40, "step": 1, "default": 22 },
+    { "type": "range", "id": "heading_line_height", "label": "Heading line-height (%)", "min": 90, "max": 180, "step": 2, "default": 112 },
+    { "type": "range", "id": "heading_line_height_mobile", "label": "Heading line-height mobile (%)", "min": 90, "max": 180, "step": 2, "default": 112 },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#111111" },
+    { "type": "color", "id": "heading_bar_color", "label": "Heading highlight color", "default": "#f3c100" },
+    { "type": "range", "id": "heading_bar_height", "label": "Heading bar height", "min": 2, "max": 24, "step": 1, "default": 12 },
+    { "type": "range", "id": "heading_bar_height_mobile", "label": "Heading bar height (mobile)", "min": 2, "max": 16, "step": 1, "default": 8 },
+
+    { "type": "header", "content": "Body text style" },
     {
       "type": "richtext",
       "id": "body",
       "label": "Body text",
       "default": "<p>Your Kefey tube is designed to stay - not to be thrown away. It's meant to live on your desk, your shelf, and in your everyday routine.</p><p>From pen holder to mini planter or tea container, our packaging invites creativity and conscious living long after the gummies are gone.</p><p>The same thoughtful approach applies to our shipping boxes - intentionally designed to be reused, repurposed, and enjoyed again.</p><p>Because sustainability isn't just a feature, it's a way of life.</p>"
     },
-    { "type": "color", "id": "heading_bar_color", "label": "Heading highlight color", "default": "#f3c100" },
+    {
+      "type": "select",
+      "id": "body_font_family",
+      "label": "Body font family",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "body_font_weight",
+      "label": "Body font weight",
+      "default": "400",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "300", "label": "300" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" }
+      ]
+    },
+    { "type": "range", "id": "body_font_size", "label": "Body size (desktop)", "min": 12, "max": 32, "step": 1, "default": 20 },
+    { "type": "range", "id": "body_font_size_mobile", "label": "Body size (mobile)", "min": 11, "max": 24, "step": 1, "default": 14 },
+    { "type": "range", "id": "body_line_height", "label": "Body line-height (%)", "min": 100, "max": 220, "step": 2, "default": 134 },
+    { "type": "range", "id": "body_line_height_mobile", "label": "Body line-height mobile (%)", "min": 100, "max": 220, "step": 2, "default": 130 },
+    { "type": "color", "id": "body_color", "label": "Body color", "default": "#1f1f1f" },
+
+    { "type": "header", "content": "Card image style" },
+    { "type": "range", "id": "image_height_desktop", "label": "Image height (desktop)", "min": 120, "max": 520, "step": 4, "default": 300 },
+    { "type": "range", "id": "image_height_mobile", "label": "Image height (mobile)", "min": 120, "max": 420, "step": 4, "default": 210 },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Image fit",
+      "default": "cover",
+      "options": [
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "default": "center center",
+      "options": [
+        { "value": "left top", "label": "Left top" },
+        { "value": "left center", "label": "Left center" },
+        { "value": "center top", "label": "Center top" },
+        { "value": "center center", "label": "Center center" },
+        { "value": "center bottom", "label": "Center bottom" },
+        { "value": "right center", "label": "Right center" }
+      ]
+    },
+    { "type": "range", "id": "image_corner_radius", "label": "Image corner radius", "min": 0, "max": 24, "step": 1, "default": 0 },
     { "type": "color", "id": "divider_color", "label": "Card divider color", "default": "#f3c100" },
+    { "type": "range", "id": "divider_width", "label": "Divider thickness", "min": 1, "max": 8, "step": 1, "default": 3 },
+
+    { "type": "header", "content": "Caption style" },
+    {
+      "type": "select",
+      "id": "caption_font_family",
+      "label": "Caption font family",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "caption_font_weight",
+      "label": "Caption font weight",
+      "default": "600",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    { "type": "range", "id": "caption_font_size", "label": "Caption size (desktop)", "min": 12, "max": 36, "step": 1, "default": 20 },
+    { "type": "range", "id": "caption_font_size_mobile", "label": "Caption size (mobile)", "min": 11, "max": 26, "step": 1, "default": 14 },
+    { "type": "range", "id": "caption_line_height", "label": "Caption line-height (%)", "min": 90, "max": 180, "step": 2, "default": 120 },
+    { "type": "range", "id": "caption_line_height_mobile", "label": "Caption line-height mobile (%)", "min": 90, "max": 180, "step": 2, "default": 120 },
+    { "type": "color", "id": "caption_color", "label": "Caption color", "default": "#101010" },
+
+    { "type": "header", "content": "Bottom CTA style" },
     { "type": "text", "id": "cta_text", "label": "Bottom CTA", "default": "Share how you reuse your Kefey tube and tag us @Kefey.co" },
+    {
+      "type": "select",
+      "id": "cta_font_family",
+      "label": "CTA font family",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "cta_font_weight",
+      "label": "CTA font weight",
+      "default": "600",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    { "type": "range", "id": "cta_font_size", "label": "CTA size (desktop)", "min": 12, "max": 30, "step": 1, "default": 20 },
+    { "type": "range", "id": "cta_font_size_mobile", "label": "CTA size (mobile)", "min": 11, "max": 22, "step": 1, "default": 13 },
+    { "type": "range", "id": "cta_line_height", "label": "CTA line-height (%)", "min": 90, "max": 180, "step": 2, "default": 124 },
     { "type": "color", "id": "cta_color", "label": "Bottom CTA color", "default": "#e74f3d" }
   ],
   "blocks": [

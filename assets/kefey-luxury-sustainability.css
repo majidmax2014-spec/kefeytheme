@@ -6,17 +6,18 @@
   width: 100%;
   max-width: var(--kls-max, 1200px);
   margin: 0 auto;
-  padding: var(--kls-pt, 44px) var(--kls-px, 24px) var(--kls-pb, 42px);
+  padding: var(--kls-pt, 44px) var(--kls-px, 24px) var(--kls-pb, 44px);
   box-sizing: border-box;
 }
 
 .kls__heading {
   margin: 0;
   text-align: center;
-  font-size: clamp(22px, 3.3vw, 44px);
-  font-weight: 700;
-  line-height: 1.12;
-  color: #111111;
+  font-family: var(--kls-heading-ff, inherit);
+  font-weight: var(--kls-heading-fw, 700);
+  font-size: var(--kls-heading-fs, 48px);
+  line-height: var(--kls-heading-lh, 1.12);
+  color: var(--kls-heading-color, #111111);
 }
 
 .kls__heading-text {
@@ -27,18 +28,20 @@
 .kls__heading-bar {
   display: block;
   width: min(100%, 620px);
-  height: 12px;
-  margin: -10px auto 0;
+  height: var(--kls-heading-bar-height, 12px);
+  margin: calc(var(--kls-heading-bar-height, 12px) * -0.75) auto 0;
   background: var(--kls-bar-color, #f3c100);
 }
 
 .kls__body {
-  max-width: 920px;
-  margin: 16px auto 0;
-  color: #1f1f1f;
+  max-width: var(--kls-body-max, 900px);
+  margin: var(--kls-gap-heading-body, 16px) auto 0;
   text-align: center;
-  font-size: clamp(14px, 1.2vw, 24px);
-  line-height: 1.34;
+  font-family: var(--kls-body-ff, inherit);
+  font-weight: var(--kls-body-fw, 400);
+  font-size: var(--kls-body-fs, 20px);
+  line-height: var(--kls-body-lh, 1.34);
+  color: var(--kls-body-color, #1f1f1f);
 }
 
 .kls__body p {
@@ -46,11 +49,11 @@
 }
 
 .kls__body p + p {
-  margin-top: 10px;
+  margin-top: 0.6em;
 }
 
 .kls__cards {
-  margin-top: 30px;
+  margin-top: var(--kls-gap-body-cards, 30px);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -62,33 +65,37 @@
 }
 
 .kls__card:not(:last-child) {
-  border-right: 3px solid var(--kls-divider, #f3c100);
+  border-right: var(--kls-divider-w, 3px) solid var(--kls-divider, #f3c100);
 }
 
 .kls__card-image {
   width: 100%;
+  height: var(--kls-image-height, 300px);
   display: block;
-  aspect-ratio: 4 / 2.75;
-  object-fit: cover;
+  object-fit: var(--kls-image-fit, cover);
+  object-position: var(--kls-image-pos, center center);
+  border-radius: var(--kls-image-radius, 0);
 }
 
 .kls__card-caption {
-  margin: 14px 10px 0;
-  color: #101010;
-  font-size: clamp(14px, 1.25vw, 32px);
-  font-weight: 600;
-  line-height: 1.2;
+  margin: var(--kls-gap-card-caption, 12px) 10px 0;
+  font-family: var(--kls-caption-ff, inherit);
+  font-weight: var(--kls-caption-fw, 600);
+  font-size: var(--kls-caption-fs, 20px);
+  line-height: var(--kls-caption-lh, 1.2);
+  color: var(--kls-caption-color, #101010);
 }
 
 .kls__cta {
-  margin: 28px 0 0;
-  padding: 18px 0 0;
-  border-top: 3px solid var(--kls-divider, #f3c100);
+  margin: var(--kls-gap-cards-cta, 24px) 0 0;
+  padding: 16px 0 0;
+  border-top: var(--kls-divider-w, 3px) solid var(--kls-divider, #f3c100);
   text-align: center;
+  font-family: var(--kls-cta-ff, inherit);
+  font-weight: var(--kls-cta-fw, 600);
+  font-size: var(--kls-cta-fs, 20px);
+  line-height: var(--kls-cta-lh, 1.24);
   color: var(--kls-cta-color, #e74f3d);
-  font-size: clamp(14px, 1.25vw, 24px);
-  font-weight: 600;
-  line-height: 1.25;
 }
 
 @media screen and (max-width: 749px) {
@@ -97,24 +104,23 @@
   }
 
   .kls__heading {
-    font-size: 22px;
+    font-size: var(--kls-heading-fs-m, 22px);
+    line-height: var(--kls-heading-lh-m, 1.12);
   }
 
   .kls__heading-bar {
     width: min(100%, 240px);
-    height: 8px;
-    margin-top: -7px;
+    height: var(--kls-heading-bar-height-m, 8px);
+    margin-top: calc(var(--kls-heading-bar-height-m, 8px) * -0.72);
   }
 
   .kls__body {
     max-width: 100%;
-    margin-top: 10px;
-    font-size: 14px;
-    line-height: 1.3;
+    font-size: var(--kls-body-fs-m, 14px);
+    line-height: var(--kls-body-lh-m, 1.3);
   }
 
   .kls__cards {
-    margin-top: 20px;
     grid-template-columns: 1fr;
     gap: 14px;
   }
@@ -124,18 +130,18 @@
   }
 
   .kls__card-image {
-    aspect-ratio: 1.45 / 1;
+    height: var(--kls-image-height-m, 210px);
   }
 
   .kls__card-caption {
     margin-top: 8px;
-    font-size: 14px;
+    font-size: var(--kls-caption-fs-m, 14px);
+    line-height: var(--kls-caption-lh-m, 1.2);
   }
 
   .kls__cta {
-    margin-top: 14px;
+    font-size: var(--kls-cta-fs-m, 13px);
     padding-top: 12px;
-    font-size: 13px;
-    border-top-width: 2px;
+    border-top-width: max(1px, calc(var(--kls-divider-w, 3px) - 1px));
   }
 }
