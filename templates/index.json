@@ -141,7 +141,7 @@
         "show_arrows": true,
         "show_dots": true,
         "autoplay": true,
-        "autoplay_speed": 5000,
+        "autoplay_speed": 3000,
         "side_panels_enabled": true,
         "left_panel_color": "#7b61ff",
         "right_panel_color": "#7b61ff",
