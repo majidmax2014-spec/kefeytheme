@@ -134,21 +134,22 @@
   color: var(--rf-btn-text, #0a0a0a);
 }
 
-/* Mobile (≤749px): same as design — badge on top, centered headline + body + ghost CTA; hide side decors */
+/* Mobile (≤749px): logo/badge left, copy + CTA right; copy left-aligned; hide side decors */
 @media (max-width: 749px) {
   .rf-banner {
     min-height: var(--rf-height-mobile, 280px);
     align-items: center;
-    justify-items: center;
+    justify-items: stretch;
   }
 
   .rf-banner__inner {
     min-height: 0;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding-block: clamp(1.75rem, 7vw, 2.75rem);
-    padding-inline: clamp(1.125rem, 5vw, 1.75rem);
+    justify-content: stretch;
+    width: 100%;
+    padding-block: clamp(1.25rem, 5vw, 2rem);
+    padding-inline: clamp(0.875rem, 4vw, 1.5rem);
   }
 
   .rf-banner__decor {
@@ -156,28 +157,30 @@
   }
 
   .rf-banner__center {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     align-items: center;
-    justify-content: center;
-    gap: clamp(1.1rem, 4.5vw, 1.65rem);
+    justify-content: flex-start;
+    gap: clamp(0.65rem, 3.5vw, 1.1rem);
     max-width: 100%;
     width: 100%;
-    text-align: center;
+    text-align: left;
   }
 
   .rf-banner__badge {
-    order: -1;
-    width: 100%;
+    order: 0;
+    flex-shrink: 0;
+    width: auto;
     display: flex;
+    align-items: center;
     justify-content: center;
     margin: 0;
   }
 
-  /* Prominent circular / badge graphic (matches reference scale) */
   .rf-badge,
   .rf-badge__img {
-    width: clamp(156px, 58vw, min(calc(var(--rf-badge-size, 160px) * 1.7), 228px));
-    max-width: min(228px, 88vw);
+    width: clamp(92px, 26vw, min(var(--rf-badge-size, 160px), 150px));
+    max-width: 150px;
   }
 
   .rf-badge {
@@ -192,34 +195,43 @@
   }
 
   .rf-banner__content {
-    flex: none;
-    width: 100%;
-    max-width: min(26rem, 100%);
-    margin: 0 auto;
-    padding: 0 0.25rem;
-    text-align: center;
+    flex: 1;
+    min-width: 0;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    text-align: left;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+  }
+
+  .rf-banner__content .rte,
+  .rf-banner__content .rte p {
+    text-align: left;
   }
 
   .rf-banner__heading {
-    margin: 0 0 0.65rem;
+    margin: 0 0 0.45rem;
     max-width: 100%;
-    font-size: clamp(1.1rem, 5.4vw, var(--rf-heading-fs, 40px));
+    text-align: left;
+    font-size: clamp(0.95rem, 3.9vw, var(--rf-heading-fs, 40px));
     line-height: 1.15;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
   }
 
   .rf-banner__text {
-    margin: 0 0 1.25rem;
-    max-width: 34ch;
-    font-size: clamp(0.9rem, 3.8vw, var(--rf-text-fs, 16px));
-    line-height: 1.5;
+    margin: 0 0 0.75rem;
+    max-width: 100%;
+    text-align: left;
+    font-size: clamp(0.8rem, 3.1vw, var(--rf-text-fs, 16px));
+    line-height: 1.45;
   }
 
   .rf-banner__text p {
     margin: 0;
+    text-align: left;
   }
 
   .rf-banner__text p + p {
@@ -228,8 +240,8 @@
 
   .rf-banner__btn {
     margin-top: 0.1rem;
-    padding: 0.8rem 1.9rem;
-    font-size: clamp(0.78rem, 3.2vw, var(--rf-btn-fs, 14px));
-    align-self: center;
+    padding: 0.65rem 1.25rem;
+    font-size: clamp(0.7rem, 2.8vw, var(--rf-btn-fs, 14px));
+    align-self: flex-start;
   }
 }
