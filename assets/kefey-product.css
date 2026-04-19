@@ -1530,9 +1530,17 @@
     grid-template-columns: minmax(0, 1fr);
   }
 
+  /* Mobile / tablet: icon left + benefit title right (same row), body below — left-aligned with icon edge */
   .kefey-benefits__cell {
-    padding: 18px 0;
+    padding: clamp(16px, 4vw, 22px) 0;
     border-right: 0 !important;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: clamp(10px, 3vw, 16px);
+    row-gap: clamp(8px, 2.5vw, 12px);
+    align-items: center;
+    text-align: left;
   }
 
   .kefey-benefits__cell:last-child {
@@ -1540,10 +1548,21 @@
   }
 
   .kefey-benefits__item-title {
-    font-size: var(--kb-it-fs-m, 36px);
+    grid-column: 2;
+    grid-row: 1;
+    margin: 0;
+    text-align: left;
+    align-self: center;
+    font-size: clamp(1.05rem, 4.2vw, var(--kb-it-fs-m, 36px));
+    line-height: 1.2;
   }
 
   .kefey-benefits__icon {
+    grid-column: 1;
+    grid-row: 1;
+    margin-top: 0;
+    align-self: center;
+    justify-self: start;
     width: var(--kb-icon-circle-m, 52px);
     height: var(--kb-icon-circle-m, 52px);
   }
@@ -1555,7 +1574,18 @@
   }
 
   .kefey-benefits__item-text {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin: 0;
+    text-align: left;
     font-size: var(--kb-ib-fs-m, 18px);
+    line-height: var(--kb-ib-lh, 1.45);
+    max-width: 100%;
+  }
+
+  .kefey-benefits__item-text p {
+    margin: 0;
+    text-align: left;
   }
 
   .kefey-lifestyle {
