@@ -1,0 +1,468 @@
+{{ 'kefey-ambassador-cta-disclaimer.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign h_ff = 'inherit'
+  if section.settings.heading_font_family == 'heading'
+    assign h_ff = 'var(--font-heading-family)'
+  elsif section.settings.heading_font_family == 'body'
+    assign h_ff = 'var(--font-body-family)'
+  endif
+
+  assign sub_ff = 'inherit'
+  if section.settings.subtext_font_family == 'heading'
+    assign sub_ff = 'var(--font-heading-family)'
+  elsif section.settings.subtext_font_family == 'body'
+    assign sub_ff = 'var(--font-body-family)'
+  endif
+
+  assign btn_ff = 'inherit'
+  if section.settings.button_font_family == 'heading'
+    assign btn_ff = 'var(--font-heading-family)'
+  elsif section.settings.button_font_family == 'body'
+    assign btn_ff = 'var(--font-body-family)'
+  endif
+
+  assign tag_ff = 'inherit'
+  if section.settings.tagline_font_family == 'heading'
+    assign tag_ff = 'var(--font-heading-family)'
+  elsif section.settings.tagline_font_family == 'body'
+    assign tag_ff = 'var(--font-body-family)'
+  endif
+
+  assign dt_ff = 'inherit'
+  if section.settings.disclaimer_title_font_family == 'heading'
+    assign dt_ff = 'var(--font-heading-family)'
+  elsif section.settings.disclaimer_title_font_family == 'body'
+    assign dt_ff = 'var(--font-body-family)'
+  endif
+
+  assign db_ff = 'inherit'
+  if section.settings.disclaimer_body_font_family == 'heading'
+    assign db_ff = 'var(--font-heading-family)'
+  elsif section.settings.disclaimer_body_font_family == 'body'
+    assign db_ff = 'var(--font-body-family)'
+  endif
+
+  assign sub_style = 'normal'
+  if section.settings.subtext_italic
+    assign sub_style = 'italic'
+  endif
+
+  assign tag_style = 'normal'
+  if section.settings.tagline_italic
+    assign tag_style = 'italic'
+  endif
+
+  assign db_style = 'normal'
+  if section.settings.disclaimer_body_italic
+    assign db_style = 'italic'
+  endif
+
+  assign mark_pad_em = section.settings.heading_mark_extend | times: 0.01
+  assign btn_track_em = section.settings.button_letter_spacing | times: 0.01
+  assign h_track_em = section.settings.heading_letter_spacing | times: 0.001
+-%}
+
+<section
+  id="KefeyAmbassadorCta-{{ section.id }}"
+  class="kba"
+  style="
+    --kba-bg: {{ section.settings.section_background }};
+    --kba-hero-mw: {{ section.settings.hero_max_width }}px;
+    --kba-px: {{ section.settings.padding_horizontal }}px;
+    --kba-px-m: {{ section.settings.padding_horizontal_mobile }}px;
+    --kba-pt: {{ section.settings.padding_top }}px;
+    --kba-pb: {{ section.settings.padding_bottom }}px;
+    --kba-pt-m: {{ section.settings.padding_top_mobile }}px;
+    --kba-pb-m: {{ section.settings.padding_bottom_mobile }}px;
+    --kba-gap-h-sub: {{ section.settings.gap_heading_to_subtext }}px;
+    --kba-gap-h-sub-m: {{ section.settings.gap_heading_to_subtext_mobile }}px;
+    --kba-gap-sub-btn: {{ section.settings.gap_subtext_to_button }}px;
+    --kba-gap-sub-btn-m: {{ section.settings.gap_subtext_to_button_mobile }}px;
+    --kba-gap-btn-tag: {{ section.settings.gap_button_to_tagline }}px;
+    --kba-gap-btn-tag-m: {{ section.settings.gap_button_to_tagline_mobile }}px;
+    --kba-gap-hero-disc: {{ section.settings.gap_hero_to_disclaimer }}px;
+    --kba-gap-hero-disc-m: {{ section.settings.gap_hero_to_disclaimer_mobile }}px;
+    --kba-h-ff: {{ h_ff }};
+    --kba-h-fw: {{ section.settings.heading_font_weight }};
+    --kba-h-fs: {{ section.settings.heading_font_size }}px;
+    --kba-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+    --kba-h-lh: {{ section.settings.heading_line_height | times: 0.01 }};
+    --kba-h-lh-m: {{ section.settings.heading_line_height_mobile | times: 0.01 }};
+    --kba-h-track: {{ h_track_em }}em;
+    --kba-h-color: {{ section.settings.heading_color }};
+    --kba-mark-bg: {{ section.settings.heading_highlight_color }};
+    --kba-mark-bar-h: {{ section.settings.heading_mark_height }}px;
+    --kba-mark-bar-h-m: {{ section.settings.heading_mark_height_mobile }}px;
+    --kba-mark-bar-b: {{ section.settings.heading_mark_offset }}px;
+    --kba-mark-bar-b-m: {{ section.settings.heading_mark_offset_mobile }}px;
+    --kba-mark-pad: {{ mark_pad_em }}em;
+    --kba-mark-bar-radius: {{ section.settings.heading_mark_radius }}px;
+    --kba-sub-ff: {{ sub_ff }};
+    --kba-sub-fw: {{ section.settings.subtext_font_weight }};
+    --kba-sub-fs: {{ section.settings.subtext_font_size }}px;
+    --kba-sub-fs-m: {{ section.settings.subtext_font_size_mobile }}px;
+    --kba-sub-lh: {{ section.settings.subtext_line_height | times: 0.01 }};
+    --kba-sub-lh-m: {{ section.settings.subtext_line_height_mobile | times: 0.01 }};
+    --kba-sub-color: {{ section.settings.subtext_color }};
+    --kba-sub-style: {{ sub_style }};
+    --kba-sub-mw: {{ section.settings.subtext_max_width }}px;
+    --kba-btn-ff: {{ btn_ff }};
+    --kba-btn-fw: {{ section.settings.button_font_weight }};
+    --kba-btn-fs: {{ section.settings.button_font_size }}px;
+    --kba-btn-fs-m: {{ section.settings.button_font_size_mobile }}px;
+    --kba-btn-track: {{ btn_track_em }}em;
+    --kba-btn-bg: {{ section.settings.button_background }};
+    --kba-btn-color: {{ section.settings.button_text_color }};
+    --kba-btn-py: {{ section.settings.button_padding_vertical }}px;
+    --kba-btn-py-m: {{ section.settings.button_padding_vertical_mobile }}px;
+    --kba-btn-px: {{ section.settings.button_padding_horizontal }}px;
+    --kba-btn-mw: {{ section.settings.button_max_width }}px;
+    --kba-btn-radius: {{ section.settings.button_border_radius }}px;
+    --kba-tag-ff: {{ tag_ff }};
+    --kba-tag-fw: {{ section.settings.tagline_font_weight }};
+    --kba-tag-fs: {{ section.settings.tagline_font_size }}px;
+    --kba-tag-fs-m: {{ section.settings.tagline_font_size_mobile }}px;
+    --kba-tag-lh: {{ section.settings.tagline_line_height | times: 0.01 }};
+    --kba-tag-lh-m: {{ section.settings.tagline_line_height_mobile | times: 0.01 }};
+    --kba-tag-color: {{ section.settings.tagline_color }};
+    --kba-tag-style: {{ tag_style }};
+    --kba-tag-line: {{ section.settings.tagline_line_color }};
+    --kba-tag-line-w: {{ section.settings.tagline_line_width }}px;
+    --kba-tag-gap: {{ section.settings.tagline_line_gap }}px;
+    --kba-tag-gap-m: {{ section.settings.tagline_line_gap_mobile }}px;
+    --kba-tag-mw: {{ section.settings.tagline_max_width }}px;
+    --kba-disc-bg: {{ section.settings.disclaimer_background }};
+    --kba-disc-color: {{ section.settings.disclaimer_body_color }};
+    --kba-disc-px: {{ section.settings.disclaimer_padding_horizontal }}px;
+    --kba-disc-px-m: {{ section.settings.disclaimer_padding_horizontal_mobile }}px;
+    --kba-disc-py: {{ section.settings.disclaimer_padding_vertical }}px;
+    --kba-disc-py-m: {{ section.settings.disclaimer_padding_vertical_mobile }}px;
+    --kba-dt-ff: {{ dt_ff }};
+    --kba-dt-fw: {{ section.settings.disclaimer_title_font_weight }};
+    --kba-dt-fs: {{ section.settings.disclaimer_title_font_size }}px;
+    --kba-dt-fs-m: {{ section.settings.disclaimer_title_font_size_mobile }}px;
+    --kba-dt-lh: {{ section.settings.disclaimer_title_line_height | times: 0.01 }};
+    --kba-dt-color: {{ section.settings.disclaimer_title_color }};
+    --kba-db-ff: {{ db_ff }};
+    --kba-db-fw: {{ section.settings.disclaimer_body_font_weight }};
+    --kba-db-fs: {{ section.settings.disclaimer_body_font_size }}px;
+    --kba-db-fs-m: {{ section.settings.disclaimer_body_font_size_mobile }}px;
+    --kba-db-lh: {{ section.settings.disclaimer_body_line_height | times: 0.01 }};
+    --kba-db-lh-m: {{ section.settings.disclaimer_body_line_height_mobile | times: 0.01 }};
+    --kba-db-color: {{ section.settings.disclaimer_body_color }};
+    --kba-db-style: {{ db_style }};
+    --kba-gap-disc-title-body: {{ section.settings.disclaimer_title_body_gap }}px;
+  "
+>
+  <div class="kba__shell">
+    <div class="kba__hero">
+      {% if section.settings.heading_before != blank or section.settings.heading_highlight != blank or section.settings.heading_after != blank %}
+        <h2 class="kba__heading">
+          {% if section.settings.heading_before != blank %}
+            <span class="kba__heading-line">{{ section.settings.heading_before }}</span>
+          {% endif %}
+          {% if section.settings.heading_highlight != blank %}
+            <span class="kba__heading-mark">
+              <span class="kba__heading-mark-text">{{ section.settings.heading_highlight }}</span>
+              <span class="kba__heading-bar" aria-hidden="true"></span>
+            </span>
+          {% endif %}
+          {% if section.settings.heading_after != blank %}
+            <span class="kba__heading-line">{{ section.settings.heading_after }}</span>
+          {% endif %}
+        </h2>
+      {% endif %}
+
+      {% if section.settings.subtext != blank %}
+        <div class="kba__sub rte">{{ section.settings.subtext }}</div>
+      {% endif %}
+
+      {% if section.settings.button_label != blank %}
+        <a
+          class="kba__btn"
+          {% if section.settings.button_link == blank %}
+            role="link" aria-disabled="true"
+          {% else %}
+            href="{{ section.settings.button_link }}"
+          {% endif %}
+        >
+          {{- section.settings.button_label -}}
+        </a>
+      {% endif %}
+
+      {% if section.settings.tagline != blank %}
+        <div class="kba__tagline-wrap">
+          <div class="kba__tagline rte">{{ section.settings.tagline }}</div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if section.settings.show_disclaimer %}
+    <div class="kba__disclaimer">
+      {% if section.settings.disclaimer_title != blank %}
+        <h3 class="kba__disc-title">{{ section.settings.disclaimer_title }}</h3>
+      {% endif %}
+      {% if section.settings.disclaimer_body != blank %}
+        <div class="kba__disc-body rte">{{ section.settings.disclaimer_body }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Ambassador CTA + disclaimer",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Section" },
+    { "type": "color", "id": "section_background", "label": "Background", "default": "#ffffff" },
+    { "type": "range", "id": "hero_max_width", "label": "Hero content max width", "min": 560, "max": 920, "step": 8, "default": 880 },
+    { "type": "range", "id": "padding_horizontal", "label": "Padding horizontal (desktop)", "min": 12, "max": 48, "step": 2, "default": 24 },
+    { "type": "range", "id": "padding_horizontal_mobile", "label": "Padding horizontal (mobile)", "min": 12, "max": 28, "step": 2, "default": 18 },
+    { "type": "range", "id": "padding_top", "label": "Padding top (desktop)", "min": 0, "max": 120, "step": 4, "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Padding bottom (desktop)", "min": 0, "max": 120, "step": 4, "default": 56 },
+    { "type": "range", "id": "padding_top_mobile", "label": "Padding top (mobile)", "min": 0, "max": 100, "step": 4, "default": 40 },
+    { "type": "range", "id": "padding_bottom_mobile", "label": "Padding bottom (mobile)", "min": 0, "max": 100, "step": 4, "default": 44 },
+    { "type": "range", "id": "gap_heading_to_subtext", "label": "Space: heading to subtext (desktop)", "min": 8, "max": 40, "step": 2, "default": 20 },
+    { "type": "range", "id": "gap_heading_to_subtext_mobile", "label": "Space: heading to subtext (mobile)", "min": 6, "max": 32, "step": 2, "default": 16 },
+    { "type": "range", "id": "gap_subtext_to_button", "label": "Space: subtext to button (desktop)", "min": 12, "max": 48, "step": 2, "default": 28 },
+    { "type": "range", "id": "gap_subtext_to_button_mobile", "label": "Space: subtext to button (mobile)", "min": 10, "max": 40, "step": 2, "default": 22 },
+    { "type": "range", "id": "gap_button_to_tagline", "label": "Space: button to tagline (desktop)", "min": 16, "max": 56, "step": 4, "default": 36 },
+    { "type": "range", "id": "gap_button_to_tagline_mobile", "label": "Space: button to tagline (mobile)", "min": 12, "max": 48, "step": 4, "default": 28 },
+    { "type": "range", "id": "gap_hero_to_disclaimer", "label": "Space: hero to disclaimer (desktop)", "min": 24, "max": 80, "step": 4, "default": 48 },
+    { "type": "range", "id": "gap_hero_to_disclaimer_mobile", "label": "Space: hero to disclaimer (mobile)", "min": 20, "max": 72, "step": 4, "default": 40 },
+
+    { "type": "header", "content": "Heading" },
+    { "type": "text", "id": "heading_before", "label": "Heading (before highlight)", "default": "Ready to " },
+    { "type": "text", "id": "heading_highlight", "label": "Heading (highlighted part)", "default": "Spark Joy with Kefey?" },
+    { "type": "text", "id": "heading_after", "label": "Heading (after highlight)", "default": "" },
+    {
+      "type": "select",
+      "id": "heading_font_family",
+      "label": "Heading font family",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "heading_font_weight",
+      "label": "Heading font weight",
+      "default": "700",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    { "type": "range", "id": "heading_font_size", "label": "Heading size (desktop)", "min": 24, "max": 56, "step": 1, "default": 40 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Heading size (mobile)", "min": 18, "max": 34, "step": 1, "default": 24 },
+    { "type": "range", "id": "heading_line_height", "label": "Heading line height (%)", "min": 100, "max": 140, "step": 2, "default": 112 },
+    { "type": "range", "id": "heading_line_height_mobile", "label": "Heading line height mobile (%)", "min": 100, "max": 140, "step": 2, "default": 112 },
+    { "type": "range", "id": "heading_letter_spacing", "label": "Heading letter spacing", "min": -40, "max": 80, "step": 2, "default": 0 },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#101010" },
+    { "type": "color", "id": "heading_highlight_color", "label": "Teal highlight (bar) color", "default": "#4db6ac" },
+    { "type": "range", "id": "heading_mark_height", "label": "Highlight bar height (desktop)", "min": 8, "max": 24, "step": 1, "default": 14 },
+    { "type": "range", "id": "heading_mark_height_mobile", "label": "Highlight bar height (mobile)", "min": 6, "max": 20, "step": 1, "default": 11 },
+    { "type": "range", "id": "heading_mark_offset", "label": "Highlight bar offset (desktop)", "min": -10, "max": 8, "step": 1, "default": -4 },
+    { "type": "range", "id": "heading_mark_offset_mobile", "label": "Highlight bar offset (mobile)", "min": -8, "max": 6, "step": 1, "default": -3 },
+    { "type": "range", "id": "heading_mark_extend", "label": "Highlight bar horizontal extend (×0.01 em)", "min": 0, "max": 20, "step": 1, "default": 4 },
+    { "type": "range", "id": "heading_mark_radius", "label": "Highlight bar corner radius", "min": 0, "max": 8, "step": 1, "default": 2 },
+
+    { "type": "header", "content": "Subtext" },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "<p>It's simple, free, and built for creators who want to grow.</p><p>Click below to apply and start spreading joy today.</p>"
+    },
+    {
+      "type": "select",
+      "id": "subtext_font_family",
+      "label": "Subtext font family",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "subtext_font_weight",
+      "label": "Subtext font weight",
+      "default": "400",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" }
+      ]
+    },
+    { "type": "checkbox", "id": "subtext_italic", "label": "Italic subtext", "default": false },
+    { "type": "range", "id": "subtext_font_size", "label": "Subtext size (desktop)", "min": 14, "max": 24, "step": 1, "default": 18 },
+    { "type": "range", "id": "subtext_font_size_mobile", "label": "Subtext size (mobile)", "min": 12, "max": 20, "step": 1, "default": 15 },
+    { "type": "range", "id": "subtext_line_height", "label": "Subtext line height (%)", "min": 120, "max": 200, "step": 2, "default": 150 },
+    { "type": "range", "id": "subtext_line_height_mobile", "label": "Subtext line height mobile (%)", "min": 120, "max": 200, "step": 2, "default": 148 },
+    { "type": "color", "id": "subtext_color", "label": "Subtext color", "default": "#101010" },
+    { "type": "range", "id": "subtext_max_width", "label": "Subtext max width", "min": 400, "max": 720, "step": 8, "default": 640 },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Join the Kefey Ambassador Program" },
+    { "type": "url", "id": "button_link", "label": "Button link" },
+    { "type": "color", "id": "button_background", "label": "Button background", "default": "#e95439" },
+    { "type": "color", "id": "button_text_color", "label": "Button text color", "default": "#ffffff" },
+    {
+      "type": "select",
+      "id": "button_font_family",
+      "label": "Button font family",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "button_font_weight",
+      "label": "Button font weight",
+      "default": "700",
+      "options": [
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    { "type": "range", "id": "button_font_size", "label": "Button text size (desktop)", "min": 14, "max": 22, "step": 1, "default": 17 },
+    { "type": "range", "id": "button_font_size_mobile", "label": "Button text size (mobile)", "min": 13, "max": 20, "step": 1, "default": 15 },
+    { "type": "range", "id": "button_letter_spacing", "label": "Button letter spacing (×0.01 em)", "min": -10, "max": 40, "step": 1, "default": 0 },
+    { "type": "range", "id": "button_padding_vertical", "label": "Button padding vertical (desktop)", "min": 10, "max": 28, "step": 2, "default": 16 },
+    { "type": "range", "id": "button_padding_vertical_mobile", "label": "Button padding vertical (mobile)", "min": 10, "max": 24, "step": 2, "default": 14 },
+    { "type": "range", "id": "button_padding_horizontal", "label": "Button padding horizontal", "min": 16, "max": 48, "step": 2, "default": 28 },
+    { "type": "range", "id": "button_max_width", "label": "Button max width", "min": 320, "max": 640, "step": 8, "default": 560 },
+    { "type": "range", "id": "button_border_radius", "label": "Button corner radius", "min": 0, "max": 12, "step": 1, "default": 0 },
+
+    { "type": "header", "content": "Tagline (with side lines)" },
+    {
+      "type": "richtext",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "<p>At Kefey, we believe self-care should feel uplifting.</p><p>Now, your influence can too.</p>"
+    },
+    {
+      "type": "select",
+      "id": "tagline_font_family",
+      "label": "Tagline font family",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "tagline_font_weight",
+      "label": "Tagline font weight",
+      "default": "500",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" }
+      ]
+    },
+    { "type": "checkbox", "id": "tagline_italic", "label": "Italic tagline", "default": false },
+    { "type": "range", "id": "tagline_font_size", "label": "Tagline size (desktop)", "min": 12, "max": 22, "step": 1, "default": 16 },
+    { "type": "range", "id": "tagline_font_size_mobile", "label": "Tagline size (mobile)", "min": 11, "max": 18, "step": 1, "default": 14 },
+    { "type": "range", "id": "tagline_line_height", "label": "Tagline line height (%)", "min": 120, "max": 200, "step": 2, "default": 134 },
+    { "type": "range", "id": "tagline_line_height_mobile", "label": "Tagline line height mobile (%)", "min": 120, "max": 200, "step": 2, "default": 132 },
+    { "type": "color", "id": "tagline_color", "label": "Tagline color", "default": "#e95439" },
+    { "type": "color", "id": "tagline_line_color", "label": "Side line color", "default": "#f3c100" },
+    { "type": "range", "id": "tagline_line_width", "label": "Side line thickness", "min": 1, "max": 6, "step": 1, "default": 3 },
+    { "type": "range", "id": "tagline_line_gap", "label": "Gap: line to text (desktop)", "min": 6, "max": 28, "step": 2, "default": 14 },
+    { "type": "range", "id": "tagline_line_gap_mobile", "label": "Gap: line to text (mobile)", "min": 4, "max": 20, "step": 2, "default": 8 },
+    { "type": "range", "id": "tagline_max_width", "label": "Tagline max width", "min": 360, "max": 640, "step": 10, "default": 520 },
+
+    { "type": "header", "content": "Disclaimer band" },
+    { "type": "checkbox", "id": "show_disclaimer", "label": "Show disclaimer", "default": true },
+    { "type": "text", "id": "disclaimer_title", "label": "Disclaimer title", "default": "Disclaimer" },
+    {
+      "type": "richtext",
+      "id": "disclaimer_body",
+      "label": "Disclaimer body",
+      "default": "<ul><li>Ambassadors share their genuine opinions and experiences. Compensation may be provided through commissions, discounts, or free products.</li><li>Ambassadors are required by law to clearly disclose their partnership with Kefey in all posts and communications (e.g., using hashtags like #ad or #KefeyPartner).</li><li>Statements made by ambassadors about Kefey products are their own opinions and have not been evaluated by the Food and Drug Administration (FDA).</li><li>Kefey products are not intended to diagnose, treat, cure, or prevent any disease. Individual results may vary.</li></ul>"
+    },
+    { "type": "color", "id": "disclaimer_background", "label": "Disclaimer background", "default": "#47b8bb" },
+    { "type": "color", "id": "disclaimer_title_color", "label": "Disclaimer title color", "default": "#ffffff" },
+    { "type": "color", "id": "disclaimer_body_color", "label": "Disclaimer body color", "default": "#ffffff" },
+    {
+      "type": "select",
+      "id": "disclaimer_title_font_family",
+      "label": "Disclaimer title font family",
+      "default": "heading",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "disclaimer_title_font_weight",
+      "label": "Disclaimer title font weight",
+      "default": "700",
+      "options": [
+        { "value": "600", "label": "600" },
+        { "value": "700", "label": "700" },
+        { "value": "800", "label": "800" }
+      ]
+    },
+    { "type": "range", "id": "disclaimer_title_font_size", "label": "Disclaimer title size (desktop)", "min": 16, "max": 28, "step": 1, "default": 22 },
+    { "type": "range", "id": "disclaimer_title_font_size_mobile", "label": "Disclaimer title size (mobile)", "min": 14, "max": 22, "step": 1, "default": 18 },
+    { "type": "range", "id": "disclaimer_title_line_height", "label": "Disclaimer title line height (%)", "min": 100, "max": 140, "step": 2, "default": 120 },
+    {
+      "type": "select",
+      "id": "disclaimer_body_font_family",
+      "label": "Disclaimer body font family",
+      "default": "body",
+      "options": [
+        { "value": "inherit", "label": "Theme default" },
+        { "value": "heading", "label": "Heading font" },
+        { "value": "body", "label": "Body font" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "disclaimer_body_font_weight",
+      "label": "Disclaimer body font weight",
+      "default": "400",
+      "options": [
+        { "value": "400", "label": "400" },
+        { "value": "500", "label": "500" },
+        { "value": "600", "label": "600" }
+      ]
+    },
+    { "type": "checkbox", "id": "disclaimer_body_italic", "label": "Italic disclaimer body", "default": false },
+    { "type": "range", "id": "disclaimer_body_font_size", "label": "Disclaimer body size (desktop)", "min": 12, "max": 20, "step": 1, "default": 15 },
+    { "type": "range", "id": "disclaimer_body_font_size_mobile", "label": "Disclaimer body size (mobile)", "min": 11, "max": 18, "step": 1, "default": 14 },
+    { "type": "range", "id": "disclaimer_body_line_height", "label": "Disclaimer body line height (%)", "min": 120, "max": 200, "step": 2, "default": 154 },
+    { "type": "range", "id": "disclaimer_body_line_height_mobile", "label": "Disclaimer body line height mobile (%)", "min": 120, "max": 200, "step": 2, "default": 150 },
+    { "type": "range", "id": "disclaimer_padding_vertical", "label": "Disclaimer padding vertical (desktop)", "min": 16, "max": 48, "step": 2, "default": 28 },
+    { "type": "range", "id": "disclaimer_padding_vertical_mobile", "label": "Disclaimer padding vertical (mobile)", "min": 12, "max": 36, "step": 2, "default": 22 },
+    { "type": "range", "id": "disclaimer_padding_horizontal", "label": "Disclaimer padding horizontal (desktop)", "min": 16, "max": 72, "step": 4, "default": 24 },
+    { "type": "range", "id": "disclaimer_padding_horizontal_mobile", "label": "Disclaimer padding horizontal (mobile)", "min": 12, "max": 28, "step": 2, "default": 18 },
+    { "type": "range", "id": "disclaimer_title_body_gap", "label": "Space: disclaimer title to body", "min": 8, "max": 28, "step": 2, "default": 14 }
+  ],
+  "presets": [{ "name": "Ambassador CTA + disclaimer" }]
+}
+{% endschema %}
