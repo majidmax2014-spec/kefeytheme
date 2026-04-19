@@ -30,58 +30,98 @@
       <p class="kefey-lifestyle__desc">{{ section.settings.description }}</p>
     </div>
 
-    <div class="kefey-lifestyle__media">
-      <div class="kefey-lifestyle__media-item">
-        {%- if section.settings.image_left != blank -%}
-          {{
-            section.settings.image_left
-            | image_url: width: 1200
-            | image_tag:
-              class: 'kefey-lifestyle__image',
-              widths: '420, 700, 900, 1200',
-              sizes: '(min-width: 990px) 33vw, 100vw',
-              loading: 'lazy',
-              alt: section.settings.title
-          }}
-        {%- endif -%}
+    <div class="kefey-lifestyle__layout kefey-lifestyle__layout--desktop">
+      <div class="kefey-lifestyle__media">
+        <div class="kefey-lifestyle__media-item">
+          {%- if section.settings.image_left != blank -%}
+            {{
+              section.settings.image_left
+              | image_url: width: 1200
+              | image_tag:
+                class: 'kefey-lifestyle__image',
+                widths: '420, 700, 900, 1200',
+                sizes: '(min-width: 990px) 33vw, 100vw',
+                loading: 'lazy',
+                alt: section.settings.title
+            }}
+          {%- endif -%}
+        </div>
+        <div class="kefey-lifestyle__media-item">
+          {%- if section.settings.image_center != blank -%}
+            {{
+              section.settings.image_center
+              | image_url: width: 1200
+              | image_tag:
+                class: 'kefey-lifestyle__image',
+                widths: '420, 700, 900, 1200',
+                sizes: '(min-width: 990px) 33vw, 100vw',
+                loading: 'lazy',
+                alt: section.settings.title
+            }}
+          {%- endif -%}
+        </div>
+        <div class="kefey-lifestyle__media-item">
+          {%- if section.settings.image_right != blank -%}
+            {{
+              section.settings.image_right
+              | image_url: width: 1200
+              | image_tag:
+                class: 'kefey-lifestyle__image',
+                widths: '420, 700, 900, 1200',
+                sizes: '(min-width: 990px) 33vw, 100vw',
+                loading: 'lazy',
+                alt: section.settings.title
+            }}
+          {%- endif -%}
+        </div>
       </div>
-      <div class="kefey-lifestyle__media-item">
-        {%- if section.settings.image_center != blank -%}
-          {{
-            section.settings.image_center
-            | image_url: width: 1200
-            | image_tag:
-              class: 'kefey-lifestyle__image',
-              widths: '420, 700, 900, 1200',
-              sizes: '(min-width: 990px) 33vw, 100vw',
-              loading: 'lazy',
-              alt: section.settings.title
-          }}
-        {%- endif -%}
-      </div>
-      <div class="kefey-lifestyle__media-item">
-        {%- if section.settings.image_right != blank -%}
-          {{
-            section.settings.image_right
-            | image_url: width: 1200
-            | image_tag:
-              class: 'kefey-lifestyle__image',
-              widths: '420, 700, 900, 1200',
-              sizes: '(min-width: 990px) 33vw, 100vw',
-              loading: 'lazy',
-              alt: section.settings.title
-          }}
-        {%- endif -%}
+
+      <div class="kefey-lifestyle__cards">
+        {%- for block in section.blocks -%}
+          <article class="kefey-lifestyle__card" style="--kl-card-bg: {{ block.settings.background_color }};" {{ block.shopify_attributes }}>
+            <h3 class="kefey-lifestyle__card-title">{{ block.settings.title }}</h3>
+            <p class="kefey-lifestyle__card-text">{{ block.settings.text }}</p>
+          </article>
+        {%- endfor -%}
       </div>
     </div>
 
-    <div class="kefey-lifestyle__cards">
-      {%- for block in section.blocks -%}
-        <article class="kefey-lifestyle__card" style="--kl-card-bg: {{ block.settings.background_color }};" {{ block.shopify_attributes }}>
-          <h3 class="kefey-lifestyle__card-title">{{ block.settings.title }}</h3>
-          <p class="kefey-lifestyle__card-text">{{ block.settings.text }}</p>
-        </article>
-      {%- endfor -%}
+    <div class="kefey-lifestyle__layout kefey-lifestyle__layout--mobile">
+      <div class="kefey-lifestyle__rows">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            case forloop.index
+              when 1
+                assign row_image = section.settings.image_left
+              when 2
+                assign row_image = section.settings.image_center
+              else
+                assign row_image = section.settings.image_right
+            endcase
+            assign row_image_alt = block.settings.title | default: section.settings.title
+          -%}
+          <div class="kefey-lifestyle__row">
+            <div class="kefey-lifestyle__row-media">
+              {%- if row_image != blank -%}
+                {{
+                  row_image
+                  | image_url: width: 1200
+                  | image_tag:
+                    class: 'kefey-lifestyle__image',
+                    widths: '300, 450, 600, 900, 1200',
+                    sizes: '(max-width: 749px) 50vw, 1px',
+                    loading: 'lazy',
+                    alt: row_image_alt
+                }}
+              {%- endif -%}
+            </div>
+            <article class="kefey-lifestyle__card" style="--kl-card-bg: {{ block.settings.background_color }};" {{ block.shopify_attributes }}>
+              <h3 class="kefey-lifestyle__card-title">{{ block.settings.title }}</h3>
+              <p class="kefey-lifestyle__card-text">{{ block.settings.text }}</p>
+            </article>
+          </div>
+        {%- endfor -%}
+      </div>
     </div>
   </div>
 </section>
