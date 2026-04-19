@@ -24,9 +24,17 @@
     --kl-pb: {{ section.settings.padding_bottom }}px;
   "
 >
-  <div class="page-width">
+  <div class="page-width kefey-lifestyle__shell">
     <div class="kefey-lifestyle__header">
-      <h2 class="kefey-lifestyle__title"><span>{{ section.settings.title }}</span></h2>
+      <h2 class="kefey-lifestyle__title">
+        {%- assign kl_title_parts = section.settings.title | split: '||' -%}
+        {%- if kl_title_parts.size > 1 -%}
+          <span class="kefey-lifestyle__title-highlight">{{ kl_title_parts[0] | strip | escape }}</span>
+          <span class="kefey-lifestyle__title-sub">{{ kl_title_parts[1] | strip | escape }}</span>
+        {%- else -%}
+          <span class="kefey-lifestyle__title-highlight">{{ section.settings.title | escape }}</span>
+        {%- endif -%}
+      </h2>
       <p class="kefey-lifestyle__desc">{{ section.settings.description }}</p>
     </div>
 
@@ -69,7 +77,13 @@
 {
   "name": "Product Lifestyle Kefey",
   "settings": [
-    { "type": "text", "id": "title", "label": "Title", "default": "Why You’ll Love Kefey® Mood Gummies" },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "info": "Use || to end the yellow highlight and start the second line. Example: Why You’ll Love Kefey®||Mood Gummies",
+      "default": "Why You’ll Love Kefey®||Mood Gummies"
+    },
     {
       "type": "textarea",
       "id": "description",
