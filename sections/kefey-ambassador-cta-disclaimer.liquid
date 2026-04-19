@@ -157,7 +157,8 @@
 >
   <div class="kba__shell">
     <div class="kba__hero">
-      {% if section.settings.heading_before != blank or section.settings.heading_highlight != blank or section.settings.heading_after != blank %}
+      {%- assign kba_heading_after = section.settings.heading_after | strip -%}
+      {% if section.settings.heading_before != blank or section.settings.heading_highlight != blank or kba_heading_after != blank %}
         <h2 class="kba__heading">
           {% if section.settings.heading_before != blank %}
             <span class="kba__heading-line">{{ section.settings.heading_before }}</span>
@@ -168,8 +169,8 @@
               <span class="kba__heading-bar" aria-hidden="true"></span>
             </span>
           {% endif %}
-          {% if section.settings.heading_after != blank %}
-            <span class="kba__heading-line">{{ section.settings.heading_after }}</span>
+          {% if kba_heading_after != blank %}
+            <span class="kba__heading-line">{{ kba_heading_after }}</span>
           {% endif %}
         </h2>
       {% endif %}
@@ -238,7 +239,7 @@
     { "type": "header", "content": "Heading" },
     { "type": "text", "id": "heading_before", "label": "Heading (before highlight)", "default": "Ready to " },
     { "type": "text", "id": "heading_highlight", "label": "Heading (highlighted part)", "default": "Spark Joy with Kefey?" },
-    { "type": "text", "id": "heading_after", "label": "Heading (after highlight)", "default": "" },
+    { "type": "text", "id": "heading_after", "label": "Heading (after highlight)", "info": "Optional. Leave empty if the heading ends on the highlighted phrase." },
     {
       "type": "select",
       "id": "heading_font_family",
