@@ -67,6 +67,21 @@
         &#8250;
       </button>
     </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="kefey-ingredients__dots" data-kefey-ingredients-dots role="tablist" aria-label="Ingredients">
+        {%- for block in section.blocks -%}
+          <button
+            type="button"
+            class="kefey-ingredients__dot{% if forloop.first %} is-active{% endif %}"
+            data-kefey-dot="{{ forloop.index0 }}"
+            role="tab"
+            aria-label="Ingredient {{ forloop.index }} of {{ section.blocks.size }}"
+            aria-selected="{% if forloop.first %}true{% else %}false{% endif %}"
+          ></button>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </section>
 

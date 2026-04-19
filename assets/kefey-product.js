@@ -6,12 +6,41 @@
       if (!track) return;
       var prev = carousel.querySelector('[data-kefey-prev]');
       var next = carousel.querySelector('[data-kefey-next]');
+      var dotsRoot = carousel.parentElement ? carousel.parentElement.querySelector('[data-kefey-ingredients-dots]') : null;
+      var dots = dotsRoot ? dotsRoot.querySelectorAll('[data-kefey-dot]') : [];
+
       var step = function () {
         var firstCard = track.querySelector(':scope > *');
         if (!firstCard) return Math.max(220, Math.floor(track.clientWidth * 0.9));
         var gap = parseFloat(window.getComputedStyle(track).columnGap || window.getComputedStyle(track).gap || '0');
+        if (isNaN(gap)) gap = 0;
         return Math.floor(firstCard.getBoundingClientRect().width + gap);
       };
+
+      function updateDots() {
+        if (!dots.length) return;
+        var st = step();
+        if (st <= 0) return;
+        var idx = Math.round(track.scrollLeft / st);
+        var max = Math.max(0, track.children.length - 1);
+        idx = Math.max(0, Math.min(max, idx));
+        dots.forEach(function (dot, i) {
+          var on = i === idx;
+          dot.classList.toggle('is-active', on);
+          dot.setAttribute('aria-selected', on ? 'true' : 'false');
+        });
+      }
+
+      var scrollRaf = 0;
+      function onTrackScroll() {
+        if (scrollRaf) cancelAnimationFrame(scrollRaf);
+        scrollRaf = requestAnimationFrame(function () {
+          scrollRaf = 0;
+          updateDots();
+        });
+      }
+
+      track.addEventListener('scroll', onTrackScroll, { passive: true });
 
       if (prev) {
         prev.addEventListener('click', function () {
@@ -23,6 +52,23 @@
           track.scrollBy({ left: step(), behavior: 'smooth' });
         });
       }
+
+      dots.forEach(function (dot) {
+        dot.addEventListener('click', function () {
+          var i = parseInt(dot.getAttribute('data-kefey-dot') || '0', 10);
+          if (isNaN(i)) i = 0;
+          track.scrollTo({ left: i * step(), behavior: 'smooth' });
+        });
+      });
+
+      if (typeof ResizeObserver !== 'undefined') {
+        var ro = new ResizeObserver(function () {
+          updateDots();
+        });
+        ro.observe(track);
+      }
+
+      requestAnimationFrame(updateDots);
     });
   }
 

@@ -859,6 +859,10 @@
   right: 0;
 }
 
+.kefey-ingredients__dots {
+  display: none;
+}
+
 /* -------------------------------
    Kefey Callouts
 ------------------------------- */
@@ -2218,5 +2222,87 @@
     width: var(--kefey-benefit-dot-size-mobile, var(--kefey-benefit-dot-size, 6px));
     height: var(--kefey-benefit-dot-size-mobile, var(--kefey-benefit-dot-size, 6px));
     right: calc(var(--kefey-benefits-gap-mobile, 18px) / -2);
+  }
+}
+
+/* Kefey Ingredients — narrow phones: one card, side arrows, pagination dots */
+@media (max-width: 749px) {
+  .kefey-ingredients__carousel {
+    display: grid;
+    grid-template-columns: minmax(28px, 36px) minmax(0, 1fr) minmax(28px, 36px);
+    column-gap: 6px;
+    align-items: center;
+    margin-top: clamp(22px, 6vw, 32px);
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .kefey-ingredients__track {
+    grid-auto-columns: minmax(0, 100%);
+    gap: 12px;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .kefey-ingredients__card {
+    border-color: #fff;
+    min-width: 0;
+  }
+
+  .kefey-ingredients__card-media {
+    margin: 10px 10px 0;
+    min-height: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  .kefey-ingredients__card-body {
+    padding: 12px 14px 18px;
+  }
+
+  .kefey-ingredients__arrow {
+    display: inline-flex !important;
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+    min-width: 24px;
+    padding: 2px;
+    font-size: clamp(1.85rem, 9vw, 2.6rem);
+    line-height: 1;
+    align-self: center;
+  }
+
+  .kefey-ingredients__dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 22px;
+    padding: 0 12px;
+    flex-wrap: wrap;
+  }
+
+  .kefey-ingredients__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    opacity: 0.85;
+    flex-shrink: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+
+  .kefey-ingredients__dot.is-active {
+    background: #f4c820;
+    opacity: 1;
+    transform: scale(1.2);
+  }
+
+  .kefey-ingredients__dot:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.95);
+    outline-offset: 2px;
   }
 }
