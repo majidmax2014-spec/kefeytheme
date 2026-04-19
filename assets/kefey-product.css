@@ -868,7 +868,7 @@
 ------------------------------- */
 .kefey-callouts {
   background: var(--kc-bg, #f4c820);
-  padding: 56px 0 62px;
+  padding: 56px 0 0px;
 }
 
 .kefey-callouts__grid {
@@ -1056,7 +1056,7 @@
 .kefey-callouts__bottom {
   margin-top: 6px;
   text-align: center;
-}
+  margin-bottom: 60px;
 
 .kefey-callouts__bottom-heading {
   margin: 0;
