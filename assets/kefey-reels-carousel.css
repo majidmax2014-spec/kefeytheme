@@ -2,8 +2,8 @@
   position: relative;
   width: 100vw;
   max-width: 100%;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  /* margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw); */
   padding-top: var(--krc-pt, 40px);
   padding-bottom: var(--krc-pb, 32px);
   background: var(--krc-bg, #ffffff);
