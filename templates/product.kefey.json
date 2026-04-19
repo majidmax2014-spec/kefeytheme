@@ -306,7 +306,7 @@
         "card_jHKz7G": {
           "type": "card",
           "settings": {
-            "background_color": "#82c7cb",
+            "background_color": "#45b3b4",
             "title": "Made to Be Enjoyed",
             "text": "A joyful daily moment that feels light, natural, and genuinely enjoyable."
           }
@@ -314,7 +314,7 @@
         "card_8UHgmy": {
           "type": "card",
           "settings": {
-            "background_color": "#edd46a",
+            "background_color": "#ffce2b",
             "title": "More Support, Fewer Steps",
             "text": "A single, concentrated formula, created to replace a shelf full of supplements, often as many as 8 different products."
           }
@@ -322,7 +322,7 @@
         "card_yUmjqj": {
           "type": "card",
           "settings": {
-            "background_color": "#82c7cb",
+            "background_color": "#45b3b4",
             "title": "You & the Planet in Mind",
             "text": "From plant-based ingredients to Eco-friendly, Re-usable packaging.  Every choice is made with care — for you and the planet."
           }
@@ -334,7 +334,7 @@
         "card_yUmjqj"
       ],
       "settings": {
-        "title": "Why You’ll Love Kefey®||Mood Gummies",
+        "title": "Why You’ll Love Kefey® Mood Gummies",
         "description": "Plant-based extracts, carefully selected and thoughtfully blended to support your mood, energy, and balance — the joyful way to feel your best.",
         "highlight_bar_color": "#f4c820",
         "image_left": "shopify://shop_images/lifestyle1.png",

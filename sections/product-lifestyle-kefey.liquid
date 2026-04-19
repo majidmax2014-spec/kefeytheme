@@ -24,50 +24,63 @@
     --kl-pb: {{ section.settings.padding_bottom }}px;
   "
 >
-  <div class="page-width kefey-lifestyle__shell">
+  <div class="page-width">
     <div class="kefey-lifestyle__header">
-      <h2 class="kefey-lifestyle__title">
-        {%- assign kl_title_parts = section.settings.title | split: '||' -%}
-        {%- if kl_title_parts.size > 1 -%}
-          <span class="kefey-lifestyle__title-highlight">{{ kl_title_parts[0] | strip | escape }}</span>
-          <span class="kefey-lifestyle__title-sub">{{ kl_title_parts[1] | strip | escape }}</span>
-        {%- else -%}
-          <span class="kefey-lifestyle__title-highlight">{{ section.settings.title | escape }}</span>
-        {%- endif -%}
-      </h2>
+      <h2 class="kefey-lifestyle__title"><span>{{ section.settings.title }}</span></h2>
       <p class="kefey-lifestyle__desc">{{ section.settings.description }}</p>
     </div>
 
-    <div class="kefey-lifestyle__rows">
+    <div class="kefey-lifestyle__media">
+      <div class="kefey-lifestyle__media-item">
+        {%- if section.settings.image_left != blank -%}
+          {{
+            section.settings.image_left
+            | image_url: width: 1200
+            | image_tag:
+              class: 'kefey-lifestyle__image',
+              widths: '420, 700, 900, 1200',
+              sizes: '(min-width: 990px) 33vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.title
+          }}
+        {%- endif -%}
+      </div>
+      <div class="kefey-lifestyle__media-item">
+        {%- if section.settings.image_center != blank -%}
+          {{
+            section.settings.image_center
+            | image_url: width: 1200
+            | image_tag:
+              class: 'kefey-lifestyle__image',
+              widths: '420, 700, 900, 1200',
+              sizes: '(min-width: 990px) 33vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.title
+          }}
+        {%- endif -%}
+      </div>
+      <div class="kefey-lifestyle__media-item">
+        {%- if section.settings.image_right != blank -%}
+          {{
+            section.settings.image_right
+            | image_url: width: 1200
+            | image_tag:
+              class: 'kefey-lifestyle__image',
+              widths: '420, 700, 900, 1200',
+              sizes: '(min-width: 990px) 33vw, 100vw',
+              loading: 'lazy',
+              alt: section.settings.title
+          }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="kefey-lifestyle__cards">
       {%- for block in section.blocks -%}
-        <div class="kefey-lifestyle__row" {{ block.shopify_attributes }}>
-          <div class="kefey-lifestyle__row-media">
-            {%- liquid
-              assign row_image = section.settings.image_right
-              if forloop.index == 1
-                assign row_image = section.settings.image_left
-              elsif forloop.index == 2
-                assign row_image = section.settings.image_center
-              endif
-            -%}
-            {%- if row_image != blank -%}
-              {{
-                row_image
-                | image_url: width: 1200
-                | image_tag:
-                  class: 'kefey-lifestyle__image',
-                  widths: '360, 540, 700, 900, 1200',
-                  sizes: '(min-width: 990px) 28vw, 45vw',
-                  loading: 'lazy',
-                  alt: block.settings.title | default: section.settings.title | escape
-              }}
-            {%- endif -%}
-          </div>
-          <article class="kefey-lifestyle__row-card" style="--kl-card-bg: {{ block.settings.background_color }};">
-            <h3 class="kefey-lifestyle__card-title">{{ block.settings.title }}</h3>
-            <p class="kefey-lifestyle__card-text">{{ block.settings.text }}</p>
-          </article>
-        </div>
+        <article class="kefey-lifestyle__card" style="--kl-card-bg: {{ block.settings.background_color }};" {{ block.shopify_attributes }}>
+          <h3 class="kefey-lifestyle__card-title">{{ block.settings.title }}</h3>
+          <p class="kefey-lifestyle__card-text">{{ block.settings.text }}</p>
+        </article>
       {%- endfor -%}
     </div>
   </div>
@@ -77,13 +90,7 @@
 {
   "name": "Product Lifestyle Kefey",
   "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Title",
-      "info": "Use || to end the yellow highlight and start the second line. Example: Why You’ll Love Kefey®||Mood Gummies",
-      "default": "Why You’ll Love Kefey®||Mood Gummies"
-    },
+    { "type": "text", "id": "title", "label": "Title", "default": "Why You’ll Love Kefey® Mood Gummies" },
     {
       "type": "textarea",
       "id": "description",

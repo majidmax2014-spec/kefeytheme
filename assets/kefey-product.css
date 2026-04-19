@@ -599,23 +599,11 @@
   font-family: var(--kl-h-ff, inherit);
   font-size: var(--kl-h-fs-d, 56px);
   font-weight: var(--kl-h-fw, 700);
-  line-height: 1.18;
+  line-height: 1.14;
 }
 
-.kefey-lifestyle__title-highlight {
-  display: inline;
-  padding: 0 0.08em 0.04em;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-  box-shadow: inset 0 -0.48em 0 0 var(--kl-highlight, #f4c820);
-}
-
-.kefey-lifestyle__title-sub {
-  display: block;
-  margin: 0.28em 0 0;
-  font-weight: var(--kl-h-fw, 700);
-  line-height: 1.12;
-  box-shadow: none;
+.kefey-lifestyle__title span {
+  box-shadow: inset 0 -0.42em 0 var(--kl-highlight, #f4c820);
 }
 
 .kefey-lifestyle__desc {
@@ -628,36 +616,30 @@
   line-height: var(--kl-d-lh, 1.4);
 }
 
-.kefey-lifestyle__rows {
+.kefey-lifestyle__media {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
 }
 
-.kefey-lifestyle__row {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: minmax(250px, auto) auto;
-  gap: 0;
-  min-width: 0;
-}
-
-.kefey-lifestyle__row-media {
-  display: flex;
+.kefey-lifestyle__media-item {
   min-height: 250px;
-  background: var(--kl-highlight, #f4c820);
-  overflow: hidden;
 }
 
-.kefey-lifestyle__row-media .kefey-lifestyle__image {
+.kefey-lifestyle__image {
   width: 100%;
-  flex: 1 1 auto;
-  min-height: 250px;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
 
-.kefey-lifestyle__row-card {
+.kefey-lifestyle__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+}
+
+.kefey-lifestyle__card {
   background: var(--kl-card-bg, #82c7cb);
   padding: 30px 24px 34px;
   text-align: center;
@@ -1610,71 +1592,29 @@
     padding-bottom: 48px;
   }
 
-  .kefey-lifestyle .kefey-lifestyle__shell {
-    padding-left: 0;
-    padding-right: 0;
-  }
-
   .kefey-lifestyle__header {
     margin-bottom: 26px;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-
-  @media screen and (min-width: 750px) {
-    .kefey-lifestyle__header {
-      padding-left: 5rem;
-      padding-right: 5rem;
-    }
   }
 
   .kefey-lifestyle__title {
     font-size: var(--kl-h-fs-m, 36px);
   }
 
-  .kefey-lifestyle__title-sub {
-    margin-top: 0.22em;
-  }
-
   .kefey-lifestyle__desc {
     font-size: var(--kl-d-fs-m, 16px);
   }
 
-  .kefey-lifestyle__rows {
+  .kefey-lifestyle__media,
+  .kefey-lifestyle__cards {
     grid-template-columns: minmax(0, 1fr);
-    gap: 6px;
-    background: #fff;
   }
 
-  .kefey-lifestyle__row {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-rows: minmax(200px, auto);
-    align-items: stretch;
-    gap: 6px;
-    min-height: 0;
+  .kefey-lifestyle__media-item {
+    min-height: 300px;
   }
 
-  .kefey-lifestyle__row-media {
-    display: flex;
-    min-height: 200px;
-  }
-
-  .kefey-lifestyle__row-media .kefey-lifestyle__image {
-    flex: 1 1 auto;
-    width: 100%;
-    min-height: 200px;
-    height: auto;
-    align-self: stretch;
-    object-fit: cover;
-  }
-
-  .kefey-lifestyle__row-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 22px 14px 24px;
-    min-height: 0;
+  .kefey-lifestyle__card {
+    padding: 22px 18px 24px;
   }
 
   .kefey-lifestyle__card-title {
@@ -1683,7 +1623,6 @@
 
   .kefey-lifestyle__card-text {
     font-size: var(--kl-cb-fs-m, 16px);
-    font-weight: 400;
   }
 
   .kefey-ingredients {
