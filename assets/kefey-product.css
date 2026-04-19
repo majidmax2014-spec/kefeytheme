@@ -2007,34 +2007,75 @@
   }
 
   .kefey-final-cta {
-    padding: 36px 0 46px;
+    padding: 32px 0 44px;
+  }
+
+  .kefey-final-cta__inner {
+    padding-inline: 16px;
   }
 
   .kefey-final-cta__heading {
-    font-size: var(--kf-h-fs-m, 40px);
+    font-size: clamp(26px, 7.2vw, var(--kf-h-fs-m, 40px));
+    line-height: 1.12;
+    margin-inline: auto;
+  }
+
+  .kefey-final-cta__line1::after {
+    height: max(calc(var(--kf-underline-h, 12px) + 4px), 0.36em);
+    bottom: max(2px, calc(var(--kf-underline-offset, 8px) * 0.4));
+    left: max(-14px, calc(var(--kf-underline-extra, 20px) * -0.65));
+    right: max(-14px, calc(var(--kf-underline-extra, 20px) * -0.65));
   }
 
   .kefey-final-cta__shift {
-    margin-top: 18px;
-    font-size: var(--kf-s-fs-m, 22px);
+    margin-top: 22px;
+    font-size: clamp(17px, 4.6vw, var(--kf-s-fs-m, 22px));
+    letter-spacing: 0.05em;
   }
 
+  /* Square yellow frame, edge-to-edge viewport (limited-width parent breakout) */
   .kefey-final-cta__slider {
-    width: 100%;
-    height: var(--kf-slider-h-m, 360px);
-    margin-top: 18px;
+    width: 100vw;
+    margin-top: 24px;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    aspect-ratio: 1 / 1;
+    height: auto;
   }
 
   .kefey-final-cta__handle {
-    width: min(var(--kf-handle-size, 56px), 48px);
-    height: min(var(--kf-handle-size, 56px), 48px);
+    width: min(var(--kf-handle-size, 56px), 52px);
+    height: min(var(--kf-handle-size, 56px), 52px);
+  }
+
+  /* Single teal square in handle (reference) */
+  .kefey-final-cta__handle-icon {
+    gap: 0;
+  }
+
+  .kefey-final-cta__handle-icon > span:first-child {
+    width: 11px;
+    height: 11px;
+    border-radius: 2px;
+  }
+
+  .kefey-final-cta__handle-icon > span:last-child {
+    display: none;
   }
 
   .kefey-final-cta__btn {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
     min-width: 0;
-    width: min(100%, 430px);
-    margin-top: 18px;
+    width: min(560px, calc(100vw - 32px));
+    max-width: 100%;
+    margin-top: 22px;
+    min-height: 56px;
+    padding: 14px 20px;
     font-size: var(--kf-b-fs-m, 20px);
+    letter-spacing: 0.04em;
   }
 }
 
