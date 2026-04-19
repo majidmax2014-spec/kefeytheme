@@ -2015,7 +2015,7 @@
   }
 
   .kefey-final-cta__heading {
-    font-size: clamp(26px, 7.2vw, var(--kf-h-fs-m, 40px));
+    font-size: var(--kf-h-fs-m, 40px);
     line-height: 1.12;
     margin-inline: auto;
   }
@@ -2029,8 +2029,8 @@
 
   .kefey-final-cta__shift {
     margin-top: 22px;
-    font-size: clamp(17px, 4.6vw, var(--kf-s-fs-m, 22px));
-    letter-spacing: 0.05em;
+    font-size: var(--kf-s-fs-m, 22px);
+    letter-spacing: var(--kf-s-ls, 0px);
   }
 
   /* Square yellow frame, edge-to-edge viewport (limited-width parent breakout) */
