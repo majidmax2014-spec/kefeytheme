@@ -1822,30 +1822,101 @@
   }
 
   .kefey-callouts {
-    padding: 34px 0 44px;
+    padding: 28px 0 40px;
   }
 
+  /* Mobile stack: headline → intro → nutrition → blend → other → disclaimer → product image (last) */
   .kefey-callouts__grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .kefey-callouts__left,
+  .kefey-callouts__right {
+    display: contents;
   }
 
   .kefey-callouts__left-headline {
+    order: 1;
+    width: 100%;
     font-size: var(--kc-lh-fs-m, 32px);
+    padding: 14px 16px;
+    border-radius: 0;
   }
 
   .kefey-callouts__left-text {
+    order: 2;
+    width: 100%;
+    margin: 0;
+    padding: 0 4px;
+    max-width: none;
     font-size: var(--kc-lt-fs-m, 22px);
   }
 
-  .kefey-callouts__box1-header {
+  .kefey-callouts__box--table {
+    order: 3;
+    width: 100%;
+    border-radius: clamp(20px, 6vw, 36px);
+    overflow: hidden;
+    border: var(--kc-box-border-w, 1px) solid var(--kc-box-border-color, rgba(255, 255, 255, 0.45));
+  }
+
+  .kefey-callouts__box--blend {
+    order: 4;
+    width: 100%;
+    border-radius: clamp(12px, 3vw, 20px);
+    padding: 18px 16px 20px;
+  }
+
+  .kefey-callouts__box--other {
+    order: 5;
+    width: 100%;
+    border-radius: clamp(12px, 3vw, 20px);
+    padding: 18px 16px 20px;
+  }
+
+  .kefey-callouts__bottom {
+    order: 6;
+    width: 100%;
+    margin-top: 0;
+    padding: 0 4px;
+  }
+
+  .kefey-callouts__left-image-wrap {
+    order: 7;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .kefey-callouts__box1-header,
+  .kefey-callouts__box1-heading {
     font-size: var(--kc-b1h-fs-m, 30px);
+    padding: 16px 14px 14px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .kefey-callouts__box1-body {
+    padding: 12px 14px 18px;
   }
 
   .kefey-callouts__box1-amount,
   .kefey-callouts__table-label,
   .kefey-callouts__table-value {
     font-size: var(--kc-tbl-fs-m, 22px);
+  }
+
+  .kefey-callouts__box--blend .kefey-callouts__box-title {
+    text-align: left;
+  }
+
+  .kefey-callouts__box--blend .kefey-callouts__box-mg {
+    text-align: right;
+    white-space: nowrap;
   }
 
   .kefey-callouts__box-title,
@@ -1859,6 +1930,7 @@
 
   .kefey-callouts__box--other .kefey-callouts__box-title {
     font-size: var(--kc-b3t-fs-m, 26px);
+    text-align: center;
   }
 
   .kefey-callouts__box--other .kefey-callouts__box-text {
