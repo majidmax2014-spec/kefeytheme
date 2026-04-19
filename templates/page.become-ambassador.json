@@ -138,11 +138,35 @@
         "padding_top_mobile": 32,
         "padding_bottom_mobile": 48
       }
+    },
+    "ambassador_heading_bar_text": {
+      "type": "kefey-heading-bar-text-blocks",
+      "blocks": {
+        "panel_perks": {
+          "type": "panel",
+          "settings": {
+            "heading": "Perks of Being a Kefey Ambassador",
+            "body": "<ul><li>Be among the first to try new Kefey products.</li><li>Access exclusive previews, early drops, and limited releases.</li><li>Join a global community of wellness-driven creators.</li><li>Turn your passion for positivity and wellbeing into real revenue.</li></ul>",
+            "bar_color": "#4db6ac"
+          }
+        },
+        "panel_brand": {
+          "type": "panel",
+          "settings": {
+            "heading": "A Purpose-Driven, Eco-Friendly Brand",
+            "body": "<p>At Kefey®, we believe in joyful wellness, eco-friendly choices, and meaningful impact.</p><p>As an ambassador, you represent a brand that cares about people, the planet, and building a positive global community.</p>",
+            "bar_color": "#4db6ac"
+          }
+        }
+      },
+      "block_order": ["panel_perks", "panel_brand"],
+      "settings": {}
     }
   },
   "order": [
     "main",
     "header_banner_w7R6fp",
-    "ambassador_program"
+    "ambassador_program",
+    "ambassador_heading_bar_text"
   ]
 }
