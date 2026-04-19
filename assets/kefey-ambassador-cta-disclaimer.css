@@ -20,41 +20,9 @@
   text-align: center;
 }
 
-.kba__heading {
-  margin: 0 0 var(--kba-gap-h-sub, 20px);
-  font-family: var(--kba-h-ff, inherit);
-  font-weight: var(--kba-h-fw, 700);
-  font-size: var(--kba-h-fs, 40px);
-  line-height: var(--kba-h-lh, 1.12);
-  letter-spacing: var(--kba-h-track, 0);
-  color: var(--kba-h-color, #101010);
-}
-
-.kba__heading-line {
-  display: inline;
-}
-
-.kba__heading-mark {
-  position: relative;
-  display: inline;
-  white-space: normal;
-}
-
-.kba__heading-mark-text {
-  position: relative;
-  z-index: 1;
-}
-
-.kba__heading-bar {
-  position: absolute;
-  z-index: 0;
-  left: calc(-1 * var(--kba-mark-pad, 0.04em));
-  right: calc(-1 * var(--kba-mark-pad, 0.04em));
-  bottom: var(--kba-mark-bar-b, -4px);
-  height: var(--kba-mark-bar-h, 14px);
-  border-radius: var(--kba-mark-bar-radius, 2px);
-  background: var(--kba-mark-bg, #4db6ac);
-  pointer-events: none;
+/* Reuses .khb__title-wrap / .khb__title from kefey-heading-bar-text-blocks.css */
+.kba__heading-khb {
+  width: 100%;
 }
 
 .kba__sub {
@@ -194,17 +162,6 @@
   .kba__shell {
     padding-left: var(--kba-px-m, 18px);
     padding-right: var(--kba-px-m, 18px);
-  }
-
-  .kba__heading {
-    font-size: var(--kba-h-fs-m, 24px);
-    line-height: var(--kba-h-lh-m, 1.12);
-    margin-bottom: var(--kba-gap-h-sub-m, 16px);
-  }
-
-  .kba__heading-bar {
-    height: var(--kba-mark-bar-h-m, 11px);
-    bottom: var(--kba-mark-bar-b-m, -3px);
   }
 
   .kba__sub {

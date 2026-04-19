@@ -1,3 +1,4 @@
+{{ 'kefey-heading-bar-text-blocks.css' | asset_url | stylesheet_tag }}
 {{ 'kefey-ambassador-cta-disclaimer.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
@@ -58,7 +59,7 @@
     assign db_style = 'italic'
   endif
 
-  assign mark_pad_em = section.settings.heading_mark_extend | times: 0.01
+  assign khb_bar_pad_em = section.settings.heading_mark_extend | times: 0.01
   assign btn_track_em = section.settings.button_letter_spacing | times: 0.01
   assign h_track_em = section.settings.heading_letter_spacing | times: 0.001
 -%}
@@ -83,21 +84,6 @@
     --kba-gap-btn-tag-m: {{ section.settings.gap_button_to_tagline_mobile }}px;
     --kba-gap-hero-disc: {{ section.settings.gap_hero_to_disclaimer }}px;
     --kba-gap-hero-disc-m: {{ section.settings.gap_hero_to_disclaimer_mobile }}px;
-    --kba-h-ff: {{ h_ff }};
-    --kba-h-fw: {{ section.settings.heading_font_weight }};
-    --kba-h-fs: {{ section.settings.heading_font_size }}px;
-    --kba-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
-    --kba-h-lh: {{ section.settings.heading_line_height | times: 0.01 }};
-    --kba-h-lh-m: {{ section.settings.heading_line_height_mobile | times: 0.01 }};
-    --kba-h-track: {{ h_track_em }}em;
-    --kba-h-color: {{ section.settings.heading_color }};
-    --kba-mark-bg: {{ section.settings.heading_highlight_color }};
-    --kba-mark-bar-h: {{ section.settings.heading_mark_height }}px;
-    --kba-mark-bar-h-m: {{ section.settings.heading_mark_height_mobile }}px;
-    --kba-mark-bar-b: {{ section.settings.heading_mark_offset }}px;
-    --kba-mark-bar-b-m: {{ section.settings.heading_mark_offset_mobile }}px;
-    --kba-mark-pad: {{ mark_pad_em }}em;
-    --kba-mark-bar-radius: {{ section.settings.heading_mark_radius }}px;
     --kba-sub-ff: {{ sub_ff }};
     --kba-sub-fw: {{ section.settings.subtext_font_weight }};
     --kba-sub-fs: {{ section.settings.subtext_font_size }}px;
@@ -157,22 +143,39 @@
 >
   <div class="kba__shell">
     <div class="kba__hero">
-      {%- assign kba_heading_after = section.settings.heading_after | strip -%}
-      {% if section.settings.heading_before != blank or section.settings.heading_highlight != blank or kba_heading_after != blank %}
-        <h2 class="kba__heading">
-          {% if section.settings.heading_before != blank %}
-            <span class="kba__heading-line">{{ section.settings.heading_before }}</span>
-          {% endif %}
-          {% if section.settings.heading_highlight != blank %}
-            <span class="kba__heading-mark">
-              <span class="kba__heading-mark-text">{{ section.settings.heading_highlight }}</span>
-              <span class="kba__heading-bar" aria-hidden="true"></span>
-            </span>
-          {% endif %}
-          {% if kba_heading_after != blank %}
-            <span class="kba__heading-line">{{ kba_heading_after }}</span>
-          {% endif %}
-        </h2>
+      {% if section.settings.heading != blank %}
+        <div
+          class="kba__heading-khb"
+          style="
+            --khb-h-ff: {{ h_ff }};
+            --khb-h-fw: {{ section.settings.heading_font_weight }};
+            --khb-h-fs: {{ section.settings.heading_font_size }}px;
+            --khb-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
+            --khb-h-lh: {{ section.settings.heading_line_height | times: 0.01 }};
+            --khb-h-lh-m: {{ section.settings.heading_line_height_mobile | times: 0.01 }};
+            --khb-h-track: {{ h_track_em }}em;
+            --khb-h-color: {{ section.settings.heading_color }};
+            --khb-bar-h: {{ section.settings.heading_mark_height }}px;
+            --khb-bar-h-m: {{ section.settings.heading_mark_height_mobile }}px;
+            --khb-bar-b: {{ section.settings.heading_mark_offset }}px;
+            --khb-bar-b-m: {{ section.settings.heading_mark_offset_mobile }}px;
+            --khb-bar-pad: {{ khb_bar_pad_em }}em;
+            --khb-bar-radius: {{ section.settings.heading_mark_radius }}px;
+            --khb-gap-heading-body: {{ section.settings.gap_heading_to_subtext }}px;
+            --khb-gap-heading-body-m: {{ section.settings.gap_heading_to_subtext_mobile }}px;
+          "
+        >
+          <div class="khb__title-wrap">
+            <h2 class="khb__title">
+              <span class="khb__title-text">{{ section.settings.heading }}</span>
+              <span
+                class="khb__title-bar"
+                style="background-color: {{ section.settings.heading_highlight_color }};"
+                aria-hidden="true"
+              ></span>
+            </h2>
+          </div>
+        </div>
       {% endif %}
 
       {% if section.settings.subtext != blank %}
@@ -236,10 +239,14 @@
     { "type": "range", "id": "gap_hero_to_disclaimer", "label": "Space: hero to disclaimer (desktop)", "min": 24, "max": 80, "step": 4, "default": 48 },
     { "type": "range", "id": "gap_hero_to_disclaimer_mobile", "label": "Space: hero to disclaimer (mobile)", "min": 20, "max": 72, "step": 4, "default": 40 },
 
-    { "type": "header", "content": "Heading" },
-    { "type": "text", "id": "heading_before", "label": "Heading (before highlight)", "default": "Ready to " },
-    { "type": "text", "id": "heading_highlight", "label": "Heading (highlighted part)", "default": "Spark Joy with Kefey?" },
-    { "type": "text", "id": "heading_after", "label": "Heading (after highlight)", "info": "Optional. Leave empty if the heading ends on the highlighted phrase." },
+    { "type": "header", "content": "Heading (matches Heading bar + text blocks)" },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Ready to Spark Joy with Kefey?",
+      "info": "Same style as the “Heading bar + text blocks” section: teal bar sits behind the lower part of this line. Use bold in the rich text if you need extra emphasis."
+    },
     {
       "type": "select",
       "id": "heading_font_family",
@@ -270,11 +277,11 @@
     { "type": "range", "id": "heading_line_height_mobile", "label": "Heading line height mobile (%)", "min": 100, "max": 140, "step": 2, "default": 112 },
     { "type": "range", "id": "heading_letter_spacing", "label": "Heading letter spacing", "min": -40, "max": 80, "step": 2, "default": 0 },
     { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#101010" },
-    { "type": "color", "id": "heading_highlight_color", "label": "Teal highlight (bar) color", "default": "#4db6ac" },
-    { "type": "range", "id": "heading_mark_height", "label": "Highlight bar height (desktop)", "min": 8, "max": 24, "step": 1, "default": 14 },
-    { "type": "range", "id": "heading_mark_height_mobile", "label": "Highlight bar height (mobile)", "min": 6, "max": 20, "step": 1, "default": 11 },
-    { "type": "range", "id": "heading_mark_offset", "label": "Highlight bar offset (desktop)", "min": -10, "max": 8, "step": 1, "default": -4 },
-    { "type": "range", "id": "heading_mark_offset_mobile", "label": "Highlight bar offset (mobile)", "min": -8, "max": 6, "step": 1, "default": -3 },
+    { "type": "color", "id": "heading_highlight_color", "label": "Teal bar color", "default": "#4db6ac" },
+    { "type": "range", "id": "heading_mark_height", "label": "Bar height (desktop)", "min": 6, "max": 24, "step": 1, "default": 12 },
+    { "type": "range", "id": "heading_mark_height_mobile", "label": "Bar height (mobile)", "min": 4, "max": 18, "step": 1, "default": 10 },
+    { "type": "range", "id": "heading_mark_offset", "label": "Bar vertical offset (desktop)", "min": -12, "max": 12, "step": 1, "default": -6 },
+    { "type": "range", "id": "heading_mark_offset_mobile", "label": "Bar vertical offset (mobile)", "min": -10, "max": 10, "step": 1, "default": -5 },
     { "type": "range", "id": "heading_mark_extend", "label": "Highlight bar horizontal extend (×0.01 em)", "min": 0, "max": 20, "step": 1, "default": 4 },
     { "type": "range", "id": "heading_mark_radius", "label": "Highlight bar corner radius", "min": 0, "max": 8, "step": 1, "default": 2 },
 
