@@ -159,7 +159,6 @@
           }
         }
       },
-<<<<<<< HEAD
       "block_order": [
         "panel_perks",
         "panel_brand"
@@ -203,14 +202,10 @@
         "body_paragraph_gap": 12,
         "body_color": "#101010"
       }
-=======
-      "block_order": ["panel_perks", "panel_brand"],
-      "settings": {}
     },
     "ambassador_cta_disclaimer": {
       "type": "kefey-ambassador-cta-disclaimer",
       "settings": {}
->>>>>>> 43decb0 (Add 'Kefey Ambassador CTA + Tagline + Disclaimer' section with customizable settings for headings, subtext, buttons, and disclaimers. Include associated CSS for responsive design, enhancing layout flexibility and visual appeal across devices.)
     }
   },
   "order": [
