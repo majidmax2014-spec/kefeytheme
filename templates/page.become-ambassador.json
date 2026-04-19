@@ -208,7 +208,7 @@
       "name": "Ambassador CTA strip",
       "settings": {
         "section_background": "#ffffff",
-        "hero_max_width": 880,
+        "hero_max_width": 920,
         "padding_horizontal": 24,
         "padding_horizontal_mobile": 18,
         "padding_top": 56,
