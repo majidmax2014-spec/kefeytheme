@@ -9,21 +9,42 @@
       var dotsRoot = carousel.parentElement ? carousel.parentElement.querySelector('[data-kefey-ingredients-dots]') : null;
       var dots = dotsRoot ? dotsRoot.querySelectorAll('[data-kefey-dot]') : [];
 
-      var step = function () {
-        var firstCard = track.querySelector(':scope > *');
-        if (!firstCard) return Math.max(220, Math.floor(track.clientWidth * 0.9));
+      function slideStep() {
         var gap = parseFloat(window.getComputedStyle(track).columnGap || window.getComputedStyle(track).gap || '0');
         if (isNaN(gap)) gap = 0;
-        return Math.floor(firstCard.getBoundingClientRect().width + gap);
-      };
+        var firstCard = track.querySelector(':scope > *');
+        var cardW = firstCard ? firstCard.getBoundingClientRect().width : 0;
+        var port = track.clientWidth;
+        var w = Math.max(cardW, port);
+        if (w <= 0) return Math.max(220, Math.floor(port * 0.9));
+        return Math.floor(w + gap);
+      }
+
+      function slideCount() {
+        return track.children.length;
+      }
+
+      function currentSlide() {
+        var st = slideStep();
+        if (st <= 0) return 0;
+        var idx = Math.round(track.scrollLeft / st);
+        var max = Math.max(0, slideCount() - 1);
+        return Math.max(0, Math.min(max, idx));
+      }
+
+      function goToSlide(index) {
+        var st = slideStep();
+        if (st <= 0) return;
+        var max = Math.max(0, slideCount() - 1);
+        index = Math.max(0, Math.min(max, index));
+        track.scrollTo({ left: index * st, behavior: 'smooth' });
+      }
 
       function updateDots() {
         if (!dots.length) return;
-        var st = step();
+        var st = slideStep();
         if (st <= 0) return;
-        var idx = Math.round(track.scrollLeft / st);
-        var max = Math.max(0, track.children.length - 1);
-        idx = Math.max(0, Math.min(max, idx));
+        var idx = currentSlide();
         dots.forEach(function (dot, i) {
           var on = i === idx;
           dot.classList.toggle('is-active', on);
@@ -44,12 +65,12 @@
 
       if (prev) {
         prev.addEventListener('click', function () {
-          track.scrollBy({ left: -step(), behavior: 'smooth' });
+          goToSlide(currentSlide() - 1);
         });
       }
       if (next) {
         next.addEventListener('click', function () {
-          track.scrollBy({ left: step(), behavior: 'smooth' });
+          goToSlide(currentSlide() + 1);
         });
       }
 
@@ -57,7 +78,7 @@
         dot.addEventListener('click', function () {
           var i = parseInt(dot.getAttribute('data-kefey-dot') || '0', 10);
           if (isNaN(i)) i = 0;
-          track.scrollTo({ left: i * step(), behavior: 'smooth' });
+          goToSlide(i);
         });
       });
 
