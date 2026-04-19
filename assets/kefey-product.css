@@ -1714,21 +1714,35 @@
     margin-top: 28px;
     padding: 0;
     max-width: 100%;
+    min-width: 0;
   }
 
+  /* Flex (not grid) so each slide is exactly one viewport width — grid % columns often show multiple cards */
   .kefey-ingredients__track {
-    grid-auto-columns: minmax(0, 100%);
-    gap: 12px;
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0;
     width: 100%;
     min-width: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
   }
 
   .kefey-ingredients__card {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     scroll-snap-align: start;
     scroll-snap-stop: always;
     border-color: #fff;
-    min-width: 0;
   }
 
   .kefey-ingredients__card-media {

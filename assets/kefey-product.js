@@ -12,12 +12,12 @@
       function slideStep() {
         var gap = parseFloat(window.getComputedStyle(track).columnGap || window.getComputedStyle(track).gap || '0');
         if (isNaN(gap)) gap = 0;
+        var port = track.clientWidth;
+        if (port > 0) return Math.max(1, Math.floor(port + gap));
         var firstCard = track.querySelector(':scope > *');
         var cardW = firstCard ? firstCard.getBoundingClientRect().width : 0;
-        var port = track.clientWidth;
-        var w = Math.max(cardW, port);
-        if (w <= 0) return Math.max(220, Math.floor(port * 0.9));
-        return Math.floor(w + gap);
+        if (cardW <= 0) return Math.max(220, 280);
+        return Math.floor(cardW + gap);
       }
 
       function slideCount() {
