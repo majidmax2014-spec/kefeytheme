@@ -87,10 +87,6 @@
       {%- if section.settings.subheading_line_1 != blank -%}
         <p class="wholesale-signup-form__subheading wholesale-signup-form__subheading--primary">{{ section.settings.subheading_line_1 }}</p>
       {%- endif -%}
-      {%- assign subheading_line_2_text = section.settings.subheading_line_2 | strip -%}
-      {%- if subheading_line_2_text != blank -%}
-        <p class="wholesale-signup-form__subheading">{{ subheading_line_2_text }}</p>
-      {%- endif -%}
     </div>
 
     {%- form 'contact', id: 'AmbassadorSignUpForm', class: 'wholesale-signup-form__form' -%}
@@ -704,14 +700,8 @@
     {
       "type": "text",
       "id": "subheading_line_1",
-      "label": "Subheading line 1",
+      "label": "Subheading",
       "default": "Join the Kefey community. Share what you love. Grow with us."
-    },
-    {
-      "type": "text",
-      "id": "subheading_line_2",
-      "label": "Subheading line 2",
-      "default": " "
     },
     {
       "type": "text",
