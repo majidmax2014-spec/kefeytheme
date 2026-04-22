@@ -235,13 +235,46 @@
     return null;
   }
 
-  function firstSellingPlanId(variant) {
+  /**
+   * Shopify /cart/add.js expects a numeric selling plan id (Recharge uses Shopify selling plans).
+   */
+  function normalizeSellingPlanId(raw) {
+    if (raw == null || raw === '') return null;
+    if (typeof raw === 'number' && !isNaN(raw)) return raw;
+    var s = String(raw).trim();
+    var gid = /SellingPlan\/(\d+)/.exec(s);
+    if (gid) return Number(gid[1]);
+    var n = parseInt(s, 10);
+    return isNaN(n) ? null : n;
+  }
+
+  /**
+   * Prefer a subscription (recurring) allocation so Recharge/Shopify Checkout gets the right plan
+   * when multiple allocations exist (e.g. preorder vs subscribe).
+   */
+  function sellingPlanIdForCart(variant) {
     if (!variant || !Array.isArray(variant.selling_plan_allocations) || !variant.selling_plan_allocations.length) {
       return null;
     }
-    var allocation = variant.selling_plan_allocations[0];
-    if (!allocation || !allocation.selling_plan_id) return null;
-    return allocation.selling_plan_id;
+    var allocations = variant.selling_plan_allocations;
+    function isSubscriptionAllocation(a) {
+      if (!a) return false;
+      var sp = a.selling_plan;
+      if (!sp || typeof sp !== 'object') return false;
+      if (sp.recurring_deliveries === true) return true;
+      var cat = String(sp.category || '').toUpperCase();
+      if (cat === 'SUBSCRIPTION' || cat === 'SUBSCRIPTIONS') return true;
+      return false;
+    }
+    var chosen = allocations.find(isSubscriptionAllocation);
+    if (!chosen) chosen = allocations[0];
+    var rawId =
+      chosen.selling_plan_id != null
+        ? chosen.selling_plan_id
+        : chosen.selling_plan && chosen.selling_plan.id != null
+          ? chosen.selling_plan.id
+          : null;
+    return normalizeSellingPlanId(rawId);
   }
 
   function initPurchaseModule(scope) {
@@ -306,7 +339,7 @@
         var basePrice = Number(variant.price || 0);
         var baseCompare = Number(variant.compare_at_price || 0);
         var packQty = state.pack;
-        var sellingPlanId = firstSellingPlanId(variant);
+        var sellingPlanId = sellingPlanIdForCart(variant);
         var hasSubscriptionPlan = Boolean(sellingPlanId);
 
         var subEach = basePrice;
@@ -386,8 +419,10 @@
           var qty = singleVariantPacks ? state.pack : 1;
 
           var payload = { id: Number(variant.id), quantity: qty };
-          var sellingPlanId = firstSellingPlanId(variant);
-          if (state.type === 'sub' && sellingPlanId) payload.selling_plan = Number(sellingPlanId);
+          var sellingPlanId = sellingPlanIdForCart(variant);
+          if (state.type === 'sub' && sellingPlanId != null) {
+            payload.selling_plan = sellingPlanId;
+          }
 
           cta.disabled = true;
           fetch('/cart/add.js', {
