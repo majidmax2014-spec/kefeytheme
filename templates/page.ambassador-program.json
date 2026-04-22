@@ -1,0 +1,63 @@
+/*
+ * ------------------------------------------------------------
+ * Ambassador Program — assign this template to your Ambassador page in Shopify admin.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "enable_legal_typography": false,
+        "padding_top": 28,
+        "padding_bottom": 12
+      }
+    },
+    "ambassador_signup_form": {
+      "type": "ambassador-signup-form",
+      "settings": {
+        "heading": "Ambassador Application",
+        "heading_font_family": "inherit",
+        "heading_font_size": 52,
+        "heading_font_weight": "700",
+        "subheading_line_1": "Join the Kefey community. Share what you love. Grow with us.",
+        "subheading_line_2": "",
+        "group_basic_heading": "Basic Info",
+        "group_social_heading": "Social Presence",
+        "group_about_heading": "Tell us about yourself",
+        "about_field_label": "Short paragraph: who you are, what you share, your vibe",
+        "subheading_font_family": "inherit",
+        "subheading_font_size": 20,
+        "subheading_font_weight": "500",
+        "label_font_family": "inherit",
+        "label_font_size": 16,
+        "label_font_weight": "400",
+        "input_font_family": "inherit",
+        "input_font_size": 18,
+        "input_font_weight": "400",
+        "button_label": "Submit application",
+        "success_message": "<p>Thank you! Your ambassador application has been received. Our team will contact you shortly.</p>",
+        "success_redirect_url": "",
+        "submission_topic": "Ambassador Application",
+        "button_font_family": "inherit",
+        "button_font_size": 30,
+        "button_font_weight": "500",
+        "support_prefix": "Questions? Email us at:",
+        "support_email": "hello@kefey.co",
+        "show_recipient_note": true,
+        "recipient_note_email": "hello@kefey.co",
+        "enable_autoresponder_note": true,
+        "support_font_family": "inherit",
+        "support_font_size": 20,
+        "support_font_weight": "500",
+        "accent_teal": "#46aeb2",
+        "highlight_color": "#f3c72d",
+        "border_color": "#b8b8b8",
+        "field_row_gap": 50,
+        "padding_top": 56,
+        "padding_bottom": 72
+      }
+    }
+  },
+  "order": ["main", "ambassador_signup_form"]
+}
