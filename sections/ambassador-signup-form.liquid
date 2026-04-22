@@ -87,8 +87,9 @@
       {%- if section.settings.subheading_line_1 != blank -%}
         <p class="wholesale-signup-form__subheading wholesale-signup-form__subheading--primary">{{ section.settings.subheading_line_1 }}</p>
       {%- endif -%}
-      {%- if section.settings.subheading_line_2 != blank -%}
-        <p class="wholesale-signup-form__subheading">{{ section.settings.subheading_line_2 }}</p>
+      {%- assign subheading_line_2_text = section.settings.subheading_line_2 | strip -%}
+      {%- if subheading_line_2_text != blank -%}
+        <p class="wholesale-signup-form__subheading">{{ subheading_line_2_text }}</p>
       {%- endif -%}
     </div>
 
@@ -710,7 +711,7 @@
       "type": "text",
       "id": "subheading_line_2",
       "label": "Subheading line 2",
-      "default": ""
+      "default": " "
     },
     {
       "type": "text",
