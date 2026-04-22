@@ -1,9 +1,14 @@
 /*
  * ------------------------------------------------------------
- * Ambassador Program — assign this template to your Ambassador page in Shopify admin.
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
 {
+  "layout": "theme",
   "sections": {
     "main": {
       "type": "main-page",
@@ -15,6 +20,7 @@
     },
     "ambassador_signup_form": {
       "type": "ambassador-signup-form",
+      "name": "Ambassador application form",
       "settings": {
         "heading": "Ambassador Application",
         "heading_font_family": "inherit",
@@ -36,7 +42,6 @@
         "input_font_weight": "400",
         "button_label": "Submit application",
         "success_message": "<p>Thank you! Your ambassador application has been received. Our team will contact you shortly.</p>",
-        "success_redirect_url": "",
         "submission_topic": "Ambassador Application",
         "button_font_family": "inherit",
         "button_font_size": 30,
