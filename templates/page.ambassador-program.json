@@ -12,10 +12,59 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "enable_legal_typography": false,
+        "legal_title_font_family": "heading",
+        "legal_section_font_family": "heading",
+        "legal_body_font_family": "body",
+        "legal_title_color": "#70b9be",
+        "legal_section_heading_color": "#101010",
+        "legal_body_color": "#333333",
+        "legal_title_font_size": 36,
+        "legal_section_heading_font_size": 18,
+        "legal_body_font_size": 16,
+        "legal_title_uppercase": true,
+        "legal_section_heading_uppercase": true,
+        "legal_body_line_height": 165,
+        "legal_paragraph_spacing": 16,
+        "legal_content_max_width": 720,
         "padding_top": 28,
         "padding_bottom": 12
+      }
+    },
+    "header_banner_qHGwqf": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "bg_image_desktop": "shopify://shop_images/becom-ambasdor-header.png",
+        "bg_image_mobile": "shopify://shop_images/becom-ambasdor-header-mobile.png",
+        "heading": "Turn Your Influence Into Joy & Real Income",
+        "subheading": "",
+        "subheading_richtext": "<p><strong>Join the Kefey Ambassador Program </strong></p><p>Creators, Influencers & Wellness Lovers: This is Your Space to Shine, Share & Earn.</p>",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 36,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 20,
+        "hb_heading_fs_mobile": 26,
+        "hb_desc_fs_mobile": 16,
+        "hb_desc_strong_weight": "700",
+        "banner_height_desktop": 460,
+        "banner_height_mobile": 550,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24,
+        "overlay_opacity_mobile": 0,
+        "mobile_vertical_align": "top",
+        "mobile_content_padding_top": 44,
+        "mobile_content_padding_x": 22,
+        "mobile_text_alignment": "match",
+        "mobile_image_anchor": "bottom"
       }
     },
     "ambassador_signup_form": {
@@ -42,6 +91,7 @@
         "input_font_weight": "400",
         "button_label": "Submit application",
         "success_message": "<p>Thank you! Your ambassador application has been received. Our team will contact you shortly.</p>",
+        "success_redirect_url": "",
         "submission_topic": "Ambassador Application",
         "button_font_family": "inherit",
         "button_font_size": 30,
@@ -63,5 +113,9 @@
       }
     }
   },
-  "order": ["main", "ambassador_signup_form"]
+  "order": [
+    "main",
+    "header_banner_qHGwqf",
+    "ambassador_signup_form"
+  ]
 }
