@@ -368,7 +368,7 @@
         "ingredient_gdYcPk": {
           "type": "ingredient",
           "settings": {
-            "ingredient_image": "shopify://shop_images/ingredient1.png",
+            "ingredient_image": "shopify://shop_images/ashwagandha.jpg",
             "title": "Ashwagandha Root Extract",
             "description": "A well-known adaptogenic herb traditionally used to help the body adapt to occasional stress and support natural balance."
           }
@@ -388,12 +388,60 @@
             "title": "Maca Root Extract",
             "description": "An adaptogenic superfood, grown in the Andes, known for supporting natural vitality and balanced energy."
           }
+        },
+        "ingredient_eHd3jV": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Vervain Extract",
+            "description": "A gentle botanical known for supporting emotional balance, and a relaxed state of mind, which naturally supports better sleep."
+          }
+        },
+        "ingredient_7Uc9ae": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Moringa Leaf Extract",
+            "description": "A natural source of plant-based vitamins and minerals that support daily wellness and nourishment."
+          }
+        },
+        "ingredient_d4dUhN": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Milk Thistle Extract",
+            "description": "A botanical source of plant compounds that support the body’s natural cleansing processes and overall wellbeing."
+          }
+        },
+        "ingredient_3Fi8kX": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Korean Red GinsengExtract",
+            "description": "A premium adaptogenic extract traditionally used to support vitality, alertness, and mental strength under everyday stress."
+          }
+        },
+        "ingredient_grkMn9": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Zinc Citrate",
+            "description": "An essential mineral that supports normal immune function and overall balance."
+          }
+        },
+        "ingredient_6CDYDB": {
+          "type": "ingredient",
+          "settings": {
+            "title": "Pectin",
+            "description": "A plant-derived ingredient that gives Kefey® gummies their soft, chewy texture, naturally vegan and gelatin-free."
+          }
         }
       },
       "block_order": [
         "ingredient_gdYcPk",
         "ingredient_GKMqTE",
-        "ingredient_YAmxmV"
+        "ingredient_YAmxmV",
+        "ingredient_eHd3jV",
+        "ingredient_7Uc9ae",
+        "ingredient_d4dUhN",
+        "ingredient_3Fi8kX",
+        "ingredient_grkMn9",
+        "ingredient_6CDYDB"
       ],
       "settings": {
         "heading": "The Ingredients Behind the Kefey Mood Star",
