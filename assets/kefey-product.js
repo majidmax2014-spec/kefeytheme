@@ -378,7 +378,14 @@
           var variant = map[state.pack] || fallbackVariant;
           if (!variant || !variant.id) return;
 
-          var payload = { id: Number(variant.id), quantity: 1 };
+          var v1 = map[1];
+          var v3 = map[3];
+          var v5 = map[5];
+          var singleVariantPacks =
+            v1 && v3 && v5 && v1.id === v3.id && v3.id === v5.id;
+          var qty = singleVariantPacks ? state.pack : 1;
+
+          var payload = { id: Number(variant.id), quantity: qty };
           var sellingPlanId = firstSellingPlanId(variant);
           if (state.type === 'sub' && sellingPlanId) payload.selling_plan = Number(sellingPlanId);
 
