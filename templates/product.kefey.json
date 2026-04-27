@@ -492,33 +492,97 @@
             "value": "15"
           }
         },
-        "nutrition_row_McUzAD": {
-          "type": "nutrition_row",
-          "settings": {
-            "label": "Sodium",
-            "value": "10 mg"
-          }
-        },
         "nutrition_row_c8njQE": {
           "type": "nutrition_row",
           "settings": {
             "label": "Total Carbohydrate",
-            "value": "3 g"
+            "value": "4 g"
+          }
+        },
+        "nutrition_row_FUqeUK": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Sugar Alcohols",
+            "value": "4 g"
           }
         },
         "nutrition_row_VcPmUz": {
           "type": "nutrition_row",
           "settings": {
-            "label": "Zinc",
+            "label": "Zinc (as Zinc Citrate)",
             "value": "1.7 mg"
+          }
+        },
+        "nutrition_row_McUzAD": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Sodium",
+            "value": "20 mg"
+          }
+        },
+        "nutrition_row_VKE9NW": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Ashwagandha Extract 30:1",
+            "value": "100 mg"
+          }
+        },
+        "nutrition_row_RtpiWY": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Maca Extract 20:1",
+            "value": "100 mg"
+          }
+        },
+        "nutrition_row_bgfh8k": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Gotu Kola Extract 10:1",
+            "value": "100 mg"
+          }
+        },
+        "nutrition_row_brqYMP": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Verbena Extract 10:1",
+            "value": "80 mg"
+          }
+        },
+        "nutrition_row_XENyzb": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Moringa Extract 20:1",
+            "value": "60 mg"
+          }
+        },
+        "nutrition_row_dLaR3q": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Red Ginseng Extract 30:1",
+            "value": "50 mg"
+          }
+        },
+        "nutrition_row_UAT8GK": {
+          "type": "nutrition_row",
+          "settings": {
+            "label": "Milk Thistle Extract 50:1",
+            "value": "40 mg"
           }
         }
       },
       "block_order": [
         "nutrition_row_zfb3Hh",
-        "nutrition_row_McUzAD",
         "nutrition_row_c8njQE",
-        "nutrition_row_VcPmUz"
+        "nutrition_row_FUqeUK",
+        "nutrition_row_VcPmUz",
+        "nutrition_row_McUzAD",
+        "nutrition_row_VKE9NW",
+        "nutrition_row_RtpiWY",
+        "nutrition_row_bgfh8k",
+        "nutrition_row_brqYMP",
+        "nutrition_row_XENyzb",
+        "nutrition_row_dLaR3q",
+        "nutrition_row_UAT8GK"
       ],
       "settings": {
         "left_column_width_percent": 45,
@@ -535,10 +599,10 @@
         "left_body": "Every two Kefey Mood Gummies combine premium plant extracts and essential nutrients — thoughtfully balanced to support calm, focus, and daily wellbeing.",
         "left_image": "shopify://shop_images/gummies.png",
         "box1_heading": "Each Serving Contains:",
-        "box1_amount_label": "Amount Per 2 Gummies",
+        "box1_amount_label": "Amount Per 2 Gummies <br>Servings Per Container: 30",
         "box2_title": "Blend of Premium Quality Herbal Extracts",
         "box2_amount": "600 mg",
-        "box2_body": "Ashwagandha Root Extract (Withania Somnifera), Maca Root Extract (Lepidium Meyenii), Gotu Kola Extract (Centella Asiatica), Vervain Extract (Verbena Officinalis), Moringa Leaf Extract (Moringa Oleifera), Korean Red Ginseng Root & Stem Extract (Panax Ginseng), Milk thistle Seeds Extract (Silybum Marianum).",
+        "box2_body": "Ashwagandha Root Extract (Withania Somnifera), <br>\nMaca Root Extract (Lepidium Meyenii), <br>\nGotu Kola Extract (Centella Asiatica), <br>\nVervain Extract (Verbena Officinalis), <br>\nMoringa Leaf Extract (Moringa Oleifera), <br>\nKorean Red Ginseng Root & Stem Extract (Panax Ginseng), <br>\nMilk thistle Seeds Extract (Silybum Marianum).",
         "box3_title": "Other Ingredients",
         "box3_body": "Maltitol Syrup, Isomalt, Erythritol, Pectin, Malic Acid, Sodium Citrate, Citric Acid, Calcium Lactate, Natural Strawberry Flavor, Beet Root Powder (Color), Stevia Leaf Extract, Coconut Oil (Coating).",
         "bottom_heading": "Does NOT Contain",
