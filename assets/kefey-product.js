@@ -278,6 +278,26 @@
     return Boolean(matchAllocationByPlanId(variant, preferredPlanId));
   }
 
+  function bestAllocationForDiscount(variant, packDiscount, basePrice) {
+    if (!variant || !Array.isArray(variant.selling_plan_allocations) || !variant.selling_plan_allocations.length) {
+      return null;
+    }
+    var expected = Math.max(0, Math.round(Number(basePrice || 0) * (100 - Number(packDiscount || 0)) / 100));
+    var best = null;
+    var bestDelta = Number.POSITIVE_INFINITY;
+    variant.selling_plan_allocations.forEach(function (allocation) {
+      if (!allocation || allocation.price == null) return;
+      var p = Number(allocation.price);
+      if (isNaN(p)) return;
+      var delta = Math.abs(p - expected);
+      if (delta < bestDelta) {
+        bestDelta = delta;
+        best = allocation;
+      }
+    });
+    return best;
+  }
+
   /**
    * Prefer a subscription (recurring) allocation so Recharge/Shopify Checkout gets the right plan
    * when multiple allocations exist (e.g. preorder vs subscribe).
@@ -404,10 +424,10 @@
         var baseCompare = Number(variant.compare_at_price || 0);
         var packQty = state.pack;
         var preferredPlanId = sellingPlanByPack[state.pack] || null;
-        var sellingPlanId = preferredPlanId != null ? preferredPlanId : sellingPlanIdForCart(variant, null);
-        var hasSubscriptionPlan = Boolean(sellingPlanId);
         var packDiscount = discountByPack[state.pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
+        var sellingPlanId = preferredPlanId != null ? preferredPlanId : sellingPlanIdForCart(variant, null);
+        var hasSubscriptionPlan = Boolean(sellingPlanId);
 
         var subEach = basePrice;
         var subCompareEach = baseCompare > 0 ? baseCompare : basePrice;
@@ -415,6 +435,19 @@
         var allocation = null;
         if (hasSubscriptionPlan) {
           allocation = matchAllocationByPlanId(variant, sellingPlanId) || variant.selling_plan_allocations[0];
+          if (!matchAllocationByPlanId(variant, sellingPlanId)) {
+            allocation = bestAllocationForDiscount(variant, packDiscount, basePrice) || allocation;
+          }
+          if (allocation) {
+            var allocRawId =
+              allocation.selling_plan_id != null
+                ? allocation.selling_plan_id
+                : allocation.selling_plan && allocation.selling_plan.id != null
+                  ? allocation.selling_plan.id
+                  : null;
+            var allocId = normalizeSellingPlanId(allocRawId);
+            if (allocId != null) sellingPlanId = allocId;
+          }
           if (allocation && allocation.price) subEach = Number(allocation.price);
           if (allocation && allocation.compare_at_price) subCompareEach = Number(allocation.compare_at_price);
         }
@@ -517,7 +550,23 @@
 
           var payload = { id: Number(variant.id), quantity: qty };
           var preferredPlanId = sellingPlanByPack[state.pack] || null;
+          var packDiscount = discountByPack[state.pack];
+          if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
           var sellingPlanId = preferredPlanId != null ? preferredPlanId : sellingPlanIdForCart(variant, null);
+          var chosenAllocation = matchAllocationByPlanId(variant, sellingPlanId);
+          if (!chosenAllocation) {
+            chosenAllocation = bestAllocationForDiscount(variant, packDiscount, Number(variant.price || 0));
+            if (chosenAllocation) {
+              var chosenRawId =
+                chosenAllocation.selling_plan_id != null
+                  ? chosenAllocation.selling_plan_id
+                  : chosenAllocation.selling_plan && chosenAllocation.selling_plan.id != null
+                    ? chosenAllocation.selling_plan.id
+                    : null;
+              var chosenId = normalizeSellingPlanId(chosenRawId);
+              if (chosenId != null) sellingPlanId = chosenId;
+            }
+          }
           if (state.type === 'sub' && sellingPlanId != null) {
             payload.selling_plan = sellingPlanId;
           }
