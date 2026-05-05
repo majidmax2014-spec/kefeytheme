@@ -282,11 +282,18 @@
     if (!variant || !Array.isArray(variant.selling_plan_allocations) || !variant.selling_plan_allocations.length) {
       return null;
     }
-    var allocations = variant.selling_plan_allocations;
-    var preferredAllocation = matchAllocationByPlanId(variant, preferredPlanId);
-    if (preferredAllocation) {
-      return normalizeSellingPlanId(preferredAllocation.selling_plan_id != null ? preferredAllocation.selling_plan_id : preferredAllocation.selling_plan && preferredAllocation.selling_plan.id != null ? preferredAllocation.selling_plan.id : null);
+    if (preferredPlanId != null) {
+      var preferredAllocation = matchAllocationByPlanId(variant, preferredPlanId);
+      if (!preferredAllocation) return null;
+      return normalizeSellingPlanId(
+        preferredAllocation.selling_plan_id != null
+          ? preferredAllocation.selling_plan_id
+          : preferredAllocation.selling_plan && preferredAllocation.selling_plan.id != null
+            ? preferredAllocation.selling_plan.id
+            : null
+      );
     }
+    var allocations = variant.selling_plan_allocations;
     function isSubscriptionAllocation(a) {
       if (!a) return false;
       var sp = a.selling_plan;
@@ -447,6 +454,16 @@
 
         if (subPlan) subPlan.classList.toggle('is-selected', state.type === 'sub');
         if (onePlan) onePlan.classList.toggle('is-selected', state.type === 'one');
+        if (subPlan) {
+          var planConfigured = sellingPlanByPack[state.pack] != null;
+          subPlan.classList.toggle('is-disabled', state.type === 'sub' && planConfigured && !hasSubscriptionPlan);
+          subPlan.setAttribute(
+            'title',
+            state.type === 'sub' && planConfigured && !hasSubscriptionPlan
+              ? 'Subscription plan for this pack is not available. Check selling plan ID mapping.'
+              : ''
+          );
+        }
         if (cta) cta.disabled = !variant.available;
       }
 
