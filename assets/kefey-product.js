@@ -306,6 +306,18 @@
     return Boolean(matchAllocationByTarget(variant, target));
   }
 
+  function firstRecurringAllocation(variant) {
+    if (!variant || !Array.isArray(variant.selling_plan_allocations)) return null;
+    return (
+      variant.selling_plan_allocations.find(function (a) {
+        if (!a || !a.selling_plan) return false;
+        if (a.selling_plan.recurring_deliveries === true) return true;
+        var cat = String(a.selling_plan.category || '').toUpperCase();
+        return cat === 'SUBSCRIPTION' || cat === 'SUBSCRIPTIONS';
+      }) || variant.selling_plan_allocations[0] || null
+    );
+  }
+
   /**
    * Prefer a subscription (recurring) allocation so Recharge/Shopify Checkout gets the right plan
    * when multiple allocations exist (e.g. preorder vs subscribe).
@@ -596,6 +608,45 @@
             console.error('[Kefey Purchase] Missing configured subscription target on selected variant for pack', state.pack, preferredTarget);
             cta.disabled = false;
             return;
+          }
+
+          // Pack 1 special case: always prefer a valid monthly subscription add,
+          // even if configured plan id/group id doesn't match this exact variant.
+          if (state.type === 'sub' && state.pack === 1 && !chosenAllocation) {
+            var recurringOnCurrent = firstRecurringAllocation(variant);
+            if (recurringOnCurrent) {
+              var recurringRawId =
+                recurringOnCurrent.selling_plan_id != null
+                  ? recurringOnCurrent.selling_plan_id
+                  : recurringOnCurrent.selling_plan && recurringOnCurrent.selling_plan.id != null
+                    ? recurringOnCurrent.selling_plan.id
+                    : null;
+              var recurringId = normalizeSellingPlanId(recurringRawId);
+              if (recurringId != null) {
+                sellingPlanId = recurringId;
+                chosenAllocation = recurringOnCurrent;
+              }
+            }
+            if (!chosenAllocation) {
+              var subscriptionVariant = variants.find(function (v) {
+                return Boolean(firstRecurringAllocation(v));
+              });
+              if (subscriptionVariant) {
+                var recurringOnAlt = firstRecurringAllocation(subscriptionVariant);
+                var recurringAltRawId =
+                  recurringOnAlt && recurringOnAlt.selling_plan_id != null
+                    ? recurringOnAlt.selling_plan_id
+                    : recurringOnAlt && recurringOnAlt.selling_plan && recurringOnAlt.selling_plan.id != null
+                      ? recurringOnAlt.selling_plan.id
+                      : null;
+                var recurringAltId = normalizeSellingPlanId(recurringAltRawId);
+                if (recurringAltId != null) {
+                  payload.id = Number(subscriptionVariant.id);
+                  sellingPlanId = recurringAltId;
+                  chosenAllocation = recurringOnAlt;
+                }
+              }
+            }
           }
           if (state.type === 'sub' && sellingPlanId != null) {
             payload.selling_plan = sellingPlanId;
