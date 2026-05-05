@@ -19,6 +19,9 @@
       data-default-pack="{{ section.settings.default_selected_pack }}"
       data-default-purchase-type="{{ section.settings.default_purchase_type }}"
       data-discount-percent="{{ section.settings.subscription_discount_percent }}"
+      data-discount-pack-1="{{ section.settings.subscription_discount_pack_1 }}"
+      data-discount-pack-3="{{ section.settings.subscription_discount_pack_3 }}"
+      data-discount-pack-5="{{ section.settings.subscription_discount_pack_5 }}"
       data-display-compare="{{ section.settings.display_compare_price }}"
       data-money-format="{{ shop.money_format | escape }}"
       data-plan-pack-1="{{ section.settings.plan_id_pack_1 }}"
@@ -125,6 +128,10 @@
     { "type": "text", "id": "sub_badge", "label": "Subscription badge text", "default": "SAVE 15% + FREE SHIPPING" },
     { "type": "text", "id": "onetime_badge", "label": "One-time badge text", "default": "STANDARD PRICING" },
     { "type": "text", "id": "badge_text", "label": "Top-right badge", "default": "10% OFF & Cancel Anytime" },
+    { "type": "header", "content": "Subscription discount by bundle" },
+    { "type": "range", "id": "subscription_discount_pack_1", "label": "Bundle 1 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 0, "unit": "%" },
+    { "type": "range", "id": "subscription_discount_pack_3", "label": "Bundle 3 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 15, "unit": "%" },
+    { "type": "range", "id": "subscription_discount_pack_5", "label": "Bundle 5 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 30, "unit": "%" },
     { "type": "range", "id": "subscription_discount_percent", "label": "Subscription discount % (display)", "min": 0, "max": 50, "step": 1, "default": 10, "unit": "%" },
     { "type": "text", "id": "display_compare_price", "label": "Display compare price fallback", "default": "$75.00" },
     { "type": "text", "id": "fallback_price", "label": "Fallback price text", "default": "$39.00" },

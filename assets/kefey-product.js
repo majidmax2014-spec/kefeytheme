@@ -279,6 +279,7 @@
    * when multiple allocations exist (e.g. preorder vs subscribe).
    */
   function sellingPlanIdForCart(variant, preferredPlanId) {
+    if (preferredPlanId != null) return preferredPlanId;
     if (!variant || !Array.isArray(variant.selling_plan_allocations) || !variant.selling_plan_allocations.length) {
       return null;
     }
@@ -344,9 +345,17 @@
       var defaultType = module.getAttribute('data-default-purchase-type') === 'one' ? 'one' : 'sub';
       var displayDiscount = parseInt(module.getAttribute('data-discount-percent') || '10', 10);
       if (isNaN(displayDiscount)) displayDiscount = 10;
+      var discountByPack = {
+        1: parseInt(module.getAttribute('data-discount-pack-1') || '0', 10),
+        3: parseInt(module.getAttribute('data-discount-pack-3') || '15', 10),
+        5: parseInt(module.getAttribute('data-discount-pack-5') || '30', 10)
+      };
+      if (isNaN(discountByPack[1])) discountByPack[1] = 0;
+      if (isNaN(discountByPack[3])) discountByPack[3] = 15;
+      if (isNaN(discountByPack[5])) discountByPack[5] = 30;
       var moneyFormat = module.getAttribute('data-money-format') || '${{amount}}';
       var displayCompareFallback = module.getAttribute('data-display-compare') || '';
-    var sellingPlanByPack = sellingPlanMapFromModule(module);
+      var sellingPlanByPack = sellingPlanMapFromModule(module);
 
       var state = {
         pack: defaultPack,
@@ -373,16 +382,22 @@
         var preferredPlanId = sellingPlanByPack[state.pack] || null;
         var sellingPlanId = sellingPlanIdForCart(variant, preferredPlanId);
         var hasSubscriptionPlan = Boolean(sellingPlanId);
+        var packDiscount = discountByPack[state.pack];
+        if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
 
         var subEach = basePrice;
         var subCompareEach = baseCompare > 0 ? baseCompare : basePrice;
 
+        var allocation = null;
         if (hasSubscriptionPlan) {
-          var allocation = matchAllocationByPlanId(variant, preferredPlanId) || variant.selling_plan_allocations[0];
+          allocation =
+            matchAllocationByPlanId(variant, preferredPlanId) ||
+            (preferredPlanId == null ? variant.selling_plan_allocations[0] : null);
           if (allocation && allocation.price) subEach = Number(allocation.price);
           if (allocation && allocation.compare_at_price) subCompareEach = Number(allocation.compare_at_price);
-        } else if (displayDiscount > 0) {
-          subEach = Math.max(0, Math.round(basePrice * (100 - displayDiscount) / 100));
+        }
+        if (!allocation) {
+          subEach = Math.max(0, Math.round(basePrice * (100 - packDiscount) / 100));
         }
 
         var subTotal = subEach * packQty;
