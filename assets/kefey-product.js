@@ -274,6 +274,10 @@
     }) || null;
   }
 
+  function variantHasPlanId(variant, preferredPlanId) {
+    return Boolean(matchAllocationByPlanId(variant, preferredPlanId));
+  }
+
   /**
    * Prefer a subscription (recurring) allocation so Recharge/Shopify Checkout gets the right plan
    * when multiple allocations exist (e.g. preorder vs subscribe).
@@ -381,8 +385,19 @@
       var oneEachEl = module.querySelector('[data-one-each]');
       var cta = module.querySelector('[data-kefey-checkout]');
 
+      function resolveVariantForPack(pack) {
+        var preferredPlanId = sellingPlanByPack[pack] || null;
+        var candidate = map[pack] || fallbackVariant;
+        if (!preferredPlanId) return candidate;
+        if (candidate && variantHasPlanId(candidate, preferredPlanId)) return candidate;
+        var byPlan = variants.find(function (v) {
+          return variantHasPlanId(v, preferredPlanId);
+        });
+        return byPlan || candidate;
+      }
+
       function render() {
-        var variant = map[state.pack] || fallbackVariant;
+        var variant = resolveVariantForPack(state.pack);
         if (!variant) return;
 
         var basePrice = Number(variant.price || 0);
@@ -490,7 +505,7 @@
 
       if (cta) {
         cta.addEventListener('click', function () {
-          var variant = map[state.pack] || fallbackVariant;
+          var variant = resolveVariantForPack(state.pack);
           if (!variant || !variant.id) return;
 
           var v1 = map[1];
