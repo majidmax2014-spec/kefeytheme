@@ -355,6 +355,8 @@
       if (isNaN(discountByPack[5])) discountByPack[5] = 30;
       var moneyFormat = module.getAttribute('data-money-format') || '${{amount}}';
       var displayCompareFallback = module.getAttribute('data-display-compare') || '';
+      var rawBadgeText = module.getAttribute('data-badge-text') || 'OFF & Cancel Anytime';
+      var badgeSuffix = rawBadgeText.replace(/^\s*\d+\s*%?\s*/i, '').trim() || 'OFF & Cancel Anytime';
       var sellingPlanByPack = sellingPlanMapFromModule(module);
 
       var state = {
@@ -369,6 +371,7 @@
       var subEachEl = module.querySelector('[data-sub-each]');
       var subTotalEl = module.querySelector('[data-sub-total]');
       var subCompareEl = module.querySelector('[data-sub-compare]');
+      var subBadgeEl = module.querySelector('[data-sub-badge]');
       var oneEachEl = module.querySelector('[data-one-each]');
       var cta = module.querySelector('[data-kefey-checkout]');
 
@@ -401,7 +404,16 @@
         }
 
         var subTotal = subEach * packQty;
-        var subCompareTotal = (subCompareEach > 0 ? subCompareEach : basePrice) * packQty;
+        var subCompareTotal = 0;
+        if (packDiscount > 0) {
+          var compareEachForDisplay =
+            subCompareEach > subEach
+              ? subCompareEach
+              : baseCompare > subEach
+                ? baseCompare
+                : basePrice;
+          subCompareTotal = compareEachForDisplay * packQty;
+        }
         var oneEach = basePrice;
 
         if (variantInput) variantInput.value = String(variant.id);
@@ -410,14 +422,23 @@
         if (oneEachEl) oneEachEl.textContent = formatMoney(oneEach, moneyFormat);
 
         if (subCompareEl) {
-          if (subCompareTotal > subTotal) {
+          if (packDiscount > 0 && subCompareTotal > subTotal) {
             subCompareEl.textContent = formatMoney(subCompareTotal, moneyFormat);
             subCompareEl.style.display = '';
-          } else if (displayCompareFallback) {
+          } else if (packDiscount > 0 && displayCompareFallback) {
             subCompareEl.textContent = displayCompareFallback;
             subCompareEl.style.display = '';
           } else {
             subCompareEl.style.display = 'none';
+          }
+        }
+
+        if (subBadgeEl) {
+          if (packDiscount > 0) {
+            subBadgeEl.textContent = String(packDiscount) + '% ' + badgeSuffix;
+            subBadgeEl.style.display = '';
+          } else {
+            subBadgeEl.style.display = 'none';
           }
         }
 
