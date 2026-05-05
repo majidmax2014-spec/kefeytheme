@@ -436,6 +436,9 @@
         var packDiscount = discountByPack[state.pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
         var sellingPlanId = sellingPlanIdForCart(variant, preferredTarget);
+        if (state.pack === 1 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
+          sellingPlanId = preferredTarget.planId;
+        }
         if (sellingPlanId == null && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null))) {
           sellingPlanId = sellingPlanIdForCart(variant, null);
         }
@@ -568,6 +571,9 @@
           var packDiscount = discountByPack[state.pack];
           if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
           var sellingPlanId = sellingPlanIdForCart(variant, preferredTarget);
+          if (state.pack === 1 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
+            sellingPlanId = preferredTarget.planId;
+          }
           var chosenAllocation = matchAllocationByTarget(variant, preferredTarget);
           if (!chosenAllocation && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null)) && variant.selling_plan_allocations && variant.selling_plan_allocations.length) {
             chosenAllocation = variant.selling_plan_allocations[0];
@@ -580,7 +586,13 @@
             var chosenId = normalizeSellingPlanId(chosenRawId);
             if (chosenId != null) sellingPlanId = chosenId;
           }
-          if (state.type === 'sub' && preferredTarget && (preferredTarget.planId != null || preferredTarget.groupId != null) && !chosenAllocation) {
+          if (
+            state.type === 'sub' &&
+            state.pack !== 1 &&
+            preferredTarget &&
+            (preferredTarget.planId != null || preferredTarget.groupId != null) &&
+            !chosenAllocation
+          ) {
             console.error('[Kefey Purchase] Missing configured subscription target on selected variant for pack', state.pack, preferredTarget);
             cta.disabled = false;
             return;
