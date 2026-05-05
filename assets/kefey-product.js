@@ -404,7 +404,7 @@
         var baseCompare = Number(variant.compare_at_price || 0);
         var packQty = state.pack;
         var preferredPlanId = sellingPlanByPack[state.pack] || null;
-        var sellingPlanId = sellingPlanIdForCart(variant, preferredPlanId);
+        var sellingPlanId = preferredPlanId != null ? preferredPlanId : sellingPlanIdForCart(variant, null);
         var hasSubscriptionPlan = Boolean(sellingPlanId);
         var packDiscount = discountByPack[state.pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
@@ -517,7 +517,7 @@
 
           var payload = { id: Number(variant.id), quantity: qty };
           var preferredPlanId = sellingPlanByPack[state.pack] || null;
-          var sellingPlanId = sellingPlanIdForCart(variant, preferredPlanId);
+          var sellingPlanId = preferredPlanId != null ? preferredPlanId : sellingPlanIdForCart(variant, null);
           if (state.type === 'sub' && sellingPlanId != null) {
             payload.selling_plan = sellingPlanId;
           }
