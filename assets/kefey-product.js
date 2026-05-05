@@ -279,7 +279,6 @@
    * when multiple allocations exist (e.g. preorder vs subscribe).
    */
   function sellingPlanIdForCart(variant, preferredPlanId) {
-    if (preferredPlanId != null) return preferredPlanId;
     if (!variant || !Array.isArray(variant.selling_plan_allocations) || !variant.selling_plan_allocations.length) {
       return null;
     }
@@ -393,9 +392,7 @@
 
         var allocation = null;
         if (hasSubscriptionPlan) {
-          allocation =
-            matchAllocationByPlanId(variant, preferredPlanId) ||
-            (preferredPlanId == null ? variant.selling_plan_allocations[0] : null);
+          allocation = matchAllocationByPlanId(variant, sellingPlanId) || variant.selling_plan_allocations[0];
           if (allocation && allocation.price) subEach = Number(allocation.price);
           if (allocation && allocation.compare_at_price) subCompareEach = Number(allocation.compare_at_price);
         }
@@ -500,13 +497,26 @@
             body: JSON.stringify(payload)
           })
             .then(function (res) {
-              if (!res.ok) throw new Error('Failed to add item');
+              if (!res.ok) {
+                return res
+                  .json()
+                  .catch(function () {
+                    return {};
+                  })
+                  .then(function (errBody) {
+                    var msg =
+                      (errBody && (errBody.description || errBody.message)) ||
+                      'Failed to add item';
+                    throw new Error(msg);
+                  });
+              }
               return res.json();
             })
             .then(function () {
               window.location.href = '/cart';
             })
-            .catch(function () {
+            .catch(function (err) {
+              console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
               cta.disabled = false;
             });
         });
