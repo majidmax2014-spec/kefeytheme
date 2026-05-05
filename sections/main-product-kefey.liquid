@@ -28,6 +28,9 @@
       data-plan-pack-1="{{ section.settings.plan_id_pack_1 }}"
       data-plan-pack-3="{{ section.settings.plan_id_pack_3 }}"
       data-plan-pack-5="{{ section.settings.plan_id_pack_5 }}"
+      data-plan-group-pack-1="{{ section.settings.plan_group_id_pack_1 }}"
+      data-plan-group-pack-3="{{ section.settings.plan_group_id_pack_3 }}"
+      data-plan-group-pack-5="{{ section.settings.plan_group_id_pack_5 }}"
       style="
         --kp-highlight: {{ section.settings.highlight_bar_color }};
         --kp-subscribe-bg: {{ section.settings.subscribe_card_bg }};
@@ -143,6 +146,9 @@
     { "type": "text", "id": "plan_id_pack_1", "label": "Bundle 1 selling plan ID", "default": "7705526500", "info": "Recharge External plan ID (Shopify selling plan ID)." },
     { "type": "text", "id": "plan_id_pack_3", "label": "Bundle 3 selling plan ID", "default": "7728857316", "info": "Recharge External plan ID (Shopify selling plan ID)." },
     { "type": "text", "id": "plan_id_pack_5", "label": "Bundle 5 selling plan ID", "default": "7728890084", "info": "Recharge External plan ID (Shopify selling plan ID)." },
+    { "type": "text", "id": "plan_group_id_pack_1", "label": "Bundle 1 plan group ID", "default": "4279697636", "info": "Recharge External plan group ID fallback for matching." },
+    { "type": "text", "id": "plan_group_id_pack_3", "label": "Bundle 3 plan group ID", "default": "4301029604", "info": "Recharge External plan group ID fallback for matching." },
+    { "type": "text", "id": "plan_group_id_pack_5", "label": "Bundle 5 plan group ID", "default": "4301062372", "info": "Recharge External plan group ID fallback for matching." },
     {
       "type": "select",
       "id": "default_selected_pack",
