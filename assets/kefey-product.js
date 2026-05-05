@@ -248,15 +248,45 @@
     return isNaN(n) ? null : n;
   }
 
+  function sellingPlanMapFromModule(module) {
+    return {
+      1: normalizeSellingPlanId(module.getAttribute('data-plan-pack-1')),
+      3: normalizeSellingPlanId(module.getAttribute('data-plan-pack-3')),
+      5: normalizeSellingPlanId(module.getAttribute('data-plan-pack-5'))
+    };
+  }
+
+  function matchAllocationByPlanId(variant, preferredPlanId) {
+    if (!variant || !Array.isArray(variant.selling_plan_allocations) || !variant.selling_plan_allocations.length) {
+      return null;
+    }
+    if (preferredPlanId == null) return null;
+    var allocations = variant.selling_plan_allocations;
+    return allocations.find(function (allocation) {
+      if (!allocation) return false;
+      var rawId =
+        allocation.selling_plan_id != null
+          ? allocation.selling_plan_id
+          : allocation.selling_plan && allocation.selling_plan.id != null
+            ? allocation.selling_plan.id
+            : null;
+      return normalizeSellingPlanId(rawId) === preferredPlanId;
+    }) || null;
+  }
+
   /**
    * Prefer a subscription (recurring) allocation so Recharge/Shopify Checkout gets the right plan
    * when multiple allocations exist (e.g. preorder vs subscribe).
    */
-  function sellingPlanIdForCart(variant) {
+  function sellingPlanIdForCart(variant, preferredPlanId) {
     if (!variant || !Array.isArray(variant.selling_plan_allocations) || !variant.selling_plan_allocations.length) {
       return null;
     }
     var allocations = variant.selling_plan_allocations;
+    var preferredAllocation = matchAllocationByPlanId(variant, preferredPlanId);
+    if (preferredAllocation) {
+      return normalizeSellingPlanId(preferredAllocation.selling_plan_id != null ? preferredAllocation.selling_plan_id : preferredAllocation.selling_plan && preferredAllocation.selling_plan.id != null ? preferredAllocation.selling_plan.id : null);
+    }
     function isSubscriptionAllocation(a) {
       if (!a) return false;
       var sp = a.selling_plan;
@@ -316,6 +346,7 @@
       if (isNaN(displayDiscount)) displayDiscount = 10;
       var moneyFormat = module.getAttribute('data-money-format') || '${{amount}}';
       var displayCompareFallback = module.getAttribute('data-display-compare') || '';
+    var sellingPlanByPack = sellingPlanMapFromModule(module);
 
       var state = {
         pack: defaultPack,
@@ -339,14 +370,15 @@
         var basePrice = Number(variant.price || 0);
         var baseCompare = Number(variant.compare_at_price || 0);
         var packQty = state.pack;
-        var sellingPlanId = sellingPlanIdForCart(variant);
+        var preferredPlanId = sellingPlanByPack[state.pack] || null;
+        var sellingPlanId = sellingPlanIdForCart(variant, preferredPlanId);
         var hasSubscriptionPlan = Boolean(sellingPlanId);
 
         var subEach = basePrice;
         var subCompareEach = baseCompare > 0 ? baseCompare : basePrice;
 
         if (hasSubscriptionPlan) {
-          var allocation = variant.selling_plan_allocations[0];
+          var allocation = matchAllocationByPlanId(variant, preferredPlanId) || variant.selling_plan_allocations[0];
           if (allocation && allocation.price) subEach = Number(allocation.price);
           if (allocation && allocation.compare_at_price) subCompareEach = Number(allocation.compare_at_price);
         } else if (displayDiscount > 0) {
@@ -419,7 +451,8 @@
           var qty = singleVariantPacks ? state.pack : 1;
 
           var payload = { id: Number(variant.id), quantity: qty };
-          var sellingPlanId = sellingPlanIdForCart(variant);
+          var preferredPlanId = sellingPlanByPack[state.pack] || null;
+          var sellingPlanId = sellingPlanIdForCart(variant, preferredPlanId);
           if (state.type === 'sub' && sellingPlanId != null) {
             payload.selling_plan = sellingPlanId;
           }

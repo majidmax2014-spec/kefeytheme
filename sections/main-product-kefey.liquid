@@ -21,6 +21,9 @@
       data-discount-percent="{{ section.settings.subscription_discount_percent }}"
       data-display-compare="{{ section.settings.display_compare_price }}"
       data-money-format="{{ shop.money_format | escape }}"
+      data-plan-pack-1="{{ section.settings.plan_id_pack_1 }}"
+      data-plan-pack-3="{{ section.settings.plan_id_pack_3 }}"
+      data-plan-pack-5="{{ section.settings.plan_id_pack_5 }}"
       style="
         --kp-highlight: {{ section.settings.highlight_bar_color }};
         --kp-subscribe-bg: {{ section.settings.subscribe_card_bg }};
@@ -128,6 +131,10 @@
     { "type": "text", "id": "pack_label_5", "label": "5 pack label", "default": "5 - Pack" },
     { "type": "text", "id": "pack_label_3", "label": "3 pack label", "default": "3 - Pack" },
     { "type": "text", "id": "pack_label_1", "label": "1 pack label", "default": "1 - Pack" },
+    { "type": "header", "content": "Recharge plan mapping by pack" },
+    { "type": "text", "id": "plan_id_pack_1", "label": "Bundle 1 selling plan ID", "default": "7705526500", "info": "Recharge External plan ID (Shopify selling plan ID)." },
+    { "type": "text", "id": "plan_id_pack_3", "label": "Bundle 3 selling plan ID", "default": "7728857316", "info": "Recharge External plan ID (Shopify selling plan ID)." },
+    { "type": "text", "id": "plan_id_pack_5", "label": "Bundle 5 selling plan ID", "default": "21978078", "info": "Use external selling plan ID if available. Fallback currently uses Plan ID." },
     {
       "type": "select",
       "id": "default_selected_pack",
