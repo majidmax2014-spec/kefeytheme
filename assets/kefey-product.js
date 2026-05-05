@@ -278,26 +278,6 @@
     return Boolean(matchAllocationByPlanId(variant, preferredPlanId));
   }
 
-  function bestAllocationForDiscount(variant, packDiscount, basePrice) {
-    if (!variant || !Array.isArray(variant.selling_plan_allocations) || !variant.selling_plan_allocations.length) {
-      return null;
-    }
-    var expected = Math.max(0, Math.round(Number(basePrice || 0) * (100 - Number(packDiscount || 0)) / 100));
-    var best = null;
-    var bestDelta = Number.POSITIVE_INFINITY;
-    variant.selling_plan_allocations.forEach(function (allocation) {
-      if (!allocation || allocation.price == null) return;
-      var p = Number(allocation.price);
-      if (isNaN(p)) return;
-      var delta = Math.abs(p - expected);
-      if (delta < bestDelta) {
-        bestDelta = delta;
-        best = allocation;
-      }
-    });
-    return best;
-  }
-
   /**
    * Prefer a subscription (recurring) allocation so Recharge/Shopify Checkout gets the right plan
    * when multiple allocations exist (e.g. preorder vs subscribe).
@@ -427,17 +407,14 @@
         var packDiscount = discountByPack[state.pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
         var sellingPlanId = preferredPlanId != null ? preferredPlanId : sellingPlanIdForCart(variant, null);
-        var hasSubscriptionPlan = Boolean(sellingPlanId);
 
         var subEach = basePrice;
         var subCompareEach = baseCompare > 0 ? baseCompare : basePrice;
 
         var allocation = null;
-        if (hasSubscriptionPlan) {
-          allocation = matchAllocationByPlanId(variant, sellingPlanId) || variant.selling_plan_allocations[0];
-          if (!matchAllocationByPlanId(variant, sellingPlanId)) {
-            allocation = bestAllocationForDiscount(variant, packDiscount, basePrice) || allocation;
-          }
+        if (sellingPlanId != null) {
+          allocation = matchAllocationByPlanId(variant, sellingPlanId);
+          if (!allocation && preferredPlanId == null) allocation = variant.selling_plan_allocations[0] || null;
           if (allocation) {
             var allocRawId =
               allocation.selling_plan_id != null
@@ -451,6 +428,7 @@
           if (allocation && allocation.price) subEach = Number(allocation.price);
           if (allocation && allocation.compare_at_price) subCompareEach = Number(allocation.compare_at_price);
         }
+        var hasSubscriptionPlan = preferredPlanId != null ? Boolean(allocation) : Boolean(sellingPlanId);
         if (!allocation) {
           subEach = Math.max(0, Math.round(basePrice * (100 - packDiscount) / 100));
         }
@@ -553,19 +531,22 @@
           var packDiscount = discountByPack[state.pack];
           if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
           var sellingPlanId = preferredPlanId != null ? preferredPlanId : sellingPlanIdForCart(variant, null);
-          var chosenAllocation = matchAllocationByPlanId(variant, sellingPlanId);
-          if (!chosenAllocation) {
-            chosenAllocation = bestAllocationForDiscount(variant, packDiscount, Number(variant.price || 0));
-            if (chosenAllocation) {
-              var chosenRawId =
-                chosenAllocation.selling_plan_id != null
-                  ? chosenAllocation.selling_plan_id
-                  : chosenAllocation.selling_plan && chosenAllocation.selling_plan.id != null
-                    ? chosenAllocation.selling_plan.id
-                    : null;
-              var chosenId = normalizeSellingPlanId(chosenRawId);
-              if (chosenId != null) sellingPlanId = chosenId;
-            }
+          var chosenAllocation = sellingPlanId != null ? matchAllocationByPlanId(variant, sellingPlanId) : null;
+          if (!chosenAllocation && preferredPlanId == null && variant.selling_plan_allocations && variant.selling_plan_allocations.length) {
+            chosenAllocation = variant.selling_plan_allocations[0];
+            var chosenRawId =
+              chosenAllocation.selling_plan_id != null
+                ? chosenAllocation.selling_plan_id
+                : chosenAllocation.selling_plan && chosenAllocation.selling_plan.id != null
+                  ? chosenAllocation.selling_plan.id
+                  : null;
+            var chosenId = normalizeSellingPlanId(chosenRawId);
+            if (chosenId != null) sellingPlanId = chosenId;
+          }
+          if (state.type === 'sub' && preferredPlanId != null && !chosenAllocation) {
+            console.error('[Kefey Purchase] Missing configured subscription plan on selected variant for pack', state.pack, preferredPlanId);
+            cta.disabled = false;
+            return;
           }
           if (state.type === 'sub' && sellingPlanId != null) {
             payload.selling_plan = sellingPlanId;
