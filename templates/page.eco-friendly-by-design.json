@@ -424,6 +424,12 @@
     "kefey_logo_text_marquee_LFXmJA": {
       "type": "kefey-logo-text-marquee",
       "blocks": {
+        "item_qkRc3f": {
+          "type": "item",
+          "settings": {
+            "text": ""
+          }
+        },
         "item_nhEQa6": {
           "type": "item",
           "settings": {
@@ -472,16 +478,49 @@
             "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
             "text": ""
           }
+        },
+        "item_pe4knj": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": ""
+          }
+        },
+        "item_YAzNfr": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": ""
+          }
+        },
+        "item_e6Ftag": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": ""
+          }
+        },
+        "item_UJDaMk": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": ""
+          }
         }
       },
       "block_order": [
+        "item_qkRc3f",
         "item_nhEQa6",
         "item_iH6CRk",
         "item_HtLkRw",
         "item_AaqEfW",
         "item_j96YGh",
         "item_hQrrg8",
-        "item_cbARGd"
+        "item_cbARGd",
+        "item_pe4knj",
+        "item_YAzNfr",
+        "item_e6Ftag",
+        "item_UJDaMk"
       ],
       "name": "Kefey logo text marquee",
       "settings": {

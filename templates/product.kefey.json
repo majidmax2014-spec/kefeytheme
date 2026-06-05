@@ -77,8 +77,8 @@
       ],
       "settings": {
         "logo_image": "shopify://shop_images/white-logo.png",
-        "background_image": "shopify://shop_images/product-banner.png",
-        "background_image_mobile": "shopify://shop_images/product-banner-mobile.png",
+        "background_image": "shopify://shop_images/product-desktop.png",
+        "background_image_mobile": "shopify://shop_images/product-mobile.png",
         "mobile_background_image_position": "center center",
         "eyebrow": "",
         "description": "A plant-based, star-shaped gummy designed to support your mood, energy, and daily balance.",
