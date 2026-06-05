@@ -428,28 +428,60 @@
           "type": "item",
           "settings": {
             "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
-            "text": "+ Trees / forest - without people"
+            "text": ""
           }
         },
         "item_iH6CRk": {
           "type": "item",
           "settings": {
             "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
-            "text": "+ Trees / forest - without people"
+            "text": ""
           }
         },
         "item_HtLkRw": {
           "type": "item",
           "settings": {
             "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
-            "text": "+ Trees / forest - without people"
+            "text": ""
+          }
+        },
+        "item_AaqEfW": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": ""
+          }
+        },
+        "item_j96YGh": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": ""
+          }
+        },
+        "item_hQrrg8": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": ""
+          }
+        },
+        "item_cbARGd": {
+          "type": "item",
+          "settings": {
+            "logo": "shopify://shop_images/one-tree-logo_9d12a3d0-6e52-4fe2-bf1d-63a49ee3778e.png",
+            "text": ""
           }
         }
       },
       "block_order": [
         "item_nhEQa6",
         "item_iH6CRk",
-        "item_HtLkRw"
+        "item_HtLkRw",
+        "item_AaqEfW",
+        "item_j96YGh",
+        "item_hQrrg8",
+        "item_cbARGd"
       ],
       "name": "Kefey logo text marquee",
       "settings": {
