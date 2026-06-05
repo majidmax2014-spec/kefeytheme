@@ -30,8 +30,8 @@
       ],
       "name": "Hero Slider",
       "settings": {
-        "height_desktop": 600,
-        "height_mobile": 480,
+        "height_desktop": 700,
+        "height_mobile": 550,
         "overlay_opacity": 20,
         "autoplay": true,
         "autoplay_speed": 5000,
