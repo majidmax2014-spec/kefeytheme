@@ -20,7 +20,7 @@
             "heading": "Wellness That Makes You Smile",
             "body_text": "<p>A Daily Ritual • Plant-Based • Sugar-Free • Planet-Kind</p>",
             "button_label": "SHOP NOW",
-            "button_link": "shopify://collections/all",
+            "button_link": "shopify://products/mood-gummies",
             "text_alignment": "left"
           }
         }
@@ -558,9 +558,10 @@
         "reel_KCNFUa": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-28.png",
+            "title": "",
             "link": "",
-            "source_type": "youtube",
+            "source_type": "none",
             "youtube_url": "https://www.youtube.com/watch?v=rOmpeY6gPHo",
             "embed_html": ""
           }
@@ -568,7 +569,8 @@
         "reel_XR4DrR": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-27.png",
+            "title": "",
             "link": "",
             "source_type": "none",
             "youtube_url": "",
@@ -578,7 +580,8 @@
         "reel_iwAXqT": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-26.png",
+            "title": "",
             "link": "",
             "source_type": "none",
             "youtube_url": "",
@@ -588,7 +591,8 @@
         "reel_L3zxkD": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-25.png",
+            "title": "",
             "link": "",
             "source_type": "none",
             "youtube_url": "",
@@ -598,7 +602,8 @@
         "reel_8HMf6b": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-24.png",
+            "title": "",
             "link": "",
             "source_type": "none",
             "youtube_url": "",
@@ -608,7 +613,8 @@
         "reel_G9cHG9": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-23.png",
+            "title": "",
             "link": "",
             "source_type": "none",
             "youtube_url": "",
@@ -618,7 +624,8 @@
         "reel_XhUC6T": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-22.png",
+            "title": "",
             "link": "",
             "source_type": "none",
             "youtube_url": "",
@@ -628,7 +635,8 @@
         "reel_ffjHwQ": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-21.png",
+            "title": "",
             "link": "",
             "source_type": "none",
             "youtube_url": "",
@@ -638,7 +646,8 @@
         "reel_jPxkGh": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-20.png",
+            "title": "",
             "link": "",
             "source_type": "none",
             "youtube_url": "",
@@ -648,7 +657,8 @@
         "reel_UMeane": {
           "type": "reel",
           "settings": {
-            "title": "Reel",
+            "thumbnail": "shopify://shop_images/LIFESTYLE-18.png",
+            "title": "",
             "link": "",
             "source_type": "none",
             "youtube_url": "",
