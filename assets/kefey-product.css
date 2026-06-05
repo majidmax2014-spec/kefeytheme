@@ -943,6 +943,13 @@
   overflow: visible;
 }
 
+.kefey-callouts__nutrition-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--kc-box-radius, 18px);
+}
+
 .kefey-callouts__box1-header,
 .kefey-callouts__box1-heading {
   background: var(--kc-white-header, #fff);

@@ -83,18 +83,31 @@
 
       <div class="kefey-callouts__right">
         <article class="kefey-callouts__box kefey-callouts__box--table">
-          <div class="kefey-callouts__box1-header kefey-callouts__box1-heading">{{ section.settings.box1_heading }}</div>
-          <div class="kefey-callouts__box1-body">
-            <div class="kefey-callouts__box1-amount">{{ section.settings.box1_amount_label }}</div>
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'nutrition_row' -%}
-                <div class="kefey-callouts__table-row" {{ block.shopify_attributes }}>
-                  <span class="kefey-callouts__table-label">{{ block.settings.label }}</span>
-                  <span class="kefey-callouts__table-value">{{ block.settings.value }}</span>
-                </div>
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
+          {%- if section.settings.nutrition_image != blank -%}
+            {{
+              section.settings.nutrition_image
+              | image_url: width: 1200
+              | image_tag:
+                class: 'kefey-callouts__nutrition-image',
+                widths: '420, 700, 900, 1200',
+                sizes: '(min-width: 990px) 45vw, 92vw',
+                loading: 'lazy',
+                alt: section.settings.box1_heading
+            }}
+          {%- else -%}
+            <div class="kefey-callouts__box1-header kefey-callouts__box1-heading">{{ section.settings.box1_heading }}</div>
+            <div class="kefey-callouts__box1-body">
+              <div class="kefey-callouts__box1-amount">{{ section.settings.box1_amount_label }}</div>
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'nutrition_row' -%}
+                  <div class="kefey-callouts__table-row" {{ block.shopify_attributes }}>
+                    <span class="kefey-callouts__table-label">{{ block.settings.label }}</span>
+                    <span class="kefey-callouts__table-value">{{ block.settings.value }}</span>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
         </article>
 
         <article class="kefey-callouts__box kefey-callouts__box--blend">
@@ -137,6 +150,7 @@
     { "type": "textarea", "id": "left_headline", "label": "Left headline", "default": "Each Serving (2 Gummies) = Nature, Concentrated with Joy" },
     { "type": "textarea", "id": "left_body", "label": "Left body", "default": "Every two Kefey Mood Gummies combine premium plant extracts and essential nutrients — thoughtfully balanced to support calm, focus, and daily wellbeing." },
     { "type": "image_picker", "id": "left_image", "label": "Left image" },
+    { "type": "image_picker", "id": "nutrition_image", "label": "Nutrition facts image" },
     { "type": "text", "id": "box1_heading", "label": "Box 1 heading", "default": "Each Serving Contains:" },
     { "type": "text", "id": "box1_amount_label", "label": "Box 1 amount label", "default": "Amount Per 2 Gummies" },
     { "type": "text", "id": "box2_title", "label": "Box 2 title", "default": "Blend of Premium Quality Herbal Extracts" },
