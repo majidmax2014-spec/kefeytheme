@@ -15,8 +15,8 @@
         "slide_f63LM7": {
           "type": "slide",
           "settings": {
-            "desktop_bg_image": "shopify://shop_images/slide1.png",
-            "mobile_bg_image": "shopify://shop_images/home_banner.png",
+            "desktop_bg_image": "shopify://shop_images/Home1.png",
+            "mobile_bg_image": "shopify://shop_images/Home-mobile.png",
             "heading": "Wellness That Makes You Smile",
             "body_text": "<p>A Daily Ritual • Plant-Based • Sugar-Free • Planet-Kind</p>",
             "button_label": "SHOP NOW",
@@ -70,7 +70,7 @@
         "item_XMtTWK": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/customer1.png",
+            "image": "shopify://shop_images/LIFESTYLE-2.png",
             "link": "",
             "alt": "",
             "background_color": ""
@@ -79,7 +79,16 @@
         "item_wJfNym": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/customer2.png",
+            "image": "shopify://shop_images/LIFESTYLE-5.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        },
+        "item_7nLLAK": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/LIFESTYLE-7.png",
             "link": "",
             "alt": "",
             "background_color": ""
@@ -88,7 +97,7 @@
         "item_nBmzrE": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/customer3.png",
+            "image": "shopify://shop_images/LIFESTYLE-9.png",
             "link": "",
             "alt": "",
             "background_color": ""
@@ -97,7 +106,7 @@
         "item_eWRJP9": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/customer4.png",
+            "image": "shopify://shop_images/LIFESTYLE-11.png",
             "link": "",
             "alt": "",
             "background_color": ""
@@ -106,7 +115,43 @@
         "item_9nfxiL": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/customer5.png",
+            "image": "shopify://shop_images/LIFESTYLE-12.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        },
+        "item_4fRbCY": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/LIFESTYLE-13.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        },
+        "item_AqNKCt": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/LIFESTYLE-14.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        },
+        "item_NyLpKG": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/LIFESTYLE-15.png",
+            "link": "",
+            "alt": "",
+            "background_color": ""
+          }
+        },
+        "item_wzaWjy": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/LIFESTYLE-17.png",
             "link": "",
             "alt": "",
             "background_color": ""
@@ -116,9 +161,14 @@
       "block_order": [
         "item_XMtTWK",
         "item_wJfNym",
+        "item_7nLLAK",
         "item_nBmzrE",
         "item_eWRJP9",
-        "item_9nfxiL"
+        "item_9nfxiL",
+        "item_4fRbCY",
+        "item_AqNKCt",
+        "item_NyLpKG",
+        "item_wzaWjy"
       ],
       "name": "Angled Image Carousel",
       "settings": {
