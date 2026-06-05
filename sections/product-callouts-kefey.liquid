@@ -110,23 +110,29 @@
           {%- endif -%}
         </article>
 
-        <article class="kefey-callouts__box kefey-callouts__box--blend">
-          <div class="kefey-callouts__box-title-row">
-            <h3 class="kefey-callouts__box-title">{{ section.settings.box2_title }}</h3>
-            <span class="kefey-callouts__box-mg">{{ section.settings.box2_amount }}</span>
-          </div>
-          <p class="kefey-callouts__box-text">{{ section.settings.box2_body }}</p>
-        </article>
+        {%- if section.settings.show_box2 -%}
+          <article class="kefey-callouts__box kefey-callouts__box--blend">
+            <div class="kefey-callouts__box-title-row">
+              <h3 class="kefey-callouts__box-title">{{ section.settings.box2_title }}</h3>
+              <span class="kefey-callouts__box-mg">{{ section.settings.box2_amount }}</span>
+            </div>
+            <p class="kefey-callouts__box-text">{{ section.settings.box2_body }}</p>
+          </article>
+        {%- endif -%}
 
-        <article class="kefey-callouts__box kefey-callouts__box--other">
-          <h3 class="kefey-callouts__box-title">{{ section.settings.box3_title }}</h3>
-          <p class="kefey-callouts__box-text">{{ section.settings.box3_body }}</p>
-        </article>
+        {%- if section.settings.show_box3 -%}
+          <article class="kefey-callouts__box kefey-callouts__box--other">
+            <h3 class="kefey-callouts__box-title">{{ section.settings.box3_title }}</h3>
+            <p class="kefey-callouts__box-text">{{ section.settings.box3_body }}</p>
+          </article>
+        {%- endif -%}
 
-        <article class="kefey-callouts__bottom">
-          <h3 class="kefey-callouts__bottom-heading">{{ section.settings.bottom_heading }}</h3>
-          <p class="kefey-callouts__bottom-text">{{ section.settings.bottom_body }}</p>
-        </article>
+        {%- if section.settings.show_bottom_content -%}
+          <article class="kefey-callouts__bottom">
+            <h3 class="kefey-callouts__bottom-heading">{{ section.settings.bottom_heading }}</h3>
+            <p class="kefey-callouts__bottom-text">{{ section.settings.bottom_body }}</p>
+          </article>
+        {%- endif -%}
       </div>
     </div>
   </div>
@@ -153,6 +159,7 @@
     { "type": "image_picker", "id": "nutrition_image", "label": "Nutrition facts image" },
     { "type": "text", "id": "box1_heading", "label": "Box 1 heading", "default": "Each Serving Contains:" },
     { "type": "text", "id": "box1_amount_label", "label": "Box 1 amount label", "default": "Amount Per 2 Gummies" },
+    { "type": "checkbox", "id": "show_box2", "label": "Show box 2", "default": true },
     { "type": "text", "id": "box2_title", "label": "Box 2 title", "default": "Blend of Premium Quality Herbal Extracts" },
     { "type": "text", "id": "box2_amount", "label": "Box 2 amount", "default": "600 mg" },
     {
@@ -161,6 +168,7 @@
       "label": "Box 2 body",
       "default": "Ashwagandha Root Extract (Withania Somnifera), Maca Root Extract (Lepidium Meyenii), Gotu Kola Extract (Centella Asiatica), Vervain Extract (Verbena Officinalis), Moringa Leaf Extract (Moringa Oleifera), Korean Red Ginseng Root & Stem Extract (Panax Ginseng), Milk thistle Seeds Extract (Silybum Marianum)."
     },
+    { "type": "checkbox", "id": "show_box3", "label": "Show box 3", "default": true },
     { "type": "text", "id": "box3_title", "label": "Box 3 title", "default": "Other Ingredients" },
     {
       "type": "textarea",
@@ -168,6 +176,7 @@
       "label": "Box 3 body",
       "default": "Maltitol Syrup, Isomalt, Erythritol, Pectin, Malic Acid, Sodium Citrate, Citric Acid, Calcium Lactate, Natural Strawberry Flavor, Beet Root Powder (Color), Stevia Leaf Extract, Coconut Oil (Coating)."
     },
+    { "type": "checkbox", "id": "show_bottom_content", "label": "Show bottom heading and text", "default": true },
     { "type": "text", "id": "bottom_heading", "label": "Bottom heading", "default": "Does NOT Contain" },
     {
       "type": "textarea",
