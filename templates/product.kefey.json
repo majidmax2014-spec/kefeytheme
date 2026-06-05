@@ -1133,7 +1133,7 @@
         "heading": "TRY IT WITH CONFIDENCE!",
         "text": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund.",
         "button_label": "CHECKOUT NOW",
-        "button_link": "",
+        "button_link": "#",
         "button_style": "outline",
         "heading_color": "#ffc94d",
         "text_color": "#ffffff",
@@ -1189,7 +1189,7 @@
         "button_bg_color": "#4bb3b5",
         "button_text_color": "#ffffff",
         "cta_label": "CHECKOUT NOW",
-        "cta_link": ""
+        "cta_link": "#"
       }
     }
   },
