@@ -558,21 +558,23 @@
         "reel_KCNFUa": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-28.png",
+            "thumbnail": "shopify://shop_images/kefey-01.png",
             "title": "",
             "link": "",
-            "source_type": "none",
-            "youtube_url": "https://www.youtube.com/watch?v=rOmpeY6gPHo",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL10_D1.mp4",
+            "youtube_url": "",
             "embed_html": ""
           }
         },
         "reel_XR4DrR": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-27.png",
+            "thumbnail": "shopify://shop_images/kefey-02.png",
             "title": "",
             "link": "",
-            "source_type": "none",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL2_D2.mp4",
             "youtube_url": "",
             "embed_html": ""
           }
@@ -580,10 +582,11 @@
         "reel_iwAXqT": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-26.png",
+            "thumbnail": "shopify://shop_images/kefey-03.png",
             "title": "",
             "link": "",
-            "source_type": "none",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL3_D1.mp4",
             "youtube_url": "",
             "embed_html": ""
           }
@@ -591,10 +594,11 @@
         "reel_L3zxkD": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-25.png",
+            "thumbnail": "shopify://shop_images/kefey-04.png",
             "title": "",
             "link": "",
-            "source_type": "none",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL4_D1.mp4",
             "youtube_url": "",
             "embed_html": ""
           }
@@ -602,10 +606,11 @@
         "reel_8HMf6b": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-24.png",
+            "thumbnail": "shopify://shop_images/kefey-05.png",
             "title": "",
             "link": "",
-            "source_type": "none",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL5_D1.mp4",
             "youtube_url": "",
             "embed_html": ""
           }
@@ -613,10 +618,11 @@
         "reel_G9cHG9": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-23.png",
+            "thumbnail": "shopify://shop_images/kefey-06.png",
             "title": "",
             "link": "",
-            "source_type": "none",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL6_D1.mp4",
             "youtube_url": "",
             "embed_html": ""
           }
@@ -624,10 +630,11 @@
         "reel_XhUC6T": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-22.png",
+            "thumbnail": "shopify://shop_images/kefey-07.png",
             "title": "",
             "link": "",
-            "source_type": "none",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL7_D1.MOV",
             "youtube_url": "",
             "embed_html": ""
           }
@@ -635,10 +642,11 @@
         "reel_ffjHwQ": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-21.png",
+            "thumbnail": "shopify://shop_images/kefey-08.png",
             "title": "",
             "link": "",
-            "source_type": "none",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL8_D1.mp4",
             "youtube_url": "",
             "embed_html": ""
           }
@@ -646,10 +654,11 @@
         "reel_jPxkGh": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-20.png",
+            "thumbnail": "shopify://shop_images/kefey-09.png",
             "title": "",
             "link": "",
-            "source_type": "none",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL9_D1.mp4",
             "youtube_url": "",
             "embed_html": ""
           }
@@ -657,10 +666,47 @@
         "reel_UMeane": {
           "type": "reel",
           "settings": {
-            "thumbnail": "shopify://shop_images/LIFESTYLE-18.png",
+            "thumbnail": "shopify://shop_images/kefey-10.png",
             "title": "",
             "link": "",
-            "source_type": "none",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL10_D1.mp4",
+            "youtube_url": "",
+            "embed_html": ""
+          }
+        },
+        "reel_m3aghi": {
+          "type": "reel",
+          "settings": {
+            "thumbnail": "shopify://shop_images/kefey-11.png",
+            "title": "",
+            "link": "",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL11_D1.mp4",
+            "youtube_url": "",
+            "embed_html": ""
+          }
+        },
+        "reel_VYGd9j": {
+          "type": "reel",
+          "settings": {
+            "thumbnail": "shopify://shop_images/kefey-12.png",
+            "title": "",
+            "link": "",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL12_D1.mp4",
+            "youtube_url": "",
+            "embed_html": ""
+          }
+        },
+        "reel_tXALxB": {
+          "type": "reel",
+          "settings": {
+            "thumbnail": "shopify://shop_images/kefey-13.png",
+            "title": "",
+            "link": "",
+            "source_type": "shopify",
+            "shopify_video": "shopify://files/videos/KEFEY_REEL13_D1.mp4",
             "youtube_url": "",
             "embed_html": ""
           }
@@ -676,7 +722,10 @@
         "reel_XhUC6T",
         "reel_ffjHwQ",
         "reel_jPxkGh",
-        "reel_UMeane"
+        "reel_UMeane",
+        "reel_m3aghi",
+        "reel_VYGd9j",
+        "reel_tXALxB"
       ],
       "name": "Kefey Reels",
       "settings": {
