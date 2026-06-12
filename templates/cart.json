@@ -13,9 +13,11 @@
       "type": "header-banner",
       "name": "Header Banner",
       "settings": {
-        "background_image": "shopify://shop_images/header-banner.png",
+        "background_image": "shopify://shop_images/cart-banner.png",
+        "bg_image_mobile": "shopify://shop_images/cart-mobile.png",
         "heading": "Cart",
         "subheading": "One step away from Joy in a Gummy!",
+        "subheading_richtext": "",
         "hb_heading_ff": "heading",
         "hb_heading_fw": "700",
         "hb_heading_fs": 56,
