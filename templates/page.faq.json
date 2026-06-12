@@ -13,9 +13,11 @@
       "type": "header-banner",
       "name": "Header Banner",
       "settings": {
-        "background_image": "shopify://shop_images/faq-banner.png",
+        "background_image": "shopify://shop_images/faq-desktop.png",
+        "bg_image_mobile": "shopify://shop_images/faq-mobile.png",
         "heading": "Mood Gummies -",
         "subheading": "Frequently Asked Questions",
+        "subheading_richtext": "",
         "hb_heading_ff": "heading",
         "hb_heading_fw": "700",
         "hb_heading_fs": 46,
