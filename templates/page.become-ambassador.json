@@ -36,8 +36,8 @@
       "type": "header-banner",
       "name": "Header Banner",
       "settings": {
-        "bg_image_desktop": "shopify://shop_images/becom-ambasdor-header.png",
-        "bg_image_mobile": "shopify://shop_images/becom-ambasdor-header-mobile.png",
+        "bg_image_desktop": "shopify://shop_images/ambasoder-desktop.png",
+        "bg_image_mobile": "shopify://shop_images/ambasoder-mobile.png",
         "heading": "Turn Your Influence Into Joy & Real Income",
         "subheading": "",
         "subheading_richtext": "<p><strong>Join the Kefey Ambassador Program </strong></p><p>Creators, Influencers & Wellness Lovers: This is Your Space to Shine, Share & Earn.</p>",
