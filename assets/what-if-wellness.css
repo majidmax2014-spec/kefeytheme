@@ -18,7 +18,7 @@
   background: var(--wiw-bg, #36b2b2);
   margin-left: clamp(56px, 19.2vw, 279px);
   min-height: 0;
-  padding: 42px 0 0 0;
+  padding: 42px 0 40px 0;
   overflow: visible;
 }
 
