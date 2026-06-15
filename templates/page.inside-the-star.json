@@ -14,8 +14,8 @@
       "type": "header-banner",
       "name": "Header Banner",
       "settings": {
-        "bg_image_desktop": "shopify://shop_images/inside-the-star.png",
-        "bg_image_mobile": "shopify://shop_images/inside-the-star-mobile.png",
+        "bg_image_desktop": "shopify://shop_images/star-desktop.png",
+        "bg_image_mobile": "shopify://shop_images/star-mobile.png",
         "heading": "Inside the Star–",
         "subheading": "Thoughtfully formulated. Naturally sweetened. Made to be enjoyed.",
         "subheading_richtext": "<p>Thoughtfully formulated. Naturally sweetened.</p><p><strong>Made to be enjoyed.</strong></p>",
@@ -74,7 +74,7 @@
       "settings": {
         "heading": "A Focused Daily Ritual",
         "body": "<p>Your daily pause — a small, star-shaped moment in a busy world.</p><p>Kefey® gummies are designed to be a single, intentional daily ritual. Each Kefey® star is formulated with highly potent botanical extracts, bringing together clean formulation, purposeful concentration, and a taste you can genuinely enjoy.</p>",
-        "image": "shopify://shop_images/Focused_Daily_Ritual.png",
+        "image": "shopify://shop_images/daily.png",
         "panel_color": "#f2c718",
         "title_bg_color": "#ea563a",
         "title_color": "#ffffff",
@@ -147,7 +147,7 @@
         "panel_padding_bottom_mobile": 40,
         "panel_padding_x_mobile": 28,
         "media_position": "right",
-        "image": "shopify://shop_images/star-defines.png",
+        "image": "shopify://shop_images/start-define.png",
         "media_background": "#e8f4f3",
         "media_min_height_mobile": 260,
         "media_max_height_mobile": 420,
