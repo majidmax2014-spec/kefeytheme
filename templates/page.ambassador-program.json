@@ -94,7 +94,7 @@
         "success_redirect_url": "",
         "submission_topic": "Ambassador Application",
         "button_font_family": "inherit",
-        "button_font_size": 30,
+        "button_font_size": 25,
         "button_font_weight": "500",
         "support_prefix": "Questions? Email us at:",
         "support_email": "hello@kefey.co",
