@@ -246,15 +246,6 @@
                   {%- endif -%}
                 </a>
               {%- endif -%}
-              {%- if section.settings.snapchat_url != blank -%}
-                <a href="{{ section.settings.snapchat_url }}" class="fk__social-item" target="_blank" rel="noopener" aria-label="Snapchat">
-                  {%- if section.settings.snapchat_icon != blank -%}
-                    {{ section.settings.snapchat_icon | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}
-                  {%- else -%}
-                    <span>S</span>
-                  {%- endif -%}
-                </a>
-              {%- endif -%}
               {%- if section.settings.instagram_url != blank -%}
                 <a
                   href="{{ section.settings.instagram_url }}"
@@ -267,6 +258,30 @@
                     {{ section.settings.instagram_icon | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}
                   {%- else -%}
                     <span>I</span>
+                  {%- endif -%}
+                </a>
+              {%- endif -%}
+              {%- if section.settings.facebook_url != blank -%}
+                <a
+                  href="{{ section.settings.facebook_url }}"
+                  class="fk__social-item"
+                  target="_blank"
+                  rel="noopener"
+                  aria-label="Facebook"
+                >
+                  {%- if section.settings.facebook_icon != blank -%}
+                    {{ section.settings.facebook_icon | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}
+                  {%- else -%}
+                    <span>F</span>
+                  {%- endif -%}
+                </a>
+              {%- endif -%}
+              {%- if section.settings.snapchat_url != blank -%}
+                <a href="{{ section.settings.snapchat_url }}" class="fk__social-item" target="_blank" rel="noopener" aria-label="Snapchat">
+                  {%- if section.settings.snapchat_icon != blank -%}
+                    {{ section.settings.snapchat_icon | image_url: width: 64 | image_tag: loading: 'lazy', alt: '' }}
+                  {%- else -%}
+                    <span>S</span>
                   {%- endif -%}
                 </a>
               {%- endif -%}
@@ -518,10 +533,12 @@
     { "type": "text", "id": "social_label", "label": "Social row label", "default": "Follow us & share the joy :" },
     { "type": "image_picker", "id": "tiktok_icon", "label": "TikTok icon" },
     { "type": "url", "id": "tiktok_url", "label": "TikTok link" },
-    { "type": "image_picker", "id": "snapchat_icon", "label": "Snapchat icon" },
-    { "type": "url", "id": "snapchat_url", "label": "Snapchat link" },
     { "type": "image_picker", "id": "instagram_icon", "label": "Instagram icon" },
     { "type": "url", "id": "instagram_url", "label": "Instagram link" },
+    { "type": "image_picker", "id": "facebook_icon", "label": "Facebook icon" },
+    { "type": "url", "id": "facebook_url", "label": "Facebook link" },
+    { "type": "image_picker", "id": "snapchat_icon", "label": "Snapchat icon" },
+    { "type": "url", "id": "snapchat_url", "label": "Snapchat link" },
     { "type": "link_list", "id": "menu_primary", "label": "Main links menu" },
     { "type": "link_list", "id": "menu_policies", "label": "Policy links menu" },
     { "type": "image_picker", "id": "brand_logo", "label": "Brand logo" },
