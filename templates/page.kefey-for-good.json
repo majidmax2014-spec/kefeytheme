@@ -13,8 +13,8 @@
       "type": "header-banner",
       "name": "Header Banner",
       "settings": {
-        "bg_image_desktop": "shopify://shop_images/kefey-for-good-banner.png",
-        "bg_image_mobile": "shopify://shop_images/kefey-for-good-banner-m.png",
+        "bg_image_desktop": "shopify://shop_images/kefey-for-good-desktop.png",
+        "bg_image_mobile": "shopify://shop_images/kefey-for-good-mobilen.png",
         "heading": "Wellness, guided by purpose.",
         "subheading": "Because what we give, matters as much as what we create.",
         "subheading_richtext": "",
