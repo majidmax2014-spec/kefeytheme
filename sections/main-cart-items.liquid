@@ -223,7 +223,7 @@
                         class="kefey-cart-offer-card__button"
                         data-cart-offer-button
                         data-bundle-key="big-smile"
-                        data-automatic-discount
+                        data-bundle-discount="25"
                         data-variant-id="{{ section.settings.offer_left_variant_id | strip }}"
                         data-quantity="{{ section.settings.offer_left_quantity }}"
                         data-discount-code="{{ section.settings.offer_left_discount_code | strip }}"
@@ -255,7 +255,7 @@
                         class="kefey-cart-offer-card__button"
                         data-cart-offer-button
                         data-bundle-key="joyful-trio"
-                        data-automatic-discount
+                        data-bundle-discount="15"
                         data-variant-id="{{ section.settings.offer_right_variant_id | strip }}"
                         data-quantity="{{ section.settings.offer_right_quantity }}"
                         data-discount-code="{{ section.settings.offer_right_discount_code | strip }}"
@@ -326,7 +326,25 @@
                             </a>
                           {%- endif -%}
 
-                          {%- if item.original_price != item.final_price -%}
+                          {%- liquid
+                            assign bundle_discount_pct = item.properties._kefey_bundle_discount | plus: 0
+                            assign bundle_discount_label = item.properties._kefey_bundle_discount_label | default: ''
+                            assign bundle_unit_final = item.original_price
+                            assign bundle_line_final = item.original_line_price
+
+                            if bundle_discount_pct > 0
+                              assign bundle_discount_amount = item.original_price | times: bundle_discount_pct | divided_by: 100
+                              assign bundle_unit_final = item.original_price | minus: bundle_discount_amount
+                              assign bundle_line_final = bundle_unit_final | times: item.quantity
+                            endif
+                          -%}
+
+                          {%- if bundle_discount_pct > 0 -%}
+                            <div class="cart-item__discounted-prices">
+                              <s class="cart-item__old-price">{{ item.original_price | money }}</s>
+                              <strong class="cart-item__final-price">{{ bundle_unit_final | money }}</strong>
+                            </div>
+                          {%- elsif item.original_price != item.final_price -%}
                             <div class="cart-item__discounted-prices">
                               <s class="cart-item__old-price">{{ item.original_price | money }}</s>
                               <strong class="cart-item__final-price">{{ item.final_price | money }}</strong>
@@ -336,12 +354,19 @@
                           {%- endif -%}
 
                           <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t }}">
-                            {%- for discount in item.line_level_discount_allocations -%}
+                            {%- if bundle_discount_pct > 0 and bundle_discount_label != blank -%}
                               <li class="discounts__discount">
                                 {{- 'icon-discount.svg' | inline_asset_content -}}
-                                {{ discount.discount_application.title | escape }}
+                                {{ bundle_discount_label | escape }}
                               </li>
-                            {%- endfor -%}
+                            {%- else -%}
+                              {%- for discount in item.line_level_discount_allocations -%}
+                                <li class="discounts__discount">
+                                  {{- 'icon-discount.svg' | inline_asset_content -}}
+                                  {{ discount.discount_application.title | escape }}
+                                </li>
+                              {%- endfor -%}
+                            {%- endif -%}
                           </ul>
                         </div>
                       </div>
@@ -436,7 +461,14 @@
                     <td class="cart-item__totals right">
                       {%- render 'loading-spinner' -%}
                       <div class="cart-item__price-wrapper">
-                        {%- if item.original_line_price != item.final_line_price -%}
+                        {%- if bundle_discount_pct > 0 -%}
+                          <dl class="cart-item__discounted-prices">
+                            <dd>
+                              <s class="cart-item__old-price price price--end">{{ item.original_line_price | money }}</s>
+                            </dd>
+                            <dd class="price price--end">{{ bundle_line_final | money }}</dd>
+                          </dl>
+                        {%- elsif item.original_line_price != item.final_line_price -%}
                           <dl class="cart-item__discounted-prices">
                             <dd>
                               <s class="cart-item__old-price price price--end">{{ item.original_line_price | money }}</s>
@@ -452,6 +484,21 @@
                 {%- endfor -%}
               </tbody>
             </table>
+
+            {%- liquid
+              assign kefey_display_total = 0
+              for item in cart.items
+                assign item_bundle_discount_pct = item.properties._kefey_bundle_discount | plus: 0
+                if item_bundle_discount_pct > 0
+                  assign item_bundle_discount_amount = item.original_price | times: item_bundle_discount_pct | divided_by: 100
+                  assign item_bundle_unit_final = item.original_price | minus: item_bundle_discount_amount
+                  assign item_bundle_line_final = item_bundle_unit_final | times: item.quantity
+                  assign kefey_display_total = kefey_display_total | plus: item_bundle_line_final
+                else
+                  assign kefey_display_total = kefey_display_total | plus: item.final_line_price
+                endif
+              endfor
+            -%}
 
             <div class="kefey-cart-upsell-row">
               <p class="kefey-cart-upsell-text">{{ section.settings.upsell_label }}</p>
@@ -485,7 +532,7 @@
                 </div>
               </div>
 
-              <p class="kefey-cart-upsell-total">TOTAL: {{ cart.total_price | money }}</p>
+              <p class="kefey-cart-upsell-total">TOTAL: {{ kefey_display_total | money }}</p>
             </div>
           {%- endif -%}
         </div>

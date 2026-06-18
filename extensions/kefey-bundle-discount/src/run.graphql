@@ -1,0 +1,18 @@
+query RunInput {
+  cart {
+    lines {
+      id
+      quantity
+      attribute(key: "_kefey_bundle_discount") {
+        key
+        value
+      }
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          id
+        }
+      }
+    }
+  }
+}

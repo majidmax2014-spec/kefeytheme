@@ -1,0 +1,18 @@
+api_version = "2025-01"
+
+[[extensions]]
+name = "Kefey bundle discount"
+handle = "kefey-bundle-discount"
+uid = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+type = "function"
+description = "Applies 25% or 15% per cart line based on bundle line item properties."
+
+  [[extensions.targeting]]
+  target = "purchase.product-discount.run"
+  input_query = "src/run.graphql"
+  export = "run"
+
+  [extensions.build]
+  command = "npm exec -- shopify app function build"
+  path = "dist/function.wasm"
+  watch = ["src/**/*.js"]

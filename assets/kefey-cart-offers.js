@@ -77,16 +77,25 @@
       }
 
       const bundleKey = (button.dataset.bundleKey || '').trim();
+      const bundleDiscount = (button.dataset.bundleDiscount || '').trim();
       const properties = {};
 
       if (bundleKey) {
         properties._kefey_bundle = bundleKey;
         properties._kefey_bundle_line = String(Date.now());
+
+        if (bundleDiscount) {
+          properties._kefey_bundle_discount = bundleDiscount;
+        }
+
+        if (discountCode) {
+          properties._kefey_bundle_discount_label = discountCode;
+        }
       }
 
       await addVariantToCart(variantId, quantity, properties);
 
-      if (button.hasAttribute('data-automatic-discount')) {
+      if (bundleKey) {
         window.location.href = CART_URL;
       } else {
         window.location.href = getDiscountRedirectUrl(discountCode);

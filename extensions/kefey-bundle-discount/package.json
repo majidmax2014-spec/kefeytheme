@@ -1,0 +1,9 @@
+{
+  "name": "kefey-bundle-discount",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "shopify app function build"
+  }
+}
