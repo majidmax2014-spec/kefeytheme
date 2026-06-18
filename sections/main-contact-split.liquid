@@ -179,9 +179,9 @@
 
         {%- form 'contact', id: 'ContactSplitForm', class: 'main-contact-split__form' -%}
           {%- if form.posted_successfully? -%}
-            <p class="main-contact-split__message main-contact-split__message--success" tabindex="-1" autofocus>
+            <div class="main-contact-split__message main-contact-split__message--success" tabindex="-1" autofocus>
               {{ section.settings.success_message }}
-            </p>
+            </div>
           {%- endif -%}
           {%- if form.errors -%}
             <div class="main-contact-split__message main-contact-split__message--error" role="alert">
@@ -491,6 +491,11 @@
       border: 1px solid #b9e4c8;
       background: #e8f8ec;
       color: #1d7d3f;
+    }
+
+    #shopify-section-{{ section.id }} .main-contact-split__message--success p {
+      margin: 0;
+      color: inherit;
     }
 
     #shopify-section-{{ section.id }} .main-contact-split__message--error {
