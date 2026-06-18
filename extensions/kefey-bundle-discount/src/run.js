@@ -14,13 +14,14 @@ export function run(input) {
   const targets = [];
 
   for (const line of input.cart.lines) {
-    const discountAttribute = line.attribute;
+    const discountValue =
+      line.bundleDiscount?.value || line.upsellDiscount?.value || "";
 
-    if (!discountAttribute?.value) {
+    if (!discountValue) {
       continue;
     }
 
-    const percentage = Number.parseFloat(discountAttribute.value, 10);
+    const percentage = Number.parseFloat(discountValue, 10);
 
     if (!Number.isFinite(percentage) || percentage <= 0) {
       continue;
@@ -53,7 +54,7 @@ export function run(input) {
     discounts: [
       {
         targets,
-        message: "Bundle discount",
+        message: "Kefey offer discount",
       },
     ],
     discountApplicationStrategy: DiscountApplicationStrategy.All,

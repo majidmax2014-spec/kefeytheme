@@ -78,6 +78,7 @@
 
       const bundleKey = (button.dataset.bundleKey || '').trim();
       const bundleDiscount = (button.dataset.bundleDiscount || '').trim();
+      const isUpsellAdd = button.hasAttribute('data-upsell-add');
       const properties = {};
 
       if (bundleKey) {
@@ -91,11 +92,19 @@
         if (discountCode) {
           properties._kefey_bundle_discount_label = discountCode;
         }
+      } else if (isUpsellAdd) {
+        properties._kefey_upsell = 'extra-tube';
+        properties._kefey_upsell_line = String(Date.now());
+        properties._kefey_upsell_discount = '10';
+
+        if (discountCode) {
+          properties._kefey_upsell_discount_label = discountCode;
+        }
       }
 
       await addVariantToCart(variantId, quantity, properties);
 
-      if (bundleKey) {
+      if (bundleKey || isUpsellAdd) {
         window.location.href = CART_URL;
       } else {
         window.location.href = getDiscountRedirectUrl(discountCode);
