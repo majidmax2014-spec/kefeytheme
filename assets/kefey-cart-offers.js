@@ -69,6 +69,27 @@
           const selectedQty = parseInteger(counter.dataset.qty, 0);
           quantity = selectedQty > 0 ? selectedQty : 1;
         }
+
+        const cartResponse = await fetch('/cart.js', {
+          credentials: 'same-origin',
+          headers: { Accept: 'application/json' },
+        });
+
+        if (cartResponse.ok) {
+          const cart = await cartResponse.json();
+          const hasQualifyingItem = cart.items.some(
+            (item) => !(item.properties && item.properties._kefey_upsell)
+          );
+
+          if (!hasQualifyingItem) {
+            const errors = document.getElementById('cart-errors');
+            if (errors) {
+              errors.textContent =
+                'Add at least one Mood Gummies item to your cart before using the 10% extra tube offer.';
+            }
+            return;
+          }
+        }
       }
 
       if (!variantId) {

@@ -160,6 +160,7 @@
   <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
 {%- endunless -%}
 <script src="{{ 'kefey-cart-offers.js' | asset_url }}" defer="defer"></script>
+<script src="{{ 'kefey-cart-upsell-guard.js' | asset_url }}" defer="defer"></script>
 
 <cart-items class="kefey-cart-page{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
   <div class="page-width kefey-cart-shell">
