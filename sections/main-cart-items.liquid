@@ -222,6 +222,8 @@
                         type="button"
                         class="kefey-cart-offer-card__button"
                         data-cart-offer-button
+                        data-bundle-key="big-smile"
+                        data-automatic-discount
                         data-variant-id="{{ section.settings.offer_left_variant_id | strip }}"
                         data-quantity="{{ section.settings.offer_left_quantity }}"
                         data-discount-code="{{ section.settings.offer_left_discount_code | strip }}"
@@ -252,6 +254,8 @@
                         type="button"
                         class="kefey-cart-offer-card__button"
                         data-cart-offer-button
+                        data-bundle-key="joyful-trio"
+                        data-automatic-discount
                         data-variant-id="{{ section.settings.offer_right_variant_id | strip }}"
                         data-quantity="{{ section.settings.offer_right_quantity }}"
                         data-discount-code="{{ section.settings.offer_right_discount_code | strip }}"
@@ -352,6 +356,9 @@
 
                         <quantity-input class="quantity cart-quantity">
                           {% assign can_update_quantity = item.instructions.can_update_quantity | default: true %}
+                          {%- if item.properties._kefey_bundle != blank -%}
+                            {% assign can_update_quantity = false %}
+                          {%- endif -%}
                           <button
                             class="quantity__button"
                             name="minus"

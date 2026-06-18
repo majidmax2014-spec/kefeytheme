@@ -12,14 +12,18 @@
     return `/discount/${encodeURIComponent(code)}?redirect=${encodeURIComponent(CART_URL)}`;
   }
 
-  async function addVariantToCart(variantId, quantity) {
+  async function addVariantToCart(variantId, quantity, properties) {
+    const item = {
+      id: parseInteger(variantId, 0),
+      quantity: parseInteger(quantity, 1),
+    };
+
+    if (properties && Object.keys(properties).length > 0) {
+      item.properties = properties;
+    }
+
     const payload = {
-      items: [
-        {
-          id: parseInteger(variantId, 0),
-          quantity: parseInteger(quantity, 1),
-        },
-      ],
+      items: [item],
     };
 
     const response = await fetch(CART_ADD_URL, {
@@ -72,8 +76,21 @@
         return;
       }
 
-      await addVariantToCart(variantId, quantity);
-      window.location.href = getDiscountRedirectUrl(discountCode);
+      const bundleKey = (button.dataset.bundleKey || '').trim();
+      const properties = {};
+
+      if (bundleKey) {
+        properties._kefey_bundle = bundleKey;
+        properties._kefey_bundle_line = String(Date.now());
+      }
+
+      await addVariantToCart(variantId, quantity, properties);
+
+      if (button.hasAttribute('data-automatic-discount')) {
+        window.location.href = CART_URL;
+      } else {
+        window.location.href = getDiscountRedirectUrl(discountCode);
+      }
     } catch (error) {
       console.error(error);
       window.location.href = CART_URL;
