@@ -148,8 +148,8 @@
       "name": "Designed To Shine",
       "settings": {
         "heading": "Designed to Shine",
-        "subtitle": "<p>And just like that - Kefey was born.</p><p>Not a capsule. | A colorful, star-shaped spark. | Not a chore.</p>",
-        "text": "<ul><li>The star is not a decoration. It is a statement.</li><li>A symbol of focus, light, and confidence - and the belief that caring for yourself should help you shine from the inside out.</li><li>Each star-shaped gummy is crafted to deliver strength without heaviness, joy without compromise, and wellness that fits naturally into real life.</li><li><strong>Not a capsule.</strong></li><li><strong>Not a chore.</strong></li><li>But a small, joyful moment worth looking forward to - one star at a time.</li></ul>",
+        "subtitle": "<p>And just like that - Kefey was born.</p><p>Not a capsule | A colorful, star-shaped Gummies | Not a chore</p>",
+        "text": "<ul><li>The star is not a decoration. It is a statement.</li><li>A symbol of focus, light, and confidence, and the belief that caring for yourself should help you shine from the inside out.</li><li>Each star-shaped gummy is crafted to deliver strength without heaviness, joy without compromise, and wellness that fits naturally into real life.</li><li><strong>Not a capsule.</strong></li><li><strong>Not a chore.</strong></li><li>But a small, joyful moment worth looking forward to. </li><li>one star at a time.</li></ul>",
         "left_image": "shopify://shop_images/about-left.png",
         "section_bg": "#ffffff",
         "panel_bg": "#f6cb1f",
@@ -198,7 +198,7 @@
       "name": "We Refuse Section",
       "settings": {
         "heading": "We refuse to be part of that.",
-        "text": "<ul><li>Kefey® signature tube is crafted from premium, non-plastic materials, designed to stay - not to be used once and forgotten.</li><li>On your desk, on your shelf, as part of your daily space.</li><li>By focusing on highly concentrated formulas, fewer products are needed.</li><li>By choosing non-plastic, reusable packaging, waste is reduced by design.</li><li>Because caring for yourself should not have to come at the planet's expense.</li></ul>",
+        "text": "<ul><li>Kefey®'s signature tube is crafted from premium, non-plastic materials, designed to stay - not to be used once and forgotten.</li><li>On your desk, on your shelf, as part of your daily space.</li><li>By focusing on highly concentrated formulas, fewer products are needed.</li><li>By choosing non-plastic, reusable packaging, waste is reduced by design.</li><li>Because caring for yourself should not have to come at the planet's expense.</li></ul>",
         "right_image": "shopify://shop_images/about-03.png",
         "section_bg": "#ffffff",
         "title_bg": "#e95439",
@@ -224,7 +224,7 @@
       "name": "Purpose Beyond Gummy",
       "settings": {
         "heading": "Purpose Beyond the <strong>Gummy</strong>",
-        "body": "<p>At Kefey, we believe that wellness should not stop with the individual - it should ripple outward. That is why we proudly support initiatives that uplift communities, empower women, nourish children, and protect the planet.</p><p>We call it <strong>Kefey for Kindness</strong>: because giving is part of what makes us glow.</p><p>This is not just a supplement. It is simple, it sparks, and it is our commitment to feel good - and do good. Ready to shine? Discover your Kefey star today.</p><p>Live full. Live Kefey.</p>",
+        "body": "<p>At Kefey, we believe wellness should not stop with the individual, it should ripple outward.</p><p>That is why we support initiatives that uplift communities, empower women, nourish children, and protect the planet. Through organizations like Vitamin Angels and One Tree Planted, we aim to turn everyday wellness into meaningful impact.</p><p>Our commitment also extends to the choices we make behind the scenes. From creating reusable packaging to designing shipping boxes that can be repurposed long after they arrive, we believe thoughtful design can make a difference too.</p><p>We call it<strong> KEFEY FOR GOOD</strong>, because giving is part of what makes us glow.</p><p>This is not just a supplement. It is our commitment to feel good, and do good.</p><p>Because when you feel good, you're able to do good and help others shine too.</p>",
         "image": "shopify://shop_images/about-4.png",
         "decor_image": "shopify://shop_images/a-4right-decor.png",
         "panel_color": "#f2c718",
