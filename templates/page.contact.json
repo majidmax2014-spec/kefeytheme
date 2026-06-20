@@ -87,6 +87,7 @@
         },
         "phone_J7fiEd": {
           "type": "phone",
+          "disabled": true,
           "settings": {
             "heading": "Phone (Customer Support & Business): +1 (888) 888-8888",
             "line_1": "Every day, 1:30 PM - 3:30 PM (Florida Time, Eastern Time)",
