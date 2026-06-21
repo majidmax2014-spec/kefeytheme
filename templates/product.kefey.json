@@ -1145,8 +1145,8 @@
       "type": "product-final-cta-kefey",
       "settings": {
         "heading_line_1": "Sometimes, balance is just",
-        "heading_line_2": "a small joyful habit away.",
-        "shift_text": "FEEL THE SHIFT.",
+        "heading_line_2": "a small joyful habit away",
+        "shift_text": "⭐ FEEL THE SHIFT ⭐",
         "underline_enabled": true,
         "underline_color": "#f4c820",
         "underline_height": 12,
@@ -1179,7 +1179,7 @@
         "button_font_weight": 700,
         "button_bg_color": "#4bb3b5",
         "button_text_color": "#ffffff",
-        "cta_label": "CHECKOUT NOW",
+        "cta_label": "Make it part of your day. Checkout Now",
         "cta_link": "#"
       }
     }
