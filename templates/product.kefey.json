@@ -833,12 +833,6 @@
     "text_marquee_bar_f7CQmU": {
       "type": "text-marquee-bar",
       "blocks": {
-        "item_ze6iYN": {
-          "type": "item",
-          "settings": {
-            "text": "FRIENDLY"
-          }
-        },
         "item_dfnAcL": {
           "type": "item",
           "settings": {
@@ -875,12 +869,6 @@
             "text": "GMP CERTIFIED"
           }
         },
-        "item_xDD7yX": {
-          "type": "item",
-          "settings": {
-            "text": "KOSHER"
-          }
-        },
         "item_E9fXqV": {
           "type": "item",
           "settings": {
@@ -889,14 +877,12 @@
         }
       },
       "block_order": [
-        "item_ze6iYN",
         "item_dfnAcL",
         "item_diAfQA",
         "item_mW8RwC",
         "item_L9XTJb",
         "item_DdqT8a",
         "item_Htd99f",
-        "item_xDD7yX",
         "item_E9fXqV"
       ],
       "name": "Text Marquee Bar",
