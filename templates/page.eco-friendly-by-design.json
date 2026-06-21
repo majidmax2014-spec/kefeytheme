@@ -245,6 +245,7 @@
     },
     "kefey_free_from_heading_C7yfCn": {
       "type": "kefey-free-from-heading",
+      "disabled": true,
       "name": "Kefey free-from heading",
       "settings": {
         "section_background": "#ffffff",
