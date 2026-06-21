@@ -319,7 +319,7 @@
         "text_font_size": 16,
         "show_button": true,
         "button_label": "FIND YOUR STAR",
-        "button_link": "",
+        "button_link": "shopify://products/mood-gummies",
         "button_show_arrow": true,
         "button_background": "#49b2b2",
         "button_text_color": "#ffffff",
