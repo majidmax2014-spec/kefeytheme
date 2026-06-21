@@ -308,7 +308,7 @@
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/shipping-box.png",
-            "caption": "Reusable Shipping Box"
+            "caption": "Reusable Shipping Box - Turns Into a Shelf After Delivery"
           }
         },
         "item_chajWz": {
@@ -329,7 +329,7 @@
           "type": "item",
           "settings": {
             "image": "shopify://shop_images/tube-pen-holder.png",
-            "caption": "Kefey Tube as a Pen Holder"
+            "caption": "Kefey Tube as a Pencil Holder"
           }
         }
       },
