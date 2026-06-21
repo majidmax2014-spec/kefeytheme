@@ -40,7 +40,7 @@
         "bg_image_mobile": "shopify://shop_images/ambasoder-mobile.png",
         "heading": "Turn Your Influence Into Joy & Real Income",
         "subheading": "",
-        "subheading_richtext": "<p><strong>Join the Kefey Ambassador Program </strong></p><p>Creators, Influencers & Wellness Lovers: This is Your Space to Shine, Share & Earn.</p>",
+        "subheading_richtext": "<p><strong>Join the Kefey Ambassador Program 🌟</strong></p><p>Creators, Influencers & Wellness Lovers: This is Your Space to Shine, Share & Earn.</p>",
         "hb_heading_ff": "heading",
         "hb_heading_fw": "700",
         "hb_heading_fs": 36,
@@ -72,42 +72,42 @@
         "benefit_realtime": {
           "type": "benefit",
           "settings": {
-            "title": "Real-Time Insights",
-            "description": "<p>Access a clean, intuitive dashboard that shows your clicks, sales, and commissions instantly — so you always know exactly how you're performing.</p>"
+            "title": "📊 Real-Time Insights",
+            "description": "<p>Access a clean, intuitive dashboard that shows your clicks, sales, and commissions instantly, so you always know exactly how you're performing.</p>"
           }
         },
         "benefit_payouts": {
           "type": "benefit",
           "settings": {
-            "title": "Fast Payouts",
+            "title": "💸 Fast Payouts",
             "description": "<p>Get rewarded without delays. Our payout process is fast, transparent, and designed to support your growth.</p>"
           }
         },
         "benefit_portal": {
           "type": "benefit",
           "settings": {
-            "title": "All-in-One Ambassador Portal",
+            "title": "🚀 All-in-One Ambassador Portal",
             "description": "<p>Manage everything from one place. Track your Kefey.ca sales, receive your personalized affiliate link, and share your unique promo code with your audience effortlessly.</p>"
           }
         },
         "benefit_share": {
           "type": "benefit",
           "settings": {
-            "title": "Share & Earn",
+            "title": "💛 Share & Earn",
             "description": "<p>Give your community 15% off every order, while you earn a 15% commission on each sale. A win-win built for long-term success.</p>"
           }
         },
         "benefit_global": {
           "type": "benefit",
           "settings": {
-            "title": "Global Availability",
-            "description": "<p>No matter where your audience lives, they can order Kefey. Earn commissions from followers worldwide – we ship to 150+ countries.</p>"
+            "title": "🌍 Global Availability",
+            "description": "<p>No matter where your audience lives, they can order Kefey. Earn commissions from followers worldwide, we ship to 150+ countries.</p>"
           }
         },
         "benefit_aov": {
           "type": "benefit",
           "settings": {
-            "title": "High Average Order Value (AOV)",
+            "title": "🛒 High Average Order Value (AOV)",
             "description": "<p>With an average order of $50+, your commissions add up fast. The more joy you share, the more you earn!</p>"
           }
         }
