@@ -69,6 +69,9 @@
             {%- if block.settings.heading != blank -%}
               <h2 class="hero-slider__heading">{{ block.settings.heading }}</h2>
             {%- endif -%}
+            {%- if block.settings.subheading != blank -%}
+              <p class="hero-slider__subheading">{{ block.settings.subheading }}</p>
+            {%- endif -%}
             {%- if block.settings.body_text != blank -%}
               <div class="hero-slider__text rte">{{ block.settings.body_text }}</div>
             {%- endif -%}
@@ -322,6 +325,12 @@
           "id": "heading",
           "label": "Heading",
           "default": "JOY IN EVERY CHEW"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Star-Shaped Mood Gummies"
         },
         {
           "type": "richtext",
