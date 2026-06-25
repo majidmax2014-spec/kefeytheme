@@ -63,7 +63,7 @@
   padding: var(--ff-top-btn-py, 12px) var(--ff-top-btn-px, 28px);
   background: var(--ff-top-btn-bg, #111111);
   color: var(--ff-top-btn-text, #ffffff);
-  font-size: var(--ff-top-btn-fs, 14px);
+  font-size: 14px;
   line-height: 1;
   font-family: var(--ff-top-btn-font-family, inherit);
   font-weight: var(--ff-top-btn-font-weight, inherit);
@@ -361,10 +361,6 @@
 
   .fk__top-subheading {
     font-size: var(--ff-top-subheading-fs, 16px);
-  }
-
-  .fk__top-btn {
-    font-size: var(--ff-top-btn-fs, 14px);
   }
 
   .fk__impact-text {
