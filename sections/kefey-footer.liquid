@@ -117,6 +117,8 @@
     --ff-font-weight: {{ section.settings.ff_font_weight }};
     --ff-top-btn-py: {{ section.settings.ff_top_btn_py }}px;
     --ff-top-btn-px: {{ section.settings.ff_top_btn_px }}px;
+    --ff-top-btn-py-mobile: {{ section.settings.ff_top_btn_py_mobile }}px;
+    --ff-top-btn-px-mobile: {{ section.settings.ff_top_btn_px_mobile }}px;
     --ff-top-btn-font-family: {{ ff_top_btn_font_family_value }};
     --ff-top-btn-font-weight: {{ section.settings.ff_top_btn_font_weight }};
     --ff-top-btn-bg: {{ section.settings.ff_top_btn_bg }};
@@ -459,8 +461,10 @@
     },
     { "type":"range", "id":"ff_top_btn_fs", "label":"Top button font size — desktop (px)", "min": 10, "max": 24, "step": 1, "default": 14 },
     { "type":"range", "id":"ff_top_btn_fs_mobile", "label":"Top button font size — mobile (px)", "min": 10, "max": 24, "step": 1, "default": 18 },
-    { "type":"range", "id":"ff_top_btn_py", "label":"Top button padding Y (px)", "min": 6, "max": 30, "step": 1, "default": 12 },
-    { "type":"range", "id":"ff_top_btn_px", "label":"Top button padding X (px)", "min": 10, "max": 60, "step": 1, "default": 28 },
+    { "type":"range", "id":"ff_top_btn_py", "label":"Top button padding Y — desktop (px)", "min": 6, "max": 30, "step": 1, "default": 12 },
+    { "type":"range", "id":"ff_top_btn_px", "label":"Top button padding X — desktop (px)", "min": 10, "max": 60, "step": 1, "default": 28 },
+    { "type":"range", "id":"ff_top_btn_py_mobile", "label":"Top button padding Y — mobile (px)", "min": 6, "max": 30, "step": 1, "default": 12 },
+    { "type":"range", "id":"ff_top_btn_px_mobile", "label":"Top button padding X — mobile (px)", "min": 10, "max": 60, "step": 1, "default": 20 },
     {
       "type":"select",
       "id":"ff_top_btn_font_family",
