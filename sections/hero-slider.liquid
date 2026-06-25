@@ -14,6 +14,13 @@
     assign hs_subheading_ff = 'var(--font-body-family)'
   endif
 
+  assign hs_body_ff = 'inherit'
+  if section.settings.hero_body_text_font_family == 'heading'
+    assign hs_body_ff = 'var(--font-heading-family)'
+  elsif section.settings.hero_body_text_font_family == 'body'
+    assign hs_body_ff = 'var(--font-body-family)'
+  endif
+
   assign hs_btn_ff = 'inherit'
   if section.settings.hero_button_font_family == 'heading'
     assign hs_btn_ff = 'var(--font-heading-family)'
@@ -24,7 +31,7 @@
 <section
   id="HeroSlider-{{ section.id }}"
   class="hero-slider"
-  style="--hero-height-desktop: {{ section.settings.height_desktop | default: 600 }}px; --hero-height-mobile: {{ section.settings.height_mobile | default: 480 }}px; --hero-overlay-opacity: {{ section.settings.overlay_opacity | at_most: 60 | divided_by: 100.0 }}; --hero-heading-size: {{ section.settings.hero_heading_size | default: 72 }}px; --hero-subheading-size: {{ section.settings.hero_subheading_size | default: 18 }}px; --hero-btn-text-size: {{ section.settings.hero_button_text_size | default: 14 }}px; --hero-btn-py: {{ section.settings.hero_button_padding_y | default: 12 }}px; --hero-btn-px: {{ section.settings.hero_button_padding_x | default: 28 }}px; --hero-content-xmargin: {{ section.settings.hero_content_side_margin | default: 0 }}px; --hero-btn-bw: {{ section.settings.hero_btn_border_width | default: 1 }}px; --hero-btn-bs: {{ section.settings.hero_btn_border_style | default: 'solid' }}; --hero-btn-bc: {{ section.settings.hero_btn_border_color | default: '#FFFFFF' }}; --hero-btn-radius: {{ section.settings.hero_btn_radius | default: 0 }}px; --hero-btn-bg: {{ section.settings.hero_btn_bg | default: '#FFFFFF' }}; --hero-btn-tc: {{ section.settings.hero_btn_text_color | default: '#111111' }}; --hero-dot-active: {{ section.settings.dot_active_color | default: '#2eb0ae' }}; --hero-dot-inactive: {{ section.settings.dot_inactive_color | default: '#d1d5db' }}; --hs-heading-ff: {{ hs_heading_ff }}; --hs-heading-fw: {{ section.settings.hero_heading_font_weight | default: '800' }}; --hs-subheading-ff: {{ hs_subheading_ff }}; --hs-subheading-fw: {{ section.settings.hero_subheading_font_weight | default: '600' }}; --hs-btn-ff: {{ hs_btn_ff }}; --hs-btn-fw: {{ section.settings.hero_button_font_weight | default: '700' }};"
+  style="--hero-height-desktop: {{ section.settings.height_desktop | default: 600 }}px; --hero-height-mobile: {{ section.settings.height_mobile | default: 480 }}px; --hero-overlay-opacity: {{ section.settings.overlay_opacity | at_most: 60 | divided_by: 100.0 }}; --hero-heading-size: {{ section.settings.hero_heading_size | default: 72 }}px; --hero-subheading-size: {{ section.settings.hero_subheading_size | default: 18 }}px; --hero-body-text-size: {{ section.settings.hero_body_text_size | default: 16 }}px; --hero-subheading-size-mobile: {{ section.settings.hero_subheading_size_mobile | default: section.settings.hero_subheading_size | default: 18 }}px; --hero-body-text-size-mobile: {{ section.settings.hero_body_text_size_mobile | default: section.settings.hero_body_text_size | default: 16 }}px; --hero-btn-text-size: {{ section.settings.hero_button_text_size | default: 14 }}px; --hero-btn-py: {{ section.settings.hero_button_padding_y | default: 12 }}px; --hero-btn-px: {{ section.settings.hero_button_padding_x | default: 28 }}px; --hero-content-xmargin: {{ section.settings.hero_content_side_margin | default: 0 }}px; --hero-btn-bw: {{ section.settings.hero_btn_border_width | default: 1 }}px; --hero-btn-bs: {{ section.settings.hero_btn_border_style | default: 'solid' }}; --hero-btn-bc: {{ section.settings.hero_btn_border_color | default: '#FFFFFF' }}; --hero-btn-radius: {{ section.settings.hero_btn_radius | default: 0 }}px; --hero-btn-bg: {{ section.settings.hero_btn_bg | default: '#FFFFFF' }}; --hero-btn-tc: {{ section.settings.hero_btn_text_color | default: '#111111' }}; --hero-dot-active: {{ section.settings.dot_active_color | default: '#2eb0ae' }}; --hero-dot-inactive: {{ section.settings.dot_inactive_color | default: '#d1d5db' }}; --hs-heading-ff: {{ hs_heading_ff }}; --hs-heading-fw: {{ section.settings.hero_heading_font_weight | default: '800' }}; --hs-subheading-ff: {{ hs_subheading_ff }}; --hs-subheading-fw: {{ section.settings.hero_subheading_font_weight | default: '600' }}; --hs-body-ff: {{ hs_body_ff }}; --hs-body-fw: {{ section.settings.hero_body_text_font_weight | default: '600' }}; --hs-btn-ff: {{ hs_btn_ff }}; --hs-btn-fw: {{ section.settings.hero_button_font_weight | default: '700' }};"
   data-btn-border="{{ section.settings.hero_btn_show_border }}"
   data-autoplay="{{ section.settings.autoplay }}"
   data-speed="{{ section.settings.autoplay_speed | default: 5000 }}"
@@ -201,7 +208,9 @@
         {"value":"800","label":"Extra bold (800)"}
       ]
     },
-    { "type":"range", "id":"hero_subheading_size", "label":"Subheading size (px)", "min": 12, "max": 40, "step": 1, "default": 18 },
+    { "type": "header", "content": "Subheading (e.g. Star-Shaped Mood Gummies)" },
+    { "type":"range", "id":"hero_subheading_size", "label":"Subheading size — desktop (px)", "min": 12, "max": 40, "step": 1, "default": 18 },
+    { "type":"range", "id":"hero_subheading_size_mobile", "label":"Subheading size — mobile (px)", "min": 10, "max": 32, "step": 1, "default": 18 },
     {
       "type":"select",
       "id":"hero_subheading_font_family",
@@ -227,6 +236,35 @@
         {"value":"800","label":"Extra bold (800)"}
       ]
     },
+    { "type": "header", "content": "Supporting text (e.g. Daily Ritual line)" },
+    { "type":"range", "id":"hero_body_text_size", "label":"Supporting text size — desktop (px)", "min": 10, "max": 32, "step": 1, "default": 16 },
+    { "type":"range", "id":"hero_body_text_size_mobile", "label":"Supporting text size — mobile (px)", "min": 8, "max": 24, "step": 1, "default": 14 },
+    {
+      "type":"select",
+      "id":"hero_body_text_font_family",
+      "label":"Supporting text font family",
+      "default":"inherit",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"heading","label":"Heading font"},
+        {"value":"body","label":"Body font"}
+      ]
+    },
+    {
+      "type":"select",
+      "id":"hero_body_text_font_weight",
+      "label":"Supporting text font weight",
+      "default":"600",
+      "options":[
+        {"value":"inherit","label":"Theme default"},
+        {"value":"400","label":"Regular (400)"},
+        {"value":"500","label":"Medium (500)"},
+        {"value":"600","label":"Semi-bold (600)"},
+        {"value":"700","label":"Bold (700)"},
+        {"value":"800","label":"Extra bold (800)"}
+      ]
+    },
+    { "type": "header", "content": "Button" },
     { "type":"range", "id":"hero_button_text_size", "label":"Button text size (px)", "min": 10, "max": 28, "step": 1, "default": 14 },
     {
       "type":"select",
