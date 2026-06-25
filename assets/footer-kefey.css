@@ -63,7 +63,7 @@
   padding: var(--ff-top-btn-py, 12px) var(--ff-top-btn-px, 28px);
   background: var(--ff-top-btn-bg, #111111);
   color: var(--ff-top-btn-text, #ffffff);
-  font-size: 14px;
+  font-size: var(--ff-top-btn-fs, 14px);
   line-height: 1;
   font-family: var(--ff-top-btn-font-family, inherit);
   font-weight: var(--ff-top-btn-font-weight, inherit);
@@ -363,6 +363,10 @@
     font-size: var(--ff-top-subheading-fs, 16px);
   }
 
+  .fk__top-btn {
+    font-size: var(--ff-top-btn-fs, 14px);
+  }
+
   .fk__impact-text {
     font-size: var(--ff-mid-text-fs, 16px);
   }
@@ -445,7 +449,7 @@
     padding-left: 1.15rem;
     padding-right: 1.15rem;
     height: 44px;
-    font-size: var(--ff-top-btn-fs-mobile, 15px);
+    font-size: clamp(0.75rem, 2.65vw, var(--ff-top-btn-fs, 14px));
     font-weight: 700;
   }
 
