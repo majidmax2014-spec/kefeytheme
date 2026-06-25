@@ -105,6 +105,7 @@
     --ff-top-heading-fs: {{ section.settings.ff_top_heading_fs }}px;
     --ff-top-subheading-fs: {{ section.settings.ff_top_subheading_fs }}px;
     --ff-top-btn-fs: {{ section.settings.ff_top_btn_fs }}px;
+    --ff-top-btn-fs-mobile: {{ section.settings.ff_top_btn_fs_mobile }}px;
     --ff-mid-text-fs: {{ section.settings.ff_mid_text_fs }}px;
     --ff-newsletter-heading-fs: {{ section.settings.ff_newsletter_heading_fs }}px;
     --ff-newsletter-text-fs: {{ section.settings.ff_newsletter_text_fs }}px;
@@ -456,7 +457,8 @@
         {"value":"800","label":"Extra bold (800)"}
       ]
     },
-    { "type":"range", "id":"ff_top_btn_fs", "label":"Top button font size (px)", "min": 10, "max": 24, "step": 1, "default": 14 },
+    { "type":"range", "id":"ff_top_btn_fs", "label":"Top button font size — desktop (px)", "min": 10, "max": 24, "step": 1, "default": 14 },
+    { "type":"range", "id":"ff_top_btn_fs_mobile", "label":"Top button font size — mobile (px)", "min": 10, "max": 24, "step": 1, "default": 15 },
     { "type":"range", "id":"ff_top_btn_py", "label":"Top button padding Y (px)", "min": 6, "max": 30, "step": 1, "default": 12 },
     { "type":"range", "id":"ff_top_btn_px", "label":"Top button padding X (px)", "min": 10, "max": 60, "step": 1, "default": 28 },
     {
