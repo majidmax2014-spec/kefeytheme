@@ -446,10 +446,10 @@
     min-width: unset;
     width: auto;
     max-width: 100%;
-    padding-left: 1.15rem;
-    padding-right: 1.15rem;
-    height: 44px;
-    font-size: var(--ff-top-btn-fs-mobile, 15px);
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    height: 46px;
+    font-size: var(--ff-top-btn-fs-mobile, 18px);
     font-weight: 700;
   }
 
@@ -492,7 +492,7 @@
     min-height: var(--fk-row2-h, 200px);
     padding: clamp(14px, 4vw, 20px) clamp(8px, 2.5vw, 12px);
     justify-content: center;
-    gap: 0;
+    gap: 12px;
   }
 
   .fk__impact-logo--left,
@@ -510,7 +510,7 @@
   .fk__impact-text {
     font-size: clamp(0.8125rem, 3.15vw, var(--ff-mid-text-fs, 16px));
     line-height: 1.24;
-    margin-top: 0.45rem;
+    margin-top: 0;
     max-width: none;
     padding: 0 5px;
   }
@@ -666,7 +666,7 @@
 @media (max-width: 749px) {
   .fk {
     --fk-row1-hm: 238px !important;
-    --fk-row2-h: 120px !important;
+    --fk-row2-h: 140px !important;
   }
 
   .fk__row--top,
@@ -681,6 +681,17 @@
   .fk__top-image-wrap {
     margin-top: 0;
     margin-bottom: 0;
+  }
+
+  .fk__impact-col {
+    gap: 14px;
+  }
+
+  .fk__top-btn {
+    font-size: var(--ff-top-btn-fs-mobile, 18px);
+    height: 48px;
+    padding-left: 1.35rem;
+    padding-right: 1.35rem;
   }
 
   .fk__policy-menu {
