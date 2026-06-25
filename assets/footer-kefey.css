@@ -449,7 +449,7 @@
     padding-left: 1.15rem;
     padding-right: 1.15rem;
     height: 44px;
-    font-size: clamp(0.75rem, 2.65vw, var(--ff-top-btn-fs, 14px));
+    font-size: var(--ff-top-btn-fs, 14px);
     font-weight: 700;
   }
 
