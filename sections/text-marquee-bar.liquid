@@ -29,7 +29,7 @@
     <div class="marquee-bar__track">
       {%- capture items_markup -%}
         {%- for block in section.blocks -%}
-          {%- if block.type == 'item' -%}
+          {%- if block.type == 'item' and block.settings.text != blank -%}
             <span class="marquee-bar__item" data-sep="{{ section.settings.separator_text | default: '|' }}" {{ block.shopify_attributes }}>
               {{- block.settings.text | strip -}}
             </span>
