@@ -331,7 +331,7 @@
         "card_yUmjqj": {
           "type": "card",
           "settings": {
-            "background_color": "#45B3B4",
+            "background_color": "#45b3b4",
             "title": "You & the Planet in Mind",
             "text": "From plant-based ingredients to Eco-friendly, Re-usable packaging.  Every choice is made with care, for you and the planet."
           }
@@ -401,7 +401,7 @@
         "ingredient_eHd3jV": {
           "type": "ingredient",
           "settings": {
-            "ingredient_image": "shopify://shop_images/varian.jpg",
+            "ingredient_image": "shopify://shop_images/verbena_JPG.jpg",
             "title": "Verbena Extract",
             "description": "A gentle botanical known for supporting emotional balance, and a relaxed state of mind, which naturally supports better sleep."
           }
@@ -441,7 +441,7 @@
         "ingredient_6CDYDB": {
           "type": "ingredient",
           "settings": {
-            "ingredient_image": "shopify://shop_images/pectin.webp",
+            "ingredient_image": "shopify://shop_images/pectin_JPG.jpg",
             "title": "Pectin",
             "description": "A plant-derived ingredient that gives Kefey® gummies their soft, chewy texture, naturally vegan and gelatin-free."
           }
@@ -461,7 +461,7 @@
       "settings": {
         "heading": "The Ingredients Behind the Kefey Mood Star",
         "subheading": "A signature Kefey® formulation powered by high-potency botanical extracts, naturally sweetened, sugar-free, and thoughtfully crafted to support real, everyday balance.",
-        "background_color": "#45B3B4",
+        "background_color": "#45b3b4",
         "heading_color": "#ffffff",
         "description_color": "#ffffff",
         "heading_font_family": "inherit",
@@ -606,7 +606,7 @@
         "box_border_thickness": 1,
         "left_headline": "Each Serving (2 Gummies) = Nature, Concentrated with Joy",
         "left_body": "Every two Kefey Mood Gummies combine premium plant extracts and essential nutrients, thoughtfully balanced to support calm, focus, and daily wellbeing.",
-        "left_image": "shopify://shop_images/gummies.png",
+        "left_image": "shopify://shop_images/kefey-gummies-flavor.png",
         "nutrition_image": "shopify://shop_images/Serving-Table.png",
         "box1_heading": "Each Serving Contains:",
         "box1_amount_label": "Amount Per 2 Gummies Servings Per Container: 30",
