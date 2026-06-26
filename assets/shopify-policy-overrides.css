@@ -3,3 +3,13 @@
 .shopify-policy__container {
   max-width: var(--legal-content-max-width, 1160px) !important;
 }
+
+.shopify-policy__container .shopify-policy__title {
+  text-align: left !important;
+}
+
+.shopify-policy__container .shopify-policy__title h1 {
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
