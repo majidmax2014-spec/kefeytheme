@@ -303,6 +303,7 @@
     assign kefey_load_policy_css = false
     if request.page_type == 'policy'
       assign kefey_load_policy_css = true
+      assign kefey_policy_layout_class = ' page--kefey-policy-layout'
     elsif request.page_type == 'page' and page.handle != blank
       assign _policy_handles = settings.policy_layout_page_handles | default: 'consumer-health-data-privacy-policy, digital-accessibility-statement' | split: ','
       for _part in _policy_handles

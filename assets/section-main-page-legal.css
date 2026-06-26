@@ -4,29 +4,34 @@
   --legal-title-font-family: var(--font-heading-family);
   --legal-section-font-family: var(--font-heading-family);
   --legal-body-font-family: var(--font-body-family);
-  --legal-title-color: #70b9be;
+  --legal-title-color: #101010;
   --legal-section-heading-color: #101010;
   --legal-body-color: #333333;
-  --legal-title-font-size: 3.6rem;
-  --legal-section-heading-font-size: 1.8rem;
-  --legal-body-font-size: 1.6rem;
+  --legal-title-font-size: 36px;
+  --legal-title-font-weight: 500;
+  --legal-section-heading-font-size: 18px;
+  --legal-body-font-size: 16px;
   --legal-body-line-height: 1.65;
-  --legal-paragraph-spacing: 1.6rem;
-  --legal-content-max-width: 72rem;
-  --legal-title-text-transform: uppercase;
+  --legal-paragraph-spacing: 16px;
+  --legal-content-max-width: 1160px;
+  --legal-title-text-transform: none;
   --legal-section-text-transform: uppercase;
+  --legal-title-highlight-color: #2bb4a7;
+  --legal-title-highlight-height: 12px;
+  --legal-title-highlight-offset: -6px;
 }
 
 .kefey-main-page--legal {
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+  max-width: var(--legal-content-max-width, 1160px);
 }
 
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 750px) {
   .page-width.page-width--narrow.kefey-main-page--legal,
   .shopify-policy__container {
-    max-width: var(--legal-content-max-width, 72rem);
+    max-width: var(--legal-content-max-width, 1160px);
   }
 }
 
@@ -38,25 +43,64 @@
   text-align: left;
 }
 
-.kefey-main-page--legal .main-page-title,
+.kefey-main-page--legal .kefey-legal-page-title,
 .shopify-policy__container .shopify-policy__title,
 .shopify-policy__container .shopify-policy__title h1 {
   font-family: var(--legal-title-font-family, inherit);
-  color: var(--legal-title-color, #70b9be);
-  font-size: var(--legal-title-font-size, 3.6rem);
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: 0.03em;
+  color: var(--legal-title-color, #101010);
+  font-size: var(--legal-title-font-size, 36px);
+  font-weight: var(--legal-title-font-weight, 500);
+  line-height: 1.1;
+  letter-spacing: normal;
   margin-top: 0;
   margin-bottom: 2.4rem;
-  text-transform: var(--legal-title-text-transform, uppercase);
+  text-transform: var(--legal-title-text-transform, none);
+}
+
+.kefey-main-page--legal .kefey-legal-page-title {
+  position: relative;
+  display: inline-block;
+}
+
+.kefey-legal-page-title__text {
+  position: relative;
+  z-index: 1;
+}
+
+.kefey-legal-page-title__bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--legal-title-highlight-height, 12px);
+  bottom: var(--legal-title-highlight-offset, -6px);
+  z-index: 0;
+  background: var(--legal-title-highlight-color, #2bb4a7);
+  pointer-events: none;
+}
+
+.shopify-policy__container .shopify-policy__title h1 {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+
+.shopify-policy__container .shopify-policy__title h1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--legal-title-highlight-height, 12px);
+  bottom: var(--legal-title-highlight-offset, -6px);
+  background: var(--legal-title-highlight-color, #2bb4a7);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .kefey-main-page--legal .rte,
 .shopify-policy__container .shopify-policy__body {
   font-family: var(--legal-body-font-family, inherit);
   color: var(--legal-body-color, #333333);
-  font-size: var(--legal-body-font-size, 1.6rem);
+  font-size: var(--legal-body-font-size, 16px);
   line-height: var(--legal-body-line-height, 1.65);
   font-weight: 400;
 }
@@ -75,7 +119,7 @@
 .shopify-policy__container .shopify-policy__body h6 {
   font-family: var(--legal-section-font-family, inherit);
   color: var(--legal-section-heading-color, #101010);
-  font-size: var(--legal-section-heading-font-size, 1.8rem) !important;
+  font-size: var(--legal-section-heading-font-size, 18px) !important;
   font-weight: 700;
   line-height: 1.35;
   letter-spacing: 0.04em;
@@ -94,8 +138,8 @@
 .kefey-main-page--legal .rte p,
 .shopify-policy__container .shopify-policy__body p {
   margin-top: 0;
-  margin-bottom: var(--legal-paragraph-spacing, 1.6rem);
-  font-size: var(--legal-body-font-size, 1.6rem);
+  margin-bottom: var(--legal-paragraph-spacing, 16px);
+  font-size: var(--legal-body-font-size, 16px);
   line-height: var(--legal-body-line-height, 1.65);
 }
 
@@ -109,16 +153,16 @@
 .shopify-policy__container .shopify-policy__body ul,
 .shopify-policy__container .shopify-policy__body ol {
   margin-top: 0;
-  margin-bottom: var(--legal-paragraph-spacing, 1.6rem);
+  margin-bottom: var(--legal-paragraph-spacing, 16px);
   padding-left: 2rem;
-  font-size: var(--legal-body-font-size, 1.6rem);
+  font-size: var(--legal-body-font-size, 16px);
   line-height: var(--legal-body-line-height, 1.65);
 }
 
 .kefey-main-page--legal .rte li,
 .shopify-policy__container .shopify-policy__body li {
   margin-bottom: 0.6rem;
-  font-size: var(--legal-body-font-size, 1.6rem);
+  font-size: var(--legal-body-font-size, 16px);
   line-height: var(--legal-body-line-height, 1.65);
 }
 
@@ -127,7 +171,7 @@
 .shopify-policy__container .shopify-policy__body td,
 .shopify-policy__container .shopify-policy__body th {
   font-family: var(--legal-body-font-family, inherit);
-  font-size: var(--legal-body-font-size, 1.6rem);
+  font-size: var(--legal-body-font-size, 16px);
   line-height: var(--legal-body-line-height, 1.65);
   color: var(--legal-body-color, #333333);
 }
@@ -164,10 +208,16 @@
 }
 
 @media screen and (max-width: 749px) {
-  .kefey-main-page--legal .main-page-title,
+  .kefey-main-page--legal .kefey-legal-page-title,
   .shopify-policy__container .shopify-policy__title,
   .shopify-policy__container .shopify-policy__title h1 {
-    font-size: calc(var(--legal-title-font-size, 3.6rem) * 0.78);
+    font-size: calc(var(--legal-title-font-size, 36px) * 0.74);
+  }
+
+  .kefey-legal-page-title__bar,
+  .shopify-policy__container .shopify-policy__title h1::after {
+    height: 10px;
+    bottom: -5px;
   }
 
   .kefey-main-page--legal .rte,
@@ -176,7 +226,7 @@
   .shopify-policy__container .shopify-policy__body p,
   .kefey-main-page--legal .rte li,
   .shopify-policy__container .shopify-policy__body li {
-    font-size: calc(var(--legal-body-font-size, 1.6rem) * 0.94);
+    font-size: calc(var(--legal-body-font-size, 16px) * 0.94);
   }
 
   .kefey-main-page--legal .rte h1,
@@ -191,6 +241,6 @@
   .shopify-policy__container .shopify-policy__body h4,
   .shopify-policy__container .shopify-policy__body h5,
   .shopify-policy__container .shopify-policy__body h6 {
-    font-size: calc(var(--legal-section-heading-font-size, 1.8rem) * 0.94) !important;
+    font-size: calc(var(--legal-section-heading-font-size, 18px) * 0.94) !important;
   }
 }

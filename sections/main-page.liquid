@@ -71,6 +71,8 @@
       --legal-section-font-family: {{ legal_section_ff }};
       --legal-body-font-family: {{ legal_body_ff }};
       --legal-title-color: {{ section.settings.legal_title_color }};
+      --legal-title-font-weight: {{ section.settings.legal_title_font_weight }};
+      --legal-title-highlight-color: {{ section.settings.legal_title_highlight_color }};
       --legal-section-heading-color: {{ section.settings.legal_section_heading_color }};
       --legal-body-color: {{ section.settings.legal_body_color }};
       --legal-title-font-size: {{ section.settings.legal_title_font_size }}px;
@@ -88,8 +90,13 @@
 <div
   class="page-width page-width--narrow section-{{ section.id }}-padding{% if use_legal_typography %} kefey-main-page--legal{% endif %}"
 >
-  <h1 class="main-page-title page-title{% unless use_legal_typography %} h0{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ page.title | escape }}
+  <h1 class="main-page-title page-title kefey-legal-page-title{% unless use_legal_typography %} h0{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    {%- if use_legal_typography -%}
+      <span class="kefey-legal-page-title__text">{{ page.title | escape }}</span>
+      <span class="kefey-legal-page-title__bar" aria-hidden="true"></span>
+    {%- else -%}
+      {{ page.title | escape }}
+    {%- endif -%}
   </h1>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
     {{ page.content }}
@@ -153,7 +160,25 @@
       "type": "color",
       "id": "legal_title_color",
       "label": "Page title color",
-      "default": "#70B9BE"
+      "default": "#101010"
+    },
+    {
+      "type": "color",
+      "id": "legal_title_highlight_color",
+      "label": "Page title highlight bar",
+      "default": "#2BB4A7"
+    },
+    {
+      "type": "select",
+      "id": "legal_title_font_weight",
+      "label": "Page title font weight",
+      "default": "500",
+      "options": [
+        { "value": "400", "label": "Regular" },
+        { "value": "500", "label": "Medium" },
+        { "value": "600", "label": "Semibold" },
+        { "value": "700", "label": "Bold" }
+      ]
     },
     {
       "type": "color",
@@ -201,7 +226,7 @@
       "type": "checkbox",
       "id": "legal_title_uppercase",
       "label": "Uppercase page title",
-      "default": true
+      "default": false
     },
     {
       "type": "checkbox",
@@ -233,11 +258,11 @@
       "type": "range",
       "id": "legal_content_max_width",
       "min": 480,
-      "max": 1200,
+      "max": 1280,
       "step": 20,
       "unit": "px",
       "label": "Content column max width",
-      "default": 720
+      "default": 1160
     },
     {
       "type": "header",

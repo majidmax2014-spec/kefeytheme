@@ -1,5 +1,5 @@
 /* Loaded after Shopify policy.css — legal typography lives in section-main-page-legal.css */
 
 .shopify-policy__container {
-  max-width: var(--legal-content-max-width, 72rem) !important;
+  max-width: var(--legal-content-max-width, 1160px) !important;
 }
