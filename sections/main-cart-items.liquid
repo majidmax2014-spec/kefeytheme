@@ -162,27 +162,16 @@
 <script src="{{ 'kefey-cart-offers.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'kefey-cart-upsell-guard.js' | asset_url }}" defer="defer"></script>
 
-<cart-items class="kefey-cart-page{% if cart == empty %} is-empty{% else %} section-{{ section.id }}-padding{% endif %}">
+<cart-items class="kefey-cart-page section-{{ section.id }}-padding{% if cart == empty %} is-empty{% endif %}">
   <div class="page-width kefey-cart-shell">
-    <div class="cart__warnings">
+    <div class="cart__warnings kefey-cart-warnings--hidden" hidden>
       <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
-      <a href="{{ routes.all_products_collection_url }}" class="button">
-        {{ 'general.continue_shopping' | t }}
-      </a>
-
-      {%- if shop.customer_accounts_enabled and customer == null -%}
-        <h2 class="cart__login-title">{{ 'sections.cart.login.title' | t }}</h2>
-        <p class="cart__login-paragraph">
-          {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
-        </p>
-      {%- endif -%}
     </div>
 
     <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
       <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
         <div class="js-contents">
-          {%- if cart != empty -%}
-            <div class="kefey-cart-offers" aria-label="Cart offers">
+          <div class="kefey-cart-offers" aria-label="Cart offers">
               {%- if section.settings.offers_heading != blank -%}
                 <h2 class="kefey-cart-offers__heading">
                   <span>{{ section.settings.offers_heading }}</span>
@@ -284,6 +273,11 @@
               </div>
             </div>
 
+          {%- if cart == empty -%}
+            <div class="kefey-cart-empty-items">
+              <p class="kefey-cart-empty-items__text">{{ 'sections.cart.empty' | t }}</p>
+            </div>
+          {%- else -%}
             <table class="cart-items kefey-cart-table" role="table">
               <caption class="visually-hidden">
                 {{ 'sections.cart.title' | t }}
@@ -525,9 +519,11 @@
                 {%- endfor -%}
               </tbody>
             </table>
+          {%- endif -%}
 
-            {%- liquid
-              assign kefey_display_total = 0
+          {%- liquid
+            assign kefey_display_total = 0
+            if cart != empty
               for item in cart.items
                 assign item_bundle_discount_pct = item.properties._kefey_bundle_discount | plus: 0
                 assign item_is_bundle = false
@@ -555,43 +551,31 @@
                   assign kefey_display_total = kefey_display_total | plus: item.original_line_price
                 endif
               endfor
-            -%}
+            endif
+          -%}
 
-            <div class="kefey-cart-upsell-row">
-              <p class="kefey-cart-upsell-text">{{ section.settings.upsell_label }}</p>
+          <div class="kefey-cart-upsell-row">
+            <p class="kefey-cart-upsell-text">{{ section.settings.upsell_label }}</p>
 
-              <div class="kefey-cart-upsell-actions">
-                {%- if section.settings.upsell_button_label != blank -%}
-                  <button
-                    type="button"
-                    class="kefey-cart-upsell-button"
-                    data-cart-offer-button
-                    data-upsell-add
-                    data-variant-id="{{ section.settings.upsell_variant_id | strip }}"
-                    data-quantity="1"
-                    data-discount-code="{{ section.settings.upsell_discount_code | strip }}"
-                    data-fallback-url="{{ section.settings.upsell_button_link | default: '#' }}"
-                  >
-                    {{ section.settings.upsell_button_label }}
-                  </button>
-                {%- endif -%}
-
-                <div
-                  class="kefey-cart-upsell-qty"
-                  data-upsell-counter
-                  data-qty="0"
-                  data-min="0"
-                  data-max="{{ section.settings.upsell_max_qty }}"
+            <div class="kefey-cart-upsell-actions">
+              {%- if section.settings.upsell_button_label != blank -%}
+                <button
+                  type="button"
+                  class="kefey-cart-upsell-button"
+                  data-cart-offer-button
+                  data-upsell-add
+                  data-variant-id="{{ section.settings.upsell_variant_id | strip }}"
+                  data-quantity="1"
+                  data-discount-code="{{ section.settings.upsell_discount_code | strip }}"
+                  data-fallback-url="{{ section.settings.upsell_button_link | default: '#' }}"
                 >
-                  <button type="button" data-upsell-change="-1" aria-label="Decrease upsell quantity">-</button>
-                  <span data-upsell-qty-display>0</span>
-                  <button type="button" data-upsell-change="1" aria-label="Increase upsell quantity">+</button>
-                </div>
-              </div>
-
-              <p class="kefey-cart-upsell-total">TOTAL: {{ kefey_display_total | money }}</p>
+                  {{ section.settings.upsell_button_label }}
+                </button>
+              {%- endif -%}
             </div>
-          {%- endif -%}
+
+            <p class="kefey-cart-upsell-total">TOTAL: {{ kefey_display_total | money }}</p>
+          </div>
         </div>
       </div>
 

@@ -30,14 +30,25 @@ cart-items,
 }
 
 .cart__empty-text,
-.is-empty .cart__contents,
 .is-empty .cart__footer {
   display: none;
+}
+
+.kefey-cart-page.is-empty .cart__contents {
+  display: block;
+}
+
+.kefey-cart-page .kefey-cart-warnings--hidden {
+  display: none !important;
 }
 
 .is-empty .cart__empty-text,
 .is-empty .cart__warnings {
   display: block;
+}
+
+.kefey-cart-page.is-empty .cart__warnings {
+  display: none !important;
 }
 
 .cart__warnings {

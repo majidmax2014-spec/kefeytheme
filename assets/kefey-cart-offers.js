@@ -41,17 +41,6 @@
     }
   }
 
-  function updateUpsellCounter(counterElement, delta) {
-    const min = parseInteger(counterElement.dataset.min, 0);
-    const max = parseInteger(counterElement.dataset.max, 10);
-    const current = parseInteger(counterElement.dataset.qty, 0);
-    const next = Math.max(min, Math.min(max, current + delta));
-
-    counterElement.dataset.qty = String(next);
-    const display = counterElement.querySelector('[data-upsell-qty-display]');
-    if (display) display.textContent = String(next);
-  }
-
   async function handleOfferButton(button) {
     if (button.dataset.loading === 'true') return;
     button.dataset.loading = 'true';
@@ -61,15 +50,9 @@
       const variantId = (button.dataset.variantId || '').trim();
       const fallbackUrl = button.dataset.fallbackUrl || CART_URL;
       const discountCode = (button.dataset.discountCode || '').trim();
-      let quantity = parseInteger(button.dataset.quantity, 1);
+      const quantity = parseInteger(button.dataset.quantity, 1);
 
       if (button.hasAttribute('data-upsell-add')) {
-        const counter = document.querySelector('[data-upsell-counter]');
-        if (counter) {
-          const selectedQty = parseInteger(counter.dataset.qty, 0);
-          quantity = selectedQty > 0 ? selectedQty : 1;
-        }
-
         const cartResponse = await fetch('/cart.js', {
           credentials: 'same-origin',
           headers: { Accept: 'application/json' },
@@ -140,16 +123,6 @@
   }
 
   document.addEventListener('click', (event) => {
-    const counterButton = event.target.closest('[data-upsell-change]');
-    if (counterButton) {
-      const counterElement = counterButton.closest('[data-upsell-counter]');
-      if (counterElement) {
-        const delta = parseInteger(counterButton.dataset.upsellChange, 0);
-        updateUpsellCounter(counterElement, delta);
-      }
-      return;
-    }
-
     const offerButton = event.target.closest('[data-cart-offer-button]');
     if (offerButton) {
       handleOfferButton(offerButton);

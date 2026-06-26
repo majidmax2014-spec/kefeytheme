@@ -2,6 +2,19 @@
   margin: 0;
 }
 
+.kefey-cart-empty-items {
+  padding: 2.4rem 0 3.2rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.kefey-cart-empty-items__text {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: #333333;
+}
+
 /* Square corners: bundle cards, qty, upsell, theme buttons/inputs on cart */
 .kefey-cart-page {
   --buttons-radius: 0;
