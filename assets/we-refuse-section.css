@@ -61,6 +61,47 @@
   margin-top: 6px;
 }
 
+.we-refuse-section__btn-wrap {
+  margin-top: var(--wrs-btn-mt, 20px);
+  text-align: left;
+}
+
+.we-refuse-section__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4em;
+  padding: var(--wrs-btn-pad-y, 14px) var(--wrs-btn-pad-x, 22px);
+  background: var(--wrs-btn-bg, #49b2b2);
+  color: var(--wrs-btn-color, #ffffff);
+  font-family: var(--wrs-t-ff, inherit);
+  font-size: var(--wrs-btn-fs, 14px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+.we-refuse-section__btn:hover {
+  opacity: 0.92;
+}
+
+.we-refuse-section__btn:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.we-refuse-section__btn-arrow {
+  font-weight: 700;
+  line-height: 1;
+}
+
 .we-refuse-section__right {
   background: var(--wrs-right-bg, #69c6de);
   display: flex;
@@ -156,5 +197,10 @@
 
   .we-refuse-section__text ul {
     padding-left: 1.2em;
+  }
+
+  .we-refuse-section__btn-wrap {
+    margin-top: var(--wrs-btn-mt-m, var(--wrs-btn-mt, 20px));
+    text-align: left;
   }
 }

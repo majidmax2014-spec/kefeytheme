@@ -37,6 +37,13 @@
     --wrs-t-ff: {{ wrs_t_ff }};
     --wrs-t-fw: {{ section.settings.text_font_weight }};
     --wrs-t-fs: {{ section.settings.text_font_size }}px;
+    --wrs-btn-bg: {{ section.settings.button_background }};
+    --wrs-btn-color: {{ section.settings.button_text_color }};
+    --wrs-btn-fs: {{ section.settings.button_font_size }}px;
+    --wrs-btn-pad-y: {{ section.settings.button_padding_y }}px;
+    --wrs-btn-pad-x: {{ section.settings.button_padding_x }}px;
+    --wrs-btn-mt: {{ section.settings.button_margin_top }}px;
+    --wrs-btn-mt-m: {{ section.settings.button_margin_top_mobile }}px;
   "
 >
   <div class="we-refuse-section__inner">
@@ -48,6 +55,20 @@
       <div class="we-refuse-section__left">
         {% if section.settings.text != blank %}
           <div class="we-refuse-section__text rte">{{ section.settings.text }}</div>
+        {% endif %}
+
+        {% if section.settings.show_button and section.settings.button_label != blank %}
+          <div class="we-refuse-section__btn-wrap">
+            <a
+              href="{{ section.settings.button_link | default: '#' }}"
+              class="we-refuse-section__btn"
+            >
+              <span class="we-refuse-section__btn-label">{{ section.settings.button_label }}</span>
+              {% if section.settings.button_show_arrow %}
+                <span class="we-refuse-section__btn-arrow" aria-hidden="true">→</span>
+              {% endif %}
+            </a>
+          </div>
         {% endif %}
       </div>
 
@@ -140,6 +161,95 @@
       ]
     },
     { "type": "range", "id": "text_font_size", "label": "Body font size", "min": 10, "max": 32, "step": 1, "default": 18 },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Learn more"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_show_arrow",
+      "label": "Show arrow after label",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#49b2b2"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "button_font_size",
+      "label": "Button font size",
+      "min": 11,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_y",
+      "label": "Button padding vertical",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "button_padding_x",
+      "label": "Button padding horizontal",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "button_margin_top",
+      "label": "Space above button (desktop)",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "button_margin_top_mobile",
+      "label": "Space above button (mobile)",
+      "min": 8,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 18
+    },
     { "type": "range", "id": "content_max_width", "label": "Content max width", "min": 980, "max": 1700, "step": 10, "default": 1220 },
     { "type": "range", "id": "left_col_width", "label": "Left column width (%)", "min": 30, "max": 60, "step": 1, "default": 42 },
     {
