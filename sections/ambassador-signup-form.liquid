@@ -54,6 +54,8 @@
   endif
 -%}
 
+{{ 'kefey-heading-highlight.css' | asset_url | stylesheet_tag }}
+
 <section
   id="ambassador-signup-form"
   class="wholesale-signup-form"
@@ -82,7 +84,11 @@
     <div class="wholesale-signup-form__header">
       <h2 class="wholesale-signup-form__title">
         <span class="wholesale-signup-form__title-text">{{ section.settings.heading }}</span>
-        <span class="wholesale-signup-form__title-highlight" aria-hidden="true"></span>
+        <span
+          class="wholesale-signup-form__title-highlight"
+          style="background-color: {{ section.settings.highlight_color }};"
+          aria-hidden="true"
+        ></span>
       </h2>
       {%- if section.settings.subheading_line_1 != blank -%}
         <p class="wholesale-signup-form__subheading wholesale-signup-form__subheading--primary">{{ section.settings.subheading_line_1 }}</p>
@@ -301,16 +307,6 @@
     #shopify-section-{{ section.id }} .wholesale-signup-form__title-text {
       position: relative;
       z-index: 1;
-    }
-
-    #shopify-section-{{ section.id }} .wholesale-signup-form__title-highlight {
-      position: absolute;
-      left: -0.3em;
-      right: -0.3em;
-      bottom: 0.16em;
-      height: 0.34em;
-      background: {{ section.settings.highlight_color }};
-      z-index: 0;
     }
 
     #shopify-section-{{ section.id }} .wholesale-signup-form__subheading {

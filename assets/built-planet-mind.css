@@ -30,18 +30,13 @@
 
 .built-planet-mind__heading-line--top {
   position: relative;
+  display: inline-block;
   font-weight: var(--bpm-h-fw, inherit);
-  padding-bottom: 7px;
 }
 
-.built-planet-mind__heading-line--top::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 8px;
-  background: var(--bpm-underline-color, #2bb4a7);
+.built-planet-mind__heading-text {
+  position: relative;
+  z-index: 1;
 }
 
 .built-planet-mind__heading-line--bottom {

@@ -1,3 +1,4 @@
+{{ 'kefey-heading-highlight.css' | asset_url | stylesheet_tag }}
 {{ 'built-planet-mind.css' | asset_url | stylesheet_tag }}
 
 {%- liquid
@@ -39,22 +40,36 @@
   <div class="built-planet-mind__inner">
     {% if section.settings.heading != blank %}
       {% assign heading_raw = section.settings.heading %}
-      {% assign top_line_class = 'built-planet-mind__heading-line' %}
-      {% if section.settings.show_heading_underline %}
-        {% assign top_line_class = top_line_class | append: ' built-planet-mind__heading-line--top' %}
-      {% endif %}
       {% if heading_raw contains '<strong>' and heading_raw contains '</strong>' %}
         {% assign heading_parts = heading_raw | split: '<strong>' %}
         {% assign heading_top = heading_parts[0] | strip %}
         {% assign heading_bottom_parts = heading_parts[1] | split: '</strong>' %}
         {% assign heading_bottom = heading_bottom_parts[0] | strip %}
         <h2 class="built-planet-mind__heading">
-          <span class="{{ top_line_class }}">{{ heading_top }}</span>
+          <span class="built-planet-mind__heading-line built-planet-mind__heading-line--top">
+            <span class="built-planet-mind__heading-text">{{ heading_top }}</span>
+            {% if section.settings.show_heading_underline %}
+              <span
+                class="built-planet-mind__heading-highlight"
+                style="background-color: {{ section.settings.heading_underline_color }};"
+                aria-hidden="true"
+              ></span>
+            {% endif %}
+          </span>
           <span class="built-planet-mind__heading-line built-planet-mind__heading-line--bottom">{{ heading_bottom }}</span>
         </h2>
       {% else %}
         <h2 class="built-planet-mind__heading">
-          <span class="{{ top_line_class }}">{{ heading_raw }}</span>
+          <span class="built-planet-mind__heading-line built-planet-mind__heading-line--top">
+            <span class="built-planet-mind__heading-text">{{ heading_raw }}</span>
+            {% if section.settings.show_heading_underline %}
+              <span
+                class="built-planet-mind__heading-highlight"
+                style="background-color: {{ section.settings.heading_underline_color }};"
+                aria-hidden="true"
+              ></span>
+            {% endif %}
+          </span>
         </h2>
       {% endif %}
     {% endif %}
