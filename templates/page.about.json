@@ -228,7 +228,7 @@
       "settings": {
         "heading": "Purpose Beyond the <strong>Gummy</strong>",
         "body": "<p>At Kefey, we believe wellness should not stop with the individual, it should ripple outward.</p><p>That is why we support initiatives that uplift communities, empower women, nourish children, and protect the planet. Through organizations like Vitamin Angels and One Tree Planted, we aim to turn everyday wellness into meaningful impact.</p><p>Our commitment also extends to the choices we make behind the scenes. From creating reusable packaging to designing shipping boxes that can be repurposed long after they arrive, we believe thoughtful design can make a difference too.</p><p>We call it<strong> KEFEY FOR GOOD</strong>, because giving is part of what makes us glow.</p><p>This is not just a supplement. It is our commitment to feel good, and do good.</p><p>Because when you feel good, you're able to do good and help others shine too.</p>",
-        "image": "shopify://shop_images/about-4.png",
+        "image": "shopify://shop_images/vitamin_angels_4_jpg.jpg",
         "decor_image": "shopify://shop_images/a-4right-decor.png",
         "panel_color": "#f2c718",
         "title_bg_color": "#36b2b2",
@@ -256,7 +256,7 @@
         "button_margin_top": 20,
         "button_margin_top_mobile": 18,
         "content_max_width": 1600,
-        "left_col_width": 45,
+        "left_col_width": 50,
         "min_height": 290,
         "content_padding_left": 56,
         "content_padding_right": 40,
