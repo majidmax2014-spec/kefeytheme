@@ -207,6 +207,38 @@
           <p id="WholesaleVolumeError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
         </div>
 
+        <div class="wholesale-signup-form__field">
+          <label class="wholesale-signup-form__label" for="WholesaleCountry-{{ section.id }}">Country</label>
+          <input
+            id="WholesaleCountry-{{ section.id }}"
+            class="wholesale-signup-form__input js-wholesale-validate"
+            type="text"
+            name="contact[country]"
+            value="{% if form.country %}{{ form.country }}{% endif %}"
+            autocomplete="country-name"
+            data-required="true"
+            data-error-id="WholesaleCountryError-{{ section.id }}"
+            required
+          >
+          <p id="WholesaleCountryError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
+        </div>
+
+        <div class="wholesale-signup-form__field">
+          <label class="wholesale-signup-form__label" for="WholesaleAddress-{{ section.id }}">Address</label>
+          <input
+            id="WholesaleAddress-{{ section.id }}"
+            class="wholesale-signup-form__input js-wholesale-validate"
+            type="text"
+            name="contact[address]"
+            value="{% if form.address %}{{ form.address }}{% endif %}"
+            autocomplete="street-address"
+            data-required="true"
+            data-error-id="WholesaleAddressError-{{ section.id }}"
+            required
+          >
+          <p id="WholesaleAddressError-{{ section.id }}" class="wholesale-signup-form__field-error" aria-live="polite"></p>
+        </div>
+
         <div class="wholesale-signup-form__field wholesale-signup-form__field--full">
           <label class="wholesale-signup-form__label" for="WholesaleDetails-{{ section.id }}">Tell us about your business &amp; why you'd like to partner with Kefey®</label>
           <textarea
@@ -230,18 +262,6 @@
         </div>
       {%- endif -%}
 
-      {%- if section.settings.show_recipient_note -%}
-        <p class="wholesale-form__note wholesale-form__note--recipient">
-          Submissions are sent to the store notification email in Shopify Settings → Notifications. For routing to
-          {{ section.settings.recipient_note_email }}, use Shopify Flow or an app.
-        </p>
-      {%- endif -%}
-
-      {%- if section.settings.enable_autoresponder_note -%}
-        <p class="wholesale-form__note wholesale-form__note--autoresponder">
-          Theme code can’t send emails. To send an automatic thank-you email, use Shopify Flow/Shopify Email or a form app.
-        </p>
-      {%- endif -%}
       {%- if form.posted_successfully? and section.settings.success_redirect_url != blank -%}
         <script>
           setTimeout(function () {
@@ -465,13 +485,6 @@
 
     #shopify-section-{{ section.id }} .wholesale-signup-form__submit:hover {
       opacity: 0.95;
-    }
-
-    #shopify-section-{{ section.id }} .wholesale-form__note {
-      margin: 1rem 0 0;
-      font-size: 13px;
-      line-height: 1.45;
-      color: #666;
     }
 
     #shopify-section-{{ section.id }} .wholesale-signup-form__support {
@@ -842,24 +855,6 @@
       "id": "support_email",
       "label": "Support email",
       "default": "wholesale@kefey.co"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_recipient_note",
-      "label": "Show submission recipient note",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "recipient_note_email",
-      "label": "Recipient note email",
-      "default": "wholesale@kefey.co"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_autoresponder_note",
-      "label": "Show autoresponder note",
-      "default": true
     },
     {
       "type": "select",
