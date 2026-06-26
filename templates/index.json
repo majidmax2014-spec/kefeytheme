@@ -15,8 +15,8 @@
         "slide_f63LM7": {
           "type": "slide",
           "settings": {
-            "desktop_bg_image": "shopify://shop_images/Home1.png",
-            "mobile_bg_image": "shopify://shop_images/Home-mobile.png",
+            "desktop_bg_image": "shopify://shop_images/Home-desktop.png",
+            "mobile_bg_image": "shopify://shop_images/Home-mobile_b699b117-8ddf-446e-b41e-90a0c7c349c1.png",
             "heading": "Turn On The Joy",
             "subheading": "Star-Shaped Mood Gummies",
             "body_text": "<p>A Daily Ritual • Plant-Based • Sugar-Free • Planet-Kind</p>",
@@ -459,7 +459,7 @@
         "button_link": "shopify://products/mood-gummies",
         "button_style": "solid",
         "heading_color": "#ffc94d",
-        "text_color": "#FFFFFF",
+        "text_color": "#ffffff",
         "button_text_color": "#000000",
         "button_border_color": "#ffffff",
         "button_bg_color": "#ffffff",
