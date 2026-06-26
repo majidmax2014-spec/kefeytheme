@@ -1,5 +1,5 @@
 {{ 'section-main-page.css' | asset_url | stylesheet_tag }}
-{%- if section.settings.enable_legal_typography -%}
+{%- if use_legal_typography -%}
   {{ 'section-main-page-legal.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
@@ -36,6 +36,20 @@
   endif
 
   assign legal_line_height = section.settings.legal_body_line_height | default: 165 | times: 0.01
+
+  assign use_legal_typography = section.settings.enable_legal_typography
+  if use_legal_typography == false and request.page_type == 'page' and page.handle != blank
+    assign _policy_handles = settings.policy_layout_page_handles | default: 'consumer-health-data-privacy-policy, digital-accessibility-statement' | split: ','
+    for _part in _policy_handles
+      assign _h = _part | strip
+      if _h != '' and page.handle == _h
+        assign use_legal_typography = true
+      endif
+    endfor
+  endif
+  if use_legal_typography == false and template.suffix == 'terms'
+    assign use_legal_typography = true
+  endif
 -%}
 
 {%- style -%}
@@ -51,7 +65,7 @@
     }
   }
 
-  {%- if section.settings.enable_legal_typography -%}
+  {%- if use_legal_typography -%}
     .kefey-main-page--legal.section-{{ section.id }}-padding {
       --legal-title-font-family: {{ legal_title_ff }};
       --legal-section-font-family: {{ legal_section_ff }};
@@ -72,9 +86,9 @@
 {%- endstyle -%}
 
 <div
-  class="page-width page-width--narrow section-{{ section.id }}-padding{% if section.settings.enable_legal_typography %} kefey-main-page--legal{% endif %}"
+  class="page-width page-width--narrow section-{{ section.id }}-padding{% if use_legal_typography %} kefey-main-page--legal{% endif %}"
 >
-  <h1 class="main-page-title page-title{% unless section.settings.enable_legal_typography %} h0{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+  <h1 class="main-page-title page-title{% unless use_legal_typography %} h0{% endunless %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
     {{ page.title | escape }}
   </h1>
   <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">

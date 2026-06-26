@@ -14,7 +14,7 @@
         "type": "textarea",
         "id": "policy_layout_page_handles",
         "label": "Page handles for policy layout",
-        "info": "Comma-separated handles for Online Store → Pages (e.g. consumer-health-data-privacy-policy, digital-accessibility-statement). Same width and body typography as legal policy pages. Does not change heading styles.",
+        "info": "Comma-separated handles for Online Store → Pages (e.g. consumer-health-data-privacy-policy, digital-accessibility-statement). These pages use the same legal typography as Privacy Policy and Terms.",
         "default": "consumer-health-data-privacy-policy, digital-accessibility-statement"
       }
     ]

@@ -395,6 +395,7 @@
       After Shopify-injected policy-*.css (policy pages) or for CMS pages listed in theme settings.
     {%- endcomment -%}
     {%- if kefey_load_policy_css -%}
+      {{ 'section-main-page-legal.css' | asset_url | stylesheet_tag }}
       {{ 'shopify-policy-overrides.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
   </body>
