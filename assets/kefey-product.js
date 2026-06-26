@@ -688,12 +688,40 @@
     });
   }
 
+  function initHeroScrollCta(scope) {
+    var links = (scope || document).querySelectorAll('[data-kefey-scroll-cta]');
+    if (!links.length) return;
+
+    links.forEach(function (link) {
+      if (link.dataset.kefeyScrollBound === 'true') return;
+      link.dataset.kefeyScrollBound = 'true';
+
+      link.addEventListener('click', function (event) {
+        var href = link.getAttribute('href') || '';
+        if (href.charAt(0) !== '#') return;
+
+        var id = href.slice(1);
+        var target = id ? document.getElementById(id) : null;
+
+        if (!target) {
+          target = document.getElementById('kefey-purchase') || document.querySelector('[data-kefey-purchase]');
+        }
+
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }
+
   function init(scope) {
     initIngredientsCarousels(scope);
     initCertCarousels(scope);
     initFinalCtaSlider(scope);
     initFaqAria(scope);
     initPurchaseModule(scope);
+    initHeroScrollCta(scope);
   }
 
   document.addEventListener('DOMContentLoaded', function () { init(document); });
