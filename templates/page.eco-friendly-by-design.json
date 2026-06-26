@@ -38,8 +38,8 @@
       "type": "header-banner",
       "name": "Header Banner",
       "settings": {
-        "bg_image_desktop": "shopify://shop_images/Eco-friendly-desktop.png",
-        "bg_image_mobile": "shopify://shop_images/Eco-friendly-mobile.png",
+        "bg_image_desktop": "shopify://shop_images/eco-desktop.png",
+        "bg_image_mobile": "shopify://shop_images/eco-mobile.png",
         "heading": "Plastic-Free Where It Matters Most — The Container.",
         "subheading": "A new standard in supplement packaging, designed to care for you & the planet.",
         "subheading_richtext": "",
@@ -170,7 +170,7 @@
         "intro_line_height": 150,
         "intro_line_height_mobile": 145,
         "intro_paragraph_gap": 14,
-        "product_image": "shopify://shop_images/kefey-benifits.png",
+        "product_image": "shopify://shop_images/kefey-benifits_96e9fbd9-00c6-4ecf-aee6-cc422ccf7820.png",
         "circle_background": "#36b2b2",
         "circle_max_width": 720,
         "circle_wrap_min_height": 530,
@@ -208,7 +208,7 @@
       "settings": {
         "heading": "Quality, Safety & Freshness — Inside & Out",
         "body": "<p>Our packaging isn’t just eco-friendly, it’s designed to meet high food-grade standards while protecting what matters most.<br/><br/>Crafted from FSC-certified paper and printed with soy-based inks, every material is carefully selected to support product quality, consumer safety, and environmental responsibility.<br/><br/>A dual-layer closure and a premium aluminum cap ensure a tighter seal, easy re-closing, and long-lasting freshness, without compromising the elegant, high-quality look of the tube.<br/><br/>To preserve freshness without relying on plastic containers, an aluminum inner lining protects your gummies from light, moisture, and air, keeping them fresh and stable for up to 24 months.<br/> Clean Protection. Thoughtful Materials. Responsible Performance.</p>",
-        "image": "shopify://shop_images/quality-safety-freshnes.png",
+        "image": "shopify://shop_images/quality-safety-freshnes_49f51220-adae-4d80-bd5a-09158e013209.png",
         "panel_color": "#f2c718",
         "title_bg_color": "#e15241",
         "title_color": "#ffffff",
