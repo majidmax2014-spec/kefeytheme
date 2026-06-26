@@ -37,6 +37,9 @@
     --wiw-r2-w: {{ section.settings.right_decor_width_2 }}px;
     --wiw-r2-x: {{ section.settings.right_decor_x_2 }}px;
     --wiw-r2-y: {{ section.settings.right_decor_y_2 }}px;
+    --wiw-right-img-w: {{ section.settings.right_image_width }}px;
+    --wiw-right-img-offset-r: {{ section.settings.right_image_offset_right }}px;
+    --wiw-right-img-offset-b: {{ section.settings.right_image_offset_bottom }}px;
     --wiw-h-ff: {{ wiw_h_ff }};
     --wiw-h-fw: {{ section.settings.heading_font_weight }};
     --wiw-h-fs: {{ section.settings.heading_font_size }}px;
@@ -123,6 +126,10 @@
       "default": "<ul><li><strong>Kefey\u00ae was created from a clear belief:</strong><br>Self-care should be effective, intentional, and genuinely enjoyable.</li><li>That principle shaped our every decision - from choosing <strong>concentrated, premium extracts</strong> for faster, more meaningful results, to designing <strong>one focused ritual</strong> instead of many diluted ones, that we already know.</li><li>Because when wellness is thoughtful and well-crafted, <strong>less can truly be more.</strong></li></ul>"
     },
     { "type": "image_picker", "id": "right_image", "label": "Right image" },
+    { "type": "header", "content": "Right image — desktop" },
+    { "type": "range", "id": "right_image_width", "label": "Image width (px)", "min": 120, "max": 600, "step": 10, "default": 310 },
+    { "type": "range", "id": "right_image_offset_right", "label": "Offset from right edge (px)", "min": -120, "max": 300, "step": 4, "default": 0 },
+    { "type": "range", "id": "right_image_offset_bottom", "label": "Offset from bottom edge (px)", "min": -120, "max": 300, "step": 4, "default": 0 },
     { "type": "color", "id": "bg_color", "label": "Background color", "default": "#36B2B2" },
     { "type": "color", "id": "title_bar_color", "label": "Title bar color", "default": "#F8CB34" },
     { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#FFFFFF" },

@@ -42,7 +42,7 @@
 .what-if-wellness__grid {
   display: grid;
   grid-template-columns: minmax(0, min(var(--wiw-left-col, 60%), 60%)) minmax(0, 1fr);
-  align-items: start;
+  align-items: stretch;
   gap: 18px;
   padding-left: 40px;
 }
@@ -51,6 +51,7 @@
   color: var(--wiw-text-color, #ffffff);
   max-width: 100%;
   padding: 6px 8px 10px 0;
+  align-self: start;
 }
 
 .what-if-wellness__intro {
@@ -86,20 +87,20 @@
 }
 
 .what-if-wellness__right {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  height: 100%;
   position: relative;
+  align-self: stretch;
+  min-height: 220px;
 }
 
 .what-if-wellness__product-image {
   display: block;
-  width: min(100%, 310px);
+  position: absolute;
+  right: var(--wiw-right-img-offset-r, 0px);
+  bottom: var(--wiw-right-img-offset-b, 0px);
+  width: var(--wiw-right-img-w, 310px);
+  max-width: 100%;
   height: auto;
-  margin-right: 200px;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .what-if-wellness__decor {
@@ -196,10 +197,16 @@
   }
 
   .what-if-wellness__right {
+    position: relative;
+    align-self: auto;
+    min-height: 0;
+    display: flex;
     justify-content: flex-end;
+    align-items: flex-start;
   }
 
   .what-if-wellness__product-image {
+    position: static;
     width: min(100%, 320px);
     margin-right: -8px;
     margin-top: -8px;
@@ -240,10 +247,14 @@
   }
 
   .what-if-wellness__right {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    min-height: 0;
   }
 
   .what-if-wellness__product-image {
+    position: static;
     width: min(92vw, 290px);
     margin: 0;
   }
