@@ -37,9 +37,11 @@
     --pbg-h-ff: {{ pbg_h_ff }};
     --pbg-h-fw: {{ section.settings.heading_font_weight }};
     --pbg-h-fs: {{ section.settings.heading_font_size }}px;
+    --pbg-h-fs-m: {{ section.settings.heading_font_size_mobile }}px;
     --pbg-t-ff: {{ pbg_t_ff }};
     --pbg-t-fw: {{ section.settings.text_font_weight }};
     --pbg-t-fs: {{ section.settings.text_font_size }}px;
+    --pbg-t-fs-m: {{ section.settings.text_font_size_mobile }}px;
     --pbg-btn-bg: {{ section.settings.button_background }};
     --pbg-btn-color: {{ section.settings.button_text_color }};
     --pbg-btn-fs: {{ section.settings.button_font_size }}px;
@@ -207,7 +209,8 @@
         { "value": "800", "label": "800" }
       ]
     },
-    { "type": "range", "id": "heading_font_size", "label": "Heading font size", "min": 16, "max": 96, "step": 2, "default": 48 },
+    { "type": "range", "id": "heading_font_size", "label": "Heading font size (desktop)", "min": 16, "max": 96, "step": 2, "default": 48 },
+    { "type": "range", "id": "heading_font_size_mobile", "label": "Heading font size (mobile)", "min": 12, "max": 48, "step": 1, "default": 17 },
     {
       "type": "select",
       "id": "text_font_family",
@@ -233,7 +236,8 @@
         { "value": "800", "label": "800" }
       ]
     },
-    { "type": "range", "id": "text_font_size", "label": "Body font size", "min": 10, "max": 32, "step": 1, "default": 20 },
+    { "type": "range", "id": "text_font_size", "label": "Body font size (desktop)", "min": 10, "max": 32, "step": 1, "default": 20 },
+    { "type": "range", "id": "text_font_size_mobile", "label": "Body font size (mobile)", "min": 10, "max": 28, "step": 1, "default": 16 },
     {
       "type": "header",
       "content": "Button"

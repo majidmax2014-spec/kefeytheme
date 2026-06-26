@@ -185,7 +185,7 @@
 
   .purpose-beyond-gummy__heading {
     text-align: right;
-    font-size: clamp(13px, 3.6vw, 17px);
+    font-size: var(--pbg-h-fs-m, var(--pbg-h-fs, 48px));
     line-height: 1.2;
     letter-spacing: 0.01em;
   }
@@ -196,18 +196,10 @@
   }
 
   .purpose-beyond-gummy__body {
+    font-size: var(--pbg-t-fs-m, var(--pbg-t-fs, 20px));
     line-height: 1.58;
     max-width: 100%;
     text-align: left;
-  }
-
-  /* Lead line: first paragraph only when a second paragraph follows */
-  .purpose-beyond-gummy__body > p:first-of-type:not(:last-of-type) {
-    font-size: calc(var(--pbg-t-fs, 20px) * 1.14);
-    font-weight: 500;
-    line-height: 1.28;
-    letter-spacing: -0.015em;
-    margin-bottom: 1.1rem;
   }
 
   .purpose-beyond-gummy__btn-wrap {
@@ -231,7 +223,7 @@
   }
 
   .purpose-beyond-gummy__heading {
-    font-size: clamp(16px, 3.5vw, 17px);
+    font-size: var(--pbg-h-fs-m, var(--pbg-h-fs, 48px));
   }
 
   .purpose-beyond-gummy__text-panel {
@@ -239,13 +231,8 @@
   }
 
   .purpose-beyond-gummy__body {
-    font-size: max(15px, var(--pbg-t-fs, 16px));
+    font-size: var(--pbg-t-fs-m, var(--pbg-t-fs, 20px));
     line-height: 1.6;
-  }
-
-  .purpose-beyond-gummy__body > p:first-of-type:not(:last-of-type) {
-    font-size: calc(var(--pbg-t-fs, 16px) * 1.18);
-    margin-bottom: 1rem;
   }
 
   .purpose-beyond-gummy__btn-wrap {

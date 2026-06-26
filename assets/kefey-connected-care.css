@@ -135,8 +135,11 @@
   }
 
   .kcc__media {
+    width: calc(100% + (var(--kcc-px-m, 20px) * 2));
+    max-width: none;
+    margin-left: calc(-1 * var(--kcc-px-m, 20px));
+    margin-right: calc(-1 * var(--kcc-px-m, 20px));
     margin-bottom: var(--kcc-gap-img-bottom-m, 28px);
-    max-width: var(--kcc-img-max-m, 100%);
   }
 
   .kcc__bottom {
