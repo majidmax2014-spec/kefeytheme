@@ -241,6 +241,7 @@
 .kefey-purchase {
   max-width: 980px;
   margin: 0 auto;
+  scroll-margin-top: calc(var(--header-height, 80px) + 16px);
 }
 
 .kefey-purchase__header {

@@ -167,7 +167,15 @@
 
         <p class="kefey-hero__subheading">Mood Gummies</p>
 
-        <a class="kefey-hero__cta" href="{{ cta_href }}">SHOP NOW</a>
+        <a
+          class="kefey-hero__cta"
+          href="{{ cta_href }}"
+          {% if cta_href contains '#' %}
+            data-kefey-scroll-cta
+          {% endif %}
+        >
+          SHOP NOW
+        </a>
 
         {%- if section.settings.description != blank -%}
           <p class="kefey-hero__description">{{ section.settings.description }}</p>
@@ -236,6 +244,26 @@
   </div>
 </section>
 
+<script>
+  (() => {
+    const scrollLinks = document.querySelectorAll('[data-kefey-scroll-cta]');
+    if (!scrollLinks.length) return;
+
+    scrollLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const href = link.getAttribute('href');
+        if (!href || href.charAt(0) !== '#') return;
+
+        const target = document.querySelector(href);
+        if (!target) return;
+
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Kefey Hero",
@@ -273,7 +301,7 @@
       "label": "Description text",
       "default": "A plant-based, star-shaped gummy designed to support your mood, energy, and daily balance."
     },
-    { "type": "url", "id": "cta_link", "label": "CTA button link" },
+    { "type": "url", "id": "cta_link", "label": "CTA button link", "info": "Leave blank to smoothly scroll to the purchase section below." },
 
     { "type": "header", "content": "Typography - Heading" },
     {
