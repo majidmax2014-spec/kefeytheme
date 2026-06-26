@@ -335,13 +335,49 @@
             "image": "shopify://shop_images/Kefey_Tube_as_a_Pencil_Holder.png",
             "caption": "Kefey Tube as a Pencil Holder"
           }
+        },
+        "social_tiktok": {
+          "type": "social_link",
+          "settings": {
+            "icon": "shopify://shop_images/tiktok.png",
+            "link": "https://www.tiktok.com/@kefey.co",
+            "label": "TikTok"
+          }
+        },
+        "social_instagram": {
+          "type": "social_link",
+          "settings": {
+            "icon": "shopify://shop_images/instagram.png",
+            "link": "https://www.instagram.com/kefey.co/",
+            "label": "Instagram"
+          }
+        },
+        "social_facebook": {
+          "type": "social_link",
+          "settings": {
+            "icon": "shopify://shop_images/facebook_dfeb5c21-8416-4111-a806-3f71880a04e9.png",
+            "link": "https://www.facebook.com/kefey.co",
+            "label": "Facebook"
+          }
+        },
+        "social_snapchat": {
+          "type": "social_link",
+          "settings": {
+            "icon": "shopify://shop_images/snapchat.png",
+            "link": "https://www.snapchat.com/@kefey.co",
+            "label": "Snapchat"
+          }
         }
       },
       "block_order": [
         "item_T6XyY3",
         "item_chajWz",
         "item_eccnpk",
-        "item_nk7Qnx"
+        "item_nk7Qnx",
+        "social_tiktok",
+        "social_instagram",
+        "social_facebook",
+        "social_snapchat"
       ],
       "name": "Luxury sustainability",
       "settings": {
@@ -397,7 +433,11 @@
         "cta_font_size": 16,
         "cta_font_size_mobile": 13,
         "cta_line_height": 90,
-        "cta_color": "#e74f3d"
+        "cta_color": "#e74f3d",
+        "show_social": true,
+        "gap_cta_to_social": 18,
+        "social_icon_size": 32,
+        "social_icon_gap": 14
       }
     },
     "we_refuse_section_NmBR4F": {

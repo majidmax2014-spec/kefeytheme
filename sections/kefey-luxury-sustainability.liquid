@@ -47,6 +47,7 @@
     --kls-gap-body-cards: {{ section.settings.gap_body_to_cards }}px;
     --kls-gap-card-caption: {{ section.settings.gap_card_to_caption }}px;
     --kls-gap-cards-cta: {{ section.settings.gap_cards_to_cta }}px;
+    --kls-gap-cta-social: {{ section.settings.gap_cta_to_social }}px;
     --kls-heading-ff: {{ heading_ff }};
     --kls-heading-fw: {{ section.settings.heading_font_weight }};
     --kls-heading-fs: {{ section.settings.heading_font_size }}px;
@@ -78,6 +79,8 @@
     --kls-divider: {{ section.settings.divider_color }};
     --kls-divider-w: {{ section.settings.divider_width }}px;
     --kls-cta-color: {{ section.settings.cta_color }};
+    --kls-social-size: {{ section.settings.social_icon_size }}px;
+    --kls-social-gap: {{ section.settings.social_icon_gap }}px;
     --kls-bar-color: {{ section.settings.heading_bar_color }};
     --kls-image-height: {{ section.settings.image_height_desktop }}px;
     --kls-image-height-m: {{ section.settings.image_height_mobile }}px;
@@ -100,6 +103,7 @@
 
     <div class="kls__cards" role="list">
       {% for block in section.blocks %}
+        {% if block.type == 'item' %}
         <article class="kls__card" role="listitem" {{ block.shopify_attributes }}>
           {% if block.settings.image != blank %}
             {{
@@ -117,11 +121,60 @@
             <h3 class="kls__card-caption">{{ block.settings.caption }}</h3>
           {% endif %}
         </article>
+        {% endif %}
       {% endfor %}
     </div>
 
-    {% if section.settings.cta_text != blank %}
-      <p class="kls__cta">{{ section.settings.cta_text }}</p>
+    {% if section.settings.cta_text != blank or section.settings.show_social %}
+      <div class="kls__bottom">
+        {% if section.settings.cta_text != blank %}
+          <p class="kls__cta">
+            <span class="kls__cta-text">{{ section.settings.cta_text }}</span>
+          </p>
+        {% endif %}
+
+        {% if section.settings.show_social %}
+          {%- assign kls_has_social = false -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'social_link' and block.settings.link != blank -%}
+              {%- assign kls_has_social = true -%}
+            {%- endif -%}
+          {%- endfor -%}
+
+          {% if kls_has_social %}
+          <div class="kls__social" role="list">
+            {% for block in section.blocks %}
+              {% if block.type == 'social_link' and block.settings.link != blank %}
+                <a
+                  class="kls__social-link"
+                  href="{{ block.settings.link }}"
+                  role="listitem"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="{{ block.settings.label | escape }}"
+                  {{ block.shopify_attributes }}
+                >
+                  {% if block.settings.icon != blank %}
+                    {{
+                      block.settings.icon
+                      | image_url: width: 128
+                      | image_tag:
+                        class: 'kls__social-icon',
+                        loading: 'lazy',
+                        widths: '32, 48, 64, 96, 128',
+                        sizes: '32px',
+                        alt: ''
+                    }}
+                  {% else %}
+                    <span class="kls__social-fallback" aria-hidden="true">{{ block.settings.label | escape | slice: 0, 1 }}</span>
+                  {% endif %}
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% endif %}
+        {% endif %}
+      </div>
     {% endif %}
   </div>
 </section>
@@ -312,7 +365,48 @@
     { "type": "range", "id": "cta_font_size", "label": "CTA size (desktop)", "min": 12, "max": 30, "step": 1, "default": 20 },
     { "type": "range", "id": "cta_font_size_mobile", "label": "CTA size (mobile)", "min": 11, "max": 22, "step": 1, "default": 13 },
     { "type": "range", "id": "cta_line_height", "label": "CTA line-height (%)", "min": 90, "max": 180, "step": 2, "default": 124 },
-    { "type": "color", "id": "cta_color", "label": "Bottom CTA color", "default": "#e74f3d" }
+    { "type": "color", "id": "cta_color", "label": "Bottom CTA color", "default": "#e74f3d" },
+
+    { "type": "header", "content": "Social media icons" },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "label": "Show social icons",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "gap_cta_to_social",
+      "label": "Gap: CTA to social icons",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "social_icon_size",
+      "label": "Social icon size",
+      "min": 20,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "social_icon_gap",
+      "label": "Gap between social icons",
+      "min": 4,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "paragraph",
+      "content": "Add Social icon blocks below. Each block needs an icon image and link."
+    }
   ],
   "blocks": [
     {
@@ -322,6 +416,16 @@
       "settings": [
         { "type": "image_picker", "id": "image", "label": "Image" },
         { "type": "text", "id": "caption", "label": "Caption", "default": "Reusable Shipping Box" }
+      ]
+    },
+    {
+      "type": "social_link",
+      "name": "Social icon",
+      "limit": 8,
+      "settings": [
+        { "type": "image_picker", "id": "icon", "label": "Icon image" },
+        { "type": "url", "id": "link", "label": "Link" },
+        { "type": "text", "id": "label", "label": "Accessible label", "default": "Instagram" }
       ]
     }
   ],
