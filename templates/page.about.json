@@ -246,7 +246,7 @@
         "text_font_size": 16,
         "show_button": true,
         "button_label": "Learn More",
-        "button_link": "",
+        "button_link": "shopify://pages/kefey®-for-good",
         "button_show_arrow": true,
         "button_background": "#49b2b2",
         "button_text_color": "#ffffff",
