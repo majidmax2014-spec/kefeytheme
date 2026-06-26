@@ -18,6 +18,8 @@
         "legal_section_font_family": "heading",
         "legal_body_font_family": "body",
         "legal_title_color": "#70b9be",
+        "legal_title_highlight_color": "#2bb4a7",
+        "legal_title_font_weight": "500",
         "legal_section_heading_color": "#101010",
         "legal_body_color": "#333333",
         "legal_title_font_size": 36,
@@ -218,9 +220,11 @@
         "heading_font_family": "inherit",
         "heading_font_weight": "inherit",
         "heading_font_size": 36,
+        "heading_font_size_mobile": 17,
         "text_font_family": "inherit",
         "text_font_weight": "inherit",
         "text_font_size": 16,
+        "text_font_size_mobile": 16,
         "show_button": false,
         "button_label": "FIND YOUR STAR",
         "button_link": "",
@@ -307,28 +311,28 @@
         "item_T6XyY3": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/shipping-box.png",
+            "image": "shopify://shop_images/kefey_Reusable_Shipping_Box.png",
             "caption": "Reusable Shipping Box - Turns Into a Shelf After Delivery"
           }
         },
         "item_chajWz": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/tuebs-as-tea-container.png",
+            "image": "shopify://shop_images/Kefey_Tube_as_a_Tea_Container.png",
             "caption": "Kefey Tube as a Tea Container"
           }
         },
         "item_eccnpk": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/tube-as-planter.png",
+            "image": "shopify://shop_images/Kefey_Tube_as_a_Mini_Planter.png",
             "caption": "Kefey Tube as a Mini Planter"
           }
         },
         "item_nk7Qnx": {
           "type": "item",
           "settings": {
-            "image": "shopify://shop_images/tube-pen-holder.png",
+            "image": "shopify://shop_images/Kefey_Tube_as_a_Pencil_Holder.png",
             "caption": "Kefey Tube as a Pencil Holder"
           }
         }
