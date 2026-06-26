@@ -88,19 +88,29 @@
 
 .what-if-wellness__right {
   position: relative;
-  align-self: stretch;
-  min-height: 220px;
 }
 
 .what-if-wellness__product-image {
   display: block;
-  position: absolute;
-  right: var(--wiw-right-img-offset-r, 0px);
-  bottom: var(--wiw-right-img-offset-b, 0px);
-  width: var(--wiw-right-img-w, 310px);
+  width: 100%;
   max-width: 100%;
   height: auto;
   margin: 0;
+}
+
+@media screen and (min-width: 990px) {
+  .what-if-wellness__right {
+    align-self: stretch;
+    min-height: 220px;
+  }
+
+  .what-if-wellness__product-image {
+    position: absolute;
+    right: var(--wiw-right-img-offset-r, 0px);
+    bottom: var(--wiw-right-img-offset-b, 0px);
+    width: var(--wiw-right-img-w, 310px);
+    max-width: 100%;
+  }
 }
 
 .what-if-wellness__decor {
@@ -174,43 +184,36 @@
   }
 
   .what-if-wellness__panel {
-    margin-left: 14px;
-    margin-right: 14px;
+    margin-left: 16px;
+    margin-right: 16px;
     min-height: unset;
-    padding: 24px 16px 18px;
+    padding: 20px 16px 18px;
   }
 
   .what-if-wellness__titlebar {
-    width: calc(100% + 16px);
+    width: calc(100% + 32px);
     margin-bottom: 16px;
     margin-left: -16px;
-    padding: 10px 14px 10px 22px;
+    padding: 12px 16px;
   }
 
   .what-if-wellness__grid {
-    grid-template-columns: minmax(0, 58%) minmax(0, 42%);
-    gap: 12px;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding-left: 0;
   }
 
   .what-if-wellness__left {
-    padding-right: 2px;
+    padding: 0;
   }
 
   .what-if-wellness__right {
-    position: relative;
-    align-self: auto;
-    min-height: 0;
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-start;
+    margin-top: 4px;
   }
 
   .what-if-wellness__product-image {
-    position: static;
-    width: min(100%, 320px);
-    margin-right: -8px;
-    margin-top: -8px;
-    margin-bottom: -6px;
+    width: 100%;
+    max-width: 100%;
   }
 
   .what-if-wellness__decor--left {
@@ -221,16 +224,16 @@
 
 @media screen and (max-width: 749px) {
   .what-if-wellness__panel {
-    margin-left: 10px;
-    margin-right: 10px;
-    padding: 18px 12px 14px;
+    margin-left: 16px;
+    margin-right: 16px;
+    padding: 16px 16px 20px;
   }
 
   .what-if-wellness__titlebar {
-    width: calc(100% + 12px);
-    margin-left: -12px;
+    width: calc(100% + 32px);
+    margin-left: -16px;
     margin-bottom: 14px;
-    padding: 9px 12px 9px 18px;
+    padding: 10px 16px;
   }
 
   .what-if-wellness__heading {
@@ -238,25 +241,7 @@
   }
 
   .what-if-wellness__grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .what-if-wellness__left {
-    padding: 0;
-  }
-
-  .what-if-wellness__right {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 0;
-  }
-
-  .what-if-wellness__product-image {
-    position: static;
-    width: min(92vw, 290px);
-    margin: 0;
+    gap: 14px;
   }
 
   .what-if-wellness__decor--right-1,
