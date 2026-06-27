@@ -159,35 +159,35 @@
         "category_orders": {
           "type": "category",
           "settings": {
-            "title": "Orders, Shipping and Returns"
+            "title": "💛 ORDERS, SHIPPING& RETURNS"
           }
         },
         "faq_where_buy": {
           "type": "faq",
           "settings": {
             "question": "Where can I buy Kefey® Mood Gummies?",
-            "answer": "<p>You can order directly from our online store and selected partners where available.</p>"
+            "answer": "<p>You can order directly from our official website: <a href=\"https://kefey.co\">www.kefey.co</a><br/><br/>We also partner with select retail and wellness stores, Contact us at <strong>hello@kefey.co </strong>for updated locations or visit the link bellow: </p><p><span style=\"text-decoration:underline\">Find a Store</span></p>"
           }
         },
         "faq_international_shipping": {
           "type": "faq",
           "settings": {
             "question": "Do you ship internationally?",
-            "answer": "<p>Shipping availability depends on your region. Enter your address at checkout to confirm options.</p>"
+            "answer": "<p>Yes. We ship to most countries worldwide through our global fulfillment network.</p><p>Shipping times and rates vary by destination.</p>"
           }
         },
         "faq_track_order": {
           "type": "faq",
           "settings": {
             "question": "How can I track my order?",
-            "answer": "<p>Once your order ships, you will receive a tracking link by email.</p>"
+            "answer": "<p>Once your order ships, you’ll receive an email with a <strong>tracking link</strong> to follow your package in real time.</p>"
           }
         },
         "faq_return_policy": {
           "type": "faq",
           "settings": {
             "question": "What is your return policy?",
-            "answer": "<p>Please review our current returns policy page for complete terms and eligibility.</p>"
+            "answer": "<p>Unopened products may be returned within 2 days of delivery, in line with health regulations. If you need support, our team is always happy to help. You can Contact us at <strong>hello@kefey.co</strong></p>"
           }
         },
         "category_programs": {
