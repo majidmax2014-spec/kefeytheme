@@ -125,35 +125,35 @@
         "category_ingredients": {
           "type": "category",
           "settings": {
-            "title": "Ingredients and Quality"
+            "title": "🌿 INGREDIENTS &QUALITY"
           }
         },
         "faq_key_ingredients": {
           "type": "faq",
           "settings": {
             "question": "What are the key ingredients in Kefey® Mood Gummies?",
-            "answer": "<p>Each formula is built around thoughtfully selected ingredients. See the product page for complete ingredient lists.</p>"
+            "answer": "<p>Each gummy contains a blend of:</p><p>Ashwagandha Root, Maca Root, Gotu Kola, Korean Red Ginseng, Vervain, Milk Thistle, Moringa, and Zinc Citrate - combined to support daily wellbeing.</p>"
           }
         },
         "faq_what_makes_different": {
           "type": "faq",
           "settings": {
-            "question": "What makes Kefey® different from other gummies?",
-            "answer": "<p>Kefey focuses on concentrated formulas and intentional rituals designed to make everyday wellness feel lighter.</p>"
+            "question": "What makes Kefey® different?",
+            "answer": "<p>Kefey® stands out from the competition:</p><ul><li>High herbal concentration (equivalent to over 11,000 mg per serving).</li><li>100% plant-based, gelatin-free formula.</li><li>Eco-friendly packaging, fully plastic-free and FSC-certified.</li><li>Designed as a joyful daily ritual, not a chore.<br/><br/><br/><br/></li></ul>"
           }
         },
         "faq_artificial_colors": {
           "type": "faq",
           "settings": {
             "question": "Do Kefey® Gummies contain artificial colors or flavors?",
-            "answer": "<p>Ingredient specifics can vary by product. Please check the label and current product listing for exact details.</p>"
+            "answer": "<p><strong>No.</strong> Colors and flavors are derived from fruit and vegetable sources, such as beetroot, which gives our mood gummies their natural red color.</p>"
           }
         },
         "faq_eco_friendly": {
           "type": "faq",
           "settings": {
             "question": "Are Kefey® Mood Gummies eco-friendly?",
-            "answer": "<p>We continue to improve responsible choices across packaging and partnerships. Visit product pages for current updates.</p>"
+            "answer": "<p>Absolutely. Every detail of our packaging was designed with the planet in mind. 💛</p><p>Our tubes are made from <strong>FSC-certified paper</strong>, meaning the paper comes from responsibly managed forests where trees are replanted and ecosystems are protected. 🌳</p><p>We also use <strong>soy-based inks</strong>, made from natural soybeans, renewable, biodegradable, and safer for the environment. They deliver vibrant colors with less environmental impact. 🌿</p><p>And because our packaging is <strong>fully plastic-free</strong>, it can be easily <strong>recycled or reused</strong>, for storing pens, tea herbs, or just keeping a little joy on your desk. ✨</p>"
           }
         },
         "category_orders": {
