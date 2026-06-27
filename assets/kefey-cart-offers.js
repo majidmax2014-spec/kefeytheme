@@ -88,6 +88,12 @@
       if (bundleKey) {
         properties._kefey_bundle = bundleKey;
         properties._kefey_bundle_line = String(Date.now());
+        properties._kefey_purchase_type = 'bundle';
+
+        const packImage = (button.dataset.packImage || '').trim();
+        const packSize = (button.dataset.packSize || '').trim();
+        if (packImage) properties._kefey_pack_image = packImage;
+        if (packSize) properties._kefey_pack_size = packSize;
 
         if (bundleDiscount) {
           properties._kefey_bundle_discount = bundleDiscount;

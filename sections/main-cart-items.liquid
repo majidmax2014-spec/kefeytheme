@@ -216,6 +216,10 @@
                         data-bundle-discount="25"
                         data-variant-id="{{ section.settings.offer_left_variant_id | strip }}"
                         data-quantity="{{ section.settings.offer_left_quantity }}"
+                        data-pack-size="{{ section.settings.offer_left_quantity }}"
+                        {%- if section.settings.offer_left_pack_image != blank -%}
+                          data-pack-image="{{ section.settings.offer_left_pack_image | image_url: width: 820 }}"
+                        {%- endif -%}
                         data-discount-code="{{ section.settings.offer_left_discount_code | strip }}"
                         data-fallback-url="{{ section.settings.offer_left_button_link | default: '#' }}"
                       >
@@ -248,6 +252,10 @@
                         data-bundle-discount="15"
                         data-variant-id="{{ section.settings.offer_right_variant_id | strip }}"
                         data-quantity="{{ section.settings.offer_right_quantity }}"
+                        data-pack-size="{{ section.settings.offer_right_quantity }}"
+                        {%- if section.settings.offer_right_pack_image != blank -%}
+                          data-pack-image="{{ section.settings.offer_right_pack_image | image_url: width: 820 }}"
+                        {%- endif -%}
                         data-discount-code="{{ section.settings.offer_right_discount_code | strip }}"
                         data-fallback-url="{{ section.settings.offer_right_button_link | default: '#' }}"
                       >
@@ -320,7 +328,45 @@
                       assign is_kefey_one_time = true
                     endif
 
-                    assign kefey_pack_image_url = item.properties._kefey_pack_image | default: ''
+                    assign kefey_pack_image_url = item.properties['_kefey_pack_image'] | default: ''
+                    assign kefey_pack_size = item.properties['_kefey_pack_size'] | default: ''
+
+                    if kefey_pack_size == blank
+                      if item.properties['_kefey_bundle'] == 'big-smile'
+                        assign kefey_pack_size = '4'
+                      elsif item.properties['_kefey_bundle'] == 'joyful-trio'
+                        assign kefey_pack_size = '3'
+                      endif
+                    endif
+
+                    if kefey_pack_image_url == blank and kefey_pack_size != blank
+                      assign kefey_pack_image_setting = blank
+
+                      case kefey_pack_size
+                        when '1'
+                          assign kefey_pack_image_setting = section.settings.pack_image_1
+                        when '2'
+                          assign kefey_pack_image_setting = section.settings.pack_image_2
+                        when '3'
+                          assign kefey_pack_image_setting = section.settings.pack_image_3
+                          if kefey_pack_image_setting == blank
+                            assign kefey_pack_image_setting = section.settings.offer_right_pack_image
+                          endif
+                        when '4'
+                          assign kefey_pack_image_setting = section.settings.pack_image_4
+                          if kefey_pack_image_setting == blank
+                            assign kefey_pack_image_setting = section.settings.offer_left_pack_image
+                          endif
+                        when '5'
+                          assign kefey_pack_image_setting = section.settings.pack_image_5
+                        when '6'
+                          assign kefey_pack_image_setting = section.settings.pack_image_6
+                      endcase
+
+                      if kefey_pack_image_setting != blank
+                        assign kefey_pack_image_url = kefey_pack_image_setting | image_url: width: 820
+                      endif
+                    endif
 
                     assign kefey_qty_min = item.variant.quantity_rule.min
                     if is_kefey_one_time
@@ -680,6 +726,12 @@
       "label": "Left offer image"
     },
     {
+      "type": "image_picker",
+      "id": "offer_left_pack_image",
+      "label": "Grab the deal cart line image (4-pack)",
+      "info": "Shown on the cart line item after adding the Big Smile bundle."
+    },
+    {
       "type": "text",
       "id": "offer_left_title",
       "label": "Left offer title",
@@ -714,6 +766,12 @@
       "label": "Right offer image"
     },
     {
+      "type": "image_picker",
+      "id": "offer_right_pack_image",
+      "label": "Joyful trio cart line image (3-pack)",
+      "info": "Shown on the cart line item after adding the Joyful Trio bundle."
+    },
+    {
       "type": "text",
       "id": "offer_right_title",
       "label": "Right offer title",
@@ -741,6 +799,40 @@
       "type": "url",
       "id": "offer_right_button_link",
       "label": "Right offer button link"
+    },
+    {
+      "type": "header",
+      "content": "Pack line images (cart fallback)"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_1",
+      "label": "1 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_2",
+      "label": "2 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_3",
+      "label": "3 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_4",
+      "label": "4 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_5",
+      "label": "5 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_6",
+      "label": "6 pack image"
     },
     {
       "type": "header",
