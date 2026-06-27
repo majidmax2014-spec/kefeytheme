@@ -183,7 +183,7 @@
         "plan_group_id_pack_5": "4301062372",
         "plan_group_id_pack_6": "4403364068",
         "default_selected_pack": "2",
-        "default_purchase_type": "sub",
+        "default_purchase_type": "one",
         "highlight_bar_color": "#f4c820",
         "subscribe_card_bg": "#f4ca2a",
         "onetime_card_bg": "#49afb4",
