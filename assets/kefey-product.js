@@ -340,15 +340,34 @@
     );
   }
 
-  function buildKefeyLineProperties(module, pack, purchaseType) {
+  function buildKefeyLineProperties(module, pack, purchaseType, sellingPlanId) {
     var packSize = purchaseType === 'one' ? 1 : pack;
     var properties = {
       _kefey_purchase_type: purchaseType,
       _kefey_pack_size: String(packSize)
     };
+    if (purchaseType === 'sub' && sellingPlanId != null) {
+      properties._kefey_plan_id = String(sellingPlanId);
+    }
     var imageUrl = getPackImageUrl(module, packSize, purchaseType);
     if (imageUrl) properties._kefey_pack_image = imageUrl;
     return properties;
+  }
+
+  function resolveOneTimeVariant(variants, fallbackVariant) {
+    var available = variants.filter(function (v) {
+      return v && v.available !== false;
+    });
+    var singles = available.filter(function (v) {
+      return getPackFromVariant(v) == null;
+    });
+    var pool = singles.length ? singles : available;
+    pool.sort(function (a, b) {
+      var minA = a.quantity_rule && a.quantity_rule.min != null ? a.quantity_rule.min : 1;
+      var minB = b.quantity_rule && b.quantity_rule.min != null ? b.quantity_rule.min : 1;
+      return minA - minB;
+    });
+    return pool[0] || fallbackVariant;
   }
 
   function normalizePlanGroupId(allocation) {
@@ -632,7 +651,7 @@
       }
 
       function renderOneTimePricing() {
-        var singleVariant = fallbackVariant;
+        var singleVariant = resolveOneTimeVariant(variants, fallbackVariant);
         var singlePrice = Number(singleVariant.price || 0);
         if (oneEachEl) oneEachEl.textContent = formatMoney(singlePrice, moneyFormat);
         return singleVariant;
@@ -699,10 +718,13 @@
 
       if (cta) {
         cta.addEventListener('click', function () {
+          if (cta.dataset.kefeyLoading === 'true') return;
+
           if (state.type === 'one') {
-            var singleVariant = fallbackVariant;
+            var singleVariant = resolveOneTimeVariant(variants, fallbackVariant);
             if (!singleVariant || !singleVariant.id) return;
 
+            cta.dataset.kefeyLoading = 'true';
             cta.disabled = true;
             fetch('/cart/add.js', {
               method: 'POST',
@@ -710,7 +732,7 @@
               body: JSON.stringify({
                 id: Number(singleVariant.id),
                 quantity: 1,
-                properties: buildKefeyLineProperties(module, 1, 'one')
+                properties: buildKefeyLineProperties(module, 1, 'one', null)
               })
             })
               .then(function (res) {
@@ -734,6 +756,7 @@
               })
               .catch(function (err) {
                 console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
+                cta.dataset.kefeyLoading = 'false';
                 cta.disabled = false;
               });
             return;
@@ -742,11 +765,6 @@
           var variant = resolveVariantForPack(state.pack);
           if (!variant || !variant.id) return;
 
-          var payload = {
-            id: Number(variant.id),
-            quantity: 1,
-            properties: buildKefeyLineProperties(module, state.pack, 'sub')
-          };
           var preferredTarget = sellingPlanByPack[state.pack] || null;
           var packDiscount = discountByPack[state.pack];
           if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
@@ -774,7 +792,6 @@
             !chosenAllocation
           ) {
             console.error('[Kefey Purchase] Missing configured subscription target on selected variant for pack', state.pack, preferredTarget);
-            cta.disabled = false;
             return;
           }
 
@@ -809,17 +826,24 @@
                       : null;
                 var recurringAltId = normalizeSellingPlanId(recurringAltRawId);
                 if (recurringAltId != null) {
-                  payload.id = Number(subscriptionVariant.id);
+                  variant = subscriptionVariant;
                   sellingPlanId = recurringAltId;
                   chosenAllocation = recurringOnAlt;
                 }
               }
             }
           }
+
+          var payload = {
+            id: Number(variant.id),
+            quantity: state.pack,
+            properties: buildKefeyLineProperties(module, state.pack, 'sub', sellingPlanId)
+          };
           if (state.type === 'sub' && sellingPlanId != null) {
             payload.selling_plan = sellingPlanId;
           }
 
+          cta.dataset.kefeyLoading = 'true';
           cta.disabled = true;
           fetch('/cart/add.js', {
             method: 'POST',
@@ -847,6 +871,7 @@
             })
             .catch(function (err) {
               console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
+              cta.dataset.kefeyLoading = 'false';
               cta.disabled = false;
             });
         });
