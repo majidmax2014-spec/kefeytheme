@@ -223,15 +223,19 @@
     return '$' + value;
   }
 
+  var KEFEY_PACK_SIZES = [1, 2, 3, 4, 5, 6];
+
   function getPackFromVariant(variant) {
     var source = [];
     if (variant && variant.title) source.push(String(variant.title));
     if (variant && Array.isArray(variant.options)) source = source.concat(variant.options.map(String));
     var haystack = source.join(' ').toLowerCase();
 
-    if (/5\s*[- ]?\s*pack|pack\s*5|\b5\b/.test(haystack)) return 5;
-    if (/3\s*[- ]?\s*pack|pack\s*3|\b3\b/.test(haystack)) return 3;
-    if (/1\s*[- ]?\s*pack|pack\s*1|\b1\b/.test(haystack)) return 1;
+    for (var i = KEFEY_PACK_SIZES.length - 1; i >= 0; i -= 1) {
+      var pack = KEFEY_PACK_SIZES[i];
+      var pattern = new RegExp('\\b' + pack + '\\s*[- ]?\\s*pack|pack\\s*' + pack + '\\b|\\b' + pack + '\\b');
+      if (pattern.test(haystack)) return pack;
+    }
     return null;
   }
 
@@ -249,20 +253,74 @@
   }
 
   function sellingPlanMapFromModule(module) {
-    return {
-      1: {
-        planId: normalizeSellingPlanId(module.getAttribute('data-plan-pack-1')),
-        groupId: normalizeSellingPlanId(module.getAttribute('data-plan-group-pack-1'))
-      },
-      3: {
-        planId: normalizeSellingPlanId(module.getAttribute('data-plan-pack-3')),
-        groupId: normalizeSellingPlanId(module.getAttribute('data-plan-group-pack-3'))
-      },
-      5: {
-        planId: normalizeSellingPlanId(module.getAttribute('data-plan-pack-5')),
-        groupId: normalizeSellingPlanId(module.getAttribute('data-plan-group-pack-5'))
-      }
-    };
+    var map = {};
+    KEFEY_PACK_SIZES.forEach(function (pack) {
+      map[pack] = {
+        planId: normalizeSellingPlanId(module.getAttribute('data-plan-pack-' + pack)),
+        groupId: normalizeSellingPlanId(module.getAttribute('data-plan-group-pack-' + pack))
+      };
+    });
+    return map;
+  }
+
+  function discountMapFromModule(module, displayDiscount) {
+    var map = {};
+    KEFEY_PACK_SIZES.forEach(function (pack) {
+      var raw = parseInt(module.getAttribute('data-discount-pack-' + pack) || '', 10);
+      map[pack] = isNaN(raw) ? displayDiscount : raw;
+    });
+    return map;
+  }
+
+  function buildVariantMapByPack(variants, fallbackVariant) {
+    var map = {};
+    variants.forEach(function (variant) {
+      var pack = getPackFromVariant(variant);
+      if (pack && !map[pack]) map[pack] = variant;
+    });
+
+    var hasMappedPack = KEFEY_PACK_SIZES.some(function (pack) {
+      return Boolean(map[pack]);
+    });
+
+    if (!hasMappedPack) {
+      KEFEY_PACK_SIZES.forEach(function (pack) {
+        map[pack] = fallbackVariant;
+      });
+      return map;
+    }
+
+    KEFEY_PACK_SIZES.forEach(function (pack) {
+      if (map[pack]) return;
+      var nearest = KEFEY_PACK_SIZES.map(function (candidate) {
+        return map[candidate];
+      }).find(Boolean);
+      map[pack] = nearest || fallbackVariant;
+    });
+
+    return map;
+  }
+
+  function usesSingleVariantForAllPacks(map) {
+    var firstVariant = map[1];
+    if (!firstVariant) return false;
+    return KEFEY_PACK_SIZES.every(function (pack) {
+      return map[pack] && map[pack].id === firstVariant.id;
+    });
+  }
+
+  function updatePackImage(module, pack) {
+    var packImageEl = module.querySelector('[data-kefey-pack-image]');
+    if (!packImageEl) return;
+
+    var nextSrc =
+      module.getAttribute('data-pack-image-' + pack) ||
+      module.getAttribute('data-pack-image-1') ||
+      packImageEl.getAttribute('data-fallback-src');
+
+    if (nextSrc && packImageEl.getAttribute('src') !== nextSrc) {
+      packImageEl.setAttribute('src', nextSrc);
+    }
   }
 
   function normalizePlanGroupId(allocation) {
@@ -374,36 +432,15 @@
       if (!product || !Array.isArray(product.variants) || !product.variants.length) return;
 
       var variants = product.variants;
-      var map = {};
-      variants.forEach(function (variant) {
-        var pack = getPackFromVariant(variant);
-        if (pack && !map[pack]) map[pack] = variant;
-      });
-
       var fallbackVariant = variants[0];
-      if (!map[1] && !map[3] && !map[5]) {
-        map[1] = fallbackVariant;
-        map[3] = fallbackVariant;
-        map[5] = fallbackVariant;
-      } else {
-        if (!map[1]) map[1] = map[3] || map[5] || fallbackVariant;
-        if (!map[3]) map[3] = map[1] || map[5] || fallbackVariant;
-        if (!map[5]) map[5] = map[3] || map[1] || fallbackVariant;
-      }
+      var map = buildVariantMapByPack(variants, fallbackVariant);
 
       var defaultPack = parseInt(module.getAttribute('data-default-pack') || '1', 10);
-      if (![1, 3, 5].includes(defaultPack)) defaultPack = 1;
+      if (!KEFEY_PACK_SIZES.includes(defaultPack)) defaultPack = 1;
       var defaultType = module.getAttribute('data-default-purchase-type') === 'one' ? 'one' : 'sub';
       var displayDiscount = parseInt(module.getAttribute('data-discount-percent') || '10', 10);
       if (isNaN(displayDiscount)) displayDiscount = 10;
-      var discountByPack = {
-        1: parseInt(module.getAttribute('data-discount-pack-1') || '0', 10),
-        3: parseInt(module.getAttribute('data-discount-pack-3') || '15', 10),
-        5: parseInt(module.getAttribute('data-discount-pack-5') || '30', 10)
-      };
-      if (isNaN(discountByPack[1])) discountByPack[1] = 0;
-      if (isNaN(discountByPack[3])) discountByPack[3] = 15;
-      if (isNaN(discountByPack[5])) discountByPack[5] = 30;
+      var discountByPack = discountMapFromModule(module, displayDiscount);
       var moneyFormat = module.getAttribute('data-money-format') || '${{amount}}';
       var displayCompareFallback = module.getAttribute('data-display-compare') || '';
       var rawBadgeText = module.getAttribute('data-badge-text') || 'OFF & Cancel Anytime';
@@ -543,6 +580,7 @@
           );
         }
         if (cta) cta.disabled = !variant.available;
+        updatePackImage(module, state.pack);
       }
 
       if (subPlan) {
@@ -560,7 +598,7 @@
       packButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
           var next = parseInt(btn.getAttribute('data-pack') || '1', 10);
-          if (![1, 3, 5].includes(next)) return;
+          if (!KEFEY_PACK_SIZES.includes(next)) return;
           state.pack = next;
           render();
         });
@@ -571,11 +609,7 @@
           var variant = resolveVariantForPack(state.pack);
           if (!variant || !variant.id) return;
 
-          var v1 = map[1];
-          var v3 = map[3];
-          var v5 = map[5];
-          var singleVariantPacks =
-            v1 && v3 && v5 && v1.id === v3.id && v3.id === v5.id;
+          var singleVariantPacks = usesSingleVariantForAllPacks(map);
           var qty = singleVariantPacks ? state.pack : 1;
 
           var payload = { id: Number(variant.id), quantity: qty };

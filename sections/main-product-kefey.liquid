@@ -9,6 +9,24 @@
   if kefey_product == blank
     assign kefey_product = collections.all.products.first
   endif
+
+  assign default_pack_num = section.settings.default_selected_pack | default: '1' | plus: 0
+  assign active_pack_image = section.settings.pack_image_1
+  if default_pack_num == 2 and section.settings.pack_image_2 != blank
+    assign active_pack_image = section.settings.pack_image_2
+  elsif default_pack_num == 3 and section.settings.pack_image_3 != blank
+    assign active_pack_image = section.settings.pack_image_3
+  elsif default_pack_num == 4 and section.settings.pack_image_4 != blank
+    assign active_pack_image = section.settings.pack_image_4
+  elsif default_pack_num == 5 and section.settings.pack_image_5 != blank
+    assign active_pack_image = section.settings.pack_image_5
+  elsif default_pack_num == 6 and section.settings.pack_image_6 != blank
+    assign active_pack_image = section.settings.pack_image_6
+  endif
+  if active_pack_image == blank and kefey_product and kefey_product.featured_image
+    assign active_pack_image = kefey_product.featured_image
+  endif
+  assign active_pack_image_url = active_pack_image | image_url: width: 820
 -%}
 
 <section class="kefey-product kefey-product-main" id="KefeyProductMain-{{ section.id }}">
@@ -21,17 +39,46 @@
       data-default-purchase-type="{{ section.settings.default_purchase_type }}"
       data-discount-percent="{{ section.settings.subscription_discount_percent }}"
       data-discount-pack-1="{{ section.settings.subscription_discount_pack_1 }}"
+      data-discount-pack-2="{{ section.settings.subscription_discount_pack_2 }}"
       data-discount-pack-3="{{ section.settings.subscription_discount_pack_3 }}"
+      data-discount-pack-4="{{ section.settings.subscription_discount_pack_4 }}"
       data-discount-pack-5="{{ section.settings.subscription_discount_pack_5 }}"
+      data-discount-pack-6="{{ section.settings.subscription_discount_pack_6 }}"
       data-badge-text="{{ section.settings.badge_text | escape }}"
       data-display-compare="{{ section.settings.display_compare_price }}"
       data-money-format="{{ shop.money_format | escape }}"
       data-plan-pack-1="{{ section.settings.plan_id_pack_1 }}"
+      data-plan-pack-2="{{ section.settings.plan_id_pack_2 }}"
       data-plan-pack-3="{{ section.settings.plan_id_pack_3 }}"
+      data-plan-pack-4="{{ section.settings.plan_id_pack_4 }}"
       data-plan-pack-5="{{ section.settings.plan_id_pack_5 }}"
+      data-plan-pack-6="{{ section.settings.plan_id_pack_6 }}"
       data-plan-group-pack-1="{{ section.settings.plan_group_id_pack_1 }}"
+      data-plan-group-pack-2="{{ section.settings.plan_group_id_pack_2 }}"
       data-plan-group-pack-3="{{ section.settings.plan_group_id_pack_3 }}"
+      data-plan-group-pack-4="{{ section.settings.plan_group_id_pack_4 }}"
       data-plan-group-pack-5="{{ section.settings.plan_group_id_pack_5 }}"
+      data-plan-group-pack-6="{{ section.settings.plan_group_id_pack_6 }}"
+      {%- if section.settings.pack_image_1 != blank -%}
+        data-pack-image-1="{{ section.settings.pack_image_1 | image_url: width: 820 }}"
+      {%- elsif kefey_product and kefey_product.featured_image -%}
+        data-pack-image-1="{{ kefey_product.featured_image | image_url: width: 820 }}"
+      {%- endif -%}
+      {%- if section.settings.pack_image_2 != blank -%}
+        data-pack-image-2="{{ section.settings.pack_image_2 | image_url: width: 820 }}"
+      {%- endif -%}
+      {%- if section.settings.pack_image_3 != blank -%}
+        data-pack-image-3="{{ section.settings.pack_image_3 | image_url: width: 820 }}"
+      {%- endif -%}
+      {%- if section.settings.pack_image_4 != blank -%}
+        data-pack-image-4="{{ section.settings.pack_image_4 | image_url: width: 820 }}"
+      {%- endif -%}
+      {%- if section.settings.pack_image_5 != blank -%}
+        data-pack-image-5="{{ section.settings.pack_image_5 | image_url: width: 820 }}"
+      {%- endif -%}
+      {%- if section.settings.pack_image_6 != blank -%}
+        data-pack-image-6="{{ section.settings.pack_image_6 | image_url: width: 820 }}"
+      {%- endif -%}
       style="
         --kp-highlight: {{ section.settings.highlight_bar_color }};
         --kp-subscribe-bg: {{ section.settings.subscribe_card_bg }};
@@ -61,16 +108,18 @@
       <div class="kefey-purchase__grid">
         <div class="kefey-purchase__left">
           <div class="kefey-purchase__image-card">
-            {%- if kefey_product and kefey_product.featured_image -%}
+            {%- if active_pack_image != blank -%}
               {{
-                kefey_product.featured_image
+                active_pack_image
                 | image_url: width: 820
                 | image_tag:
                   class: 'kefey-purchase__image',
                   widths: '360, 560, 760, 820',
                   sizes: '(min-width: 990px) 440px, 90vw',
                   loading: 'lazy',
-                  alt: kefey_product.title
+                  alt: kefey_product.title,
+                  data-kefey-pack-image: '',
+                  data-fallback-src: active_pack_image_url
               }}
             {%- endif -%}
           </div>
@@ -98,8 +147,11 @@
             </button>
 
             <div class="kefey-purchase__packs" role="group" aria-label="Pack selector">
+              <button class="kefey-purchase__pack" type="button" data-pack="6">{{ section.settings.pack_label_6 }}</button>
               <button class="kefey-purchase__pack" type="button" data-pack="5">{{ section.settings.pack_label_5 }}</button>
+              <button class="kefey-purchase__pack" type="button" data-pack="4">{{ section.settings.pack_label_4 }}</button>
               <button class="kefey-purchase__pack" type="button" data-pack="3">{{ section.settings.pack_label_3 }}</button>
+              <button class="kefey-purchase__pack" type="button" data-pack="2">{{ section.settings.pack_label_2 }}</button>
               <button class="kefey-purchase__pack" type="button" data-pack="1">{{ section.settings.pack_label_1 }}</button>
             </div>
           </div>
@@ -135,21 +187,40 @@
     { "type": "text", "id": "badge_text", "label": "Top-right badge", "default": "10% OFF & Cancel Anytime" },
     { "type": "header", "content": "Subscription discount by bundle" },
     { "type": "range", "id": "subscription_discount_pack_1", "label": "Bundle 1 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 0, "unit": "%" },
+    { "type": "range", "id": "subscription_discount_pack_2", "label": "Bundle 2 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 10, "unit": "%" },
     { "type": "range", "id": "subscription_discount_pack_3", "label": "Bundle 3 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 15, "unit": "%" },
+    { "type": "range", "id": "subscription_discount_pack_4", "label": "Bundle 4 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 20, "unit": "%" },
     { "type": "range", "id": "subscription_discount_pack_5", "label": "Bundle 5 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 30, "unit": "%" },
+    { "type": "range", "id": "subscription_discount_pack_6", "label": "Bundle 6 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 35, "unit": "%" },
     { "type": "range", "id": "subscription_discount_percent", "label": "Subscription discount % (display)", "min": 0, "max": 50, "step": 1, "default": 10, "unit": "%" },
     { "type": "text", "id": "display_compare_price", "label": "Display compare price fallback", "default": "$75.00" },
     { "type": "text", "id": "fallback_price", "label": "Fallback price text", "default": "$39.00" },
+    { "type": "text", "id": "pack_label_6", "label": "6 pack label", "default": "6 - Pack" },
     { "type": "text", "id": "pack_label_5", "label": "5 pack label", "default": "5 - Pack" },
+    { "type": "text", "id": "pack_label_4", "label": "4 pack label", "default": "4 - Pack" },
     { "type": "text", "id": "pack_label_3", "label": "3 pack label", "default": "3 - Pack" },
+    { "type": "text", "id": "pack_label_2", "label": "2 pack label", "default": "2 - Pack" },
     { "type": "text", "id": "pack_label_1", "label": "1 pack label", "default": "1 - Pack" },
+    { "type": "header", "content": "Pack preview images" },
+    { "type": "image_picker", "id": "pack_image_1", "label": "1 pack image" },
+    { "type": "image_picker", "id": "pack_image_2", "label": "2 pack image" },
+    { "type": "image_picker", "id": "pack_image_3", "label": "3 pack image" },
+    { "type": "image_picker", "id": "pack_image_4", "label": "4 pack image" },
+    { "type": "image_picker", "id": "pack_image_5", "label": "5 pack image" },
+    { "type": "image_picker", "id": "pack_image_6", "label": "6 pack image" },
     { "type": "header", "content": "Recharge plan mapping by pack" },
     { "type": "text", "id": "plan_id_pack_1", "label": "Bundle 1 selling plan ID", "default": "7728955620", "info": "Recharge External plan ID (Shopify selling plan ID)." },
+    { "type": "text", "id": "plan_id_pack_2", "label": "Bundle 2 selling plan ID", "default": "", "info": "Recharge External plan ID (Shopify selling plan ID)." },
     { "type": "text", "id": "plan_id_pack_3", "label": "Bundle 3 selling plan ID", "default": "7728857316", "info": "Recharge External plan ID (Shopify selling plan ID)." },
+    { "type": "text", "id": "plan_id_pack_4", "label": "Bundle 4 selling plan ID", "default": "7838564580", "info": "Recharge External plan ID (Shopify selling plan ID)." },
     { "type": "text", "id": "plan_id_pack_5", "label": "Bundle 5 selling plan ID", "default": "7728890084", "info": "Recharge External plan ID (Shopify selling plan ID)." },
+    { "type": "text", "id": "plan_id_pack_6", "label": "Bundle 6 selling plan ID", "default": "7838597348", "info": "Recharge External plan ID (Shopify selling plan ID)." },
     { "type": "text", "id": "plan_group_id_pack_1", "label": "Bundle 1 plan group ID", "default": "4301095140", "info": "Recharge External plan group ID fallback for matching." },
+    { "type": "text", "id": "plan_group_id_pack_2", "label": "Bundle 2 plan group ID", "default": "", "info": "Recharge External plan group ID fallback for matching." },
     { "type": "text", "id": "plan_group_id_pack_3", "label": "Bundle 3 plan group ID", "default": "4301029604", "info": "Recharge External plan group ID fallback for matching." },
+    { "type": "text", "id": "plan_group_id_pack_4", "label": "Bundle 4 plan group ID", "default": "4403331300", "info": "Recharge External plan group ID fallback for matching." },
     { "type": "text", "id": "plan_group_id_pack_5", "label": "Bundle 5 plan group ID", "default": "4301062372", "info": "Recharge External plan group ID fallback for matching." },
+    { "type": "text", "id": "plan_group_id_pack_6", "label": "Bundle 6 plan group ID", "default": "4403364068", "info": "Recharge External plan group ID fallback for matching." },
     {
       "type": "select",
       "id": "default_selected_pack",
@@ -157,8 +228,11 @@
       "default": "1",
       "options": [
         { "value": "1", "label": "1 pack" },
+        { "value": "2", "label": "2 pack" },
         { "value": "3", "label": "3 pack" },
-        { "value": "5", "label": "5 pack" }
+        { "value": "4", "label": "4 pack" },
+        { "value": "5", "label": "5 pack" },
+        { "value": "6", "label": "6 pack" }
       ]
     },
     {
