@@ -154,26 +154,16 @@
 
         <div class="kefey-purchase__right">
           <div class="kefey-purchase__plans">
-            <div class="kefey-purchase__subscribe-group">
-              <button class="kefey-purchase__plan kefey-purchase__plan--subscribe" type="button" data-plan="sub">
-                <span class="kefey-purchase__badge" data-sub-badge>{{ section.settings.badge_text }}</span>
-                <span class="kefey-purchase__plan-title">{{ section.settings.sub_label }}</span>
-                <span class="kefey-purchase__price-row">
-                  <span class="kefey-purchase__price" data-sub-each>{{ section.settings.fallback_price }}</span>
-                  <span class="kefey-purchase__each">each</span>
-                  <span class="kefey-purchase__total">Total: <span data-sub-total>{{ section.settings.fallback_price }}</span></span>
-                  <span class="kefey-purchase__compare" data-sub-compare>{{ section.settings.display_compare_price }}</span>
-                </span>
-              </button>
-
-              <div class="kefey-purchase__packs" data-subscribe-packs role="group" aria-label="Pack selector">
-                <button class="kefey-purchase__pack" type="button" data-pack="6">{{ section.settings.pack_label_6 }}</button>
-                <button class="kefey-purchase__pack" type="button" data-pack="5">{{ section.settings.pack_label_5 }}</button>
-                <button class="kefey-purchase__pack" type="button" data-pack="4">{{ section.settings.pack_label_4 }}</button>
-                <button class="kefey-purchase__pack" type="button" data-pack="3">{{ section.settings.pack_label_3 }}</button>
-                <button class="kefey-purchase__pack" type="button" data-pack="2">{{ section.settings.pack_label_2 }}</button>
-              </div>
-            </div>
+            <button class="kefey-purchase__plan kefey-purchase__plan--subscribe" type="button" data-plan="sub">
+              <span class="kefey-purchase__badge" data-sub-badge>{{ section.settings.badge_text }}</span>
+              <span class="kefey-purchase__plan-title">{{ section.settings.sub_label }}</span>
+              <span class="kefey-purchase__price-row">
+                <span class="kefey-purchase__price" data-sub-each>{{ section.settings.fallback_price }}</span>
+                <span class="kefey-purchase__each">each</span>
+                <span class="kefey-purchase__total">Total: <span data-sub-total>{{ section.settings.fallback_price }}</span></span>
+                <span class="kefey-purchase__compare" data-sub-compare>{{ section.settings.display_compare_price }}</span>
+              </span>
+            </button>
 
             <button class="kefey-purchase__plan kefey-purchase__plan--one-time" type="button" data-plan="one">
               <span class="kefey-purchase__plan-title">{{ section.settings.onetime_label }}</span>
@@ -182,6 +172,14 @@
                 <span class="kefey-purchase__each">each</span>
               </span>
             </button>
+
+            <div class="kefey-purchase__packs" data-subscribe-packs role="group" aria-label="Pack selector">
+              <button class="kefey-purchase__pack" type="button" data-pack="6">{{ section.settings.pack_label_6 }}</button>
+              <button class="kefey-purchase__pack" type="button" data-pack="5">{{ section.settings.pack_label_5 }}</button>
+              <button class="kefey-purchase__pack" type="button" data-pack="4">{{ section.settings.pack_label_4 }}</button>
+              <button class="kefey-purchase__pack" type="button" data-pack="3">{{ section.settings.pack_label_3 }}</button>
+              <button class="kefey-purchase__pack" type="button" data-pack="2">{{ section.settings.pack_label_2 }}</button>
+            </div>
           </div>
         </div>
       </div>
