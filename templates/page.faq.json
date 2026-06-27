@@ -56,35 +56,70 @@
           "type": "faq",
           "settings": {
             "question": "What are Kefey® Mood Gummies?",
-            "answer": "<p>Kefey® Mood Gummies are daily star-shaped wellness gummies designed to support a lighter, more joyful routine.</p>"
+            "answer": "<p>Kefey® Mood Gummies are plant-based supplements crafted with a concentrated blend of seven herbal extracts (Ashwagandha Root Extract, Gotu Kola Extract, Maca Root Extract, Vervain Extract, Moringa Leaf Extract, Milk Thistle Extract, Korean Red Ginseng Extract) and Zinc Citrate.<br/></p><p>They’re designed to support daily balance, focus, and vitality — delivered in a joyful, star-shaped gummy you’ll actually enjoy taking, everyday.<br/><br/><br/><br/></p>"
           }
         },
         "faq_how_many": {
           "type": "faq",
           "settings": {
             "question": "How many gummies should I take per day?",
-            "answer": "<p>Follow the serving size shown on the product label, or consult your healthcare professional if needed.</p>"
+            "answer": "<p>Take 2 gummies twice daily, preferably with a meal. </p><p>Each serving (2 stars) delivers a concentrated herbal blend equivalent to over <strong>11,000 mg of dried botanicals</strong>.</p>"
           }
         },
         "faq_with_food": {
           "type": "faq",
           "settings": {
             "question": "Do I need to take them with food?",
-            "answer": "<p>You can take them with or without food unless your label states otherwise.</p>"
+            "answer": "<p>You can take Kefey® Mood Gummies <strong>with or without food</strong>. For best absorption and comfort, we recommend taking them <strong>after a light meal</strong>.</p>"
           }
         },
         "faq_vegan": {
           "type": "faq",
           "settings": {
-            "question": "Are Kefey® Mood Gummies vegan or vegetarian?",
-            "answer": "<p>Please refer to the current product pack details for dietary suitability.</p>"
+            "question": "Are Kefey® Mood Gummies vegan?",
+            "answer": "<p>✅ Yes. Kefey® Mood Gummies are 100% vegan friendly and vegetarian.</p><p>They’re made with fruit-derived pectin instead of gelatin — never animal-based ingredients, making them both vegan and vegetarian.</p>"
           }
         },
         "faq_gluten_free": {
           "type": "faq",
           "settings": {
             "question": "Are Kefey® Mood Gummies gluten-free?",
-            "answer": "<p>Check the latest product information on your selected variant page for allergen and dietary claims.</p>"
+            "answer": "<p>✅ Yes! Our gummies are <strong>gluten-free</strong>, <strong>non-GMO</strong>, and produced in an allergen-controlled facility.</p>"
+          }
+        },
+        "faq_pgzjgJ": {
+          "type": "faq",
+          "settings": {
+            "question": "Are Kefey® Mood Gummies halal?",
+            "answer": "<p>✅ Yes! The formula uses halal-certified, plant-based ingredients and contains no gelatin, and absolutely No animal-based products.</p>"
+          }
+        },
+        "faq_aqAHTL": {
+          "type": "faq",
+          "settings": {
+            "question": "Do Kefey® Gummies contain sugar or artificialsweeteners?",
+            "answer": "<p>No added sugar. No artificial sweeteners.<br/></p><p>They’re gently flavored with natural fruit ingredients for a clean, pleasant taste.</p>"
+          }
+        },
+        "faq_jxq8pR": {
+          "type": "faq",
+          "settings": {
+            "question": "Where are Kefey® Mood Gummies made?",
+            "answer": "<p>Our gummies are proudly <strong>manufactured in the USA</strong> in a <strong>cGMP-certified facility and a FDA registered facility,</strong> using high-quality ingredients sourced locally and globally.</p><p>Each batch undergoes testing for quality and consistency.</p>"
+          }
+        },
+        "faq_KDTLGa": {
+          "type": "faq",
+          "settings": {
+            "question": "Are Kefey® Mood Gummies safe for daily use?",
+            "answer": "<p>Yes. Kefey® Mood Gummies are made with natural food-grade plant extracts and minerals suitable for daily use by adults. </p><p>As with any supplement, consult your healthcare professional if you are pregnant, nursing, or taking medication.</p>"
+          }
+        },
+        "faq_GJ3JrN": {
+          "type": "faq",
+          "settings": {
+            "question": "Do Kefey® Mood Gummies contain gelatin?",
+            "answer": "<p>No. Kefey® Mood Gummies are <strong>100% gelatin-free.</strong></p><p>We use <strong>pectin</strong>, a natural ingredient made from fruit peels like apples and citrus, to create their soft, chewy texture.</p><p>It’s plant-based, halal-friendly, and kinder to both you and the planet. 💛</p>"
           }
         },
         "category_ingredients": {
@@ -231,6 +266,11 @@
         "faq_with_food",
         "faq_vegan",
         "faq_gluten_free",
+        "faq_pgzjgJ",
+        "faq_aqAHTL",
+        "faq_jxq8pR",
+        "faq_KDTLGa",
+        "faq_GJ3JrN",
         "category_ingredients",
         "faq_key_ingredients",
         "faq_what_makes_different",
