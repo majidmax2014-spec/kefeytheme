@@ -223,7 +223,7 @@
     return '$' + value;
   }
 
-  var KEFEY_PACK_SIZES = [1, 2, 3, 4, 5, 6];
+  var KEFEY_PACK_SIZES = [2, 3, 4, 5, 6];
 
   function getPackFromVariant(variant) {
     var source = [];
@@ -302,21 +302,28 @@
   }
 
   function usesSingleVariantForAllPacks(map) {
-    var firstVariant = map[1];
+    var firstVariant = map[2];
     if (!firstVariant) return false;
     return KEFEY_PACK_SIZES.every(function (pack) {
       return map[pack] && map[pack].id === firstVariant.id;
     });
   }
 
-  function updatePackImage(module, pack) {
+  function updatePackImage(module, pack, purchaseType) {
     var packImageEl = module.querySelector('[data-kefey-pack-image]');
     if (!packImageEl) return;
 
-    var nextSrc =
-      module.getAttribute('data-pack-image-' + pack) ||
-      module.getAttribute('data-pack-image-1') ||
-      packImageEl.getAttribute('data-fallback-src');
+    var nextSrc;
+    if (purchaseType === 'one') {
+      nextSrc =
+        module.getAttribute('data-single-product-image') ||
+        packImageEl.getAttribute('data-fallback-src');
+    } else {
+      nextSrc =
+        module.getAttribute('data-pack-image-' + pack) ||
+        module.getAttribute('data-single-product-image') ||
+        packImageEl.getAttribute('data-fallback-src');
+    }
 
     if (nextSrc && packImageEl.getAttribute('src') !== nextSrc) {
       packImageEl.setAttribute('src', nextSrc);
@@ -435,8 +442,8 @@
       var fallbackVariant = variants[0];
       var map = buildVariantMapByPack(variants, fallbackVariant);
 
-      var defaultPack = parseInt(module.getAttribute('data-default-pack') || '1', 10);
-      if (!KEFEY_PACK_SIZES.includes(defaultPack)) defaultPack = 1;
+      var defaultPack = parseInt(module.getAttribute('data-default-pack') || '2', 10);
+      if (!KEFEY_PACK_SIZES.includes(defaultPack)) defaultPack = 2;
       var defaultType = module.getAttribute('data-default-purchase-type') === 'one' ? 'one' : 'sub';
       var displayDiscount = parseInt(module.getAttribute('data-discount-percent') || '10', 10);
       if (isNaN(displayDiscount)) displayDiscount = 10;
@@ -463,6 +470,8 @@
       var oneEachEl = module.querySelector('[data-one-each]');
       var cta = module.querySelector('[data-kefey-checkout]');
 
+      var packsEl = module.querySelector('.kefey-purchase__packs');
+
       function resolveVariantForPack(pack) {
         var preferredTarget = sellingPlanByPack[pack] || null;
         var candidate = map[pack] || fallbackVariant;
@@ -475,6 +484,27 @@
       }
 
       function render() {
+        if (state.type === 'one') {
+          var singleVariant = fallbackVariant;
+          var singlePrice = Number(singleVariant.price || 0);
+
+          if (variantInput) variantInput.value = String(singleVariant.id);
+          if (oneEachEl) oneEachEl.textContent = formatMoney(singlePrice, moneyFormat);
+          if (subEachEl) subEachEl.textContent = formatMoney(singlePrice, moneyFormat);
+          if (subTotalEl) subTotalEl.textContent = formatMoney(singlePrice, moneyFormat);
+          if (subCompareEl) subCompareEl.style.display = 'none';
+          if (subBadgeEl) subBadgeEl.style.display = 'none';
+
+          if (subPlan) subPlan.classList.toggle('is-selected', false);
+          if (onePlan) onePlan.classList.toggle('is-selected', true);
+          if (packsEl) packsEl.hidden = true;
+          if (cta) cta.disabled = !singleVariant.available;
+          updatePackImage(module, state.pack, 'one');
+          return;
+        }
+
+        if (packsEl) packsEl.hidden = false;
+
         var variant = resolveVariantForPack(state.pack);
         if (!variant) return;
 
@@ -485,7 +515,7 @@
         var packDiscount = discountByPack[state.pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
         var sellingPlanId = sellingPlanIdForCart(variant, preferredTarget);
-        if (state.pack === 1 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
+        if (state.pack === 2 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
           sellingPlanId = preferredTarget.planId;
         }
         if (sellingPlanId == null && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null))) {
@@ -561,7 +591,7 @@
         }
 
         packButtons.forEach(function (btn) {
-          var btnPack = parseInt(btn.getAttribute('data-pack') || '1', 10);
+          var btnPack = parseInt(btn.getAttribute('data-pack') || '2', 10);
           btn.classList.toggle('is-selected', btnPack === state.pack);
           btn.setAttribute('aria-pressed', btnPack === state.pack ? 'true' : 'false');
         });
@@ -580,7 +610,7 @@
           );
         }
         if (cta) cta.disabled = !variant.available;
-        updatePackImage(module, state.pack);
+        updatePackImage(module, state.pack, state.type);
       }
 
       if (subPlan) {
@@ -597,7 +627,7 @@
       }
       packButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
-          var next = parseInt(btn.getAttribute('data-pack') || '1', 10);
+          var next = parseInt(btn.getAttribute('data-pack') || '2', 10);
           if (!KEFEY_PACK_SIZES.includes(next)) return;
           state.pack = next;
           render();
@@ -606,6 +636,42 @@
 
       if (cta) {
         cta.addEventListener('click', function () {
+          if (state.type === 'one') {
+            var singleVariant = fallbackVariant;
+            if (!singleVariant || !singleVariant.id) return;
+
+            cta.disabled = true;
+            fetch('/cart/add.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+              body: JSON.stringify({ id: Number(singleVariant.id), quantity: 1 })
+            })
+              .then(function (res) {
+                if (!res.ok) {
+                  return res
+                    .json()
+                    .catch(function () {
+                      return {};
+                    })
+                    .then(function (errBody) {
+                      var msg =
+                        (errBody && (errBody.description || errBody.message)) ||
+                        'Failed to add item';
+                      throw new Error(msg);
+                    });
+                }
+                return res.json();
+              })
+              .then(function () {
+                window.location.href = '/cart';
+              })
+              .catch(function (err) {
+                console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
+                cta.disabled = false;
+              });
+            return;
+          }
+
           var variant = resolveVariantForPack(state.pack);
           if (!variant || !variant.id) return;
 
@@ -617,7 +683,7 @@
           var packDiscount = discountByPack[state.pack];
           if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
           var sellingPlanId = sellingPlanIdForCart(variant, preferredTarget);
-          if (state.pack === 1 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
+          if (state.pack === 2 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
             sellingPlanId = preferredTarget.planId;
           }
           var chosenAllocation = matchAllocationByTarget(variant, preferredTarget);
@@ -634,7 +700,7 @@
           }
           if (
             state.type === 'sub' &&
-            state.pack !== 1 &&
+            state.pack !== 2 &&
             preferredTarget &&
             (preferredTarget.planId != null || preferredTarget.groupId != null) &&
             !chosenAllocation
@@ -644,9 +710,9 @@
             return;
           }
 
-          // Pack 1 special case: always prefer a valid monthly subscription add,
-          // even if configured plan id/group id doesn't match this exact variant.
-          if (state.type === 'sub' && state.pack === 1 && !chosenAllocation) {
+          // Pack 2 fallback: prefer a valid monthly subscription add when plan mapping
+          // does not match the selected variant exactly.
+          if (state.type === 'sub' && state.pack === 2 && !chosenAllocation) {
             var recurringOnCurrent = firstRecurringAllocation(variant);
             if (recurringOnCurrent) {
               var recurringRawId =
