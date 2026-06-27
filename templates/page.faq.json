@@ -227,35 +227,35 @@
         "category_more_about": {
           "type": "category",
           "settings": {
-            "title": "More About KEFEY®"
+            "title": "🌎 MORE ABOUT KEFEY®"
           }
         },
         "faq_charity": {
           "type": "faq",
           "settings": {
             "question": "Is Kefey® involved in any sustainability or charity programs?",
-            "answer": "<p>Yes. We support ongoing purpose initiatives and partnerships. Visit our impact pages for details.</p>"
+            "answer": "<p>Yes! As part of our commitment to conscious wellness, Kefey® makes contributions to initiatives such as</p><ul><li><strong>Vitamin Angels</strong> – providing vitamins to children and women in need.</li><li><strong>One Tree Planted</strong> – reforesting the planet, one tree at a time.</li></ul>"
           }
         },
         "faq_other_supplements": {
           "type": "faq",
           "settings": {
-            "question": "Can I take Kefey® Gummies with other supplements?",
-            "answer": "<p>If you use other supplements or medications, consult your healthcare professional first.</p>"
+            "question": "Who can take Kefey® Mood Gummies?",
+            "answer": "<p>Kefey® Mood Gummies are formulated for <strong>adults and aged 16 and above</strong>.</p><p>They are not intended for children unless approved by a healthcare professional.</p>"
           }
         },
         "faq_who_can_take": {
           "type": "faq",
           "settings": {
-            "question": "Who can take Kefey® Mood Gummies?",
-            "answer": "<p>Usage guidance can vary by formula and age group. Follow product labeling instructions.</p>"
+            "question": "Can I take Kefey® Gummies with other supplements?",
+            "answer": "<p>Generally yes, but we recommend consulting your healthcare provider if you are taking other supplements or medications.</p>"
           }
         },
         "faq_athletes": {
           "type": "faq",
           "settings": {
             "question": "Are Kefey® Gummies suitable for athletes?",
-            "answer": "<p>Suitability can depend on your routine and requirements. Review product details before use.</p>"
+            "answer": "<p>Yes! Kefey® Mood Gummies are made with clean, plant-based ingredients and contain <strong>no banned substances</strong>, making them suitable for active individuals and athletes.</p><p>The natural herbal blend — including Maca, Korean Red Ginseng, and Moringa, helps <strong>support daily vitality and balanced energy levels</strong> without caffeine or stimulants. ⚡</p><p>They’re a simple, delicious way to maintain focus and steady energy throughout your day or training routine. 💛<br/><br/><br/><br/></p>"
           }
         }
       },
