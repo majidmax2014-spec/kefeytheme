@@ -193,35 +193,35 @@
         "category_programs": {
           "type": "category",
           "settings": {
-            "title": "Programs and Support"
+            "title": "💌 PROGRAMS & SUPPORT"
           }
         },
         "faq_subscription": {
           "type": "faq",
           "settings": {
             "question": "Do you offer a subscription service?",
-            "answer": "<p>Yes, subscriptions may be available on eligible products. Check product pages for options.</p>"
+            "answer": "<p>Yes! You can subscribe to receive your gummies automatically and <strong>save 20%-30% </strong>on every order.</p><p>Manage your subscription easily from the shop page at any time. You can pause, modify, or cancel anytime.</p>"
           }
         },
         "faq_wholesale": {
           "type": "faq",
           "settings": {
             "question": "Do you have a wholesale or distributor program?",
-            "answer": "<p>Contact our team with your business details and we will guide you through availability.</p>"
+            "answer": "<p>Yes! Kefey® partners with distributors and retailers worldwide.</p><p>If you’d like to join our wholesale program, please visit our Wholesale Page or email <strong>wholesale@kefey.co</strong></p>"
           }
         },
         "faq_payment_secure": {
           "type": "faq",
           "settings": {
             "question": "Is my payment information secure?",
-            "answer": "<p>Yes, checkout is encrypted and processed securely using trusted payment providers.</p>"
+            "answer": "<p>Yes. All transactions on our website are <strong>SSL-encrypted</strong> and processed through trusted payment gateways such as<strong> Shopify, Tabby, PayPal, Apple Pay, and Google Pay</strong>.</p>"
           }
         },
         "faq_cancel_modify": {
           "type": "faq",
           "settings": {
             "question": "Can I cancel or modify my order?",
-            "answer": "<p>Contact support as soon as possible after purchase and we will do our best to help.</p>"
+            "answer": "<p>If your order hasn’t shipped yet, please contact <strong>hello@kefey.co</strong> as soon as possible to modify or cancel it. Once shipped, changes are no longer possible.</p>"
           }
         },
         "category_more_about": {
