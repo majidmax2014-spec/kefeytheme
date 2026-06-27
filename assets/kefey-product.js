@@ -744,7 +744,7 @@
 
           var payload = {
             id: Number(variant.id),
-            quantity: state.pack,
+            quantity: 1,
             properties: buildKefeyLineProperties(module, state.pack, 'sub')
           };
           var preferredTarget = sellingPlanByPack[state.pack] || null;

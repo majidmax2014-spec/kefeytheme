@@ -310,7 +310,16 @@
                       assign is_kefey_purchase = true
                     endif
 
+                    assign is_kefey_sub_purchase = false
+                    if item.properties._kefey_purchase_type == 'sub'
+                      assign is_kefey_sub_purchase = true
+                    endif
+
                     assign kefey_pack_image_url = item.properties._kefey_pack_image | default: ''
+                    assign kefey_display_quantity = item.quantity
+                    if is_kefey_sub_purchase and item.properties._kefey_pack_size != blank
+                      assign kefey_display_quantity = item.properties._kefey_pack_size | plus: 0
+                    endif
 
                     assign bundle_unit_final = item.original_price
                     assign bundle_line_final = item.original_line_price
@@ -431,7 +440,7 @@
                           {%- if item.properties._kefey_bundle != blank -%}
                             {% assign can_update_quantity = false %}
                           {%- endif -%}
-                          {%- if is_kefey_purchase -%}
+                          {%- if is_kefey_sub_purchase -%}
                             {% assign can_update_quantity = false %}
                           {%- endif -%}
                           <button
@@ -447,21 +456,30 @@
                             </span>
                             -
                           </button>
+                          {%- if is_kefey_sub_purchase -%}
+                            <input type="hidden" name="updates[]" value="{{ item.quantity }}">
+                          {%- endif -%}
                           <input
                             class="quantity__input"
                             data-quantity-variant-id="{{ item.variant.id }}"
                             type="number"
-                            name="updates[]"
-                            value="{{ item.quantity }}"
-                            {% # theme-check-disable %}
-                            data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
-                            min="0"
-                            data-min="{{ item.variant.quantity_rule.min }}"
-                            {% if item.variant.quantity_rule.max != null %}
-                              max="{{ item.variant.quantity_rule.max }}"
-                            {% endif %}
-                            step="{{ item.variant.quantity_rule.increment }}"
-                            {% # theme-check-enable %}
+                            {% unless is_kefey_sub_purchase %}
+                              name="updates[]"
+                            {% endunless %}
+                            {%- if is_kefey_sub_purchase -%}
+                              value="{{ kefey_display_quantity }}"
+                            {%- else -%}
+                              value="{{ item.quantity }}"
+                              {% # theme-check-disable %}
+                              data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                              min="0"
+                              data-min="{{ item.variant.quantity_rule.min }}"
+                              {% if item.variant.quantity_rule.max != null %}
+                                max="{{ item.variant.quantity_rule.max }}"
+                              {% endif %}
+                              step="{{ item.variant.quantity_rule.increment }}"
+                              {% # theme-check-enable %}
+                            {%- endif -%}
                             aria-label="{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}"
                             id="Quantity-{{ item.index | plus: 1 }}"
                             data-index="{{ item.index | plus: 1 }}"
