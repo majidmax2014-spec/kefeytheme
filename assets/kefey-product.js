@@ -301,14 +301,6 @@
     return map;
   }
 
-  function usesSingleVariantForAllPacks(map) {
-    var firstVariant = map[2];
-    if (!firstVariant) return false;
-    return KEFEY_PACK_SIZES.every(function (pack) {
-      return map[pack] && map[pack].id === firstVariant.id;
-    });
-  }
-
   function updatePackImage(module, pack, purchaseType) {
     var packImageEl = module.querySelector('[data-kefey-pack-image]');
     if (!packImageEl) return;
@@ -675,10 +667,8 @@
           var variant = resolveVariantForPack(state.pack);
           if (!variant || !variant.id) return;
 
-          var singleVariantPacks = usesSingleVariantForAllPacks(map);
-          var qty = singleVariantPacks ? state.pack : 1;
-
-          var payload = { id: Number(variant.id), quantity: qty };
+          // Bundle size is defined by the Recharge selling plan — always add qty 1.
+          var payload = { id: Number(variant.id), quantity: 1 };
           var preferredTarget = sellingPlanByPack[state.pack] || null;
           var packDiscount = discountByPack[state.pack];
           if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
