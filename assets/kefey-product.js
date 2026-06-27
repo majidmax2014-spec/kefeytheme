@@ -302,7 +302,8 @@
   }
 
   function updatePackImage(module, pack, purchaseType) {
-    var packImageEl = module.querySelector('[data-kefey-pack-image]');
+    var packImageEl =
+      module.querySelector('[data-kefey-pack-image]') || module.querySelector('.kefey-purchase__image');
     if (!packImageEl) return;
 
     var nextSrc;
@@ -317,9 +318,15 @@
         packImageEl.getAttribute('data-fallback-src');
     }
 
-    if (nextSrc && packImageEl.getAttribute('src') !== nextSrc) {
-      packImageEl.setAttribute('src', nextSrc);
-    }
+    if (!nextSrc) return;
+
+    var currentSrc = packImageEl.getAttribute('src') || '';
+    var currentKey = currentSrc.split('?')[0].split('/').pop();
+    var nextKey = nextSrc.split('?')[0].split('/').pop();
+    if (currentKey && nextKey && currentKey === nextKey) return;
+
+    packImageEl.removeAttribute('srcset');
+    packImageEl.setAttribute('src', nextSrc);
   }
 
   function normalizePlanGroupId(allocation) {
@@ -462,7 +469,7 @@
       var oneEachEl = module.querySelector('[data-one-each]');
       var cta = module.querySelector('[data-kefey-checkout]');
 
-      var packsEl = module.querySelector('.kefey-purchase__packs');
+      var packsEl = module.querySelector('[data-subscribe-packs]');
 
       function resolveVariantForPack(pack) {
         var preferredTarget = sellingPlanByPack[pack] || null;
@@ -475,39 +482,18 @@
         return byPlan || candidate;
       }
 
-      function render() {
-        if (state.type === 'one') {
-          var singleVariant = fallbackVariant;
-          var singlePrice = Number(singleVariant.price || 0);
-
-          if (variantInput) variantInput.value = String(singleVariant.id);
-          if (oneEachEl) oneEachEl.textContent = formatMoney(singlePrice, moneyFormat);
-          if (subEachEl) subEachEl.textContent = formatMoney(singlePrice, moneyFormat);
-          if (subTotalEl) subTotalEl.textContent = formatMoney(singlePrice, moneyFormat);
-          if (subCompareEl) subCompareEl.style.display = 'none';
-          if (subBadgeEl) subBadgeEl.style.display = 'none';
-
-          if (subPlan) subPlan.classList.toggle('is-selected', false);
-          if (onePlan) onePlan.classList.toggle('is-selected', true);
-          if (packsEl) packsEl.hidden = true;
-          if (cta) cta.disabled = !singleVariant.available;
-          updatePackImage(module, state.pack, 'one');
-          return;
-        }
-
-        if (packsEl) packsEl.hidden = false;
-
-        var variant = resolveVariantForPack(state.pack);
-        if (!variant) return;
+      function computeSubscribePricing(pack) {
+        var variant = resolveVariantForPack(pack);
+        if (!variant) return null;
 
         var basePrice = Number(variant.price || 0);
         var baseCompare = Number(variant.compare_at_price || 0);
-        var packQty = state.pack;
-        var preferredTarget = sellingPlanByPack[state.pack] || null;
-        var packDiscount = discountByPack[state.pack];
+        var packQty = pack;
+        var preferredTarget = sellingPlanByPack[pack] || null;
+        var packDiscount = discountByPack[pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
         var sellingPlanId = sellingPlanIdForCart(variant, preferredTarget);
-        if (state.pack === 2 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
+        if (pack === 2 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
           sellingPlanId = preferredTarget.planId;
         }
         if (sellingPlanId == null && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null))) {
@@ -516,9 +502,9 @@
 
         var subEach = basePrice;
         var subCompareEach = baseCompare > 0 ? baseCompare : basePrice;
-
         var allocation = null;
-        if (sellingPlanId != null) {
+
+        if (sellingPlanId != null && Array.isArray(variant.selling_plan_allocations)) {
           allocation = matchAllocationByTarget(variant, preferredTarget);
           if (!allocation && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null))) {
             allocation = variant.selling_plan_allocations[0] || null;
@@ -536,9 +522,12 @@
           if (allocation && allocation.price) subEach = Number(allocation.price);
           if (allocation && allocation.compare_at_price) subCompareEach = Number(allocation.compare_at_price);
         }
-        var hasSubscriptionPlan = preferredTarget && (preferredTarget.planId != null || preferredTarget.groupId != null)
-          ? Boolean(allocation)
-          : Boolean(sellingPlanId);
+
+        var hasSubscriptionPlan =
+          preferredTarget && (preferredTarget.planId != null || preferredTarget.groupId != null)
+            ? Boolean(allocation)
+            : Boolean(sellingPlanId);
+
         if (!allocation) {
           subEach = Math.max(0, Math.round(basePrice * (100 - packDiscount) / 100));
         }
@@ -554,18 +543,30 @@
                 : basePrice;
           subCompareTotal = compareEachForDisplay * packQty;
         }
-        var oneEach = basePrice;
 
-        if (variantInput) variantInput.value = String(variant.id);
-        if (subEachEl) subEachEl.textContent = formatMoney(subEach, moneyFormat);
-        if (subTotalEl) subTotalEl.textContent = formatMoney(subTotal, moneyFormat);
-        if (oneEachEl) oneEachEl.textContent = formatMoney(oneEach, moneyFormat);
+        return {
+          variant: variant,
+          packDiscount: packDiscount,
+          subEach: subEach,
+          subTotal: subTotal,
+          subCompareTotal: subCompareTotal,
+          hasSubscriptionPlan: hasSubscriptionPlan,
+          preferredTarget: preferredTarget
+        };
+      }
+
+      function renderSubscribePricing() {
+        var pricing = computeSubscribePricing(state.pack);
+        if (!pricing) return;
+
+        if (subEachEl) subEachEl.textContent = formatMoney(pricing.subEach, moneyFormat);
+        if (subTotalEl) subTotalEl.textContent = formatMoney(pricing.subTotal, moneyFormat);
 
         if (subCompareEl) {
-          if (packDiscount > 0 && subCompareTotal > subTotal) {
-            subCompareEl.textContent = formatMoney(subCompareTotal, moneyFormat);
+          if (pricing.packDiscount > 0 && pricing.subCompareTotal > pricing.subTotal) {
+            subCompareEl.textContent = formatMoney(pricing.subCompareTotal, moneyFormat);
             subCompareEl.style.display = '';
-          } else if (packDiscount > 0 && displayCompareFallback) {
+          } else if (pricing.packDiscount > 0 && displayCompareFallback) {
             subCompareEl.textContent = displayCompareFallback;
             subCompareEl.style.display = '';
           } else {
@@ -574,8 +575,8 @@
         }
 
         if (subBadgeEl) {
-          if (packDiscount > 0) {
-            subBadgeEl.textContent = String(packDiscount) + '% ' + badgeSuffix;
+          if (pricing.packDiscount > 0) {
+            subBadgeEl.textContent = String(pricing.packDiscount) + '% ' + badgeSuffix;
             subBadgeEl.style.display = '';
           } else {
             subBadgeEl.style.display = 'none';
@@ -588,40 +589,88 @@
           btn.setAttribute('aria-pressed', btnPack === state.pack ? 'true' : 'false');
         });
 
-        if (subPlan) subPlan.classList.toggle('is-selected', state.type === 'sub');
-        if (onePlan) onePlan.classList.toggle('is-selected', state.type === 'one');
         if (subPlan) {
-          var planCfg = sellingPlanByPack[state.pack] || null;
-          var planConfigured = Boolean(planCfg && (planCfg.planId != null || planCfg.groupId != null));
-          subPlan.classList.toggle('is-disabled', state.type === 'sub' && planConfigured && !hasSubscriptionPlan);
+          var planConfigured = Boolean(
+            pricing.preferredTarget &&
+              (pricing.preferredTarget.planId != null || pricing.preferredTarget.groupId != null)
+          );
+          subPlan.classList.toggle(
+            'is-disabled',
+            state.type === 'sub' && planConfigured && !pricing.hasSubscriptionPlan
+          );
           subPlan.setAttribute(
             'title',
-            state.type === 'sub' && planConfigured && !hasSubscriptionPlan
+            state.type === 'sub' && planConfigured && !pricing.hasSubscriptionPlan
               ? 'Subscription plan for this pack is not available. Check selling plan ID mapping.'
               : ''
           );
         }
-        if (cta) cta.disabled = !variant.available;
-        updatePackImage(module, state.pack, state.type);
+
+        return pricing;
+      }
+
+      function renderOneTimePricing() {
+        var singleVariant = fallbackVariant;
+        var singlePrice = Number(singleVariant.price || 0);
+        if (oneEachEl) oneEachEl.textContent = formatMoney(singlePrice, moneyFormat);
+        return singleVariant;
+      }
+
+      function render() {
+        var subscribePricing = renderSubscribePricing();
+        var singleVariant = renderOneTimePricing();
+
+        if (state.type === 'one') {
+          if (subPlan) subPlan.classList.toggle('is-selected', false);
+          if (onePlan) onePlan.classList.toggle('is-selected', true);
+          if (packsEl) {
+            packsEl.hidden = true;
+            packsEl.setAttribute('aria-hidden', 'true');
+          }
+          if (variantInput) variantInput.value = String(singleVariant.id);
+          if (cta) cta.disabled = !singleVariant.available;
+          updatePackImage(module, state.pack, 'one');
+          return;
+        }
+
+        if (subPlan) subPlan.classList.toggle('is-selected', true);
+        if (onePlan) onePlan.classList.toggle('is-selected', false);
+        if (packsEl) {
+          packsEl.hidden = false;
+          packsEl.setAttribute('aria-hidden', 'false');
+        }
+
+        if (subscribePricing && subscribePricing.variant) {
+          if (variantInput) variantInput.value = String(subscribePricing.variant.id);
+          if (cta) cta.disabled = !subscribePricing.variant.available;
+        }
+
+        updatePackImage(module, state.pack, 'sub');
       }
 
       if (subPlan) {
         subPlan.addEventListener('click', function () {
+          if (state.type === 'sub') return;
           state.type = 'sub';
           render();
         });
       }
       if (onePlan) {
         onePlan.addEventListener('click', function () {
+          if (state.type === 'one') return;
           state.type = 'one';
           render();
         });
       }
       packButtons.forEach(function (btn) {
-        btn.addEventListener('click', function () {
+        btn.addEventListener('click', function (event) {
+          event.stopPropagation();
           var next = parseInt(btn.getAttribute('data-pack') || '2', 10);
           if (!KEFEY_PACK_SIZES.includes(next)) return;
           state.pack = next;
+          if (state.type !== 'sub') {
+            state.type = 'sub';
+          }
           render();
         });
       });

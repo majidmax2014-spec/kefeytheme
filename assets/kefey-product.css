@@ -406,8 +406,13 @@
   font-weight: var(--kp-p-fw, 700);
 }
 
+.kefey-purchase__subscribe-group {
+  display: grid;
+  gap: 10px;
+}
+
 .kefey-purchase__packs {
-  margin-top: 6px;
+  margin-top: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px 14px;
