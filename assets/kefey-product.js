@@ -329,6 +329,28 @@
     packImageEl.setAttribute('src', nextSrc);
   }
 
+  function getPackImageUrl(module, pack, purchaseType) {
+    if (purchaseType === 'one') {
+      return module.getAttribute('data-single-product-image') || '';
+    }
+    return (
+      module.getAttribute('data-pack-image-' + pack) ||
+      module.getAttribute('data-single-product-image') ||
+      ''
+    );
+  }
+
+  function buildKefeyLineProperties(module, pack, purchaseType) {
+    var packSize = purchaseType === 'one' ? 1 : pack;
+    var properties = {
+      _kefey_purchase_type: purchaseType,
+      _kefey_pack_size: String(packSize)
+    };
+    var imageUrl = getPackImageUrl(module, packSize, purchaseType);
+    if (imageUrl) properties._kefey_pack_image = imageUrl;
+    return properties;
+  }
+
   function normalizePlanGroupId(allocation) {
     if (!allocation) return null;
     var rawGroupId =
@@ -685,7 +707,11 @@
             fetch('/cart/add.js', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-              body: JSON.stringify({ id: Number(singleVariant.id), quantity: 1 })
+              body: JSON.stringify({
+                id: Number(singleVariant.id),
+                quantity: 1,
+                properties: buildKefeyLineProperties(module, 1, 'one')
+              })
             })
               .then(function (res) {
                 if (!res.ok) {
@@ -716,8 +742,11 @@
           var variant = resolveVariantForPack(state.pack);
           if (!variant || !variant.id) return;
 
-          // Bundle size is defined by the Recharge selling plan — always add qty 1.
-          var payload = { id: Number(variant.id), quantity: 1 };
+          var payload = {
+            id: Number(variant.id),
+            quantity: state.pack,
+            properties: buildKefeyLineProperties(module, state.pack, 'sub')
+          };
           var preferredTarget = sellingPlanByPack[state.pack] || null;
           var packDiscount = discountByPack[state.pack];
           if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;

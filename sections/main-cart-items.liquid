@@ -305,6 +305,13 @@
                       assign is_kefey_upsell = true
                     endif
 
+                    assign is_kefey_purchase = false
+                    if item.properties._kefey_purchase_type != blank
+                      assign is_kefey_purchase = true
+                    endif
+
+                    assign kefey_pack_image_url = item.properties._kefey_pack_image | default: ''
+
                     assign bundle_unit_final = item.original_price
                     assign bundle_line_final = item.original_line_price
 
@@ -330,19 +337,31 @@
                     <td>
                       <div class="kefey-cart-product">
                         <div class="cart-item__media">
-                          {% if item.image %}
+                          {%- if kefey_pack_image_url != blank -%}
                             <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
-                            <div class="cart-item__image-container">
+                            <div class="cart-item__image-container kefey-cart-item__image-container">
+                              <img
+                                src="{{ kefey_pack_image_url }}"
+                                class="cart-item__image kefey-cart-item__image"
+                                alt="{{ item.product.title | escape }}"
+                                loading="lazy"
+                                width="92"
+                                height="92"
+                              >
+                            </div>
+                          {%- elsif item.image -%}
+                            <a href="{{ item.url }}" class="cart-item__link" aria-hidden="true" tabindex="-1"> </a>
+                            <div class="cart-item__image-container kefey-cart-item__image-container">
                               <img
                                 src="{{ item.image | image_url: width: 220 }}"
-                                class="cart-item__image"
+                                class="cart-item__image kefey-cart-item__image"
                                 alt="{{ item.image.alt | escape }}"
                                 loading="lazy"
                                 width="92"
-                                height="{{ 92 | divided_by: item.image.aspect_ratio | ceil }}"
+                                height="92"
                               >
                             </div>
-                          {% endif %}
+                          {%- endif -%}
                         </div>
 
                         <div class="cart-item__details">
@@ -410,6 +429,9 @@
                         <quantity-input class="quantity cart-quantity">
                           {% assign can_update_quantity = item.instructions.can_update_quantity | default: true %}
                           {%- if item.properties._kefey_bundle != blank -%}
+                            {% assign can_update_quantity = false %}
+                          {%- endif -%}
+                          {%- if is_kefey_purchase -%}
                             {% assign can_update_quantity = false %}
                           {%- endif -%}
                           <button
