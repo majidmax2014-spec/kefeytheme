@@ -11,11 +11,14 @@ import { DiscountApplicationStrategy } from "../generated/api";
  * @returns {FunctionRunResult}
  */
 export function run(input) {
-  const targets = [];
+  /** @type {FunctionRunResult["discounts"]} */
+  const discounts = [];
 
   for (const line of input.cart.lines) {
-    const discountValue =
-      line.bundleDiscount?.value || line.upsellDiscount?.value || "";
+    const isBundle = Boolean(line.bundleDiscount?.value);
+    const discountValue = isBundle
+      ? line.bundleDiscount?.value
+      : line.upsellDiscount?.value || "";
 
     if (!discountValue) {
       continue;
@@ -31,19 +34,29 @@ export function run(input) {
       continue;
     }
 
-    targets.push({
-      cartLine: {
-        id: line.id,
-      },
+    const rawLabel = isBundle
+      ? line.bundleDiscountLabel?.value
+      : line.upsellDiscountLabel?.value;
+    const message = rawLabel?.trim() || "Kefey offer discount";
+
+    discounts.push({
+      targets: [
+        {
+          cartLine: {
+            id: line.id,
+          },
+        },
+      ],
       value: {
         percentage: {
           value: String(percentage),
         },
       },
+      message,
     });
   }
 
-  if (!targets.length) {
+  if (!discounts.length) {
     return {
       discounts: [],
       discountApplicationStrategy: DiscountApplicationStrategy.First,
@@ -51,12 +64,7 @@ export function run(input) {
   }
 
   return {
-    discounts: [
-      {
-        targets,
-        message: "Kefey offer discount",
-      },
-    ],
+    discounts,
     discountApplicationStrategy: DiscountApplicationStrategy.All,
   };
 }

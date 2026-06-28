@@ -6,7 +6,13 @@ query RunInput {
       bundleDiscount: attribute(key: "_kefey_bundle_discount") {
         value
       }
+      bundleDiscountLabel: attribute(key: "_kefey_bundle_discount_label") {
+        value
+      }
       upsellDiscount: attribute(key: "_kefey_upsell_discount") {
+        value
+      }
+      upsellDiscountLabel: attribute(key: "_kefey_upsell_discount_label") {
         value
       }
       merchandise {
