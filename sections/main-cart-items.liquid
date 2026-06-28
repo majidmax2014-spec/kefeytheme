@@ -216,7 +216,7 @@
                         data-bundle-discount="25"
                         data-variant-id="{{ section.settings.offer_left_variant_id | strip }}"
                         data-quantity="{{ section.settings.offer_left_quantity }}"
-                        data-pack-size="{{ section.settings.offer_left_quantity }}"
+                        data-pack-size="4"
                         {%- if section.settings.offer_left_pack_image != blank -%}
                           data-pack-image="{{ section.settings.offer_left_pack_image | image_url: width: 820 }}"
                         {%- endif -%}
@@ -252,7 +252,7 @@
                         data-bundle-discount="15"
                         data-variant-id="{{ section.settings.offer_right_variant_id | strip }}"
                         data-quantity="{{ section.settings.offer_right_quantity }}"
-                        data-pack-size="{{ section.settings.offer_right_quantity }}"
+                        data-pack-size="3"
                         {%- if section.settings.offer_right_pack_image != blank -%}
                           data-pack-image="{{ section.settings.offer_right_pack_image | image_url: width: 820 }}"
                         {%- endif -%}
@@ -850,7 +850,8 @@
       "max": 20,
       "step": 1,
       "label": "Left offer quantity",
-      "default": 4
+      "default": 1,
+      "info": "Use 1 when the variant represents the full bundle (e.g. Big Smile Bundle)."
     },
     {
       "type": "text",
@@ -870,7 +871,8 @@
       "max": 20,
       "step": 1,
       "label": "Right offer quantity",
-      "default": 3
+      "default": 1,
+      "info": "Use 1 when the variant represents the full bundle (e.g. Joyful Trio Bundle)."
     },
     {
       "type": "text",
