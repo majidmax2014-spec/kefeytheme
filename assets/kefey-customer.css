@@ -1,0 +1,346 @@
+/* Kefey customer account — matches cart / product branding */
+
+.kefey-customer {
+  --kf-cust-accent: #f4ca2a;
+  --kf-cust-accent-dark: #e3b800;
+  --kf-cust-teal: #49afb4;
+  --kf-cust-ink: #111111;
+  --kf-cust-muted: #5a5a5a;
+  --kf-cust-border: #e6e6e6;
+  --kf-cust-card-radius: 16px;
+  font-family: var(--font-body-family);
+  color: var(--kf-cust-ink);
+}
+
+.kefey-customer .page-width {
+  max-width: 1180px;
+}
+
+.kefey-customer__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.kefey-customer__title {
+  margin: 0;
+  font-family: var(--font-heading-family);
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.kefey-customer__title-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.kefey-customer__title-highlight {
+  position: absolute;
+  left: -2%;
+  right: -2%;
+  bottom: 0.08em;
+  height: 0.38em;
+  background: var(--kf-cust-accent);
+  z-index: -1;
+  border-radius: 2px;
+}
+
+.kefey-customer__logout,
+.kefey-customer__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--kf-cust-ink);
+}
+
+.kefey-customer__logout:hover,
+.kefey-customer__back:hover {
+  color: var(--kf-cust-teal);
+}
+
+.kefey-customer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.4rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid var(--kf-cust-border);
+}
+
+.kefey-customer__nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid #888;
+  background: #fff;
+  color: var(--kf-cust-ink);
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.kefey-customer__nav a:hover,
+.kefey-customer__nav a.is-active {
+  background: var(--kf-cust-accent);
+  border-color: #717171;
+}
+
+.kefey-customer__grid {
+  display: grid;
+  gap: 2rem;
+}
+
+@media screen and (min-width: 990px) {
+  .kefey-customer__grid--account {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: start;
+  }
+
+  .kefey-customer__grid--account .kefey-customer__card--orders {
+    grid-column: 1 / -1;
+  }
+}
+
+.kefey-customer__card {
+  background: #fff;
+  border: 1px solid var(--kf-cust-border);
+  border-radius: var(--kf-cust-card-radius);
+  padding: 2rem 2rem 2.2rem;
+  box-shadow: 0 8px 28px rgba(17, 17, 17, 0.04);
+}
+
+.kefey-customer__card h2 {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-heading-family);
+  font-size: clamp(1.6rem, 2vw, 2rem);
+  font-weight: 700;
+}
+
+.kefey-customer__card p {
+  margin: 0 0 1.25rem;
+  font-size: 1.45rem;
+  line-height: 1.5;
+  color: var(--kf-cust-muted);
+}
+
+.kefey-customer__card--subscription {
+  background: linear-gradient(135deg, #fff9e0 0%, #fff 55%);
+  border-color: #f0d96a;
+}
+
+.kefey-customer__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.85rem 1.8rem;
+  border: none;
+  border-radius: 999px;
+  background: var(--kf-cust-ink);
+  color: #fff;
+  font-family: var(--font-heading-family);
+  font-size: 1.35rem;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.kefey-customer__btn:hover {
+  opacity: 0.88;
+  color: #fff;
+}
+
+.kefey-customer__btn--secondary {
+  background: var(--kf-cust-teal);
+}
+
+.kefey-customer__btn--outline {
+  background: #fff;
+  color: var(--kf-cust-ink);
+  border: 1px solid #888;
+}
+
+.kefey-customer__address {
+  font-size: 1.45rem;
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+}
+
+/* Tables */
+.kefey-customer .order-history,
+.kefey-customer .order-details {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1.4rem;
+}
+
+.kefey-customer .order-history thead th,
+.kefey-customer .order-details thead th {
+  padding: 1rem 1.2rem;
+  text-align: left;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--kf-cust-muted);
+  border-bottom: 2px solid var(--kf-cust-border);
+}
+
+.kefey-customer .order-history tbody td,
+.kefey-customer .order-details tbody td {
+  padding: 1.2rem;
+  border-bottom: 1px solid var(--kf-cust-border);
+  vertical-align: top;
+}
+
+.kefey-customer .order-history tbody td:first-of-type a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid #888;
+  background: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.kefey-customer .order-history tbody td:first-of-type a:hover {
+  background: var(--kf-cust-accent);
+  box-shadow: none;
+}
+
+.kefey-customer__empty {
+  font-size: 1.45rem;
+  color: var(--kf-cust-muted);
+}
+
+/* Login / register */
+.kefey-customer--auth {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.kefey-customer--auth .customer form {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.kefey-customer--auth .customer button,
+.kefey-customer--auth .kefey-customer__btn {
+  width: 100%;
+  margin: 2rem 0 1rem;
+}
+
+.kefey-customer--auth .field input {
+  border-radius: 10px;
+}
+
+.kefey-customer--auth a {
+  font-weight: 600;
+}
+
+.kefey-customer--auth hr {
+  margin: 2.5rem 0;
+  border: none;
+  border-top: 1px solid var(--kf-cust-border);
+}
+
+/* Order detail layout */
+.kefey-customer--order .kefey-customer__grid {
+  gap: 2.4rem;
+}
+
+@media screen and (min-width: 990px) {
+  .kefey-customer--order .kefey-customer__grid {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  }
+}
+
+.kefey-customer__meta {
+  font-size: 1.4rem;
+  color: var(--kf-cust-muted);
+  margin-bottom: 1.5rem;
+}
+
+.kefey-customer__meta p {
+  margin: 0 0 0.5rem;
+}
+
+/* Addresses */
+.kefey-customer--addresses .customer.addresses {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.kefey-customer--addresses .customer.addresses > h1 {
+  display: none;
+}
+
+.kefey-customer--addresses .customer.addresses > a:first-of-type {
+  display: none;
+}
+
+.kefey-customer--addresses button[type='button'],
+.kefey-customer--addresses button[type='submit'] {
+  min-height: 44px;
+  padding: 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid #888;
+  background: var(--kf-cust-accent);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.kefey-customer--addresses li > button {
+  margin-right: 0.5rem;
+}
+
+@media screen and (max-width: 749px) {
+  .kefey-customer__card {
+    padding: 1.5rem;
+  }
+
+  .kefey-customer .order-history thead {
+    display: none;
+  }
+
+  .kefey-customer .order-history tbody tr {
+    display: block;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--kf-cust-border);
+  }
+
+  .kefey-customer .order-history tbody td {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0;
+    border: none;
+  }
+
+  .kefey-customer .order-history tbody td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--kf-cust-muted);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+  }
+}

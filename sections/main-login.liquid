@@ -1,4 +1,5 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
+{{ 'kefey-customer.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -18,10 +19,19 @@
   {%- assign hide_shop_login_button = true -%}
 {%- endif -%}
 
-<div class="customer login section-{{ section.id }}-padding">
-  <h1 id="recover" tabindex="-1">
+<div class="customer login kefey-customer kefey-customer--auth section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="kefey-customer__title-wrap" style="text-align: center; margin: 0 auto 1rem;">
+      <h1 class="kefey-customer__title" style="font-size: clamp(2rem, 4vw, 2.5rem);">{{ section.settings.heading | default: 'Welcome back' }}</h1>
+      <span class="kefey-customer__title-highlight" aria-hidden="true"></span>
+    </div>
+    {%- if section.settings.subheading != blank -%}
+      <p style="text-align: center; color: #5a5a5a; font-size: 1.45rem; margin: 0 0 1rem;">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+
+  <h2 id="recover" class="visually-hidden" tabindex="-1">
     {{ 'customer.recover_password.title' | t }}
-  </h1>
+  </h2>
   <div>
     <p>
       {{ 'customer.recover_password.subtext' | t }}
@@ -68,9 +78,9 @@
     {%- endform -%}
   </div>
 
-  <h1 id="login" tabindex="-1">
+  <h2 id="login" class="kefey-customer__title" style="font-size: 2rem; text-align: center; margin-top: 2rem;" tabindex="-1">
     {{ 'customer.login_page.title' | t }}
-  </h1>
+  </h2>
   <div>
     {%- if recover_success == true -%}
       <h3 class="form__message" tabindex="-1" autofocus>
@@ -145,7 +155,7 @@
         </a>
       {%- endif -%}
 
-      <button>
+      <button class="kefey-customer__btn" type="submit">
         {{ 'customer.login_page.sign_in' | t }}
       </button>
 
@@ -167,12 +177,50 @@
       {%- endform -%}
     </div>
   {%- endif -%}
+
+  {%- if section.settings.show_subscription_link and section.settings.subscription_url != blank -%}
+    <p style="text-align: center; margin-top: 2rem;">
+      <a href="{{ section.settings.subscription_url }}" class="kefey-customer__btn kefey-customer__btn--secondary" style="display: inline-flex;">
+        {{ section.settings.subscription_label | default: 'Manage subscriptions' }}
+      </a>
+    </p>
+  {%- endif -%}
+  </div>
 </div>
 
 {% schema %}
 {
   "name": "t:sections.main-login.name",
   "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Welcome back"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Sign in to track orders and manage your subscription."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_subscription_link",
+      "label": "Show manage subscriptions link",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "subscription_label",
+      "label": "Subscription link label",
+      "default": "Manage subscriptions"
+    },
+    {
+      "type": "url",
+      "id": "subscription_url",
+      "label": "Subscription management URL"
+    },
     {
       "type": "checkbox",
       "id": "enable_shop_login_button",

@@ -1,4 +1,5 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
+{{ 'kefey-customer.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -14,10 +15,17 @@
   }
 {%- endstyle -%}
 
-<div class="customer register section-{{ section.id }}-padding">
-  <h1>
-    {{ 'customer.register.title' | t }}
-  </h1>
+<div class="customer register kefey-customer kefey-customer--auth section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="kefey-customer__title-wrap" style="text-align: center; margin: 0 auto 1.5rem;">
+      <h1 class="kefey-customer__title" style="font-size: clamp(2rem, 4vw, 2.5rem);">
+        {{ section.settings.heading | default: 'Create account' }}
+      </h1>
+      <span class="kefey-customer__title-highlight" aria-hidden="true"></span>
+    </div>
+    {%- if section.settings.subheading != blank -%}
+      <p style="text-align: center; color: #5a5a5a; font-size: 1.45rem; margin: 0 0 1rem;">{{ section.settings.subheading }}</p>
+    {%- endif -%}
   {%- form 'create_customer', novalidate: 'novalidate' -%}
     {%- if form.errors -%}
       <h2 class="form__message" tabindex="-1" autofocus>
@@ -127,16 +135,29 @@
         {{ form.errors.messages.password }}.
       </span>
     {%- endif -%}
-    <button>
+    <button class="kefey-customer__btn" type="submit">
       {{ 'customer.register.submit' | t }}
     </button>
   {%- endform -%}
+  </div>
 </div>
 
 {% schema %}
 {
   "name": "t:sections.main-register.name",
   "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Create account"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Track orders and manage your Mood Gummies subscription."
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"

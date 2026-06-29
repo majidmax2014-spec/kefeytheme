@@ -1,6 +1,10 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
+{{ 'kefey-customer.css' | asset_url | stylesheet_tag }}
 
-<script src="{{ 'customer.js' | asset_url }}" defer></script>
+{%- liquid
+  assign subscription_url = section.settings.subscription_url | default: '/tools/recurring/login'
+  assign subscription_label = section.settings.subscription_label | default: 'Manage subscriptions'
+-%}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -16,12 +20,26 @@
   }
 {%- endstyle -%}
 
+<script src="{{ 'customer.js' | asset_url }}" defer></script>
+
 {%- paginate customer.addresses by 5 -%}
-  <div class="customer addresses section-{{ section.id }}-padding" data-customer-addresses>
-    <h1>{{ 'customer.addresses.title' | t }}</h1>
-    <a href="{{ routes.account_url }}">
-      {{ 'customer.account.return' | t }}
-    </a>
+  <div class="kefey-customer kefey-customer--addresses section-{{ section.id }}-padding">
+    <div class="page-width">
+      <div class="kefey-customer__header">
+        <div class="kefey-customer__title-wrap">
+          <h1 class="kefey-customer__title">{{ 'customer.addresses.title' | t }}</h1>
+          <span class="kefey-customer__title-highlight" aria-hidden="true"></span>
+        </div>
+        <a href="{{ routes.account_url }}" class="kefey-customer__back">{{ 'customer.account.return' | t }}</a>
+      </div>
+
+      {% render 'kefey-customer-nav',
+        subscription_url: subscription_url,
+        subscription_label: subscription_label,
+        active_page: 'addresses'
+      %}
+
+  <div class="customer addresses kefey-customer__card" data-customer-addresses>
 
     <div data-address>
       <button
@@ -380,6 +398,8 @@
       {%- endif -%}
     {%- endif -%}
   </div>
+    </div>
+  </div>
 {%- endpaginate -%}
 
 <script>
@@ -392,6 +412,17 @@
 {
   "name": "t:sections.main-addresses.name",
   "settings": [
+    {
+      "type": "text",
+      "id": "subscription_label",
+      "label": "Subscription nav label",
+      "default": "Manage subscriptions"
+    },
+    {
+      "type": "url",
+      "id": "subscription_url",
+      "label": "Subscription management URL"
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"

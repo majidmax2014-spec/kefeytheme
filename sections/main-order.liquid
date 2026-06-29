@@ -1,4 +1,10 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
+{{ 'kefey-customer.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign subscription_url = section.settings.subscription_url | default: '/tools/recurring/login'
+  assign subscription_label = section.settings.subscription_label | default: 'Manage subscriptions'
+-%}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -14,22 +20,33 @@
   }
 {%- endstyle -%}
 
-<div class="customer order section-{{ section.id }}-padding">
-  <div>
-    <h1 class="customer__title">{{ 'customer.account.title' | t }}</h1>
-    <a href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a>
-  </div>
+<div class="customer order kefey-customer kefey-customer--order section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="kefey-customer__header">
+      <div class="kefey-customer__title-wrap">
+        <h1 class="kefey-customer__title">{{ 'customer.order.title' | t: name: order.name }}</h1>
+        <span class="kefey-customer__title-highlight" aria-hidden="true"></span>
+      </div>
+      <a href="{{ routes.account_url }}" class="kefey-customer__back">{{ 'customer.account.return' | t }}</a>
+    </div>
 
-  <div>
-    <div>
-      <h2>{{ 'customer.order.title' | t: name: order.name }}</h2>
-      {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
-      <p>{{ 'customer.order.date_html' | t: date: order_date }}</p>
-      {%- if order.cancelled -%}
-        {%- assign cancelled_at = order.cancelled_at | time_tag: format: 'date_at_time' -%}
-        <p>{{ 'customer.order.cancelled_html' | t: date: cancelled_at }}</p>
-        <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason_label }}</p>
-      {%- endif -%}
+    {% render 'kefey-customer-nav',
+      subscription_url: subscription_url,
+      subscription_label: subscription_label,
+      active_page: 'orders'
+    %}
+
+    <div class="kefey-customer__grid">
+      <div class="kefey-customer__card">
+        <div class="kefey-customer__meta">
+          {%- assign order_date = order.created_at | time_tag: format: 'date_at_time' -%}
+          <p>{{ 'customer.order.date_html' | t: date: order_date }}</p>
+          {%- if order.cancelled -%}
+            {%- assign cancelled_at = order.cancelled_at | time_tag: format: 'date_at_time' -%}
+            <p>{{ 'customer.order.cancelled_html' | t: date: cancelled_at }}</p>
+            <p>{{ 'customer.order.cancelled_reason' | t: reason: order.cancel_reason_label }}</p>
+          {%- endif -%}
+        </div>
 
       <table role="table" class="order-details">
         <caption class="visually-hidden">
@@ -303,23 +320,25 @@
           </tr>
         </tfoot>
       </table>
-    </div>
-    <div>
-      <div>
-        <h2>{{ 'customer.order.billing_address' | t }}</h2>
-        <p>
-          <strong>{{ 'customer.order.payment_status' | t }}:</strong>
-          {{ order.financial_status_label }}
-        </p>
-        {{ order.billing_address | format_address }}
       </div>
+
       <div>
-        <h2>{{ 'customer.order.shipping_address' | t }}</h2>
-        <p>
-          <strong>{{ 'customer.order.fulfillment_status' | t }}:</strong>
-          {{ order.fulfillment_status_label }}
-        </p>
-        {{ order.shipping_address | format_address }}
+        <div class="kefey-customer__card">
+          <h2>{{ 'customer.order.billing_address' | t }}</h2>
+          <p>
+            <strong>{{ 'customer.order.payment_status' | t }}:</strong>
+            {{ order.financial_status_label }}
+          </p>
+          <div class="kefey-customer__address">{{ order.billing_address | format_address }}</div>
+        </div>
+        <div class="kefey-customer__card" style="margin-top: 2rem;">
+          <h2>{{ 'customer.order.shipping_address' | t }}</h2>
+          <p>
+            <strong>{{ 'customer.order.fulfillment_status' | t }}:</strong>
+            {{ order.fulfillment_status_label }}
+          </p>
+          <div class="kefey-customer__address">{{ order.shipping_address | format_address }}</div>
+        </div>
       </div>
     </div>
   </div>
@@ -329,6 +348,17 @@
 {
   "name": "t:sections.main-order.name",
   "settings": [
+    {
+      "type": "text",
+      "id": "subscription_label",
+      "label": "Subscription nav label",
+      "default": "Manage subscriptions"
+    },
+    {
+      "type": "url",
+      "id": "subscription_url",
+      "label": "Subscription management URL"
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"

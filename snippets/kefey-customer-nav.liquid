@@ -1,0 +1,13 @@
+{%- liquid
+  assign subscription_url = subscription_url | default: '/tools/recurring/login'
+  assign subscription_label = subscription_label | default: 'Manage subscriptions'
+  assign active_page = active_page | default: 'orders'
+-%}
+
+<nav class="kefey-customer__nav" aria-label="Account navigation">
+  <a href="{{ routes.account_url }}"{% if active_page == 'orders' %} class="is-active"{% endif %}>{{ 'customer.orders.title' | t }}</a>
+  {%- if subscription_url != blank -%}
+    <a href="{{ subscription_url }}"{% if active_page == 'subscriptions' %} class="is-active"{% endif %}>{{ subscription_label }}</a>
+  {%- endif -%}
+  <a href="{{ routes.account_addresses_url }}"{% if active_page == 'addresses' %} class="is-active"{% endif %}>{{ 'customer.account.view_addresses' | t }}</a>
+</nav>

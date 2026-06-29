@@ -1,14 +1,50 @@
 {
   "sections": {
+    "header_banner_order": {
+      "type": "header-banner",
+      "name": "Header Banner",
+      "settings": {
+        "background_image": "shopify://shop_images/cart-desktop.png",
+        "bg_image_mobile": "shopify://shop_images/cart-mobile_4b3d5cea-28a3-4294-8113-d73e08af7a81.png",
+        "heading": "Order Details",
+        "subheading": "View items, shipping, and payment for this order.",
+        "subheading_richtext": "",
+        "hb_heading_ff": "heading",
+        "hb_heading_fw": "700",
+        "hb_heading_fs": 46,
+        "hb_desc_ff": "body",
+        "hb_desc_fw": "500",
+        "hb_desc_fs": 22,
+        "hb_heading_fs_mobile": 32,
+        "hb_desc_fs_mobile": 18,
+        "hb_desc_strong_weight": "700",
+        "banner_height_desktop": 360,
+        "banner_height_mobile": 320,
+        "content_max_width": 760,
+        "content_alignment": "left",
+        "content_padding_x": 64,
+        "overlay_enable": true,
+        "overlay_color": "#000000",
+        "overlay_opacity": 24,
+        "overlay_opacity_mobile": 0,
+        "mobile_vertical_align": "top",
+        "mobile_content_padding_top": 44,
+        "mobile_content_padding_x": 22,
+        "mobile_text_alignment": "left",
+        "mobile_image_anchor": "bottom"
+      }
+    },
     "main": {
       "type": "main-order",
       "settings": {
+        "subscription_label": "Manage subscriptions",
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 48
       }
     }
   },
   "order": [
+    "header_banner_order",
     "main"
   ]
 }
