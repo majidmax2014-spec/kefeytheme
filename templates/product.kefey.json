@@ -928,8 +928,8 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
-            "customer_name": "Maya"
+            "review_text": "<p>I love that it supports focus without making me anxious. It feels gentle and smart.</p>",
+            "customer_name": "Rashi"
           }
         },
         "testimonial_xNcVLR": {
@@ -954,14 +954,6 @@
             "rating": 5,
             "review_text": "<p>I like that it replaces multiple supplements. My routine feels lighter and more organized.</p>",
             "customer_name": "Michael S."
-          }
-        },
-        "testimonial_kFr8M7": {
-          "type": "testimonial",
-          "settings": {
-            "rating": 5,
-            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
-            "customer_name": "Maya"
           }
         },
         "testimonial_JckTUY": {
@@ -1076,6 +1068,14 @@
             "customer_name": "Suzi"
           }
         },
+        "testimonial_kFr8M7": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>The tube is too nice to throw away. I refilled it with clips and still smile when I see it.</p>",
+            "customer_name": "Yara"
+          }
+        },
         "testimonial_pW6kEC": {
           "type": "testimonial",
           "settings": {
@@ -1090,7 +1090,6 @@
         "testimonial_xNcVLR",
         "testimonial_nxWRkW",
         "testimonial_UbFCiF",
-        "testimonial_kFr8M7",
         "testimonial_JckTUY",
         "testimonial_TVBaF3",
         "testimonial_8ab4tc",
@@ -1105,6 +1104,7 @@
         "testimonial_dcXxNE",
         "testimonial_KTCBCa",
         "testimonial_3r9Bmj",
+        "testimonial_kFr8M7",
         "testimonial_pW6kEC"
       ],
       "settings": {
