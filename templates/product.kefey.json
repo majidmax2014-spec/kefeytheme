@@ -157,7 +157,7 @@
         "subscription_discount_pack_3": 15,
         "subscription_discount_pack_4": 25,
         "subscription_discount_pack_5": 30,
-        "subscription_discount_pack_6": 35,
+        "subscription_discount_pack_6": 30,
         "subscription_discount_percent": 10,
         "display_compare_price": "$75.00",
         "fallback_price": "$39.00",

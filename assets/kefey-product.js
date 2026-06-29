@@ -223,7 +223,7 @@
     return '$' + value;
   }
 
-  var KEFEY_PACK_SIZES = [2, 3, 4, 5, 6];
+  var KEFEY_PACK_SIZES = [2, 4, 6];
 
   function getPackFromVariant(variant) {
     var source = [];

@@ -216,7 +216,7 @@
                         data-bundle-discount="25"
                         data-variant-id="{{ section.settings.offer_left_variant_id | strip }}"
                         data-quantity="{{ section.settings.offer_left_quantity }}"
-                        data-pack-size="4"
+                        data-pack-size="5"
                         {%- if section.settings.offer_left_pack_image != blank -%}
                           data-pack-image="{{ section.settings.offer_left_pack_image | image_url: width: 820 }}"
                         {%- endif -%}
@@ -333,7 +333,7 @@
 
                     if kefey_pack_size == blank
                       if item.properties['_kefey_bundle'] == 'big-smile'
-                        assign kefey_pack_size = '4'
+                        assign kefey_pack_size = '5'
                       elsif item.properties['_kefey_bundle'] == 'joyful-trio'
                         assign kefey_pack_size = '3'
                       endif
@@ -359,6 +359,9 @@
                           endif
                         when '5'
                           assign kefey_pack_image_setting = section.settings.pack_image_5
+                          if kefey_pack_image_setting == blank
+                            assign kefey_pack_image_setting = section.settings.offer_left_pack_image
+                          endif
                         when '6'
                           assign kefey_pack_image_setting = section.settings.pack_image_6
                       endcase
@@ -728,7 +731,7 @@
     {
       "type": "image_picker",
       "id": "offer_left_pack_image",
-      "label": "Grab the deal cart line image (4-pack)",
+      "label": "Grab the deal cart line image (5-pack)",
       "info": "Shown on the cart line item after adding the Big Smile bundle."
     },
     {
@@ -741,7 +744,7 @@
       "type": "text",
       "id": "offer_left_line1",
       "label": "Left offer line 1",
-      "default": "Buy 4 Mood Gummies & SAVE 25%"
+      "default": "Buy 5 Mood Gummies & SAVE 25%"
     },
     {
       "type": "text",
@@ -850,8 +853,8 @@
       "max": 20,
       "step": 1,
       "label": "Left offer quantity",
-      "default": 4,
-      "info": "Big Smile Bundle: 4 tubes per add."
+      "default": 5,
+      "info": "Big Smile Bundle: 5 tubes per add."
     },
     {
       "type": "text",
