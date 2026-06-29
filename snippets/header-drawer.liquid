@@ -6,9 +6,7 @@
 {% endcomment %}
 
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
-  {%- liquid
-    assign header_shop_product = collections.all.products.first
-  -%}
+  {%- render 'kefey-shop-link-url' -%}
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
       class="header__icon header__icon--menu header__icon--summary link focus-inset"
@@ -32,8 +30,8 @@
                     assign is_shop_link = true
                   endif
                   assign link_url = link.url
-                  if is_shop_link and header_shop_product
-                    assign link_url = header_shop_product.url
+                  if is_shop_link and kefey_shop_url != blank
+                    assign link_url = kefey_shop_url
                   endif
                 -%}
                 <li>

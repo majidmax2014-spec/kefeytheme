@@ -1,0 +1,15 @@
+{% comment %}
+  Resolves the product URL for nav links titled "Shop".
+  Expects section.settings.shop_product_handle (optional).
+{% endcomment %}
+{%- liquid
+  assign kefey_shop_url = blank
+  assign kefey_shop_handle = section.settings.shop_product_handle | default: 'kefey-mood-gummies' | strip | handleize
+
+  if kefey_shop_handle != blank
+    assign kefey_shop_product = all_products[kefey_shop_handle]
+    if kefey_shop_product != blank
+      assign kefey_shop_url = kefey_shop_product.url
+    endif
+  endif
+-%}

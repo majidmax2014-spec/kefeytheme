@@ -1,14 +1,16 @@
 {%- liquid
+  assign product_handle = section.settings.product_handle | default: 'kefey-mood-gummies' | strip | handleize
   assign target_url = section.settings.product_url
-  assign fallback_handle = section.settings.product_handle | handleize
-  if fallback_handle == blank and collections.all.products.first
-    assign fallback_handle = collections.all.products.first.handle
-  endif
+  assign redirect_product = all_products[product_handle]
 
-  if target_url == blank and fallback_handle != blank
-    assign target_url = '/products/' | append: fallback_handle
+  if target_url == blank and redirect_product != blank
+    assign target_url = redirect_product.url
   endif
 -%}
+
+{%- if target_url != blank -%}
+  <meta http-equiv="refresh" content="0; url={{ target_url }}">
+{%- endif -%}
 
 <section class="page-width" style="padding: 60px 0; text-align: center;">
   <p>Redirecting to product...</p>

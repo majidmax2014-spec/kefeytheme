@@ -2,7 +2,9 @@
   "sections": {
     "redirect": {
       "type": "redirect-to-single-product",
-      "settings": {}
+      "settings": {
+        "product_handle": "kefey-mood-gummies"
+      }
     }
   },
   "order": [

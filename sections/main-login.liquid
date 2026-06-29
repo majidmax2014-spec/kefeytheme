@@ -19,6 +19,12 @@
   {%- assign hide_shop_login_button = true -%}
 {%- endif -%}
 
+{%- if customer -%}
+  <script>
+    window.location.replace({{ routes.account_url | json }});
+  </script>
+{%- endif -%}
+
 <div class="customer login kefey-customer kefey-customer--auth section-{{ section.id }}-padding">
   <div class="page-width">
     <div class="kefey-customer__title-wrap" style="text-align: center; margin: 0 auto 1rem;">
@@ -91,6 +97,7 @@
       </h3>
     {%- endif -%}
     {%- form 'customer_login', novalidate: 'novalidate' -%}
+      <input type="hidden" name="return_to" value="{{ routes.account_url }}">
       {%- if form.errors -%}
         <h2 class="form__message" tabindex="-1" autofocus>
           <span class="visually-hidden">{{ 'accessibility.error' | t }} </span>

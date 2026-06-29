@@ -5,9 +5,7 @@
   {% render 'header-dropdown-menu' %}
 {% endcomment %}
 
-{%- liquid
-  assign header_shop_product = collections.all.products.first
--%}
+{%- render 'kefey-shop-link-url' -%}
 
 <nav class="header__inline-menu">
   <ul class="list-menu list-menu--inline" role="list">
@@ -19,8 +17,8 @@
           assign is_shop_link = true
         endif
         assign link_url = link.url
-        if is_shop_link and header_shop_product
-          assign link_url = header_shop_product.url
+        if is_shop_link and kefey_shop_url != blank
+          assign link_url = kefey_shop_url
         endif
       -%}
       <li>
