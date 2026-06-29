@@ -340,7 +340,7 @@
           "type": "social_link",
           "settings": {
             "icon": "shopify://shop_images/tiktok.png",
-            "link": "https://www.tiktok.com/@kefey.co",
+            "link": "https://www.tiktok.com/@kefey.us",
             "label": "TikTok"
           }
         },
@@ -356,7 +356,7 @@
           "type": "social_link",
           "settings": {
             "icon": "shopify://shop_images/facebook_dfeb5c21-8416-4111-a806-3f71880a04e9.png",
-            "link": "https://www.facebook.com/kefey.co",
+            "link": "https://www.facebook.com/kefey.usa",
             "label": "Facebook"
           }
         },
