@@ -3,7 +3,8 @@
     "redirect": {
       "type": "redirect-to-single-product",
       "settings": {
-        "product_handle": "kefey-mood-gummies"
+        "product_handle": "mood-gummies",
+        "product_url": "/products/mood-gummies"
       }
     }
   },

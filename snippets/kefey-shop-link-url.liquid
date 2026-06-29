@@ -4,12 +4,14 @@
 {% endcomment %}
 {%- liquid
   assign kefey_shop_url = blank
-  assign kefey_shop_handle = section.settings.shop_product_handle | default: 'kefey-mood-gummies' | strip | handleize
+  assign kefey_shop_handle = section.settings.shop_product_handle | default: 'mood-gummies' | strip | handleize
 
   if kefey_shop_handle != blank
     assign kefey_shop_product = all_products[kefey_shop_handle]
     if kefey_shop_product != blank
       assign kefey_shop_url = kefey_shop_product.url
+    else
+      assign kefey_shop_url = '/products/' | append: kefey_shop_handle
     endif
   endif
 -%}

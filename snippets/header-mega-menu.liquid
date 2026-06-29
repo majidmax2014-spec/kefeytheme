@@ -13,7 +13,11 @@
       {%- liquid
         assign is_shop_link = false
         assign shop_title = link.title | downcase | strip
+        assign link_path = link.url | downcase
         if shop_title == 'shop'
+          assign is_shop_link = true
+        endif
+        if link_path contains '/collections/all' or link_path contains '/collections/frontpage'
           assign is_shop_link = true
         endif
         assign link_url = link.url
