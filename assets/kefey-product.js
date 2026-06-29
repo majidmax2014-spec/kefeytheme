@@ -560,18 +560,21 @@
             var allocId = normalizeSellingPlanId(allocRawId);
             if (allocId != null) sellingPlanId = allocId;
           }
-          if (allocation && allocation.price) subEach = Number(allocation.price);
-          if (allocation && allocation.compare_at_price) subCompareEach = Number(allocation.compare_at_price);
+          if (allocation && allocation.compare_at_price) {
+            subCompareEach = Number(allocation.compare_at_price);
+          }
+        }
+
+        if (packDiscount > 0) {
+          subEach = Math.max(0, Math.round(basePrice * (100 - packDiscount) / 100));
+        } else if (allocation && allocation.price) {
+          subEach = Number(allocation.price);
         }
 
         var hasSubscriptionPlan =
           preferredTarget && (preferredTarget.planId != null || preferredTarget.groupId != null)
             ? Boolean(allocation)
             : Boolean(sellingPlanId);
-
-        if (!allocation) {
-          subEach = Math.max(0, Math.round(basePrice * (100 - packDiscount) / 100));
-        }
 
         var subTotal = subEach * packQty;
         var subCompareTotal = 0;
