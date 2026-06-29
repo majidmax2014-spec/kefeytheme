@@ -168,7 +168,6 @@
         "pack_label_2": "2 - Pack",
         "pack_image_1": "shopify://shop_images/1-Pack.png",
         "pack_image_2": "shopify://shop_images/2-Packs.png",
-        "pack_image_3": "shopify://shop_images/3-Packs.png",
         "pack_image_4": "shopify://shop_images/4-Packs.png",
         "pack_image_5": "shopify://shop_images/5-Packs.png",
         "pack_image_6": "shopify://shop_images/6-Packs.png",
@@ -925,23 +924,39 @@
     "joyful_routines_existing": {
       "type": "kefey-testimonials-grid",
       "blocks": {
-        "testimonial_xNcVLR": {
+        "testimonial_kM98cz": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
             "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
             "customer_name": "Maya"
+          }
+        },
+        "testimonial_xNcVLR": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>The design made me keep it on my desk, which made me remember to take it. Small thing & big impact.</p>",
+            "customer_name": "Daniel H."
           }
         },
         "testimonial_nxWRkW": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
-            "customer_name": "Maya"
+            "review_text": "<p>After about a week, my days felt more even. No spikes, no crashes, just steadier mood and energy.</p>",
+            "customer_name": "Mayas"
           }
         },
         "testimonial_UbFCiF": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>I like that it replaces multiple supplements. My routine feels lighter and more organized.</p>",
+            "customer_name": "Michael S."
+          }
+        },
+        "testimonial_kFr8M7": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
@@ -953,25 +968,99 @@
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
-            "customer_name": "Maya"
+            "review_text": "<p>I finished the gummies weeks ago and still use the tube on my desk. It feels good not throwing it away.</p>",
+            "customer_name": "Helen"
           }
         },
         "testimonial_TVBaF3": {
           "type": "testimonial",
           "settings": {
             "rating": 5,
-            "review_text": "<p>After a week, my days felt more even. No spikes, no crashes, just steadier energy and mood.</p>",
-            "customer_name": "Maya"
+            "review_text": "<p>This is the first supplement I’ve reordered without hesitation. It fits into my routine naturally.</p>",
+            "customer_name": "James"
+          }
+        },
+        "testimonial_8ab4tc": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>The experience from ordering to delivery felt smooth and considered. You can tell they care about details.</p>",
+            "customer_name": "Ram"
+          }
+        },
+        "testimonial_943CUD": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>The taste alone made this different. I’ve never said that about a supplement before.</p>",
+            "customer_name": "Sarah"
+          }
+        },
+        "testimonial_VgtPjW": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>My energy feels more balanced throughout the day. Not a boost, just a better rhythm.</p>",
+            "customer_name": "Omar"
+          }
+        },
+        "testimonial_wKd7Up": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>Kefey helped me simplify everything. My mood, my energy, my routine. It feels designed for real life, not promises.</p>",
+            "customer_name": "Sophia"
+          }
+        },
+        "testimonial_YfcqBn": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>I turned the shipping box into a small shelf organizer. Thoughtful packaging like this is rare.</p>",
+            "customer_name": "Marcus"
+          }
+        },
+        "testimonial_FT8dFN": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>The taste is clean and pleasant, not artificial. That alone makes a huge difference.</p>",
+            "customer_name": "Emily"
+          }
+        },
+        "testimonial_kThqDH": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>I feel more focused during the day without feeling wired or overstimulated. That surprised me.</p>",
+            "customer_name": "Lina"
+          }
+        },
+        "testimonial_bpheye": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>I’ve replaced several supplements with this. My cabinet finally looks clean and my routine feels lighter.</p>",
+            "customer_name": "Alex"
           }
         }
       },
       "block_order": [
+        "testimonial_kM98cz",
         "testimonial_xNcVLR",
         "testimonial_nxWRkW",
         "testimonial_UbFCiF",
+        "testimonial_kFr8M7",
         "testimonial_JckTUY",
-        "testimonial_TVBaF3"
+        "testimonial_TVBaF3",
+        "testimonial_8ab4tc",
+        "testimonial_943CUD",
+        "testimonial_VgtPjW",
+        "testimonial_wKd7Up",
+        "testimonial_YfcqBn",
+        "testimonial_FT8dFN",
+        "testimonial_kThqDH",
+        "testimonial_bpheye"
       ],
       "settings": {
         "heading": "Joyful Routines. That's Why",
