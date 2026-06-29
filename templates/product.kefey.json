@@ -1043,6 +1043,46 @@
             "review_text": "<p>I’ve replaced several supplements with this. My cabinet finally looks clean and my routine feels lighter.</p>",
             "customer_name": "Alex"
           }
+        },
+        "testimonial_mzqLgp": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>I didn’t expect to feel calmer in the evenings, but I do. My nights feel more settled.</p>",
+            "customer_name": "Norin"
+          }
+        },
+        "testimonial_dcXxNE": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>What surprised me wasn’t the formula! it was how easy it was to stay consistent! No pressure at all.</p>",
+            "customer_name": "Daniel"
+          }
+        },
+        "testimonial_KTCBCa": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>I like brands that think about the planet without preaching. They do that really well.</p>",
+            "customer_name": "Adam"
+          }
+        },
+        "testimonial_3r9Bmj": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>My mood feels more balanced, especially on busy days. It’s subtle, but very real.</p>",
+            "customer_name": "Suzi"
+          }
+        },
+        "testimonial_pW6kEC": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "review_text": "<p>Consistency made the difference. After a few weeks, it just became part of my day.</p>",
+            "customer_name": "Emily"
+          }
         }
       },
       "block_order": [
@@ -1060,7 +1100,12 @@
         "testimonial_YfcqBn",
         "testimonial_FT8dFN",
         "testimonial_kThqDH",
-        "testimonial_bpheye"
+        "testimonial_bpheye",
+        "testimonial_mzqLgp",
+        "testimonial_dcXxNE",
+        "testimonial_KTCBCa",
+        "testimonial_3r9Bmj",
+        "testimonial_pW6kEC"
       ],
       "settings": {
         "heading": "Joyful Routines. That's Why",
