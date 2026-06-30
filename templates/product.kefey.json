@@ -185,7 +185,7 @@
         "default_purchase_type": "one",
         "highlight_bar_color": "#f4c820",
         "subscribe_card_bg": "#f4ca2a",
-        "onetime_card_bg": "#49afb4",
+        "onetime_card_bg": "#4FB1B1",
         "cta_bg_color": "#111111",
         "cta_text_color": "#ffffff",
         "heading_font_family": "inherit",
