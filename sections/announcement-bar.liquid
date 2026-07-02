@@ -159,7 +159,73 @@
     {%- if section.settings.show_social and social_icons -%}
       {%- render 'social-icons' -%}
     {%- endif -%}
-    {%- if section.blocks.size == 1 -%}
+    {%- if section.settings.enable_marquee and section.blocks.size > 0 -%}
+      <div
+        class="announcement-bar announcement-marquee{% if section.settings.marquee_pause_on_hover %} announcement-marquee--pause-hover{% endif %}"
+        role="region"
+        aria-label="{{ 'sections.header.announcement' | t }}"
+        style="--marquee-speed: {{ section.settings.marquee_speed }}s;"
+      >
+        <div class="announcement-marquee__track">
+          {%- for half in (1..2) -%}
+            <div class="announcement-marquee__half"{% if half == 2 %} aria-hidden="true"{% endif %}>
+              {%- for r in (1..4) -%}
+                {%- for block in section.blocks -%}
+                  {%- if block.settings.text != blank -%}
+                    {%- if block.settings.link != blank -%}
+                      <a
+                        href="{{ block.settings.link }}"
+                        class="announcement-marquee__item link"
+                        {% if half == 1 and forloop.first and r == 1 %}{{ block.shopify_attributes }}{% endif %}
+                      >{{ block.settings.text | escape }}</a>
+                    {%- else -%}
+                      <span
+                        class="announcement-marquee__item"
+                        {% if half == 1 and forloop.first and r == 1 %}{{ block.shopify_attributes }}{% endif %}
+                      >{{ block.settings.text | escape }}</span>
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              {%- endfor -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+      <style>
+        .announcement-marquee {
+          overflow: hidden;
+          width: 100%;
+          padding: 0.6rem 0;
+        }
+        .announcement-marquee__track {
+          display: flex;
+          width: max-content;
+          animation: kefey-marquee var(--marquee-speed, 20s) linear infinite;
+        }
+        .announcement-marquee__half {
+          display: flex;
+          align-items: center;
+          flex: 0 0 auto;
+        }
+        .announcement-marquee__item {
+          display: inline-flex;
+          align-items: center;
+          padding: 0 1.5rem;
+          white-space: nowrap;
+          text-decoration: none;
+        }
+        .announcement-marquee--pause-hover:hover .announcement-marquee__track {
+          animation-play-state: paused;
+        }
+        @keyframes kefey-marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .announcement-marquee__track { animation: none; }
+        }
+      </style>
+    {%- elsif section.blocks.size == 1 -%}
       <div
         class="announcement-bar{% if section.settings.show_social %} announcement-bar--one-announcement{% endif %}"
         role="region"
@@ -360,7 +426,34 @@
       "unit": "s",
       "label": "t:sections.announcement-bar.settings.change_slides_speed.label",
       "default": 5
-    },    
+    },
+    {
+      "type": "header",
+      "content": "Marquee (scrolling text)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_marquee",
+      "label": "Enable scrolling marquee",
+      "default": false,
+      "info": "Continuously scrolls all announcement messages. Overrides the single/carousel display."
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "unit": "s",
+      "label": "Scroll duration (lower = faster)",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "marquee_pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",
