@@ -52,9 +52,9 @@
           "type": "benefit",
           "settings": {
             "icon_type": "image",
-            "icon_image": "shopify://shop_images/halal.png",
+            "icon_image": "shopify://shop_images/sugar-free.png",
             "icon_svg": "",
-            "label": "Halal"
+            "label": "Sugar Free"
           }
         },
         "benefit_t7rXMW": {
@@ -87,6 +87,7 @@
         "heading_font_family": "inherit",
         "heading_font_family_custom": "inherit",
         "heading_font_size_desktop": 112,
+        "mood_gummies_font_size_desktop": 56,
         "heading_font_size_mobile": 36,
         "heading_font_weight": 700,
         "heading_line_height": 1,
@@ -134,7 +135,6 @@
         "mobile_grid_row_gap": 24,
         "mobile_media_margin_top": 0,
         "mobile_logo_max_width": 108,
-        "mood_gummies_font_size_desktop": 72,
         "mood_gummies_font_size_mobile": 42,
         "mood_star_font_size_mobile": 15,
         "button_padding_vertical_mobile": 9,
