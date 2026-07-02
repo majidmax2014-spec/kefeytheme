@@ -84,8 +84,15 @@
           <div class="rf-banner__text rte">{{ section.settings.text }}</div>
         {%- endif -%}
         {%- if section.settings.button_label != blank -%}
-          <a href="{{ section.settings.button_link | default: routes.all_products_collection_url }}"
+          {%- liquid
+            assign rf_btn_href = section.settings.button_link
+            if rf_btn_href == blank
+              assign rf_btn_href = '#kefey-purchase'
+            endif
+          -%}
+          <a href="{{ rf_btn_href }}"
              class="rf-banner__btn{% if section.settings.button_style == 'solid' %} rf-banner__btn--solid{% endif %}"
+             {% if rf_btn_href contains '#' %}data-kefey-scroll-cta{% endif %}
              aria-label="{{ section.settings.button_label | escape }}">
             {{ section.settings.button_label | upcase }}
           </a>

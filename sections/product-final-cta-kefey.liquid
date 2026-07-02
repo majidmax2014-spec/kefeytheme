@@ -93,7 +93,17 @@
       </button>
     </div>
 
-    <a class="kefey-final-cta__btn" href="{{ section.settings.cta_link | default: '/cart' }}">{{ section.settings.cta_label }}</a>
+    {%- liquid
+      assign final_cta_href = section.settings.cta_link
+      if final_cta_href == blank
+        assign final_cta_href = '#kefey-purchase'
+      endif
+    -%}
+    <a
+      class="kefey-final-cta__btn"
+      href="{{ final_cta_href }}"
+      {% if final_cta_href contains '#' %}data-kefey-scroll-cta{% endif %}
+    >{{ section.settings.cta_label }}</a>
   </div>
 </section>
 

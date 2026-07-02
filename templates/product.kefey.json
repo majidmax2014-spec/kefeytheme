@@ -611,6 +611,11 @@
       ],
       "settings": {
         "left_column_width_percent": 60,
+<<<<<<< HEAD
+=======
+        "left_image_max_width": 900,
+        "left_image_scale": 100,
+>>>>>>> f3355ec (Enhance product callouts and final CTA functionality)
         "section_bg_color": "#f4c820",
         "teal_box_color": "#4bb3b5",
         "white_header_bg_color": "#ffffff",
@@ -1275,7 +1280,7 @@
         "heading": "TRY IT WITH CONFIDENCE!",
         "text": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund.",
         "button_label": "CHECKOUT NOW",
-        "button_link": "#",
+        "button_link": "#kefey-purchase",
         "button_style": "outline",
         "heading_color": "#ffc94d",
         "text_color": "#ffffff",
@@ -1331,7 +1336,7 @@
         "button_bg_color": "#4bb3b5",
         "button_text_color": "#ffffff",
         "cta_label": "TRY ME",
-        "cta_link": "#"
+        "cta_link": "#kefey-purchase"
       }
     }
   },

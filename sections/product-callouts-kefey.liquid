@@ -5,6 +5,7 @@
     --kc-left-col: {{ section.settings.left_column_width_percent }}%;
     --kc-right-col: {{ right_width }}%;
     --kc-left-img-maxw: {{ section.settings.left_image_max_width }}px;
+    --kc-left-img-scale: {{ section.settings.left_image_scale | divided_by: 100.0 }};
     --kc-bg: {{ section.settings.section_bg_color }};
     --kc-teal: {{ section.settings.teal_box_color }};
     --kc-white-header: {{ section.settings.white_header_bg_color }};
@@ -145,6 +146,7 @@
   "settings": [
     { "type": "range", "id": "left_column_width_percent", "label": "Left column width %", "min": 30, "max": 70, "step": 1, "default": 52, "unit": "%" },
     { "type": "range", "id": "left_image_max_width", "label": "Left image max width", "min": 300, "max": 1200, "step": 10, "default": 900, "unit": "px" },
+    { "type": "range", "id": "left_image_scale", "label": "Left image size (zoom)", "min": 100, "max": 200, "step": 5, "default": 100, "unit": "%", "info": "Grows the image beyond the column. High values may overlap nearby boxes." },
     { "type": "color", "id": "section_bg_color", "label": "Section background", "default": "#f4c820" },
     { "type": "color", "id": "teal_box_color", "label": "Teal box color", "default": "#4bb3b5" },
     { "type": "color", "id": "white_header_bg_color", "label": "White header background", "default": "#ffffff" },

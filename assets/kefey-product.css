@@ -928,6 +928,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  overflow: visible;
 }
 
 .kefey-callouts__left-image {
@@ -937,6 +938,8 @@
   margin-left: auto;
   margin-right: auto;
   display: block;
+  transform: scale(var(--kc-left-img-scale, 1));
+  transform-origin: center bottom;
 }
 
 .kefey-callouts__right {
@@ -1953,6 +1956,10 @@
     order: 7;
     width: 100%;
     margin-top: 8px;
+  }
+
+  .kefey-callouts__left-image {
+    transform: none;
   }
 
   .kefey-callouts__box1-header,
