@@ -19,7 +19,7 @@
   {%- assign hide_shop_login_button = true -%}
 {%- endif -%}
 
-{%- if customer -%}
+{%- if customer and request.design_mode == false -%}
   <script>
     window.location.replace({{ routes.account_url | json }});
   </script>
