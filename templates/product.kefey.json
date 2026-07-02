@@ -611,11 +611,8 @@
       ],
       "settings": {
         "left_column_width_percent": 60,
-<<<<<<< HEAD
-=======
         "left_image_max_width": 900,
         "left_image_scale": 100,
->>>>>>> f3355ec (Enhance product callouts and final CTA functionality)
         "section_bg_color": "#f4c820",
         "teal_box_color": "#4bb3b5",
         "white_header_bg_color": "#ffffff",
