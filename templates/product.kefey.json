@@ -155,7 +155,7 @@
         "onetime_label": "One-time Purchase",
         "sub_badge": "SAVE 15% + FREE SHIPPING",
         "onetime_badge": "STANDARD PRICING",
-        "badge_text": "10% OFF & Cancel Anytime",
+        "badge_text": "10% OFF & Cancel Anytime + Free Delivery",
         "subscription_discount_pack_2": 10,
         "subscription_discount_pack_3": 15,
         "subscription_discount_pack_4": 20,
@@ -610,8 +610,7 @@
         "nutrition_row_UAT8GK"
       ],
       "settings": {
-        "left_column_width_percent": 52,
-        "left_image_max_width": 900,
+        "left_column_width_percent": 45,
         "section_bg_color": "#f4c820",
         "teal_box_color": "#4bb3b5",
         "white_header_bg_color": "#ffffff",
