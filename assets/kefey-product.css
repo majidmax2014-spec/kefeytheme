@@ -2229,6 +2229,16 @@
   text-transform: lowercase;
 }
 
+.kefey-hero__mood-star {
+  margin: 0 0 4px;
+  color: var(--kh-heading-color, #fff);
+  font-family: var(--kh-h-ff, inherit);
+  font-size: clamp(16px, 1.7vw, 24px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: var(--kh-h-ls, 0px);
+}
+
 .kefey-hero__subheading {
   margin: 2px 0 0;
   color: var(--kh-heading-color, #fff);
@@ -2449,6 +2459,10 @@
 
   .kefey-hero__heading {
     font-size: var(--kh-h-fs-m, 64px);
+  }
+
+  .kefey-hero__mood-star {
+    font-size: var(--kh-star-fs-m, 15px);
   }
 
   .kefey-hero__subheading {
