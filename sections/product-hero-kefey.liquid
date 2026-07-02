@@ -49,7 +49,6 @@
     --kh-m-bg-pos: {{ section.settings.mobile_background_image_position }};
     --kh-m-logo-max: {{ section.settings.mobile_logo_max_width }}px;
     --kh-sub-fs-m: {{ section.settings.mood_gummies_font_size_mobile }}px;
-    --kh-star-fs-m: {{ section.settings.mood_star_font_size_mobile }}px;
     --kefey-button-padding-vertical-mobile: {{ section.settings.button_padding_vertical_mobile }}px;
     --kefey-button-padding-horizontal-mobile: {{ section.settings.button_padding_horizontal_mobile }}px;
     --kefey-button-min-height-mobile: {{ section.settings.button_min_height_mobile }}px;
@@ -167,13 +166,7 @@
           <p class="kefey-hero__eyebrow">{{ section.settings.eyebrow }}</p>
         {%- endif -%}
 
-        {%- if section.settings.mood_star_text != blank -%}
-          <p class="kefey-hero__mood-star">{{ section.settings.mood_star_text }}</p>
-        {%- endif -%}
-
-        {%- if section.settings.subheading != blank -%}
-          <p class="kefey-hero__subheading">{{ section.settings.subheading }}</p>
-        {%- endif -%}
+        <p class="kefey-hero__subheading">Mood Gummies</p>
 
         <a
           class="kefey-hero__cta"
@@ -283,8 +276,6 @@
 
     { "type": "header", "content": "Content" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Live Full Live Kefey" },
-    { "type": "text", "id": "mood_star_text", "label": "Line above title", "default": "This Is Your Mood Star.", "info": "Shows above the main title." },
-    { "type": "text", "id": "subheading", "label": "Main title", "default": "Kefey Mood Gummies" },
     {
       "type": "textarea",
       "id": "description",
@@ -454,21 +445,11 @@
     {
       "type": "range",
       "id": "mood_gummies_font_size_mobile",
-      "label": "Main title text size (mobile)",
+      "label": "\"Mood Gummies\" text size (mobile)",
       "min": 14,
-      "max": 60,
+      "max": 44,
       "step": 1,
-      "default": 34,
-      "unit": "px"
-    },
-    {
-      "type": "range",
-      "id": "mood_star_font_size_mobile",
-      "label": "\"Mood Star\" line size (mobile)",
-      "min": 10,
-      "max": 32,
-      "step": 1,
-      "default": 15,
+      "default": 28,
       "unit": "px"
     },
     {

@@ -16,7 +16,7 @@
   endif
 -%}
 
-{%- if target_url != blank and request.design_mode == false -%}
+{%- if target_url != blank -%}
   <meta http-equiv="refresh" content="0; url={{ target_url }}">
   <script>
     window.location.replace({{ target_url | json }});
@@ -24,13 +24,9 @@
 {%- endif -%}
 
 <section class="page-width" style="padding: 60px 0; text-align: center;">
+  <p>Redirecting to product...</p>
   {%- if target_url != blank -%}
-    {%- if request.design_mode -%}
-      <p>This page redirects visitors to <a href="{{ target_url }}">{{ target_url }}</a>. Redirect is disabled inside the theme editor.</p>
-    {%- else -%}
-      <p>Redirecting to product...</p>
-      <p><a href="{{ target_url }}">Continue</a></p>
-    {%- endif -%}
+    <p><a href="{{ target_url }}">Continue</a></p>
   {%- else -%}
     <p>Please set a product handle in this section.</p>
   {%- endif -%}
