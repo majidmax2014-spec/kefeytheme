@@ -612,7 +612,7 @@
       "settings": {
         "left_column_width_percent": 60,
         "left_image_max_width": 900,
-        "left_image_scale": 100,
+        "left_image_scale": 130,
         "section_bg_color": "#f4c820",
         "teal_box_color": "#4bb3b5",
         "white_header_bg_color": "#ffffff",
@@ -1277,6 +1277,9 @@
         "heading": "TRY IT WITH CONFIDENCE!",
         "text": "If it's not for you, we'll make it right.\nWith a full, 100% hassle-free refund.",
         "button_label": "CHECKOUT NOW",
+        "heading_font_size": 40,
+        "text_font_size": 16,
+        "button_font_size": 14,
         "button_link": "#kefey-purchase",
         "button_style": "outline",
         "heading_color": "#ffc94d",
@@ -1289,8 +1292,6 @@
         "badge_size": 160,
         "badge_text_center": "kefey",
         "badge_text_ring": "MONEYBACK GUARANTEED",
-        "left_decor_enabled": true,
-        "left_decor_image": "shopify://shop_images/left-decor.png",
         "right_decor_enabled": true
       }
     },
