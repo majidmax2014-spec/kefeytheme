@@ -63,43 +63,14 @@
       </div>
     {% endif %}
     {% if section.settings.order_number_display != blank %}
-      <p
-        class="ty-hero__order"
-        data-ty-order
-        data-ty-order-template="{{ section.settings.order_number_display | escape }}"
-      >{{ section.settings.order_number_display }}</p>
+      <p class="ty-hero__order">{{ section.settings.order_number_display }}</p>
     {% endif %}
     {% if section.settings.track_label != blank and section.settings.track_url != blank %}
-      <a href="{{ section.settings.track_url }}" class="ty-hero__track" data-ty-track>
+      <a href="{{ section.settings.track_url }}" class="ty-hero__track">
         {{ section.settings.track_label }}
       </a>
     {% endif %}
   </div>
-
-  <script>
-    (function () {
-      var scope = document.getElementById('ThankYouHero-{{ section.id }}');
-      if (!scope) return;
-
-      var params = new URLSearchParams(window.location.search);
-      var order = params.get('order') || params.get('order_number') || params.get('order_name');
-
-      var orderEl = scope.querySelector('[data-ty-order]');
-      if (orderEl && order) {
-        order = String(order).replace(/^#/, '');
-        var tpl = orderEl.getAttribute('data-ty-order-template') || orderEl.textContent;
-        orderEl.textContent = /\d/.test(tpl)
-          ? tpl.replace(/#?\d[\d,]*/, '#' + order)
-          : tpl + ' #' + order;
-      }
-
-      var trackEl = scope.querySelector('[data-ty-track]');
-      var statusUrl = params.get('status_url') || params.get('order_status_url');
-      if (trackEl && statusUrl) {
-        trackEl.setAttribute('href', statusUrl);
-      }
-    })();
-  </script>
 </section>
 
 {% schema %}
