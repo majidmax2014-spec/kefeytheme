@@ -79,13 +79,9 @@
         "background_image": "shopify://shop_images/product-desktop_c100f10b-4b2d-4580-8781-cd5b5144ca55.png",
         "background_image_mobile": "shopify://shop_images/product-mobile.png",
         "mobile_background_image_position": "center center",
-<<<<<<< HEAD
-        "eyebrow": "This is Your Mood Star",
-=======
         "eyebrow": "",
         "mood_star_text": "This Is Your Mood Star.",
         "subheading": "Kefey Mood Gummies",
->>>>>>> 4094448 (Add mood star text and styling to product hero section)
         "description": "A plant-based, star-shaped gummy designed to support your mood, energy, and daily balance.",
         "cta_link": "",
         "heading_font_family": "inherit",
