@@ -629,8 +629,9 @@
 
         packButtons.forEach(function (btn) {
           var btnPack = parseInt(btn.getAttribute('data-pack') || '2', 10);
-          btn.classList.toggle('is-selected', btnPack === state.pack);
-          btn.setAttribute('aria-pressed', btnPack === state.pack ? 'true' : 'false');
+          var isPackSelected = state.type === 'sub' && btnPack === state.pack;
+          btn.classList.toggle('is-selected', isPackSelected);
+          btn.setAttribute('aria-pressed', isPackSelected ? 'true' : 'false');
         });
 
         if (subPlan) {
