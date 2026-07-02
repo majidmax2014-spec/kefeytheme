@@ -48,6 +48,7 @@
     --kh-m-media-mt: {{ section.settings.mobile_media_margin_top }}px;
     --kh-m-bg-pos: {{ section.settings.mobile_background_image_position }};
     --kh-m-logo-max: {{ section.settings.mobile_logo_max_width }}px;
+    --kh-sub-fs-d: {{ section.settings.mood_gummies_font_size_desktop }}px;
     --kh-sub-fs-m: {{ section.settings.mood_gummies_font_size_mobile }}px;
     --kh-star-fs-m: {{ section.settings.mood_star_font_size_mobile }}px;
     --kefey-button-padding-vertical-mobile: {{ section.settings.button_padding_vertical_mobile }}px;
@@ -309,6 +310,7 @@
     },
     { "type": "text", "id": "heading_font_family_custom", "label": "Heading custom font family", "default": "inherit" },
     { "type": "range", "id": "heading_font_size_desktop", "label": "Heading font size desktop", "min": 40, "max": 220, "step": 2, "default": 102, "unit": "px" },
+    { "type": "range", "id": "mood_gummies_font_size_desktop", "label": "Main title size (desktop)", "min": 24, "max": 120, "step": 2, "default": 56, "unit": "px" },
     { "type": "range", "id": "heading_font_size_mobile", "label": "Heading font size mobile", "min": 24, "max": 120, "step": 2, "default": 64, "unit": "px" },
     { "type": "range", "id": "heading_font_weight", "label": "Heading font weight", "min": 300, "max": 900, "step": 100, "default": 700 },
     { "type": "range", "id": "heading_line_height", "label": "Heading line height", "min": 0.8, "max": 1.6, "step": 0.1, "default": 1.0 },

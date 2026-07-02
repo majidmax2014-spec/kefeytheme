@@ -2243,7 +2243,7 @@
   margin: 2px 0 0;
   color: var(--kh-heading-color, #fff);
   font-family: var(--kh-h-ff, inherit);
-  font-size: clamp(30px, 3.2vw, 42px);
+  font-size: var(--kh-sub-fs-d, 56px);
   font-weight: var(--kh-h-fw, 700);
   line-height: 1.04;
   letter-spacing: var(--kh-h-ls, 0px);
