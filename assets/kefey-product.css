@@ -931,8 +931,11 @@
 }
 
 .kefey-callouts__left-image {
-  width: min(100%, 760px);
+  width: 100%;
+  max-width: var(--kc-left-img-maxw, 900px);
   height: auto;
+  margin-left: auto;
+  margin-right: auto;
   display: block;
 }
 

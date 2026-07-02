@@ -4,6 +4,7 @@
   style="
     --kc-left-col: {{ section.settings.left_column_width_percent }}%;
     --kc-right-col: {{ right_width }}%;
+    --kc-left-img-maxw: {{ section.settings.left_image_max_width }}px;
     --kc-bg: {{ section.settings.section_bg_color }};
     --kc-teal: {{ section.settings.teal_box_color }};
     --kc-white-header: {{ section.settings.white_header_bg_color }};
@@ -142,7 +143,8 @@
 {
   "name": "Product Callouts Kefey",
   "settings": [
-    { "type": "range", "id": "left_column_width_percent", "label": "Left column width %", "min": 30, "max": 60, "step": 1, "default": 45, "unit": "%" },
+    { "type": "range", "id": "left_column_width_percent", "label": "Left column width %", "min": 30, "max": 70, "step": 1, "default": 52, "unit": "%" },
+    { "type": "range", "id": "left_image_max_width", "label": "Left image max width", "min": 300, "max": 1200, "step": 10, "default": 900, "unit": "px" },
     { "type": "color", "id": "section_bg_color", "label": "Section background", "default": "#f4c820" },
     { "type": "color", "id": "teal_box_color", "label": "Teal box color", "default": "#4bb3b5" },
     { "type": "color", "id": "white_header_bg_color", "label": "White header background", "default": "#ffffff" },
