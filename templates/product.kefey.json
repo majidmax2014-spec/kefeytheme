@@ -54,7 +54,7 @@
             "icon_type": "image",
             "icon_image": "shopify://shop_images/halal.png",
             "icon_svg": "",
-            "label": "Halal"
+            "label": "Sugar Free"
           }
         },
         "benefit_t7rXMW": {
@@ -76,16 +76,15 @@
         "benefit_t7rXMW"
       ],
       "settings": {
-        "logo_image": "shopify://shop_images/white-logo.png",
         "background_image": "shopify://shop_images/product-desktop_c100f10b-4b2d-4580-8781-cd5b5144ca55.png",
         "background_image_mobile": "shopify://shop_images/product-mobile.png",
         "mobile_background_image_position": "center center",
-        "eyebrow": "",
+        "eyebrow": "This is Your Mood Star",
         "description": "A plant-based, star-shaped gummy designed to support your mood, energy, and daily balance.",
         "cta_link": "",
         "heading_font_family": "inherit",
         "heading_font_family_custom": "inherit",
-        "heading_font_size_desktop": 102,
+        "heading_font_size_desktop": 148,
         "heading_font_size_mobile": 36,
         "heading_font_weight": 700,
         "heading_line_height": 1,
@@ -185,7 +184,7 @@
         "default_purchase_type": "one",
         "highlight_bar_color": "#f4c820",
         "subscribe_card_bg": "#f4ca2a",
-        "onetime_card_bg": "#4FB1B1",
+        "onetime_card_bg": "#4fb1b1",
         "cta_bg_color": "#111111",
         "cta_text_color": "#ffffff",
         "heading_font_family": "inherit",
@@ -1327,7 +1326,7 @@
         "button_font_weight": 700,
         "button_bg_color": "#4bb3b5",
         "button_text_color": "#ffffff",
-        "cta_label": "Make it part of your day. Checkout Now",
+        "cta_label": "TRY ME",
         "cta_link": "#"
       }
     }
