@@ -22,8 +22,9 @@
   width: 100%;
 }
 .marquee-bar__track {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  width: max-content;
   white-space: nowrap;
   gap: 0;
   will-change: transform;

@@ -28,12 +28,14 @@
   <div class="marquee-bar__viewport">
     <div class="marquee-bar__track">
       {%- capture items_markup -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'item' and block.settings.text != blank -%}
-            <span class="marquee-bar__item" data-sep="{{ section.settings.separator_text | default: '|' }}" {{ block.shopify_attributes }}>
-              {{- block.settings.text | strip -}}
-            </span>
-          {%- endif -%}
+        {%- for repeat in (1..2) -%}
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'item' and block.settings.text != blank -%}
+              <span class="marquee-bar__item" data-sep="{{ section.settings.separator_text | default: '|' }}"{% if repeat > 1 %} aria-hidden="true"{% else %} {{ block.shopify_attributes }}{% endif %}>
+                {{- block.settings.text | strip -}}
+              </span>
+            {%- endif -%}
+          {%- endfor -%}
         {%- endfor -%}
       {%- endcapture -%}
       <div class="marquee-bar__group">{{ items_markup }}</div>
