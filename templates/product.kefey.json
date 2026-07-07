@@ -611,7 +611,7 @@
       ],
       "settings": {
         "left_column_width_percent": 60,
-        "left_image_max_width": 900,
+        "left_image_max_width": 630,
         "left_image_scale": 120,
         "section_bg_color": "#f4c820",
         "teal_box_color": "#4bb3b5",
