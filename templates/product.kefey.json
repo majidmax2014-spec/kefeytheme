@@ -918,7 +918,7 @@
         "margin_top": 0,
         "margin_bottom": 0,
         "separator_text": "|",
-        "speed": 18,
+        "speed": 30,
         "direction": "left",
         "enable_rtl": false,
         "pause_on_hover": true,
