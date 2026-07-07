@@ -456,6 +456,9 @@
         "heading": "TRY IT WITH CONFIDENCE!",
         "text": "If it’s not for you, we’ll make it right. \nWith a full, 100% hassle-free refund.",
         "button_label": "CHECKOUT NOW",
+        "heading_font_size": 40,
+        "text_font_size": 16,
+        "button_font_size": 14,
         "button_link": "shopify://products/mood-gummies",
         "button_style": "solid",
         "heading_color": "#ffc94d",
@@ -468,8 +471,6 @@
         "badge_size": 150,
         "badge_text_center": "kefey",
         "badge_text_ring": "MONEYBACK GUARANTEE",
-        "left_decor_enabled": true,
-        "left_decor_image": "shopify://shop_images/left-decor.png",
         "right_decor_enabled": true
       }
     },
@@ -543,7 +544,7 @@
         "margin_top": 72,
         "margin_bottom": 12,
         "separator_text": "|",
-        "speed": 18,
+        "speed": 30,
         "direction": "left",
         "enable_rtl": false,
         "pause_on_hover": true,
