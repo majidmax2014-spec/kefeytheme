@@ -2409,7 +2409,8 @@
 @media (max-width: 989px) {
   .kefey-hero {
     min-height: 0;
-    padding-top: var(--kh-m-pt, var(--kh-pt, 40px));
+    /* Match homepage hero-slider breathing room below the header */
+    padding-top: max(var(--kh-m-pt, 40px), 6vh);
     padding-bottom: var(--kh-m-pb, var(--kh-pb, 44px));
   }
 
