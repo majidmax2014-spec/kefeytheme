@@ -1501,13 +1501,13 @@
         "type": "color",
         "id": "prehype_background_color",
         "label": "Background color",
-        "default": "#FFEB00"
+        "default": "#FDEF2C"
       },
       {
         "type": "color",
         "id": "prehype_accent_color",
         "label": "Accent color (highlight & button)",
-        "default": "#FF00A8"
+        "default": "#FC2AB0"
       },
       {
         "type": "text",

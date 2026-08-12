@@ -35,7 +35,7 @@
   width: min(100%, 520px);
   overflow: hidden;
   padding: 48px 48px 36px;
-  background: var(--prehype-bg, #ffeb00);
+  background: var(--prehype-bg, #fdef2c);
   color: #000;
   text-align: center;
   box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
@@ -97,32 +97,42 @@
 .prehype-popup__logo {
   display: block;
   width: auto;
-  max-width: 168px;
+  max-width: 280px;
   height: auto;
-  max-height: 38px;
-  margin: 0 auto 18px;
+  max-height: 72px;
+  margin: 0 auto 22px;
   object-fit: contain;
 }
 
 .prehype-popup__logo-text {
-  margin: 0 0 18px;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 3.2rem;
-  font-weight: 400;
-  font-style: italic;
-  line-height: 1;
-  letter-spacing: 0.01em;
+  margin: 0 0 22px;
+  font-family: "Fraunces", "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  font-optical-sizing: auto;
+  font-size: clamp(4.8rem, 10vw, 6.2rem);
+  font-weight: 700;
+  font-style: normal;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
   color: #000;
 }
 
+.prehype-popup__reg {
+  display: inline-block;
+  margin-left: 0.04em;
+  font-size: 0.32em;
+  font-weight: 600;
+  line-height: 1;
+  vertical-align: super;
+}
+
 .prehype-popup h2.prehype-popup__heading {
-  margin: 0 0 18px;
-  font-family: var(--font-heading-family), Impact, "Arial Black", sans-serif;
-  font-size: clamp(3.4rem, 7.2vw, 4.6rem);
+  margin: 0 0 20px;
+  font-family: "Poppins", var(--font-heading-family), sans-serif;
+  font-size: clamp(3.8rem, 8vw, 5.4rem);
   font-style: normal;
   font-weight: 800;
-  line-height: 0.9;
-  letter-spacing: -0.02em;
+  line-height: 0.86;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
   color: #000;
   word-break: normal;
@@ -133,31 +143,31 @@
 }
 
 .prehype-popup__heading-highlight {
-  color: var(--prehype-accent, #ff00a8);
+  color: var(--prehype-accent, #fc2ab0);
 }
 
 .prehype-popup__heading-star {
   display: inline-block;
-  width: 0.52em;
-  height: 0.52em;
-  margin-left: 0.08em;
-  vertical-align: 0.08em;
+  width: 0.48em;
+  height: 0.48em;
+  margin-left: 0.06em;
+  vertical-align: 0.1em;
   object-fit: contain;
 }
 
 .prehype-popup__body,
 .prehype-popup__signup {
-  margin: 0 auto 12px;
+  margin: 0 auto 10px;
   max-width: 34ch;
-  font-family: var(--font-body-family), Arial, sans-serif;
+  font-family: "Poppins", var(--font-body-family), sans-serif;
   font-size: 1.5rem;
   font-weight: 400;
-  line-height: 1.32;
+  line-height: 1.35;
   color: #000;
 }
 
 .prehype-popup__signup {
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 .prehype-popup__signup strong {
@@ -178,7 +188,7 @@
   min-height: 50px;
   background: #fff;
   border: 1.5px solid #000;
-  border-radius: 14px;
+  border-radius: 12px;
 }
 
 .prehype-popup__field-icon {
@@ -195,8 +205,9 @@
   border: 0;
   background: transparent;
   color: #000;
-  font-family: var(--font-body-family), Arial, sans-serif;
+  font-family: "Poppins", var(--font-body-family), sans-serif;
   font-size: 1.45rem;
+  font-weight: 400;
   box-shadow: none;
 }
 
@@ -218,14 +229,14 @@
   margin-bottom: 4px;
   padding: 12px 18px;
   border: 1.5px solid #000;
-  border-radius: 14px;
-  background: var(--prehype-accent, #ff00a8);
+  border-radius: 12px;
+  background: var(--prehype-accent, #fc2ab0);
   box-shadow: 4px 4px 0 0 #000;
   color: #fff;
-  font-family: var(--font-heading-family), Impact, "Arial Black", sans-serif;
-  font-size: 1.5rem;
+  font-family: "Poppins", var(--font-heading-family), sans-serif;
+  font-size: 1.45rem;
   font-weight: 800;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
   transition: transform 0.12s ease, box-shadow 0.12s ease;
@@ -255,7 +266,7 @@
 .prehype-popup__disclaimer {
   margin: 16px auto 0;
   max-width: 32ch;
-  font-family: var(--font-body-family), Arial, sans-serif;
+  font-family: "Poppins", var(--font-body-family), sans-serif;
   font-size: 1.2rem;
   line-height: 1.35;
   color: #000;
@@ -264,7 +275,7 @@
 .prehype-popup__message {
   margin: 12px auto 0;
   max-width: 34ch;
-  font-family: var(--font-body-family), Arial, sans-serif;
+  font-family: "Poppins", var(--font-body-family), sans-serif;
   font-size: 1.35rem;
   line-height: 1.35;
 }
@@ -302,7 +313,11 @@ body.prehype-active .dynamic-checkout__content {
   }
 
   .prehype-popup h2.prehype-popup__heading {
-    font-size: 3.2rem;
+    font-size: 3.6rem;
+  }
+
+  .prehype-popup__logo-text {
+    font-size: 4.6rem;
   }
 
   .prehype-popup__deco--left {
