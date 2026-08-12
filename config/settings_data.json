@@ -131,6 +131,8 @@
     "cart_color_scheme": "scheme-1",
     "prehype_checkout_popup_enabled": true,
     "prehype_popup_logo": "shopify://shop_images/Kefey_Logo_without_tagline_Black_-_RGB.png",
+    "prehype_popup_deco_left": "shopify://shop_images/STARGUM.png",
+    "prehype_popup_deco_right": "shopify://shop_images/STARGUM.png",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
