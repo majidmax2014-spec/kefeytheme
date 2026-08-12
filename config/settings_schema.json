@@ -1463,5 +1463,113 @@
         "default": "scheme-1"
       }
     ]
+  },
+  {
+    "name": "Pre-launch campaign",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "When enabled, checkout is replaced with a notify-me popup for pre-launch campaigns. Disable this setting to restore normal checkout."
+      },
+      {
+        "type": "checkbox",
+        "id": "prehype_checkout_popup_enabled",
+        "label": "Enable pre-hype checkout popup",
+        "default": false
+      },
+      {
+        "type": "header",
+        "content": "Popup content"
+      },
+      {
+        "type": "image_picker",
+        "id": "prehype_popup_logo",
+        "label": "Logo",
+        "info": "Optional. Uses theme logo if blank."
+      },
+      {
+        "type": "image_picker",
+        "id": "prehype_popup_deco_left",
+        "label": "Left decoration image"
+      },
+      {
+        "type": "image_picker",
+        "id": "prehype_popup_deco_right",
+        "label": "Right decoration image"
+      },
+      {
+        "type": "color",
+        "id": "prehype_background_color",
+        "label": "Background color",
+        "default": "#FFEF00"
+      },
+      {
+        "type": "color",
+        "id": "prehype_accent_color",
+        "label": "Accent color (highlight & button)",
+        "default": "#FF0099"
+      },
+      {
+        "type": "text",
+        "id": "prehype_heading_line_1",
+        "label": "Heading line 1",
+        "default": "KEFEY IS"
+      },
+      {
+        "type": "text",
+        "id": "prehype_heading_highlight",
+        "label": "Heading highlight",
+        "default": "ALMOST"
+      },
+      {
+        "type": "text",
+        "id": "prehype_heading_line_2",
+        "label": "Heading line 2",
+        "default": "HERE"
+      },
+      {
+        "type": "textarea",
+        "id": "prehype_body_text",
+        "label": "Body text",
+        "default": "Our Mood Gummies are not available to purchase just yet, but the wait is nearly over."
+      },
+      {
+        "type": "textarea",
+        "id": "prehype_signup_text",
+        "label": "Signup prompt",
+        "default": "Sign up to be the first to know when KEFEY officially goes live."
+      },
+      {
+        "type": "text",
+        "id": "prehype_email_placeholder",
+        "label": "Email placeholder",
+        "default": "Enter your email"
+      },
+      {
+        "type": "text",
+        "id": "prehype_cta_text",
+        "label": "Button label",
+        "default": "NOTIFY ME FIRST"
+      },
+      {
+        "type": "text",
+        "id": "prehype_disclaimer",
+        "label": "Disclaimer",
+        "default": "No spam, just launch updates and early access."
+      },
+      {
+        "type": "text",
+        "id": "prehype_email_tags",
+        "label": "Customer tags (comma-separated)",
+        "default": "pre-launch, notify-me",
+        "info": "Applied to email signups in Shopify Admin → Customers."
+      },
+      {
+        "type": "text",
+        "id": "prehype_success_message",
+        "label": "Success message",
+        "default": "You're on the list! We'll notify you when Kefey goes live."
+      }
+    ]
   }
 ]

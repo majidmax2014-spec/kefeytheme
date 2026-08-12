@@ -448,6 +448,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       {{ 'shopify-policy-overrides.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
 
+<<<<<<< HEAD
 
 
 
@@ -455,5 +456,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 
 
+=======
+    {%- if settings.prehype_checkout_popup_enabled -%}
+      {%- render 'kefey-prehype-popup' -%}
+    {%- endif -%}
+>>>>>>> b2fb7ab (Add pre-hype checkout popup for pre-launch campaign)
   </body>
 </html>

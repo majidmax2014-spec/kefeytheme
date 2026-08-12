@@ -1,0 +1,158 @@
+{% comment %}
+  Pre-launch checkout popup. Rendered when theme setting prehype_checkout_popup_enabled is true.
+{% endcomment %}
+
+{{ 'kefey-prehype-popup.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign prehype_logo = settings.prehype_popup_logo
+  if prehype_logo == blank
+    assign prehype_logo = settings.logo
+  endif
+-%}
+
+<div
+  id="PrehypePopup"
+  class="prehype-popup"
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="PrehypePopupHeading"
+  style="--prehype-bg: {{ settings.prehype_background_color | default: '#FFEF00' }}; --prehype-accent: {{ settings.prehype_accent_color | default: '#FF0099' }};"
+>
+  <div class="prehype-popup__backdrop" aria-hidden="true"></div>
+
+  <div class="prehype-popup__panel">
+    <button type="button" class="prehype-popup__close" aria-label="{{ 'accessibility.close' | t }}">
+      <span class="svg-wrapper">
+        {{- 'icon-close.svg' | inline_asset_content -}}
+      </span>
+    </button>
+
+    {%- if settings.prehype_popup_deco_left != blank -%}
+      <img
+        class="prehype-popup__deco prehype-popup__deco--left"
+        src="{{ settings.prehype_popup_deco_left | image_url: width: 400 }}"
+        alt=""
+        width="{{ settings.prehype_popup_deco_left.width }}"
+        height="{{ settings.prehype_popup_deco_left.height }}"
+        loading="lazy"
+        decoding="async"
+      >
+    {%- else -%}
+      <img
+        class="prehype-popup__deco prehype-popup__deco--left"
+        src="{{ 'prehype-popup-deco-left.png' | asset_url }}"
+        alt=""
+        width="260"
+        height="720"
+        loading="lazy"
+        decoding="async"
+      >
+    {%- endif -%}
+
+    {%- if settings.prehype_popup_deco_right != blank -%}
+      <img
+        class="prehype-popup__deco prehype-popup__deco--right"
+        src="{{ settings.prehype_popup_deco_right | image_url: width: 400 }}"
+        alt=""
+        width="{{ settings.prehype_popup_deco_right.width }}"
+        height="{{ settings.prehype_popup_deco_right.height }}"
+        loading="lazy"
+        decoding="async"
+      >
+    {%- else -%}
+      <img
+        class="prehype-popup__deco prehype-popup__deco--right"
+        src="{{ 'prehype-popup-deco-right.png' | asset_url }}"
+        alt=""
+        width="260"
+        height="720"
+        loading="lazy"
+        decoding="async"
+      >
+    {%- endif -%}
+
+    {%- if prehype_logo != blank -%}
+      <img
+        class="prehype-popup__logo"
+        src="{{ prehype_logo | image_url: width: 440 }}"
+        alt="{{ shop.name | escape }}"
+        width="{{ prehype_logo.width }}"
+        height="{{ prehype_logo.height }}"
+        loading="lazy"
+        decoding="async"
+      >
+    {%- else -%}
+      <p class="prehype-popup__logo-text">{{ shop.name }}</p>
+    {%- endif -%}
+
+    <h2 id="PrehypePopupHeading" class="prehype-popup__heading">
+      {%- if settings.prehype_heading_line_1 != blank -%}
+        <span class="prehype-popup__heading-line">{{ settings.prehype_heading_line_1 | escape }}</span>
+      {%- endif -%}
+      {%- if settings.prehype_heading_highlight != blank -%}
+        <span class="prehype-popup__heading-line prehype-popup__heading-highlight">
+          {{- settings.prehype_heading_highlight | escape -}}
+        </span>
+      {%- endif -%}
+      {%- if settings.prehype_heading_line_2 != blank -%}
+        <span class="prehype-popup__heading-line">
+          {{- settings.prehype_heading_line_2 | escape -}}
+          <svg class="prehype-popup__heading-star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M12 2l2.2 6.8H21l-5.5 4 2.1 6.8L12 17.8 6.4 19.6l2.1-6.8L3 8.8h6.8z"/>
+          </svg>
+        </span>
+      {%- endif -%}
+    </h2>
+
+    {%- if settings.prehype_body_text != blank -%}
+      <p class="prehype-popup__body">{{ settings.prehype_body_text | escape }}</p>
+    {%- endif -%}
+
+    {%- if settings.prehype_signup_text != blank -%}
+      <p class="prehype-popup__signup">{{ settings.prehype_signup_text | escape }}</p>
+    {%- endif -%}
+
+    <form class="prehype-popup__form" id="PrehypeNotifyForm" novalidate>
+      <div class="prehype-popup__field">
+        <svg class="prehype-popup__field-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="none" stroke="currentColor" stroke-width="2" d="M4 6h16v12H4z"/>
+          <path fill="none" stroke="currentColor" stroke-width="2" d="M4 7l8 6 8-6"/>
+        </svg>
+        <input
+          class="prehype-popup__input"
+          type="email"
+          name="contact[email]"
+          autocomplete="email"
+          autocapitalize="off"
+          autocorrect="off"
+          required
+          placeholder="{{ settings.prehype_email_placeholder | default: 'Enter your email' | escape }}"
+        >
+      </div>
+
+      <button class="prehype-popup__submit" type="submit">
+        <svg class="prehype-popup__submit-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v.07A6 6 0 0 1 18 9v4.5l1.7 1.7c.3.3.3.8 0 1.1-.2.2-.5.3-.7.3H5c-.3 0-.6-.1-.8-.3-.3-.3-.3-.8 0-1.1L6 13.5V9a6 6 0 0 1 5-5.93V3a1 1 0 0 1 1-1zm-1 18h2a2 2 0 1 1-2 0z"/>
+        </svg>
+        <span>{{ settings.prehype_cta_text | default: 'NOTIFY ME FIRST' | escape }}</span>
+      </button>
+    </form>
+
+    <p class="prehype-popup__message" hidden></p>
+
+    {%- if settings.prehype_disclaimer != blank -%}
+      <p class="prehype-popup__disclaimer">{{ settings.prehype_disclaimer | escape }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  window.prehypeSettings = {
+    enabled: true,
+    tags: {{ settings.prehype_email_tags | default: 'pre-launch, notify-me' | json }},
+    successMessage: {{ settings.prehype_success_message | default: "You're on the list! We'll notify you when Kefey goes live." | json }}
+  };
+</script>
+<script src="{{ 'kefey-prehype-popup.js' | asset_url }}" defer="defer"></script>
