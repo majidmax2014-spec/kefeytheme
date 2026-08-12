@@ -129,6 +129,8 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "cart_color_scheme": "scheme-1",
+    "prehype_checkout_popup_enabled": true,
+    "prehype_popup_logo": "shopify://shop_images/Kefey_Logo_without_tagline_Black_-_RGB.png",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
