@@ -39,10 +39,10 @@
     {%- else -%}
       <img
         class="prehype-popup__deco prehype-popup__deco--left"
-        src="{{ 'prehype-popup-deco-left.png' | asset_url }}"
+        src="{{ 'prehype-popup-gummy.png' | asset_url }}"
         alt=""
-        width="140"
-        height="400"
+        width="204"
+        height="189"
         loading="lazy"
         decoding="async"
       >
@@ -61,10 +61,10 @@
     {%- else -%}
       <img
         class="prehype-popup__deco prehype-popup__deco--right"
-        src="{{ 'prehype-popup-deco-right.png' | asset_url }}"
+        src="{{ 'prehype-popup-gummy.png' | asset_url }}"
         alt=""
-        width="140"
-        height="380"
+        width="204"
+        height="189"
         loading="lazy"
         decoding="async"
       >
@@ -97,9 +97,14 @@
       {%- if settings.prehype_heading_line_2 != blank -%}
         <span class="prehype-popup__heading-line">
           {{- settings.prehype_heading_line_2 | escape -}}
-          <svg class="prehype-popup__heading-star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path fill="currentColor" d="M12 0.6l2.15 8.25L22.4 12l-8.25 2.15L12 23.4l-2.15-8.25L1.6 12l8.25-2.15z"/>
-          </svg>
+          <img
+            class="prehype-popup__heading-star"
+            src="{{ 'prehype-popup-here-star.png' | asset_url }}"
+            alt=""
+            width="90"
+            height="91"
+            decoding="async"
+          >
         </span>
       {%- endif -%}
     </h2>

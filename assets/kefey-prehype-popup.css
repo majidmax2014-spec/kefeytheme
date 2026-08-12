@@ -76,16 +76,17 @@
 }
 
 .prehype-popup__deco--left {
-  left: -42px;
-  top: 46%;
-  width: 118px;
+  left: -58px;
+  top: 52%;
+  width: 150px;
   transform: translateY(-50%);
 }
 
 .prehype-popup__deco--right {
-  right: -38px;
-  top: 86px;
-  width: 112px;
+  right: -52px;
+  top: 72px;
+  width: 138px;
+  transform: scaleX(-1);
 }
 
 .prehype-popup__content {
@@ -137,11 +138,11 @@
 
 .prehype-popup__heading-star {
   display: inline-block;
-  width: 0.42em;
-  height: 0.42em;
-  margin-left: 0.06em;
-  vertical-align: 0.12em;
-  color: var(--prehype-accent, #ff00a8);
+  width: 0.52em;
+  height: 0.52em;
+  margin-left: 0.08em;
+  vertical-align: 0.08em;
+  object-fit: contain;
 }
 
 .prehype-popup__body,
@@ -305,13 +306,13 @@ body.prehype-active .dynamic-checkout__content {
   }
 
   .prehype-popup__deco--left {
-    left: -48px;
-    width: 96px;
+    left: -62px;
+    width: 120px;
   }
 
   .prehype-popup__deco--right {
-    right: -44px;
-    top: 72px;
-    width: 92px;
+    right: -56px;
+    top: 64px;
+    width: 110px;
   }
 }
