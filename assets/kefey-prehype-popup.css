@@ -277,6 +277,14 @@
   font-weight: 700;
 }
 
+#PrehypeNotifyFrame {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border: 0;
+  overflow: hidden;
+}
+
 body.prehype-popup-open {
   overflow: hidden;
 }

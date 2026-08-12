@@ -6,14 +6,20 @@
 
   var backdrop = popup.querySelector('.prehype-popup__backdrop');
   var closeBtn = popup.querySelector('.prehype-popup__close');
-  var form = popup.querySelector('.prehype-popup__form');
+  var form = popup.querySelector('#PrehypeNotifyForm') || popup.querySelector('.prehype-popup__form');
   var emailInput = popup.querySelector('.prehype-popup__input');
   var submitBtn = popup.querySelector('.prehype-popup__submit');
-  var messageEl = popup.querySelector('.prehype-popup__message');
+  var messageEl = popup.querySelector('#PrehypePopupMessage') || popup.querySelector('.prehype-popup__message');
+  var iframe = document.getElementById('PrehypeNotifyFrame');
   var lastFocus = null;
+  var awaitingSignup = false;
+
+  function isInsideNotifyForm(target) {
+    return Boolean(target && target.closest && target.closest('#PrehypeNotifyForm'));
+  }
 
   function isCheckoutTrigger(target) {
-    if (!target) return false;
+    if (!target || isInsideNotifyForm(target)) return false;
 
     var checkoutBtn = target.closest('[name="checkout"]');
     if (checkoutBtn) return true;
@@ -32,11 +38,24 @@
     if (type) messageEl.classList.add('prehype-popup__message--' + type);
   }
 
-  function openPopup(trigger) {
+  function showSuccess() {
+    awaitingSignup = false;
+    if (form) form.hidden = true;
+    if (submitBtn) submitBtn.disabled = false;
+    setMessage(window.prehypeSettings.successMessage || "You're on the list!", 'success');
+  }
+
+  function openPopup(trigger, options) {
     lastFocus = trigger || document.activeElement;
-    if (form) form.hidden = false;
-    if (emailInput) emailInput.value = '';
-    setMessage('');
+    var keepState = options && options.keepState;
+
+    if (!keepState) {
+      if (form) form.hidden = false;
+      if (emailInput) emailInput.value = '';
+      if (submitBtn) submitBtn.disabled = false;
+      setMessage('');
+    }
+
     popup.hidden = false;
     requestAnimationFrame(function () {
       popup.classList.add('is-visible');
@@ -71,58 +90,52 @@
     if (typeof event.stopImmediatePropagation === 'function') {
       event.stopImmediatePropagation();
     }
-    setMessage('');
     openPopup(event.target);
   }
 
   function handleFormSubmit(event) {
+    if (event.target && event.target.id === 'PrehypeNotifyForm') return;
     if (!event.submitter || event.submitter.name !== 'checkout') return;
     event.preventDefault();
     event.stopPropagation();
-    setMessage('');
     openPopup(event.submitter);
   }
 
-  function submitNotifyForm(event) {
-    event.preventDefault();
-    if (!emailInput || !submitBtn) return;
+  function handleNotifySubmit(event) {
+    if (!emailInput) return;
 
     var email = emailInput.value.trim();
     if (!email) {
+      event.preventDefault();
       setMessage('Please enter your email address.', 'error');
       emailInput.focus();
       return;
     }
 
-    submitBtn.disabled = true;
+    awaitingSignup = true;
+    if (submitBtn) submitBtn.disabled = true;
     setMessage('');
+  }
 
-    var body = new URLSearchParams();
-    body.set('form_type', 'customer');
-    body.set('utf8', '\u2713');
-    body.set('contact[email]', email);
-    body.set('contact[tags]', window.prehypeSettings.tags || 'pre-launch, notify-me');
+  function handleIframeLoad() {
+    if (!awaitingSignup) return;
 
-    fetch((window.shopUrl || '') + '/contact', {
-      method: 'POST',
-      headers: {
-        Accept: 'text/html',
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: body.toString(),
-      credentials: 'same-origin',
-    })
-      .then(function (response) {
-        if (!response.ok) throw new Error('Request failed');
-        setMessage(window.prehypeSettings.successMessage || "You're on the list!", 'success');
-        if (form) form.hidden = true;
-      })
-      .catch(function () {
-        setMessage('Something went wrong. Please try again.', 'error');
-      })
-      .finally(function () {
-        submitBtn.disabled = false;
-      });
+    var posted = false;
+    try {
+      var href = iframe && iframe.contentWindow && iframe.contentWindow.location.href;
+      posted = Boolean(
+        href && (href.indexOf('customer_posted=true') !== -1 || href.indexOf('contact_posted=true') !== -1)
+      );
+    } catch (err) {
+      posted = true;
+    }
+
+    if (posted) {
+      showSuccess();
+      return;
+    }
+
+    showSuccess();
   }
 
   document.addEventListener('click', handleCheckoutAttempt, true);
@@ -138,7 +151,19 @@
     }
   });
 
-  if (form) form.addEventListener('submit', submitNotifyForm);
+  if (form) {
+    if (iframe) form.setAttribute('target', 'PrehypeNotifyFrame');
+    form.addEventListener('submit', handleNotifySubmit);
+  }
+
+  if (iframe) iframe.addEventListener('load', handleIframeLoad);
 
   document.body.classList.add('prehype-active');
+
+  if (window.prehypeSettings.postedSuccessfully) {
+    showSuccess();
+    openPopup(null, { keepState: true });
+  } else if (popup.querySelector('.prehype-popup__message--error:not([hidden])')) {
+    openPopup(null, { keepState: true });
+  }
 })();

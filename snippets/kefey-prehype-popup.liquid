@@ -112,7 +112,18 @@
       <p class="prehype-popup__signup">{{ settings.prehype_signup_text | escape | replace: 'KEFEY', '<strong>KEFEY</strong>' }}</p>
     {%- endif -%}
 
-    <form class="prehype-popup__form" id="PrehypeNotifyForm" novalidate>
+    {%- form 'customer', id: 'PrehypeNotifyForm', class: 'prehype-popup__form' -%}
+      {%- if form.posted_successfully? -%}
+        {%- assign prehype_posted = true -%}
+      {%- endif -%}
+      {%- if form.errors -%}
+        {%- assign prehype_form_error = form.errors.translated_fields['email'] | default: 'Email' | capitalize | append: ' ' | append: form.errors.messages['email'] -%}
+      {%- endif -%}
+
+      <input type="hidden" name="contact[tags]" value="{{ settings.prehype_email_tags | default: 'pre-launch, notify-me' | escape }}">
+      <input type="hidden" name="contact[accepts_marketing]" value="true">
+      <input type="hidden" name="return_to" value="{{ request.path }}">
+
       <div class="prehype-popup__field">
         <svg class="prehype-popup__field-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path fill="none" stroke="currentColor" stroke-width="2" d="M4 6h16v12H4z"/>
@@ -130,15 +141,25 @@
         >
       </div>
 
-      <button class="prehype-popup__submit" type="submit">
+      <button class="prehype-popup__submit" type="submit" name="commit">
         <svg class="prehype-popup__submit-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path fill="currentColor" d="M12 2a1 1 0 0 1 1 1v.07A6 6 0 0 1 18 9v4.5l1.7 1.7c.3.3.3.8 0 1.1-.2.2-.5.3-.7.3H5c-.3 0-.6-.1-.8-.3-.3-.3-.3-.8 0-1.1L6 13.5V9a6 6 0 0 1 5-5.93V3a1 1 0 0 1 1-1zm-1 18h2a2 2 0 1 1-2 0z"/>
         </svg>
         <span>{{ settings.prehype_cta_text | default: 'NOTIFY ME FIRST' | escape }}</span>
       </button>
-    </form>
+    {%- endform -%}
 
-    <p class="prehype-popup__message" hidden></p>
+    <p
+      class="prehype-popup__message{% if prehype_posted %} prehype-popup__message--success{% elsif prehype_form_error %} prehype-popup__message--error{% endif %}"
+      id="PrehypePopupMessage"
+      {% unless prehype_posted or prehype_form_error %}hidden{% endunless %}
+    >
+      {%- if prehype_posted -%}
+        {{ settings.prehype_success_message | default: "You're on the list! We'll notify you when Kefey goes live." | escape }}
+      {%- elsif prehype_form_error -%}
+        {{ prehype_form_error | escape }}
+      {%- endif -%}
+    </p>
 
     {%- if settings.prehype_disclaimer != blank -%}
       <p class="prehype-popup__disclaimer">{{ settings.prehype_disclaimer | escape }}</p>
@@ -147,9 +168,19 @@
   </div>
 </div>
 
+<iframe
+  id="PrehypeNotifyFrame"
+  name="PrehypeNotifyFrame"
+  title="Notify me signup"
+  tabindex="-1"
+  aria-hidden="true"
+  hidden
+></iframe>
+
 <script>
   window.prehypeSettings = {
     enabled: true,
+    postedSuccessfully: {{ prehype_posted | default: false | json }},
     tags: {{ settings.prehype_email_tags | default: 'pre-launch, notify-me' | json }},
     successMessage: {{ settings.prehype_success_message | default: "You're on the list! We'll notify you when Kefey goes live." | json }}
   };
