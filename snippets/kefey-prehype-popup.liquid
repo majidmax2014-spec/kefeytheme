@@ -6,9 +6,6 @@
 
 {%- liquid
   assign prehype_logo = settings.prehype_popup_logo
-  if prehype_logo == blank
-    assign prehype_logo = settings.logo
-  endif
 -%}
 
 <div
@@ -18,7 +15,7 @@
   role="dialog"
   aria-modal="true"
   aria-labelledby="PrehypePopupHeading"
-  style="--prehype-bg: {{ settings.prehype_background_color | default: '#FFEF00' }}; --prehype-accent: {{ settings.prehype_accent_color | default: '#FF0099' }};"
+  style="--prehype-bg: {{ settings.prehype_background_color | default: '#FFEB00' }}; --prehype-accent: {{ settings.prehype_accent_color | default: '#FF00A8' }};"
 >
   <div class="prehype-popup__backdrop" aria-hidden="true"></div>
 
@@ -44,8 +41,8 @@
         class="prehype-popup__deco prehype-popup__deco--left"
         src="{{ 'prehype-popup-deco-left.png' | asset_url }}"
         alt=""
-        width="260"
-        height="720"
+        width="140"
+        height="400"
         loading="lazy"
         decoding="async"
       >
@@ -66,13 +63,14 @@
         class="prehype-popup__deco prehype-popup__deco--right"
         src="{{ 'prehype-popup-deco-right.png' | asset_url }}"
         alt=""
-        width="260"
-        height="720"
+        width="140"
+        height="380"
         loading="lazy"
         decoding="async"
       >
     {%- endif -%}
 
+    <div class="prehype-popup__content">
     {%- if prehype_logo != blank -%}
       <img
         class="prehype-popup__logo"
@@ -84,7 +82,7 @@
         decoding="async"
       >
     {%- else -%}
-      <p class="prehype-popup__logo-text">{{ shop.name }}</p>
+      <p class="prehype-popup__logo-text">kefey<sup>®</sup></p>
     {%- endif -%}
 
     <h2 id="PrehypePopupHeading" class="prehype-popup__heading">
@@ -100,7 +98,7 @@
         <span class="prehype-popup__heading-line">
           {{- settings.prehype_heading_line_2 | escape -}}
           <svg class="prehype-popup__heading-star" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path fill="currentColor" d="M12 2l2.2 6.8H21l-5.5 4 2.1 6.8L12 17.8 6.4 19.6l2.1-6.8L3 8.8h6.8z"/>
+            <path fill="currentColor" d="M12 0.6l2.15 8.25L22.4 12l-8.25 2.15L12 23.4l-2.15-8.25L1.6 12l8.25-2.15z"/>
           </svg>
         </span>
       {%- endif -%}
@@ -111,7 +109,7 @@
     {%- endif -%}
 
     {%- if settings.prehype_signup_text != blank -%}
-      <p class="prehype-popup__signup">{{ settings.prehype_signup_text | escape }}</p>
+      <p class="prehype-popup__signup">{{ settings.prehype_signup_text | escape | replace: 'KEFEY', '<strong>KEFEY</strong>' }}</p>
     {%- endif -%}
 
     <form class="prehype-popup__form" id="PrehypeNotifyForm" novalidate>
@@ -145,6 +143,7 @@
     {%- if settings.prehype_disclaimer != blank -%}
       <p class="prehype-popup__disclaimer">{{ settings.prehype_disclaimer | escape }}</p>
     {%- endif -%}
+    </div>
   </div>
 </div>
 
