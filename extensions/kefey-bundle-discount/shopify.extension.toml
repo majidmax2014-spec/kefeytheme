@@ -1,16 +1,21 @@
-api_version = "2025-01"
+api_version = "2025-04"
 
 [[extensions]]
 name = "Kefey bundle discount"
 handle = "kefey-bundle-discount"
 uid = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 type = "function"
-description = "Applies SAVE25 and SAVE15 together on each matching cart line, including multiple lines of the same product."
+description = "Applies SAVE25 on the Big Smile line and SAVE15 on the order so both Mood Gummies bundles can discount at checkout."
 
   [[extensions.targeting]]
-  target = "purchase.product-discount.run"
+  target = "cart.lines.discounts.generate.run"
   input_query = "src/run.graphql"
   export = "run"
+
+  [[extensions.targeting]]
+  target = "cart.delivery-options.discounts.generate.run"
+  input_query = "src/delivery.graphql"
+  export = "delivery"
 
   [extensions.build]
   command = "npm exec -- shopify app function build"

@@ -1,4 +1,7 @@
 query RunInput {
+  discount {
+    discountClasses
+  }
   cart {
     lines {
       id
