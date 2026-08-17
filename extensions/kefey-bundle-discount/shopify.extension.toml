@@ -5,7 +5,7 @@ name = "Kefey bundle discount"
 handle = "kefey-bundle-discount"
 uid = "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
 type = "function"
-description = "Applies 25% or 15% per cart line based on bundle line item properties."
+description = "Applies SAVE25 and SAVE15 together on each matching cart line, including multiple lines of the same product."
 
   [[extensions.targeting]]
   target = "purchase.product-discount.run"

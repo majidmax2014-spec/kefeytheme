@@ -3,6 +3,9 @@ query RunInput {
     lines {
       id
       quantity
+      bundleKey: attribute(key: "_kefey_bundle") {
+        value
+      }
       bundleDiscount: attribute(key: "_kefey_bundle_discount") {
         value
       }
@@ -14,6 +17,11 @@ query RunInput {
       }
       upsellDiscountLabel: attribute(key: "_kefey_upsell_discount_label") {
         value
+      }
+      cost {
+        subtotalAmount {
+          amount
+        }
       }
       merchandise {
         __typename
