@@ -225,6 +225,10 @@
 
   var KEFEY_PACK_SIZES = [2, 4, 6];
 
+  function isVariantAvailable(variant) {
+    return Boolean(variant && variant.available !== false);
+  }
+
   function getPackFromVariant(variant) {
     var source = [];
     if (variant && variant.title) source.push(String(variant.title));
@@ -237,6 +241,17 @@
       if (pattern.test(haystack)) return pack;
     }
     return null;
+  }
+
+  function variantMatchesPack(variant, pack) {
+    var variantPack = getPackFromVariant(variant);
+    return variantPack == null || variantPack === pack;
+  }
+
+  function cartQuantityForPack(variant, pack) {
+    var variantPack = getPackFromVariant(variant);
+    if (variantPack && variantPack === pack) return 1;
+    return pack;
   }
 
   /**
@@ -274,28 +289,31 @@
 
   function buildVariantMapByPack(variants, fallbackVariant) {
     var map = {};
+    var availableSingle = null;
+    var anyAvailable = null;
+
     variants.forEach(function (variant) {
+      if (isVariantAvailable(variant)) {
+        if (!anyAvailable) anyAvailable = variant;
+        if (!availableSingle && getPackFromVariant(variant) == null) availableSingle = variant;
+      }
       var pack = getPackFromVariant(variant);
-      if (pack && !map[pack]) map[pack] = variant;
+      if (!pack) return;
+      var current = map[pack];
+      if (!current || (!isVariantAvailable(current) && isVariantAvailable(variant))) {
+        map[pack] = variant;
+      }
     });
-
-    var hasMappedPack = KEFEY_PACK_SIZES.some(function (pack) {
-      return Boolean(map[pack]);
-    });
-
-    if (!hasMappedPack) {
-      KEFEY_PACK_SIZES.forEach(function (pack) {
-        map[pack] = fallbackVariant;
-      });
-      return map;
-    }
 
     KEFEY_PACK_SIZES.forEach(function (pack) {
-      if (map[pack]) return;
-      var nearest = KEFEY_PACK_SIZES.map(function (candidate) {
-        return map[candidate];
-      }).find(Boolean);
-      map[pack] = nearest || fallbackVariant;
+      var mapped = map[pack];
+      if (mapped && isVariantAvailable(mapped)) return;
+      if (availableSingle) {
+        map[pack] = availableSingle;
+        return;
+      }
+      if (mapped) return;
+      map[pack] = anyAvailable || fallbackVariant;
     });
 
     return map;
@@ -509,18 +527,46 @@
       var subBadgeEl = module.querySelector('[data-sub-badge]');
       var oneEachEl = module.querySelector('[data-one-each]');
       var cta = module.querySelector('[data-kefey-checkout]');
+      var atcErrorEl = module.querySelector('[data-kefey-atc-error]');
 
       var packsEl = module.querySelector('[data-subscribe-packs]');
 
+      function showAtcError(message) {
+        if (!atcErrorEl) return;
+        atcErrorEl.textContent = message || '';
+        atcErrorEl.hidden = !message;
+      }
+
       function resolveVariantForPack(pack) {
         var preferredTarget = sellingPlanByPack[pack] || null;
-        var candidate = map[pack] || fallbackVariant;
-        if (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null)) return candidate;
-        if (candidate && variantHasTarget(candidate, preferredTarget)) return candidate;
-        var byPlan = variants.find(function (v) {
-          return variantHasTarget(v, preferredTarget);
+        var candidate = map[pack] || null;
+
+        function findMatch(predicate) {
+          return variants.find(function (v) {
+            return predicate(v) && variantMatchesPack(v, pack);
+          });
+        }
+
+        if (preferredTarget && (preferredTarget.planId != null || preferredTarget.groupId != null)) {
+          var availableWithPlan = findMatch(function (v) {
+            return isVariantAvailable(v) && variantHasTarget(v, preferredTarget);
+          });
+          if (availableWithPlan) return availableWithPlan;
+        }
+
+        if (candidate && isVariantAvailable(candidate)) return candidate;
+
+        var availableUnit = findMatch(function (v) {
+          return isVariantAvailable(v) && getPackFromVariant(v) == null;
         });
-        return byPlan || candidate;
+        if (availableUnit) return availableUnit;
+
+        var anyAvailable = findMatch(function (v) {
+          return isVariantAvailable(v);
+        });
+        if (anyAvailable) return anyAvailable;
+
+        return candidate || fallbackVariant;
       }
 
       function computeSubscribePricing(pack) {
@@ -529,7 +575,7 @@
 
         var basePrice = Number(variant.price || 0);
         var baseCompare = Number(variant.compare_at_price || 0);
-        var packQty = pack;
+        var packQty = cartQuantityForPack(variant, pack);
         var preferredTarget = sellingPlanByPack[pack] || null;
         var packDiscount = discountByPack[pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
@@ -630,7 +676,11 @@
         packButtons.forEach(function (btn) {
           var btnPack = parseInt(btn.getAttribute('data-pack') || '2', 10);
           var isPackSelected = state.type === 'sub' && btnPack === state.pack;
+          var packVariant = resolveVariantForPack(btnPack);
+          var packSoldOut = !isVariantAvailable(packVariant);
           btn.classList.toggle('is-selected', isPackSelected);
+          btn.classList.toggle('is-sold-out', packSoldOut);
+          btn.disabled = packSoldOut;
           btn.setAttribute('aria-pressed', isPackSelected ? 'true' : 'false');
         });
 
@@ -673,7 +723,7 @@
             packsEl.setAttribute('aria-hidden', 'true');
           }
           if (variantInput) variantInput.value = String(singleVariant.id);
-          if (cta) cta.disabled = !singleVariant.available;
+          if (cta) cta.disabled = !isVariantAvailable(singleVariant);
           updatePackImage(module, state.pack, 'one');
           return;
         }
@@ -687,7 +737,7 @@
 
         if (subscribePricing && subscribePricing.variant) {
           if (variantInput) variantInput.value = String(subscribePricing.variant.id);
-          if (cta) cta.disabled = !subscribePricing.variant.available;
+          if (cta) cta.disabled = !isVariantAvailable(subscribePricing.variant);
         }
 
         updatePackImage(module, state.pack, 'sub');
@@ -711,11 +761,12 @@
         btn.addEventListener('click', function (event) {
           event.stopPropagation();
           var next = parseInt(btn.getAttribute('data-pack') || '2', 10);
-          if (!KEFEY_PACK_SIZES.includes(next)) return;
+          if (!KEFEY_PACK_SIZES.includes(next) || btn.disabled) return;
           state.pack = next;
           if (state.type !== 'sub') {
             state.type = 'sub';
           }
+          showAtcError('');
           render();
         });
       });
@@ -723,10 +774,15 @@
       if (cta) {
         cta.addEventListener('click', function () {
           if (cta.dataset.kefeyLoading === 'true') return;
+          showAtcError('');
 
           if (state.type === 'one') {
             var singleVariant = resolveOneTimeVariant(variants, fallbackVariant);
             if (!singleVariant || !singleVariant.id) return;
+            if (!isVariantAvailable(singleVariant)) {
+              showAtcError('This product is sold out.');
+              return;
+            }
 
             cta.dataset.kefeyLoading = 'true';
             cta.disabled = true;
@@ -759,7 +815,9 @@
                 window.location.href = '/cart';
               })
               .catch(function (err) {
-                console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
+                var message = err && err.message ? err.message : 'Failed to add item';
+                console.error('[Kefey Purchase] Add to cart failed:', message);
+                showAtcError(message);
                 cta.dataset.kefeyLoading = 'false';
                 cta.disabled = false;
               });
@@ -768,6 +826,11 @@
 
           var variant = resolveVariantForPack(state.pack);
           if (!variant || !variant.id) return;
+          if (!isVariantAvailable(variant)) {
+            showAtcError('This pack is sold out. Choose another size.');
+            cta.disabled = true;
+            return;
+          }
 
           var preferredTarget = sellingPlanByPack[state.pack] || null;
           var packDiscount = discountByPack[state.pack];
@@ -818,7 +881,11 @@
             }
             if (!chosenAllocation) {
               var subscriptionVariant = variants.find(function (v) {
-                return Boolean(firstRecurringAllocation(v));
+                return (
+                  isVariantAvailable(v) &&
+                  variantMatchesPack(v, state.pack) &&
+                  Boolean(firstRecurringAllocation(v))
+                );
               });
               if (subscriptionVariant) {
                 var recurringOnAlt = firstRecurringAllocation(subscriptionVariant);
@@ -840,7 +907,7 @@
 
           var payload = {
             id: Number(variant.id),
-            quantity: state.pack,
+            quantity: cartQuantityForPack(variant, state.pack),
             properties: buildKefeyLineProperties(module, state.pack, 'sub', sellingPlanId)
           };
           if (state.type === 'sub' && sellingPlanId != null) {
@@ -874,9 +941,11 @@
               window.location.href = '/cart';
             })
             .catch(function (err) {
-              console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
+              var message = err && err.message ? err.message : 'Failed to add item';
+              console.error('[Kefey Purchase] Add to cart failed:', message);
+              showAtcError(message);
               cta.dataset.kefeyLoading = 'false';
-              cta.disabled = false;
+              render();
             });
         });
       }
