@@ -192,6 +192,18 @@
       {%- if kefey_product -%}
         <script type="application/json" data-kefey-product-json>{{ kefey_product | json }}</script>
       {%- endif -%}
+      {%- if section.settings.product_onetime != blank -%}
+        <script type="application/json" data-kefey-onetime-json>{{ section.settings.product_onetime | json }}</script>
+      {%- endif -%}
+      {%- if section.settings.product_pack_2 != blank -%}
+        <script type="application/json" data-kefey-pack-json="2">{{ section.settings.product_pack_2 | json }}</script>
+      {%- endif -%}
+      {%- if section.settings.product_pack_4 != blank -%}
+        <script type="application/json" data-kefey-pack-json="4">{{ section.settings.product_pack_4 | json }}</script>
+      {%- endif -%}
+      {%- if section.settings.product_pack_6 != blank -%}
+        <script type="application/json" data-kefey-pack-json="6">{{ section.settings.product_pack_6 | json }}</script>
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -201,6 +213,12 @@
   "name": "Main Product Kefey",
   "settings": [
     { "type": "product", "id": "product", "label": "Product" },
+    { "type": "header", "content": "Pack products" },
+    { "type": "paragraph", "content": "Each pack size is its own Shopify product (2 Packs, 4 Packs, 6 Packs). Map them here so Subscribe adds that product with its own selling plan. Leave blank to use the current product." },
+    { "type": "product", "id": "product_onetime", "label": "One-time purchase product" },
+    { "type": "product", "id": "product_pack_2", "label": "2 pack product" },
+    { "type": "product", "id": "product_pack_4", "label": "4 pack product" },
+    { "type": "product", "id": "product_pack_6", "label": "6 pack product" },
     { "type": "text", "id": "purchase_heading", "label": "Purchase heading", "default": "Never Run Out of Joy" },
     { "type": "text", "id": "purchase_subheading", "label": "Purchase subheading", "default": "More Stars | More Balance | More Smiles" },
     { "type": "text", "id": "purchase_note", "label": "Purchase red note", "default": "Subscribe & receive your Kefey® Mood Gummies monthly." },
