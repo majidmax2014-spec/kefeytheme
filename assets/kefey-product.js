@@ -225,79 +225,18 @@
 
   var KEFEY_PACK_SIZES = [2, 4, 6];
 
-  function isVariantAvailable(variant) {
-    return Boolean(variant && variant.available !== false);
-  }
-
-  function parseProductJson(el) {
-    if (!el) return null;
-    try {
-      var parsed = JSON.parse(el.textContent);
-      if (parsed && Array.isArray(parsed.variants) && parsed.variants.length) return parsed;
-    } catch (err) {
-      return null;
-    }
-    return null;
-  }
-
-  function getPackFromText(text) {
-    var haystack = String(text || '').toLowerCase();
-    if (!haystack) return null;
-    for (var i = KEFEY_PACK_SIZES.length - 1; i >= 0; i -= 1) {
-      var pack = KEFEY_PACK_SIZES[i];
-      var pattern = new RegExp('\\b' + pack + '\\s*[- ]?\\s*pack|pack\\s*' + pack + '\\b');
-      if (pattern.test(haystack)) return pack;
-    }
-    return null;
-  }
-
   function getPackFromVariant(variant) {
     var source = [];
     if (variant && variant.title) source.push(String(variant.title));
     if (variant && Array.isArray(variant.options)) source = source.concat(variant.options.map(String));
-    return getPackFromText(source.join(' '));
-  }
+    var haystack = source.join(' ').toLowerCase();
 
-  function variantMatchesPack(variant, pack) {
-    var variantPack = getPackFromVariant(variant);
-    return variantPack == null || variantPack === pack;
-  }
-
-  function cartQuantityForPack(variant, pack, packProduct) {
-    if (getPackFromVariant(variant) === pack) return 1;
-    if (packProduct && getPackFromText(packProduct.title)) return 1;
-    return pack;
-  }
-
-  function allocationPlanId(allocation) {
-    if (!allocation) return null;
-    var raw =
-      allocation.selling_plan_id != null
-        ? allocation.selling_plan_id
-        : allocation.selling_plan && allocation.selling_plan.id != null
-          ? allocation.selling_plan.id
-          : null;
-    return normalizeSellingPlanId(raw);
-  }
-
-  function variantHasPlanId(variant, planId) {
-    if (!variant || planId == null || !Array.isArray(variant.selling_plan_allocations)) return false;
-    return variant.selling_plan_allocations.some(function (allocation) {
-      return allocationPlanId(allocation) === planId;
-    });
-  }
-
-  function firstAvailableVariant(productObj, preferSubscription) {
-    var vars = productObj && Array.isArray(productObj.variants) ? productObj.variants : [];
-    var available = vars.filter(isVariantAvailable);
-    var pool = available.length ? available : vars;
-    if (preferSubscription) {
-      var withPlan = pool.find(function (v) {
-        return Boolean(firstRecurringAllocation(v));
-      });
-      if (withPlan) return withPlan;
+    for (var i = KEFEY_PACK_SIZES.length - 1; i >= 0; i -= 1) {
+      var pack = KEFEY_PACK_SIZES[i];
+      var pattern = new RegExp('\\b' + pack + '\\s*[- ]?\\s*pack|pack\\s*' + pack + '\\b|\\b' + pack + '\\b');
+      if (pattern.test(haystack)) return pack;
     }
-    return pool[0] || vars[0] || null;
+    return null;
   }
 
   /**
@@ -335,31 +274,28 @@
 
   function buildVariantMapByPack(variants, fallbackVariant) {
     var map = {};
-    var availableSingle = null;
-    var anyAvailable = null;
-
     variants.forEach(function (variant) {
-      if (isVariantAvailable(variant)) {
-        if (!anyAvailable) anyAvailable = variant;
-        if (!availableSingle && getPackFromVariant(variant) == null) availableSingle = variant;
-      }
       var pack = getPackFromVariant(variant);
-      if (!pack) return;
-      var current = map[pack];
-      if (!current || (!isVariantAvailable(current) && isVariantAvailable(variant))) {
-        map[pack] = variant;
-      }
+      if (pack && !map[pack]) map[pack] = variant;
     });
 
+    var hasMappedPack = KEFEY_PACK_SIZES.some(function (pack) {
+      return Boolean(map[pack]);
+    });
+
+    if (!hasMappedPack) {
+      KEFEY_PACK_SIZES.forEach(function (pack) {
+        map[pack] = fallbackVariant;
+      });
+      return map;
+    }
+
     KEFEY_PACK_SIZES.forEach(function (pack) {
-      var mapped = map[pack];
-      if (mapped && isVariantAvailable(mapped)) return;
-      if (availableSingle) {
-        map[pack] = availableSingle;
-        return;
-      }
-      if (mapped) return;
-      map[pack] = anyAvailable || fallbackVariant;
+      if (map[pack]) return;
+      var nearest = KEFEY_PACK_SIZES.map(function (candidate) {
+        return map[candidate];
+      }).find(Boolean);
+      map[pack] = nearest || fallbackVariant;
     });
 
     return map;
@@ -534,24 +470,17 @@
       var jsonEl = module.querySelector('[data-kefey-product-json]');
       if (!jsonEl) return;
 
-      var product = parseProductJson(jsonEl);
-      if (!product) return;
-
-      var packProducts = {};
-      module.querySelectorAll('[data-kefey-pack-json]').forEach(function (el) {
-        var pack = parseInt(el.getAttribute('data-kefey-pack-json') || '', 10);
-        var parsed = parseProductJson(el);
-        if (KEFEY_PACK_SIZES.includes(pack) && parsed) packProducts[pack] = parsed;
-      });
-      var oneTimeProduct = parseProductJson(module.querySelector('[data-kefey-onetime-json]'));
+      var product;
+      try {
+        product = JSON.parse(jsonEl.textContent);
+      } catch (err) {
+        return;
+      }
+      if (!product || !Array.isArray(product.variants) || !product.variants.length) return;
 
       var variants = product.variants;
       var fallbackVariant = variants[0];
       var map = buildVariantMapByPack(variants, fallbackVariant);
-
-      function productForPack(pack) {
-        return packProducts[pack] || product;
-      }
 
       var defaultPack = parseInt(module.getAttribute('data-default-pack') || '2', 10);
       if (!KEFEY_PACK_SIZES.includes(defaultPack)) defaultPack = 2;
@@ -580,51 +509,18 @@
       var subBadgeEl = module.querySelector('[data-sub-badge]');
       var oneEachEl = module.querySelector('[data-one-each]');
       var cta = module.querySelector('[data-kefey-checkout]');
-      var atcErrorEl = module.querySelector('[data-kefey-atc-error]');
 
       var packsEl = module.querySelector('[data-subscribe-packs]');
 
-      function showAtcError(message) {
-        if (!atcErrorEl) return;
-        atcErrorEl.textContent = message || '';
-        atcErrorEl.hidden = !message;
-      }
-
       function resolveVariantForPack(pack) {
-        var packProduct = productForPack(pack);
-        if (packProducts[pack]) {
-          return firstAvailableVariant(packProduct, true);
-        }
-
         var preferredTarget = sellingPlanByPack[pack] || null;
-        var candidate = map[pack] || null;
-
-        function findMatch(predicate) {
-          return variants.find(function (v) {
-            return predicate(v) && variantMatchesPack(v, pack);
-          });
-        }
-
-        if (preferredTarget && (preferredTarget.planId != null || preferredTarget.groupId != null)) {
-          var availableWithPlan = findMatch(function (v) {
-            return isVariantAvailable(v) && variantHasTarget(v, preferredTarget);
-          });
-          if (availableWithPlan) return availableWithPlan;
-        }
-
-        if (candidate && isVariantAvailable(candidate)) return candidate;
-
-        var availableUnit = findMatch(function (v) {
-          return isVariantAvailable(v) && getPackFromVariant(v) == null;
+        var candidate = map[pack] || fallbackVariant;
+        if (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null)) return candidate;
+        if (candidate && variantHasTarget(candidate, preferredTarget)) return candidate;
+        var byPlan = variants.find(function (v) {
+          return variantHasTarget(v, preferredTarget);
         });
-        if (availableUnit) return availableUnit;
-
-        var anyAvailable = findMatch(function (v) {
-          return isVariantAvailable(v);
-        });
-        if (anyAvailable) return anyAvailable;
-
-        return candidate || fallbackVariant;
+        return byPlan || candidate;
       }
 
       function computeSubscribePricing(pack) {
@@ -633,12 +529,15 @@
 
         var basePrice = Number(variant.price || 0);
         var baseCompare = Number(variant.compare_at_price || 0);
-        var packQty = cartQuantityForPack(variant, pack, productForPack(pack));
+        var packQty = pack;
         var preferredTarget = sellingPlanByPack[pack] || null;
         var packDiscount = discountByPack[pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
         var sellingPlanId = sellingPlanIdForCart(variant, preferredTarget);
-        if (sellingPlanId == null || !variantHasPlanId(variant, sellingPlanId)) {
+        if (pack === 2 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
+          sellingPlanId = preferredTarget.planId;
+        }
+        if (sellingPlanId == null && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null))) {
           sellingPlanId = sellingPlanIdForCart(variant, null);
         }
 
@@ -648,10 +547,18 @@
 
         if (sellingPlanId != null && Array.isArray(variant.selling_plan_allocations)) {
           allocation = matchAllocationByTarget(variant, preferredTarget);
-          if (!allocation) allocation = firstRecurringAllocation(variant);
+          if (!allocation && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null))) {
+            allocation = variant.selling_plan_allocations[0] || null;
+          }
           if (allocation) {
-            var allocId = allocationPlanId(allocation);
-            if (allocId != null && variantHasPlanId(variant, allocId)) sellingPlanId = allocId;
+            var allocRawId =
+              allocation.selling_plan_id != null
+                ? allocation.selling_plan_id
+                : allocation.selling_plan && allocation.selling_plan.id != null
+                  ? allocation.selling_plan.id
+                  : null;
+            var allocId = normalizeSellingPlanId(allocRawId);
+            if (allocId != null) sellingPlanId = allocId;
           }
           if (allocation && allocation.compare_at_price) {
             subCompareEach = Number(allocation.compare_at_price);
@@ -723,11 +630,7 @@
         packButtons.forEach(function (btn) {
           var btnPack = parseInt(btn.getAttribute('data-pack') || '2', 10);
           var isPackSelected = state.type === 'sub' && btnPack === state.pack;
-          var packVariant = resolveVariantForPack(btnPack);
-          var packSoldOut = !isVariantAvailable(packVariant);
           btn.classList.toggle('is-selected', isPackSelected);
-          btn.classList.toggle('is-sold-out', packSoldOut);
-          btn.disabled = packSoldOut;
           btn.setAttribute('aria-pressed', isPackSelected ? 'true' : 'false');
         });
 
@@ -752,9 +655,8 @@
       }
 
       function renderOneTimePricing() {
-        var oneProduct = oneTimeProduct || product;
-        var singleVariant = resolveOneTimeVariant(oneProduct.variants, oneProduct.variants[0]);
-        var singlePrice = Number(singleVariant && singleVariant.price || 0);
+        var singleVariant = resolveOneTimeVariant(variants, fallbackVariant);
+        var singlePrice = Number(singleVariant.price || 0);
         if (oneEachEl) oneEachEl.textContent = formatMoney(singlePrice, moneyFormat);
         return singleVariant;
       }
@@ -771,7 +673,7 @@
             packsEl.setAttribute('aria-hidden', 'true');
           }
           if (variantInput) variantInput.value = String(singleVariant.id);
-          if (cta) cta.disabled = !isVariantAvailable(singleVariant);
+          if (cta) cta.disabled = !singleVariant.available;
           updatePackImage(module, state.pack, 'one');
           return;
         }
@@ -785,7 +687,7 @@
 
         if (subscribePricing && subscribePricing.variant) {
           if (variantInput) variantInput.value = String(subscribePricing.variant.id);
-          if (cta) cta.disabled = !isVariantAvailable(subscribePricing.variant);
+          if (cta) cta.disabled = !subscribePricing.variant.available;
         }
 
         updatePackImage(module, state.pack, 'sub');
@@ -809,12 +711,11 @@
         btn.addEventListener('click', function (event) {
           event.stopPropagation();
           var next = parseInt(btn.getAttribute('data-pack') || '2', 10);
-          if (!KEFEY_PACK_SIZES.includes(next) || btn.disabled) return;
+          if (!KEFEY_PACK_SIZES.includes(next)) return;
           state.pack = next;
           if (state.type !== 'sub') {
             state.type = 'sub';
           }
-          showAtcError('');
           render();
         });
       });
@@ -822,16 +723,10 @@
       if (cta) {
         cta.addEventListener('click', function () {
           if (cta.dataset.kefeyLoading === 'true') return;
-          showAtcError('');
 
           if (state.type === 'one') {
-            var oneProduct = oneTimeProduct || product;
-            var singleVariant = resolveOneTimeVariant(oneProduct.variants, oneProduct.variants[0]);
+            var singleVariant = resolveOneTimeVariant(variants, fallbackVariant);
             if (!singleVariant || !singleVariant.id) return;
-            if (!isVariantAvailable(singleVariant)) {
-              showAtcError('This product is sold out.');
-              return;
-            }
 
             cta.dataset.kefeyLoading = 'true';
             cta.disabled = true;
@@ -864,9 +759,7 @@
                 window.location.href = '/cart';
               })
               .catch(function (err) {
-                var message = err && err.message ? err.message : 'Failed to add item';
-                console.error('[Kefey Purchase] Add to cart failed:', message);
-                showAtcError(message);
+                console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
                 cta.dataset.kefeyLoading = 'false';
                 cta.disabled = false;
               });
@@ -875,33 +768,82 @@
 
           var variant = resolveVariantForPack(state.pack);
           if (!variant || !variant.id) return;
-          if (!isVariantAvailable(variant)) {
-            showAtcError('This pack is sold out. Choose another size.');
-            cta.disabled = true;
-            return;
-          }
 
-          var packProduct = productForPack(state.pack);
           var preferredTarget = sellingPlanByPack[state.pack] || null;
+          var packDiscount = discountByPack[state.pack];
+          if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
           var sellingPlanId = sellingPlanIdForCart(variant, preferredTarget);
-          if (sellingPlanId == null || !variantHasPlanId(variant, sellingPlanId)) {
-            sellingPlanId = allocationPlanId(firstRecurringAllocation(variant));
+          if (state.pack === 2 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
+            sellingPlanId = preferredTarget.planId;
           }
-          if (sellingPlanId != null && !variantHasPlanId(variant, sellingPlanId)) {
-            sellingPlanId = null;
+          var chosenAllocation = matchAllocationByTarget(variant, preferredTarget);
+          if (!chosenAllocation && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null)) && variant.selling_plan_allocations && variant.selling_plan_allocations.length) {
+            chosenAllocation = variant.selling_plan_allocations[0];
+            var chosenRawId =
+              chosenAllocation.selling_plan_id != null
+                ? chosenAllocation.selling_plan_id
+                : chosenAllocation.selling_plan && chosenAllocation.selling_plan.id != null
+                  ? chosenAllocation.selling_plan.id
+                  : null;
+            var chosenId = normalizeSellingPlanId(chosenRawId);
+            if (chosenId != null) sellingPlanId = chosenId;
+          }
+          if (
+            state.type === 'sub' &&
+            state.pack !== 2 &&
+            preferredTarget &&
+            (preferredTarget.planId != null || preferredTarget.groupId != null) &&
+            !chosenAllocation
+          ) {
+            console.error('[Kefey Purchase] Missing configured subscription target on selected variant for pack', state.pack, preferredTarget);
+            return;
           }
 
-          if (state.type === 'sub' && sellingPlanId == null) {
-            showAtcError('This pack does not have a matching subscription plan.');
-            return;
+          // Pack 2 fallback: prefer a valid monthly subscription add when plan mapping
+          // does not match the selected variant exactly.
+          if (state.type === 'sub' && state.pack === 2 && !chosenAllocation) {
+            var recurringOnCurrent = firstRecurringAllocation(variant);
+            if (recurringOnCurrent) {
+              var recurringRawId =
+                recurringOnCurrent.selling_plan_id != null
+                  ? recurringOnCurrent.selling_plan_id
+                  : recurringOnCurrent.selling_plan && recurringOnCurrent.selling_plan.id != null
+                    ? recurringOnCurrent.selling_plan.id
+                    : null;
+              var recurringId = normalizeSellingPlanId(recurringRawId);
+              if (recurringId != null) {
+                sellingPlanId = recurringId;
+                chosenAllocation = recurringOnCurrent;
+              }
+            }
+            if (!chosenAllocation) {
+              var subscriptionVariant = variants.find(function (v) {
+                return Boolean(firstRecurringAllocation(v));
+              });
+              if (subscriptionVariant) {
+                var recurringOnAlt = firstRecurringAllocation(subscriptionVariant);
+                var recurringAltRawId =
+                  recurringOnAlt && recurringOnAlt.selling_plan_id != null
+                    ? recurringOnAlt.selling_plan_id
+                    : recurringOnAlt && recurringOnAlt.selling_plan && recurringOnAlt.selling_plan.id != null
+                      ? recurringOnAlt.selling_plan.id
+                      : null;
+                var recurringAltId = normalizeSellingPlanId(recurringAltRawId);
+                if (recurringAltId != null) {
+                  variant = subscriptionVariant;
+                  sellingPlanId = recurringAltId;
+                  chosenAllocation = recurringOnAlt;
+                }
+              }
+            }
           }
 
           var payload = {
             id: Number(variant.id),
-            quantity: cartQuantityForPack(variant, state.pack, packProduct),
+            quantity: state.pack,
             properties: buildKefeyLineProperties(module, state.pack, 'sub', sellingPlanId)
           };
-          if (state.type === 'sub' && sellingPlanId != null && variantHasPlanId(variant, sellingPlanId)) {
+          if (state.type === 'sub' && sellingPlanId != null) {
             payload.selling_plan = sellingPlanId;
           }
 
@@ -932,11 +874,9 @@
               window.location.href = '/cart';
             })
             .catch(function (err) {
-              var message = err && err.message ? err.message : 'Failed to add item';
-              console.error('[Kefey Purchase] Add to cart failed:', message);
-              showAtcError(message);
+              console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
               cta.dataset.kefeyLoading = 'false';
-              render();
+              cta.disabled = false;
             });
         });
       }

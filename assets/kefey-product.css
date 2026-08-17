@@ -450,13 +450,6 @@
   border-color: #717171;
 }
 
-.kefey-purchase__pack:disabled,
-.kefey-purchase__pack.is-sold-out {
-  opacity: 0.45;
-  cursor: not-allowed;
-  text-decoration: line-through;
-}
-
 .kefey-purchase__cta {
   width: 100%;
   min-height: 64px;
@@ -476,14 +469,6 @@
 .kefey-purchase__cta:disabled {
   opacity: 0.55;
   cursor: not-allowed;
-}
-
-.kefey-purchase__error {
-  margin: 10px 0 0;
-  color: #c62828;
-  font-size: 1.4rem;
-  font-weight: 600;
-  text-align: center;
 }
 
 .kefey-product-section {
