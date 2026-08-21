@@ -280,6 +280,16 @@
         "padding_top": 44,
         "padding_bottom": 52
       }
+    },
+    "custom_liquid_Mt9EpE": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@graph\": [\n    {\n      \"@type\": \"AboutPage\",\n      \"@id\": \"https://kefey.co/pages/our-story#webpage\",\n      \"url\": \"https://kefey.co/pages/our-story\",\n      \"name\": \"Our Story | The Brand Behind Kefey® Mood Gummies\",\n      \"headline\": \"We reimagine wellness as joy\",\n      \"description\": \"The story behind Kefey® mood gummies: one star-shaped, plant-based formula built to replace a shelf of supplements, packed in reusable, plastic-free tubes.\",\n      \"isPartOf\": { \"@id\": \"https://kefey.co/#website\" },\n      \"about\": { \"@id\": \"https://kefey.co/#organization\" },\n      \"mainEntity\": { \"@id\": \"https://kefey.co/#organization\" },\n      \"primaryImageOfPage\": {\n        \"@type\": \"ImageObject\",\n        \"url\": \"https://kefey.co/cdn/shop/files/about-desktop.png?v=1781259364\"\n      },\n      \"image\": [\n        \"https://kefey.co/cdn/shop/files/Kefey-Star.png?v=1782495498\",\n        \"https://kefey.co/cdn/shop/files/Kefey-Reuse.png?v=1782495697\"\n      ],\n      \"inLanguage\": \"en-US\",\n      \"significantLink\": [\n        \"https://kefey.co/products/mood-gummies\",\n        \"https://kefey.co/pages/kefey%C2%AE-for-good\",\n        \"https://kefey.co/pages/eco-friendly-by-design\"\n      ]\n    },\n    {\n      \"@type\": \"Organization\",\n      \"@id\": \"https://kefey.co/#organization\",\n      \"name\": \"Kefey\",\n      \"alternateName\": \"Kefey®\",\n      \"url\": \"https://kefey.co/\",\n      \"logo\": \"https://kefey.co/cdn/shop/files/Kefey_Logo_without_tagline_Black_-_RGB.png?v=1779615621\",\n      \"slogan\": \"Turn On The Joy\",\n      \"description\": \"Kefey is a United States wellness brand built on the belief that self-care should be effective, intentional and genuinely enjoyable. Instead of many diluted products, Kefey makes one concentrated daily ritual: star-shaped, plant-based mood gummies formulated with adaptogenic botanicals to support mood, focus, energy and daily balance. Kefey gummies are sugar-free, vegan and non-GMO, and ship in premium non-plastic, reusable tubes designed to be kept rather than discarded.\",\n      \"areaServed\": {\n        \"@type\": \"Country\",\n        \"name\": \"United States\",\n        \"alternateName\": \"US\"\n      },\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"addressCountry\": \"US\"\n      },\n      \"knowsAbout\": [\n        \"mood gummies\",\n        \"focus gummies\",\n        \"adaptogenic supplements\",\n        \"plastic-free packaging\",\n        \"sustainable wellness\"\n      ],\n      \"sameAs\": [\n        \"https://www.instagram.com/kefey.co/\",\n        \"https://www.tiktok.com/@kefey.us\",\n        \"https://www.facebook.com/kefey.usa\",\n        \"https://www.snapchat.com/@kefey.co\"\n      ]\n    },\n    {\n      \"@type\": \"BreadcrumbList\",\n      \"@id\": \"https://kefey.co/pages/our-story#breadcrumb\",\n      \"itemListElement\": [\n        { \"@type\": \"ListItem\", \"position\": 1, \"name\": \"Home\", \"item\": \"https://kefey.co/\" },\n        { \"@type\": \"ListItem\", \"position\": 2, \"name\": \"About Us\" },\n        { \"@type\": \"ListItem\", \"position\": 3, \"name\": \"Our Story\" }\n      ]\n    }\n  ]\n}\n</script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
@@ -291,6 +301,7 @@
     "designed_to_shine_6E8hee",
     "built_planet_mind_J4mCcb",
     "we_refuse_section_76XaT4",
-    "purpose_beyond_gummy_F8mZx2"
+    "purpose_beyond_gummy_F8mZx2",
+    "custom_liquid_Mt9EpE"
   ]
 }
