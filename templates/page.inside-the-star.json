@@ -327,7 +327,7 @@
         "button_label": "FIND YOUR STAR",
         "button_link": "shopify://products/mood-gummies",
         "button_show_arrow": true,
-        "button_background": "#4FB1B1",
+        "button_background": "#4fb1b1",
         "button_text_color": "#ffffff",
         "button_font_size": 14,
         "button_padding_y": 14,
@@ -344,6 +344,16 @@
         "padding_top": 44,
         "padding_bottom": 52
       }
+    },
+    "custom_liquid_cbqppc": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "custom_liquid": "<script type=\"application/ld+json\">\n{\n  \"@context\": \"https://schema.org\",\n  \"@graph\": [\n    {\n      \"@type\": \"WebPage\",\n      \"@id\": \"https://kefey.co/pages/inside-the-star#webpage\",\n      \"url\": \"https://kefey.co/pages/inside-the-star\",\n      \"name\": \"Inside the Star | Kefey Mood Gummies Ingredients\",\n      \"headline\": \"Inside the Star\",\n      \"description\": \"What's inside Kefey mood gummies: pectin-based, sugar-free and naturally sweetened, with potent botanical extracts. Vegan, non-GMO and halal.\",\n      \"isPartOf\": { \"@id\": \"https://kefey.co/#website\" },\n      \"about\": { \"@id\": \"https://kefey.co/products/mood-gummies#product\" },\n      \"mainEntity\": { \"@id\": \"https://kefey.co/pages/inside-the-star#attributes\" },\n      \"primaryImageOfPage\": {\n        \"@type\": \"ImageObject\",\n        \"url\": \"https://kefey.co/cdn/shop/files/star-desktop.png?v=1781506635\"\n      },\n      \"inLanguage\": \"en-US\",\n      \"significantLink\": \"https://kefey.co/products/mood-gummies\"\n    },\n    {\n      \"@type\": \"ItemList\",\n      \"@id\": \"https://kefey.co/pages/inside-the-star#attributes\",\n      \"name\": \"What defines each Kefey® star\",\n      \"itemListOrder\": \"https://schema.org/ItemListUnordered\",\n      \"numberOfItems\": 8,\n      \"itemListElement\": [\n        { \"@type\": \"ListItem\", \"position\": 1, \"name\": \"Highly effective botanical extracts\" },\n        { \"@type\": \"ListItem\", \"position\": 2, \"name\": \"Sugar-free\" },\n        { \"@type\": \"ListItem\", \"position\": 3, \"name\": \"Naturally sweetened\" },\n        { \"@type\": \"ListItem\", \"position\": 4, \"name\": \"Vegan (pectin-based)\" },\n        { \"@type\": \"ListItem\", \"position\": 5, \"name\": \"Non-GMO\" },\n        { \"@type\": \"ListItem\", \"position\": 6, \"name\": \"Halal\" },\n        { \"@type\": \"ListItem\", \"position\": 7, \"name\": \"Made in the USA\" },\n        { \"@type\": \"ListItem\", \"position\": 8, \"name\": \"GMP-certified and FDA-registered facilities\" }\n      ]\n    },\n    {\n      \"@type\": \"Product\",\n      \"@id\": \"https://kefey.co/products/mood-gummies#product\",\n      \"name\": \"Kefey® Mood Gummies\",\n      \"url\": \"https://kefey.co/products/mood-gummies\",\n      \"image\": \"https://kefey.co/cdn/shop/files/1-Pack.png?v=1782725978\",\n      \"description\": \"Kefey® Mood Gummies are star-shaped, plant-based gummies made with pectin instead of gelatin, formulated with potent botanical extracts and naturally sweetened with no added sugar. They are vegan, non-GMO and halal, and are free from gelatin, gluten, dairy, soy, artificial colors, yeast, wheat, eggs, peanuts, shellfish, agave, salicylates and bee products.\",\n      \"brand\": { \"@id\": \"https://kefey.co/#organization\" },\n      \"countryOfOrigin\": { \"@type\": \"Country\", \"name\": \"US\" },\n      \"additionalProperty\": [\n        { \"@type\": \"PropertyValue\", \"name\": \"Gelling Agent\", \"value\": \"Pectin (fruit-derived fiber), not gelatin\" },\n        { \"@type\": \"PropertyValue\", \"name\": \"Sweetener\", \"value\": \"Naturally sweetened, no added sugar\" },\n        { \"@type\": \"PropertyValue\", \"name\": \"Dietary Suitability\", \"value\": \"Vegan, non-GMO, halal\" },\n        { \"@type\": \"PropertyValue\", \"name\": \"Free From\", \"value\": \"Gelatin, gluten, dairy, soy, artificial colors, yeast, wheat, eggs, peanuts, shellfish, agave, salicylates, bee products\" },\n        { \"@type\": \"PropertyValue\", \"name\": \"Manufacturing\", \"value\": \"Made in the USA in GMP-certified, FDA-registered facilities\" }\n      ]\n    },\n    {\n      \"@type\": \"BreadcrumbList\",\n      \"@id\": \"https://kefey.co/pages/inside-the-star#breadcrumb\",\n      \"itemListElement\": [\n        { \"@type\": \"ListItem\", \"position\": 1, \"name\": \"Home\", \"item\": \"https://kefey.co/\" },\n        { \"@type\": \"ListItem\", \"position\": 2, \"name\": \"About Us\" },\n        { \"@type\": \"ListItem\", \"position\": 3, \"name\": \"Inside the Star\" }\n      ]\n    }\n  ]\n}\n</script>",
+        "color_scheme": "",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
     }
   },
   "order": [
@@ -354,6 +364,7 @@
     "kefey_plant_based_banner_KHqxr7",
     "kefey_free_from_heading_PLdayY",
     "marquee_strip_gfxGk7",
-    "purpose_beyond_gummy_GKmGPP"
+    "purpose_beyond_gummy_GKmGPP",
+    "custom_liquid_cbqppc"
   ]
 }
