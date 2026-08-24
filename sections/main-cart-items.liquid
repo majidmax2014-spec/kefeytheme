@@ -844,7 +844,8 @@
     {
       "type": "text",
       "id": "offer_left_variant_id",
-      "label": "Left offer variant ID"
+      "label": "Left offer variant ID (MOOD-5 / Big Smile)",
+      "info": "Use the single MOOD-5 pack variant ID. Do not use a duplicate Big Smile variant. Quantity should be 1 when the SKU already represents 5 tubes."
     },
     {
       "type": "range",
@@ -853,8 +854,8 @@
       "max": 20,
       "step": 1,
       "label": "Left offer quantity",
-      "default": 5,
-      "info": "Big Smile Bundle: 5 tubes per add."
+      "default": 1,
+      "info": "Use 1 when MOOD-5 is a pack SKU (5 tubes). Use 5 only if the variant is a single tube priced at $39."
     },
     {
       "type": "text",
@@ -865,7 +866,8 @@
     {
       "type": "text",
       "id": "offer_right_variant_id",
-      "label": "Right offer variant ID"
+      "label": "Right offer variant ID (MOOD-3 / Joyful Trio)",
+      "info": "Use the single MOOD-3 pack variant ID. Do not use a duplicate Joyful Trio variant. Quantity should be 1 when the SKU already represents 3 tubes."
     },
     {
       "type": "range",
@@ -874,8 +876,8 @@
       "max": 20,
       "step": 1,
       "label": "Right offer quantity",
-      "default": 3,
-      "info": "Joyful Trio Bundle: 3 tubes per add."
+      "default": 1,
+      "info": "Use 1 when MOOD-3 is a pack SKU (3 tubes). Use 3 only if the variant is a single tube priced at $39."
     },
     {
       "type": "text",
@@ -918,7 +920,8 @@
     {
       "type": "text",
       "id": "upsell_variant_id",
-      "label": "Upsell variant ID"
+      "label": "Upsell variant ID (MOOD-EXT)",
+      "info": "Extra Tube / MOOD-EXT — must deduct 1 × MOOD-1 from shared inventory."
     },
     {
       "type": "range",
