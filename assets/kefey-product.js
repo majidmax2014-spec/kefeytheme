@@ -233,10 +233,33 @@
 
     for (var i = KEFEY_PACK_SIZES.length - 1; i >= 0; i -= 1) {
       var pack = KEFEY_PACK_SIZES[i];
-      var pattern = new RegExp('\\b' + pack + '\\s*[- ]?\\s*pack|pack\\s*' + pack + '\\b|\\b' + pack + '\\b');
+      var pattern = new RegExp('\\b' + pack + '\\s*[- ]?\\s*pack|pack\\s*' + pack + '\\b');
       if (pattern.test(haystack)) return pack;
     }
     return null;
+  }
+
+  function cartQuantityForPack(variant, pack) {
+    if (getPackFromVariant(variant) === pack) return 1;
+    return pack;
+  }
+
+  function allocationPlanId(allocation) {
+    if (!allocation) return null;
+    var raw =
+      allocation.selling_plan_id != null
+        ? allocation.selling_plan_id
+        : allocation.selling_plan && allocation.selling_plan.id != null
+          ? allocation.selling_plan.id
+          : null;
+    return normalizeSellingPlanId(raw);
+  }
+
+  function variantHasPlanId(variant, planId) {
+    if (!variant || planId == null || !Array.isArray(variant.selling_plan_allocations)) return false;
+    return variant.selling_plan_allocations.some(function (allocation) {
+      return allocationPlanId(allocation) === planId;
+    });
   }
 
   /**
@@ -358,6 +381,12 @@
     var available = variants.filter(function (v) {
       return v && v.available !== false;
     });
+    var oneTime = available.find(function (v) {
+      var title = String(v.title || '').toLowerCase();
+      return title.indexOf('one-time') !== -1 || title.indexOf('one time') !== -1;
+    });
+    if (oneTime) return oneTime;
+
     var singles = available.filter(function (v) {
       return getPackFromVariant(v) == null;
     });
@@ -529,15 +558,12 @@
 
         var basePrice = Number(variant.price || 0);
         var baseCompare = Number(variant.compare_at_price || 0);
-        var packQty = pack;
+        var packQty = cartQuantityForPack(variant, pack);
         var preferredTarget = sellingPlanByPack[pack] || null;
         var packDiscount = discountByPack[pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
         var sellingPlanId = sellingPlanIdForCart(variant, preferredTarget);
-        if (pack === 2 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
-          sellingPlanId = preferredTarget.planId;
-        }
-        if (sellingPlanId == null && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null))) {
+        if (sellingPlanId == null || !variantHasPlanId(variant, sellingPlanId)) {
           sellingPlanId = sellingPlanIdForCart(variant, null);
         }
 
@@ -547,34 +573,26 @@
 
         if (sellingPlanId != null && Array.isArray(variant.selling_plan_allocations)) {
           allocation = matchAllocationByTarget(variant, preferredTarget);
-          if (!allocation && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null))) {
-            allocation = variant.selling_plan_allocations[0] || null;
-          }
+          if (!allocation) allocation = firstRecurringAllocation(variant);
           if (allocation) {
-            var allocRawId =
-              allocation.selling_plan_id != null
-                ? allocation.selling_plan_id
-                : allocation.selling_plan && allocation.selling_plan.id != null
-                  ? allocation.selling_plan.id
-                  : null;
-            var allocId = normalizeSellingPlanId(allocRawId);
-            if (allocId != null) sellingPlanId = allocId;
+            var allocId = allocationPlanId(allocation);
+            if (allocId != null && variantHasPlanId(variant, allocId)) sellingPlanId = allocId;
           }
           if (allocation && allocation.compare_at_price) {
             subCompareEach = Number(allocation.compare_at_price);
           }
         }
 
-        if (packDiscount > 0) {
-          subEach = Math.max(0, Math.round(basePrice * (100 - packDiscount) / 100));
-        } else if (allocation && allocation.price) {
+        if (allocation && allocation.price) {
           subEach = Number(allocation.price);
+        } else if (packDiscount > 0) {
+          subEach = Math.max(0, Math.round(basePrice * (100 - packDiscount) / 100));
         }
 
         var hasSubscriptionPlan =
           preferredTarget && (preferredTarget.planId != null || preferredTarget.groupId != null)
-            ? Boolean(allocation)
-            : Boolean(sellingPlanId);
+            ? Boolean(matchAllocationByTarget(variant, preferredTarget))
+            : Boolean(sellingPlanId && variantHasPlanId(variant, sellingPlanId));
 
         var subTotal = subEach * packQty;
         var subCompareTotal = 0;
@@ -773,77 +791,35 @@
           var packDiscount = discountByPack[state.pack];
           if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
           var sellingPlanId = sellingPlanIdForCart(variant, preferredTarget);
-          if (state.pack === 2 && sellingPlanId == null && preferredTarget && preferredTarget.planId != null) {
-            sellingPlanId = preferredTarget.planId;
+          if (sellingPlanId == null || !variantHasPlanId(variant, sellingPlanId)) {
+            sellingPlanId = sellingPlanIdForCart(variant, null);
           }
           var chosenAllocation = matchAllocationByTarget(variant, preferredTarget);
-          if (!chosenAllocation && (!preferredTarget || (preferredTarget.planId == null && preferredTarget.groupId == null)) && variant.selling_plan_allocations && variant.selling_plan_allocations.length) {
-            chosenAllocation = variant.selling_plan_allocations[0];
-            var chosenRawId =
-              chosenAllocation.selling_plan_id != null
-                ? chosenAllocation.selling_plan_id
-                : chosenAllocation.selling_plan && chosenAllocation.selling_plan.id != null
-                  ? chosenAllocation.selling_plan.id
-                  : null;
-            var chosenId = normalizeSellingPlanId(chosenRawId);
-            if (chosenId != null) sellingPlanId = chosenId;
+          if (!chosenAllocation) chosenAllocation = firstRecurringAllocation(variant);
+          if (chosenAllocation) {
+            var chosenId = allocationPlanId(chosenAllocation);
+            if (chosenId != null && variantHasPlanId(variant, chosenId)) sellingPlanId = chosenId;
           }
           if (
             state.type === 'sub' &&
-            state.pack !== 2 &&
             preferredTarget &&
             (preferredTarget.planId != null || preferredTarget.groupId != null) &&
-            !chosenAllocation
+            !matchAllocationByTarget(variant, preferredTarget)
           ) {
             console.error('[Kefey Purchase] Missing configured subscription target on selected variant for pack', state.pack, preferredTarget);
             return;
           }
 
-          // Pack 2 fallback: prefer a valid monthly subscription add when plan mapping
-          // does not match the selected variant exactly.
-          if (state.type === 'sub' && state.pack === 2 && !chosenAllocation) {
-            var recurringOnCurrent = firstRecurringAllocation(variant);
-            if (recurringOnCurrent) {
-              var recurringRawId =
-                recurringOnCurrent.selling_plan_id != null
-                  ? recurringOnCurrent.selling_plan_id
-                  : recurringOnCurrent.selling_plan && recurringOnCurrent.selling_plan.id != null
-                    ? recurringOnCurrent.selling_plan.id
-                    : null;
-              var recurringId = normalizeSellingPlanId(recurringRawId);
-              if (recurringId != null) {
-                sellingPlanId = recurringId;
-                chosenAllocation = recurringOnCurrent;
-              }
-            }
-            if (!chosenAllocation) {
-              var subscriptionVariant = variants.find(function (v) {
-                return Boolean(firstRecurringAllocation(v));
-              });
-              if (subscriptionVariant) {
-                var recurringOnAlt = firstRecurringAllocation(subscriptionVariant);
-                var recurringAltRawId =
-                  recurringOnAlt && recurringOnAlt.selling_plan_id != null
-                    ? recurringOnAlt.selling_plan_id
-                    : recurringOnAlt && recurringOnAlt.selling_plan && recurringOnAlt.selling_plan.id != null
-                      ? recurringOnAlt.selling_plan.id
-                      : null;
-                var recurringAltId = normalizeSellingPlanId(recurringAltRawId);
-                if (recurringAltId != null) {
-                  variant = subscriptionVariant;
-                  sellingPlanId = recurringAltId;
-                  chosenAllocation = recurringOnAlt;
-                }
-              }
-            }
+          if (state.type === 'sub' && sellingPlanId != null && !variantHasPlanId(variant, sellingPlanId)) {
+            sellingPlanId = null;
           }
 
           var payload = {
             id: Number(variant.id),
-            quantity: state.pack,
+            quantity: cartQuantityForPack(variant, state.pack),
             properties: buildKefeyLineProperties(module, state.pack, 'sub', sellingPlanId)
           };
-          if (state.type === 'sub' && sellingPlanId != null) {
+          if (state.type === 'sub' && sellingPlanId != null && variantHasPlanId(variant, sellingPlanId)) {
             payload.selling_plan = sellingPlanId;
           }
 
