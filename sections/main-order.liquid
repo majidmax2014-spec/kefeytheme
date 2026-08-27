@@ -72,39 +72,29 @@
                 data-label="{{ 'customer.order.product' | t }}"
               >
                 <div class="kefey-order-line">
-                  {%- liquid
-                    assign order_line_image = blank
-                    if line_item.properties['_kefey_pack_image'] != blank
-                      assign order_line_image = line_item.properties['_kefey_pack_image']
-                    elsif line_item.image
-                      assign order_line_image = line_item.image | image_url: width: 160
-                    endif
-                  -%}
-                  {%- if order_line_image != blank -%}
-                    <div class="kefey-order-line__media">
-                      <img
-                        src="{{ order_line_image }}"
-                        alt="{{ line_item.title | escape }}"
-                        width="80"
-                        height="80"
-                        loading="lazy"
-                      >
-                    </div>
-                  {%- endif -%}
+                  {% render 'kefey-order-line-media', line_item: line_item, section: section %}
                   <div class="kefey-order-line__body">
                   {%- if line_item.url != blank -%}
                     <a href="{{ line_item.url }}">{{ line_item.title | escape }}</a>
                   {%- else -%}
                     <p>{{ line_item.title | escape }}</p>
                   {%- endif -%}
+                  {%- if line_item.variant != blank and line_item.product.has_only_default_variant == false -%}
+                    <p class="kefey-order-line__variant">{{ line_item.variant.title | escape }}</p>
+                  {%- endif -%}
+                  {%- if line_item.properties['_kefey_purchase_type'] == 'sub' or line_item.selling_plan_allocation != null -%}
+                    <p class="kefey-order-line__badge">Subscription</p>
+                  {%- elsif line_item.properties['_kefey_bundle'] != blank -%}
+                    <p class="kefey-order-line__badge">
+                      Bundle
+                      {%- if line_item.properties['_kefey_bundle_discount_label'] != blank -%}
+                        · {{ line_item.properties['_kefey_bundle_discount_label'] | escape }}
+                      {%- endif -%}
+                    </p>
+                  {%- endif -%}
                   {%- assign property_size = line_item.properties | size -%}
                   {%- unless line_item.selling_plan_allocation == null and property_size == 0 -%}
                     <div class="properties">
-                      {%- unless line_item.product.has_only_default_variant -%}
-                        <span>
-                          {{ line_item.variant.title | escape }}
-                        </span>
-                      {%- endunless -%}
                       {%- unless line_item.selling_plan_allocation == null -%}
                         <span>
                           {{ line_item.selling_plan_allocation.selling_plan.name }}
@@ -176,40 +166,32 @@
                 role="cell"
                 data-label="{{ 'customer.order.price' | t }}"
               >
-                {%- if line_item.original_price != line_item.final_price or line_item.unit_price_measurement -%}
+                {%- liquid
+                  assign kefey_unit_price = line_item.final_price
+                  assign kefey_unit_compare = line_item.original_price
+                -%}
+                {%- if kefey_unit_compare != kefey_unit_price -%}
                   <dl>
-                    {%- if line_item.original_price != line_item.final_price -%}
-                      <dt>
-                        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-                      </dt>
-                      <dd class="regular-price">
-                        <s>{{ line_item.original_price | money }}</s>
-                      </dd>
-                      <dt>
-                        <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
-                      </dt>
-                      <dd>
-                        <span>{{ line_item.final_price | money }}</span>
-                      </dd>
-                    {%- else -%}
-                      <dt>
-                        <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
-                      </dt>
-                      <dd>
-                        {{ line_item.original_price | money }}
-                      </dd>
-                    {%- endif -%}
-                    {%- if line_item.unit_price_measurement -%}
-                      <dt>
-                        <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
-                      </dt>
-                      <dd class="unit-price">
-                        {% render 'unit-price', price: line_item.unit_price, measurement: line_item.unit_price_measurement, hide_accessibility_label: true %}
-                      </dd>
-                    {%- endif -%}
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
+                    </dt>
+                    <dd class="regular-price">
+                      <s>{{ kefey_unit_compare | money }}</s>
+                    </dd>
+                    <dt>
+                      <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
+                    </dt>
+                    <dd>
+                      <span>{{ kefey_unit_price | money }}</span>
+                    </dd>
                   </dl>
                 {%- else -%}
-                  <span>{{ line_item.final_price | money }}</span>
+                  <span>{{ kefey_unit_price | money }}</span>
+                {%- endif -%}
+                {%- if line_item.unit_price_measurement -%}
+                  <div class="unit-price">
+                    {% render 'unit-price', price: line_item.unit_price, measurement: line_item.unit_price_measurement, hide_accessibility_label: true %}
+                  </div>
                 {%- endif -%}
               </td>
               <td
@@ -240,7 +222,7 @@
                     </dd>
                   </dl>
                 {%- else -%}
-                  {{ line_item.original_line_price | money }}
+                  {{ line_item.final_line_price | money }}
                 {%- endif -%}
               </td>
             </tr>
@@ -380,6 +362,54 @@
       "type": "url",
       "id": "subscription_url",
       "label": "Subscription management URL"
+    },
+    {
+      "type": "header",
+      "content": "Order line pack images"
+    },
+    {
+      "type": "paragraph",
+      "content": "Used when a historical order line has no _kefey_pack_image property. Prefer matching the cart pack images."
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_1",
+      "label": "1 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_2",
+      "label": "2 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_3",
+      "label": "3 pack / Joyful Trio image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_4",
+      "label": "4 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_5",
+      "label": "5 pack / Big Smile image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_6",
+      "label": "6 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "offer_left_pack_image",
+      "label": "Big Smile fallback image"
+    },
+    {
+      "type": "image_picker",
+      "id": "offer_right_pack_image",
+      "label": "Joyful Trio fallback image"
     },
     {
       "type": "header",

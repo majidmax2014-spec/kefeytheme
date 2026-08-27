@@ -1,0 +1,131 @@
+{%- comment -%}
+  Resolves the best pack/bundle image for an order line.
+  Priority:
+  1) Stored _kefey_pack_image property (from storefront ATC)
+  2) Theme pack/bundle image settings (by pack size / variant title)
+  3) Variant featured media / image
+  4) Product media filename match (2-Packs, 6-Packs, etc.)
+  5) line_item.image fallback
+
+  Params:
+  - line_item (required)
+  - section (optional)
+  - output: 'media' (default) | 'url'
+{%- endcomment -%}
+
+{%- liquid
+  assign kefey_order_image = blank
+  assign kefey_pack_size = 0
+  assign kefey_output_mode = output | default: 'media'
+
+  if line_item.properties['_kefey_pack_image'] != blank
+    assign kefey_order_image = line_item.properties['_kefey_pack_image']
+  endif
+
+  if line_item.properties['_kefey_pack_size'] != blank
+    assign kefey_pack_size = line_item.properties['_kefey_pack_size'] | plus: 0
+  endif
+
+  if kefey_pack_size == 0
+    assign kefey_title_blob = line_item.variant.title | append: ' ' | append: line_item.title | append: ' ' | append: line_item.product.title | downcase
+    if kefey_title_blob contains 'big smile' or kefey_title_blob contains '5 pack'
+      assign kefey_pack_size = 5
+    elsif kefey_title_blob contains 'joyful trio' or kefey_title_blob contains '3 pack'
+      assign kefey_pack_size = 3
+    elsif kefey_title_blob contains '6 pack'
+      assign kefey_pack_size = 6
+    elsif kefey_title_blob contains '4 pack'
+      assign kefey_pack_size = 4
+    elsif kefey_title_blob contains '2 pack'
+      assign kefey_pack_size = 2
+    elsif kefey_title_blob contains 'extra tube' or kefey_title_blob contains 'one-time'
+      assign kefey_pack_size = 1
+    endif
+  endif
+
+  if kefey_pack_size == 0 and line_item.quantity > 0 and line_item.quantity <= 6
+    assign kefey_pack_size = line_item.quantity
+  endif
+
+  if kefey_order_image == blank and section
+    assign kefey_pack_setting = blank
+    case kefey_pack_size
+      when 1
+        assign kefey_pack_setting = section.settings.pack_image_1
+      when 2
+        assign kefey_pack_setting = section.settings.pack_image_2
+      when 3
+        assign kefey_pack_setting = section.settings.pack_image_3
+        if kefey_pack_setting == blank
+          assign kefey_pack_setting = section.settings.offer_right_pack_image
+        endif
+      when 4
+        assign kefey_pack_setting = section.settings.pack_image_4
+      when 5
+        assign kefey_pack_setting = section.settings.pack_image_5
+        if kefey_pack_setting == blank
+          assign kefey_pack_setting = section.settings.offer_left_pack_image
+        endif
+      when 6
+        assign kefey_pack_setting = section.settings.pack_image_6
+    endcase
+
+    if kefey_pack_setting != blank
+      assign kefey_order_image = kefey_pack_setting | image_url: width: 240
+    endif
+  endif
+
+  if kefey_order_image == blank and line_item.variant.featured_media
+    assign kefey_order_image = line_item.variant.featured_media | image_url: width: 240
+  elsif kefey_order_image == blank and line_item.variant.image
+    assign kefey_order_image = line_item.variant.image | image_url: width: 240
+  endif
+
+  if kefey_order_image == blank and line_item.product and line_item.product.images.size > 0
+    for product_image in line_item.product.images
+      assign image_src_down = product_image.src | downcase
+      if kefey_pack_size == 6 and image_src_down contains '6-pack'
+        assign kefey_order_image = product_image | image_url: width: 240
+        break
+      elsif kefey_pack_size == 5 and image_src_down contains '5-pack'
+        assign kefey_order_image = product_image | image_url: width: 240
+        break
+      elsif kefey_pack_size == 4 and image_src_down contains '4-pack'
+        assign kefey_order_image = product_image | image_url: width: 240
+        break
+      elsif kefey_pack_size == 3 and image_src_down contains '3-pak'
+        assign kefey_order_image = product_image | image_url: width: 240
+        break
+      elsif kefey_pack_size == 3 and image_src_down contains '3-pack'
+        assign kefey_order_image = product_image | image_url: width: 240
+        break
+      elsif kefey_pack_size == 2 and image_src_down contains '2-pack'
+        assign kefey_order_image = product_image | image_url: width: 240
+        break
+      elsif kefey_pack_size == 1 and image_src_down contains '1-pack'
+        assign kefey_order_image = product_image | image_url: width: 240
+        break
+      endif
+    endfor
+  endif
+
+  if kefey_order_image == blank and line_item.image
+    assign kefey_order_image = line_item.image | image_url: width: 240
+  endif
+-%}
+
+{%- if kefey_order_image != blank -%}
+  {%- if kefey_output_mode == 'url' -%}
+    {{- kefey_order_image -}}
+  {%- else -%}
+    <div class="kefey-order-line__media">
+      <img
+        src="{{ kefey_order_image }}"
+        alt="{{ line_item.title | escape }}"
+        width="80"
+        height="80"
+        loading="lazy"
+      >
+    </div>
+  {%- endif -%}
+{%- endif -%}

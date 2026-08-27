@@ -38,6 +38,14 @@
       "type": "main-order",
       "settings": {
         "subscription_label": "Manage subscriptions",
+        "pack_image_1": "shopify://shop_images/1-Pack.png",
+        "pack_image_2": "shopify://shop_images/2-Packs.png",
+        "pack_image_3": "shopify://shop_images/3-Pakcs.png",
+        "pack_image_4": "shopify://shop_images/4-Packs.png",
+        "pack_image_5": "shopify://shop_images/5-Packs.png",
+        "pack_image_6": "shopify://shop_images/6-Packs.png",
+        "offer_left_pack_image": "shopify://shop_images/5-Packs.png",
+        "offer_right_pack_image": "shopify://shop_images/3-Pakcs.png",
         "padding_top": 36,
         "padding_bottom": 48
       }

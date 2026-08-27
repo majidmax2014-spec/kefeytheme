@@ -86,12 +86,31 @@
                       headers="ColumnOrder"
                       data-label="{{ 'customer.orders.order_number' | t }}"
                     >
-                      <a
-                        href="{{ order.customer_url }}"
-                        aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}"
-                      >
-                        {{ order.name }}
-                      </a>
+                      <div class="kefey-order-history-row">
+                        <div class="kefey-order-history-row__thumbs" aria-hidden="true">
+                          {%- for line_item in order.line_items limit: 3 -%}
+                            {%- capture kefey_thumb_url -%}
+                              {% render 'kefey-order-line-media', line_item: line_item, section: section, output: 'url' %}
+                            {%- endcapture -%}
+                            {%- assign kefey_thumb_url = kefey_thumb_url | strip -%}
+                            {%- if kefey_thumb_url != blank -%}
+                              <img
+                                src="{{ kefey_thumb_url }}"
+                                alt=""
+                                width="40"
+                                height="40"
+                                loading="lazy"
+                              >
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </div>
+                        <a
+                          href="{{ order.customer_url }}"
+                          aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}"
+                        >
+                          {{ order.name }}
+                        </a>
+                      </div>
                     </td>
                     <td headers="RowOrder ColumnDate" role="cell" data-label="{{ 'customer.orders.date' | t }}">
                       {{ order.created_at | time_tag: format: 'date' }}
@@ -215,6 +234,50 @@
       "id": "subscription_url",
       "label": "Subscription management URL",
       "info": "Use /tools/recurring/login for Recharge on classic accounts, or your Shopify account subscriptions page for Unity."
+    },
+    {
+      "type": "header",
+      "content": "Order history pack images"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_1",
+      "label": "1 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_2",
+      "label": "2 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_3",
+      "label": "3 pack / Joyful Trio image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_4",
+      "label": "4 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_5",
+      "label": "5 pack / Big Smile image"
+    },
+    {
+      "type": "image_picker",
+      "id": "pack_image_6",
+      "label": "6 pack image"
+    },
+    {
+      "type": "image_picker",
+      "id": "offer_left_pack_image",
+      "label": "Big Smile fallback image"
+    },
+    {
+      "type": "image_picker",
+      "id": "offer_right_pack_image",
+      "label": "Joyful Trio fallback image"
     },
     {
       "type": "header",

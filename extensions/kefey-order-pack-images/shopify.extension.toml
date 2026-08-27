@@ -1,0 +1,15 @@
+api_version = "2025-10"
+
+[[extensions]]
+name = "Kefey order pack images"
+handle = "kefey-order-pack-images"
+type = "ui_extension"
+uid = "c3d4e5f6-a7b8-9012-cdef-1234567890ab"
+
+  [[extensions.targeting]]
+  module = "./src/OrderLinePackImage.jsx"
+  target = "customer-account.order-status.cart-line-item.render-after"
+
+  [[extensions.targeting]]
+  module = "./src/OrderPackImageBlock.jsx"
+  target = "customer-account.order-status.block.render"

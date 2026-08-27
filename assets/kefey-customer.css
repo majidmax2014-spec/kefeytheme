@@ -369,6 +369,42 @@
   flex: 1;
 }
 
+.kefey-order-line__variant {
+  margin: 0.2rem 0 0;
+  color: var(--kf-cust-muted);
+  font-size: 1.3rem;
+}
+
+.kefey-order-line__badge {
+  margin: 0.35rem 0 0;
+  color: var(--kf-cust-muted);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.kefey-order-history-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.kefey-order-history-row__thumbs {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.kefey-order-history-row__thumbs img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f6f6f6;
+}
+
 .kefey-order-reorder {
   margin-top: 2rem;
   padding-top: 1.6rem;
