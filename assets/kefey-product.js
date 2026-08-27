@@ -239,8 +239,16 @@
     return null;
   }
 
+  /**
+   * Tube price is $39 (3900 cents). Pack variants at that price need cart qty = pack
+   * size so 2-pack subscribe = 2 × $35.10 = $70.20 after 10% off.
+   * If Admin later sets a true pack total (e.g. $78), use qty 1.
+   */
   function cartQuantityForPack(variant, pack) {
-    if (getPackFromVariant(variant) === pack) return 1;
+    var price = Number(variant && variant.price != null ? variant.price : 0);
+    if (!pack || pack < 1) return 1;
+    // Already a pack total (roughly 2+ tubes at ~$39+) → one line item.
+    if (price >= 5000) return 1;
     return pack;
   }
 

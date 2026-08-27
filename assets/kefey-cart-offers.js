@@ -1,6 +1,7 @@
 (() => {
   const CART_ADD_URL = (window.routes && window.routes.cart_add_url) || '/cart/add.js';
   const CART_URL = (window.routes && window.routes.cart_url) || '/cart';
+  const CART_UPDATE_URL = (window.routes && window.routes.cart_update_url) || '/cart/update.js';
 
   function parseInteger(value, fallback = 0) {
     const parsed = Number.parseInt(value, 10);
@@ -10,6 +11,58 @@
   function getDiscountRedirectUrl(code) {
     if (!code) return CART_URL;
     return `/discount/${encodeURIComponent(code)}?redirect=${encodeURIComponent(CART_URL)}`;
+  }
+
+  /**
+   * Heal subscribe lines that used qty 1 on $39 pack variants.
+   * Expected: 2-pack = qty 2 → $70.20 after 10% (not $35.10).
+   */
+  async function syncSubscriptionPackQuantities() {
+    try {
+      const cartResponse = await fetch('/cart.js', {
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' },
+      });
+      if (!cartResponse.ok) return;
+
+      const cart = await cartResponse.json();
+      if (!cart.items || !cart.items.length) return;
+
+      const updates = {};
+      let needsUpdate = false;
+
+      cart.items.forEach((item) => {
+        const props = item.properties || {};
+        if (props._kefey_purchase_type !== 'sub') return;
+
+        const pack = parseInteger(props._kefey_pack_size, 0);
+        const unitPrice = Number(item.original_price || item.price || 0);
+        // Per-tube pricing (~$39). Skip if variant is already a pack total.
+        if (pack <= 1 || unitPrice >= 5000) return;
+        if (item.quantity === pack) return;
+
+        updates[item.key] = pack;
+        needsUpdate = true;
+      });
+
+      if (!needsUpdate) return;
+
+      const updateResponse = await fetch(CART_UPDATE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({ updates }),
+      });
+
+      if (updateResponse.ok) {
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('[Kefey Cart] Subscription quantity sync failed:', error);
+    }
   }
 
   async function addVariantToCart(variantId, quantity, properties) {
@@ -134,4 +187,10 @@
       handleOfferButton(offerButton);
     }
   });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', syncSubscriptionPackQuantities);
+  } else {
+    syncSubscriptionPackQuantities();
+  }
 })();
