@@ -2,6 +2,7 @@
   const CART_ADD_URL = (window.routes && window.routes.cart_add_url) || '/cart/add.js';
   const CART_URL = (window.routes && window.routes.cart_url) || '/cart';
   const CART_UPDATE_URL = (window.routes && window.routes.cart_update_url) || '/cart/update.js';
+  const DISCOUNT_SYNC_KEY = 'kefey_discount_sync';
 
   function parseInteger(value, fallback = 0) {
     const parsed = Number.parseInt(value, 10);
@@ -11,6 +12,86 @@
   function getDiscountRedirectUrl(code) {
     if (!code) return CART_URL;
     return `/discount/${encodeURIComponent(code)}?redirect=${encodeURIComponent(CART_URL)}`;
+  }
+
+  function normalizeDiscountName(value) {
+    return String(value || '')
+      .trim()
+      .toUpperCase();
+  }
+
+  function collectAppliedDiscountNames(cart) {
+    const names = new Set();
+
+    (cart.cart_level_discount_applications || []).forEach(function (discount) {
+      const title = normalizeDiscountName(discount.title || discount.code);
+      if (title) names.add(title);
+    });
+
+    (cart.items || []).forEach(function (item) {
+      (item.discounts || []).forEach(function (discount) {
+        const title = normalizeDiscountName(discount.title);
+        if (title) names.add(title);
+      });
+      (item.line_level_discount_allocations || []).forEach(function (allocation) {
+        const app = allocation.discount_application || {};
+        const title = normalizeDiscountName(app.title || app.code);
+        if (title) names.add(title);
+      });
+    });
+
+    return names;
+  }
+
+  function collectNeededDiscountCodes(cart) {
+    const codes = [];
+    const seen = new Set();
+
+    (cart.items || []).forEach(function (item) {
+      const props = item.properties || {};
+      const code = (props._kefey_bundle_discount_label || props._kefey_upsell_discount_label || '').trim();
+      const key = normalizeDiscountName(code);
+      if (!key || seen.has(key)) return;
+      seen.add(key);
+      codes.push(code);
+    });
+
+    return codes;
+  }
+
+  /**
+   * Apply the first missing bundle/upsell discount code via Shopify's /discount/URL
+   * so checkout gets a real discount (cart Liquid display is not enough).
+   */
+  async function syncBundleDiscountCodes() {
+    try {
+      if (sessionStorage.getItem(DISCOUNT_SYNC_KEY) === '1') {
+        sessionStorage.removeItem(DISCOUNT_SYNC_KEY);
+        return;
+      }
+
+      const cartResponse = await fetch('/cart.js', {
+        credentials: 'same-origin',
+        headers: { Accept: 'application/json' },
+      });
+      if (!cartResponse.ok) return;
+
+      const cart = await cartResponse.json();
+      const needed = collectNeededDiscountCodes(cart);
+      if (!needed.length) return;
+
+      const applied = collectAppliedDiscountNames(cart);
+      const missing = needed.find(function (code) {
+        return !applied.has(normalizeDiscountName(code));
+      });
+
+      if (!missing) return;
+
+      sessionStorage.setItem(DISCOUNT_SYNC_KEY, '1');
+      window.location.href = getDiscountRedirectUrl(missing);
+    } catch (error) {
+      console.error('[Kefey Cart] Discount sync failed:', error);
+    }
   }
 
   /**
@@ -23,10 +104,10 @@
         credentials: 'same-origin',
         headers: { Accept: 'application/json' },
       });
-      if (!cartResponse.ok) return;
+      if (!cartResponse.ok) return false;
 
       const cart = await cartResponse.json();
-      if (!cart.items || !cart.items.length) return;
+      if (!cart.items || !cart.items.length) return false;
 
       const updates = {};
       let needsUpdate = false;
@@ -45,7 +126,7 @@
         needsUpdate = true;
       });
 
-      if (!needsUpdate) return;
+      if (!needsUpdate) return false;
 
       const updateResponse = await fetch(CART_UPDATE_URL, {
         method: 'POST',
@@ -59,10 +140,12 @@
 
       if (updateResponse.ok) {
         window.location.reload();
+        return true;
       }
     } catch (error) {
       console.error('[Kefey Cart] Subscription quantity sync failed:', error);
     }
+    return false;
   }
 
   async function addVariantToCart(variantId, quantity, properties) {
@@ -167,10 +250,11 @@
 
       await addVariantToCart(variantId, quantity, properties);
 
-      if (bundleKey || isUpsellAdd) {
-        window.location.href = CART_URL;
-      } else {
+      // Always apply the real Shopify discount code so checkout matches cart display.
+      if (discountCode) {
         window.location.href = getDiscountRedirectUrl(discountCode);
+      } else {
+        window.location.href = CART_URL;
       }
     } catch (error) {
       console.error(error);
@@ -181,6 +265,12 @@
     }
   }
 
+  async function initCartPricingFixes() {
+    const didReload = await syncSubscriptionPackQuantities();
+    if (didReload) return;
+    await syncBundleDiscountCodes();
+  }
+
   document.addEventListener('click', (event) => {
     const offerButton = event.target.closest('[data-cart-offer-button]');
     if (offerButton) {
@@ -189,8 +279,8 @@
   });
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', syncSubscriptionPackQuantities);
+    document.addEventListener('DOMContentLoaded', initCartPricingFixes);
   } else {
-    syncSubscriptionPackQuantities();
+    initCartPricingFixes();
   }
 })();
