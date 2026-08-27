@@ -161,6 +161,68 @@
 {%- endunless -%}
 <script src="{{ 'kefey-cart-offers.js' | asset_url }}" defer="defer"></script>
 <script src="{{ 'kefey-cart-upsell-guard.js' | asset_url }}" defer="defer"></script>
+{%- liquid
+  assign kefey_big_smile_image = ''
+  if section.settings.offer_left_pack_image != blank
+    assign kefey_big_smile_image = section.settings.offer_left_pack_image | image_url: width: 820
+  elsif section.settings.pack_image_5 != blank
+    assign kefey_big_smile_image = section.settings.pack_image_5 | image_url: width: 820
+  endif
+  assign kefey_joyful_image = ''
+  if section.settings.offer_right_pack_image != blank
+    assign kefey_joyful_image = section.settings.offer_right_pack_image | image_url: width: 820
+  elsif section.settings.pack_image_3 != blank
+    assign kefey_joyful_image = section.settings.pack_image_3 | image_url: width: 820
+  endif
+  assign kefey_pack_image_2 = ''
+  if section.settings.pack_image_2 != blank
+    assign kefey_pack_image_2 = section.settings.pack_image_2 | image_url: width: 820
+  endif
+  assign kefey_pack_image_4 = ''
+  if section.settings.pack_image_4 != blank
+    assign kefey_pack_image_4 = section.settings.pack_image_4 | image_url: width: 820
+  endif
+  assign kefey_pack_image_6 = ''
+  if section.settings.pack_image_6 != blank
+    assign kefey_pack_image_6 = section.settings.pack_image_6 | image_url: width: 820
+  endif
+-%}
+<script type="application/json" id="kefey-cart-restore-config">
+  {
+    "bundles": [
+      {
+        "key": "big-smile",
+        "variantId": {{ section.settings.offer_left_variant_id | strip | json }},
+        "quantity": {{ section.settings.offer_left_quantity | default: 5 | json }},
+        "discount": "25",
+        "code": {{ section.settings.offer_left_discount_code | strip | default: 'SAVE25' | json }},
+        "packSize": "5",
+        "packImage": {{ kefey_big_smile_image | json }},
+        "aliasTitles": ["big smile", "5 packs", "5 pack"]
+      },
+      {
+        "key": "joyful-trio",
+        "variantId": {{ section.settings.offer_right_variant_id | strip | json }},
+        "quantity": {{ section.settings.offer_right_quantity | default: 3 | json }},
+        "discount": "15",
+        "code": {{ section.settings.offer_right_discount_code | strip | default: 'SAVE15' | json }},
+        "packSize": "3",
+        "packImage": {{ kefey_joyful_image | json }},
+        "aliasTitles": ["joyful trio", "3 packs", "3 pack"]
+      }
+    ],
+    "upsell": {
+      "variantId": {{ section.settings.upsell_variant_id | strip | json }},
+      "code": {{ section.settings.upsell_discount_code | strip | default: 'SAVE10' | json }},
+      "discount": "10"
+    },
+    "packImages": {
+      "2": {{ kefey_pack_image_2 | json }},
+      "4": {{ kefey_pack_image_4 | json }},
+      "6": {{ kefey_pack_image_6 | json }}
+    }
+  }
+</script>
 
 <cart-items class="kefey-cart-page section-{{ section.id }}-padding{% if cart == empty %} is-empty{% endif %}">
   <div class="page-width kefey-cart-shell">

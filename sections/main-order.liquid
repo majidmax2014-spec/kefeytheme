@@ -1,6 +1,5 @@
 {{ 'customer.css' | asset_url | stylesheet_tag }}
 {{ 'kefey-customer.css' | asset_url | stylesheet_tag }}
-<script src="{{ 'kefey-order-reorder.js' | asset_url }}" defer></script>
 
 {%- liquid
   assign subscription_url = section.settings.subscription_url | default: '/tools/recurring/login'
@@ -343,74 +342,6 @@
         </tfoot>
       </table>
 
-      {%- liquid
-        assign kefey_has_subscription_lines = false
-        assign kefey_has_onetime_lines = false
-        for line_item in order.line_items
-          if line_item.selling_plan_allocation != null
-            assign kefey_has_subscription_lines = true
-          else
-            assign kefey_has_onetime_lines = true
-          endif
-        endfor
-      -%}
-
-      <div class="kefey-order-reorder" data-kefey-order-reorder>
-        <h2 class="kefey-order-reorder__title">Buy again</h2>
-        <p class="kefey-order-reorder__note">
-          Shopify’s native Buy Again button cannot restore subscriptions or SAVE15/SAVE25 safely.
-          Use the options below instead.
-        </p>
-
-        {%- if kefey_has_subscription_lines -%}
-          <p class="kefey-order-reorder__warn">
-            This order includes active-style subscription lines. Reordering them as new subscriptions
-            can create duplicate billing. Manage existing subscriptions instead of buying them again.
-          </p>
-          <a class="kefey-customer__btn kefey-customer__btn--outline" href="{{ subscription_url }}">
-            {{ subscription_label }}
-          </a>
-        {%- endif -%}
-
-        {%- if kefey_has_onetime_lines -%}
-          <button
-            type="button"
-            class="kefey-customer__btn"
-            data-kefey-reorder-onetime
-          >
-            Add one-time items to cart
-          </button>
-          <p class="kefey-order-reorder__hint" data-kefey-reorder-status hidden></p>
-          <script type="application/json" data-kefey-reorder-payload>
-            {
-              "items": [
-                {%- assign kefey_reorder_first = true -%}
-                {%- for line_item in order.line_items -%}
-                  {%- if line_item.selling_plan_allocation == null and line_item.variant_id -%}
-                    {%- unless kefey_reorder_first -%},{%- endunless -%}
-                    {%- assign kefey_reorder_first = false -%}
-                    {
-                      "id": {{ line_item.variant_id | json }},
-                      "quantity": {{ line_item.quantity | json }},
-                      "properties": {
-                        {%- assign prop_first = true -%}
-                        {%- for property in line_item.properties -%}
-                          {%- if property.last != blank -%}
-                            {%- unless prop_first -%},{%- endunless -%}
-                            {%- assign prop_first = false -%}
-                            {{ property.first | json }}: {{ property.last | json }}
-                          {%- endif -%}
-                        {%- endfor -%}
-                      },
-                      "discountCode": {{ line_item.properties._kefey_bundle_discount_label | default: line_item.properties._kefey_upsell_discount_label | default: '' | json }}
-                    }
-                  {%- endif -%}
-                {%- endfor -%}
-              ]
-            }
-          </script>
-        {%- endif -%}
-      </div>
       </div>
 
       <div>
