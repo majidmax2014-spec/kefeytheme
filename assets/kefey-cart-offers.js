@@ -188,6 +188,13 @@
           const planId = pickSellingPlanId(variant);
           if (planId) {
             const packSize = inferPackSize(variant, item) || parseInteger(item.quantity, 1);
+            let subQuantity = parseInteger(item.quantity, 1);
+            if (packSize > 1 && subQuantity === packSize) {
+              subQuantity = 1;
+            } else if (packSize > 1 && subQuantity > packSize && subQuantity % packSize === 0) {
+              subQuantity = subQuantity / packSize;
+            }
+
             const packImage =
               (config.packImages && config.packImages[String(packSize)]) ||
               (variant.featured_image && variant.featured_image.src) ||
@@ -204,7 +211,7 @@
               removeKey: item.key,
               add: {
                 id: Number(item.variant_id),
-                quantity: Number(item.quantity),
+                quantity: Number(subQuantity),
                 selling_plan: planId,
                 properties: properties,
               },
@@ -213,22 +220,30 @@
           }
         }
 
-        // One-time bundles (SAVE15 / SAVE25): restore line properties for display + discount sync.
+        // One-time bundles: restore line properties for display + images.
         const bundle = matchBundleConfig(item, config);
         if (bundle && !props._kefey_bundle && !lineHasSellingPlan(item)) {
+          const packSize = parseInteger(bundle.packSize, 0) || inferPackSize(variant, item) || parseInteger(item.quantity, 1);
+          let bundleQuantity = parseInteger(item.quantity, 1);
+          if (packSize > 1 && bundleQuantity === packSize) {
+            bundleQuantity = 1;
+          } else if (packSize > 1 && bundleQuantity > packSize && bundleQuantity % packSize === 0) {
+            bundleQuantity = bundleQuantity / packSize;
+          }
+
           const properties = Object.assign({}, props, {
             _kefey_bundle: bundle.key,
             _kefey_bundle_line: String(Date.now() + index),
             _kefey_purchase_type: 'bundle',
             _kefey_bundle_discount: String(bundle.discount || ''),
             _kefey_bundle_discount_label: String(bundle.code || ''),
-            _kefey_pack_size: String(bundle.packSize || item.quantity || ''),
+            _kefey_pack_size: String(packSize || ''),
           });
           if (bundle.packImage) properties._kefey_pack_image = bundle.packImage;
 
           propertyUpdates.push({
             id: item.key,
-            quantity: item.quantity,
+            quantity: bundleQuantity,
             properties: properties,
           });
           continue;
@@ -243,16 +258,18 @@
           !alreadyConfigured &&
           !lineHasSellingPlan(item)
         ) {
+          const upProps = {
+            _kefey_upsell: 'extra-tube',
+            _kefey_upsell_line: String(Date.now() + index),
+            _kefey_purchase_type: 'one',
+          };
+          if (upsell.discount) upProps._kefey_upsell_discount = String(upsell.discount);
+          if (upsell.code) upProps._kefey_upsell_discount_label = String(upsell.code);
+
           propertyUpdates.push({
             id: item.key,
             quantity: item.quantity,
-            properties: Object.assign({}, props, {
-              _kefey_upsell: 'extra-tube',
-              _kefey_upsell_line: String(Date.now() + index),
-              _kefey_upsell_discount: String(upsell.discount || '10'),
-              _kefey_upsell_discount_label: String(upsell.code || 'SAVE10'),
-              _kefey_purchase_type: 'one',
-            }),
+            properties: Object.assign({}, props, upProps),
           });
         }
       }
@@ -498,9 +515,10 @@
       } else if (isUpsellAdd) {
         properties._kefey_upsell = 'extra-tube';
         properties._kefey_upsell_line = String(Date.now());
-        properties._kefey_upsell_discount = '10';
+        properties._kefey_purchase_type = 'one';
 
         if (discountCode) {
+          properties._kefey_upsell_discount = '10';
           properties._kefey_upsell_discount_label = discountCode;
         }
       }

@@ -213,8 +213,8 @@
     ],
     "upsell": {
       "variantId": {{ section.settings.upsell_variant_id | strip | json }},
-      "code": {{ section.settings.upsell_discount_code | strip | default: 'SAVE10' | json }},
-      "discount": "10"
+      "code": {{ section.settings.upsell_discount_code | strip | default: '' | json }},
+      "discount": ""
     },
     "packImages": {
       "2": {{ kefey_pack_image_2 | json }},
@@ -477,17 +477,27 @@
                       endif
                     endif
 
-                    assign upsell_discount_pct = 10
+                    assign upsell_discount_pct = item.properties._kefey_upsell_discount | default: '' | plus: 0
                     assign upsell_unit_final = item.original_price
                     assign upsell_line_final = item.original_line_price
+                    assign upsell_unit_compare = item.variant.compare_at_price | default: item.original_price
 
                     if is_kefey_upsell
-                      assign upsell_discount_amount = item.original_price | times: upsell_discount_pct | divided_by: 100
-                      assign upsell_unit_final = item.original_price | minus: upsell_discount_amount
-                      assign upsell_line_final = upsell_unit_final | times: item.quantity
+                      if upsell_discount_pct > 0
+                        assign upsell_discount_amount = item.original_price | times: upsell_discount_pct | divided_by: 100
+                        assign upsell_unit_final = item.original_price | minus: upsell_discount_amount
+                        assign upsell_line_final = upsell_unit_final | times: item.quantity
+                        assign upsell_unit_compare = item.original_price
+                      else
+                        assign upsell_unit_final = item.original_price
+                        assign upsell_line_final = item.original_line_price
+                        if item.variant.compare_at_price > item.original_price
+                          assign upsell_unit_compare = item.variant.compare_at_price
+                        endif
+                      endif
                     endif
 
-                    assign upsell_discount_label = section.settings.upsell_discount_code | default: 'SAVE10'
+                    assign upsell_discount_label = item.properties._kefey_upsell_discount_label | default: section.settings.upsell_discount_code | default: ''
                   -%}
                   <tr class="cart-item" id="CartItem-{{ item.index | plus: 1 }}">
                     <td>
@@ -528,6 +538,8 @@
                             <a class="kefey-cart-switch-link" href="{{ item.url }}">
                               {{ section.settings.switch_purchase_label }}
                             </a>
+                          {%- elsif item.properties._kefey_upsell != blank -%}
+                            <p class="kefey-cart-plan">EXTRA TUBE</p>
                           {%- elsif kefey_bundle_title != blank -%}
                             <p class="kefey-cart-plan">{{ kefey_bundle_title | upcase }}</p>
                           {%- elsif item.product.has_only_default_variant == false and item.variant.title != blank -%}
@@ -541,11 +553,13 @@
                             </div>
                           {%- elsif is_kefey_bundle -%}
                             <div class="kefey-cart-unit-price">{{ bundle_unit_final | money }}</div>
-                          {%- elsif is_kefey_upsell -%}
+                          {%- elsif is_kefey_upsell and upsell_unit_compare > upsell_unit_final -%}
                             <div class="cart-item__discounted-prices">
-                              <s class="cart-item__old-price">{{ item.original_price | money }}</s>
+                              <s class="cart-item__old-price">{{ upsell_unit_compare | money }}</s>
                               <strong class="cart-item__final-price">{{ upsell_unit_final | money }}</strong>
                             </div>
+                          {%- elsif is_kefey_upsell -%}
+                            <div class="kefey-cart-unit-price">{{ upsell_unit_final | money }}</div>
                           {%- elsif item.selling_plan_allocation != null and item.original_price != item.final_price -%}
                             <div class="cart-item__discounted-prices">
                               <s class="cart-item__old-price">{{ item.original_price | money }}</s>
@@ -682,13 +696,15 @@
                           </dl>
                         {%- elsif is_kefey_bundle -%}
                           <span class="price price--end">{{ bundle_line_final | money }}</span>
-                        {%- elsif is_kefey_upsell -%}
+                        {%- elsif is_kefey_upsell and upsell_unit_compare > upsell_unit_final -%}
                           <dl class="cart-item__discounted-prices">
                             <dd>
-                              <s class="cart-item__old-price price price--end">{{ item.original_line_price | money }}</s>
+                              <s class="cart-item__old-price price price--end">{{ upsell_unit_compare | times: item.quantity | money }}</s>
                             </dd>
                             <dd class="price price--end">{{ upsell_line_final | money }}</dd>
                           </dl>
+                        {%- elsif is_kefey_upsell -%}
+                          <span class="price price--end">{{ upsell_line_final | money }}</span>
                         {%- elsif item.selling_plan_allocation != null and item.original_line_price != item.final_line_price -%}
                           <dl class="cart-item__discounted-prices">
                             <dd>
@@ -731,10 +747,15 @@
                 elsif item_is_bundle
                   assign kefey_display_total = kefey_display_total | plus: item.original_line_price
                 elsif item_is_upsell
-                  assign item_upsell_discount_amount = item.original_price | times: 10 | divided_by: 100
-                  assign item_upsell_unit_final = item.original_price | minus: item_upsell_discount_amount
-                  assign item_upsell_line_final = item_upsell_unit_final | times: item.quantity
-                  assign kefey_display_total = kefey_display_total | plus: item_upsell_line_final
+                  assign item_upsell_discount_pct = item.properties._kefey_upsell_discount | default: '' | plus: 0
+                  if item_upsell_discount_pct > 0
+                    assign item_upsell_discount_amount = item.original_price | times: item_upsell_discount_pct | divided_by: 100
+                    assign item_upsell_unit_final = item.original_price | minus: item_upsell_discount_amount
+                    assign item_upsell_line_final = item_upsell_unit_final | times: item.quantity
+                    assign kefey_display_total = kefey_display_total | plus: item_upsell_line_final
+                  else
+                    assign kefey_display_total = kefey_display_total | plus: item.original_line_price
+                  endif
                 elsif item.selling_plan_allocation != null
                   assign kefey_display_total = kefey_display_total | plus: item.final_line_price
                 else
@@ -1039,8 +1060,8 @@
     {
       "type": "text",
       "id": "upsell_discount_code",
-      "label": "Upsell discount code (10% code)",
-      "default": "SAVE10"
+      "label": "Upsell discount code (optional)",
+      "info": "Leave blank if variant price is already discounted."
     },
     {
       "type": "url",

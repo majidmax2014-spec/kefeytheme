@@ -80,7 +80,7 @@
         "upsell_button_label": "ADD 1 EXTRA TUBE & GET 10% OFF!",
         "upsell_variant_id": "49242709688548",
         "upsell_max_qty": 10,
-        "upsell_discount_code": "SAVE10",
+        "upsell_discount_code": "",
         "upsell_button_link": "",
         "offers_heading_font_family": "heading",
         "offers_heading_font_size": 36,
