@@ -194,8 +194,8 @@
         "key": "big-smile",
         "variantId": {{ section.settings.offer_left_variant_id | strip | json }},
         "quantity": {{ section.settings.offer_left_quantity | default: 1 | json }},
-        "discount": "25",
-        "code": {{ section.settings.offer_left_discount_code | strip | default: 'SAVE25' | json }},
+        "discount": "",
+        "code": {{ section.settings.offer_left_discount_code | strip | default: '' | json }},
         "packSize": "5",
         "packImage": {{ kefey_big_smile_image | json }},
         "aliasTitles": ["big smile", "5 packs", "5 pack"]
@@ -204,8 +204,8 @@
         "key": "joyful-trio",
         "variantId": {{ section.settings.offer_right_variant_id | strip | json }},
         "quantity": {{ section.settings.offer_right_quantity | default: 1 | json }},
-        "discount": "15",
-        "code": {{ section.settings.offer_right_discount_code | strip | default: 'SAVE15' | json }},
+        "discount": "",
+        "code": {{ section.settings.offer_right_discount_code | strip | default: '' | json }},
         "packSize": "3",
         "packImage": {{ kefey_joyful_image | json }},
         "aliasTitles": ["joyful trio", "3 packs", "3 pack"]
@@ -275,9 +275,9 @@
                         class="kefey-cart-offer-card__button"
                         data-cart-offer-button
                         data-bundle-key="big-smile"
-                        data-bundle-discount="25"
+                        data-bundle-discount=""
                         data-variant-id="{{ section.settings.offer_left_variant_id | strip }}"
-                        data-quantity="{{ section.settings.offer_left_quantity }}"
+                        data-quantity="{{ section.settings.offer_left_quantity | default: 1 }}"
                         data-pack-size="5"
                         {%- if section.settings.offer_left_pack_image != blank -%}
                           data-pack-image="{{ section.settings.offer_left_pack_image | image_url: width: 820 }}"
@@ -311,9 +311,9 @@
                         class="kefey-cart-offer-card__button"
                         data-cart-offer-button
                         data-bundle-key="joyful-trio"
-                        data-bundle-discount="15"
+                        data-bundle-discount=""
                         data-variant-id="{{ section.settings.offer_right_variant_id | strip }}"
-                        data-quantity="{{ section.settings.offer_right_quantity }}"
+                        data-quantity="{{ section.settings.offer_right_quantity | default: 1 }}"
                         data-pack-size="3"
                         {%- if section.settings.offer_right_pack_image != blank -%}
                           data-pack-image="{{ section.settings.offer_right_pack_image | image_url: width: 820 }}"
@@ -366,7 +366,7 @@
                     assign bundle_discount_pct = item.properties._kefey_bundle_discount | plus: 0
                     assign bundle_discount_label = item.properties._kefey_bundle_discount_label | default: ''
                     assign is_kefey_bundle = false
-                    if item.properties._kefey_bundle != blank and bundle_discount_pct > 0
+                    if item.properties._kefey_bundle != blank
                       assign is_kefey_bundle = true
                     endif
 
@@ -440,11 +440,21 @@
 
                     assign bundle_unit_final = item.original_price
                     assign bundle_line_final = item.original_line_price
+                    assign bundle_unit_compare = item.variant.compare_at_price | default: item.original_price
 
                     if is_kefey_bundle
-                      assign bundle_discount_amount = item.original_price | times: bundle_discount_pct | divided_by: 100
-                      assign bundle_unit_final = item.original_price | minus: bundle_discount_amount
-                      assign bundle_line_final = bundle_unit_final | times: item.quantity
+                      if bundle_discount_pct > 0
+                        assign bundle_discount_amount = item.original_price | times: bundle_discount_pct | divided_by: 100
+                        assign bundle_unit_final = item.original_price | minus: bundle_discount_amount
+                        assign bundle_line_final = bundle_unit_final | times: item.quantity
+                        assign bundle_unit_compare = item.original_price
+                      else
+                        assign bundle_unit_final = item.original_price
+                        assign bundle_line_final = item.original_line_price
+                        if item.variant.compare_at_price > item.original_price
+                          assign bundle_unit_compare = item.variant.compare_at_price
+                        endif
+                      endif
                     endif
 
                     assign upsell_discount_pct = 10
@@ -500,11 +510,13 @@
                             </a>
                           {%- endif -%}
 
-                          {%- if is_kefey_bundle -%}
+                          {%- if is_kefey_bundle and bundle_unit_compare > bundle_unit_final -%}
                             <div class="cart-item__discounted-prices">
-                              <s class="cart-item__old-price">{{ item.original_price | money }}</s>
+                              <s class="cart-item__old-price">{{ bundle_unit_compare | money }}</s>
                               <strong class="cart-item__final-price">{{ bundle_unit_final | money }}</strong>
                             </div>
+                          {%- elsif is_kefey_bundle -%}
+                            <div class="kefey-cart-unit-price">{{ bundle_unit_final | money }}</div>
                           {%- elsif is_kefey_upsell -%}
                             <div class="cart-item__discounted-prices">
                               <s class="cart-item__old-price">{{ item.original_price | money }}</s>
@@ -637,13 +649,15 @@
                     <td class="cart-item__totals right">
                       {%- render 'loading-spinner' -%}
                       <div class="cart-item__price-wrapper">
-                        {%- if is_kefey_bundle -%}
+                        {%- if is_kefey_bundle and bundle_unit_compare > bundle_unit_final -%}
                           <dl class="cart-item__discounted-prices">
                             <dd>
-                              <s class="cart-item__old-price price price--end">{{ item.original_line_price | money }}</s>
+                              <s class="cart-item__old-price price price--end">{{ bundle_unit_compare | times: item.quantity | money }}</s>
                             </dd>
                             <dd class="price price--end">{{ bundle_line_final | money }}</dd>
                           </dl>
+                        {%- elsif is_kefey_bundle -%}
+                          <span class="price price--end">{{ bundle_line_final | money }}</span>
                         {%- elsif is_kefey_upsell -%}
                           <dl class="cart-item__discounted-prices">
                             <dd>
@@ -675,7 +689,7 @@
               for item in cart.items
                 assign item_bundle_discount_pct = item.properties._kefey_bundle_discount | plus: 0
                 assign item_is_bundle = false
-                if item.properties._kefey_bundle != blank and item_bundle_discount_pct > 0
+                if item.properties._kefey_bundle != blank
                   assign item_is_bundle = true
                 endif
                 assign item_is_upsell = false
@@ -683,11 +697,13 @@
                   assign item_is_upsell = true
                 endif
 
-                if item_is_bundle
+                if item_is_bundle and item_bundle_discount_pct > 0
                   assign item_bundle_discount_amount = item.original_price | times: item_bundle_discount_pct | divided_by: 100
                   assign item_bundle_unit_final = item.original_price | minus: item_bundle_discount_amount
                   assign item_bundle_line_final = item_bundle_unit_final | times: item.quantity
                   assign kefey_display_total = kefey_display_total | plus: item_bundle_line_final
+                elsif item_is_bundle
+                  assign kefey_display_total = kefey_display_total | plus: item.original_line_price
                 elsif item_is_upsell
                   assign item_upsell_discount_amount = item.original_price | times: 10 | divided_by: 100
                   assign item_upsell_unit_final = item.original_price | minus: item_upsell_discount_amount
@@ -923,7 +939,7 @@
       "type": "text",
       "id": "offer_left_discount_code",
       "label": "Left offer discount code",
-      "default": "SAVE25"
+      "default": ""
     },
     {
       "type": "text",
@@ -945,7 +961,7 @@
       "type": "text",
       "id": "offer_right_discount_code",
       "label": "Right offer discount code",
-      "default": "SAVE15"
+      "default": ""
     },
     {
       "type": "header",

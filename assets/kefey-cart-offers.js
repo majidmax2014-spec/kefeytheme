@@ -147,7 +147,7 @@
   /**
    * Native Shopify Buy Again re-adds variant + qty only (no selling_plan, no Kefey props).
    * Rebuild subscription lines via remove + /cart/add.js with selling_plan, and attach
-   * SAVE15/SAVE25 bundle properties so discount sync can apply real codes.
+   * bundle properties so cart display, thumbnails, and discount sync work seamlessly.
    */
   async function restoreBuyAgainPurchaseConfig() {
     try {

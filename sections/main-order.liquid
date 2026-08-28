@@ -169,6 +169,9 @@
                 {%- liquid
                   assign kefey_unit_price = line_item.final_price
                   assign kefey_unit_compare = line_item.original_price
+                  if line_item.variant.compare_at_price > line_item.original_price
+                    assign kefey_unit_compare = line_item.variant.compare_at_price
+                  endif
                 -%}
                 {%- if kefey_unit_compare != kefey_unit_price -%}
                   <dl>
@@ -206,23 +209,30 @@
                 role="cell"
                 data-label="{{ 'customer.order.total' | t }}"
               >
-                {%- if line_item.original_line_price != line_item.final_line_price -%}
+                {%- liquid
+                  assign kefey_line_total = line_item.final_line_price
+                  assign kefey_line_compare = line_item.original_line_price
+                  if line_item.variant.compare_at_price > line_item.original_price
+                    assign kefey_line_compare = line_item.variant.compare_at_price | times: line_item.quantity
+                  endif
+                -%}
+                {%- if kefey_line_compare != kefey_line_total -%}
                   <dl>
                     <dt>
                       <span class="visually-hidden">{{ 'products.product.price.regular_price' | t }}</span>
                     </dt>
                     <dd class="regular-price">
-                      <s>{{ line_item.original_line_price | money }}</s>
+                      <s>{{ kefey_line_compare | money }}</s>
                     </dd>
                     <dt>
                       <span class="visually-hidden">{{ 'products.product.price.sale_price' | t }}</span>
                     </dt>
                     <dd>
-                      <span>{{ line_item.final_line_price | money }}</span>
+                      <span>{{ kefey_line_total | money }}</span>
                     </dd>
                   </dl>
                 {%- else -%}
-                  {{ line_item.final_line_price | money }}
+                  {{ kefey_line_total | money }}
                 {%- endif -%}
               </td>
             </tr>
