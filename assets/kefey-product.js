@@ -240,16 +240,11 @@
   }
 
   /**
-   * Tube price is $39 (3900 cents). Pack variants at that price need cart qty = pack
-   * size so 2-pack subscribe = 2 × $35.10 = $70.20 after 10% off.
-   * If Admin later sets a true pack total (e.g. $78), use qty 1.
+   * Variants are now priced as full pack totals (e.g. 1-pack $39, 2-pack $78, etc.).
+   * Cart quantity is always 1 per variant line item.
    */
   function cartQuantityForPack(variant, pack) {
-    var price = Number(variant && variant.price != null ? variant.price : 0);
-    if (!pack || pack < 1) return 1;
-    // Already a pack total (roughly 2+ tubes at ~$39+) → one line item.
-    if (price >= 5000) return 1;
-    return pack;
+    return 1;
   }
 
   function allocationPlanId(allocation) {
@@ -566,7 +561,7 @@
 
         var basePrice = Number(variant.price || 0);
         var baseCompare = Number(variant.compare_at_price || 0);
-        var packQty = cartQuantityForPack(variant, pack);
+        var packNum = pack && pack > 0 ? pack : 1;
         var preferredTarget = sellingPlanByPack[pack] || null;
         var packDiscount = discountByPack[pack];
         if (typeof packDiscount !== 'number' || isNaN(packDiscount)) packDiscount = displayDiscount;
@@ -575,8 +570,8 @@
           sellingPlanId = sellingPlanIdForCart(variant, null);
         }
 
-        var subEach = basePrice;
-        var subCompareEach = baseCompare > 0 ? baseCompare : basePrice;
+        var subTotal = basePrice;
+        var subCompareTotal = baseCompare > 0 ? baseCompare : basePrice;
         var allocation = null;
 
         if (sellingPlanId != null && Array.isArray(variant.selling_plan_allocations)) {
@@ -587,14 +582,14 @@
             if (allocId != null && variantHasPlanId(variant, allocId)) sellingPlanId = allocId;
           }
           if (allocation && allocation.compare_at_price) {
-            subCompareEach = Number(allocation.compare_at_price);
+            subCompareTotal = Number(allocation.compare_at_price);
           }
         }
 
         if (allocation && allocation.price) {
-          subEach = Number(allocation.price);
+          subTotal = Number(allocation.price);
         } else if (packDiscount > 0) {
-          subEach = Math.max(0, Math.round(basePrice * (100 - packDiscount) / 100));
+          subTotal = Math.max(0, Math.round(basePrice * (100 - packDiscount) / 100));
         }
 
         var hasSubscriptionPlan =
@@ -602,16 +597,17 @@
             ? Boolean(matchAllocationByTarget(variant, preferredTarget))
             : Boolean(sellingPlanId && variantHasPlanId(variant, sellingPlanId));
 
-        var subTotal = subEach * packQty;
-        var subCompareTotal = 0;
+        // Sub each (per tube display): subTotal / pack size
+        var subEach = Math.round(subTotal / packNum);
+
+        var compareTotalForDisplay = 0;
         if (packDiscount > 0) {
-          var compareEachForDisplay =
-            subCompareEach > subEach
-              ? subCompareEach
-              : baseCompare > subEach
+          compareTotalForDisplay =
+            subCompareTotal > subTotal
+              ? subCompareTotal
+              : baseCompare > subTotal
                 ? baseCompare
                 : basePrice;
-          subCompareTotal = compareEachForDisplay * packQty;
         }
 
         return {
@@ -619,7 +615,7 @@
           packDiscount: packDiscount,
           subEach: subEach,
           subTotal: subTotal,
-          subCompareTotal: subCompareTotal,
+          subCompareTotal: compareTotalForDisplay,
           hasSubscriptionPlan: hasSubscriptionPlan,
           preferredTarget: preferredTarget
         };

@@ -193,7 +193,7 @@
       {
         "key": "big-smile",
         "variantId": {{ section.settings.offer_left_variant_id | strip | json }},
-        "quantity": {{ section.settings.offer_left_quantity | default: 5 | json }},
+        "quantity": {{ section.settings.offer_left_quantity | default: 1 | json }},
         "discount": "25",
         "code": {{ section.settings.offer_left_discount_code | strip | default: 'SAVE25' | json }},
         "packSize": "5",
@@ -203,7 +203,7 @@
       {
         "key": "joyful-trio",
         "variantId": {{ section.settings.offer_right_variant_id | strip | json }},
-        "quantity": {{ section.settings.offer_right_quantity | default: 3 | json }},
+        "quantity": {{ section.settings.offer_right_quantity | default: 1 | json }},
         "discount": "15",
         "code": {{ section.settings.offer_right_discount_code | strip | default: 'SAVE15' | json }},
         "packSize": "3",
@@ -916,8 +916,8 @@
       "max": 20,
       "step": 1,
       "label": "Left offer quantity",
-      "default": 5,
-      "info": "Tubes to add. Use 5 when Big Smile is priced $39/tube."
+      "default": 1,
+      "info": "Tubes/packs to add."
     },
     {
       "type": "text",
@@ -929,7 +929,7 @@
       "type": "text",
       "id": "offer_right_variant_id",
       "label": "Right offer variant ID (MOOD-3 / Joyful Trio)",
-      "info": "Joyful Trio / MOOD-3. With $39 tube pricing use quantity 3. If the variant price is already $117, use quantity 1."
+      "info": "Joyful Trio / MOOD-3 variant."
     },
     {
       "type": "range",
@@ -938,8 +938,8 @@
       "max": 20,
       "step": 1,
       "label": "Right offer quantity",
-      "default": 3,
-      "info": "Tubes to add. Use 3 when Joyful Trio is priced $39/tube."
+      "default": 1,
+      "info": "Tubes/packs to add."
     },
     {
       "type": "text",
