@@ -17,7 +17,7 @@
         "announcement_WqMQbf": {
           "type": "announcement",
           "settings": {
-            "text": "🚀 FREE SHIPPING ON ORDERS $60+ • JOY, DELIVERED. ✨",
+            "text": "🚀 FREE SHIPPING ON EVERY ORDER • GOOD MOODS, DELIVERED ✨",
             "link": ""
           }
         }
@@ -28,7 +28,7 @@
       "name": "t:sections.announcement-bar.presets.name",
       "settings": {
         "enable_countdown": false,
-        "countdown_message": "🚀 <strong>FREE SHIPPING ON ORDERS $60+ • JOY, DELIVERED. ✨</strong>",
+        "countdown_message": "🚀 <strong>FREE SHIPPING ON EVERY ORDER • GOOD MOODS, DELIVERED ✨</strong>",
         "countdown_end": "2026-06-31 23:59:59",
         "countdown_accent_color": "#ffc72c",
         "countdown_link_label": "",
