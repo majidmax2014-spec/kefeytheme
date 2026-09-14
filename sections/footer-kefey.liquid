@@ -54,7 +54,7 @@
               <div class="fk__p">{{ section.settings.newsletter_text }}</div>
             {%- endif -%}
             <div class="fk__form">
-              {%- form 'customer', id: 'FooterSubscribe-'.concat(section.id) -%}
+              {%- form 'customer', id: 'FooterSubscribe-' -%}
                 {%- if form.posted_successfully? -%}
                   <p class="fk__note fk__note--success">{{ 'general.newsletter_form.confirmation' | t }}</p>
                 {%- endif -%}
@@ -195,3 +195,13 @@
 {% endschema %}
 
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- form 'customer', id: 'FooterSubscribe-'.concat(section.id) -%}"
+  to: "{%- form 'customer', id: 'FooterSubscribe-' -%}"
+  position: 3316..3363
+{% endcomment %}

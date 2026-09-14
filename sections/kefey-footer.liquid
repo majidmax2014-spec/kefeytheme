@@ -203,7 +203,7 @@
         <div class="fk__col fk__col--newsletter">
           <h3 class="fk__newsletter-heading">{{ section.settings.newsletter_heading }}</h3>
           <p class="fk__newsletter-text">{{ section.settings.newsletter_text }}</p>
-          {%- form 'customer', id: 'FooterNewsletter-'.append(section.id), class: 'fk__newsletter-form' -%}
+          {%- form 'customer', id: 'FooterNewsletter-', class: 'fk__newsletter-form' -%}
             <input type="hidden" name="contact[tags]" value="newsletter">
             <label class="visually-hidden" for="FooterEmail-{{ section.id }}">Email</label>
             <div class="fk__newsletter-field">
@@ -719,3 +719,15 @@
 {% endschema %}
 
 
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- form 'customer', id: 'FooterNewsletter-'.append(section.id), class: 'fk__newsletter-form'
+    -%}"
+  to: "{%- form 'customer', id: 'FooterNewsletter-', class: 'fk__newsletter-form'
+    -%}"
+  position: 9622..9700
+{% endcomment %}
