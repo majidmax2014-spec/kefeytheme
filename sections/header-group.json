@@ -44,7 +44,7 @@
         "auto_rotate": false,
         "change_slides_speed": 5,
         "enable_marquee": true,
-        "marquee_speed": 20,
+        "marquee_speed": 50,
         "marquee_pause_on_hover": true,
         "color_scheme": "",
         "show_line_separator": true,
