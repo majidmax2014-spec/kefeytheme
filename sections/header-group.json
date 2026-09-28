@@ -14,6 +14,13 @@
     "announcement_bar_wyP6Wk": {
       "type": "announcement-bar",
       "blocks": {
+        "announcement_nyQctg": {
+          "type": "announcement",
+          "settings": {
+            "text": "FREE SHIPPING ON EVERY ORDER IN THE USA",
+            "link": ""
+          }
+        },
         "announcement_WqMQbf": {
           "type": "announcement",
           "settings": {
@@ -23,6 +30,7 @@
         }
       },
       "block_order": [
+        "announcement_nyQctg",
         "announcement_WqMQbf"
       ],
       "name": "t:sections.announcement-bar.presets.name",
