@@ -137,12 +137,90 @@
         "show_excerpt": true,
         "button_label": "",
         "button_link": "",
-        "bg_color": "#FFFFFF",
-        "card_color": "#FFFFFF",
-        "heading_color": "#1F1F1F",
+        "bg_color": "#ffffff",
+        "card_color": "#ffffff",
+        "heading_color": "#1f1f1f",
         "text_color": "#666666",
         "padding_top": 56,
         "padding_bottom": 64
+      }
+    },
+    "bright_side_topics_KetMMT": {
+      "type": "bright-side-topics",
+      "blocks": {
+        "topic_XrgWhm": {
+          "type": "topic",
+          "settings": {
+            "title": "Good Moods",
+            "text": "Mood, focus and staying steady when the week gets busy.",
+            "link_label": "Explore",
+            "link": "",
+            "bg_color": "#3fb8b2",
+            "text_color": "#ffffff"
+          }
+        },
+        "topic_PVCdEE": {
+          "type": "topic",
+          "settings": {
+            "title": "Energy & Rest",
+            "text": "Steady energy, restful evenings, and the daily habits in between.",
+            "link_label": "Explore",
+            "link": "",
+            "bg_color": "#8bc34f",
+            "text_color": "#ffffff"
+          }
+        },
+        "topic_BAkbGe": {
+          "type": "topic",
+          "settings": {
+            "title": "Star Ingredients",
+            "text": "Every botanical explained, and how the formula comes together.",
+            "link_label": "Explore",
+            "link": "",
+            "bg_color": "#e8533a",
+            "text_color": "#ffffff"
+          }
+        },
+        "topic_3wf7en": {
+          "type": "topic",
+          "settings": {
+            "title": "Live Full",
+            "text": "The little rituals and joyful moments that make every day feel lighter.",
+            "link_label": "Explore",
+            "link": "",
+            "bg_color": "#ffc700",
+            "text_color": "#1f1f1f"
+          }
+        },
+        "topic_kw89rf": {
+          "type": "topic",
+          "settings": {
+            "title": "Kefey Stories",
+            "text": "Our story, our people, our impact and the latest news.",
+            "link_label": "Explore",
+            "link": "",
+            "bg_color": "#52b0ae",
+            "text_color": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "topic_XrgWhm",
+        "topic_PVCdEE",
+        "topic_BAkbGe",
+        "topic_3wf7en",
+        "topic_kw89rf"
+      ],
+      "name": "Bright Side topics",
+      "settings": {
+        "heading": "Pick a topic",
+        "subheading": "Five places to start, depending on what's on your mind today.",
+        "columns": 5,
+        "bg_color": "#FFFFFF",
+        "heading_color": "#1F1F1F",
+        "text_color": "#555555",
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     }
   },
@@ -150,6 +228,7 @@
     "hero",
     "main",
     "featured_article_card_ycYxJX",
-    "bright_side_article_grid_Fwi9D8"
+    "bright_side_article_grid_Fwi9D8",
+    "bright_side_topics_KetMMT"
   ]
 }
