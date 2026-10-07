@@ -15,6 +15,7 @@
         "photo_1": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/LIFESTYLE_13.jpg",
             "link": "",
             "rotation": -6,
             "offset_y": 6
@@ -23,6 +24,7 @@
         "photo_2": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/kefey_lifestyle_1.jpg",
             "link": "",
             "rotation": 4,
             "offset_y": -4
@@ -38,6 +40,7 @@
         "photo_3": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/3-Pakcs.png",
             "link": "",
             "rotation": -3,
             "offset_y": -4
@@ -46,6 +49,7 @@
         "photo_4": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/5-Packs.png",
             "link": "",
             "rotation": 5,
             "offset_y": 6
@@ -105,6 +109,7 @@
       "name": "Featured article card",
       "settings": {
         "article": "",
+        "image": "shopify://shop_images/1_Pack.jpg",
         "tag_label": "Star ingredients",
         "heading": "",
         "text": "",
@@ -113,7 +118,7 @@
         "button_label": "Read the article",
         "button_link": "",
         "image_position": "left",
-        "max_width": 800,
+        "max_width": 720,
         "bg_color": "#ffffff",
         "card_color": "#ffffff",
         "heading_color": "#1f1f1f",
@@ -130,7 +135,7 @@
       "settings": {
         "heading": "Fresh on The Bright Side",
         "subheading": "New stories every week, from every corner of Kefey.",
-        "blog": "",
+        "blog": "gummies",
         "posts_count": 6,
         "skip_posts": 0,
         "columns": 3,
@@ -141,7 +146,7 @@
         "card_color": "#ffffff",
         "heading_color": "#1f1f1f",
         "text_color": "#666666",
-        "padding_top": 56,
+        "padding_top": 64,
         "padding_bottom": 64
       }
     },
@@ -314,36 +319,42 @@
         "photo_Pz73nb": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/4_Packs.jpg",
             "link": ""
           }
         },
         "photo_YWfWLt": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/6_Pack_Image.png",
             "link": ""
           }
         },
         "photo_4bc6ET": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/5_Packs.jpg",
             "link": ""
           }
         },
         "photo_iyAFBH": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/kefey_product_flavor.jpg",
             "link": ""
           }
         },
         "photo_RgdDgx": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/life_style_3.jpg",
             "link": ""
           }
         },
         "photo_ekLnVf": {
           "type": "photo",
           "settings": {
+            "image": "shopify://shop_images/Lifestyle_22_1.jpg",
             "link": ""
           }
         }
