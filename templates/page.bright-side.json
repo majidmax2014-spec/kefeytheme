@@ -77,6 +77,7 @@
     },
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "enable_legal_typography": false,
         "legal_title_font_family": "heading",
@@ -113,20 +114,42 @@
         "button_link": "",
         "image_position": "left",
         "max_width": 800,
+        "bg_color": "#ffffff",
+        "card_color": "#ffffff",
+        "heading_color": "#1f1f1f",
+        "text_color": "#555555",
+        "accent_color": "#e8533a",
+        "pill_bg": "#fde4df",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "bright_side_article_grid_Fwi9D8": {
+      "type": "bright-side-article-grid",
+      "name": "Bright Side article grid",
+      "settings": {
+        "heading": "Fresh on The Bright Side",
+        "subheading": "New stories every week, from every corner of Kefey.",
+        "blog": "",
+        "posts_count": 6,
+        "skip_posts": 0,
+        "columns": 3,
+        "show_excerpt": true,
+        "button_label": "",
+        "button_link": "",
         "bg_color": "#FFFFFF",
         "card_color": "#FFFFFF",
         "heading_color": "#1F1F1F",
-        "text_color": "#555555",
-        "accent_color": "#E8533A",
-        "pill_bg": "#FDE4DF",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "text_color": "#666666",
+        "padding_top": 56,
+        "padding_bottom": 64
       }
     }
   },
   "order": [
     "hero",
     "main",
-    "featured_article_card_ycYxJX"
+    "featured_article_card_ycYxJX",
+    "bright_side_article_grid_Fwi9D8"
   ]
 }
