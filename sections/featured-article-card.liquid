@@ -1,0 +1,274 @@
+{%- comment -%}
+  File: sections/featured-article-card.liquid
+  Featured article card — image left, content right.
+  Pick a blog post to auto-fill, or override any field manually.
+{%- endcomment -%}
+
+{%- liquid
+  assign a = section.settings.article
+
+  assign card_image = section.settings.image
+  if card_image == blank and a != blank
+    assign card_image = a.image
+  endif
+
+  assign card_title = section.settings.heading
+  if card_title == blank and a != blank
+    assign card_title = a.title
+  endif
+
+  assign card_text = section.settings.text
+  if card_text == blank and a != blank
+    if a.excerpt != blank
+      assign card_text = a.excerpt | strip_html | truncatewords: 30
+    else
+      assign card_text = a.content | strip_html | truncatewords: 30
+    endif
+  endif
+
+  assign card_tag = section.settings.tag_label
+  if card_tag == blank and a != blank and a.tags.size > 0
+    assign card_tag = a.tags.first
+  endif
+
+  assign card_url = section.settings.button_link
+  if card_url == blank and a != blank
+    assign card_url = a.url
+  endif
+
+  assign read_time = section.settings.read_time
+  if read_time == 0 and a != blank
+    assign words = a.content | strip_html | split: ' ' | size
+    assign read_time = words | divided_by: 200 | at_least: 1
+  endif
+-%}
+
+<style>
+  #FeaturedCard-{{ section.id }} {
+    --fc-bg: {{ section.settings.bg_color }};
+    --fc-card: {{ section.settings.card_color }};
+    --fc-heading: {{ section.settings.heading_color }};
+    --fc-text: {{ section.settings.text_color }};
+    --fc-accent: {{ section.settings.accent_color }};
+    --fc-pill: {{ section.settings.pill_bg }};
+    --fc-max: {{ section.settings.max_width }}px;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<section id="FeaturedCard-{{ section.id }}" class="featured-card">
+  <div class="page-width">
+    <article class="featured-card__inner{% if section.settings.image_position == 'right' %} featured-card__inner--reverse{% endif %}">
+
+      <a href="{{ card_url | default: '#' }}" class="featured-card__media" aria-label="{{ card_title | escape }}">
+        {%- if card_image != blank -%}
+          {{ card_image | image_url: width: 1200 | image_tag:
+            loading: 'lazy',
+            widths: '500, 750, 1000, 1200',
+            sizes: '(min-width: 990px) 480px, 100vw',
+            alt: card_image.alt | default: card_title | escape
+          }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'featured-card__placeholder' }}
+        {%- endif -%}
+      </a>
+
+      <div class="featured-card__body">
+        {%- if card_tag != blank -%}
+          <span class="featured-card__pill">
+            <span class="featured-card__dot" aria-hidden="true"></span>
+            {{ card_tag }}
+          </span>
+        {%- endif -%}
+
+        <h2 class="featured-card__title">
+          <a href="{{ card_url | default: '#' }}">{{ card_title | default: 'Ashwagandha, explained without the jargon' | escape }}</a>
+        </h2>
+
+        {%- if card_text != blank -%}
+          <p class="featured-card__text">{{ card_text }}</p>
+        {%- endif -%}
+
+        <p class="featured-card__meta">
+          {%- if section.settings.author != blank -%}
+            {{ section.settings.author }}
+          {%- elsif a != blank -%}
+            By {{ a.author }}
+          {%- endif -%}
+          {%- if read_time > 0 %} · {{ read_time }} min read{%- endif -%}
+        </p>
+
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ card_url | default: '#' }}" class="featured-card__btn">{{ section.settings.button_label }}</a>
+        {%- endif -%}
+      </div>
+
+    </article>
+  </div>
+</section>
+
+{% stylesheet %}
+  .featured-card { background: var(--fc-bg); }
+
+  .featured-card__inner {
+    max-width: var(--fc-max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--fc-card);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  }
+  @media (min-width: 750px) {
+    .featured-card__inner { grid-template-columns: 54% 46%; }
+    .featured-card__inner--reverse { grid-template-columns: 46% 54%; }
+    .featured-card__inner--reverse .featured-card__media { order: 2; }
+  }
+
+  /* Image */
+  .featured-card__media {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+  @media (min-width: 750px) {
+    .featured-card__media { aspect-ratio: auto; min-height: 370px; }
+  }
+  .featured-card__media img,
+  .featured-card__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .featured-card__inner:hover .featured-card__media img { transform: scale(1.04); }
+
+  /* Content */
+  .featured-card__body {
+    padding: 32px 26px 36px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  @media (min-width: 990px) {
+    .featured-card__body { padding: 40px 44px; }
+  }
+
+  .featured-card__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 12px;
+    margin-bottom: 14px;
+    background: var(--fc-pill);
+    color: var(--fc-heading);
+    border-radius: 999px;
+    font-size: 0.66rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .featured-card__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--fc-accent);
+  }
+
+  .featured-card__title {
+    margin: 0 0 14px;
+    font-size: clamp(1.6rem, 2.6vw, 2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--fc-heading);
+  }
+  .featured-card__title a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .featured-card__title a:hover { color: var(--fc-accent); }
+
+  .featured-card__text {
+    margin: 0 0 18px;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--fc-text);
+  }
+
+  .featured-card__meta {
+    margin: 0 0 22px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--fc-text);
+    opacity: 0.85;
+  }
+
+  .featured-card__btn {
+    display: inline-block;
+    padding: 14px 24px;
+    background: var(--fc-accent);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .featured-card__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(232, 83, 58, 0.35);
+    color: #fff;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Featured article card",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Article" },
+    { "type": "article", "id": "article", "label": "Blog post", "info": "Image, title, text, tag and link fill in automatically. Use the fields below to override." },
+
+    { "type": "header", "content": "Overrides (optional)" },
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "text", "id": "tag_label", "label": "Tag label", "default": "Star ingredients" },
+    { "type": "text", "id": "heading", "label": "Heading" },
+    { "type": "textarea", "id": "text", "label": "Text" },
+    { "type": "text", "id": "author", "label": "Author line", "default": "By the Kefey® team" },
+    { "type": "range", "id": "read_time", "label": "Read time (0 = auto)", "min": 0, "max": 30, "step": 1, "unit": "min", "default": 0 },
+
+    { "type": "header", "content": "Button" },
+    { "type": "text", "id": "button_label", "label": "Button label", "default": "Read the article" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Leave empty to link to the selected post" },
+
+    { "type": "header", "content": "Layout" },
+    { "type": "select", "id": "image_position", "label": "Image position", "default": "left",
+      "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
+    { "type": "range", "id": "max_width", "label": "Card max width", "min": 600, "max": 1200, "step": 20, "unit": "px", "default": 800 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "color", "id": "card_color", "label": "Card background", "default": "#FFFFFF" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#1F1F1F" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#555555" },
+    { "type": "color", "id": "accent_color", "label": "Accent (button & dot)", "default": "#E8533A" },
+    { "type": "color", "id": "pill_bg", "label": "Tag background", "default": "#FDE4DF" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "presets": [
+    { "name": "Featured article card" }
+  ]
+}
+{% endschema %}
