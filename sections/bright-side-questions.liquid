@@ -1,0 +1,254 @@
+{%- comment -%}
+  File: sections/bright-side-questions.liquid
+  "Questions we're asked most" — tinted question cards with star icon,
+  tag pill and "Read →" link. Each card is a block.
+{%- endcomment -%}
+
+<style>
+  #BrightQs-{{ section.id }} {
+    --bq-bg: {{ section.settings.bg_color }};
+    --bq-heading: {{ section.settings.heading_color }};
+    --bq-text: {{ section.settings.text_color }};
+    --bq-cols: {{ section.settings.columns }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<section id="BrightQs-{{ section.id }}" class="bright-qs">
+  <div class="bright-qs__container">
+
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <header class="bright-qs__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="bright-qs__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="bright-qs__sub">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="bright-qs__grid">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign q_url = block.settings.link
+          if q_url == blank and block.settings.article != blank
+            assign q_url = block.settings.article.url
+          endif
+          assign q_text = block.settings.question
+          if q_text == blank and block.settings.article != blank
+            assign q_text = block.settings.article.title
+          endif
+        -%}
+
+        {%- if q_url != blank -%}
+          <a href="{{ q_url }}" class="bright-qs__card bright-qs__card--{{ block.settings.theme }}" {{ block.shopify_attributes }}>
+        {%- else -%}
+          <div class="bright-qs__card bright-qs__card--{{ block.settings.theme }}" {{ block.shopify_attributes }}>
+        {%- endif -%}
+
+          <svg class="bright-qs__star" viewBox="0 0 100 95" aria-hidden="true" focusable="false">
+            <path d="M50 0 L61.8 35.3 L99 36.3 L69.1 58.7 L79.4 94.4 L50 73.1 L20.6 94.4 L30.9 58.7 L1 36.3 L38.2 35.3 Z"/>
+          </svg>
+
+          <h3 class="bright-qs__question">{{ q_text | escape }}</h3>
+
+          <div class="bright-qs__footer">
+            {%- if block.settings.tag_label != blank -%}
+              <span class="bright-qs__pill">
+                <span class="bright-qs__dot" aria-hidden="true"></span>
+                {{ block.settings.tag_label }}
+              </span>
+            {%- else -%}
+              <span></span>
+            {%- endif -%}
+            {%- if section.settings.read_label != blank -%}
+              <span class="bright-qs__read">{{ section.settings.read_label }} <span aria-hidden="true">→</span></span>
+            {%- endif -%}
+          </div>
+
+        {%- if q_url != blank -%}</a>{%- else -%}</div>{%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% stylesheet %}
+  .bright-qs { background: var(--bq-bg); }
+  .bright-qs__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .bright-qs__header { text-align: center; margin-bottom: 36px; }
+  .bright-qs__heading {
+    margin: 0 0 22px;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
+    color: var(--bq-heading);
+  }
+  .bright-qs__sub {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--bq-text);
+  }
+
+  .bright-qs__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  @media (min-width: 600px) {
+    .bright-qs__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 900px) {
+    .bright-qs__grid { grid-template-columns: repeat(var(--bq-cols), minmax(0, 1fr)); }
+  }
+
+  /* Card */
+  .bright-qs__card {
+    --q-bg: #E1F4F3;
+    --q-accent: #3FB8B2;
+    --q-pill: #D2EEEC;
+    display: flex;
+    flex-direction: column;
+    min-height: 175px;
+    padding: 22px 20px 20px;
+    background: var(--q-bg);
+    border-radius: 18px;
+    color: var(--bq-heading);
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .bright-qs__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+    color: var(--bq-heading);
+  }
+
+  /* Colour themes */
+  .bright-qs__card--teal   { --q-bg: #E1F4F3; --q-accent: #3FB8B2; --q-pill: #D2EEEC; }
+  .bright-qs__card--green  { --q-bg: #EDF6E5; --q-accent: #7CC34F; --q-pill: #E1F0D4; }
+  .bright-qs__card--red    { --q-bg: #FCE5DF; --q-accent: #E8533A; --q-pill: #F8D6CE; }
+  .bright-qs__card--yellow { --q-bg: #FFF6D9; --q-accent: #F5BE00; --q-pill: #FCEDBC; }
+  .bright-qs__card--pink   { --q-bg: #FCE6EF; --q-accent: #E8508F; --q-pill: #F8D5E3; }
+
+  .bright-qs__star {
+    width: 22px;
+    height: 21px;
+    margin-bottom: 14px;
+    fill: var(--q-accent);
+    transition: transform 0.35s ease;
+  }
+  .bright-qs__card:hover .bright-qs__star { transform: rotate(-15deg) scale(1.15); }
+
+  .bright-qs__question {
+    margin: 0 0 22px;
+    font-size: 15.5px;
+    font-weight: 700;
+    line-height: 1.45;
+    color: inherit;
+  }
+
+  .bright-qs__footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .bright-qs__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 10px;
+    background: var(--q-pill);
+    border-radius: 999px;
+    font-size: 9.5px;
+    font-weight: 800;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .bright-qs__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--q-accent);
+  }
+  .bright-qs__read {
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 800;
+  }
+  .bright-qs__read span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .bright-qs__card:hover .bright-qs__read span { transform: translateX(4px); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bright Side questions",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions we're asked most" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Straight answers to the things people ask us every week." },
+    { "type": "text", "id": "read_label", "label": "Read link label", "default": "Read" },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 4, "step": 1, "default": 3 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#F6F4F1" },
+    { "type": "color", "id": "heading_color", "label": "Heading & card text", "default": "#1F1F1F" },
+    { "type": "color", "id": "text_color", "label": "Subheading", "default": "#555555" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question card",
+      "settings": [
+        { "type": "article", "id": "article", "label": "Blog post (optional)", "info": "Fills the question and link automatically" },
+        { "type": "textarea", "id": "question", "label": "Question", "default": "Are mood gummies non-drowsy and safe to take in the morning?" },
+        { "type": "text", "id": "tag_label", "label": "Tag label", "default": "Good Moods" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Leave empty to use the blog post link" },
+        { "type": "select", "id": "theme", "label": "Card colour", "default": "teal",
+          "options": [
+            { "value": "teal", "label": "Teal" },
+            { "value": "green", "label": "Green" },
+            { "value": "red", "label": "Red" },
+            { "value": "yellow", "label": "Yellow" },
+            { "value": "pink", "label": "Pink" }
+          ]
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bright Side questions",
+      "blocks": [
+        { "type": "question", "settings": { "question": "Are mood gummies non-drowsy and safe to take in the morning?", "tag_label": "Good Moods", "theme": "teal" } },
+        { "type": "question", "settings": { "question": "Do mood gummies work without caffeine or stimulants?", "tag_label": "Energy & Rest", "theme": "green" } },
+        { "type": "question", "settings": { "question": "Are mood gummies safe to take every day long-term?", "tag_label": "Energy & Rest", "theme": "green" } },
+        { "type": "question", "settings": { "question": "What supplement combines ashwagandha and Gotu Kola for daily wellness?", "tag_label": "Star Ingredients", "theme": "red" } },
+        { "type": "question", "settings": { "question": "What does it mean to live full with daily wellness supplements?", "tag_label": "Live Full", "theme": "yellow" } },
+        { "type": "question", "settings": { "question": "What is the story behind Kefey?", "tag_label": "Kefey Stories", "theme": "teal" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
