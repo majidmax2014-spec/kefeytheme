@@ -12,22 +12,121 @@
     "hero": {
       "type": "blog-hero-bright-side",
       "blocks": {
-        "photo_1": { "type": "photo", "settings": { "rotation": -6, "offset_y": 6 } },
-        "photo_2": { "type": "photo", "settings": { "rotation": 4, "offset_y": -4 } },
-        "star": { "type": "star", "settings": {} },
-        "photo_3": { "type": "photo", "settings": { "rotation": -3, "offset_y": -4 } },
-        "photo_4": { "type": "photo", "settings": { "rotation": 5, "offset_y": 6 } }
+        "photo_1": {
+          "type": "photo",
+          "settings": {
+            "link": "",
+            "rotation": -6,
+            "offset_y": 6
+          }
+        },
+        "photo_2": {
+          "type": "photo",
+          "settings": {
+            "link": "",
+            "rotation": 4,
+            "offset_y": -4
+          }
+        },
+        "star": {
+          "type": "star",
+          "settings": {
+            "star_fill": "#ffffff",
+            "rotation": 0
+          }
+        },
+        "photo_3": {
+          "type": "photo",
+          "settings": {
+            "link": "",
+            "rotation": -3,
+            "offset_y": -4
+          }
+        },
+        "photo_4": {
+          "type": "photo",
+          "settings": {
+            "link": "",
+            "rotation": 5,
+            "offset_y": 6
+          }
+        }
       },
-      "block_order": ["photo_1", "photo_2", "star", "photo_3", "photo_4"],
-      "settings": {}
+      "block_order": [
+        "photo_1",
+        "photo_2",
+        "star",
+        "photo_3",
+        "photo_4"
+      ],
+      "settings": {
+        "eyebrow": "From the Kefey® team",
+        "heading": "The Bright Side",
+        "text": "<p>Honest, joyful writing on feeling good every day — what's inside the star, how to keep your days steady, and the little moments that help you live full.</p>",
+        "heading_font": "nunito_sans_n8",
+        "bg_color": "#e8533a",
+        "text_color": "#ffffff",
+        "star_color": "#ffc414",
+        "star_soft_color": "#ef7563",
+        "card_border_color": "#ffffff",
+        "show_deco_stars": true,
+        "animate": true,
+        "padding_top": 80,
+        "padding_bottom": 64
+      }
     },
     "main": {
       "type": "main-page",
       "settings": {
+        "enable_legal_typography": false,
+        "legal_title_font_family": "heading",
+        "legal_section_font_family": "heading",
+        "legal_body_font_family": "body",
+        "legal_title_color": "#101010",
+        "legal_title_highlight_color": "#2bb4a7",
+        "legal_title_font_weight": "500",
+        "legal_section_heading_color": "#101010",
+        "legal_body_color": "#333333",
+        "legal_title_font_size": 36,
+        "legal_section_heading_font_size": 18,
+        "legal_body_font_size": 16,
+        "legal_title_uppercase": false,
+        "legal_section_heading_uppercase": true,
+        "legal_body_line_height": 165,
+        "legal_paragraph_spacing": 16,
+        "legal_content_max_width": 1160,
         "padding_top": 52,
         "padding_bottom": 36
       }
+    },
+    "featured_article_card_ycYxJX": {
+      "type": "featured-article-card",
+      "name": "Featured article card",
+      "settings": {
+        "article": "",
+        "tag_label": "Star ingredients",
+        "heading": "",
+        "text": "",
+        "author": "By the Kefey® team",
+        "read_time": 0,
+        "button_label": "Read the article",
+        "button_link": "",
+        "image_position": "left",
+        "max_width": 800,
+        "bg_color": "#FFFFFF",
+        "card_color": "#FFFFFF",
+        "heading_color": "#1F1F1F",
+        "text_color": "#555555",
+        "accent_color": "#E8533A",
+        "pill_bg": "#FDE4DF",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     }
   },
-  "order": ["hero", "main"]
+  "order": [
+    "hero",
+    "main",
+    "featured_article_card_ycYxJX"
+  ]
 }
