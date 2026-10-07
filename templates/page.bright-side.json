@@ -301,9 +301,71 @@
         "subheading": "Straight answers to the things people ask us every week.",
         "read_label": "Read",
         "columns": 3,
-        "bg_color": "#F6F4F1",
-        "heading_color": "#1F1F1F",
+        "bg_color": "#f6f4f1",
+        "heading_color": "#1f1f1f",
         "text_color": "#555555",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "bright_side_share_joy_hpNKAQ": {
+      "type": "bright-side-share-joy",
+      "blocks": {
+        "photo_Pz73nb": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_YWfWLt": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_4bc6ET": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_iyAFBH": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_RgdDgx": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        },
+        "photo_ekLnVf": {
+          "type": "photo",
+          "settings": {
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "photo_Pz73nb",
+        "photo_YWfWLt",
+        "photo_4bc6ET",
+        "photo_iyAFBH",
+        "photo_RgdDgx",
+        "photo_ekLnVf"
+      ],
+      "name": "Bright Side share joy",
+      "settings": {
+        "promo_heading": "Share the joy",
+        "promo_text": "@kefey.co on Instagram & TikTok",
+        "promo_link": "",
+        "promo_position": 2,
+        "bg_color": "#FFFFFF",
+        "promo_bg": "#E8533A",
+        "promo_text_color": "#FFFFFF",
+        "promo_star_color": "#EF7563",
         "padding_top": 56,
         "padding_bottom": 56
       }
@@ -315,6 +377,7 @@
     "featured_article_card_ycYxJX",
     "bright_side_article_grid_Fwi9D8",
     "bright_side_topics_KetMMT",
-    "bright_side_questions_NDnwnA"
+    "bright_side_questions_NDnwnA",
+    "bright_side_share_joy_hpNKAQ"
   ]
 }
