@@ -1,0 +1,286 @@
+{%- comment -%}
+  File: sections/bright-side-article-grid.liquid
+  "Fresh on The Bright Side" — heading + grid of latest blog articles.
+  Each card: image, coloured tag pill, title, excerpt, read time.
+{%- endcomment -%}
+
+{%- liquid
+  assign blog_obj = section.settings.blog
+  if blog_obj == blank
+    assign blog_obj = blogs.news
+  endif
+  assign skip = section.settings.skip_posts
+  assign limit = section.settings.posts_count
+  assign pill_colors = 'teal,orange,yellow,red,pink,green' | split: ','
+-%}
+
+<style>
+  #BrightGrid-{{ section.id }} {
+    --bg-bg: {{ section.settings.bg_color }};
+    --bg-card: {{ section.settings.card_color }};
+    --bg-heading: {{ section.settings.heading_color }};
+    --bg-text: {{ section.settings.text_color }};
+    --bg-cols: {{ section.settings.columns }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<section id="BrightGrid-{{ section.id }}" class="bright-grid">
+  <div class="page-width bright-grid__wrap">
+
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <header class="bright-grid__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="bright-grid__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="bright-grid__sub">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="bright-grid__grid">
+      {%- if blog_obj.articles.size > 0 -%}
+        {%- for article in blog_obj.articles offset: skip limit: limit -%}
+          {%- liquid
+            assign words = article.content | strip_html | split: ' ' | size
+            assign read_time = words | divided_by: 200 | at_least: 1
+            assign color_index = forloop.index0 | modulo: pill_colors.size
+            assign pill = pill_colors[color_index]
+          -%}
+          <article class="bright-grid__card">
+            <a href="{{ article.url }}" class="bright-grid__media" aria-label="{{ article.title | escape }}">
+              {%- if article.image -%}
+                {{ article.image | image_url: width: 800 | image_tag:
+                  loading: 'lazy',
+                  widths: '400, 600, 800',
+                  sizes: '(min-width: 990px) 300px, (min-width: 750px) 45vw, 100vw',
+                  alt: article.image.alt | default: article.title | escape
+                }}
+              {%- else -%}
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'bright-grid__placeholder' }}
+              {%- endif -%}
+            </a>
+
+            <div class="bright-grid__body">
+              {%- if article.tags.size > 0 -%}
+                <span class="bright-grid__pill bright-grid__pill--{{ pill }}">
+                  <span class="bright-grid__dot" aria-hidden="true"></span>
+                  {{ article.tags.first }}
+                </span>
+              {%- endif -%}
+
+              <h3 class="bright-grid__title">
+                <a href="{{ article.url }}">{{ article.title | escape }}</a>
+              </h3>
+
+              {%- if section.settings.show_excerpt -%}
+                <p class="bright-grid__excerpt">
+                  {%- if article.excerpt != blank -%}
+                    {{ article.excerpt | strip_html | truncatewords: 14 }}
+                  {%- else -%}
+                    {{ article.content | strip_html | truncatewords: 14 }}
+                  {%- endif -%}
+                </p>
+              {%- endif -%}
+
+              <p class="bright-grid__meta">{{ read_time }} min read</p>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        {%- for i in (1..6) -%}
+          <article class="bright-grid__card">
+            <div class="bright-grid__media">{{ 'lifestyle-1' | placeholder_svg_tag: 'bright-grid__placeholder' }}</div>
+            <div class="bright-grid__body">
+              <span class="bright-grid__pill bright-grid__pill--teal"><span class="bright-grid__dot"></span>Tag</span>
+              <h3 class="bright-grid__title">Your article title</h3>
+              <p class="bright-grid__excerpt">Choose a blog in the section settings to show posts here.</p>
+              <p class="bright-grid__meta">5 min read</p>
+            </div>
+          </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.button_label != blank -%}
+      <div class="bright-grid__footer">
+        <a href="{{ section.settings.button_link | default: blog_obj.url }}" class="bright-grid__btn">{{ section.settings.button_label }}</a>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% stylesheet %}
+  .bright-grid { background: var(--bg-bg); }
+  .bright-grid__wrap { max-width: 1000px; margin: 0 auto; }
+
+  .bright-grid__header { text-align: center; margin-bottom: 36px; }
+  .bright-grid__heading {
+    margin: 0 0 10px;
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--bg-heading);
+  }
+  .bright-grid__sub {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--bg-text);
+  }
+
+  .bright-grid__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  @media (min-width: 600px) {
+    .bright-grid__grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 990px) {
+    .bright-grid__grid { grid-template-columns: repeat(var(--bg-cols), 1fr); }
+  }
+
+  .bright-grid__card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-card);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .bright-grid__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.11);
+  }
+
+  .bright-grid__media {
+    display: block;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+  }
+  .bright-grid__media img,
+  .bright-grid__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .bright-grid__card:hover .bright-grid__media img { transform: scale(1.05); }
+
+  .bright-grid__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px 18px 20px;
+  }
+
+  /* Tag pill */
+  .bright-grid__pill {
+    --pill-dot: #2BB4A7;
+    --pill-bg: #E0F5F2;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    margin-bottom: 12px;
+    background: var(--pill-bg);
+    color: var(--bg-heading);
+    border-radius: 999px;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .bright-grid__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--pill-dot);
+  }
+  .bright-grid__pill--teal   { --pill-dot: #2BB4A7; --pill-bg: #E0F5F2; }
+  .bright-grid__pill--orange { --pill-dot: #F28B30; --pill-bg: #FDEBDA; }
+  .bright-grid__pill--yellow { --pill-dot: #E8B400; --pill-bg: #FFF5CC; }
+  .bright-grid__pill--red    { --pill-dot: #E8533A; --pill-bg: #FDE4DF; }
+  .bright-grid__pill--pink   { --pill-dot: #E8508F; --pill-bg: #FCE3EE; }
+  .bright-grid__pill--green  { --pill-dot: #5BAA4A; --pill-bg: #E5F3E1; }
+
+  .bright-grid__title {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--bg-heading);
+  }
+  .bright-grid__title a { color: inherit; text-decoration: none; }
+  .bright-grid__title a:hover { color: #E8533A; }
+
+  .bright-grid__excerpt {
+    margin: 0 0 14px;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: var(--bg-text);
+  }
+  .bright-grid__meta {
+    margin: auto 0 0;
+    font-size: 0.7rem;
+    color: var(--bg-text);
+    opacity: 0.8;
+  }
+
+  .bright-grid__footer { text-align: center; margin-top: 40px; }
+  .bright-grid__btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: #E8533A;
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .bright-grid__btn:hover { color: #fff; opacity: 0.9; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bright Side article grid",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Fresh on The Bright Side" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "New stories every week, from every corner of Kefey." },
+    { "type": "blog", "id": "blog", "label": "Blog" },
+    { "type": "range", "id": "posts_count", "label": "Number of posts", "min": 3, "max": 12, "step": 1, "default": 6 },
+    { "type": "range", "id": "skip_posts", "label": "Skip first posts", "min": 0, "max": 5, "step": 1, "default": 0, "info": "Use 1 if the latest post is already shown in the featured card" },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 4, "step": 1, "default": 3 },
+    { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
+
+    { "type": "header", "content": "Button (optional)" },
+    { "type": "text", "id": "button_label", "label": "Button label", "info": "Leave empty to hide" },
+    { "type": "url", "id": "button_link", "label": "Button link", "info": "Defaults to the blog page" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "color", "id": "card_color", "label": "Card background", "default": "#FFFFFF" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#1F1F1F" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#666666" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
+  ],
+  "presets": [
+    { "name": "Bright Side article grid" }
+  ]
+}
+{% endschema %}
