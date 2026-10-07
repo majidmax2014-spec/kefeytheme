@@ -1,0 +1,212 @@
+{%- comment -%}
+  File: sections/bright-side-share-joy.liquid
+  "Share the joy" — social / UGC photo grid with a coloured promo box.
+  Photos are blocks. The promo box spans 2 columns and its position is adjustable.
+{%- endcomment -%}
+
+{%- liquid
+  assign promo_after = section.settings.promo_position
+  assign promo_done = false
+-%}
+
+<style>
+  #ShareJoy-{{ section.id }} {
+    --sj-bg: {{ section.settings.bg_color }};
+    --sj-promo: {{ section.settings.promo_bg }};
+    --sj-promo-text: {{ section.settings.promo_text_color }};
+    --sj-star: {{ section.settings.promo_star_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{%- capture promo_box -%}
+  {%- if section.settings.promo_link != blank -%}
+    <a href="{{ section.settings.promo_link }}" class="share-joy__promo" target="_blank" rel="noopener">
+  {%- else -%}
+    <div class="share-joy__promo">
+  {%- endif -%}
+      <svg class="share-joy__deco share-joy__deco--tr" viewBox="0 0 100 95" aria-hidden="true" focusable="false"><path d="M50 0 L61.8 35.3 L99 36.3 L69.1 58.7 L79.4 94.4 L50 73.1 L20.6 94.4 L30.9 58.7 L1 36.3 L38.2 35.3 Z"/></svg>
+      <svg class="share-joy__deco share-joy__deco--bl" viewBox="0 0 100 95" aria-hidden="true" focusable="false"><path d="M50 0 L61.8 35.3 L99 36.3 L69.1 58.7 L79.4 94.4 L50 73.1 L20.6 94.4 L30.9 58.7 L1 36.3 L38.2 35.3 Z"/></svg>
+      <div class="share-joy__promo-content">
+        {%- if section.settings.promo_heading != blank -%}
+          <h2 class="share-joy__promo-heading">{{ section.settings.promo_heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.promo_text != blank -%}
+          <p class="share-joy__promo-text">{{ section.settings.promo_text }}</p>
+        {%- endif -%}
+      </div>
+  {%- if section.settings.promo_link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+{%- endcapture -%}
+
+<section id="ShareJoy-{{ section.id }}" class="share-joy">
+  <div class="share-joy__container">
+    <div class="share-joy__grid">
+
+      {%- if promo_after == 0 -%}
+        {{ promo_box }}
+        {%- assign promo_done = true -%}
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="share-joy__item" target="_blank" rel="noopener" {{ block.shopify_attributes }}>
+        {%- else -%}
+          <div class="share-joy__item" {{ block.shopify_attributes }}>
+        {%- endif -%}
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag:
+                loading: 'lazy',
+                widths: '300, 450, 600',
+                sizes: '(min-width: 750px) 210px, 50vw',
+                alt: block.settings.image.alt | escape
+              }}
+            {%- else -%}
+              {{ 'lifestyle-2' | placeholder_svg_tag: 'share-joy__placeholder' }}
+            {%- endif -%}
+        {%- if block.settings.link != blank -%}</a>{%- else -%}</div>{%- endif -%}
+
+        {%- if forloop.index == promo_after -%}
+          {{ promo_box }}
+          {%- assign promo_done = true -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- unless promo_done -%}
+        {{ promo_box }}
+      {%- endunless -%}
+
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  .share-joy { background: var(--sj-bg); }
+  .share-joy__container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .share-joy__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  @media (min-width: 750px) {
+    .share-joy__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 13px;
+    }
+  }
+
+  /* Photo tile */
+  .share-joy__item {
+    display: block;
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f2f2f2;
+  }
+  .share-joy__item img,
+  .share-joy__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .share-joy__item:hover img { transform: scale(1.06); }
+
+  /* Promo box */
+  .share-joy__promo {
+    grid-column: span 2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 170px;
+    padding: 24px;
+    background: var(--sj-promo);
+    color: var(--sj-promo-text);
+    border-radius: 16px;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+  }
+  .share-joy__promo:hover { color: var(--sj-promo-text); }
+
+  .share-joy__deco {
+    position: absolute;
+    fill: var(--sj-star);
+    transition: transform 0.5s ease;
+  }
+  .share-joy__deco--tr { top: -6px; right: -6px; width: 62px; }
+  .share-joy__deco--bl { bottom: -16px; left: -8px; width: 58px; }
+  .share-joy__promo:hover .share-joy__deco--tr { transform: rotate(18deg) scale(1.1); }
+  .share-joy__promo:hover .share-joy__deco--bl { transform: rotate(-18deg) scale(1.1); }
+
+  .share-joy__promo-content { position: relative; z-index: 1; }
+  .share-joy__promo-heading {
+    margin: 0 0 12px;
+    color: inherit;
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.3px;
+  }
+  .share-joy__promo-text {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  @media (max-width: 749px) {
+    .share-joy__promo-heading { font-size: 26px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bright Side share joy",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 10,
+  "settings": [
+    { "type": "header", "content": "Promo box" },
+    { "type": "text", "id": "promo_heading", "label": "Heading", "default": "Share the joy" },
+    { "type": "text", "id": "promo_text", "label": "Text", "default": "@kefey.co on Instagram & TikTok" },
+    { "type": "url", "id": "promo_link", "label": "Link", "info": "e.g. your Instagram profile" },
+    { "type": "range", "id": "promo_position", "label": "Show box after photo no.", "min": 0, "max": 10, "step": 1, "default": 2 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "color", "id": "promo_bg", "label": "Box background", "default": "#E8533A" },
+    { "type": "color", "id": "promo_text_color", "label": "Box text", "default": "#FFFFFF" },
+    { "type": "color", "id": "promo_star_color", "label": "Box stars", "default": "#EF7563" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 }
+  ],
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "url", "id": "link", "label": "Link (optional)", "info": "e.g. the Instagram post" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bright Side share joy",
+      "blocks": [
+        { "type": "photo" }, { "type": "photo" }, { "type": "photo" },
+        { "type": "photo" }, { "type": "photo" }, { "type": "photo" }
+      ]
+    }
+  ]
+}
+{% endschema %}
