@@ -16,7 +16,7 @@
 </style>
 
 <section id="BrightTopics-{{ section.id }}" class="bright-topics">
-  <div class="page-width">
+  <div class="bright-topics__container">
 
     {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
       <header class="bright-topics__header">
@@ -49,8 +49,6 @@
                     sizes: '90px',
                     alt: block.settings.image.alt | escape
                   }}
-                {%- else -%}
-                  {{ 'lifestyle-1' | placeholder_svg_tag: 'bright-topics__placeholder' }}
                 {%- endif -%}
               </div>
             </div>
@@ -76,26 +74,33 @@
 
 {% stylesheet %}
   .bright-topics { background: var(--bt-bg); }
+  .bright-topics__container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
 
-  .bright-topics__header { text-align: center; margin-bottom: 40px; }
+  .bright-topics__header { text-align: center; margin-bottom: 36px; }
   .bright-topics__heading {
-    margin: 0 0 18px;
-    font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+    margin: 0 0 22px;
+    font-size: 34px;
     font-weight: 800;
-    letter-spacing: -0.01em;
+    line-height: 1.15;
+    letter-spacing: -0.3px;
     color: var(--bt-heading);
   }
   .bright-topics__sub {
     margin: 0;
-    font-size: 0.95rem;
+    font-size: 15px;
+    line-height: 1.5;
     color: var(--bt-text);
   }
 
-  /* Grid — horizontal swipe on mobile */
+  /* Mobile: swipe */
   .bright-topics__grid {
     display: grid;
     grid-auto-flow: column;
-    grid-auto-columns: 72%;
+    grid-auto-columns: 200px;
     gap: 16px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -103,14 +108,14 @@
     scrollbar-width: none;
   }
   .bright-topics__grid::-webkit-scrollbar { display: none; }
+
+  /* Tablet + desktop: all cards in one row */
   @media (min-width: 750px) {
-    .bright-topics__grid { grid-auto-columns: 40%; }
-  }
-  @media (min-width: 990px) {
     .bright-topics__grid {
       grid-auto-flow: row;
-      grid-template-columns: repeat(var(--bt-cols), 1fr);
+      grid-template-columns: repeat(var(--bt-cols), minmax(0, 1fr));
       overflow: visible;
+      padding: 8px 0 24px;
     }
   }
 
@@ -138,7 +143,7 @@
     width: 84px;
     height: 80px;
     margin-bottom: 26px;
-    filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.2));
+    filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.22));
     transition: transform 0.4s ease;
   }
   .bright-topics__card:hover .bright-topics__star { transform: rotate(-10deg) scale(1.08); }
@@ -146,10 +151,9 @@
     width: 100%;
     height: 100%;
     clip-path: polygon(50% 0%, 61.8% 35.3%, 99% 36.3%, 69.1% 58.7%, 79.4% 94.4%, 50% 73.1%, 20.6% 94.4%, 30.9% 58.7%, 1% 36.3%, 38.2% 35.3%);
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.4);
   }
-  .bright-topics__star-clip img,
-  .bright-topics__placeholder {
+  .bright-topics__star-clip img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -159,19 +163,21 @@
   .bright-topics__title {
     margin: 0 0 14px;
     color: inherit;
-    font-size: clamp(1.5rem, 2vw, 1.75rem);
+    font-size: 26px;
     font-weight: 800;
-    line-height: 1.25;
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+    word-break: break-word;
   }
   .bright-topics__text {
     margin: 0 0 20px;
-    font-size: 0.88rem;
+    font-size: 14px;
     font-weight: 500;
     line-height: 1.65;
   }
   .bright-topics__link {
     margin-top: auto;
-    font-size: 0.85rem;
+    font-size: 13px;
     font-weight: 800;
   }
   .bright-topics__link span {
@@ -179,6 +185,14 @@
     transition: transform 0.2s ease;
   }
   .bright-topics__card:hover .bright-topics__link span { transform: translateX(4px); }
+
+  /* Slightly smaller text when screen is narrow but cards are in a row */
+  @media (min-width: 750px) and (max-width: 989px) {
+    .bright-topics__card { padding: 22px 16px 20px; min-height: 320px; }
+    .bright-topics__title { font-size: 20px; }
+    .bright-topics__text { font-size: 12.5px; }
+    .bright-topics__star { width: 66px; height: 63px; margin-bottom: 20px; }
+  }
 {% endstylesheet %}
 
 {% schema %}
