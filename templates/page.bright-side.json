@@ -216,11 +216,96 @@
         "heading": "Pick a topic",
         "subheading": "Five places to start, depending on what's on your mind today.",
         "columns": 5,
-        "bg_color": "#FFFFFF",
-        "heading_color": "#1F1F1F",
+        "bg_color": "#ffffff",
+        "heading_color": "#1f1f1f",
         "text_color": "#555555",
         "padding_top": 48,
         "padding_bottom": 48
+      }
+    },
+    "bright_side_questions_NDnwnA": {
+      "type": "bright-side-questions",
+      "blocks": {
+        "question_WwdFhU": {
+          "type": "question",
+          "settings": {
+            "article": "",
+            "question": "Are mood gummies non-drowsy and safe to take in the morning?",
+            "tag_label": "Good Moods",
+            "link": "",
+            "theme": "teal"
+          }
+        },
+        "question_6Rjfw6": {
+          "type": "question",
+          "settings": {
+            "article": "",
+            "question": "Do mood gummies work without caffeine or stimulants?",
+            "tag_label": "Energy & Rest",
+            "link": "",
+            "theme": "green"
+          }
+        },
+        "question_gdmthi": {
+          "type": "question",
+          "settings": {
+            "article": "",
+            "question": "Are mood gummies safe to take every day long-term?",
+            "tag_label": "Energy & Rest",
+            "link": "",
+            "theme": "green"
+          }
+        },
+        "question_nzV876": {
+          "type": "question",
+          "settings": {
+            "article": "",
+            "question": "What supplement combines ashwagandha and Gotu Kola for daily wellness?",
+            "tag_label": "Star Ingredients",
+            "link": "",
+            "theme": "red"
+          }
+        },
+        "question_FWwihF": {
+          "type": "question",
+          "settings": {
+            "article": "",
+            "question": "What does it mean to live full with daily wellness supplements?",
+            "tag_label": "Live Full",
+            "link": "",
+            "theme": "yellow"
+          }
+        },
+        "question_qc8Dec": {
+          "type": "question",
+          "settings": {
+            "article": "",
+            "question": "What is the story behind Kefey?",
+            "tag_label": "Kefey Stories",
+            "link": "",
+            "theme": "teal"
+          }
+        }
+      },
+      "block_order": [
+        "question_WwdFhU",
+        "question_6Rjfw6",
+        "question_gdmthi",
+        "question_nzV876",
+        "question_FWwihF",
+        "question_qc8Dec"
+      ],
+      "name": "Bright Side questions",
+      "settings": {
+        "heading": "Questions we're asked most",
+        "subheading": "Straight answers to the things people ask us every week.",
+        "read_label": "Read",
+        "columns": 3,
+        "bg_color": "#F6F4F1",
+        "heading_color": "#1F1F1F",
+        "text_color": "#555555",
+        "padding_top": 56,
+        "padding_bottom": 56
       }
     }
   },
@@ -229,6 +314,7 @@
     "main",
     "featured_article_card_ycYxJX",
     "bright_side_article_grid_Fwi9D8",
-    "bright_side_topics_KetMMT"
+    "bright_side_topics_KetMMT",
+    "bright_side_questions_NDnwnA"
   ]
 }
