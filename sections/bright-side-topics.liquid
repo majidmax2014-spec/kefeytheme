@@ -1,0 +1,233 @@
+{%- comment -%}
+  File: sections/bright-side-topics.liquid
+  "Pick a topic" — coloured topic cards with star-shaped photo.
+  Each card is a block: colour, text colour, image, title, text, link.
+{%- endcomment -%}
+
+<style>
+  #BrightTopics-{{ section.id }} {
+    --bt-bg: {{ section.settings.bg_color }};
+    --bt-heading: {{ section.settings.heading_color }};
+    --bt-text: {{ section.settings.text_color }};
+    --bt-cols: {{ section.settings.columns }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<section id="BrightTopics-{{ section.id }}" class="bright-topics">
+  <div class="page-width">
+
+    {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+      <header class="bright-topics__header">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="bright-topics__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <p class="bright-topics__sub">{{ section.settings.subheading }}</p>
+        {%- endif -%}
+      </header>
+    {%- endif -%}
+
+    <div class="bright-topics__grid">
+      {%- for block in section.blocks -%}
+        {%- assign has_link = false -%}
+        {%- if block.settings.link != blank -%}{%- assign has_link = true -%}{%- endif -%}
+
+        {%- if has_link -%}
+          <a href="{{ block.settings.link }}" class="bright-topics__card" style="--card-bg: {{ block.settings.bg_color }}; --card-text: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
+        {%- else -%}
+          <div class="bright-topics__card" style="--card-bg: {{ block.settings.bg_color }}; --card-text: {{ block.settings.text_color }};" {{ block.shopify_attributes }}>
+        {%- endif -%}
+
+            <div class="bright-topics__star">
+              <div class="bright-topics__star-clip">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 300 | image_tag:
+                    loading: 'lazy',
+                    widths: '150, 300',
+                    sizes: '90px',
+                    alt: block.settings.image.alt | escape
+                  }}
+                {%- else -%}
+                  {{ 'lifestyle-1' | placeholder_svg_tag: 'bright-topics__placeholder' }}
+                {%- endif -%}
+              </div>
+            </div>
+
+            {%- if block.settings.title != blank -%}
+              <h3 class="bright-topics__title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+
+            {%- if block.settings.text != blank -%}
+              <p class="bright-topics__text">{{ block.settings.text }}</p>
+            {%- endif -%}
+
+            {%- if block.settings.link_label != blank -%}
+              <span class="bright-topics__link">{{ block.settings.link_label }} <span aria-hidden="true">→</span></span>
+            {%- endif -%}
+
+        {%- if has_link -%}</a>{%- else -%}</div>{%- endif -%}
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% stylesheet %}
+  .bright-topics { background: var(--bt-bg); }
+
+  .bright-topics__header { text-align: center; margin-bottom: 40px; }
+  .bright-topics__heading {
+    margin: 0 0 18px;
+    font-size: clamp(1.8rem, 3.6vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--bt-heading);
+  }
+  .bright-topics__sub {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--bt-text);
+  }
+
+  /* Grid — horizontal swipe on mobile */
+  .bright-topics__grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 72%;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 8px 4px 24px;
+    scrollbar-width: none;
+  }
+  .bright-topics__grid::-webkit-scrollbar { display: none; }
+  @media (min-width: 750px) {
+    .bright-topics__grid { grid-auto-columns: 40%; }
+  }
+  @media (min-width: 990px) {
+    .bright-topics__grid {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(var(--bt-cols), 1fr);
+      overflow: visible;
+    }
+  }
+
+  /* Card */
+  .bright-topics__card {
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    min-height: 355px;
+    padding: 28px 22px 24px;
+    background: var(--card-bg);
+    color: var(--card-text);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(.2,.8,.3,1.2), box-shadow 0.3s ease;
+  }
+  .bright-topics__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.15);
+    color: var(--card-text);
+  }
+
+  /* Star-shaped image */
+  .bright-topics__star {
+    width: 84px;
+    height: 80px;
+    margin-bottom: 26px;
+    filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.2));
+    transition: transform 0.4s ease;
+  }
+  .bright-topics__card:hover .bright-topics__star { transform: rotate(-10deg) scale(1.08); }
+  .bright-topics__star-clip {
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(50% 0%, 61.8% 35.3%, 99% 36.3%, 69.1% 58.7%, 79.4% 94.4%, 50% 73.1%, 20.6% 94.4%, 30.9% 58.7%, 1% 36.3%, 38.2% 35.3%);
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .bright-topics__star-clip img,
+  .bright-topics__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bright-topics__title {
+    margin: 0 0 14px;
+    color: inherit;
+    font-size: clamp(1.5rem, 2vw, 1.75rem);
+    font-weight: 800;
+    line-height: 1.25;
+  }
+  .bright-topics__text {
+    margin: 0 0 20px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    line-height: 1.65;
+  }
+  .bright-topics__link {
+    margin-top: auto;
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
+  .bright-topics__link span {
+    display: inline-block;
+    transition: transform 0.2s ease;
+  }
+  .bright-topics__card:hover .bright-topics__link span { transform: translateX(4px); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bright Side topics",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 8,
+  "settings": [
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Pick a topic" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "Five places to start, depending on what's on your mind today." },
+    { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 3, "max": 6, "step": 1, "default": 5 },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#1F1F1F" },
+    { "type": "color", "id": "text_color", "label": "Subheading", "default": "#555555" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "topic",
+      "name": "Topic card",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Star image" },
+        { "type": "text", "id": "title", "label": "Title", "default": "Good Moods" },
+        { "type": "textarea", "id": "text", "label": "Text", "default": "Mood, focus and staying steady when the week gets busy." },
+        { "type": "text", "id": "link_label", "label": "Link label", "default": "Explore" },
+        { "type": "url", "id": "link", "label": "Link", "info": "Tip: /blogs/news/tagged/good-moods shows posts with that tag" },
+        { "type": "color", "id": "bg_color", "label": "Card color", "default": "#3FB8B2" },
+        { "type": "color", "id": "text_color", "label": "Text color", "default": "#FFFFFF" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bright Side topics",
+      "blocks": [
+        { "type": "topic", "settings": { "title": "Good Moods", "text": "Mood, focus and staying steady when the week gets busy.", "bg_color": "#3FB8B2", "text_color": "#FFFFFF" } },
+        { "type": "topic", "settings": { "title": "Energy & Rest", "text": "Steady energy, restful evenings, and the daily habits in between.", "bg_color": "#8BC34F", "text_color": "#FFFFFF" } },
+        { "type": "topic", "settings": { "title": "Star Ingredients", "text": "Every botanical explained, and how the formula comes together.", "bg_color": "#E8533A", "text_color": "#FFFFFF" } },
+        { "type": "topic", "settings": { "title": "Live Full", "text": "The little rituals and joyful moments that make every day feel lighter.", "bg_color": "#FFC700", "text_color": "#1F1F1F" } },
+        { "type": "topic", "settings": { "title": "Kefey Stories", "text": "Our story, our people, our impact and the latest news.", "bg_color": "#52B0AE", "text_color": "#FFFFFF" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
