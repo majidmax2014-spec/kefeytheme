@@ -329,7 +329,9 @@
         "question_FWwihF",
         "question_qc8Dec"
       ],
-      "custom_css": [],
+      "custom_css": [
+        ".bright-qs__container {margin: 0 5%; width: 90%; max-width: 100%;}"
+      ],
       "name": "Bright Side questions",
       "settings": {
         "heading": "Questions we're asked most",
