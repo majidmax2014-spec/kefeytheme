@@ -117,8 +117,7 @@
         ".featured-card__title {font-size: 40px; font-weight: 800;}",
         ".featured-card__text {font-size: 16px;}",
         "p.featured-card__meta {font-size: 13px;}",
-        ".featured-card__btn {display: inline-block; padding: 14px 24px; background: var(--fc-accent); color: #fff; border-radius: 999px; font-size: 15px !important;}",
-        ".page-width {padding: 0px;}"
+        ".featured-card__btn {display: inline-block; padding: 14px 24px; background: var(--fc-accent); color: #fff; border-radius: 999px; font-size: 15px !important;}"
       ],
       "name": "Featured article card",
       "settings": {
@@ -150,8 +149,7 @@
         "p.bright-grid__sub {font-size: 15px;}",
         "h3.bright-grid__title {font-size: 17px;}",
         "p.bright-grid__excerpt {font-size: 13px;}",
-        "p.bright-grid__meta {font-size: 12px;}",
-        ".page-width.bright-grid__wrap {padding: 0px;}"
+        "p.bright-grid__meta {font-size: 12px;}"
       ],
       "name": "Bright Side article grid",
       "settings": {
