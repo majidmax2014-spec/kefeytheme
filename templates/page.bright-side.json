@@ -149,7 +149,8 @@
         "p.bright-grid__sub {font-size: 15px;}",
         "h3.bright-grid__title {font-size: 17px;}",
         "p.bright-grid__excerpt {font-size: 13px;}",
-        "p.bright-grid__meta {font-size: 12px;}"
+        "p.bright-grid__meta {font-size: 12px;}",
+        ".page-width.bright-grid__wrap {padding: 0px;}"
       ],
       "name": "Bright Side article grid",
       "settings": {
