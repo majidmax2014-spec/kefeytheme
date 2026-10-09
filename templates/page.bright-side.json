@@ -330,7 +330,7 @@
         "question_qc8Dec"
       ],
       "custom_css": [
-        ".bright-qs__container {margin: 0 5% !important; width: 90%; max-width: 1000px !important;}",
+        ".bright-qs__container {margin: 0 5% !important; width: 90%; max-width: 100% !important;}",
         ".bright-qs__card {padding: 10%;}",
         "h3.bright-qs__question {font-size: 18px;}",
         "span.bright-qs__pill {padding: 10px; font-size: 12px;}"
