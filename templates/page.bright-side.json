@@ -117,7 +117,8 @@
         ".featured-card__title {font-size: 40px; font-weight: 800;}",
         ".featured-card__text {font-size: 16px;}",
         "p.featured-card__meta {font-size: 13px;}",
-        ".featured-card__btn {display: inline-block; padding: 14px 24px; background: var(--fc-accent); color: #fff; border-radius: 999px; font-size: 15px !important;}"
+        ".featured-card__btn {display: inline-block; padding: 14px 24px; background: var(--fc-accent); color: #fff; border-radius: 999px; font-size: 15px !important;}",
+        ".page-width {padding: 0px;}"
       ],
       "name": "Featured article card",
       "settings": {
