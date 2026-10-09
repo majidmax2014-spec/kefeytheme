@@ -112,8 +112,12 @@
     "featured_article_card_ycYxJX": {
       "type": "featured-article-card",
       "custom_css": [
-        ".featured-card__pill {display: inline-flex; align-items: center; gap: 7px; padding: 10px 12px; margin-bottom: 14px; background: var(--fc-pill); color: var(--fc-heading); border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; line-height: 1;}",
-        ".featured-card__inner {grid-template-columns: 50% 50%; width: 100% !important; max-width: 100%;}"
+        ".featured-card__pill {padding: 10px 12px; font-size: 13px;}",
+        ".featured-card__inner {grid-template-columns: 50% 50%; width: 100% !important; max-width: 100%;}",
+        " .featured-card__title {font-size: 40px; font-weight: 800;}",
+        ".featured-card__text{font-size: 16px;}",
+        "p.featured-card__meta {font-size: 13px;}",
+        ".featured-card__btn {display: inline-block; padding: 14px 24px; background: var(--fc-accent); color: #fff; border-radius: 999px; font-size: 15px !important; }"
       ],
       "name": "Featured article card",
       "settings": {
