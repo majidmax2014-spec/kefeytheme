@@ -63,6 +63,11 @@
         "photo_3",
         "photo_4"
       ],
+      "custom_css": [
+        "p.bright-hero__eyebrow {font-size: 13px;}",
+        "h1.bright-hero__heading {font-size: 85px; font-weight: 900 !important;}",
+        ".bright-hero__text p {font-size: 15px;}"
+      ],
       "settings": {
         "eyebrow": "From the Kefey® team",
         "heading": "The Bright Side",
@@ -373,10 +378,10 @@
         "promo_text": "@kefey.co on Instagram & TikTok",
         "promo_link": "",
         "promo_position": 2,
-        "bg_color": "#FFFFFF",
-        "promo_bg": "#E8533A",
-        "promo_text_color": "#FFFFFF",
-        "promo_star_color": "#EF7563",
+        "bg_color": "#ffffff",
+        "promo_bg": "#e8533a",
+        "promo_text_color": "#ffffff",
+        "promo_star_color": "#ef7563",
         "padding_top": 56,
         "padding_bottom": 56
       }
