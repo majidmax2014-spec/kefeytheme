@@ -111,6 +111,10 @@
     },
     "featured_article_card_ycYxJX": {
       "type": "featured-article-card",
+      "custom_css": [
+        ".featured-card__pill {display: inline-flex; align-items: center; gap: 7px; padding: 10px 12px; margin-bottom: 14px; background: var(--fc-pill); color: var(--fc-heading); border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; line-height: 1;}",
+        ".featured-card__inner {grid-template-columns: 50% 50%; width: 100% !important; max-width: 100%;}"
+      ],
       "name": "Featured article card",
       "settings": {
         "article": "",
