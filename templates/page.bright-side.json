@@ -330,8 +330,8 @@
         "question_qc8Dec"
       ],
       "custom_css": [
-        ".bright-topics__container {margin: 0 5%;}",
-        ".bright-topics__container {max-width: 100%; width: 90%;}"
+        ".bright-topics__container {margin: 0 5% !important;}",
+        ".bright-topics__container {max-width: 100% !important; width: 90% !important;}"
       ],
       "name": "Bright Side questions",
       "settings": {
