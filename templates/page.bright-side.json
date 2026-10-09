@@ -176,6 +176,7 @@
         "topic_XrgWhm": {
           "type": "topic",
           "settings": {
+            "image": "shopify://shop_images/5-Packs.png",
             "title": "Good Moods",
             "text": "Mood, focus and staying steady when the week gets busy.",
             "link_label": "Explore",
@@ -187,6 +188,7 @@
         "topic_PVCdEE": {
           "type": "topic",
           "settings": {
+            "image": "shopify://shop_images/3-Pakcs.png",
             "title": "Energy & Rest",
             "text": "Steady energy, restful evenings, and the daily habits in between.",
             "link_label": "Explore",
@@ -198,6 +200,7 @@
         "topic_BAkbGe": {
           "type": "topic",
           "settings": {
+            "image": "shopify://shop_images/kefey_lifestyle_1.jpg",
             "title": "Star Ingredients",
             "text": "Every botanical explained, and how the formula comes together.",
             "link_label": "Explore",
@@ -209,6 +212,7 @@
         "topic_3wf7en": {
           "type": "topic",
           "settings": {
+            "image": "shopify://shop_images/6-Packs.png",
             "title": "Live Full",
             "text": "The little rituals and joyful moments that make every day feel lighter.",
             "link_label": "Explore",
@@ -220,6 +224,7 @@
         "topic_kw89rf": {
           "type": "topic",
           "settings": {
+            "image": "shopify://shop_images/Lifestyle_22_1.jpg",
             "title": "Kefey Stories",
             "text": "Our story, our people, our impact and the latest news.",
             "link_label": "Explore",
@@ -235,6 +240,10 @@
         "topic_BAkbGe",
         "topic_3wf7en",
         "topic_kw89rf"
+      ],
+      "custom_css": [
+        ".bright-topics__container {margin: 0 5%;}",
+        ".bright-topics__container {max-width: 100%; width: 90%;}"
       ],
       "name": "Bright Side topics",
       "settings": {
