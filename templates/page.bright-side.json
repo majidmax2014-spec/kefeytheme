@@ -84,6 +84,75 @@
         "padding_bottom": 64
       }
     },
+    "bright_side_filter_pills_8eLTBG": {
+      "type": "bright-side-filter-pills",
+      "blocks": {
+        "pill_HPTFrz": {
+          "type": "pill",
+          "settings": {
+            "label": "Good Moods",
+            "link": "",
+            "dot_color": "#3fb8b2"
+          }
+        },
+        "pill_3QFA9P": {
+          "type": "pill",
+          "settings": {
+            "label": "Energy & Rest",
+            "link": "",
+            "dot_color": "#7cc34f"
+          }
+        },
+        "pill_FmBHJG": {
+          "type": "pill",
+          "settings": {
+            "label": "Star Ingredients",
+            "link": "",
+            "dot_color": "#e8533a"
+          }
+        },
+        "pill_peaqig": {
+          "type": "pill",
+          "settings": {
+            "label": "Live Full",
+            "link": "",
+            "dot_color": "#f5be00"
+          }
+        },
+        "pill_iUNBD3": {
+          "type": "pill",
+          "settings": {
+            "label": "Kefey Stories",
+            "link": "",
+            "dot_color": "#3fa9a6"
+          }
+        }
+      },
+      "block_order": [
+        "pill_HPTFrz",
+        "pill_3QFA9P",
+        "pill_FmBHJG",
+        "pill_peaqig",
+        "pill_iUNBD3"
+      ],
+      "name": "Bright Side filter pills",
+      "settings": {
+        "all_label": "All",
+        "all_link": "",
+        "all_dot_color": "#E8533A",
+        "sticky": false,
+        "show_border": true,
+        "aria_label": "Browse topics",
+        "bg_color": "#FFFFFF",
+        "pill_bg": "#F5F3EF",
+        "pill_text": "#3A3A3A",
+        "active_bg": "#E8533A",
+        "active_text": "#FFFFFF",
+        "border_color": "#ECECEC",
+        "padding_top": 22,
+        "padding_bottom": 22
+      }
+    },
     "main": {
       "type": "main-page",
       "disabled": true,
@@ -423,6 +492,7 @@
   },
   "order": [
     "hero",
+    "bright_side_filter_pills_8eLTBG",
     "main",
     "featured_article_card_ycYxJX",
     "bright_side_article_grid_Fwi9D8",
