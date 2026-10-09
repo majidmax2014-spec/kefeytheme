@@ -1,0 +1,199 @@
+{%- comment -%}
+  File: sections/bright-side-filter-pills.liquid
+  Topic filter pills — "All" + one pill per topic (block).
+  The pill whose link matches the current page is shown as active.
+{%- endcomment -%}
+
+{%- liquid
+  assign current_path = request.path | downcase
+  assign any_active = false
+  for block in section.blocks
+    assign b_link = block.settings.link | downcase
+    if b_link != blank and current_path == b_link
+      assign any_active = true
+    endif
+  endfor
+
+  assign all_link = section.settings.all_link | default: '/blogs/news'
+-%}
+
+<style>
+  #FilterPills-{{ section.id }} {
+    --fp-bg: {{ section.settings.bg_color }};
+    --fp-pill: {{ section.settings.pill_bg }};
+    --fp-text: {{ section.settings.pill_text }};
+    --fp-active: {{ section.settings.active_bg }};
+    --fp-active-text: {{ section.settings.active_text }};
+    --fp-border: {{ section.settings.border_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<nav id="FilterPills-{{ section.id }}"
+     class="filter-pills{% if section.settings.sticky %} filter-pills--sticky{% endif %}{% if section.settings.show_border %} filter-pills--border{% endif %}"
+     aria-label="{{ section.settings.aria_label | escape }}">
+  <div class="filter-pills__track">
+
+    {%- if section.settings.all_label != blank -%}
+      <a href="{{ all_link }}"
+         class="filter-pills__pill{% unless any_active %} is-active{% endunless %}"
+         style="--dot: {{ section.settings.all_dot_color }};"
+         {% unless any_active %}aria-current="page"{% endunless %}>
+        <span class="filter-pills__dot" aria-hidden="true"></span>
+        {{ section.settings.all_label }}
+      </a>
+    {%- endif -%}
+
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign b_link = block.settings.link | downcase
+        assign is_active = false
+        if b_link != blank and current_path == b_link
+          assign is_active = true
+        endif
+      -%}
+      <a href="{{ block.settings.link | default: '#' }}"
+         class="filter-pills__pill{% if is_active %} is-active{% endif %}"
+         style="--dot: {{ block.settings.dot_color }};"
+         {% if is_active %}aria-current="page"{% endif %}
+         {{ block.shopify_attributes }}>
+        <span class="filter-pills__dot" aria-hidden="true"></span>
+        {{ block.settings.label }}
+      </a>
+    {%- endfor -%}
+
+  </div>
+</nav>
+
+{% stylesheet %}
+  .filter-pills {
+    background: var(--fp-bg);
+    position: relative;
+    z-index: 5;
+  }
+  .filter-pills--border { border-bottom: 1px solid var(--fp-border); }
+  .filter-pills--sticky {
+    position: sticky;
+    top: 0;
+  }
+
+  .filter-pills__track {
+    display: flex;
+    gap: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4px 20px;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filter-pills__track::-webkit-scrollbar { display: none; }
+  @media (min-width: 990px) {
+    .filter-pills__track {
+      justify-content: center;
+      flex-wrap: wrap;
+      overflow: visible;
+    }
+  }
+
+  .filter-pills__pill {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    height: 40px;
+    padding: 0 18px;
+    background: var(--fp-pill);
+    color: var(--fp-text);
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+  .filter-pills__pill:hover {
+    transform: translateY(-2px);
+    color: var(--fp-text);
+  }
+
+  .filter-pills__dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--dot);
+    flex-shrink: 0;
+  }
+
+  /* Active */
+  .filter-pills__pill.is-active,
+  .filter-pills__pill.is-active:hover {
+    background: var(--fp-active);
+    color: var(--fp-active-text);
+  }
+  .filter-pills__pill.is-active .filter-pills__dot { background: var(--fp-active-text); }
+
+  @media (max-width: 749px) {
+    .filter-pills__pill { height: 36px; padding: 0 15px; font-size: 14px; }
+    .filter-pills__dot { width: 9px; height: 9px; }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bright Side filter pills",
+  "tag": "div",
+  "class": "section",
+  "max_blocks": 12,
+  "settings": [
+    { "type": "header", "content": "\"All\" pill" },
+    { "type": "text", "id": "all_label", "label": "Label", "default": "All", "info": "Leave empty to hide" },
+    { "type": "url", "id": "all_link", "label": "Link", "info": "Usually your blog page, e.g. /blogs/news" },
+    { "type": "color", "id": "all_dot_color", "label": "Dot color", "default": "#E8533A" },
+
+    { "type": "header", "content": "Style" },
+    { "type": "checkbox", "id": "sticky", "label": "Stick to top while scrolling", "default": false },
+    { "type": "checkbox", "id": "show_border", "label": "Show bottom line", "default": true },
+    { "type": "text", "id": "aria_label", "label": "Accessibility label", "default": "Browse topics" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Section background", "default": "#FFFFFF" },
+    { "type": "color", "id": "pill_bg", "label": "Pill background", "default": "#F5F3EF" },
+    { "type": "color", "id": "pill_text", "label": "Pill text", "default": "#3A3A3A" },
+    { "type": "color", "id": "active_bg", "label": "Active pill background", "default": "#E8533A" },
+    { "type": "color", "id": "active_text", "label": "Active pill text", "default": "#FFFFFF" },
+    { "type": "color", "id": "border_color", "label": "Bottom line", "default": "#ECECEC" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 22 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 22 }
+  ],
+  "blocks": [
+    {
+      "type": "pill",
+      "name": "Topic pill",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Good Moods" },
+        { "type": "url", "id": "link", "label": "Link", "info": "e.g. /blogs/news/tagged/good-moods" },
+        { "type": "color", "id": "dot_color", "label": "Dot color", "default": "#3FB8B2" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bright Side filter pills",
+      "blocks": [
+        { "type": "pill", "settings": { "label": "Good Moods", "dot_color": "#3FB8B2" } },
+        { "type": "pill", "settings": { "label": "Energy & Rest", "dot_color": "#7CC34F" } },
+        { "type": "pill", "settings": { "label": "Star Ingredients", "dot_color": "#E8533A" } },
+        { "type": "pill", "settings": { "label": "Live Full", "dot_color": "#F5BE00" } },
+        { "type": "pill", "settings": { "label": "Kefey Stories", "dot_color": "#3FA9A6" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
