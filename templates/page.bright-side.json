@@ -402,6 +402,9 @@
         "photo_RgdDgx",
         "photo_ekLnVf"
       ],
+      "custom_css": [
+        ".share-joy__container {max-width: 100%; width: 90%;}"
+      ],
       "name": "Bright Side share joy",
       "settings": {
         "promo_heading": "Share the joy",
