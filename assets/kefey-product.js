@@ -778,7 +778,8 @@
                 return res.json();
               })
               .then(function () {
-                window.location.href = '/cart';
+                // Product CTA goes straight to checkout; header cart icon still opens /cart.
+                window.location.href = '/checkout';
               })
               .catch(function (err) {
                 console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
@@ -851,7 +852,8 @@
               return res.json();
             })
             .then(function () {
-              window.location.href = '/cart';
+              // Product CTA goes straight to checkout; header cart icon still opens /cart.
+              window.location.href = '/checkout';
             })
             .catch(function (err) {
               console.error('[Kefey Purchase] Add to cart failed:', err && err.message ? err.message : err);
