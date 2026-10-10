@@ -535,8 +535,8 @@
       var state = {
         pack: defaultPack,
         type: defaultType,
-        // One-time starts as single tube; pack buttons opt into 2/4/6 pack one-time pricing.
-        oneTimeUsesPack: defaultType === 'sub'
+        // Start with the default pack selected (e.g. 2 Pack) for both purchase types.
+        oneTimeUsesPack: true
       };
 
       var subPlan = module.querySelector('[data-plan="sub"]');
