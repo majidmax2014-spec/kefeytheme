@@ -40,9 +40,7 @@
     assign pack_image_6_url = section.settings.pack_image_6 | image_url: width: 820
   endif
 
-  if section.settings.default_purchase_type == 'one'
-    assign active_pack_image = section.settings.pack_image_1
-  elsif default_pack_num == 6 and section.settings.pack_image_6 != blank
+  if default_pack_num == 6 and section.settings.pack_image_6 != blank
     assign active_pack_image = section.settings.pack_image_6
   elsif default_pack_num == 5 and section.settings.pack_image_5 != blank
     assign active_pack_image = section.settings.pack_image_5
@@ -59,6 +57,47 @@
     assign active_pack_image = kefey_product.featured_image
   endif
   assign active_pack_image_url = active_pack_image | image_url: width: 820
+
+  assign default_purchase_type = section.settings.default_purchase_type | default: 'one'
+  assign default_pack_variant = blank
+  assign default_one_price = section.settings.fallback_price
+  assign default_variant_id = kefey_product.selected_or_first_available_variant.id
+  if kefey_product
+    for variant in kefey_product.variants
+      assign vt = variant.title | append: ' ' | append: variant.option1 | append: ' ' | append: variant.option2 | append: ' ' | append: variant.option3 | downcase
+      assign pack_match = false
+      if default_pack_num == 6
+        if vt contains '6 pack' or vt contains '6-pack' or vt contains '6 packs' or vt contains 'pack 6'
+          assign pack_match = true
+        endif
+      elsif default_pack_num == 4
+        if vt contains '4 pack' or vt contains '4-pack' or vt contains '4 packs' or vt contains 'pack 4'
+          assign pack_match = true
+        endif
+      elsif default_pack_num == 2
+        if vt contains '2 pack' or vt contains '2-pack' or vt contains '2 packs' or vt contains 'pack 2'
+          assign pack_match = true
+        endif
+      endif
+      if pack_match
+        assign default_pack_variant = variant
+        break
+      endif
+    endfor
+    if default_pack_variant != blank
+      assign default_one_price = default_pack_variant.price | money
+      assign default_variant_id = default_pack_variant.id
+    endif
+  endif
+
+  assign default_gummies = 120
+  if default_pack_num == 6
+    assign default_gummies = 360
+  elsif default_pack_num == 4
+    assign default_gummies = 240
+  elsif default_pack_num == 2
+    assign default_gummies = 120
+  endif
 -%}
 
 <section class="kefey-product kefey-product-main" id="KefeyProductMain-{{ section.id }}">
@@ -149,8 +188,8 @@
                   data-fallback-src: active_pack_image_url
               }}
             {%- endif -%}
-            <div class="kefey-purchase__gummies-badge" data-kefey-gummies-badge hidden>
-              <span class="kefey-purchase__gummies-count" data-kefey-gummies-count>120</span>
+            <div class="kefey-purchase__gummies-badge" data-kefey-gummies-badge>
+              <span class="kefey-purchase__gummies-count" data-kefey-gummies-count>{{ default_gummies }}</span>
               <span class="kefey-purchase__gummies-label">gummies</span>
             </div>
           </div>
@@ -158,7 +197,11 @@
 
         <div class="kefey-purchase__right">
           <div class="kefey-purchase__plans">
-            <button class="kefey-purchase__plan kefey-purchase__plan--subscribe" type="button" data-plan="sub">
+            <button
+              class="kefey-purchase__plan kefey-purchase__plan--subscribe{% if default_purchase_type == 'sub' %} is-selected{% endif %}"
+              type="button"
+              data-plan="sub"
+            >
               <span class="kefey-purchase__badge" data-sub-badge>{{ section.settings.badge_text }}</span>
               <span class="kefey-purchase__plan-title">{{ section.settings.sub_label }}</span>
               <span class="kefey-purchase__price-row">
@@ -169,24 +212,49 @@
               </span>
             </button>
 
-            <button class="kefey-purchase__plan kefey-purchase__plan--one-time" type="button" data-plan="one">
+            <button
+              class="kefey-purchase__plan kefey-purchase__plan--one-time{% if default_purchase_type == 'one' %} is-selected{% endif %}"
+              type="button"
+              data-plan="one"
+            >
               <span class="kefey-purchase__plan-title">{{ section.settings.onetime_label }}</span>
               <span class="kefey-purchase__price-row">
-                <span class="kefey-purchase__price" data-one-each>{{ section.settings.fallback_price }}</span>
-                <span class="kefey-purchase__each" data-one-price-label>each</span>
+                <span class="kefey-purchase__price" data-one-each>{{ default_one_price }}</span>
+                <span class="kefey-purchase__each" data-one-price-label>total</span>
               </span>
             </button>
 
             <div class="kefey-purchase__packs" data-subscribe-packs role="group" aria-label="Pack selector">
-              <button class="kefey-purchase__pack" type="button" data-pack="6">{{ section.settings.pack_label_6 }}</button>
-              <button class="kefey-purchase__pack" type="button" data-pack="4">{{ section.settings.pack_label_4 }}</button>
-              <button class="kefey-purchase__pack" type="button" data-pack="2">{{ section.settings.pack_label_2 }}</button>
+              <button
+                class="kefey-purchase__pack{% if default_pack_num == 6 %} is-selected{% endif %}"
+                type="button"
+                data-pack="6"
+                aria-pressed="{% if default_pack_num == 6 %}true{% else %}false{% endif %}"
+              >
+                {{ section.settings.pack_label_6 }}
+              </button>
+              <button
+                class="kefey-purchase__pack{% if default_pack_num == 4 %} is-selected{% endif %}"
+                type="button"
+                data-pack="4"
+                aria-pressed="{% if default_pack_num == 4 %}true{% else %}false{% endif %}"
+              >
+                {{ section.settings.pack_label_4 }}
+              </button>
+              <button
+                class="kefey-purchase__pack{% if default_pack_num == 2 %} is-selected{% endif %}"
+                type="button"
+                data-pack="2"
+                aria-pressed="{% if default_pack_num == 2 %}true{% else %}false{% endif %}"
+              >
+                {{ section.settings.pack_label_2 }}
+              </button>
             </div>
           </div>
         </div>
       </div>
       <div class="kefey-purchase__cta-row">
-        <input type="hidden" value="{{ kefey_product.selected_or_first_available_variant.id }}" data-selected-variant-id>
+        <input type="hidden" value="{{ default_variant_id }}" data-selected-variant-id>
         <button class="kefey-purchase__cta" type="button" data-kefey-checkout>
           {{ section.settings.atc_label }}
         </button>
