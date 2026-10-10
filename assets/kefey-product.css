@@ -324,8 +324,7 @@
   z-index: 2;
   width: clamp(118px, 30%, 158px);
   aspect-ratio: 339 / 324;
-  display: grid;
-  place-items: center;
+  display: block;
   pointer-events: none;
   color: var(--kefey-gummies-text);
   filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.22));
@@ -355,7 +354,9 @@
 }
 
 .kefey-purchase__gummies-text {
-  position: relative;
+  position: absolute;
+  left: 50%;
+  top: 54%;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -363,30 +364,35 @@
   justify-content: center;
   text-align: center;
   line-height: 1;
-  width: 58%;
-  max-width: none;
-  transform: translateY(2%);
+  width: 56%;
+  margin: 0;
+  padding: 0;
+  transform: translate(-50%, -50%);
 }
 
 .kefey-purchase__gummies-count {
   display: block;
+  width: 100%;
   font-family: var(--kp-p-ff, inherit);
   font-size: clamp(2.2rem, 3.1vw, 3.2rem);
   font-weight: 800;
   letter-spacing: -0.04em;
   line-height: 0.92;
+  text-align: center;
   color: var(--kefey-gummies-text);
 }
 
 .kefey-purchase__gummies-label {
   display: block;
-  margin-top: 0.22em;
+  width: 100%;
+  margin-top: 0.2em;
   font-family: var(--kp-t-ff, inherit);
   font-size: clamp(0.78rem, 1vw, 1.05rem);
   font-weight: 600;
   text-transform: lowercase;
   letter-spacing: 0.01em;
   line-height: 1;
+  text-align: center;
   color: var(--kefey-gummies-text);
 }
 
@@ -1728,12 +1734,16 @@
     width: clamp(104px, 34%, 136px);
   }
 
+  .kefey-purchase__gummies-text {
+    top: 54%;
+  }
+
   .kefey-purchase__gummies-count {
     font-size: clamp(1.9rem, 6.2vw, 2.7rem);
   }
 
   .kefey-purchase__gummies-label {
-    margin-top: 0.2em;
+    margin-top: 0.18em;
     font-size: clamp(0.72rem, 2.3vw, 0.95rem);
   }
 
