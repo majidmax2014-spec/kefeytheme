@@ -177,14 +177,25 @@
 
         const product = productCache[handle];
         const variant = findVariant(product, item.variant_id);
+        const purchaseType = String(props._kefey_purchase_type || '').toLowerCase();
+        const isIntentionalOneTime = purchaseType === 'one';
+        const isIntentionalBundle = purchaseType === 'bundle' || Boolean(props._kefey_bundle);
+        const isIntentionalUpsell = Boolean(props._kefey_upsell);
         const alreadyConfigured =
-          props._kefey_purchase_type === 'sub' ||
-          props._kefey_purchase_type === 'bundle' ||
-          props._kefey_bundle ||
-          props._kefey_upsell;
+          purchaseType === 'sub' ||
+          isIntentionalOneTime ||
+          isIntentionalBundle ||
+          isIntentionalUpsell;
 
         // Subscription packs: variant has selling plans but Buy Again omitted them.
-        if (!lineHasSellingPlan(item) && variant) {
+        // Never convert storefront one-time / bundle / upsell lines into subscriptions.
+        if (
+          !lineHasSellingPlan(item) &&
+          variant &&
+          !isIntentionalOneTime &&
+          !isIntentionalBundle &&
+          !isIntentionalUpsell
+        ) {
           const planId = pickSellingPlanId(variant);
           if (planId) {
             const packSize = inferPackSize(variant, item) || parseInteger(item.quantity, 1);
