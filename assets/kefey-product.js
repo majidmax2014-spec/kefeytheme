@@ -756,9 +756,8 @@
       }
       if (onePlan) {
         onePlan.addEventListener('click', function () {
-          // One-time defaults back to single-tube pricing until a pack is chosen.
+          // Keep current pack selection (e.g. 6 Pack) when switching back from Subscribe.
           state.type = 'one';
-          state.oneTimeUsesPack = false;
           render();
         });
       }
