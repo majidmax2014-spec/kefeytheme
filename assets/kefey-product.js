@@ -697,6 +697,9 @@
         }
         if (gummiesCountEl) gummiesCountEl.textContent = String(gummies);
         gummiesBadgeEl.hidden = false;
+        gummiesBadgeEl.setAttribute('data-pack', String(state.pack));
+        gummiesBadgeEl.classList.toggle('is-pack-4', state.pack === 4);
+        gummiesBadgeEl.classList.toggle('is-pack-6', state.pack === 6);
       }
 
       function renderOneTimePricing() {

@@ -188,22 +188,21 @@
                   data-fallback-src: active_pack_image_url
               }}
             {%- endif -%}
-            <div class="kefey-purchase__gummies-badge" data-kefey-gummies-badge>
-              <svg
+            <div
+              class="kefey-purchase__gummies-badge{% if default_pack_num == 4 %} is-pack-4{% elsif default_pack_num == 6 %} is-pack-6{% endif %}"
+              data-kefey-gummies-badge
+              data-pack="{{ default_pack_num }}"
+            >
+              <img
                 class="kefey-purchase__gummies-star"
-                viewBox="0 0 100 100"
+                src="{{ 'kefey-gummies-star.png' | asset_url }}"
+                alt=""
+                width="339"
+                height="324"
+                loading="lazy"
+                decoding="async"
                 aria-hidden="true"
-                focusable="false"
               >
-                <path
-                  fill="#ffffff"
-                  stroke="#ffffff"
-                  stroke-width="7"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  d="M50 6 L61.5 36.2 L93.5 38.5 L68.8 59.2 L77.2 90.5 L50 73.8 L22.8 90.5 L31.2 59.2 L6.5 38.5 L38.5 36.2 Z"
-                />
-              </svg>
               <span class="kefey-purchase__gummies-text">
                 <span class="kefey-purchase__gummies-count" data-kefey-gummies-count>{{ default_gummies }}</span>
                 <span class="kefey-purchase__gummies-label">gummies</span>

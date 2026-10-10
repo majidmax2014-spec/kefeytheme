@@ -317,6 +317,7 @@
 }
 
 .kefey-purchase__gummies-badge {
+  --kefey-gummies-text: #e31b23;
   position: absolute;
   top: 10px;
   left: 10px;
@@ -326,8 +327,16 @@
   display: grid;
   place-items: center;
   pointer-events: none;
-  color: #e31b23;
+  color: var(--kefey-gummies-text);
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.18));
+}
+
+/* 4 Pack / 6 Pack brand star text — dark berry from pack creatives */
+.kefey-purchase__gummies-badge.is-pack-4,
+.kefey-purchase__gummies-badge.is-pack-6,
+.kefey-purchase__gummies-badge[data-pack='4'],
+.kefey-purchase__gummies-badge[data-pack='6'] {
+  --kefey-gummies-text: #6e0a3c;
 }
 
 .kefey-purchase__gummies-badge[hidden] {
@@ -340,11 +349,9 @@
   width: 100%;
   height: 100%;
   display: block;
-}
-
-.kefey-purchase__gummies-star path {
-  fill: #ffffff;
-  stroke: #ffffff;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
 }
 
 .kefey-purchase__gummies-text {
@@ -368,7 +375,7 @@
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1;
-  color: #e31b23;
+  color: var(--kefey-gummies-text);
 }
 
 .kefey-purchase__gummies-label {
@@ -380,7 +387,7 @@
   text-transform: lowercase;
   letter-spacing: 0.02em;
   line-height: 1.1;
-  color: #e31b23;
+  color: var(--kefey-gummies-text);
 }
 
 .kefey-purchase__right {
