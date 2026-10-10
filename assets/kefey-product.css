@@ -316,6 +316,45 @@
   overflow: hidden;
 }
 
+.kefey-purchase__gummies-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 2;
+  width: clamp(72px, 18%, 96px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #111111;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.kefey-purchase__gummies-badge[hidden] {
+  display: none !important;
+}
+
+.kefey-purchase__gummies-count {
+  font-family: var(--kp-p-ff, inherit);
+  font-size: clamp(1.8rem, 2.4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.kefey-purchase__gummies-label {
+  margin-top: 0.15em;
+  font-family: var(--kp-t-ff, inherit);
+  font-size: clamp(0.9rem, 1.1vw, 1.2rem);
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: 0.02em;
+}
+
 .kefey-purchase__right {
   display: flex;
   flex-direction: column;
@@ -1646,6 +1685,12 @@
   .kefey-purchase__badge {
     right: 8px;
     top: -12px;
+  }
+
+  .kefey-purchase__gummies-badge {
+    top: 10px;
+    left: 10px;
+    width: clamp(64px, 22%, 84px);
   }
 
   .kefey-purchase__cta-row {

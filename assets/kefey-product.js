@@ -327,13 +327,19 @@
     return map;
   }
 
-  function updatePackImage(module, pack, purchaseType) {
+  var GUMMIES_BY_PACK = {
+    2: 120,
+    4: 240,
+    6: 360
+  };
+
+  function updatePackImage(module, pack, purchaseType, usePackImage) {
     var packImageEl =
       module.querySelector('[data-kefey-pack-image]') || module.querySelector('.kefey-purchase__image');
     if (!packImageEl) return;
 
     var nextSrc;
-    if (purchaseType === 'one') {
+    if (purchaseType === 'one' && !usePackImage) {
       nextSrc =
         module.getAttribute('data-single-product-image') ||
         packImageEl.getAttribute('data-fallback-src');
@@ -355,8 +361,8 @@
     packImageEl.setAttribute('src', nextSrc);
   }
 
-  function getPackImageUrl(module, pack, purchaseType) {
-    if (purchaseType === 'one') {
+  function getPackImageUrl(module, pack, purchaseType, usePackImage) {
+    if (purchaseType === 'one' && !usePackImage) {
       return module.getAttribute('data-single-product-image') || '';
     }
     return (
@@ -366,8 +372,8 @@
     );
   }
 
-  function buildKefeyLineProperties(module, pack, purchaseType, sellingPlanId) {
-    var packSize = purchaseType === 'one' ? 1 : pack;
+  function buildKefeyLineProperties(module, pack, purchaseType, sellingPlanId, usePackImage) {
+    var packSize = purchaseType === 'one' && !usePackImage ? 1 : pack;
     var properties = {
       _kefey_purchase_type: purchaseType,
       _kefey_pack_size: String(packSize)
@@ -375,7 +381,7 @@
     if (purchaseType === 'sub' && sellingPlanId != null) {
       properties._kefey_plan_id = String(sellingPlanId);
     }
-    var imageUrl = getPackImageUrl(module, packSize, purchaseType);
+    var imageUrl = getPackImageUrl(module, packSize, purchaseType, usePackImage);
     if (imageUrl) properties._kefey_pack_image = imageUrl;
     return properties;
   }
@@ -528,7 +534,9 @@
 
       var state = {
         pack: defaultPack,
-        type: defaultType
+        type: defaultType,
+        // One-time starts as single tube; pack buttons opt into 2/4/6 pack one-time pricing.
+        oneTimeUsesPack: defaultType === 'sub'
       };
 
       var subPlan = module.querySelector('[data-plan="sub"]');
@@ -541,8 +549,9 @@
       var subBadgeEl = module.querySelector('[data-sub-badge]');
       var oneEachEl = module.querySelector('[data-one-each]');
       var cta = module.querySelector('[data-kefey-checkout]');
-
       var packsEl = module.querySelector('[data-subscribe-packs]');
+      var gummiesBadgeEl = module.querySelector('[data-kefey-gummies-badge]');
+      var gummiesCountEl = module.querySelector('[data-kefey-gummies-count]');
 
       function resolveVariantForPack(pack) {
         var preferredTarget = sellingPlanByPack[pack] || null;
@@ -651,7 +660,8 @@
 
         packButtons.forEach(function (btn) {
           var btnPack = parseInt(btn.getAttribute('data-pack') || '2', 10);
-          var isPackSelected = state.type === 'sub' && btnPack === state.pack;
+          var isPackSelected =
+            btnPack === state.pack && (state.type === 'sub' || state.oneTimeUsesPack);
           btn.classList.toggle('is-selected', isPackSelected);
           btn.setAttribute('aria-pressed', isPackSelected ? 'true' : 'false');
         });
@@ -676,7 +686,26 @@
         return pricing;
       }
 
+      function updateGummiesBadge() {
+        if (!gummiesBadgeEl) return;
+        var showBadge = state.type === 'sub' || state.oneTimeUsesPack;
+        var gummies = GUMMIES_BY_PACK[state.pack] || 0;
+        if (!showBadge || !gummies) {
+          gummiesBadgeEl.hidden = true;
+          return;
+        }
+        if (gummiesCountEl) gummiesCountEl.textContent = String(gummies);
+        gummiesBadgeEl.hidden = false;
+      }
+
       function renderOneTimePricing() {
+        if (state.oneTimeUsesPack) {
+          var packVariant = resolveVariantForPack(state.pack);
+          var packPrice = Number(packVariant && packVariant.price ? packVariant.price : 0);
+          if (oneEachEl) oneEachEl.textContent = formatMoney(packPrice, moneyFormat);
+          return packVariant || resolveOneTimeVariant(variants, fallbackVariant);
+        }
+
         var singleVariant = resolveOneTimeVariant(variants, fallbackVariant);
         var singlePrice = Number(singleVariant.price || 0);
         if (oneEachEl) oneEachEl.textContent = formatMoney(singlePrice, moneyFormat);
@@ -685,47 +714,47 @@
 
       function render() {
         var subscribePricing = renderSubscribePricing();
-        var singleVariant = renderOneTimePricing();
+        var oneTimeVariant = renderOneTimePricing();
+
+        if (packsEl) {
+          packsEl.hidden = false;
+          packsEl.setAttribute('aria-hidden', 'false');
+        }
 
         if (state.type === 'one') {
           if (subPlan) subPlan.classList.toggle('is-selected', false);
           if (onePlan) onePlan.classList.toggle('is-selected', true);
-          if (packsEl) {
-            packsEl.hidden = true;
-            packsEl.setAttribute('aria-hidden', 'true');
-          }
-          if (variantInput) variantInput.value = String(singleVariant.id);
-          if (cta) cta.disabled = !singleVariant.available;
-          updatePackImage(module, state.pack, 'one');
+          if (variantInput) variantInput.value = String(oneTimeVariant.id);
+          if (cta) cta.disabled = !oneTimeVariant.available;
+          updatePackImage(module, state.pack, 'one', state.oneTimeUsesPack);
+          updateGummiesBadge();
           return;
         }
 
         if (subPlan) subPlan.classList.toggle('is-selected', true);
         if (onePlan) onePlan.classList.toggle('is-selected', false);
-        if (packsEl) {
-          packsEl.hidden = false;
-          packsEl.setAttribute('aria-hidden', 'false');
-        }
 
         if (subscribePricing && subscribePricing.variant) {
           if (variantInput) variantInput.value = String(subscribePricing.variant.id);
           if (cta) cta.disabled = !subscribePricing.variant.available;
         }
 
-        updatePackImage(module, state.pack, 'sub');
+        updatePackImage(module, state.pack, 'sub', true);
+        updateGummiesBadge();
       }
 
       if (subPlan) {
         subPlan.addEventListener('click', function () {
-          if (state.type === 'sub') return;
           state.type = 'sub';
+          state.oneTimeUsesPack = true;
           render();
         });
       }
       if (onePlan) {
         onePlan.addEventListener('click', function () {
-          if (state.type === 'one') return;
+          // One-time defaults back to single-tube pricing until a pack is chosen.
           state.type = 'one';
+          state.oneTimeUsesPack = false;
           render();
         });
       }
@@ -735,9 +764,8 @@
           var next = parseInt(btn.getAttribute('data-pack') || '2', 10);
           if (!KEFEY_PACK_SIZES.includes(next)) return;
           state.pack = next;
-          if (state.type !== 'sub') {
-            state.type = 'sub';
-          }
+          // Keep current purchase type; packs update one-time pricing when one-time is selected.
+          state.oneTimeUsesPack = true;
           render();
         });
       });
@@ -747,8 +775,10 @@
           if (cta.dataset.kefeyLoading === 'true') return;
 
           if (state.type === 'one') {
-            var singleVariant = resolveOneTimeVariant(variants, fallbackVariant);
-            if (!singleVariant || !singleVariant.id) return;
+            var oneVariant = state.oneTimeUsesPack
+              ? resolveVariantForPack(state.pack)
+              : resolveOneTimeVariant(variants, fallbackVariant);
+            if (!oneVariant || !oneVariant.id) return;
 
             cta.dataset.kefeyLoading = 'true';
             cta.disabled = true;
@@ -756,9 +786,15 @@
               method: 'POST',
               headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
               body: JSON.stringify({
-                id: Number(singleVariant.id),
+                id: Number(oneVariant.id),
                 quantity: 1,
-                properties: buildKefeyLineProperties(module, 1, 'one', null)
+                properties: buildKefeyLineProperties(
+                  module,
+                  state.oneTimeUsesPack ? state.pack : 1,
+                  'one',
+                  null,
+                  state.oneTimeUsesPack
+                )
               })
             })
               .then(function (res) {
@@ -822,7 +858,7 @@
           var payload = {
             id: Number(variant.id),
             quantity: cartQuantityForPack(variant, state.pack),
-            properties: buildKefeyLineProperties(module, state.pack, 'sub', sellingPlanId)
+            properties: buildKefeyLineProperties(module, state.pack, 'sub', sellingPlanId, true)
           };
           if (state.type === 'sub' && sellingPlanId != null && variantHasPlanId(variant, sellingPlanId)) {
             payload.selling_plan = sellingPlanId;
