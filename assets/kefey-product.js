@@ -548,6 +548,7 @@
       var subCompareEl = module.querySelector('[data-sub-compare]');
       var subBadgeEl = module.querySelector('[data-sub-badge]');
       var oneEachEl = module.querySelector('[data-one-each]');
+      var onePriceLabelEl = module.querySelector('[data-one-price-label]');
       var cta = module.querySelector('[data-kefey-checkout]');
       var packsEl = module.querySelector('[data-subscribe-packs]');
       var gummiesBadgeEl = module.querySelector('[data-kefey-gummies-badge]');
@@ -703,12 +704,15 @@
           var packVariant = resolveVariantForPack(state.pack);
           var packPrice = Number(packVariant && packVariant.price ? packVariant.price : 0);
           if (oneEachEl) oneEachEl.textContent = formatMoney(packPrice, moneyFormat);
+          // Pack price is the full pack total, not a per-tube "each" price.
+          if (onePriceLabelEl) onePriceLabelEl.textContent = 'total';
           return packVariant || resolveOneTimeVariant(variants, fallbackVariant);
         }
 
         var singleVariant = resolveOneTimeVariant(variants, fallbackVariant);
         var singlePrice = Number(singleVariant.price || 0);
         if (oneEachEl) oneEachEl.textContent = formatMoney(singlePrice, moneyFormat);
+        if (onePriceLabelEl) onePriceLabelEl.textContent = 'each';
         return singleVariant;
       }
 

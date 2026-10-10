@@ -347,10 +347,10 @@
 }
 
 .kefey-purchase__gummies-label {
-  margin-top: 0.15em;
+  margin-top: 0.1em;
   font-family: var(--kp-t-ff, inherit);
-  font-size: clamp(0.9rem, 1.1vw, 1.2rem);
-  font-weight: 700;
+  font-size: clamp(0.65rem, 0.75vw, 0.85rem);
+  font-weight: 600;
   text-transform: lowercase;
   letter-spacing: 0.02em;
 }
