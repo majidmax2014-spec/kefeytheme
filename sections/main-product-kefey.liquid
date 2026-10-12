@@ -10,7 +10,7 @@
     assign kefey_product = collections.all.products.first
   endif
 
-  assign default_pack_num = section.settings.default_selected_pack | default: '2' | plus: 0
+  assign default_pack_num = section.settings.default_selected_pack | default: '1' | plus: 0
 
   assign single_product_image_url = ''
   if section.settings.pack_image_1 != blank
@@ -427,7 +427,7 @@
       "type": "select",
       "id": "default_selected_pack",
       "label": "Default selected pack",
-      "default": "2",
+      "default": "1",
       "options": [
         { "value": "1", "label": "1 pack" },
         { "value": "2", "label": "2 pack" },

@@ -545,8 +545,8 @@
       var fallbackVariant = variants[0];
       var map = buildVariantMapByPack(variants, fallbackVariant, explicitVariantIdsFromModule(module));
 
-      var defaultPack = parseInt(module.getAttribute('data-default-pack') || '2', 10);
-      if (!KEFEY_PACK_SIZES.includes(defaultPack)) defaultPack = 2;
+      var defaultPack = parseInt(module.getAttribute('data-default-pack') || '1', 10);
+      if (!KEFEY_PACK_SIZES.includes(defaultPack)) defaultPack = 1;
       var defaultType = module.getAttribute('data-default-purchase-type') === 'one' ? 'one' : 'sub';
       var displayDiscount = parseInt(module.getAttribute('data-discount-percent') || '10', 10);
       if (isNaN(displayDiscount)) displayDiscount = 10;
