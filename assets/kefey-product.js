@@ -223,7 +223,7 @@
     return '$' + value;
   }
 
-  var KEFEY_PACK_SIZES = [2, 4, 6];
+  var KEFEY_PACK_SIZES = [1, 2, 3, 4, 5, 6];
 
   function getPackFromVariant(variant) {
     var source = [];
@@ -233,7 +233,7 @@
 
     for (var i = KEFEY_PACK_SIZES.length - 1; i >= 0; i -= 1) {
       var pack = KEFEY_PACK_SIZES[i];
-      var pattern = new RegExp('\\b' + pack + '\\s*[- ]?\\s*pack|pack\\s*' + pack + '\\b');
+      var pattern = new RegExp('\\b' + pack + '\\s*[- ]?\\s*packs?|packs?\\s*' + pack + '\\b');
       if (pattern.test(haystack)) return pack;
     }
     return null;
@@ -298,8 +298,30 @@
     return map;
   }
 
-  function buildVariantMapByPack(variants, fallbackVariant) {
+  function explicitVariantIdsFromModule(module) {
+    var ids = {};
+    KEFEY_PACK_SIZES.forEach(function (pack) {
+      var raw = module.getAttribute('data-variant-pack-' + pack);
+      if (!raw) return;
+      var id = parseInt(String(raw).trim(), 10);
+      if (!isNaN(id) && id > 0) ids[pack] = id;
+    });
+    return ids;
+  }
+
+  function buildVariantMapByPack(variants, fallbackVariant, explicitIds) {
     var map = {};
+    var idLookup = explicitIds || {};
+
+    KEFEY_PACK_SIZES.forEach(function (pack) {
+      var explicitId = idLookup[pack];
+      if (!explicitId) return;
+      var found = variants.find(function (variant) {
+        return Number(variant.id) === Number(explicitId);
+      });
+      if (found) map[pack] = found;
+    });
+
     variants.forEach(function (variant) {
       var pack = getPackFromVariant(variant);
       if (pack && !map[pack]) map[pack] = variant;
@@ -328,8 +350,11 @@
   }
 
   var GUMMIES_BY_PACK = {
+    1: 60,
     2: 120,
+    3: 180,
     4: 240,
+    5: 300,
     6: 360
   };
 
@@ -518,7 +543,7 @@
 
       var variants = product.variants;
       var fallbackVariant = variants[0];
-      var map = buildVariantMapByPack(variants, fallbackVariant);
+      var map = buildVariantMapByPack(variants, fallbackVariant, explicitVariantIdsFromModule(module));
 
       var defaultPack = parseInt(module.getAttribute('data-default-pack') || '2', 10);
       if (!KEFEY_PACK_SIZES.includes(defaultPack)) defaultPack = 2;

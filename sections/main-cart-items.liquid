@@ -174,13 +174,29 @@
   elsif section.settings.pack_image_3 != blank
     assign kefey_joyful_image = section.settings.pack_image_3 | image_url: width: 820
   endif
+  assign kefey_pack_image_1 = ''
+  if section.settings.pack_image_1 != blank
+    assign kefey_pack_image_1 = section.settings.pack_image_1 | image_url: width: 820
+  endif
   assign kefey_pack_image_2 = ''
   if section.settings.pack_image_2 != blank
     assign kefey_pack_image_2 = section.settings.pack_image_2 | image_url: width: 820
   endif
+  assign kefey_pack_image_3 = ''
+  if section.settings.pack_image_3 != blank
+    assign kefey_pack_image_3 = section.settings.pack_image_3 | image_url: width: 820
+  elsif kefey_joyful_image != blank
+    assign kefey_pack_image_3 = kefey_joyful_image
+  endif
   assign kefey_pack_image_4 = ''
   if section.settings.pack_image_4 != blank
     assign kefey_pack_image_4 = section.settings.pack_image_4 | image_url: width: 820
+  endif
+  assign kefey_pack_image_5 = ''
+  if section.settings.pack_image_5 != blank
+    assign kefey_pack_image_5 = section.settings.pack_image_5 | image_url: width: 820
+  elsif kefey_big_smile_image != blank
+    assign kefey_pack_image_5 = kefey_big_smile_image
   endif
   assign kefey_pack_image_6 = ''
   if section.settings.pack_image_6 != blank
@@ -217,8 +233,11 @@
       "discount": ""
     },
     "packImages": {
+      "1": {{ kefey_pack_image_1 | json }},
       "2": {{ kefey_pack_image_2 | json }},
+      "3": {{ kefey_pack_image_3 | json }},
       "4": {{ kefey_pack_image_4 | json }},
+      "5": {{ kefey_pack_image_5 | json }},
       "6": {{ kefey_pack_image_6 | json }}
     }
   }
@@ -233,7 +252,8 @@
     <form action="{{ routes.cart_url }}" class="cart__contents critical-hidden" method="post" id="cart">
       <div class="cart__items" id="main-cart-items" data-id="{{ section.id }}">
         <div class="js-contents">
-          <div class="kefey-cart-offers" aria-label="Cart offers">
+          {%- if section.settings.show_cart_bundle_offers -%}
+            <div class="kefey-cart-offers" aria-label="Cart offers">
               {%- if section.settings.offers_heading != blank -%}
                 <h2 class="kefey-cart-offers__heading">
                   <span>{{ section.settings.offers_heading }}</span>
@@ -342,6 +362,7 @@
                 </article>
               </div>
             </div>
+          {%- endif -%}
 
           {%- if cart == empty -%}
             <div class="kefey-cart-empty-items">
@@ -841,6 +862,13 @@
     {
       "type": "header",
       "content": "Top offers strip"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_cart_bundle_offers",
+      "label": "Show Big Smile / Joyful Trio cart offers",
+      "default": false,
+      "info": "Hidden for now. Turn on later to restore the cart bundle offer cards without re-adding them."
     },
     {
       "type": "text",

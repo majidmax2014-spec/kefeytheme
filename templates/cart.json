@@ -49,6 +49,7 @@
         "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36,
+        "show_cart_bundle_offers": false,
         "offers_heading": "One step away from Joy in a Gummy!",
         "offer_left_image": "shopify://shop_images/5-box-cart_65dde808-4bf4-4612-bf04-0b42d2979784.png",
         "offer_left_pack_image": "shopify://shop_images/5-Packs.png",

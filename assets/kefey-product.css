@@ -510,19 +510,19 @@
   margin-top: 6px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px 14px;
+  gap: 10px 10px;
 }
 
 .kefey-purchase__pack {
-  min-height: 48px;
+  min-height: 44px;
   border-radius: 999px;
   border: 1px solid #888;
   background: #fff;
   color: #222;
-  font-size: clamp(1.3rem, 1vw, 2rem);
+  font-size: clamp(1.1rem, 0.9vw, 1.6rem);
   font-weight: 700;
   cursor: pointer;
-  padding: 0 10px;
+  padding: 0 8px;
 }
 
 .kefey-purchase__pack.is-selected {

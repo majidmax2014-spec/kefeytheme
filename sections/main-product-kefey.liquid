@@ -19,6 +19,7 @@
     assign single_product_image_url = kefey_product.featured_image | image_url: width: 820
   endif
 
+  assign pack_image_1_url = single_product_image_url
   assign pack_image_2_url = single_product_image_url
   if section.settings.pack_image_2 != blank
     assign pack_image_2_url = section.settings.pack_image_2 | image_url: width: 820
@@ -50,6 +51,8 @@
     assign active_pack_image = section.settings.pack_image_3
   elsif default_pack_num == 2 and section.settings.pack_image_2 != blank
     assign active_pack_image = section.settings.pack_image_2
+  elsif default_pack_num == 1 and section.settings.pack_image_1 != blank
+    assign active_pack_image = section.settings.pack_image_1
   else
     assign active_pack_image = section.settings.pack_image_1
   endif
@@ -70,12 +73,24 @@
         if vt contains '6 pack' or vt contains '6-pack' or vt contains '6 packs' or vt contains 'pack 6'
           assign pack_match = true
         endif
+      elsif default_pack_num == 5
+        if vt contains '5 pack' or vt contains '5-pack' or vt contains '5 packs' or vt contains 'pack 5'
+          assign pack_match = true
+        endif
       elsif default_pack_num == 4
         if vt contains '4 pack' or vt contains '4-pack' or vt contains '4 packs' or vt contains 'pack 4'
           assign pack_match = true
         endif
+      elsif default_pack_num == 3
+        if vt contains '3 pack' or vt contains '3-pack' or vt contains '3 packs' or vt contains 'pack 3'
+          assign pack_match = true
+        endif
       elsif default_pack_num == 2
         if vt contains '2 pack' or vt contains '2-pack' or vt contains '2 packs' or vt contains 'pack 2'
+          assign pack_match = true
+        endif
+      elsif default_pack_num == 1
+        if vt contains '1 pack' or vt contains '1-pack' or vt contains '1 packs' or vt contains 'pack 1'
           assign pack_match = true
         endif
       endif
@@ -84,6 +99,32 @@
         break
       endif
     endfor
+    if default_pack_variant == blank
+      assign explicit_variant_id = ''
+      case default_pack_num
+        when 1
+          assign explicit_variant_id = section.settings.variant_id_pack_1 | strip
+        when 2
+          assign explicit_variant_id = section.settings.variant_id_pack_2 | strip
+        when 3
+          assign explicit_variant_id = section.settings.variant_id_pack_3 | strip
+        when 4
+          assign explicit_variant_id = section.settings.variant_id_pack_4 | strip
+        when 5
+          assign explicit_variant_id = section.settings.variant_id_pack_5 | strip
+        when 6
+          assign explicit_variant_id = section.settings.variant_id_pack_6 | strip
+      endcase
+      if explicit_variant_id != blank
+        assign explicit_variant_id_num = explicit_variant_id | plus: 0
+        for variant in kefey_product.variants
+          if variant.id == explicit_variant_id_num
+            assign default_pack_variant = variant
+            break
+          endif
+        endfor
+      endif
+    endif
     if default_pack_variant != blank
       assign default_one_price = default_pack_variant.price | money
       assign default_variant_id = default_pack_variant.id
@@ -93,10 +134,16 @@
   assign default_gummies = 120
   if default_pack_num == 6
     assign default_gummies = 360
+  elsif default_pack_num == 5
+    assign default_gummies = 300
   elsif default_pack_num == 4
     assign default_gummies = 240
+  elsif default_pack_num == 3
+    assign default_gummies = 180
   elsif default_pack_num == 2
     assign default_gummies = 120
+  elsif default_pack_num == 1
+    assign default_gummies = 60
   endif
 -%}
 
@@ -109,6 +156,7 @@
       data-default-pack="{{ section.settings.default_selected_pack }}"
       data-default-purchase-type="{{ section.settings.default_purchase_type }}"
       data-discount-percent="{{ section.settings.subscription_discount_percent }}"
+      data-discount-pack-1="{{ section.settings.subscription_discount_pack_1 }}"
       data-discount-pack-2="{{ section.settings.subscription_discount_pack_2 }}"
       data-discount-pack-3="{{ section.settings.subscription_discount_pack_3 }}"
       data-discount-pack-4="{{ section.settings.subscription_discount_pack_4 }}"
@@ -117,18 +165,29 @@
       data-badge-text="{{ section.settings.badge_text | escape }}"
       data-display-compare="{{ section.settings.display_compare_price }}"
       data-money-format="{{ shop.money_format | escape }}"
+      data-plan-pack-1="{{ section.settings.plan_id_pack_1 }}"
       data-plan-pack-2="{{ section.settings.plan_id_pack_2 }}"
       data-plan-pack-3="{{ section.settings.plan_id_pack_3 }}"
       data-plan-pack-4="{{ section.settings.plan_id_pack_4 }}"
       data-plan-pack-5="{{ section.settings.plan_id_pack_5 }}"
       data-plan-pack-6="{{ section.settings.plan_id_pack_6 }}"
+      data-plan-group-pack-1="{{ section.settings.plan_group_id_pack_1 }}"
       data-plan-group-pack-2="{{ section.settings.plan_group_id_pack_2 }}"
       data-plan-group-pack-3="{{ section.settings.plan_group_id_pack_3 }}"
       data-plan-group-pack-4="{{ section.settings.plan_group_id_pack_4 }}"
       data-plan-group-pack-5="{{ section.settings.plan_group_id_pack_5 }}"
       data-plan-group-pack-6="{{ section.settings.plan_group_id_pack_6 }}"
+      data-variant-pack-1="{{ section.settings.variant_id_pack_1 }}"
+      data-variant-pack-2="{{ section.settings.variant_id_pack_2 }}"
+      data-variant-pack-3="{{ section.settings.variant_id_pack_3 }}"
+      data-variant-pack-4="{{ section.settings.variant_id_pack_4 }}"
+      data-variant-pack-5="{{ section.settings.variant_id_pack_5 }}"
+      data-variant-pack-6="{{ section.settings.variant_id_pack_6 }}"
       {%- if single_product_image_url != blank -%}
         data-single-product-image="{{ single_product_image_url }}"
+      {%- endif -%}
+      {%- if pack_image_1_url != blank -%}
+        data-pack-image-1="{{ pack_image_1_url }}"
       {%- endif -%}
       {%- if pack_image_2_url != blank -%}
         data-pack-image-2="{{ pack_image_2_url }}"
@@ -250,6 +309,14 @@
                 {{ section.settings.pack_label_6 }}
               </button>
               <button
+                class="kefey-purchase__pack{% if default_pack_num == 5 %} is-selected{% endif %}"
+                type="button"
+                data-pack="5"
+                aria-pressed="{% if default_pack_num == 5 %}true{% else %}false{% endif %}"
+              >
+                {{ section.settings.pack_label_5 }}
+              </button>
+              <button
                 class="kefey-purchase__pack{% if default_pack_num == 4 %} is-selected{% endif %}"
                 type="button"
                 data-pack="4"
@@ -258,12 +325,28 @@
                 {{ section.settings.pack_label_4 }}
               </button>
               <button
+                class="kefey-purchase__pack{% if default_pack_num == 3 %} is-selected{% endif %}"
+                type="button"
+                data-pack="3"
+                aria-pressed="{% if default_pack_num == 3 %}true{% else %}false{% endif %}"
+              >
+                {{ section.settings.pack_label_3 }}
+              </button>
+              <button
                 class="kefey-purchase__pack{% if default_pack_num == 2 %} is-selected{% endif %}"
                 type="button"
                 data-pack="2"
                 aria-pressed="{% if default_pack_num == 2 %}true{% else %}false{% endif %}"
               >
                 {{ section.settings.pack_label_2 }}
+              </button>
+              <button
+                class="kefey-purchase__pack{% if default_pack_num == 1 %} is-selected{% endif %}"
+                type="button"
+                data-pack="1"
+                aria-pressed="{% if default_pack_num == 1 %}true{% else %}false{% endif %}"
+              >
+                {{ section.settings.pack_label_1 }}
               </button>
             </div>
           </div>
@@ -298,6 +381,7 @@
     { "type": "text", "id": "onetime_badge", "label": "One-time badge text", "default": "STANDARD PRICING" },
     { "type": "text", "id": "badge_text", "label": "Top-right badge", "default": "10% OFF & Cancel Anytime" },
     { "type": "header", "content": "Subscription discount by bundle" },
+    { "type": "range", "id": "subscription_discount_pack_1", "label": "Bundle 1 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 7, "unit": "%" },
     { "type": "range", "id": "subscription_discount_pack_2", "label": "Bundle 2 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 10, "unit": "%" },
     { "type": "range", "id": "subscription_discount_pack_3", "label": "Bundle 3 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 15, "unit": "%" },
     { "type": "range", "id": "subscription_discount_pack_4", "label": "Bundle 4 subscription discount %", "min": 0, "max": 50, "step": 1, "default": 20, "unit": "%" },
@@ -311,23 +395,33 @@
     { "type": "text", "id": "pack_label_4", "label": "4 pack label", "default": "4 - Pack" },
     { "type": "text", "id": "pack_label_3", "label": "3 pack label", "default": "3 - Pack" },
     { "type": "text", "id": "pack_label_2", "label": "2 pack label", "default": "2 - Pack" },
+    { "type": "text", "id": "pack_label_1", "label": "1 pack label", "default": "1 - Pack" },
     { "type": "header", "content": "Pack preview images" },
-    { "type": "image_picker", "id": "pack_image_1", "label": "Single product image (one-time purchase)" },
+    { "type": "image_picker", "id": "pack_image_1", "label": "1 pack / single product image" },
     { "type": "image_picker", "id": "pack_image_2", "label": "2 pack image" },
     { "type": "image_picker", "id": "pack_image_3", "label": "3 pack image" },
     { "type": "image_picker", "id": "pack_image_4", "label": "4 pack image" },
     { "type": "image_picker", "id": "pack_image_5", "label": "5 pack image" },
     { "type": "image_picker", "id": "pack_image_6", "label": "6 pack image" },
+    { "type": "header", "content": "Variant ID mapping by pack" },
+    { "type": "text", "id": "variant_id_pack_1", "label": "1 pack variant ID", "default": "49234573492452" },
+    { "type": "text", "id": "variant_id_pack_2", "label": "2 pack variant ID", "default": "" },
+    { "type": "text", "id": "variant_id_pack_3", "label": "3 pack variant ID", "default": "67535371567332" },
+    { "type": "text", "id": "variant_id_pack_4", "label": "4 pack variant ID", "default": "" },
+    { "type": "text", "id": "variant_id_pack_5", "label": "5 pack variant ID", "default": "67535377891556" },
+    { "type": "text", "id": "variant_id_pack_6", "label": "6 pack variant ID", "default": "" },
     { "type": "header", "content": "Recharge plan mapping by pack" },
+    { "type": "text", "id": "plan_id_pack_1", "label": "Bundle 1 selling plan ID", "default": "8150057188", "info": "Recharge External plan ID (Shopify selling plan ID)." },
     { "type": "text", "id": "plan_id_pack_2", "label": "Bundle 2 selling plan ID", "default": "7728955620", "info": "Recharge External plan ID (Shopify selling plan ID)." },
-    { "type": "text", "id": "plan_id_pack_3", "label": "Bundle 3 selling plan ID", "default": "7728857316", "info": "Recharge External plan ID (Shopify selling plan ID)." },
+    { "type": "text", "id": "plan_id_pack_3", "label": "Bundle 3 selling plan ID", "default": "8150122724", "info": "Recharge External plan ID (Shopify selling plan ID)." },
     { "type": "text", "id": "plan_id_pack_4", "label": "Bundle 4 selling plan ID", "default": "7838564580", "info": "Recharge External plan ID (Shopify selling plan ID)." },
-    { "type": "text", "id": "plan_id_pack_5", "label": "Bundle 5 selling plan ID", "default": "7728890084", "info": "Recharge External plan ID (Shopify selling plan ID)." },
+    { "type": "text", "id": "plan_id_pack_5", "label": "Bundle 5 selling plan ID", "default": "8150319332", "info": "Recharge External plan ID (Shopify selling plan ID)." },
     { "type": "text", "id": "plan_id_pack_6", "label": "Bundle 6 selling plan ID", "default": "7838597348", "info": "Recharge External plan ID (Shopify selling plan ID)." },
+    { "type": "text", "id": "plan_group_id_pack_1", "label": "Bundle 1 plan group ID", "default": "4680876260", "info": "Recharge External plan group ID fallback for matching." },
     { "type": "text", "id": "plan_group_id_pack_2", "label": "Bundle 2 plan group ID", "default": "4301095140", "info": "Recharge External plan group ID fallback for matching." },
-    { "type": "text", "id": "plan_group_id_pack_3", "label": "Bundle 3 plan group ID", "default": "4301029604", "info": "Recharge External plan group ID fallback for matching." },
+    { "type": "text", "id": "plan_group_id_pack_3", "label": "Bundle 3 plan group ID", "default": "4680941796", "info": "Recharge External plan group ID fallback for matching." },
     { "type": "text", "id": "plan_group_id_pack_4", "label": "Bundle 4 plan group ID", "default": "4403331300", "info": "Recharge External plan group ID fallback for matching." },
-    { "type": "text", "id": "plan_group_id_pack_5", "label": "Bundle 5 plan group ID", "default": "4301062372", "info": "Recharge External plan group ID fallback for matching." },
+    { "type": "text", "id": "plan_group_id_pack_5", "label": "Bundle 5 plan group ID", "default": "4681138404", "info": "Recharge External plan group ID fallback for matching." },
     { "type": "text", "id": "plan_group_id_pack_6", "label": "Bundle 6 plan group ID", "default": "4403364068", "info": "Recharge External plan group ID fallback for matching." },
     {
       "type": "select",
@@ -335,8 +429,11 @@
       "label": "Default selected pack",
       "default": "2",
       "options": [
+        { "value": "1", "label": "1 pack" },
         { "value": "2", "label": "2 pack" },
+        { "value": "3", "label": "3 pack" },
         { "value": "4", "label": "4 pack" },
+        { "value": "5", "label": "5 pack" },
         { "value": "6", "label": "6 pack" }
       ]
     },
