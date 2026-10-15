@@ -260,14 +260,32 @@
         "show_count": true,
         "button_label": "View all articles",
         "empty_text": "New stories are coming soon.",
-        "bg_color": "#F6F4F1",
-        "card_color": "#FFFFFF",
-        "heading_color": "#1F1F1F",
+        "bg_color": "#f6f4f1",
+        "card_color": "#ffffff",
+        "heading_color": "#1f1f1f",
         "text_color": "#555555",
-        "pill_bg": "#DDF2F1",
-        "pill_dot": "#3FB8B2",
+        "pill_bg": "#ddf2f1",
+        "pill_dot": "#3fb8b2",
         "padding_top": 48,
         "padding_bottom": 64
+      }
+    },
+    "bright_side_topic_cta_CWjPPc": {
+      "type": "bright-side-topic-cta",
+      "name": "Topic CTA banner",
+      "settings": {
+        "heading": "Mood support, explained on one page",
+        "text": "Everything on non-drowsy, caffeine-free daily support, gathered in one place.",
+        "button_label": "See mood support",
+        "button_link": "",
+        "section_bg": "#FFFFFF",
+        "box_bg": "#E3F3F3",
+        "heading_color": "#1F1F1F",
+        "text_color": "#555555",
+        "button_bg": "#E8533A",
+        "button_text_color": "#FFFFFF",
+        "padding_top": 24,
+        "padding_bottom": 56
       }
     }
   },
@@ -277,6 +295,7 @@
     "bright_side_category_hero_aYbHKf",
     "bright_side_category_hero_EDAeQf",
     "bright_side_topic_about_zxWEtK",
-    "bright_side_topic_articles_83kfQp"
+    "bright_side_topic_articles_83kfQp",
+    "bright_side_topic_cta_CWjPPc"
   ]
 }
