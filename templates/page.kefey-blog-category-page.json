@@ -150,10 +150,11 @@
         "parent_link": "",
         "heading": "Good Moods",
         "subtitle": "Mood, focus, and the calm in between.",
-        "bg_color": "#41B5B2",
-        "text_color": "#FFFFFF",
-        "star_color": "#6DC9C6",
-        "chip_bg": "rgba(255,255,255,0.22)",
+        "bg_color": "#41b5b2",
+        "text_color": "#ffffff",
+        "star_color": "#6dc9c6",
+        "chip_bg": "#ffffff38",
+        "chip_hover_bg": "#86d3d0",
         "show_stars": true,
         "padding_top": 96,
         "padding_bottom": 96
@@ -205,13 +206,37 @@
         "parent_link": "",
         "heading": "Good Moods",
         "subtitle": "Mood, focus, and the calm in between.",
-        "bg_color": "#41B5B2",
-        "text_color": "#FFFFFF",
-        "star_color": "#6DC9C6",
-        "chip_bg": "rgba(255,255,255,0.22)",
+        "bg_color": "#41b5b2",
+        "text_color": "#ffffff",
+        "star_color": "#6dc9c6",
+        "chip_bg": "#ffffff38",
+        "chip_hover_bg": "#86d3d0",
         "show_stars": true,
         "padding_top": 96,
         "padding_bottom": 96
+      }
+    },
+    "bright_side_topic_about_zxWEtK": {
+      "type": "bright-side-topic-about",
+      "name": "Bright Side topic about",
+      "settings": {
+        "image": "shopify://shop_images/4-Packs.png",
+        "image_position": "left",
+        "badge_text": "New stories every week",
+        "show_star": true,
+        "star_image": "shopify://shop_images/STARGUM.png",
+        "eyebrow": "About this topic",
+        "topic_name": "",
+        "heading": "What you'll find in [topic]",
+        "text": "<p>Good Moods is where we write about the part of wellness that's hardest to see: mood, focus, and the everyday ability to stay steady when the week gets busy. It's the space between feeling scattered and feeling settled, and most of us spend more time there than we'd like to admit.</p><p>You'll find articles on how mood and energy connect, why so many “calm” products leave people feeling flat, and what non-drowsy should really mean. We look at focus as a set of everyday conditions rather than a test of willpower. And we write honestly about stress: the normal, occasional kind that comes with work, family and full calendars, and the small, practical things that help.</p><p>Where botanicals come into it, we explain how adaptogens such as ashwagandha and Korean red ginseng have traditionally been used, and what realistic expectations look like — gradual rather than instant, consistent rather than dramatic.</p><p>Everything in Good Moods is educational. It's written to help you understand what's going on and decide what fits your own routine. It isn't medical advice, and if something is affecting your day-to-day life, your healthcare provider is the right person to talk to.</p>",
+        "bg_top": "#EAF6F6",
+        "bg_bottom": "#FFFFFF",
+        "heading_color": "#1F1F1F",
+        "text_color": "#4A4A4A",
+        "accent_color": "#3FB8B2",
+        "star_color": "#FFFFFF",
+        "padding_top": 40,
+        "padding_bottom": 80
       }
     }
   },
@@ -219,6 +244,7 @@
     "main",
     "bright_side_filter_pills_BNPGUm",
     "bright_side_category_hero_aYbHKf",
-    "bright_side_category_hero_EDAeQf"
+    "bright_side_category_hero_EDAeQf",
+    "bright_side_topic_about_zxWEtK"
   ]
 }
