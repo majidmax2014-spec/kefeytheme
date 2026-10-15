@@ -163,13 +163,6 @@
     "bright_side_category_hero_EDAeQf": {
       "type": "bright-side-category-hero",
       "blocks": {
-        "chip_bgFhg9": {
-          "type": "chip",
-          "settings": {
-            "label": "Mood",
-            "link": ""
-          }
-        },
         "chip_4RRUtC": {
           "type": "chip",
           "settings": {
@@ -200,7 +193,6 @@
         }
       },
       "block_order": [
-        "chip_bgFhg9",
         "chip_4RRUtC",
         "chip_mHRtPU",
         "chip_ikd4FW",
@@ -278,12 +270,12 @@
         "text": "Everything on non-drowsy, caffeine-free daily support, gathered in one place.",
         "button_label": "See mood support",
         "button_link": "",
-        "section_bg": "#FFFFFF",
-        "box_bg": "#E3F3F3",
-        "heading_color": "#1F1F1F",
+        "section_bg": "#ffffff",
+        "box_bg": "#e3f3f3",
+        "heading_color": "#1f1f1f",
         "text_color": "#555555",
-        "button_bg": "#E8533A",
-        "button_text_color": "#FFFFFF",
+        "button_bg": "#e8533a",
+        "button_text_color": "#ffffff",
         "padding_top": 72,
         "padding_bottom": 72
       }
