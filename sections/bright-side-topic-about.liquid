@@ -1,0 +1,246 @@
+{%- comment -%}
+  File: sections/bright-side-topic-about.liquid
+  "About this topic" — photo with badge + star (left), eyebrow, heading
+  and rich text (right). Side spacing 5%.
+  "[topic]" in the heading is replaced with the page title.
+{%- endcomment -%}
+
+{%- liquid
+  assign topic_name = section.settings.topic_name
+  if topic_name == blank
+    if page != blank
+      assign topic_name = page.title
+    else
+      assign topic_name = 'Good Moods'
+    endif
+  endif
+  assign heading = section.settings.heading | replace: '[topic]', topic_name
+-%}
+
+<style>
+  #TopicAbout-{{ section.id }} {
+    --ta-bg-top: {{ section.settings.bg_top }};
+    --ta-bg-bottom: {{ section.settings.bg_bottom }};
+    --ta-heading: {{ section.settings.heading_color }};
+    --ta-text: {{ section.settings.text_color }};
+    --ta-accent: {{ section.settings.accent_color }};
+    --ta-star: {{ section.settings.star_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<section id="TopicAbout-{{ section.id }}" class="topic-about">
+  <div class="topic-about__inner{% if section.settings.image_position == 'right' %} topic-about__inner--reverse{% endif %}">
+
+    {%- comment -%} ===== Image ===== {%- endcomment -%}
+    <div class="topic-about__media-wrap">
+      <div class="topic-about__media">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1000 | image_tag:
+            loading: 'lazy',
+            widths: '450, 700, 1000',
+            sizes: '(min-width: 750px) 40vw, 90vw',
+            alt: section.settings.image.alt | escape
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'topic-about__placeholder' }}
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.badge_text != blank -%}
+        <span class="topic-about__badge">
+          <svg class="topic-about__badge-star" viewBox="0 0 100 95" aria-hidden="true" focusable="false"><path d="M50 0 L61.8 35.3 L99 36.3 L69.1 58.7 L79.4 94.4 L50 73.1 L20.6 94.4 L30.9 58.7 L1 36.3 L38.2 35.3 Z"/></svg>
+          {{ section.settings.badge_text }}
+        </span>
+      {%- endif -%}
+
+      {%- if section.settings.show_star -%}
+        <div class="topic-about__star">
+          <svg class="topic-about__star-shape" viewBox="0 0 100 95" aria-hidden="true" focusable="false"><path d="M50 0 L61.8 35.3 L99 36.3 L69.1 58.7 L79.4 94.4 L50 73.1 L20.6 94.4 L30.9 58.7 L1 36.3 L38.2 35.3 Z"/></svg>
+          {%- if section.settings.star_image != blank -%}
+            {{ section.settings.star_image | image_url: width: 300 | image_tag:
+              class: 'topic-about__star-img',
+              loading: 'lazy',
+              widths: '150, 300',
+              sizes: '120px',
+              alt: section.settings.star_image.alt | escape
+            }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ===== Text ===== {%- endcomment -%}
+    <div class="topic-about__content">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="topic-about__eyebrow">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      {%- if heading != blank -%}
+        <h2 class="topic-about__heading">{{ heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="topic-about__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% stylesheet %}
+  .topic-about {
+    background: linear-gradient(180deg, var(--ta-bg-top) 0%, var(--ta-bg-bottom) 70%);
+  }
+  .topic-about__inner {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+  @media (min-width: 750px) {
+    .topic-about__inner {
+      grid-template-columns: 40% 1fr;
+      gap: 6%;
+      align-items: center;
+    }
+    .topic-about__inner--reverse { grid-template-columns: 1fr 40%; }
+    .topic-about__inner--reverse .topic-about__media-wrap { order: 2; }
+  }
+
+  /* ---------- Image ---------- */
+  .topic-about__media-wrap {
+    position: relative;
+    max-width: 440px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .topic-about__media {
+    aspect-ratio: 4 / 5;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.12);
+  }
+  .topic-about__media img,
+  .topic-about__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Badge */
+  .topic-about__badge {
+    position: absolute;
+    top: 7%;
+    left: -16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 14px;
+    background: #fff;
+    color: var(--ta-heading);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1);
+  }
+  .topic-about__badge-star {
+    width: 15px;
+    height: 14px;
+    fill: var(--ta-accent);
+  }
+
+  /* Star with gummies */
+  .topic-about__star {
+    position: absolute;
+    right: -40px;
+    bottom: -50px;
+    width: 150px;
+    height: 143px;
+    filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.16));
+  }
+  .topic-about__star-shape {
+    width: 100%;
+    height: 100%;
+    fill: var(--ta-star);
+  }
+  .topic-about__star-img {
+    position: absolute;
+    inset: 22% 12% 18%;
+    width: 76%;
+    height: 60%;
+    object-fit: contain;
+  }
+  @media (max-width: 749px) {
+    .topic-about__badge { left: -6px; font-size: 12px; }
+    .topic-about__star { width: 110px; height: 105px; right: -6px; bottom: -36px; }
+  }
+
+  /* ---------- Text ---------- */
+  .topic-about__eyebrow {
+    margin: 0 0 12px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--ta-text);
+    opacity: 0.85;
+  }
+  .topic-about__heading {
+    margin: 0 0 22px;
+    font-size: clamp(26px, 2.8vw, 34px);
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.4px;
+    color: var(--ta-heading);
+  }
+  .topic-about__text {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--ta-text);
+  }
+  .topic-about__text p { margin: 0 0 16px; }
+  .topic-about__text p:last-child { margin-bottom: 0; }
+  .topic-about__text a { color: var(--ta-accent); }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Bright Side topic about",
+  "tag": "div",
+  "class": "section",
+  "settings": [
+    { "type": "header", "content": "Image" },
+    { "type": "image_picker", "id": "image", "label": "Photo" },
+    { "type": "select", "id": "image_position", "label": "Photo position", "default": "left",
+      "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
+    { "type": "text", "id": "badge_text", "label": "Badge text", "default": "New stories every week", "info": "Leave empty to hide" },
+    { "type": "checkbox", "id": "show_star", "label": "Show star", "default": true },
+    { "type": "image_picker", "id": "star_image", "label": "Image inside star", "info": "Transparent PNG, e.g. gummies" },
+
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "About this topic" },
+    { "type": "text", "id": "topic_name", "label": "Topic name", "info": "Leave empty to use the page title" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "What you'll find in [topic]", "info": "[topic] is replaced with the topic name" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Good Moods is where we write about the part of wellness that's hardest to see: mood, focus, and the everyday ability to stay steady when the week gets busy. It's the space between feeling scattered and feeling settled, and most of us spend more time there than we'd like to admit.</p><p>You'll find articles on how mood and energy connect, why so many “calm” products leave people feeling flat, and what non-drowsy should really mean. We look at focus as a set of everyday conditions rather than a test of willpower. And we write honestly about stress: the normal, occasional kind that comes with work, family and full calendars, and the small, practical things that help.</p><p>Where botanicals come into it, we explain how adaptogens such as ashwagandha and Korean red ginseng have traditionally been used, and what realistic expectations look like — gradual rather than instant, consistent rather than dramatic.</p><p>Everything in Good Moods is educational. It's written to help you understand what's going on and decide what fits your own routine. It isn't medical advice, and if something is affecting your day-to-day life, your healthcare provider is the right person to talk to.</p>" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_top", "label": "Background (top)", "default": "#EAF6F6" },
+    { "type": "color", "id": "bg_bottom", "label": "Background (bottom)", "default": "#FFFFFF" },
+    { "type": "color", "id": "heading_color", "label": "Heading", "default": "#1F1F1F" },
+    { "type": "color", "id": "text_color", "label": "Text", "default": "#4A4A4A" },
+    { "type": "color", "id": "accent_color", "label": "Accent (badge star)", "default": "#3FB8B2" },
+    { "type": "color", "id": "star_color", "label": "Big star", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 40 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 }
+  ],
+  "presets": [
+    { "name": "Bright Side topic about" }
+  ]
+}
+{% endschema %}
