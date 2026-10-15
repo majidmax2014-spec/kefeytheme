@@ -163,6 +163,13 @@
     "bright_side_category_hero_EDAeQf": {
       "type": "bright-side-category-hero",
       "blocks": {
+        "chip_bgFhg9": {
+          "type": "chip",
+          "settings": {
+            "label": "Mood",
+            "link": ""
+          }
+        },
         "chip_4RRUtC": {
           "type": "chip",
           "settings": {
@@ -193,6 +200,7 @@
         }
       },
       "block_order": [
+        "chip_bgFhg9",
         "chip_4RRUtC",
         "chip_mHRtPU",
         "chip_ikd4FW",
@@ -243,7 +251,7 @@
       "type": "bright-side-topic-articles",
       "name": "Topic articles",
       "settings": {
-        "blog": "gummies",
+        "blog": "",
         "filter_tag": "",
         "posts_count": 6,
         "columns": 3,
