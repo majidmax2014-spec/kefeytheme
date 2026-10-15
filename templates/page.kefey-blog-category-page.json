@@ -89,23 +89,136 @@
       "settings": {
         "all_label": "All",
         "all_link": "",
-        "all_dot_color": "#E8533A",
+        "all_dot_color": "#e8533a",
         "sticky": false,
         "show_border": true,
         "aria_label": "Browse topics",
-        "bg_color": "#FFFFFF",
-        "pill_bg": "#F5F3EF",
-        "pill_text": "#3A3A3A",
-        "active_bg": "#E8533A",
-        "active_text": "#FFFFFF",
-        "border_color": "#ECECEC",
+        "bg_color": "#ffffff",
+        "pill_bg": "#f5f3ef",
+        "pill_text": "#3a3a3a",
+        "active_bg": "#e8533a",
+        "active_text": "#ffffff",
+        "border_color": "#ececec",
         "padding_top": 22,
         "padding_bottom": 22
+      }
+    },
+    "bright_side_category_hero_aYbHKf": {
+      "type": "bright-side-category-hero",
+      "blocks": {
+        "chip_46yKqW": {
+          "type": "chip",
+          "settings": {
+            "label": "Mood",
+            "link": ""
+          }
+        },
+        "chip_eFgXAA": {
+          "type": "chip",
+          "settings": {
+            "label": "Focus",
+            "link": ""
+          }
+        },
+        "chip_W6nLMf": {
+          "type": "chip",
+          "settings": {
+            "label": "Calm",
+            "link": ""
+          }
+        },
+        "chip_6NDzHi": {
+          "type": "chip",
+          "settings": {
+            "label": "Everyday stress",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "chip_46yKqW",
+        "chip_eFgXAA",
+        "chip_W6nLMf",
+        "chip_6NDzHi"
+      ],
+      "disabled": true,
+      "name": "Bright Side category hero",
+      "settings": {
+        "show_breadcrumb": true,
+        "home_label": "Home",
+        "parent_label": "The Bright Side",
+        "parent_link": "",
+        "heading": "Good Moods",
+        "subtitle": "Mood, focus, and the calm in between.",
+        "bg_color": "#41B5B2",
+        "text_color": "#FFFFFF",
+        "star_color": "#6DC9C6",
+        "chip_bg": "rgba(255,255,255,0.22)",
+        "show_stars": true,
+        "padding_top": 96,
+        "padding_bottom": 96
+      }
+    },
+    "bright_side_category_hero_EDAeQf": {
+      "type": "bright-side-category-hero",
+      "blocks": {
+        "chip_4RRUtC": {
+          "type": "chip",
+          "settings": {
+            "label": "Mood",
+            "link": ""
+          }
+        },
+        "chip_mHRtPU": {
+          "type": "chip",
+          "settings": {
+            "label": "Focus",
+            "link": ""
+          }
+        },
+        "chip_ikd4FW": {
+          "type": "chip",
+          "settings": {
+            "label": "Calm",
+            "link": ""
+          }
+        },
+        "chip_LiUKKY": {
+          "type": "chip",
+          "settings": {
+            "label": "Everyday stress",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "chip_4RRUtC",
+        "chip_mHRtPU",
+        "chip_ikd4FW",
+        "chip_LiUKKY"
+      ],
+      "name": "Bright Side category hero",
+      "settings": {
+        "show_breadcrumb": true,
+        "home_label": "Home",
+        "parent_label": "The Bright Side",
+        "parent_link": "",
+        "heading": "Good Moods",
+        "subtitle": "Mood, focus, and the calm in between.",
+        "bg_color": "#41B5B2",
+        "text_color": "#FFFFFF",
+        "star_color": "#6DC9C6",
+        "chip_bg": "rgba(255,255,255,0.22)",
+        "show_stars": true,
+        "padding_top": 96,
+        "padding_bottom": 96
       }
     }
   },
   "order": [
     "main",
-    "bright_side_filter_pills_BNPGUm"
+    "bright_side_filter_pills_BNPGUm",
+    "bright_side_category_hero_aYbHKf",
+    "bright_side_category_hero_EDAeQf"
   ]
 }
