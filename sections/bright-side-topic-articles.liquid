@@ -10,29 +10,39 @@
     assign blog_obj = blogs.news
   endif
 
-  assign tag = section.settings.filter_tag
-  if tag == blank and page != blank
-    assign tag = page.title
-  endif
+  assign tag = section.settings.filter_tag | strip
   assign tag_handle = tag | handleize
-
   assign limit = section.settings.posts_count
 
   comment
-    Count matching articles first (tag match is case-insensitive via handleize)
+    Count posts with the tag (case-insensitive). If no tag is set,
+    or no post has it, show ALL posts from the blog.
   endcomment
+  assign use_filter = false
   assign total = 0
-  for article in blog_obj.articles
-    for t in article.tags
-      assign t_handle = t | handleize
-      if t_handle == tag_handle
-        assign total = total | plus: 1
-        break
-      endif
+  if tag != blank
+    for article in blog_obj.articles
+      for t in article.tags
+        assign t_handle = t | handleize
+        if t_handle == tag_handle
+          assign total = total | plus: 1
+          break
+        endif
+      endfor
     endfor
-  endfor
+    if total > 0
+      assign use_filter = true
+    endif
+  endif
+  unless use_filter
+    assign total = blog_obj.articles_count
+  endunless
 
-  assign heading = section.settings.heading | replace: '[tag]', tag
+  assign heading_name = tag
+  if heading_name == blank
+    assign heading_name = blog_obj.title
+  endif
+  assign heading = section.settings.heading | replace: '[tag]', heading_name
 -%}
 
 <style>
@@ -66,12 +76,21 @@
       {%- for article in blog_obj.articles -%}
         {%- if shown >= limit -%}{%- break -%}{%- endif -%}
 
-        {%- assign match = false -%}
-        {%- for t in article.tags -%}
-          {%- assign t_handle = t | handleize -%}
-          {%- if t_handle == tag_handle -%}{%- assign match = true -%}{%- break -%}{%- endif -%}
-        {%- endfor -%}
-        {%- unless match -%}{%- continue -%}{%- endunless -%}
+        {%- if use_filter -%}
+          {%- assign match = false -%}
+          {%- for t in article.tags -%}
+            {%- assign t_handle = t | handleize -%}
+            {%- if t_handle == tag_handle -%}{%- assign match = true -%}{%- break -%}{%- endif -%}
+          {%- endfor -%}
+          {%- unless match -%}{%- continue -%}{%- endunless -%}
+        {%- endif -%}
+
+        {%- liquid
+          assign card_tag = tag
+          if card_tag == blank and article.tags.size > 0
+            assign card_tag = article.tags.first
+          endif
+        -%}
 
         {%- liquid
           assign shown = shown | plus: 1
@@ -94,10 +113,12 @@
           </a>
 
           <div class="topic-articles__body">
-            <span class="topic-articles__pill">
-              <span class="topic-articles__dot" aria-hidden="true"></span>
-              {{ tag }}
-            </span>
+            {%- if card_tag != blank -%}
+              <span class="topic-articles__pill">
+                <span class="topic-articles__dot" aria-hidden="true"></span>
+                {{ card_tag }}
+              </span>
+            {%- endif -%}
 
             <h3 class="topic-articles__title">
               <a href="{{ article.url }}">{{ article.title | escape }}</a>
@@ -139,7 +160,7 @@
 
     {%- if section.settings.button_label != blank and total > shown -%}
       <div class="topic-articles__footer">
-        <a href="{{ blog_obj.url }}/tagged/{{ tag_handle }}" class="topic-articles__btn">{{ section.settings.button_label }}</a>
+        <a href="{{ blog_obj.url }}{% if use_filter %}/tagged/{{ tag_handle }}{% endif %}" class="topic-articles__btn">{{ section.settings.button_label }}</a>
       </div>
     {%- endif -%}
 
@@ -310,7 +331,7 @@
   "settings": [
     { "type": "header", "content": "Articles" },
     { "type": "blog", "id": "blog", "label": "Blog" },
-    { "type": "text", "id": "filter_tag", "label": "Show posts with tag", "info": "e.g. Good Moods. Leave empty to use the page title." },
+    { "type": "text", "id": "filter_tag", "label": "Show posts with tag", "info": "Optional, e.g. Good Moods. Leave empty to show all posts from the blog." },
     { "type": "range", "id": "posts_count", "label": "Number of posts", "min": 3, "max": 24, "step": 1, "default": 6 },
     { "type": "range", "id": "columns", "label": "Columns on desktop", "min": 2, "max": 4, "step": 1, "default": 3 },
     { "type": "checkbox", "id": "show_excerpt", "label": "Show excerpt", "default": true },
