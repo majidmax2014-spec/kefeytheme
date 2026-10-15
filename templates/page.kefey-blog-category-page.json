@@ -229,14 +229,37 @@
         "topic_name": "",
         "heading": "What you'll find in [topic]",
         "text": "<p>Good Moods is where we write about the part of wellness that's hardest to see: mood, focus, and the everyday ability to stay steady when the week gets busy. It's the space between feeling scattered and feeling settled, and most of us spend more time there than we'd like to admit.</p><p>You'll find articles on how mood and energy connect, why so many “calm” products leave people feeling flat, and what non-drowsy should really mean. We look at focus as a set of everyday conditions rather than a test of willpower. And we write honestly about stress: the normal, occasional kind that comes with work, family and full calendars, and the small, practical things that help.</p><p>Where botanicals come into it, we explain how adaptogens such as ashwagandha and Korean red ginseng have traditionally been used, and what realistic expectations look like — gradual rather than instant, consistent rather than dramatic.</p><p>Everything in Good Moods is educational. It's written to help you understand what's going on and decide what fits your own routine. It isn't medical advice, and if something is affecting your day-to-day life, your healthcare provider is the right person to talk to.</p>",
-        "bg_top": "#EAF6F6",
-        "bg_bottom": "#FFFFFF",
-        "heading_color": "#1F1F1F",
-        "text_color": "#4A4A4A",
-        "accent_color": "#3FB8B2",
-        "star_color": "#FFFFFF",
+        "bg_top": "#eaf6f6",
+        "bg_bottom": "#ffffff",
+        "heading_color": "#1f1f1f",
+        "text_color": "#4a4a4a",
+        "accent_color": "#3fb8b2",
+        "star_color": "#ffffff",
         "padding_top": 40,
         "padding_bottom": 80
+      }
+    },
+    "bright_side_topic_articles_83kfQp": {
+      "type": "bright-side-topic-articles",
+      "name": "Topic articles",
+      "settings": {
+        "blog": "",
+        "filter_tag": "",
+        "posts_count": 6,
+        "columns": 3,
+        "show_excerpt": true,
+        "heading": "Latest in [tag]",
+        "show_count": true,
+        "button_label": "View all articles",
+        "empty_text": "New stories are coming soon.",
+        "bg_color": "#F6F4F1",
+        "card_color": "#FFFFFF",
+        "heading_color": "#1F1F1F",
+        "text_color": "#555555",
+        "pill_bg": "#DDF2F1",
+        "pill_dot": "#3FB8B2",
+        "padding_top": 48,
+        "padding_bottom": 64
       }
     }
   },
@@ -245,6 +268,7 @@
     "bright_side_filter_pills_BNPGUm",
     "bright_side_category_hero_aYbHKf",
     "bright_side_category_hero_EDAeQf",
-    "bright_side_topic_about_zxWEtK"
+    "bright_side_topic_about_zxWEtK",
+    "bright_side_topic_articles_83kfQp"
   ]
 }
