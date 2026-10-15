@@ -1,16 +1,17 @@
 {%- comment -%}
   File: sections/bright-side-category-hero.liquid
   Category hero — breadcrumb, big heading, subtitle, sub-topic chips,
-  decorative faded stars. Chips are blocks.
+  faded decorative stars. Heading defaults to the page title.
+  Matches template keys: blocks type "chip", setting "subtitle".
 {%- endcomment -%}
 
 {%- liquid
-  assign hero_heading = section.settings.heading
-  if hero_heading == blank
-    if page.title != blank
-      assign hero_heading = page.title
-    elsif blog.title != blank
-      assign hero_heading = blog.title
+  assign hero_title = section.settings.heading
+  if hero_title == blank
+    if page != blank
+      assign hero_title = page.title
+    else
+      assign hero_title = 'Good Moods'
     endif
   endif
 -%}
@@ -21,12 +22,13 @@
     --ch-text: {{ section.settings.text_color }};
     --ch-star: {{ section.settings.star_color }};
     --ch-chip: {{ section.settings.chip_bg }};
+    --ch-chip-hover: {{ section.settings.chip_hover_bg }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 </style>
 
-<section id="CatHero-{{ section.id }}" class="cat-hero{% if section.settings.animate %} cat-hero--animate{% endif %}">
+<section id="CatHero-{{ section.id }}" class="cat-hero">
 
   {%- if section.settings.show_stars -%}
     <svg class="cat-hero__star cat-hero__star--tl" viewBox="0 0 100 95" aria-hidden="true" focusable="false"><path d="M50 0 L61.8 35.3 L99 36.3 L69.1 58.7 L79.4 94.4 L50 73.1 L20.6 94.4 L30.9 58.7 L1 36.3 L38.2 35.3 Z"/></svg>
@@ -36,23 +38,21 @@
   <div class="cat-hero__inner">
 
     {%- if section.settings.show_breadcrumb -%}
-      <nav class="cat-hero__breadcrumb" aria-label="Breadcrumb">
+      <nav class="cat-hero__crumbs" aria-label="Breadcrumb">
         <a href="{{ routes.root_url }}">{{ section.settings.home_label }}</a>
         {%- if section.settings.parent_label != blank -%}
           <span class="cat-hero__sep" aria-hidden="true">›</span>
           <a href="{{ section.settings.parent_link | default: '#' }}">{{ section.settings.parent_label }}</a>
         {%- endif -%}
         <span class="cat-hero__sep" aria-hidden="true">›</span>
-        <span aria-current="page">{{ section.settings.current_label | default: hero_heading }}</span>
+        <span aria-current="page">{{ hero_title }}</span>
       </nav>
     {%- endif -%}
 
-    {%- if hero_heading != blank -%}
-      <h1 class="cat-hero__heading">{{ hero_heading }}</h1>
-    {%- endif -%}
+    <h1 class="cat-hero__heading">{{ hero_title }}</h1>
 
     {%- if section.settings.subtitle != blank -%}
-      <p class="cat-hero__subtitle">{{ section.settings.subtitle }}</p>
+      <p class="cat-hero__sub">{{ section.settings.subtitle }}</p>
     {%- endif -%}
 
     {%- if section.blocks.size > 0 -%}
@@ -81,7 +81,7 @@
   .cat-hero__inner {
     position: relative;
     z-index: 1;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -92,47 +92,51 @@
     fill: var(--ch-star);
     pointer-events: none;
   }
-  .cat-hero__star--tl { top: -40px; left: -40px; width: 170px; }
-  .cat-hero__star--br { bottom: -60px; right: -30px; width: 210px; }
+  .cat-hero__star--tl { top: -24px; left: -32px; width: 165px; }
+  .cat-hero__star--br { bottom: -44px; right: -12px; width: 215px; }
   @media (max-width: 749px) {
-    .cat-hero__star--tl { width: 100px; top: -26px; left: -26px; }
-    .cat-hero__star--br { width: 120px; bottom: -36px; right: -24px; }
+    .cat-hero__star--tl { width: 90px; top: -14px; left: -20px; }
+    .cat-hero__star--br { width: 110px; bottom: -26px; right: -16px; }
   }
 
   /* Breadcrumb */
-  .cat-hero__breadcrumb {
+  .cat-hero__crumbs {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 6px;
-    margin-bottom: 26px;
-    font-size: 15px;
+    margin: 0 0 28px;
+    font-size: 19px;
     font-weight: 700;
+    line-height: 1.3;
+    color: inherit;
   }
-  .cat-hero__breadcrumb a {
+  .cat-hero__crumbs a,
+  .cat-hero__crumbs span {
     color: inherit;
     text-decoration: none;
   }
-  .cat-hero__breadcrumb a:hover { text-decoration: underline; }
-  .cat-hero__sep { opacity: 0.85; }
+  .cat-hero__crumbs a:hover { text-decoration: underline; }
 
   /* Heading */
   .cat-hero__heading {
-    margin: 0 0 22px;
+    margin: 0 0 34px;
     color: inherit;
-    font-size: clamp(52px, 8vw, 110px);
+    font-size: clamp(48px, 8vw, 116px);
     font-weight: 900;
     line-height: 1;
-    letter-spacing: -2px;
-    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    letter-spacing: -2.5px;
+    text-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
   }
 
-  .cat-hero__subtitle {
-    margin: 0 0 30px;
-    font-size: clamp(17px, 1.9vw, 24px);
+  /* Subtitle */
+  .cat-hero__sub {
+    margin: 0 0 36px;
+    color: inherit;
+    font-size: clamp(18px, 2.1vw, 31px);
     font-weight: 500;
-    line-height: 1.4;
+    line-height: 1.35;
   }
 
   /* Chips */
@@ -140,46 +144,35 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
   }
   .cat-hero__chip {
     display: inline-flex;
     align-items: center;
-    height: 40px;
-    padding: 0 18px;
+    height: 55px;
+    padding: 0 23px;
     background: var(--ch-chip);
     color: var(--ch-text);
     border-radius: 999px;
-    font-size: 15px;
+    font-size: 19px;
     font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
     text-decoration: none;
     transition: background 0.2s ease, transform 0.2s ease;
   }
   a.cat-hero__chip:hover {
-    background: rgba(255, 255, 255, 0.35);
-    transform: translateY(-2px);
+    background: var(--ch-chip-hover);
     color: var(--ch-text);
-  }
-  @media (max-width: 749px) {
-    .cat-hero__chip { height: 36px; padding: 0 15px; font-size: 14px; }
-    .cat-hero__breadcrumb { font-size: 13px; margin-bottom: 18px; }
+    transform: translateY(-2px);
   }
 
-  /* Animation */
-  @media (prefers-reduced-motion: no-preference) {
-    .cat-hero--animate .cat-hero__star { animation: catHeroFloat 6s ease-in-out infinite; }
-    .cat-hero--animate .cat-hero__star--br { animation-delay: -3s; }
-    .cat-hero--animate .cat-hero__heading { animation: catHeroIn 0.7s ease both; }
-    .cat-hero--animate .cat-hero__subtitle { animation: catHeroIn 0.7s 0.1s ease both; }
-    .cat-hero--animate .cat-hero__chips { animation: catHeroIn 0.7s 0.2s ease both; }
-  }
-  @keyframes catHeroFloat {
-    0%, 100% { transform: rotate(0deg); }
-    50%      { transform: rotate(10deg); }
-  }
-  @keyframes catHeroIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to   { opacity: 1; transform: translateY(0); }
+  @media (max-width: 749px) {
+    .cat-hero__crumbs { font-size: 14px; margin-bottom: 18px; }
+    .cat-hero__heading { margin-bottom: 20px; letter-spacing: -1px; }
+    .cat-hero__sub { margin-bottom: 24px; }
+    .cat-hero__chips { gap: 8px; }
+    .cat-hero__chip { height: 40px; padding: 0 16px; font-size: 15px; }
   }
 {% endstylesheet %}
 
@@ -193,25 +186,24 @@
     { "type": "header", "content": "Breadcrumb" },
     { "type": "checkbox", "id": "show_breadcrumb", "label": "Show breadcrumb", "default": true },
     { "type": "text", "id": "home_label", "label": "Home label", "default": "Home" },
-    { "type": "text", "id": "parent_label", "label": "Middle label", "default": "The Bright Side" },
-    { "type": "url", "id": "parent_link", "label": "Middle link", "info": "e.g. /pages/bright-side" },
-    { "type": "text", "id": "current_label", "label": "Current page label", "info": "Leave empty to use the heading" },
+    { "type": "text", "id": "parent_label", "label": "Parent label", "default": "The Bright Side" },
+    { "type": "url", "id": "parent_link", "label": "Parent link", "info": "e.g. /pages/bright-side" },
 
     { "type": "header", "content": "Content" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Good Moods", "info": "Leave empty to use the page title" },
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Leave empty to use the page title" },
     { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "Mood, focus, and the calm in between." },
 
     { "type": "header", "content": "Colors" },
-    { "type": "color", "id": "bg_color", "label": "Background", "default": "#41B5B2" },
+    { "type": "color", "id": "bg_color", "label": "Background", "default": "#42B5B1" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#FFFFFF" },
-    { "type": "color_background", "id": "chip_bg", "label": "Chip background", "default": "rgba(255,255,255,0.22)" },
-    { "type": "color", "id": "star_color", "label": "Decorative stars", "default": "#6DC9C6" },
-
-    { "type": "header", "content": "Style" },
+    { "type": "color", "id": "star_color", "label": "Stars", "default": "#6CC9C5" },
+    { "type": "color", "id": "chip_bg", "label": "Chip background", "default": "#6CC9C5" },
+    { "type": "color", "id": "chip_hover_bg", "label": "Chip hover background", "default": "#86D3D0" },
     { "type": "checkbox", "id": "show_stars", "label": "Show decorative stars", "default": true },
-    { "type": "checkbox", "id": "animate", "label": "Enable animations", "default": true },
-    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 },
-    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 96 }
+
+    { "type": "header", "content": "Spacing" },
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 140 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 112 }
   ],
   "blocks": [
     {
@@ -219,7 +211,7 @@
       "name": "Sub-topic chip",
       "settings": [
         { "type": "text", "id": "label", "label": "Label", "default": "Mood" },
-        { "type": "url", "id": "link", "label": "Link (optional)" }
+        { "type": "url", "id": "link", "label": "Link (optional)", "info": "e.g. /blogs/news/tagged/mood" }
       ]
     }
   ],
