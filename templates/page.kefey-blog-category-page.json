@@ -251,7 +251,7 @@
       "type": "bright-side-topic-articles",
       "name": "Topic articles",
       "settings": {
-        "blog": "",
+        "blog": "gummies",
         "filter_tag": "",
         "posts_count": 6,
         "columns": 3,
@@ -285,7 +285,7 @@
         "button_bg": "#E8533A",
         "button_text_color": "#FFFFFF",
         "padding_top": 72,
-        "padding_bottom": 56
+        "padding_bottom": 72
       }
     }
   },
