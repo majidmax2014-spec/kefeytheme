@@ -42,7 +42,8 @@
           "settings": {
             "label": "Good Moods",
             "link": "",
-            "dot_color": "#3fb8b2"
+            "dot_color": "#3fb8b2",
+            "force_active": false
           }
         },
         "pill_J4hFkJ": {
@@ -50,7 +51,8 @@
           "settings": {
             "label": "Energy & Rest",
             "link": "",
-            "dot_color": "#7cc34f"
+            "dot_color": "#7cc34f",
+            "force_active": false
           }
         },
         "pill_YLBGP4": {
@@ -58,7 +60,8 @@
           "settings": {
             "label": "Star Ingredients",
             "link": "",
-            "dot_color": "#e8533a"
+            "dot_color": "#e8533a",
+            "force_active": false
           }
         },
         "pill_VPggaB": {
@@ -66,7 +69,8 @@
           "settings": {
             "label": "Live Full",
             "link": "",
-            "dot_color": "#f5be00"
+            "dot_color": "#f5be00",
+            "force_active": false
           }
         },
         "pill_PTpErr": {
@@ -74,7 +78,8 @@
           "settings": {
             "label": "Kefey Stories",
             "link": "",
-            "dot_color": "#3fa9a6"
+            "dot_color": "#3fa9a6",
+            "force_active": false
           }
         }
       },
@@ -96,8 +101,8 @@
         "bg_color": "#ffffff",
         "pill_bg": "#f5f3ef",
         "pill_text": "#3a3a3a",
-        "active_bg": "#e8533a",
-        "active_text": "#ffffff",
+        "active_bg": "#F2F3F3",
+        "active_text": "#37393D",
         "border_color": "#ececec",
         "padding_top": 22,
         "padding_bottom": 22
