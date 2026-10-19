@@ -43,7 +43,7 @@
             "label": "Good Moods",
             "link": "",
             "dot_color": "#3fb8b2",
-            "force_active": false
+            "force_active": true
           }
         },
         "pill_J4hFkJ": {
@@ -101,7 +101,7 @@
         "bg_color": "#ffffff",
         "pill_bg": "#f5f3ef",
         "pill_text": "#3a3a3a",
-        "active_bg": "#F2F3F3",
+        "active_bg": "#3FB8B2",
         "active_text": "#37393D",
         "border_color": "#ececec",
         "padding_top": 22,
