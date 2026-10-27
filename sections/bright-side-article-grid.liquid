@@ -12,8 +12,6 @@
   assign skip = section.settings.skip_posts
   assign limit = section.settings.posts_count
   assign pill_colors = 'teal,orange,yellow,red,pink,green' | split: ','
-
-  assign img_sizes = '(min-width: 990px) calc(90vw / ' | append: section.settings.columns | append: '), (min-width: 600px) 45vw, 90vw'
 -%}
 
 <style>
@@ -65,12 +63,18 @@
           <article class="bright-grid__card">
             <a href="{{ article.url }}" class="bright-grid__media" aria-label="{{ article.title | escape }}">
               {%- if article.image -%}
-                {{ article.image | image_url: width: 1600 | image_tag:
-                  loading: 'lazy',
-                  widths: '400, 600, 800, 1000, 1200, 1600',
-                  sizes: img_sizes,
-                  alt: article.image.alt | default: article.title | escape
-                }}
+                <img
+                  src="{{ article.image | image_url: width: 1400 }}"
+                  srcset="{{ article.image | image_url: width: 900 }} 900w,
+                          {{ article.image | image_url: width: 1400 }} 1400w,
+                          {{ article.image | image_url: width: 2000 }} 2000w"
+                  sizes="(min-width: 990px) 700px, (min-width: 600px) 700px, 100vw"
+                  alt="{{ article.image.alt | default: article.title | escape }}"
+                  width="{{ article.image.width }}"
+                  height="{{ article.image.height }}"
+                  loading="lazy"
+                  decoding="async"
+                >
               {%- else -%}
                 {{ 'lifestyle-1' | placeholder_svg_tag: 'bright-grid__placeholder' }}
               {%- endif -%}
@@ -174,30 +178,30 @@
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: box-shadow 0.25s ease;
   }
   .bright-grid__card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.11);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.12);
   }
 
   .bright-grid__media {
+    position: relative;
     display: block;
     aspect-ratio: 4 / 3;
     overflow: hidden;
   }
   .bright-grid__media img,
   .bright-grid__placeholder {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s ease;
-    /* keeps images crisp while card / image animate */
-    backface-visibility: hidden;
-    transform: translateZ(0);
+    filter: none !important;
+    opacity: 1 !important;
   }
-  .bright-grid__card:hover .bright-grid__media img { transform: translateZ(0) scale(1.05); }
 
   .bright-grid__body {
     flex: 1;
