@@ -174,35 +174,25 @@
     height: auto;
     display: block;
     user-select: none;
-    /* sticker look: white outline + soft shadow */
-    filter:
-      drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff)
-      drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff)
-      drop-shadow(0 8px 12px rgba(0, 0, 0, 0.16));
   }
-  .bright-hero__doodle--zigzag   { top: 27%; left: 12%;     width: 66px; rotate: -10deg; }
-  .bright-hero__doodle--squiggle { bottom: 26%; left: 4%;   width: 48px; rotate: 12deg; }
-  .bright-hero__doodle--loop     { bottom: 28%; right: 4%;  width: 62px; rotate: -8deg; }
-  .bright-hero__doodle--spiral   { bottom: 5%; right: 9%;   width: 86px; rotate: 6deg; }
-  .bright-hero__doodle--dot      { top: 9%; left: 26%;      width: 18px; }
+  .bright-hero__doodle--squiggle { top: 34%; left: 5%;     width: 52px; rotate: -14deg; }
+  .bright-hero__doodle--zigzag   { top: 25%; right: 9%;    width: 78px; rotate: 8deg; }
+  .bright-hero__doodle--spiral   { bottom: 9%; left: 8%;   width: 92px; rotate: -6deg; }
+  .bright-hero__doodle--loop     { bottom: 12%; right: 6%; width: 70px; rotate: 10deg; }
+  .bright-hero__doodle--dot      { top: 9%; left: 24%;     width: 16px; }
 
   @media (max-width: 989px) {
-    .bright-hero__doodle--zigzag   { width: 52px; left: 5%; top: 30%; }
-    .bright-hero__doodle--squiggle { width: 38px; left: 2%; }
-    .bright-hero__doodle--loop     { width: 48px; right: 2%; }
-    .bright-hero__doodle--spiral   { width: 66px; right: 4%; }
+    .bright-hero__doodle--squiggle { width: 40px; left: 3%; }
+    .bright-hero__doodle--zigzag   { width: 60px; right: 4%; }
+    .bright-hero__doodle--spiral   { width: 70px; left: 3%; }
+    .bright-hero__doodle--loop     { width: 54px; right: 3%; }
   }
   @media (max-width: 749px) {
-    .bright-hero__doodle {
-      filter:
-        drop-shadow(1.5px 0 0 #fff) drop-shadow(-1.5px 0 0 #fff)
-        drop-shadow(0 1.5px 0 #fff) drop-shadow(0 -1.5px 0 #fff);
-    }
     .bright-hero__doodle--squiggle,
     .bright-hero__doodle--loop { display: none; }
-    .bright-hero__doodle--zigzag { top: 20%; left: 3%; width: 38px; }
-    .bright-hero__doodle--spiral { bottom: 3%; right: 3%; width: 46px; }
-    .bright-hero__doodle--dot    { top: 12%; left: 16%; width: 11px; }
+    .bright-hero__doodle--zigzag { top: 18%; right: 3%; width: 42px; }
+    .bright-hero__doodle--spiral { bottom: 4%; left: 3%; width: 48px; }
+    .bright-hero__doodle--dot    { top: 12%; left: 14%; width: 10px; }
   }
 
   /* ---------- Gallery ---------- */
