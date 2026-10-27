@@ -27,6 +27,17 @@
 </style>
 
 <section id="BrightGrid-{{ section.id }}" class="bright-grid">
+
+  {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
+  {%- if section.settings.show_doodles -%}
+    <div class="bright-grid__doodles" aria-hidden="true">
+      <img class="bright-grid__doodle bright-grid__doodle--star" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_58.png?v=1793080282&width=180" alt="" width="180" height="180" loading="lazy">
+      <img class="bright-grid__doodle bright-grid__doodle--dot" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_65.png?v=1793080282&width=80" alt="" width="80" height="80" loading="lazy">
+      <img class="bright-grid__doodle bright-grid__doodle--squiggle" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_60.png?v=1793080282&width=160" alt="" width="160" height="160" loading="lazy">
+      <img class="bright-grid__doodle bright-grid__doodle--curl" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_63.png?v=1793080282&width=200" alt="" width="200" height="200" loading="lazy">
+    </div>
+  {%- endif -%}
+
   <div class="page-width bright-grid__wrap">
 
     {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
@@ -248,6 +259,50 @@
     text-decoration: none;
   }
   .bright-grid__btn:hover { color: #fff; opacity: 0.9; }
+
+  /* ---------- Decorative doodles ---------- */
+  .bright-grid { position: relative; overflow: hidden; }
+  .bright-grid__wrap { position: relative; z-index: 1; }
+  .bright-grid__doodles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .bright-grid__doodle {
+    position: absolute;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  .bright-grid__doodle--star     { top: 40px;  left: 7%;    width: 58px; rotate: -12deg; }
+  .bright-grid__doodle--dot      { top: 116px; left: 12%;   width: 16px; }
+  .bright-grid__doodle--squiggle { top: 32px;  right: 8%;   width: 44px; rotate: 14deg; }
+  .bright-grid__doodle--curl     { bottom: 56px; right: 4%; width: 62px; rotate: 8deg; }
+
+  @media (max-width: 1199px) {
+    .bright-grid__doodle--curl { display: none; }
+    .bright-grid__doodle--star     { left: 4%; width: 48px; }
+    .bright-grid__doodle--squiggle { right: 4%; width: 38px; }
+    .bright-grid__doodle--dot      { left: 9%; }
+  }
+  @media (max-width: 749px) {
+    .bright-grid__doodle--dot { display: none; }
+    .bright-grid__doodle--star     { top: 14px; left: 4%;  width: 34px; }
+    .bright-grid__doodle--squiggle { top: 12px; right: 4%; width: 26px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .bright-grid__doodle {
+      animation: brightGridDoodle 6s ease-in-out infinite;
+    }
+    .bright-grid__doodle--dot      { animation-delay: -1.5s; }
+    .bright-grid__doodle--squiggle { animation-delay: -3s; }
+    .bright-grid__doodle--curl     { animation-delay: -4.5s; }
+  }
+  @keyframes brightGridDoodle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -274,6 +329,9 @@
     { "type": "color", "id": "card_color", "label": "Card background", "default": "#FFFFFF" },
     { "type": "color", "id": "heading_color", "label": "Heading", "default": "#1F1F1F" },
     { "type": "color", "id": "text_color", "label": "Text", "default": "#666666" },
+
+    { "type": "header", "content": "Decoration" },
+    { "type": "checkbox", "id": "show_doodles", "label": "Show decorative doodles", "default": true },
 
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
