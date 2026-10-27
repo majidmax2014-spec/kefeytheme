@@ -59,6 +59,16 @@
 
 <section id="FeaturedCard-{{ section.id }}" class="featured-card">
   <div class="page-width">
+
+    {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
+    {%- if section.settings.show_doodles -%}
+      <div class="featured-card__doodles" aria-hidden="true">
+        <img class="featured-card__doodle featured-card__doodle--star" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_64.png?v=1793080283&width=180" alt="" width="180" height="180" loading="lazy">
+        <img class="featured-card__doodle featured-card__doodle--spiral" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_56.png?v=1793080283&width=220" alt="" width="220" height="220" loading="lazy">
+        <img class="featured-card__doodle featured-card__doodle--loop" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_62.png?v=1793080282&width=160" alt="" width="160" height="160" loading="lazy">
+      </div>
+    {%- endif -%}
+
     <article class="featured-card__inner{% if section.settings.image_position == 'right' %} featured-card__inner--reverse{% endif %}">
 
       <a href="{{ card_url | default: '#' }}" class="featured-card__media" aria-label="{{ card_title | escape }}">
@@ -227,6 +237,64 @@
     box-shadow: 0 8px 18px rgba(232, 83, 58, 0.35);
     color: #fff;
   }
+
+  /* ---------- Decorative doodles ---------- */
+  .featured-card { overflow: hidden; }
+  .featured-card .page-width { position: relative; }
+  .featured-card__inner { position: relative; z-index: 1; }
+  .featured-card__doodles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .featured-card__doodle {
+    position: absolute;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  /* Star peeks out from behind the top-right corner of the card */
+  .featured-card__doodle--star {
+    top: -28px;
+    right: max(6px, calc(50% - var(--fc-max) / 2 - 30px));
+    width: 72px;
+    rotate: 14deg;
+  }
+  /* Spiral peeks out from behind the bottom-left corner */
+  .featured-card__doodle--spiral {
+    bottom: -26px;
+    left: max(6px, calc(50% - var(--fc-max) / 2 - 38px));
+    width: 86px;
+    rotate: -8deg;
+  }
+  /* Small loop floats on the left side (wide screens only) */
+  .featured-card__doodle--loop {
+    top: 16%;
+    left: calc(50% - var(--fc-max) / 2 - 96px);
+    width: 50px;
+    rotate: -12deg;
+  }
+
+  @media (max-width: 1099px) {
+    .featured-card__doodle--loop { display: none; }
+  }
+  @media (max-width: 749px) {
+    .featured-card__doodle--star   { top: -16px; right: 4px; width: 42px; }
+    .featured-card__doodle--spiral { bottom: -14px; left: 4px; width: 50px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .featured-card__doodle {
+      animation: featuredCardDoodle 6s ease-in-out infinite;
+    }
+    .featured-card__doodle--spiral { animation-delay: -2s; }
+    .featured-card__doodle--loop   { animation-delay: -4s; }
+  }
+  @keyframes featuredCardDoodle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -262,6 +330,9 @@
     { "type": "color", "id": "text_color", "label": "Text", "default": "#555555" },
     { "type": "color", "id": "accent_color", "label": "Accent (button & dot)", "default": "#E8533A" },
     { "type": "color", "id": "pill_bg", "label": "Tag background", "default": "#FDE4DF" },
+
+    { "type": "header", "content": "Decoration" },
+    { "type": "checkbox", "id": "show_doodles", "label": "Show decorative doodles", "default": true },
 
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
