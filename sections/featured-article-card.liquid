@@ -51,14 +51,13 @@
     --fc-text: {{ section.settings.text_color }};
     --fc-accent: {{ section.settings.accent_color }};
     --fc-pill: {{ section.settings.pill_bg }};
-    --fc-max: {{ section.settings.max_width }}px;
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 </style>
 
 <section id="FeaturedCard-{{ section.id }}" class="featured-card">
-  <div class="page-width">
+  <div class="featured-card__container">
     <div class="featured-card__frame">
 
       {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
@@ -74,10 +73,10 @@
 
         <a href="{{ card_url | default: '#' }}" class="featured-card__media" aria-label="{{ card_title | escape }}">
           {%- if card_image != blank -%}
-            {{ card_image | image_url: width: 1200 | image_tag:
+            {{ card_image | image_url: width: 1600 | image_tag:
               loading: 'lazy',
-              widths: '500, 750, 1000, 1200',
-              sizes: '(min-width: 990px) 480px, 100vw',
+              widths: '500, 750, 1000, 1200, 1600',
+              sizes: '(min-width: 750px) 54vw, 100vw',
               alt: card_image.alt | default: card_title | escape
             }}
           {%- else -%}
@@ -121,11 +120,25 @@
 </section>
 
 {% stylesheet %}
-  .featured-card { background: var(--fc-bg); }
+  .featured-card {
+    background: var(--fc-bg);
+    overflow: hidden;
+  }
+
+  /* Only 5% space on left & right */
+  .featured-card__container {
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    box-sizing: border-box;
+  }
+  .featured-card__frame {
+    position: relative;
+    width: 100%;
+  }
 
   .featured-card__inner {
-    max-width: var(--fc-max);
-    margin: 0 auto;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
     background: var(--fc-card);
@@ -146,7 +159,7 @@
     aspect-ratio: 4 / 3;
   }
   @media (min-width: 750px) {
-    .featured-card__media { aspect-ratio: auto; min-height: 370px; }
+    .featured-card__media { aspect-ratio: auto; min-height: 420px; }
   }
   .featured-card__media img,
   .featured-card__placeholder {
@@ -167,7 +180,7 @@
     align-items: flex-start;
   }
   @media (min-width: 990px) {
-    .featured-card__body { padding: 40px 44px; }
+    .featured-card__body { padding: 48px 56px; }
   }
 
   .featured-card__pill {
@@ -194,7 +207,7 @@
 
   .featured-card__title {
     margin: 0 0 14px;
-    font-size: clamp(1.6rem, 2.6vw, 2rem);
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
     font-weight: 800;
     line-height: 1.15;
     letter-spacing: -0.01em;
@@ -208,6 +221,7 @@
 
   .featured-card__text {
     margin: 0 0 18px;
+    max-width: 520px;
     font-size: 0.95rem;
     line-height: 1.75;
     color: var(--fc-text);
@@ -241,12 +255,6 @@
   }
 
   /* ---------- Decorative doodles ---------- */
-  .featured-card { overflow: hidden; }
-  .featured-card__frame {
-    position: relative;
-    max-width: var(--fc-max);
-    margin: 0 auto;
-  }
   .featured-card__doodles {
     position: absolute;
     inset: 0;
@@ -259,29 +267,29 @@
     display: block;
     user-select: none;
   }
-  /* Star sits on the top-right corner of the card */
+  /* Star on the top-right corner of the card */
   .featured-card__doodle--star {
     top: -30px;
-    right: -26px;
+    right: -24px;
     width: 64px;
     rotate: 14deg;
   }
-  /* Spiral sits on the bottom-left corner */
+  /* Spiral on the bottom-left corner */
   .featured-card__doodle--spiral {
     bottom: -30px;
-    left: -36px;
+    left: -30px;
     width: 80px;
     rotate: -8deg;
   }
-  /* Small loop beside the card on the left (wide screens only) */
+  /* Small loop beside the card on the left (large screens only) */
   .featured-card__doodle--loop {
     top: 14%;
-    left: -84px;
-    width: 46px;
+    left: -58px;
+    width: 44px;
     rotate: -12deg;
   }
 
-  @media (max-width: 1099px) {
+  @media (max-width: 1299px) {
     .featured-card__doodle--loop { display: none; }
   }
   @media (max-width: 749px) {
@@ -326,7 +334,6 @@
     { "type": "header", "content": "Layout" },
     { "type": "select", "id": "image_position", "label": "Image position", "default": "left",
       "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ] },
-    { "type": "range", "id": "max_width", "label": "Card max width", "min": 600, "max": 1200, "step": 20, "unit": "px", "default": 800 },
 
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "bg_color", "label": "Section background", "default": "#FFFFFF" },
