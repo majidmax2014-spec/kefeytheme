@@ -16,6 +16,16 @@
 </style>
 
 <section id="BrightQs-{{ section.id }}" class="bright-qs">
+
+  {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
+  {%- if section.settings.show_doodles -%}
+    <div class="bright-qs__doodles" aria-hidden="true">
+      <img class="bright-qs__doodle bright-qs__doodle--spiral" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_56.png?v=1793080283&width=220" alt="" width="220" height="220" loading="lazy">
+      <img class="bright-qs__doodle bright-qs__doodle--dot" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_65.png?v=1793080282&width=80" alt="" width="80" height="80" loading="lazy">
+      <img class="bright-qs__doodle bright-qs__doodle--curl" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_63.png?v=1793080282&width=200" alt="" width="200" height="200" loading="lazy">
+    </div>
+  {%- endif -%}
+
   <div class="bright-qs__container">
 
     {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
@@ -76,11 +86,18 @@
 </section>
 
 {% stylesheet %}
-  .bright-qs { background: var(--bq-bg); }
+  .bright-qs {
+    position: relative;
+    overflow: hidden;
+    background: var(--bq-bg);
+  }
+  /* Only 5% space on left & right */
   .bright-qs__container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 20px;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 0 5%;
+    box-sizing: border-box;
   }
 
   .bright-qs__header { text-align: center; margin-bottom: 36px; }
@@ -192,6 +209,45 @@
     transition: transform 0.2s ease;
   }
   .bright-qs__card:hover .bright-qs__read span { transform: translateX(4px); }
+
+  /* ---------- Decorative doodles ---------- */
+  .bright-qs__doodles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .bright-qs__doodle {
+    position: absolute;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  .bright-qs__doodle--spiral { top: 34px;  left: 8%;   width: 84px; rotate: -6deg; }
+  .bright-qs__doodle--dot    { top: 26px;  left: 17%;  width: 14px; }
+  .bright-qs__doodle--curl   { top: 22px;  right: 9%;  width: 52px; rotate: 10deg; }
+
+  @media (max-width: 989px) {
+    .bright-qs__doodle--spiral { left: 3%; width: 62px; }
+    .bright-qs__doodle--dot    { left: 13%; }
+    .bright-qs__doodle--curl   { right: 4%; width: 42px; }
+  }
+  @media (max-width: 749px) {
+    .bright-qs__doodle--dot { display: none; }
+    .bright-qs__doodle--spiral { top: 12px; left: 3%; width: 44px; }
+    .bright-qs__doodle--curl   { top: 8px; right: 4%; width: 30px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .bright-qs__doodle {
+      animation: brightQsDoodle 6s ease-in-out infinite;
+    }
+    .bright-qs__doodle--dot  { animation-delay: -2s; }
+    .bright-qs__doodle--curl { animation-delay: -4s; }
+  }
+  @keyframes brightQsDoodle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -211,6 +267,9 @@
     { "type": "color", "id": "bg_color", "label": "Section background", "default": "#F6F4F1" },
     { "type": "color", "id": "heading_color", "label": "Heading & card text", "default": "#1F1F1F" },
     { "type": "color", "id": "text_color", "label": "Subheading", "default": "#555555" },
+
+    { "type": "header", "content": "Decoration" },
+    { "type": "checkbox", "id": "show_doodles", "label": "Show decorative doodles", "default": true },
 
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 56 },
