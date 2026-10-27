@@ -79,6 +79,7 @@
         "star_soft_color": "#ef7563",
         "card_border_color": "#ffffff",
         "show_deco_stars": true,
+        "show_doodles": true,
         "animate": true,
         "padding_top": 80,
         "padding_bottom": 64
@@ -205,13 +206,13 @@
         "button_label": "Read the article",
         "button_link": "",
         "image_position": "left",
-        "max_width": 720,
         "bg_color": "#ffffff",
         "card_color": "#ffffff",
         "heading_color": "#1f1f1f",
         "text_color": "#555555",
         "accent_color": "#e8533a",
         "pill_bg": "#fde4df",
+        "show_doodles": true,
         "padding_top": 48,
         "padding_bottom": 48
       }
@@ -241,6 +242,7 @@
         "card_color": "#ffffff",
         "heading_color": "#1f1f1f",
         "text_color": "#666666",
+        "show_doodles": true,
         "padding_top": 64,
         "padding_bottom": 64
       }
@@ -256,8 +258,7 @@
             "text": "Mood, focus and staying steady when the week gets busy.",
             "link_label": "Explore",
             "link": "",
-            "bg_color": "#3fb8b2",
-            "text_color": "#ffffff"
+            "bg_color": "#3fb8b2"
           }
         },
         "topic_PVCdEE": {
@@ -268,8 +269,7 @@
             "text": "Steady energy, restful evenings, and the daily habits in between.",
             "link_label": "Explore",
             "link": "",
-            "bg_color": "#8bc34f",
-            "text_color": "#ffffff"
+            "bg_color": "#8bc34f"
           }
         },
         "topic_BAkbGe": {
@@ -280,8 +280,7 @@
             "text": "Every botanical explained, and how the formula comes together.",
             "link_label": "Explore",
             "link": "",
-            "bg_color": "#e8533a",
-            "text_color": "#ffffff"
+            "bg_color": "#e8533a"
           }
         },
         "topic_3wf7en": {
@@ -292,20 +291,18 @@
             "text": "The little rituals and joyful moments that make every day feel lighter.",
             "link_label": "Explore",
             "link": "",
-            "bg_color": "#ffc700",
-            "text_color": "#1f1f1f"
+            "bg_color": "#ffc700"
           }
         },
         "topic_kw89rf": {
           "type": "topic",
           "settings": {
-            "image": "shopify://shop_images/Lifestyle_22_1.jpg",
+            "image": "shopify://shop_images/4-Packs_3e14fe13-589d-485a-b5f4-3ed0e03a9b55.png",
             "title": "Kefey Stories",
             "text": "Our story, our people, our impact and the latest news.",
             "link_label": "Explore",
             "link": "",
-            "bg_color": "#52b0ae",
-            "text_color": "#ffffff"
+            "bg_color": "#52b0ae"
           }
         }
       },
@@ -328,6 +325,7 @@
         "bg_color": "#ffffff",
         "heading_color": "#1f1f1f",
         "text_color": "#555555",
+        "show_doodles": true,
         "padding_top": 48,
         "padding_bottom": 48
       }
@@ -419,6 +417,7 @@
         "bg_color": "#f6f4f1",
         "heading_color": "#1f1f1f",
         "text_color": "#555555",
+        "show_doodles": true,
         "padding_top": 56,
         "padding_bottom": 56
       }
