@@ -12,6 +12,8 @@
   assign skip = section.settings.skip_posts
   assign limit = section.settings.posts_count
   assign pill_colors = 'teal,orange,yellow,red,pink,green' | split: ','
+
+  assign img_sizes = '(min-width: 990px) calc(90vw / ' | append: section.settings.columns | append: '), (min-width: 600px) 45vw, 90vw'
 -%}
 
 <style>
@@ -38,7 +40,7 @@
     </div>
   {%- endif -%}
 
-  <div class="page-width bright-grid__wrap">
+  <div class="bright-grid__wrap">
 
     {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
       <header class="bright-grid__header">
@@ -63,10 +65,10 @@
           <article class="bright-grid__card">
             <a href="{{ article.url }}" class="bright-grid__media" aria-label="{{ article.title | escape }}">
               {%- if article.image -%}
-                {{ article.image | image_url: width: 800 | image_tag:
+                {{ article.image | image_url: width: 1600 | image_tag:
                   loading: 'lazy',
-                  widths: '400, 600, 800',
-                  sizes: '(min-width: 990px) 300px, (min-width: 750px) 45vw, 100vw',
+                  widths: '400, 600, 800, 1000, 1200, 1600',
+                  sizes: img_sizes,
                   alt: article.image.alt | default: article.title | escape
                 }}
               {%- else -%}
@@ -125,8 +127,19 @@
 </section>
 
 {% stylesheet %}
-  .bright-grid { background: var(--bg-bg); }
-  .bright-grid__wrap { max-width: 1000px; margin: 0 auto; }
+  .bright-grid {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-bg);
+  }
+  /* Only 5% space on left & right */
+  .bright-grid__wrap {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    padding: 0 5%;
+    box-sizing: border-box;
+  }
 
   .bright-grid__header { text-align: center; margin-bottom: 36px; }
   .bright-grid__heading {
@@ -180,8 +193,11 @@
     object-fit: cover;
     display: block;
     transition: transform 0.5s ease;
+    /* keeps images crisp while card / image animate */
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
-  .bright-grid__card:hover .bright-grid__media img { transform: scale(1.05); }
+  .bright-grid__card:hover .bright-grid__media img { transform: translateZ(0) scale(1.05); }
 
   .bright-grid__body {
     flex: 1;
@@ -261,8 +277,6 @@
   .bright-grid__btn:hover { color: #fff; opacity: 0.9; }
 
   /* ---------- Decorative doodles ---------- */
-  .bright-grid { position: relative; overflow: hidden; }
-  .bright-grid__wrap { position: relative; z-index: 1; }
   .bright-grid__doodles {
     position: absolute;
     inset: 0;
@@ -277,7 +291,7 @@
   .bright-grid__doodle--star     { top: 40px;  left: 7%;    width: 58px; rotate: -12deg; }
   .bright-grid__doodle--dot      { top: 116px; left: 12%;   width: 16px; }
   .bright-grid__doodle--squiggle { top: 32px;  right: 8%;   width: 44px; rotate: 14deg; }
-  .bright-grid__doodle--curl     { bottom: 56px; right: 4%; width: 62px; rotate: 8deg; }
+  .bright-grid__doodle--curl     { bottom: 56px; right: 1.5%; width: 52px; rotate: 8deg; }
 
   @media (max-width: 1199px) {
     .bright-grid__doodle--curl { display: none; }
