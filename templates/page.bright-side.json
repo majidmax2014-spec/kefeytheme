@@ -349,8 +349,8 @@
           "type": "question",
           "settings": {
             "article": "",
-            "question": "Where can I find the recommended serving?",
-            "tag_label": "Good Moods",
+            "question": "Where can I find the latest Kefey product updates and retail locations?",
+            "tag_label": "What's Buzzing",
             "link": "",
             "theme": "teal"
           }
@@ -359,8 +359,8 @@
           "type": "question",
           "settings": {
             "article": "",
-            "question": "What ingredients are in Kefey® Mood Gummies?",
-            "tag_label": "Energy & Rest",
+            "question": "Is paper-based packaging always recyclable?",
+            "tag_label": "Planet in Mind",
             "link": "",
             "theme": "green"
           }
@@ -369,8 +369,8 @@
           "type": "question",
           "settings": {
             "article": "",
-            "question": "Are Kefey® Mood Gummies vegan and halal (plant-based gummies)?",
-            "tag_label": "Energy & Rest",
+            "question": "What does it mean to \"Live Full\"?",
+            "tag_label": "Live Full Stories",
             "link": "",
             "theme": "green"
           }
@@ -379,8 +379,8 @@
           "type": "question",
           "settings": {
             "article": "",
-            "question": "Where can I learn more about the ingredients?",
-            "tag_label": "Star Ingredients",
+            "question": "How do daily wellness habits support the gut microbiome?",
+            "tag_label": "Wellbeing Unpacked",
             "link": "",
             "theme": "red"
           }
@@ -389,8 +389,8 @@
           "type": "question",
           "settings": {
             "article": "",
-            "question": "Does Kefey support charitable causes?",
-            "tag_label": "Live Full",
+            "question": "How do I read and understand a supplement label?",
+            "tag_label": "Inside the Star",
             "link": "",
             "theme": "yellow"
           }
@@ -399,8 +399,8 @@
           "type": "question",
           "settings": {
             "article": "",
-            "question": "Do Kefey® Mood Gummies contain sugar or caffeine?",
-            "tag_label": "Kefey Stories",
+            "question": "What ingredients are in Kefey® Mood Gummies?",
+            "tag_label": "Chew on This!",
             "link": "",
             "theme": "teal"
           }
