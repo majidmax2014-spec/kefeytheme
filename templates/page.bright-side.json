@@ -255,7 +255,7 @@
           "settings": {
             "image": "shopify://shop_images/5-Packs.png",
             "title": "Chew on This!",
-            "text": "",
+            "text": "Product guides, practical how-tos, and answers to common gummy supplement FAQs.",
             "link_label": "Explore",
             "link": "",
             "bg_color": "#3fb8b2"
@@ -266,7 +266,7 @@
           "settings": {
             "image": "shopify://shop_images/3-Pakcs.png",
             "title": "Inside the Star",
-            "text": "",
+            "text": "A closer look at our supplement ingredients, formulations, and quality standards.",
             "link_label": "Explore",
             "link": "",
             "bg_color": "#8bc34f"
@@ -277,7 +277,7 @@
           "settings": {
             "image": "shopify://shop_images/kefey_lifestyle_1.jpg",
             "title": "Wellbeing Unpacked",
-            "text": "",
+            "text": "Everyday wellbeing made easy to understand with approachable, evidence-led guides.",
             "link_label": "Explore",
             "link": "",
             "bg_color": "#e8533a"
@@ -288,7 +288,7 @@
           "settings": {
             "image": "shopify://shop_images/6-Packs.png",
             "title": "Planet in Mind",
-            "text": "",
+            "text": "Explore Kefey®’s environmental choices, packaging materials, and community impact.",
             "link_label": "Explore",
             "link": "",
             "bg_color": "#ffc700"
@@ -299,7 +299,7 @@
           "settings": {
             "image": "shopify://shop_images/4-Packs_3e14fe13-589d-485a-b5f4-3ed0e03a9b55.png",
             "title": "What's Buzzing?",
-            "text": ".",
+            "text": ". Keep up with the latest Kefey news, product launches, and brand collaborations.",
             "link_label": "Explore",
             "link": "",
             "bg_color": "#52b0ae"
@@ -310,7 +310,7 @@
           "settings": {
             "image": "shopify://shop_images/1-Pack_61ff9b31-064c-40e1-8487-03485652912d.png",
             "title": "Live Full",
-            "text": ".",
+            "text": ".Find inspiration for outdoor activities, new experiences, and everyday joy.",
             "link_label": "Explore",
             "link": "",
             "bg_color": "#52b0ae"
