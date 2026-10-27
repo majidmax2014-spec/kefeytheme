@@ -35,6 +35,17 @@
     </div>
   {%- endif -%}
 
+  {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
+  {%- if section.settings.show_doodles -%}
+    <div class="bright-hero__doodles" aria-hidden="true">
+      <img class="bright-hero__doodle bright-hero__doodle--squiggle" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_60.png?v=1793080282&width=160" alt="" width="160" height="160" loading="eager">
+      <img class="bright-hero__doodle bright-hero__doodle--zigzag" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_61.png?v=1793080282&width=200" alt="" width="200" height="200" loading="eager">
+      <img class="bright-hero__doodle bright-hero__doodle--spiral" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_56.png?v=1793080283&width=220" alt="" width="220" height="220" loading="eager">
+      <img class="bright-hero__doodle bright-hero__doodle--loop" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_62.png?v=1793080282&width=200" alt="" width="200" height="200" loading="eager">
+      <img class="bright-hero__doodle bright-hero__doodle--dot" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_65.png?v=1793080282&width=80" alt="" width="80" height="80" loading="eager">
+    </div>
+  {%- endif -%}
+
   <div class="bright-hero__inner page-width">
     {%- if section.settings.eyebrow != blank -%}
       <p class="bright-hero__eyebrow">{{ section.settings.eyebrow }}</p>
@@ -152,6 +163,38 @@
     .bright-hero__deco-star--mr { top: 38%; right: 4%; width: 18px; }
   }
 
+  /* ---------- Decorative doodles ---------- */
+  .bright-hero__doodles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .bright-hero__doodle {
+    position: absolute;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  .bright-hero__doodle--squiggle { top: 34%; left: 5%;     width: 52px; rotate: -14deg; }
+  .bright-hero__doodle--zigzag   { top: 25%; right: 9%;    width: 78px; rotate: 8deg; }
+  .bright-hero__doodle--spiral   { bottom: 9%; left: 8%;   width: 92px; rotate: -6deg; }
+  .bright-hero__doodle--loop     { bottom: 12%; right: 6%; width: 70px; rotate: 10deg; }
+  .bright-hero__doodle--dot      { top: 9%; left: 24%;     width: 16px; }
+
+  @media (max-width: 989px) {
+    .bright-hero__doodle--squiggle { width: 40px; left: 3%; }
+    .bright-hero__doodle--zigzag   { width: 60px; right: 4%; }
+    .bright-hero__doodle--spiral   { width: 70px; left: 3%; }
+    .bright-hero__doodle--loop     { width: 54px; right: 3%; }
+  }
+  @media (max-width: 749px) {
+    .bright-hero__doodle--squiggle,
+    .bright-hero__doodle--loop { display: none; }
+    .bright-hero__doodle--zigzag { top: 18%; right: 3%; width: 42px; }
+    .bright-hero__doodle--spiral { bottom: 4%; left: 3%; width: 48px; }
+    .bright-hero__doodle--dot    { top: 12%; left: 14%; width: 10px; }
+  }
+
   /* ---------- Gallery ---------- */
   .bright-hero__gallery {
     display: flex;
@@ -230,6 +273,14 @@
     }
     .bright-hero--animate .bright-hero__deco-star--tr { animation-delay: -1.5s; }
     .bright-hero--animate .bright-hero__deco-star--mr { animation-delay: -3s; }
+
+    .bright-hero--animate .bright-hero__doodle {
+      animation: brightHeroDoodle 6s ease-in-out infinite;
+    }
+    .bright-hero--animate .bright-hero__doodle--zigzag { animation-delay: -1.2s; }
+    .bright-hero--animate .bright-hero__doodle--spiral { animation-delay: -2.4s; }
+    .bright-hero--animate .bright-hero__doodle--loop   { animation-delay: -3.6s; }
+    .bright-hero--animate .bright-hero__doodle--dot    { animation-delay: -4.8s; }
   }
   @keyframes brightHeroIn {
     from { opacity: 0; translate: 0 40px; }
@@ -242,6 +293,10 @@
   @keyframes brightHeroSpin {
     0%, 100% { transform: rotate(0deg); }
     50%      { transform: rotate(10deg); }
+  }
+  @keyframes brightHeroDoodle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
   }
 {% endstylesheet %}
 
@@ -267,6 +322,7 @@
 
     { "type": "header", "content": "Style" },
     { "type": "checkbox", "id": "show_deco_stars", "label": "Show decorative stars", "default": true },
+    { "type": "checkbox", "id": "show_doodles", "label": "Show decorative doodles", "default": true },
     { "type": "checkbox", "id": "animate", "label": "Enable animations", "default": true },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 80 },
     { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 64 }
