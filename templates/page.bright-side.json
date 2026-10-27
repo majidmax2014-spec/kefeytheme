@@ -304,6 +304,17 @@
             "link": "",
             "bg_color": "#52b0ae"
           }
+        },
+        "topic_Lbh3c7": {
+          "type": "topic",
+          "settings": {
+            "image": "shopify://shop_images/1-Pack_61ff9b31-064c-40e1-8487-03485652912d.png",
+            "title": "Live Full",
+            "text": ".",
+            "link_label": "Explore",
+            "link": "",
+            "bg_color": "#52b0ae"
+          }
         }
       },
       "block_order": [
@@ -311,7 +322,8 @@
         "topic_PVCdEE",
         "topic_BAkbGe",
         "topic_3wf7en",
-        "topic_kw89rf"
+        "topic_kw89rf",
+        "topic_Lbh3c7"
       ],
       "custom_css": [
         ".bright-topics__container {margin: 0 5%;}",
