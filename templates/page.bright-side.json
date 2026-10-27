@@ -70,7 +70,7 @@
       ],
       "settings": {
         "eyebrow": "From the Kefey® team",
-        "heading": "The Bright Side",
+        "heading": "The Buzz Side",
         "text": "<p>Honest, joyful writing on feeling good every day — what's inside the star, how to keep your days steady, and the little moments that help you live full.</p>",
         "heading_font": "nunito_sans_n8",
         "bg_color": "#e8533a",
@@ -92,7 +92,8 @@
           "settings": {
             "label": "Good Moods",
             "link": "",
-            "dot_color": "#3fb8b2"
+            "dot_color": "#3fb8b2",
+            "force_active": false
           }
         },
         "pill_3QFA9P": {
@@ -100,7 +101,8 @@
           "settings": {
             "label": "Energy & Rest",
             "link": "",
-            "dot_color": "#7cc34f"
+            "dot_color": "#7cc34f",
+            "force_active": false
           }
         },
         "pill_FmBHJG": {
@@ -108,7 +110,8 @@
           "settings": {
             "label": "Star Ingredients",
             "link": "",
-            "dot_color": "#e8533a"
+            "dot_color": "#e8533a",
+            "force_active": false
           }
         },
         "pill_peaqig": {
@@ -116,7 +119,8 @@
           "settings": {
             "label": "Live Full",
             "link": "",
-            "dot_color": "#f5be00"
+            "dot_color": "#f5be00",
+            "force_active": false
           }
         },
         "pill_iUNBD3": {
@@ -124,7 +128,8 @@
           "settings": {
             "label": "Kefey Stories",
             "link": "",
-            "dot_color": "#3fa9a6"
+            "dot_color": "#3fa9a6",
+            "force_active": false
           }
         }
       },
@@ -139,16 +144,16 @@
       "settings": {
         "all_label": "All",
         "all_link": "",
-        "all_dot_color": "#E8533A",
+        "all_dot_color": "#e8533a",
         "sticky": false,
         "show_border": true,
         "aria_label": "Browse topics",
-        "bg_color": "#FFFFFF",
-        "pill_bg": "#F5F3EF",
-        "pill_text": "#3A3A3A",
-        "active_bg": "#E8533A",
-        "active_text": "#FFFFFF",
-        "border_color": "#ECECEC",
+        "bg_color": "#ffffff",
+        "pill_bg": "#f5f3ef",
+        "pill_text": "#3a3a3a",
+        "active_bg": "#e8533a",
+        "active_text": "#ffffff",
+        "border_color": "#ececec",
         "padding_top": 22,
         "padding_bottom": 22
       }
