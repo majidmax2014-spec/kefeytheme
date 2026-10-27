@@ -299,7 +299,7 @@
           "settings": {
             "image": "shopify://shop_images/4-Packs_3e14fe13-589d-485a-b5f4-3ed0e03a9b55.png",
             "title": "What's Buzzing?",
-            "text": "",
+            "text": ".",
             "link_label": "Explore",
             "link": "",
             "bg_color": "#52b0ae"
