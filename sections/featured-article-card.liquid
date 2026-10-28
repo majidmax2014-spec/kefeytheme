@@ -1,7 +1,8 @@
 {%- comment -%}
   File: sections/featured-article-card.liquid
-  Featured article card — image left, content right.
-  Pick a blog post to auto-fill, or override any field manually.
+  Featured article card — image left, content right (stacks on mobile).
+  All CSS is scoped to this section's ID with unique "kfa-" classes,
+  so theme styles can't override the layout.
 {%- endcomment -%}
 
 {%- liquid
@@ -15,6 +16,9 @@
   assign card_title = section.settings.heading
   if card_title == blank and a != blank
     assign card_title = a.title
+  endif
+  if card_title == blank
+    assign card_title = 'Ashwagandha, explained without the jargon'
   endif
 
   assign card_text = section.settings.text
@@ -35,72 +39,287 @@
   if card_url == blank and a != blank
     assign card_url = a.url
   endif
+  if card_url == blank
+    assign card_url = '#'
+  endif
 
   assign read_time = section.settings.read_time
   if read_time == 0 and a != blank
     assign words = a.content | strip_html | split: ' ' | size
     assign read_time = words | divided_by: 200 | at_least: 1
   endif
+
+  assign card_alt = card_title
+  if card_image != blank and card_image.alt != blank
+    assign card_alt = card_image.alt
+  endif
+  assign card_alt = card_alt | escape
+
+  assign sid = '#KfaCard-' | append: section.id
+  assign pt_mobile = section.settings.padding_top | times: 0.6 | round
+  assign pb_mobile = section.settings.padding_bottom | times: 0.6 | round
 -%}
 
 <style>
-  #FeaturedCard-{{ section.id }} {
-    --fc-bg: {{ section.settings.bg_color }};
-    --fc-card: {{ section.settings.card_color }};
-    --fc-heading: {{ section.settings.heading_color }};
-    --fc-text: {{ section.settings.text_color }};
-    --fc-accent: {{ section.settings.accent_color }};
-    --fc-pill: {{ section.settings.pill_bg }};
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
+  {{ sid }} {
+    --kfa-bg: {{ section.settings.bg_color }};
+    --kfa-card: {{ section.settings.card_color }};
+    --kfa-heading: {{ section.settings.heading_color }};
+    --kfa-text: {{ section.settings.text_color }};
+    --kfa-accent: {{ section.settings.accent_color }};
+    --kfa-pill: {{ section.settings.pill_bg }};
+    display: block;
+    width: 100%;
+    background: var(--kfa-bg);
+    overflow: hidden;
+    padding: {{ pt_mobile }}px 0 {{ pb_mobile }}px;
+  }
+  {{ sid }} *, {{ sid }} *::before, {{ sid }} *::after { box-sizing: border-box; }
+
+  {{ sid }} .kfa-wrap {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 5%;
+  }
+  {{ sid }} .kfa-frame { position: relative; width: 100%; }
+
+  /* ---------- Card: MOBILE = stacked ---------- */
+  {{ sid }} .kfa-card {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    background: var(--kfa-card);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
+  }
+
+  {{ sid }} .kfa-media {
+    position: relative;
+    display: block;
+    width: 100%;
+    flex: 0 0 auto;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.04);
+  }
+  {{ sid }} .kfa-media img,
+  {{ sid }} .kfa-media svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
+  {{ sid }} .kfa-body {
+    width: 100%;
+    min-width: 0;
+    padding: 24px 20px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  {{ sid }} .kfa-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    margin: 0 0 14px;
+    background: var(--kfa-pill);
+    color: var(--kfa-heading);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  {{ sid }} .kfa-dot {
+    flex: 0 0 auto;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--kfa-accent);
+  }
+
+  {{ sid }} .kfa-title {
+    margin: 0 0 12px;
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.18;
+    letter-spacing: -0.01em;
+    color: var(--kfa-heading);
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+  {{ sid }} .kfa-title a { color: inherit; text-decoration: none; }
+  {{ sid }} .kfa-title a:hover { color: var(--kfa-accent); }
+
+  {{ sid }} .kfa-text {
+    margin: 0 0 16px;
+    max-width: 520px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--kfa-text);
+  }
+
+  {{ sid }} .kfa-meta {
+    margin: 0 0 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--kfa-text);
+    opacity: 0.85;
+  }
+  {{ sid }} .kfa-meta:empty { display: none; }
+
+  {{ sid }} .kfa-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    background: var(--kfa-accent);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  {{ sid }} .kfa-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    color: #fff;
+  }
+
+  /* ---------- Doodles ---------- */
+  {{ sid }} .kfa-doodles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+  {{ sid }} .kfa-doodle {
+    position: absolute;
+    height: auto;
+    max-width: none;
+    display: block;
+    user-select: none;
+  }
+  {{ sid }} .kfa-doodle--star   { top: -16px; right: -8px; width: 38px; rotate: 14deg; }
+  {{ sid }} .kfa-doodle--spiral { bottom: -16px; left: -8px; width: 46px; rotate: -8deg; }
+  {{ sid }} .kfa-doodle--loop   { display: none; top: 14%; left: -58px; width: 44px; rotate: -12deg; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    {{ sid }} .kfa-doodle { animation: kfaFloat 6s ease-in-out infinite; }
+    {{ sid }} .kfa-doodle--spiral { animation-delay: -2s; }
+    {{ sid }} .kfa-doodle--loop   { animation-delay: -4s; }
+  }
+  @keyframes kfaFloat {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+
+  /* ---------- Small phones up ---------- */
+  @media (min-width: 480px) {
+    {{ sid }} .kfa-title { font-size: 28px; }
+    {{ sid }} .kfa-text  { font-size: 15px; }
+    {{ sid }} .kfa-btn   { display: inline-block; width: auto; }
+  }
+
+  /* ---------- Tablet: side by side 50/50 ---------- */
+  @media (min-width: 750px) {
+    {{ sid }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+    {{ sid }} .kfa-card { flex-direction: row; align-items: stretch; border-radius: 20px; }
+    {{ sid }} .kfa-card--reverse { flex-direction: row-reverse; }
+    {{ sid }} .kfa-media { width: 50%; flex: 0 0 50%; aspect-ratio: auto; min-height: 340px; }
+    {{ sid }} .kfa-body  { width: 50%; flex: 0 0 50%; padding: 32px; }
+    {{ sid }} .kfa-title { font-size: 30px; }
+    {{ sid }} .kfa-doodle--star   { top: -26px; right: -20px; width: 56px; }
+    {{ sid }} .kfa-doodle--spiral { bottom: -26px; left: -24px; width: 68px; }
+  }
+
+  /* ---------- Desktop: 54 / 46 ---------- */
+  @media (min-width: 990px) {
+    {{ sid }} .kfa-media { width: 54%; flex-basis: 54%; min-height: 420px; }
+    {{ sid }} .kfa-body  { width: 46%; flex-basis: 46%; padding: 40px 44px; }
+    {{ sid }} .kfa-title { font-size: 34px; }
+    {{ sid }} .kfa-text  { font-size: 16px; }
+  }
+  @media (min-width: 1200px) {
+    {{ sid }} .kfa-body  { padding: 48px 56px; }
+    {{ sid }} .kfa-title { font-size: 38px; }
+  }
+  @media (min-width: 1300px) {
+    {{ sid }} .kfa-doodle--star   { top: -30px; right: -24px; width: 64px; }
+    {{ sid }} .kfa-doodle--spiral { bottom: -30px; left: -30px; width: 80px; }
+    {{ sid }} .kfa-doodle--loop   { display: block; }
+  }
+
+  @media (hover: hover) {
+    {{ sid }} .kfa-card:hover .kfa-media img { transform: scale(1.04); }
   }
 </style>
 
-<section id="FeaturedCard-{{ section.id }}" class="featured-card">
-  <div class="featured-card__container">
-    <div class="featured-card__frame">
+<div id="KfaCard-{{ section.id }}" class="kfa-section">
+  <div class="kfa-wrap">
+    <div class="kfa-frame">
 
-      {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
       {%- if section.settings.show_doodles -%}
-        <div class="featured-card__doodles" aria-hidden="true">
-          <img class="featured-card__doodle featured-card__doodle--star" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_64.png?v=1793080283&width=180" alt="" width="180" height="180" loading="lazy">
-          <img class="featured-card__doodle featured-card__doodle--spiral" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_56.png?v=1793080283&width=220" alt="" width="220" height="220" loading="lazy">
-          <img class="featured-card__doodle featured-card__doodle--loop" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_62.png?v=1793080282&width=160" alt="" width="160" height="160" loading="lazy">
+        <div class="kfa-doodles" aria-hidden="true">
+          <img class="kfa-doodle kfa-doodle--star" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_64.png?v=1793080283&width=180" alt="" width="180" height="180" loading="lazy">
+          <img class="kfa-doodle kfa-doodle--spiral" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_56.png?v=1793080283&width=220" alt="" width="220" height="220" loading="lazy">
+          <img class="kfa-doodle kfa-doodle--loop" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_62.png?v=1793080282&width=160" alt="" width="160" height="160" loading="lazy">
         </div>
       {%- endif -%}
 
-      <article class="featured-card__inner{% if section.settings.image_position == 'right' %} featured-card__inner--reverse{% endif %}">
+      <div class="kfa-card{% if section.settings.image_position == 'right' %} kfa-card--reverse{% endif %}">
 
-        <a href="{{ card_url | default: '#' }}" class="featured-card__media" aria-label="{{ card_title | escape }}">
+        <a href="{{ card_url }}" class="kfa-media" aria-label="{{ card_title | escape }}">
           {%- if card_image != blank -%}
             {{ card_image | image_url: width: 1600 | image_tag:
               loading: 'lazy',
-              widths: '500, 750, 1000, 1200, 1600',
-              sizes: '(min-width: 750px) 54vw, 100vw',
-              alt: card_image.alt | default: card_title | escape
+              widths: '400, 600, 800, 1000, 1200, 1600',
+              sizes: '(min-width: 990px) 50vw, (min-width: 750px) 45vw, 92vw',
+              alt: card_alt
             }}
           {%- else -%}
-            {{ 'lifestyle-2' | placeholder_svg_tag: 'featured-card__placeholder' }}
+            {{ 'lifestyle-2' | placeholder_svg_tag }}
           {%- endif -%}
         </a>
 
-        <div class="featured-card__body">
+        <div class="kfa-body">
           {%- if card_tag != blank -%}
-            <span class="featured-card__pill">
-              <span class="featured-card__dot" aria-hidden="true"></span>
-              {{ card_tag }}
+            <span class="kfa-pill">
+              <span class="kfa-dot" aria-hidden="true"></span>
+              {{ card_tag | escape }}
             </span>
           {%- endif -%}
 
-          <h2 class="featured-card__title">
-            <a href="{{ card_url | default: '#' }}">{{ card_title | default: 'Ashwagandha, explained without the jargon' | escape }}</a>
+          <h2 class="kfa-title">
+            <a href="{{ card_url }}">{{ card_title | escape }}</a>
           </h2>
 
           {%- if card_text != blank -%}
-            <p class="featured-card__text">{{ card_text }}</p>
+            <p class="kfa-text">{{ card_text }}</p>
           {%- endif -%}
 
-          <p class="featured-card__meta">
+          <p class="kfa-meta">
             {%- if section.settings.author != blank -%}
               {{ section.settings.author }}
             {%- elsif a != blank -%}
@@ -110,211 +329,20 @@
           </p>
 
           {%- if section.settings.button_label != blank -%}
-            <a href="{{ card_url | default: '#' }}" class="featured-card__btn">{{ section.settings.button_label }}</a>
+            <a href="{{ card_url }}" class="kfa-btn">{{ section.settings.button_label }}</a>
           {%- endif -%}
         </div>
 
-      </article>
+      </div>
     </div>
   </div>
-</section>
-
-{% stylesheet %}
-  .featured-card {
-    background: var(--fc-bg);
-    overflow: hidden;
-  }
-
-  /* Only 5% space on left & right */
-  .featured-card__container {
-    width: 100%;
-    padding-left: 5%;
-    padding-right: 5%;
-    box-sizing: border-box;
-  }
-  .featured-card__frame {
-    position: relative;
-    width: 100%;
-  }
-
-  .featured-card__inner {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr;
-    background: var(--fc-card);
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
-  }
-  @media (min-width: 750px) {
-    .featured-card__inner { grid-template-columns: 54% 46%; }
-    .featured-card__inner--reverse { grid-template-columns: 46% 54%; }
-    .featured-card__inner--reverse .featured-card__media { order: 2; }
-  }
-
-  /* Image */
-  .featured-card__media {
-    display: block;
-    overflow: hidden;
-    aspect-ratio: 4 / 3;
-  }
-  @media (min-width: 750px) {
-    .featured-card__media { aspect-ratio: auto; min-height: 420px; }
-  }
-  .featured-card__media img,
-  .featured-card__placeholder {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s ease;
-  }
-  .featured-card__inner:hover .featured-card__media img { transform: scale(1.04); }
-
-  /* Content */
-  .featured-card__body {
-    padding: 32px 26px 36px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  @media (min-width: 990px) {
-    .featured-card__body { padding: 48px 56px; }
-  }
-
-  .featured-card__pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 6px 12px;
-    margin-bottom: 14px;
-    background: var(--fc-pill);
-    color: var(--fc-heading);
-    border-radius: 999px;
-    font-size: 0.66rem;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    line-height: 1;
-  }
-  .featured-card__dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--fc-accent);
-  }
-
-  .featured-card__title {
-    margin: 0 0 14px;
-    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -0.01em;
-    color: var(--fc-heading);
-  }
-  .featured-card__title a {
-    color: inherit;
-    text-decoration: none;
-  }
-  .featured-card__title a:hover { color: var(--fc-accent); }
-
-  .featured-card__text {
-    margin: 0 0 18px;
-    max-width: 520px;
-    font-size: 0.95rem;
-    line-height: 1.75;
-    color: var(--fc-text);
-  }
-
-  .featured-card__meta {
-    margin: 0 0 22px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--fc-text);
-    opacity: 0.85;
-  }
-
-  .featured-card__btn {
-    display: inline-block;
-    padding: 14px 24px;
-    background: var(--fc-accent);
-    color: #fff;
-    border-radius: 999px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-  .featured-card__btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(232, 83, 58, 0.35);
-    color: #fff;
-  }
-
-  /* ---------- Decorative doodles ---------- */
-  .featured-card__doodles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 2;
-  }
-  .featured-card__doodle {
-    position: absolute;
-    height: auto;
-    display: block;
-    user-select: none;
-  }
-  /* Star on the top-right corner of the card */
-  .featured-card__doodle--star {
-    top: -30px;
-    right: -24px;
-    width: 64px;
-    rotate: 14deg;
-  }
-  /* Spiral on the bottom-left corner */
-  .featured-card__doodle--spiral {
-    bottom: -30px;
-    left: -30px;
-    width: 80px;
-    rotate: -8deg;
-  }
-  /* Small loop beside the card on the left (large screens only) */
-  .featured-card__doodle--loop {
-    top: 14%;
-    left: -58px;
-    width: 44px;
-    rotate: -12deg;
-  }
-
-  @media (max-width: 1299px) {
-    .featured-card__doodle--loop { display: none; }
-  }
-  @media (max-width: 749px) {
-    .featured-card__doodle--star   { top: -18px; right: -8px; width: 40px; }
-    .featured-card__doodle--spiral { bottom: -18px; left: -8px; width: 50px; }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .featured-card__doodle {
-      animation: featuredCardDoodle 6s ease-in-out infinite;
-    }
-    .featured-card__doodle--spiral { animation-delay: -2s; }
-    .featured-card__doodle--loop   { animation-delay: -4s; }
-  }
-  @keyframes featuredCardDoodle {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-6px); }
-  }
-{% endstylesheet %}
+</div>
 
 {% schema %}
 {
   "name": "Featured article card",
-  "tag": "div",
-  "class": "section",
+  "tag": "section",
+  "class": "section kfa-shopify-section",
   "settings": [
     { "type": "header", "content": "Article" },
     { "type": "article", "id": "article", "label": "Blog post", "info": "Image, title, text, tag and link fill in automatically. Use the fields below to override." },
