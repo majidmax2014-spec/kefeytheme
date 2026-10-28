@@ -16,9 +16,6 @@
   if card_title == blank and a != blank
     assign card_title = a.title
   endif
-  if card_title == blank
-    assign card_title = 'Ashwagandha, explained without the jargon'
-  endif
 
   assign card_text = section.settings.text
   if card_text == blank and a != blank
@@ -38,21 +35,12 @@
   if card_url == blank and a != blank
     assign card_url = a.url
   endif
-  if card_url == blank
-    assign card_url = '#'
-  endif
 
   assign read_time = section.settings.read_time
   if read_time == 0 and a != blank
     assign words = a.content | strip_html | split: ' ' | size
     assign read_time = words | divided_by: 200 | at_least: 1
   endif
-
-  assign card_alt = card_title
-  if card_image != blank and card_image.alt != blank
-    assign card_alt = card_image.alt
-  endif
-  assign card_alt = card_alt | escape
 -%}
 
 <style>
@@ -63,14 +51,8 @@
     --fc-text: {{ section.settings.text_color }};
     --fc-accent: {{ section.settings.accent_color }};
     --fc-pill: {{ section.settings.pill_bg }};
-    padding-top: {{ section.settings.padding_top | times: 0.6 | round }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round }}px;
-  }
-  @media (min-width: 750px) {
-    #FeaturedCard-{{ section.id }} {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 </style>
 
@@ -78,6 +60,7 @@
   <div class="featured-card__container">
     <div class="featured-card__frame">
 
+      {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
       {%- if section.settings.show_doodles -%}
         <div class="featured-card__doodles" aria-hidden="true">
           <img class="featured-card__doodle featured-card__doodle--star" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_64.png?v=1793080283&width=180" alt="" width="180" height="180" loading="lazy">
@@ -88,17 +71,16 @@
 
       <article class="featured-card__inner{% if section.settings.image_position == 'right' %} featured-card__inner--reverse{% endif %}">
 
-        <a href="{{ card_url }}" class="featured-card__media" aria-label="{{ card_title | escape }}">
+        <a href="{{ card_url | default: '#' }}" class="featured-card__media" aria-label="{{ card_title | escape }}">
           {%- if card_image != blank -%}
             {{ card_image | image_url: width: 1600 | image_tag:
               loading: 'lazy',
-              widths: '400, 600, 800, 1000, 1200, 1600',
-              sizes: '(min-width: 990px) 50vw, (min-width: 750px) 48vw, 92vw',
-              alt: card_alt,
-              class: 'featured-card__img'
+              widths: '500, 750, 1000, 1200, 1600',
+              sizes: '(min-width: 750px) 54vw, 100vw',
+              alt: card_image.alt | default: card_title | escape
             }}
           {%- else -%}
-            {{ 'lifestyle-2' | placeholder_svg_tag: 'featured-card__img featured-card__placeholder' }}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'featured-card__placeholder' }}
           {%- endif -%}
         </a>
 
@@ -106,12 +88,12 @@
           {%- if card_tag != blank -%}
             <span class="featured-card__pill">
               <span class="featured-card__dot" aria-hidden="true"></span>
-              {{ card_tag | escape }}
+              {{ card_tag }}
             </span>
           {%- endif -%}
 
           <h2 class="featured-card__title">
-            <a href="{{ card_url }}">{{ card_title | escape }}</a>
+            <a href="{{ card_url | default: '#' }}">{{ card_title | default: 'Ashwagandha, explained without the jargon' | escape }}</a>
           </h2>
 
           {%- if card_text != blank -%}
@@ -128,7 +110,7 @@
           </p>
 
           {%- if section.settings.button_label != blank -%}
-            <a href="{{ card_url }}" class="featured-card__btn">{{ section.settings.button_label }}</a>
+            <a href="{{ card_url | default: '#' }}" class="featured-card__btn">{{ section.settings.button_label }}</a>
           {%- endif -%}
         </div>
 
@@ -142,86 +124,62 @@
     background: var(--fc-bg);
     overflow: hidden;
   }
-  .featured-card *,
-  .featured-card *::before,
-  .featured-card *::after { box-sizing: border-box; }
 
+  /* Only 5% space on left & right */
   .featured-card__container {
     width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
     padding-left: 5%;
     padding-right: 5%;
+    box-sizing: border-box;
   }
   .featured-card__frame {
     position: relative;
     width: 100%;
   }
 
-  /* ---------- Card ---------- */
   .featured-card__inner {
-    position: relative;
-    z-index: 1;
     width: 100%;
     display: grid;
-    grid-template-columns: minmax(0, 1fr);
+    grid-template-columns: 1fr;
     background: var(--fc-card);
-    border-radius: 16px;
+    border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 18px 45px rgba(0, 0, 0, 0.08);
   }
-  .featured-card__inner > * { min-width: 0; }
-
   @media (min-width: 750px) {
-    .featured-card__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border-radius: 20px; }
+    .featured-card__inner { grid-template-columns: 54% 46%; }
+    .featured-card__inner--reverse { grid-template-columns: 46% 54%; }
     .featured-card__inner--reverse .featured-card__media { order: 2; }
   }
-  @media (min-width: 990px) {
-    .featured-card__inner { grid-template-columns: minmax(0, 54fr) minmax(0, 46fr); }
-    .featured-card__inner--reverse { grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
-  }
 
-  /* ---------- Image ---------- */
+  /* Image */
   .featured-card__media {
-    position: relative;
     display: block;
     overflow: hidden;
     aspect-ratio: 4 / 3;
-    background: rgba(0, 0, 0, 0.04);
   }
   @media (min-width: 750px) {
-    .featured-card__media { aspect-ratio: auto; min-height: 340px; }
+    .featured-card__media { aspect-ratio: auto; min-height: 420px; }
   }
-  @media (min-width: 990px) {
-    .featured-card__media { min-height: 420px; }
-  }
-  /* Absolute so the image never dictates the card height */
-  .featured-card__media .featured-card__img {
-    position: absolute;
-    inset: 0;
+  .featured-card__media img,
+  .featured-card__placeholder {
     width: 100%;
     height: 100%;
-    max-width: none;
     object-fit: cover;
     display: block;
     transition: transform 0.6s ease;
   }
-  @media (hover: hover) {
-    .featured-card__inner:hover .featured-card__img { transform: scale(1.04); }
-  }
+  .featured-card__inner:hover .featured-card__media img { transform: scale(1.04); }
 
-  /* ---------- Content ---------- */
+  /* Content */
   .featured-card__body {
-    padding: 24px 20px 28px;
+    padding: 32px 26px 36px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
   }
-  @media (min-width: 750px) {
-    .featured-card__body { padding: 32px 32px; }
-  }
-  @media (min-width: 1200px) {
+  @media (min-width: 990px) {
     .featured-card__body { padding: 48px 56px; }
   }
 
@@ -229,19 +187,18 @@
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    padding: 7px 12px;
+    padding: 6px 12px;
     margin-bottom: 14px;
     background: var(--fc-pill);
     color: var(--fc-heading);
     border-radius: 999px;
-    font-size: 11px;
+    font-size: 0.66rem;
     font-weight: 800;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     line-height: 1;
   }
   .featured-card__dot {
-    flex: 0 0 auto;
     width: 7px;
     height: 7px;
     border-radius: 50%;
@@ -249,14 +206,12 @@
   }
 
   .featured-card__title {
-    margin: 0 0 12px;
-    font-size: clamp(22px, 1.2rem + 1.8vw, 38px);
+    margin: 0 0 14px;
+    font-size: clamp(1.6rem, 2.6vw, 2.4rem);
     font-weight: 800;
     line-height: 1.15;
     letter-spacing: -0.01em;
     color: var(--fc-heading);
-    overflow-wrap: break-word;
-    word-break: normal;
   }
   .featured-card__title a {
     color: inherit;
@@ -265,21 +220,20 @@
   .featured-card__title a:hover { color: var(--fc-accent); }
 
   .featured-card__text {
-    margin: 0 0 16px;
+    margin: 0 0 18px;
     max-width: 520px;
-    font-size: clamp(14px, 0.85rem + 0.2vw, 16px);
-    line-height: 1.7;
+    font-size: 0.95rem;
+    line-height: 1.75;
     color: var(--fc-text);
   }
 
   .featured-card__meta {
-    margin: 0 0 20px;
-    font-size: 12px;
+    margin: 0 0 22px;
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--fc-text);
     opacity: 0.85;
   }
-  .featured-card__meta:empty { display: none; }
 
   .featured-card__btn {
     display: inline-block;
@@ -287,21 +241,17 @@
     background: var(--fc-accent);
     color: #fff;
     border-radius: 999px;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     text-decoration: none;
-    text-align: center;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
   .featured-card__btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 8px 18px rgba(232, 83, 58, 0.35);
     color: #fff;
-  }
-  @media (max-width: 479px) {
-    .featured-card__btn { width: 100%; }
   }
 
   /* ---------- Decorative doodles ---------- */
@@ -314,26 +264,43 @@
   .featured-card__doodle {
     position: absolute;
     height: auto;
-    max-width: none;
     display: block;
     user-select: none;
   }
-  .featured-card__doodle--star   { top: -18px; right: -10px; width: 40px; rotate: 14deg; }
-  .featured-card__doodle--spiral { bottom: -18px; left: -10px; width: 48px; rotate: -8deg; }
-  .featured-card__doodle--loop   { display: none; top: 14%; left: -58px; width: 44px; rotate: -12deg; }
-
-  @media (min-width: 750px) {
-    .featured-card__doodle--star   { top: -26px; right: -20px; width: 56px; }
-    .featured-card__doodle--spiral { bottom: -26px; left: -24px; width: 68px; }
+  /* Star on the top-right corner of the card */
+  .featured-card__doodle--star {
+    top: -30px;
+    right: -24px;
+    width: 64px;
+    rotate: 14deg;
   }
-  @media (min-width: 1300px) {
-    .featured-card__doodle--star   { top: -30px; right: -24px; width: 64px; }
-    .featured-card__doodle--spiral { bottom: -30px; left: -30px; width: 80px; }
-    .featured-card__doodle--loop   { display: block; }
+  /* Spiral on the bottom-left corner */
+  .featured-card__doodle--spiral {
+    bottom: -30px;
+    left: -30px;
+    width: 80px;
+    rotate: -8deg;
+  }
+  /* Small loop beside the card on the left (large screens only) */
+  .featured-card__doodle--loop {
+    top: 14%;
+    left: -58px;
+    width: 44px;
+    rotate: -12deg;
+  }
+
+  @media (max-width: 1299px) {
+    .featured-card__doodle--loop { display: none; }
+  }
+  @media (max-width: 749px) {
+    .featured-card__doodle--star   { top: -18px; right: -8px; width: 40px; }
+    .featured-card__doodle--spiral { bottom: -18px; left: -8px; width: 50px; }
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    .featured-card__doodle { animation: featuredCardDoodle 6s ease-in-out infinite; }
+    .featured-card__doodle {
+      animation: featuredCardDoodle 6s ease-in-out infinite;
+    }
     .featured-card__doodle--spiral { animation-delay: -2s; }
     .featured-card__doodle--loop   { animation-delay: -4s; }
   }
