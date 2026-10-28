@@ -33,7 +33,7 @@
         "star": {
           "type": "star",
           "settings": {
-            "star_fill": "#ECC339",
+            "star_fill": "#ecc339",
             "rotation": 0
           }
         },
@@ -91,7 +91,7 @@
         "pill_HPTFrz": {
           "type": "pill",
           "settings": {
-            "label": "Good Moods",
+            "label": "Chew on This !",
             "link": "",
             "dot_color": "#3fb8b2",
             "force_active": false
@@ -100,7 +100,7 @@
         "pill_3QFA9P": {
           "type": "pill",
           "settings": {
-            "label": "Energy & Rest",
+            "label": "Inside the Star",
             "link": "",
             "dot_color": "#7cc34f",
             "force_active": false
@@ -109,7 +109,7 @@
         "pill_FmBHJG": {
           "type": "pill",
           "settings": {
-            "label": "Star Ingredients",
+            "label": "Wellbeing Unpacked",
             "link": "",
             "dot_color": "#e8533a",
             "force_active": false
@@ -127,7 +127,16 @@
         "pill_iUNBD3": {
           "type": "pill",
           "settings": {
-            "label": "Kefey Stories",
+            "label": "Planet in Mind",
+            "link": "",
+            "dot_color": "#3fa9a6",
+            "force_active": false
+          }
+        },
+        "pill_AKtbJy": {
+          "type": "pill",
+          "settings": {
+            "label": "What's Buzzing?",
             "link": "",
             "dot_color": "#3fa9a6",
             "force_active": false
@@ -139,7 +148,8 @@
         "pill_3QFA9P",
         "pill_FmBHJG",
         "pill_peaqig",
-        "pill_iUNBD3"
+        "pill_iUNBD3",
+        "pill_AKtbJy"
       ],
       "name": "Bright Side filter pills",
       "settings": {
