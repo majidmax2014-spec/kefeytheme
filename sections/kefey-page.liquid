@@ -1,20 +1,25 @@
 {%- comment -%}
-  File: sections/kefey-article.liquid
-  Kefey article page:
+  File: sections/kefey-page.liquid
+  Kefey content page (for Online Store > Pages):
   hero + cover image + sticky table of contents (auto from H2s)
-  + styled article content + author box + disclaimer + related posts.
+  + styled page content + author box + disclaimer + related blog posts.
 {%- endcomment -%}
 
 {%- liquid
-  assign a = article
-  assign words = a.content | strip_html | split: ' ' | size
+  assign words = page.content | strip_html | split: ' ' | size
   assign read_time = words | divided_by: 200 | at_least: 1
-  assign main_tag = a.tags.first
+  assign tag_label = section.settings.tag_label
 
   assign author_name = section.settings.author_name
   if author_name == blank
-    assign author_name = a.author
+    assign author_name = page.author
   endif
+
+  assign rel_blog = section.settings.related_blog
+  if rel_blog == blank
+    assign rel_blog = blogs.news
+  endif
+  assign rel_tag = section.settings.related_tag
 -%}
 
 <style>
@@ -32,35 +37,37 @@
 <div id="KA-{{ section.id }}" class="ka">
 
   {%- comment -%} ---------- HERO ---------- {%- endcomment -%}
-  <header class="ka-hero{% if a.image %} ka-hero--has-cover{% endif %}">
+  <header class="ka-hero{% if section.settings.cover_image != blank %} ka-hero--has-cover{% endif %}">
     <svg class="ka-hero__star ka-hero__star--l" viewBox="0 0 100 95" aria-hidden="true"><path d="M50 0 L61.8 35.3 L99 36.3 L69.1 58.7 L79.4 94.4 L50 73.1 L20.6 94.4 L30.9 58.7 L1 36.3 L38.2 35.3 Z"/></svg>
     <svg class="ka-hero__star ka-hero__star--r" viewBox="0 0 100 95" aria-hidden="true"><path d="M50 0 L61.8 35.3 L99 36.3 L69.1 58.7 L79.4 94.4 L50 73.1 L20.6 94.4 L30.9 58.7 L1 36.3 L38.2 35.3 Z"/></svg>
 
     <div class="ka-hero__inner">
       <nav class="ka-crumbs" aria-label="Breadcrumb">
         <a href="{{ routes.root_url }}">Home</a>
-        <span aria-hidden="true">/</span>
-        <a href="{{ blog.url }}">{{ blog.title }}</a>
-        {%- if main_tag != blank -%}
+        {%- if section.settings.crumb_label != blank -%}
           <span aria-hidden="true">/</span>
-          <a href="{{ blog.url }}/tagged/{{ main_tag | handleize }}">{{ main_tag }}</a>
+          <a href="{{ section.settings.crumb_link | default: '#' }}">{{ section.settings.crumb_label }}</a>
         {%- endif -%}
+        <span aria-hidden="true">/</span>
+        <span>{{ page.title }}</span>
       </nav>
 
-      {%- if main_tag != blank -%}
-        <span class="ka-pill">{{ main_tag }}</span>
+      {%- if tag_label != blank -%}
+        <span class="ka-pill">{{ tag_label }}</span>
       {%- endif -%}
 
-      <h1 class="ka-hero__title">{{ a.title | escape }}</h1>
+      <h1 class="ka-hero__title">{{ section.settings.hero_title | default: page.title | escape }}</h1>
 
-      {%- if a.excerpt != blank -%}
-        <div class="ka-hero__excerpt">{{ a.excerpt | strip_html | truncatewords: 40 }}</div>
+      {%- if section.settings.hero_text_intro != blank -%}
+        <div class="ka-hero__excerpt">{{ section.settings.hero_text_intro }}</div>
       {%- endif -%}
 
       <p class="ka-hero__meta">
         <span>By {{ author_name }}</span>
-        <span aria-hidden="true">·</span>
-        <span>{{ a.published_at | date: '%-d %B %Y' }}</span>
+        {%- if section.settings.show_date -%}
+          <span aria-hidden="true">·</span>
+          <span>{{ page.published_at | date: '%-d %B %Y' }}</span>
+        {%- endif -%}
         <span aria-hidden="true">·</span>
         <span>{{ read_time }} min read</span>
       </p>
@@ -68,19 +75,20 @@
   </header>
 
   {%- comment -%} ---------- COVER IMAGE ---------- {%- endcomment -%}
-  {%- if a.image -%}
+  {%- if section.settings.cover_image != blank -%}
+    {%- assign cover = section.settings.cover_image -%}
     <figure class="ka-cover">
       <img
-        src="{{ a.image | image_url: width: 1600 }}"
-        srcset="{{ a.image | image_url: width: 900 }} 900w, {{ a.image | image_url: width: 1600 }} 1600w, {{ a.image | image_url: width: 2200 }} 2200w"
+        src="{{ cover | image_url: width: 1600 }}"
+        srcset="{{ cover | image_url: width: 900 }} 900w, {{ cover | image_url: width: 1600 }} 1600w, {{ cover | image_url: width: 2200 }} 2200w"
         sizes="(min-width: 990px) 900px, 92vw"
-        alt="{{ a.image.alt | default: a.title | escape }}"
-        width="{{ a.image.width }}"
-        height="{{ a.image.height }}"
+        alt="{{ cover.alt | default: page.title | escape }}"
+        width="{{ cover.width }}"
+        height="{{ cover.height }}"
         fetchpriority="high"
       >
-      {%- if a.image.alt != blank -%}
-        <figcaption>{{ a.image.alt }}</figcaption>
+      {%- if section.settings.cover_caption != blank -%}
+        <figcaption>{{ section.settings.cover_caption }}</figcaption>
       {%- endif -%}
     </figure>
   {%- endif -%}
@@ -102,7 +110,7 @@
 
     <div class="ka-main">
       <div class="ka-content" data-article-content>
-        {{ a.content }}
+        {{ page.content }}
       </div>
 
       {%- if section.settings.show_author -%}
@@ -125,33 +133,36 @@
     </div>
   </div>
 
-  {%- comment -%} ---------- RELATED POSTS (same first tag) ---------- {%- endcomment -%}
-  {%- if section.settings.show_related and main_tag != blank -%}
+  {%- comment -%} ---------- RELATED BLOG POSTS ---------- {%- endcomment -%}
+  {%- if section.settings.show_related -%}
     {%- assign related_count = 0 -%}
     {%- capture related_cards -%}
-      {%- for post in blog.articles limit: 30 -%}
-        {%- if post.id == a.id -%}{%- continue -%}{%- endif -%}
-        {%- if post.tags contains main_tag -%}
-          {%- assign related_count = related_count | plus: 1 -%}
-          {%- assign p_words = post.content | strip_html | split: ' ' | size -%}
-          {%- assign p_read = p_words | divided_by: 200 | at_least: 1 -%}
-          <a href="{{ post.url }}" class="ka-rel__card">
-            <div class="ka-rel__media">
-              {%- if post.image -%}
-                <img src="{{ post.image | image_url: width: 900 }}" alt="{{ post.image.alt | default: post.title | escape }}" width="{{ post.image.width }}" height="{{ post.image.height }}" loading="lazy">
-              {%- else -%}
-                {{ 'lifestyle-1' | placeholder_svg_tag: 'ka-rel__placeholder' }}
-              {%- endif -%}
-            </div>
-            <div class="ka-rel__body">
-              <span class="ka-rel__pill"><span aria-hidden="true">★</span> {{ main_tag }}</span>
-              <h3 class="ka-rel__title">{{ post.title | escape }}</h3>
-              <p class="ka-rel__excerpt">{{ post.excerpt | default: post.content | strip_html | truncatewords: 12 }}</p>
-              <p class="ka-rel__meta">{{ p_read }} min read</p>
-            </div>
-          </a>
-          {%- if related_count >= 3 -%}{%- break -%}{%- endif -%}
+      {%- for post in rel_blog.articles limit: 30 -%}
+        {%- if rel_tag != blank -%}
+          {%- unless post.tags contains rel_tag -%}{%- continue -%}{%- endunless -%}
         {%- endif -%}
+        {%- assign related_count = related_count | plus: 1 -%}
+        {%- assign p_words = post.content | strip_html | split: ' ' | size -%}
+        {%- assign p_read = p_words | divided_by: 200 | at_least: 1 -%}
+        {%- assign p_tag = rel_tag | default: post.tags.first -%}
+        <a href="{{ post.url }}" class="ka-rel__card">
+          <div class="ka-rel__media">
+            {%- if post.image -%}
+              <img src="{{ post.image | image_url: width: 900 }}" alt="{{ post.image.alt | default: post.title | escape }}" width="{{ post.image.width }}" height="{{ post.image.height }}" loading="lazy">
+            {%- else -%}
+              {{ 'lifestyle-1' | placeholder_svg_tag: 'ka-rel__placeholder' }}
+            {%- endif -%}
+          </div>
+          <div class="ka-rel__body">
+            {%- if p_tag != blank -%}
+              <span class="ka-rel__pill"><span aria-hidden="true">★</span> {{ p_tag }}</span>
+            {%- endif -%}
+            <h3 class="ka-rel__title">{{ post.title | escape }}</h3>
+            <p class="ka-rel__excerpt">{{ post.excerpt | default: post.content | strip_html | truncatewords: 12 }}</p>
+            <p class="ka-rel__meta">{{ p_read }} min read</p>
+          </div>
+        </a>
+        {%- if related_count >= 3 -%}{%- break -%}{%- endif -%}
       {%- endfor -%}
     {%- endcapture -%}
 
@@ -159,8 +170,14 @@
       <section class="ka-rel">
         <div class="ka-rel__inner">
           <div class="ka-rel__head">
-            <h2 class="ka-rel__heading">More from {{ main_tag }}</h2>
-            <a class="ka-rel__all" href="{{ blog.url }}/tagged/{{ main_tag | handleize }}">More in {{ main_tag }} →</a>
+            <h2 class="ka-rel__heading">{{ section.settings.related_heading }}</h2>
+            {%- if section.settings.related_link_label != blank -%}
+              {%- if rel_tag != blank -%}
+                <a class="ka-rel__all" href="{{ rel_blog.url }}/tagged/{{ rel_tag | handleize }}">{{ section.settings.related_link_label }}</a>
+              {%- else -%}
+                <a class="ka-rel__all" href="{{ rel_blog.url }}">{{ section.settings.related_link_label }}</a>
+              {%- endif -%}
+            {%- endif -%}
           </div>
           <div class="ka-rel__grid">{{ related_cards }}</div>
         </div>
@@ -290,6 +307,7 @@
     font-size: clamp(15px, 1.6vw, 17px);
     line-height: 1.6;
   }
+  .ka-hero__excerpt p { margin: 0; }
   .ka-hero__meta {
     display: flex;
     flex-wrap: wrap;
@@ -409,7 +427,7 @@
     font-weight: 700;
   }
 
-  /* ================= ARTICLE CONTENT ================= */
+  /* ================= PAGE CONTENT ================= */
   .ka-content { font-size: 16px; line-height: 1.75; color: var(--ka-text); }
   .ka-content > *:first-child { margin-top: 0; }
   .ka-content p { margin: 0 0 18px; }
@@ -471,7 +489,7 @@
     .ka-images { grid-template-columns: 1fr; }
   }
 
-  /* Worth knowing (yellow) */
+  /* Note (yellow) */
   .ka-note {
     margin: 28px 0;
     padding: 18px 22px;
@@ -495,7 +513,7 @@
   }
   .ka-quote p { margin: 0; }
 
-  /* Key takeaways */
+  /* Takeaways */
   .ka-takeaways {
     margin: 32px 0;
     padding: 22px 26px;
@@ -744,25 +762,41 @@
 
 {% schema %}
 {
-  "name": "Kefey article page",
+  "name": "Kefey content page",
   "tag": "section",
   "class": "section",
   "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "crumb_label", "label": "Breadcrumb middle label", "default": "Inside the Star" },
+    { "type": "url", "id": "crumb_link", "label": "Breadcrumb middle link" },
+    { "type": "text", "id": "tag_label", "label": "Tag pill", "default": "Inside the Star" },
+    { "type": "text", "id": "hero_title", "label": "Title", "info": "Leave empty to use the page title" },
+    { "type": "richtext", "id": "hero_text_intro", "label": "Short description", "default": "<p>An extract ratio can help explain part of an ingredient's preparation, but it does not tell you everything about its composition or quality.</p>" },
+    { "type": "checkbox", "id": "show_date", "label": "Show published date", "default": true },
+
+    { "type": "header", "content": "Cover image" },
+    { "type": "image_picker", "id": "cover_image", "label": "Cover image" },
+    { "type": "text", "id": "cover_caption", "label": "Caption" },
+
     { "type": "header", "content": "Table of contents" },
     { "type": "text", "id": "toc_label", "label": "Sidebar title", "default": "On this page" },
     { "type": "range", "id": "sticky_offset", "label": "Sticky top offset", "min": 0, "max": 200, "step": 5, "unit": "px", "default": 110, "info": "Increase if your sticky header covers the sidebar" },
 
     { "type": "header", "content": "Author" },
     { "type": "checkbox", "id": "show_author", "label": "Show author box", "default": true },
-    { "type": "text", "id": "author_name", "label": "Author name", "default": "The Kefey® team", "info": "Leave empty to use the post author" },
+    { "type": "text", "id": "author_name", "label": "Author name", "default": "The Kefey® team" },
     { "type": "image_picker", "id": "author_image", "label": "Author image" },
     { "type": "richtext", "id": "author_bio", "label": "Author bio", "default": "<p>We write about what goes into our formula and why, in plain language, without the marketing gloss.</p>" },
 
     { "type": "header", "content": "Disclaimer" },
     { "type": "richtext", "id": "disclaimer", "label": "Disclaimer", "default": "<p>† These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. Always speak with your healthcare provider if you are pregnant, nursing or taking medication.</p>" },
 
-    { "type": "header", "content": "Related posts" },
-    { "type": "checkbox", "id": "show_related", "label": "Show related posts (same tag)", "default": true },
+    { "type": "header", "content": "Related blog posts" },
+    { "type": "checkbox", "id": "show_related", "label": "Show related posts", "default": true },
+    { "type": "blog", "id": "related_blog", "label": "Blog" },
+    { "type": "text", "id": "related_tag", "label": "Only posts with this tag", "info": "Leave empty to show the latest posts" },
+    { "type": "text", "id": "related_heading", "label": "Heading", "default": "More from Inside the Star" },
+    { "type": "text", "id": "related_link_label", "label": "Link label", "default": "See all →" },
 
     { "type": "header", "content": "Colors" },
     { "type": "color", "id": "hero_bg", "label": "Hero background", "default": "#E8533A" },
