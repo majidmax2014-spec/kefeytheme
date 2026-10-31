@@ -11,8 +11,37 @@
   "sections": {
     "main": {
       "type": "kefey-star-journal",
-      "settings": {}
+      "settings": {
+        "crumb_label": "Inside the Star",
+        "crumb_link": "",
+        "tag_label": "Inside the Star",
+        "hero_title": "",
+        "hero_text_intro": "<p>An extract ratio can help explain part of an ingredient's preparation, but it does not tell you everything about its composition or quality.</p>",
+        "show_date": true,
+        "cover_image": "shopify://shop_images/PRODUCT_12.jpg",
+        "cover_caption": "",
+        "toc_label": "On this page",
+        "sticky_offset": 110,
+        "show_author": true,
+        "author_name": "The Kefey® team",
+        "author_image": "shopify://shop_images/3_Pakcs.jpg",
+        "author_bio": "<p>We write about what goes into our formula and why, in plain language, without the marketing gloss.</p>",
+        "disclaimer": "<p>† These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. Always speak with your healthcare provider if you are pregnant, nursing or taking medication.</p>",
+        "show_related": true,
+        "related_blog": "gummies",
+        "related_tag": "",
+        "related_heading": "More from Inside the Star",
+        "related_link_label": "See all →",
+        "hero_bg": "#e8533a",
+        "hero_text": "#ffffff",
+        "accent_color": "#e8533a",
+        "heading_color": "#1f1f1f",
+        "text_color": "#4a4a4a",
+        "related_bg": "#f6f4f1"
+      }
     }
   },
-  "order": ["main"]
+  "order": [
+    "main"
+  ]
 }
