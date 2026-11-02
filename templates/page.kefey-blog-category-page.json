@@ -92,7 +92,7 @@
       ],
       "name": "Bright Side filter pills",
       "settings": {
-        "all_label": "All",
+        "all_label": "The Buzz",
         "all_link": "",
         "all_dot_color": "#e8533a",
         "sticky": false,
@@ -101,8 +101,8 @@
         "bg_color": "#ffffff",
         "pill_bg": "#f5f3ef",
         "pill_text": "#3a3a3a",
-        "active_bg": "#3FB8B2",
-        "active_text": "#37393D",
+        "active_bg": "#3fb8b2",
+        "active_text": "#37393d",
         "border_color": "#ececec",
         "padding_top": 22,
         "padding_bottom": 22
@@ -161,6 +161,7 @@
         "chip_bg": "#ffffff38",
         "chip_hover_bg": "#86d3d0",
         "show_stars": true,
+        "show_doodles": true,
         "padding_top": 96,
         "padding_bottom": 96
       }
@@ -217,6 +218,7 @@
         "chip_bg": "#ffffff38",
         "chip_hover_bg": "#86d3d0",
         "show_stars": true,
+        "show_doodles": true,
         "padding_top": 96,
         "padding_bottom": 96
       }
@@ -240,6 +242,7 @@
         "text_color": "#4a4a4a",
         "accent_color": "#3fb8b2",
         "star_color": "#ffffff",
+        "show_doodles": true,
         "padding_top": 40,
         "padding_bottom": 80
       }
@@ -263,6 +266,7 @@
         "text_color": "#555555",
         "pill_bg": "#ddf2f1",
         "pill_dot": "#3fb8b2",
+        "show_doodles": true,
         "padding_top": 48,
         "padding_bottom": 64
       }
@@ -281,6 +285,7 @@
         "text_color": "#555555",
         "button_bg": "#e8533a",
         "button_text_color": "#ffffff",
+        "show_doodles": true,
         "padding_top": 72,
         "padding_bottom": 72
       }
