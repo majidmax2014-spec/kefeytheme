@@ -21,6 +21,12 @@
   <div class="topic-cta__inner">
     <div class="topic-cta__box">
 
+      {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
+      {%- if section.settings.show_doodles -%}
+        <img class="topic-cta__doodle topic-cta__doodle--star" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_64.png?v=1793080283&width=120" alt="" width="120" height="120" loading="lazy" aria-hidden="true">
+        <img class="topic-cta__doodle topic-cta__doodle--loop" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_62.png?v=1793080282&width=120" alt="" width="120" height="120" loading="lazy" aria-hidden="true">
+      {%- endif -%}
+
       <div class="topic-cta__content">
         {%- if section.settings.heading != blank -%}
           <h2 class="topic-cta__heading">{{ section.settings.heading }}</h2>
@@ -106,6 +112,37 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 18px rgba(232, 83, 58, 0.3);
   }
+
+  /* ---------- Decorative doodles (on the box corners) ---------- */
+  .topic-cta__box { position: relative; }
+  .topic-cta__content,
+  .topic-cta__btn { position: relative; z-index: 1; }
+  .topic-cta__doodle {
+    position: absolute;
+    height: auto;
+    display: block;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+  }
+  .topic-cta__doodle--star { top: -20px;    right: -16px; width: 46px; rotate: 14deg; }
+  .topic-cta__doodle--loop { bottom: -18px; left: -14px;  width: 42px; rotate: -10deg; }
+
+  @media (max-width: 749px) {
+    .topic-cta__doodle--star { top: -14px;    right: -6px; width: 32px; }
+    .topic-cta__doodle--loop { bottom: -12px; left: -6px;  width: 30px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .topic-cta__doodle {
+      animation: topicCtaDoodle 6s ease-in-out infinite;
+    }
+    .topic-cta__doodle--loop { animation-delay: -3s; }
+  }
+  @keyframes topicCtaDoodle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -127,6 +164,9 @@
     { "type": "color", "id": "text_color", "label": "Text", "default": "#555555" },
     { "type": "color", "id": "button_bg", "label": "Button background", "default": "#E8533A" },
     { "type": "color", "id": "button_text_color", "label": "Button text", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Decoration" },
+    { "type": "checkbox", "id": "show_doodles", "label": "Show decorative doodles", "default": true },
 
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 24 },
