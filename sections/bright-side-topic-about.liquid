@@ -31,6 +31,16 @@
 </style>
 
 <section id="TopicAbout-{{ section.id }}" class="topic-about">
+
+  {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
+  {%- if section.settings.show_doodles -%}
+    <div class="topic-about__doodles" aria-hidden="true">
+      <img class="topic-about__doodle topic-about__doodle--zigzag" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_61.png?v=1793080282&width=200" alt="" width="200" height="200" loading="lazy">
+      <img class="topic-about__doodle topic-about__doodle--dot" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_65.png?v=1793080282&width=80" alt="" width="80" height="80" loading="lazy">
+      <img class="topic-about__doodle topic-about__doodle--spiral" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_56.png?v=1793080283&width=220" alt="" width="220" height="220" loading="lazy">
+    </div>
+  {%- endif -%}
+
   <div class="topic-about__inner{% if section.settings.image_position == 'right' %} topic-about__inner--reverse{% endif %}">
 
     {%- comment -%} ===== Image ===== {%- endcomment -%}
@@ -205,6 +215,46 @@
   .topic-about__text p { margin: 0 0 16px; }
   .topic-about__text p:last-child { margin-bottom: 0; }
   .topic-about__text a { color: var(--ta-accent); }
+
+  /* ---------- Decorative doodles ---------- */
+  .topic-about { position: relative; overflow: hidden; }
+  .topic-about__inner { position: relative; z-index: 1; }
+  .topic-about__doodles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .topic-about__doodle {
+    position: absolute;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  .topic-about__doodle--zigzag { top: 6%;     right: 5%;  width: 70px; rotate: 8deg; }
+  .topic-about__doodle--dot    { top: 10%;    left: 47%;  width: 16px; }
+  .topic-about__doodle--spiral { bottom: 4%;  left: 2%;   width: 80px; rotate: -8deg; }
+
+  @media (max-width: 989px) {
+    .topic-about__doodle--zigzag { right: 3%; width: 54px; }
+    .topic-about__doodle--spiral { left: 1%;  width: 60px; }
+  }
+  @media (max-width: 749px) {
+    .topic-about__doodle--dot,
+    .topic-about__doodle--spiral { display: none; }
+    .topic-about__doodle--zigzag { top: 8px; right: 4%; width: 40px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .topic-about__doodle {
+      animation: topicAboutDoodle 6s ease-in-out infinite;
+    }
+    .topic-about__doodle--dot    { animation-delay: -2s; }
+    .topic-about__doodle--spiral { animation-delay: -4s; }
+  }
+  @keyframes topicAboutDoodle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -234,6 +284,9 @@
     { "type": "color", "id": "text_color", "label": "Text", "default": "#4A4A4A" },
     { "type": "color", "id": "accent_color", "label": "Accent (badge star)", "default": "#3FB8B2" },
     { "type": "color", "id": "star_color", "label": "Big star", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Decoration" },
+    { "type": "checkbox", "id": "show_doodles", "label": "Show decorative doodles", "default": true },
 
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 40 },
