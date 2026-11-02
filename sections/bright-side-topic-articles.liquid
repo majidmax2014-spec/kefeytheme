@@ -60,6 +60,16 @@
 </style>
 
 <section id="TopicArticles-{{ section.id }}" class="topic-articles">
+
+  {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
+  {%- if section.settings.show_doodles -%}
+    <div class="topic-articles__doodles" aria-hidden="true">
+      <img class="topic-articles__doodle topic-articles__doodle--star" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_58.png?v=1793080282&width=140" alt="" width="140" height="140" loading="lazy">
+      <img class="topic-articles__doodle topic-articles__doodle--squiggle" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_60.png?v=1793080282&width=120" alt="" width="120" height="120" loading="lazy">
+      <img class="topic-articles__doodle topic-articles__doodle--curve" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_59.png?v=1793080283&width=120" alt="" width="120" height="120" loading="lazy">
+    </div>
+  {%- endif -%}
+
   <div class="topic-articles__inner">
 
     <header class="topic-articles__header">
@@ -321,6 +331,45 @@
     transition: transform 0.2s ease;
   }
   .topic-articles__btn:hover { color: #fff; transform: translateY(-2px); }
+
+  /* ---------- Decorative doodles (sit in the 5% side space) ---------- */
+  .topic-articles { position: relative; overflow: hidden; }
+  .topic-articles__inner { position: relative; z-index: 1; }
+  .topic-articles__doodles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .topic-articles__doodle {
+    position: absolute;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  .topic-articles__doodle--star     { top: 14px;   left: 1%;  width: 44px; rotate: -12deg; }
+  .topic-articles__doodle--squiggle { top: 42%;    right: 1%; width: 34px; rotate: 10deg; }
+  .topic-articles__doodle--curve    { bottom: 8%;  left: 1.4%; width: 28px; rotate: -18deg; }
+
+  @media (max-width: 1199px) {
+    .topic-articles__doodle--squiggle,
+    .topic-articles__doodle--curve { display: none; }
+    .topic-articles__doodle--star { top: 10px; left: 1%; width: 34px; }
+  }
+  @media (max-width: 749px) {
+    .topic-articles__doodle--star { top: 8px; left: auto; right: 4%; width: 28px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .topic-articles__doodle {
+      animation: topicArticlesDoodle 6s ease-in-out infinite;
+    }
+    .topic-articles__doodle--squiggle { animation-delay: -2s; }
+    .topic-articles__doodle--curve    { animation-delay: -4s; }
+  }
+  @keyframes topicArticlesDoodle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -351,6 +400,9 @@
     { "type": "color", "id": "text_color", "label": "Text", "default": "#555555" },
     { "type": "color", "id": "pill_bg", "label": "Tag background", "default": "#DDF2F1" },
     { "type": "color", "id": "pill_dot", "label": "Tag dot & accent", "default": "#3FB8B2" },
+
+    { "type": "header", "content": "Decoration" },
+    { "type": "checkbox", "id": "show_doodles", "label": "Show decorative doodles", "default": true },
 
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 4, "unit": "px", "default": 48 },
