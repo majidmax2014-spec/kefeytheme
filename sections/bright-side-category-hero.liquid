@@ -35,6 +35,15 @@
     <svg class="cat-hero__star cat-hero__star--br" viewBox="0 0 100 95" aria-hidden="true" focusable="false"><path d="M50 0 L61.8 35.3 L99 36.3 L69.1 58.7 L79.4 94.4 L50 73.1 L20.6 94.4 L30.9 58.7 L1 36.3 L38.2 35.3 Z"/></svg>
   {%- endif -%}
 
+  {%- comment -%} Decorative doodles (client elements) {%- endcomment -%}
+  {%- if section.settings.show_doodles -%}
+    <div class="cat-hero__doodles" aria-hidden="true">
+      <img class="cat-hero__doodle cat-hero__doodle--star" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_64.png?v=1793080283&width=180" alt="" width="180" height="180" loading="eager">
+      <img class="cat-hero__doodle cat-hero__doodle--squiggle" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_60.png?v=1793080282&width=160" alt="" width="160" height="160" loading="eager">
+      <img class="cat-hero__doodle cat-hero__doodle--curl" src="https://cdn.shopify.com/s/files/1/0752/1556/9124/files/Untitled_design_63.png?v=1793080282&width=200" alt="" width="200" height="200" loading="eager">
+    </div>
+  {%- endif -%}
+
   <div class="cat-hero__inner">
 
     {%- if section.settings.show_breadcrumb -%}
@@ -174,6 +183,45 @@
     .cat-hero__chips { gap: 8px; }
     .cat-hero__chip { height: 40px; padding: 0 16px; font-size: 15px; }
   }
+
+  /* ---------- Decorative doodles ---------- */
+  .cat-hero__doodles {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .cat-hero__doodle {
+    position: absolute;
+    height: auto;
+    display: block;
+    user-select: none;
+  }
+  .cat-hero__doodle--star     { top: 20%;    right: 11%; width: 64px; rotate: 14deg; }
+  .cat-hero__doodle--squiggle { top: 46%;    left: 6%;   width: 50px; rotate: -12deg; }
+  .cat-hero__doodle--curl     { bottom: 12%; left: 14%;  width: 58px; rotate: 8deg; }
+
+  @media (max-width: 989px) {
+    .cat-hero__doodle--star     { right: 5%; width: 50px; }
+    .cat-hero__doodle--squiggle { left: 3%;  width: 40px; }
+    .cat-hero__doodle--curl     { left: 6%;  width: 46px; }
+  }
+  @media (max-width: 749px) {
+    .cat-hero__doodle--squiggle { display: none; }
+    .cat-hero__doodle--star { top: 10%; right: 5%; width: 34px; }
+    .cat-hero__doodle--curl { bottom: 6%; left: 5%; width: 34px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cat-hero__doodle {
+      animation: catHeroDoodle 6s ease-in-out infinite;
+    }
+    .cat-hero__doodle--squiggle { animation-delay: -2s; }
+    .cat-hero__doodle--curl     { animation-delay: -4s; }
+  }
+  @keyframes catHeroDoodle {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -200,6 +248,7 @@
     { "type": "color", "id": "chip_bg", "label": "Chip background", "default": "#6CC9C5" },
     { "type": "color", "id": "chip_hover_bg", "label": "Chip hover background", "default": "#86D3D0" },
     { "type": "checkbox", "id": "show_stars", "label": "Show decorative stars", "default": true },
+    { "type": "checkbox", "id": "show_doodles", "label": "Show decorative doodles", "default": true },
 
     { "type": "header", "content": "Spacing" },
     { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 200, "step": 4, "unit": "px", "default": 140 },
