@@ -87,7 +87,7 @@
           "settings": {
             "label": "What's Buzzing?",
             "link": "",
-            "dot_color": "#A95B3F",
+            "dot_color": "#a95b3f",
             "force_active": false
           }
         }
@@ -112,7 +112,7 @@
         "pill_bg": "#f5f3ef",
         "pill_text": "#3a3a3a",
         "active_bg": "#3fb8b2",
-        "active_text": "#37393d",
+        "active_text": "#F2F3F3",
         "border_color": "#ececec",
         "padding_top": 22,
         "padding_bottom": 22
