@@ -40,7 +40,7 @@
         "pill_NR8eFq": {
           "type": "pill",
           "settings": {
-            "label": "Good Moods",
+            "label": "Chew on This !",
             "link": "",
             "dot_color": "#3fb8b2",
             "force_active": true
@@ -49,7 +49,7 @@
         "pill_J4hFkJ": {
           "type": "pill",
           "settings": {
-            "label": "Energy & Rest",
+            "label": "Inside the Star",
             "link": "",
             "dot_color": "#7cc34f",
             "force_active": false
@@ -58,7 +58,7 @@
         "pill_YLBGP4": {
           "type": "pill",
           "settings": {
-            "label": "Star Ingredients",
+            "label": "Wellbeing Unpacked",
             "link": "",
             "dot_color": "#e8533a",
             "force_active": false
@@ -76,9 +76,18 @@
         "pill_PTpErr": {
           "type": "pill",
           "settings": {
-            "label": "Kefey Stories",
+            "label": "Planet in Mind",
             "link": "",
             "dot_color": "#3fa9a6",
+            "force_active": false
+          }
+        },
+        "pill_mBiVzk": {
+          "type": "pill",
+          "settings": {
+            "label": "What's Buzzing?",
+            "link": "",
+            "dot_color": "#A95B3F",
             "force_active": false
           }
         }
@@ -88,7 +97,8 @@
         "pill_J4hFkJ",
         "pill_YLBGP4",
         "pill_VPggaB",
-        "pill_PTpErr"
+        "pill_PTpErr",
+        "pill_mBiVzk"
       ],
       "name": "Bright Side filter pills",
       "settings": {
@@ -208,9 +218,9 @@
       "settings": {
         "show_breadcrumb": true,
         "home_label": "Home",
-        "parent_label": "The Bright Side",
+        "parent_label": "The Buzz",
         "parent_link": "",
-        "heading": "Good Moods",
+        "heading": "Chew on This !",
         "subtitle": "Mood, focus, and the calm in between.",
         "bg_color": "#41b5b2",
         "text_color": "#ffffff",
