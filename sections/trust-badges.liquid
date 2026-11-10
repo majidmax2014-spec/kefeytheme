@@ -1,0 +1,145 @@
+{%- comment -%}
+  Trust Badges section
+  File name: sections/trust-badges.liquid
+  Add it from: Online Store > Themes > Customize > Add section > "Trust Badges"
+{%- endcomment -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} .tb-wrap {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.background }};
+  }
+  #shopify-section-{{ section.id }} .tb-row {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size | at_least: 1 }}, minmax(0, 1fr));
+    gap: 16px;
+    max-width: {{ section.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 0 16px;
+    text-align: center;
+  }
+  #shopify-section-{{ section.id }} .tb-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  #shopify-section-{{ section.id }} .tb-icon {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    color: {{ section.settings.icon_color }};
+    display: block;
+  }
+  #shopify-section-{{ section.id }} .tb-text {
+    margin: 0;
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.font_size }}px;
+    font-weight: 600;
+    line-height: 1.35;
+    max-width: 170px;
+  }
+  @media (max-width: 480px) {
+    #shopify-section-{{ section.id }} .tb-row { gap: 8px; padding: 0 12px; }
+    #shopify-section-{{ section.id }} .tb-text { font-size: {{ section.settings.font_size | minus: 2 }}px; }
+  }
+{%- endstyle -%}
+
+<div class="tb-wrap">
+  <div class="tb-row">
+    {%- for block in section.blocks -%}
+      <div class="tb-item" {{ block.shopify_attributes }}>
+        {%- case block.settings.icon -%}
+          {%- when 'lock' -%}
+            <svg class="tb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="5" y="10.5" width="14" height="10" rx="3"/>
+              <path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/>
+            </svg>
+          {%- when 'document' -%}
+            <svg class="tb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 20H7a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v7z"/>
+              <path d="M14 20v-3.5a2.5 2.5 0 0 1 2.5-2.5H20"/>
+              <path d="M8 8.5h8M8 12h5"/>
+            </svg>
+          {%- when 'truck' -%}
+            <svg class="tb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7.5 16.5H6.5V6.5h9v10h-4"/>
+              <path d="M15.5 9.5h3l3 3.5v3.5h-1.5"/>
+              <circle cx="9.5" cy="17" r="1.8"/>
+              <circle cx="17.5" cy="17" r="1.8"/>
+              <path d="M1.5 10h3M2.5 13h2"/>
+            </svg>
+          {%- when 'shield' -%}
+            <svg class="tb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 3l7 3v5.5c0 4.5-3 8-7 9.5-4-1.5-7-5-7-9.5V6z"/>
+              <path d="M9 12l2 2 4-4"/>
+            </svg>
+          {%- when 'return' -%}
+            <svg class="tb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 9h11a5 5 0 0 1 0 10H8"/>
+              <path d="M8 5L4 9l4 4"/>
+            </svg>
+          {%- when 'heart' -%}
+            <svg class="tb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 20s-7.5-4.5-7.5-10A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 7.5 3c0 5.5-7.5 10-7.5 10z"/>
+            </svg>
+        {%- endcase -%}
+        {%- if block.settings.text != blank -%}
+          <p class="tb-text">{{ block.settings.text }}</p>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Trust Badges",
+  "tag": "section",
+  "class": "trust-badges-section",
+  "max_blocks": 4,
+  "settings": [
+    { "type": "color", "id": "icon_color", "label": "Icon color", "default": "#C8202F" },
+    { "type": "color", "id": "text_color", "label": "Text color", "default": "#111111" },
+    { "type": "color_background", "id": "background", "label": "Background" },
+    { "type": "range", "id": "icon_size", "label": "Icon size", "min": 16, "max": 48, "step": 1, "unit": "px", "default": 24 },
+    { "type": "range", "id": "font_size", "label": "Text size", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "max_width", "label": "Max width", "min": 300, "max": 1200, "step": 20, "unit": "px", "default": 560 },
+    { "type": "range", "id": "padding_top", "label": "Top spacing", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 20 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom spacing", "min": 0, "max": 80, "step": 4, "unit": "px", "default": 20 }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "default": "lock",
+          "options": [
+            { "value": "lock", "label": "Lock" },
+            { "value": "document", "label": "Document / Guarantee" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "return", "label": "Return arrow" },
+            { "value": "heart", "label": "Heart" }
+          ]
+        },
+        { "type": "text", "id": "text", "label": "Text", "default": "Secure Payments" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trust Badges",
+      "blocks": [
+        { "type": "badge", "settings": { "icon": "lock", "text": "Secure Payments" } },
+        { "type": "badge", "settings": { "icon": "document", "text": "30-Day Money Back Guarantee" } },
+        { "type": "badge", "settings": { "icon": "truck", "text": "Fast Shipping" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
