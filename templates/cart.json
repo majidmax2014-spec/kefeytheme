@@ -147,11 +147,54 @@
         "checkout_font_size": 21,
         "checkout_font_weight": 700
       }
+    },
+    "trust_badges_W7jz6Q": {
+      "type": "trust-badges",
+      "blocks": {
+        "badge_8Ahgjc": {
+          "type": "badge",
+          "settings": {
+            "icon": "lock",
+            "text": "Secure Payments"
+          }
+        },
+        "badge_RVDGQF": {
+          "type": "badge",
+          "settings": {
+            "icon": "document",
+            "text": "30-Day Money Back Guarantee"
+          }
+        },
+        "badge_eHGUVU": {
+          "type": "badge",
+          "settings": {
+            "icon": "truck",
+            "text": "Fast Shipping"
+          }
+        }
+      },
+      "block_order": [
+        "badge_8Ahgjc",
+        "badge_RVDGQF",
+        "badge_eHGUVU"
+      ],
+      "name": "Trust Badges",
+      "settings": {
+        "icon_color": "#C8202F",
+        "text_color": "#111111",
+        "background": "",
+        "icon_size": 24,
+        "font_size": 15,
+        "max_width": 560,
+        "padding_top": 32,
+        "padding_bottom": 32
+      }
     }
   },
   "order": [
     "header_banner_b9xhCr",
     "cart-items",
-    "cart-footer"
+    "cart-footer",
+    "trust_badges_W7jz6Q"
   ]
 }
