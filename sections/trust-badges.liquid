@@ -16,9 +16,10 @@
     grid-template-columns: repeat({{ section.blocks.size | at_least: 1 }}, minmax(0, 1fr));
     align-items: start;
     column-gap: 24px;
-    max-width: {{ section.settings.max_width }}px;
+    width: {{ section.settings.row_width }}%;
+    max-width: none;
     margin: 0 auto;
-    padding: 0 16px;
+    padding: 0;
     text-align: center;
   }
   #shopify-section-{{ section.id }} .tb-item {
@@ -48,14 +49,13 @@
     line-height: 1.35;
     letter-spacing: 0;
     text-transform: none;
-    max-width: 180px;
+    max-width: 100%;
     word-break: normal;
     overflow-wrap: break-word;
   }
   @media (max-width: 749px) {
     #shopify-section-{{ section.id }} .tb-row {
       column-gap: 10px;
-      padding: 0 12px;
     }
     #shopify-section-{{ section.id }} .tb-item { gap: 8px; }
     #shopify-section-{{ section.id }} .tb-item svg.tb-icon {
@@ -140,10 +140,10 @@
         { "value": "700", "label": "Bold" }
       ]
     },
+    { "type": "range", "id": "row_width", "label": "Row width", "min": 50, "max": 100, "step": 1, "unit": "%", "default": 90 },
     { "type": "header", "content": "Desktop" },
     { "type": "range", "id": "icon_size", "label": "Icon size", "min": 16, "max": 48, "step": 1, "unit": "px", "default": 28 },
     { "type": "range", "id": "font_size", "label": "Text size", "min": 12, "max": 22, "step": 1, "unit": "px", "default": 15 },
-    { "type": "range", "id": "max_width", "label": "Max width", "min": 300, "max": 1200, "step": 20, "unit": "px", "default": 600 },
     { "type": "header", "content": "Mobile" },
     { "type": "range", "id": "icon_size_mobile", "label": "Icon size", "min": 16, "max": 40, "step": 1, "unit": "px", "default": 24 },
     { "type": "range", "id": "font_size_mobile", "label": "Text size", "min": 10, "max": 18, "step": 1, "unit": "px", "default": 13 },
